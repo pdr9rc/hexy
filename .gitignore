@@ -133,7 +133,6 @@ dmypy.json
 .idea/
 *.swp
 *.swo
-*~
 
 # OS files
 .DS_Store
@@ -153,4 +152,7 @@ Thumbs.db
 # Editor backups
 *~
 .#*
-\#*# 
+\#*#
+
+# Additional files to ignore
+*/hex_*.md
