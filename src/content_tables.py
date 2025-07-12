@@ -481,6 +481,146 @@ STATS_TABLES = {
     }
 }
 
+# ===== TERRAIN TABLES =====
+TERRAIN_TABLES = {
+    'en': {
+        'mountain': {
+            'encounters': [
+                "Ancient stone circle on peak", "Collapsed mine entrance", "Eagle's nest with strange eggs",
+                "Frozen waterfall hiding cave", "Monastery ruins on cliff", "Giant skeleton embedded in rock",
+                "Avalanche-blocked pass", "Hermit's cave dwelling", "Dragon bones scattered about",
+                "Sacred burial cairns", "Wind-carved stone faces", "Hidden valley below"
+            ],
+            'denizen_types': ["Mountain hermit", "Stone giant", "Highland bandit", "Cave troll", "Wind spirit"],
+            'features': ["Treacherous cliffs", "Hidden passes", "Ancient carved steps", "Sacred peaks", "Deep chasms"]
+        },
+        'forest': {
+            'encounters': [
+                "Circle of twisted trees", "Abandoned woodcutter's camp", "Shrine overgrown with vines",
+                "Pack of dire wolves", "Fairy ring of mushrooms", "Hanging corpses in trees",
+                "Druid's sacred grove", "Hunting lodge in ruins", "Ancient tree with hollow trunk",
+                "Stream of black water", "Spider webs everywhere", "Will-o'-wisps dancing"
+            ],
+            'denizen_types': ["Wild druid", "Forest witch", "Bandit chief", "Tree shepherd", "Beast hunter"],
+            'features': ["Dense undergrowth", "Ancient oaks", "Hidden clearings", "Overgrown paths", "Babbling brooks"]
+        },
+        'coast': {
+            'encounters': [
+                "Shipwreck on rocky shore", "Tide pools with strange creatures", "Lighthouse abandoned",
+                "Sea cave with echoing depths", "Driftwood shrine", "Beached whale carcass",
+                "Fishing village ruins", "Smuggler's hidden cove", "Siren's rocky perch",
+                "Message in bottle", "Seaweed-wrapped bones", "Storm approaching fast"
+            ],
+            'denizen_types': ["Shipwreck survivor", "Sea witch", "Smuggler", "Lighthouse keeper", "Siren"],
+            'features': ["Rocky cliffs", "Sandy beaches", "Hidden coves", "Tidal caves", "Salt marshes"]
+        },
+        'plains': {
+            'encounters': [
+                "Merchant caravan under attack", "Circle of standing stones", "Abandoned farmstead",
+                "Wild horse herd", "Battlefield with old bones", "Windmill with broken sails",
+                "Crossroads with gibbet", "Traveling circus camp", "Nomad tent circle",
+                "Ancient road marker", "Grazing land turned sour", "Dust devil approaching"
+            ],
+            'denizen_types': ["Wandering merchant", "Plains rider", "Shepherd", "Road warden", "Nomad chief"],
+            'features': ["Rolling hills", "Tall grass", "Ancient roads", "Scattered farms", "Open sky"]
+        },
+        'swamp': {
+            'encounters': [
+                "Witch's hut on stilts", "Swamp gas bubbling up", "Corpse hanging from tree",
+                "Bog with floating bodies", "Fireflies leading astray", "Alligator nest",
+                "Sunken temple ruins", "Will-o'-wisp trail", "Plague victim camp",
+                "Quicksand pit hidden", "Frog chorus deafening", "Mist obscuring vision"
+            ],
+            'denizen_types': ["Swamp witch", "Bog lurker", "Disease bearer", "Marsh hunter", "Lost soul"],
+            'features': ["Stagnant pools", "Twisted cypresses", "Floating islands", "Thick mist", "Sucking mud"]
+        }
+    },
+    'pt': {
+        'mountain': {
+            'encounters': [
+                "Círculo de pedras antigas no pico", "Entrada de mina desabada", "Ninho de águia com ovos estranhos",
+                "Cachoeira congelada escondendo caverna", "Ruínas de mosteiro no penhasco", "Esqueleto gigante incrustado na rocha",
+                "Passagem bloqueada por avalanche", "Caverna habitada por eremita", "Ossos de dragão espalhados",
+                "Cairns sagrados de sepultura", "Faces esculpidas pelo vento na pedra", "Vale escondido abaixo"
+            ],
+            'denizen_types': ["Eremita da montanha", "Gigante de pedra", "Bandido das terras altas", "Troll das cavernas", "Espírito do vento"],
+            'features': ["Penhascos traiçoeiros", "Passagens escondidas", "Degraus antigos esculpidos", "Picos sagrados", "Abismos profundos"]
+        },
+        'forest': {
+            'encounters': [
+                "Círculo de árvores retorcidas", "Acampamento abandonado de lenhador", "Santuário coberto por vinhas",
+                "Matilha de lobos terríveis", "Círculo de fadas com cogumelos", "Cadáveres pendurados em árvores",
+                "Bosque sagrado do druida", "Cabana de caça em ruínas", "Árvore antiga com tronco oco",
+                "Riacho de água negra", "Teias de aranha por toda parte", "Fogos-fátuos dançando"
+            ],
+            'denizen_types': ["Druida selvagem", "Bruxa da floresta", "Chefe de bandidos", "Pastor de árvores", "Caçador de feras"],
+            'features': ["Vegetação densa", "Carvalhos antigos", "Clareiras escondidas", "Trilhas cobertas", "Riachos murmurantes"]
+        },
+        'coast': {
+            'encounters': [
+                "Naufrágio na costa rochosa", "Poças de maré com criaturas estranhas", "Farol abandonado",
+                "Caverna marinha com profundezas ecoantes", "Santuário de madeira flutuante", "Carcaça de baleia encalhada",
+                "Ruínas de vila de pescadores", "Enseada escondida de contrabandistas", "Poleiro rochoso da sereia",
+                "Mensagem na garrafa", "Ossos envoltos em algas", "Tempestade se aproximando rapidamente"
+            ],
+            'denizen_types': ["Sobrevivente de naufrágio", "Bruxa do mar", "Contrabandista", "Faroleiro", "Sereia"],
+            'features': ["Penhascos rochosos", "Praias arenosas", "Enseadas escondidas", "Cavernas de maré", "Pântanos salgados"]
+        },
+        'plains': {
+            'encounters': [
+                "Caravana de mercadores sob ataque", "Círculo de pedras eretas", "Fazenda abandonada",
+                "Manada de cavalos selvagens", "Campo de batalha com ossos velhos", "Moinho com velas quebradas",
+                "Encruzilhada com patíbulo", "Acampamento de circo viajante", "Círculo de tendas nômades",
+                "Marco antigo da estrada", "Terra de pastagem azedada", "Redemoinho de poeira se aproximando"
+            ],
+            'denizen_types': ["Mercador andarilho", "Cavaleiro das planícies", "Pastor", "Guarda da estrada", "Chefe nômade"],
+            'features': ["Colinas ondulantes", "Grama alta", "Estradas antigas", "Fazendas espalhadas", "Céu aberto"]
+        },
+        'swamp': {
+            'encounters': [
+                "Cabana de bruxa sobre palafitas", "Gás do pântano borbulhando", "Cadáver pendurado em árvore",
+                "Lama com corpos flutuando", "Vaga-lumes desviando o caminho", "Ninho de jacaré",
+                "Ruínas de templo submerso", "Trilha de fogo-fátuo", "Acampamento de vítimas da peste",
+                "Poço de areia movediça escondido", "Coro de sapos ensurdecedor", "Névoa obscurecendo a visão"
+            ],
+            'denizen_types': ["Bruxa do pântano", "Espreitador do brejo", "Portador de doença", "Caçador do charco", "Alma perdida"],
+            'features': ["Poças estagnadas", "Ciprestes retorcidos", "Ilhas flutuantes", "Névoa espessa", "Lama sugadora"]
+        }
+    }
+}
+
+# ===== CORE TABLES =====
+CORE_TABLES = {
+    'en': {
+        'denizen_names_prefix': ['Brother', 'Sister', 'Father', 'Mother', 'Old', 'Young', 'Mad', 'Saint', 'Heretic', 'Lost'],
+        'denizen_names_suffix': ['Bones', 'Ash', 'Crow', 'Thorn', 'Rust', 'Mold', 'Grime', 'Rot', 'Doom', 'Blight'],
+        'denizen_motivations': [
+            "seeks redemption for past sins", "hunts for forbidden knowledge", "flees from terrible pursuers",
+            "searches for lost family", "guards ancient secrets", "trades in human misery"
+        ],
+        'denizen_features': [
+            "Covered in ritual scars", "Missing several fingers", "Eyes clouded with cataracts",
+            "Constantly muttering prayers", "Smells of decay", "Wears tattered robes"
+        ],
+        'denizen_demeanors': ['Hostile', 'Suspicious', 'Desperate', 'Helpful', 'Indifferent', 'Cryptic'],
+        'atmospheres': ['Oppressive silence', 'Echoing sounds', 'Unnatural cold', 'Thick mist', 'Strange lights']
+    },
+    'pt': {
+        'denizen_names_prefix': ['Irmão', 'Irmã', 'Pai', 'Mãe', 'Velho', 'Jovem', 'Louco', 'Santo', 'Herege', 'Perdido'],
+        'denizen_names_suffix': ['Ossos', 'Cinza', 'Corvo', 'Espinho', 'Ferrugem', 'Mofo', 'Sujeira', 'Podridão', 'Perdição', 'Praga'],
+        'denizen_motivations': [
+            "busca redenção pelos pecados passados", "caça conhecimento proibido", "foge de perseguidores terríveis",
+            "procura família perdida", "guarda segredos antigos", "comercia com miséria humana"
+        ],
+        'denizen_features': [
+            "Coberto de cicatrizes rituais", "Perdeu vários dedos", "Olhos turvos com cataratas",
+            "Murmura orações constantemente", "Cheira a decomposição", "Usa robes esfarrapados"
+        ],
+        'denizen_demeanors': ['Hostil', 'Suspeito', 'Desesperado', 'Prestativo', 'Indiferente', 'Enigmático'],
+        'atmospheres': ['Silêncio opressivo', 'Sons ecoantes', 'Frio sobrenatural', 'Névoa espessa', 'Luzes estranhas']
+    }
+}
+
 # ===== ENHANCED LOOT TABLES =====
 ENHANCED_LOOT_TABLES = {
     'en': {
@@ -561,6 +701,8 @@ def get_table(category, table_name, language='en'):
         'wilderness': WILDERNESS_TABLES,
         'stats': STATS_TABLES,
         'enhanced_loot': ENHANCED_LOOT_TABLES,
+        'terrain': TERRAIN_TABLES,
+        'core': CORE_TABLES,
     }
     
     return table_categories.get(category, {}).get(language, {}).get(table_name, [])
@@ -570,7 +712,8 @@ def get_all_tables(language='en'):
     all_tables = {}
     categories = [BASIC_TABLES, NAMING_TABLES, TAVERN_TABLES, DUNGEON_TABLES, 
                  DENIZEN_TABLES, BESTIARY_TABLES, SCROLL_TABLES, LOOT_TABLES, 
-                 AFFILIATION_TABLES, WILDERNESS_TABLES, STATS_TABLES, ENHANCED_LOOT_TABLES]
+                 AFFILIATION_TABLES, WILDERNESS_TABLES, STATS_TABLES, ENHANCED_LOOT_TABLES,
+                 TERRAIN_TABLES, CORE_TABLES]
     
     for category in categories:
         if language in category:
@@ -580,7 +723,7 @@ def get_all_tables(language='en'):
 
 def list_categories():
     """List all available table categories."""
-    return ['basic', 'naming', 'tavern', 'dungeon', 'denizen', 'bestiary', 'scroll', 'loot', 'affiliation', 'wilderness', 'stats', 'enhanced_loot']
+    return ['basic', 'naming', 'tavern', 'dungeon', 'denizen', 'bestiary', 'scroll', 'loot', 'affiliation', 'wilderness', 'stats', 'enhanced_loot', 'terrain', 'core']
 
 def list_tables_in_category(category, language='en'):
     """List all tables in a specific category."""
@@ -597,6 +740,8 @@ def list_tables_in_category(category, language='en'):
         'wilderness': WILDERNESS_TABLES,
         'stats': STATS_TABLES,
         'enhanced_loot': ENHANCED_LOOT_TABLES,
+        'terrain': TERRAIN_TABLES,
+        'core': CORE_TABLES,
     }
     
     category_tables = table_categories.get(category, {}).get(language, {})

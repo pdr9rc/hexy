@@ -9,31 +9,23 @@ import json
 import markdown
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from mork_borg_lore_database import MorkBorgLoreDatabase
+from terrain_system import terrain_system
+from hex_generator import hex_generator
+from map_generator import map_generator
+from translation_system import translation_system
 
 app = Flask(__name__, template_folder='../web/templates', static_folder='../web/static')
 
-# Initialize lore database
+# Initialize systems
 lore_db = MorkBorgLoreDatabase()
 
-# Import the proper terrain analyzer
-from terrain_analyzer import DyingLandsTerrainAnalyzer
-
-# Initialize terrain analyzer
-terrain_analyzer = DyingLandsTerrainAnalyzer()
-
 def get_map_dimensions():
-    """Get map dimensions from terrain analyzer."""
-    return terrain_analyzer.get_map_dimensions()
+    """Get map dimensions from terrain system."""
+    return terrain_system.get_map_dimensions()
 
 def get_terrain_for_hex(hex_code):
-    """Get terrain type for a hex using proper terrain analysis."""
-    # Check for hardcoded lore locations first
-    hardcoded = lore_db.get_hardcoded_hex(hex_code)
-    if hardcoded:
-        return hardcoded.get('terrain', 'plains')
-    
-    # Use terrain analyzer for sophisticated terrain detection
-    return terrain_analyzer.get_terrain_for_hex(hex_code)
+    """Get terrain type for a hex using unified terrain system."""
+    return terrain_system.get_terrain_for_hex(hex_code, lore_db)
 
 @app.route('/')
 def main_map():
@@ -42,7 +34,7 @@ def main_map():
         os.makedirs('dying_lands_output', exist_ok=True)
         return render_template('setup.html', 
                              title="The Dying Lands - Setup", 
-                             action="Run full_map_generator.py to create the map")
+                             action="Run map_generator.py to create the map")
     
     # Get map dimensions
     map_width, map_height = get_map_dimensions()
@@ -101,7 +93,8 @@ def get_hex_info(hex_code):
                     'local_tavern': settlement_data['local_tavern'],
                     'local_power': settlement_data['local_power'],
                     'settlement_art': settlement_data['settlement_art'],
-                    'hex_code': hex_code
+                    'hex_code': hex_code,
+                    'redirect_to': 'settlement'
                 })
             
             # Regular hex content
@@ -165,48 +158,56 @@ def get_city_details(hex_code):
     
     return jsonify({'success': False, 'error': 'City not found'})
 
+@app.route('/api/settlement/<hex_code>')
+def get_settlement_details(hex_code):
+    """Get detailed settlement information."""
+    hex_file = f"dying_lands_output/hexes/hex_{hex_code}.md"
+    
+    if os.path.exists(hex_file):
+        try:
+            with open(hex_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            
+            # Check if this is a settlement
+            if '⌂ **' in content:
+                settlement_data = extract_settlement_data(content, hex_code)
+                
+                # Get terrain for regional context
+                terrain = get_terrain_for_hex(hex_code)
+                
+                # Generate settlement ASCII map
+                settlement_map = generate_settlement_ascii_map(settlement_data, hex_code)
+                
+                return jsonify({
+                    'success': True,
+                    'settlement': settlement_data,
+                    'terrain': terrain,
+                    'hex_code': hex_code,
+                    'settlement_map': settlement_map
+                })
+        
+        except Exception as e:
+            return jsonify({'success': False, 'error': str(e)})
+    
+    return jsonify({'success': False, 'error': 'Settlement not found'})
+
 @app.route('/api/lore-overview')
 def get_lore_overview():
     """Get complete lore overview."""
-    return jsonify({
-        'success': True,
-        'major_cities': len(lore_db.major_cities),
-        'factions': len(lore_db.factions),
-        'cities_data': [
-            {
-                'hex_code': f"{coords[0]:02d}{coords[1]:02d}",
-                'name': data['name'],
-                'region': data['region'],
-                'population': data['population']
-            }
-            for data in lore_db.major_cities.values()
-            for coords in [data['coordinates']]
-        ],
-        'factions_data': [
-            {
-                'name': data['name'],
-                'influence': data['influence'],
-                'regions': data['regions']
-            }
-            for data in lore_db.factions.values()
-        ]
-    })
+    try:
+        # Use unified map generator
+        result = map_generator.get_lore_overview()
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/terrain-overview')
 def get_terrain_overview():
     """Get terrain analysis."""
     try:
-        # Use the proper terrain analyzer
-        terrain_map = terrain_analyzer.create_terrain_overview_map()
-        distribution = terrain_analyzer.get_terrain_distribution()
-        dimensions = terrain_analyzer.get_map_dimensions()
-        
-        return jsonify({
-            'success': True,
-            'terrain_map': terrain_map,
-            'dimensions': list(dimensions),
-            'distribution': distribution
-        })
+        # Use unified terrain system
+        result = map_generator.get_terrain_overview()
+        return jsonify(result)
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
@@ -220,103 +221,47 @@ def generate_single_hex():
         if not hex_code:
             return jsonify({'success': False, 'error': 'Hex code required'})
         
-        print(f"🔍 DEBUG: Starting generation for hex {hex_code}")
-        print(f"🔍 DEBUG: Full request data: {data}")
-        print(f"🔍 DEBUG: hex_code type: {type(hex_code)}, length: {len(hex_code)}")
-        
-        # Validate hex code format
-        if not hex_code.isdigit() or len(hex_code) != 4:
-            return jsonify({'success': False, 'error': f'Invalid hex code format: {hex_code}. Expected XXYY format (e.g., 0101)'})
-        
-        # Force reload the module to get latest changes
-        import importlib
-        import dying_lands_generator
-        importlib.reload(dying_lands_generator)
-        
-        # Import and use the generators for single hex
-        from full_map_generator import generate_lore_hex_content
-        from dying_lands_generator import generate_hex_content, write_hex_file
-        
-        print(f"🔍 DEBUG: Imports successful (with reload)")
-        
-        # Check for hardcoded lore locations first
-        hardcoded = lore_db.get_hardcoded_hex(hex_code)
-        if hardcoded and hardcoded.get('locked', False):
-            print(f"🔍 DEBUG: Using lore-based generation")
-            hex_data = generate_lore_hex_content(hex_code, hardcoded, 'en')
-        else:
-            print(f"🔍 DEBUG: Using terrain-based generation")
-            terrain = get_terrain_for_hex(hex_code)
-            print(f"🔍 DEBUG: Terrain detected: {terrain}")
-            hex_data = generate_hex_content(hex_code, terrain)
-            print(f"🔍 DEBUG: Generated encounter: {hex_data.get('encounter', 'None')}")
-            print(f"🔍 DEBUG: Generated denizen preview: {str(hex_data.get('denizen', 'None'))[:100]}...")
-        
-        # Write the file
-        write_hex_file(hex_data)
+        # Generate hex content using unified system
+        hex_data = map_generator.generate_single_hex(hex_code)
         
         return jsonify({
             'success': True,
             'hex_code': hex_code,
-            'message': f'Generated content for hex {hex_code}'
+            'message': translation_system.t('hex_generated', hex_code=hex_code)
         })
         
     except Exception as e:
-        print(f"🔍 DEBUG: Error occurred: {e}")
-        import traceback
-        traceback.print_exc()
+        print(f"Error generating hex {hex_code}: {e}")
         return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/generate-full-map', methods=['POST'])
 def generate_full_map():
     """Generate content for the entire map."""
     try:
-        from full_map_generator import generate_full_map
-        
-        # Generate with lore integration
-        hex_data_list = generate_full_map(language='en', skip_existing=False)
+        # Generate using unified system
+        hex_data_list = map_generator.generate_full_map(skip_existing=False)
         
         return jsonify({
             'success': True,
             'count': len(hex_data_list),
-            'message': f'Generated {len(hex_data_list)} hexes with lore integration'
+            'message': translation_system.t('generated_hexes', count=len(hex_data_list))
         })
         
     except Exception as e:
+        print(f"Generation error: {e}")
         return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/reset-continent', methods=['POST'])
 def reset_continent():
     """Reset the entire continent by deleting all content and regenerating."""
     try:
-        import shutil
-        import os
-        from full_map_generator import generate_full_map, create_output_dirs
-        import dying_lands_generator
+        # Reset using unified system
+        result = map_generator.reset_continent()
         
-        # Set the global language for consistency
-        dying_lands_generator.CURRENT_LANG = 'en'
-        
-        # Delete existing content
-        if os.path.exists('dying_lands_output'):
-            shutil.rmtree('dying_lands_output')
-        
-        # Recreate directories
-        create_output_dirs()
-        
-        # Generate fresh content with proper language setting
-        hex_data_list = generate_full_map(language='en', skip_existing=False)
-        
-        return jsonify({
-            'success': True,
-            'count': len(hex_data_list),
-            'message': f'🗺️ Continent reset! Generated {len(hex_data_list)} fresh hexes'
-        })
+        return jsonify(result)
         
     except Exception as e:
-        import traceback
-        error_details = traceback.format_exc()
-        print(f"Reset error: {error_details}")  # Log to console for debugging
+        print(f"Reset error: {e}")
         return jsonify({'success': False, 'error': str(e)})
 
 def generate_ascii_map_data():
@@ -368,6 +313,13 @@ def generate_ascii_map_data():
                         symbol = '☉'  # NPC marker
                     # Otherwise keep terrain symbol for basic content
                 
+                # Determine CSS class based on content type
+                css_class = f'terrain-{terrain}'
+                if content_type == 'settlement':
+                    css_class = 'settlement'
+                elif has_content:
+                    css_class += ' has-content'
+                
                 grid[hex_code] = {
                     'x': x, 'y': y,
                     'terrain': terrain,
@@ -375,7 +327,7 @@ def generate_ascii_map_data():
                     'is_city': False,
                     'has_content': has_content,
                     'content_type': content_type,
-                    'css_class': f'terrain-{terrain}' + (' has-content' if has_content else '')
+                    'css_class': css_class
                 }
     
     return grid
@@ -397,16 +349,7 @@ def get_major_cities_data():
 
 def get_terrain_symbol(terrain):
     """Get symbol for terrain type."""
-    symbols = {
-        'mountain': '^',
-        'forest': '♠',
-        'coast': '~',
-        'plains': '.',
-        'swamp': '#',
-        'desert': 'ä',
-        'unknown': '?'
-    }
-    return symbols.get(terrain, '?')
+    return terrain_system.get_terrain_symbol(terrain)
 
 def get_hex_content_type(hex_code):
     """Determine content type from hex file for visual indicators."""
@@ -513,6 +456,116 @@ def extract_settlement_data(content, hex_code):
                 settlement_data['settlement_art'] = '\n'.join(lines[art_start:art_end + 1])
     
     return settlement_data
+
+def generate_settlement_ascii_map(settlement_data, hex_code):
+    """Generate ASCII map layout for a settlement."""
+    settlement_name = settlement_data['name']
+    population_size = settlement_data['population']
+    terrain = get_terrain_for_hex(hex_code)
+    
+    # Determine settlement size based on population
+    if '1000' in population_size or '501-1000' in population_size:
+        size = 'large'
+        width, height = 12, 8
+    elif '500' in population_size or '101-500' in population_size:
+        size = 'medium'
+        width, height = 10, 6
+    else:
+        size = 'small'
+        width, height = 8, 5
+    
+    # Create settlement layout based on terrain
+    settlement_layouts = {
+        'mountain': {
+            'layout': [
+                "    ⛰️⛰️⛰️    ",
+                "  ⛰️ SETTLEMENT ⛰️",
+                "⛰️   🏠  🏠  🏠   ⛰️",
+                "⛰️      🏛️      ⛰️",
+                "⛰️⛰️⛰️⛰️⛰️⛰️⛰️⛰️⛰️⛰️"
+            ],
+            'legend': [
+                "⛰️ Mountain Peaks",
+                "🏠 Stone Houses",
+                "🏛️ Meeting Hall"
+            ]
+        },
+        'forest': {
+            'layout': [
+                "🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲",
+                "🌲  TREE VILLAGE  🌲",
+                "🌲   🏠  🏠  🏠   🌲",
+                "🌲      🔮      🌲",
+                "🌲🌲🌲🌲🌲🌲🌲🌲🌲🌲"
+            ],
+            'legend': [
+                "🌲 Cursed Forest",
+                "🏠 Tree Houses",
+                "🔮 Shrine"
+            ]
+        },
+        'coast': {
+            'layout': [
+                "🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊",
+                "🌊  FISHING VILLE 🌊",
+                "🌊   🏠  🏠  🏠   🌊",
+                "🌊      ⚓      🌊",
+                "🌊🌊🌊🌊🌊🌊🌊🌊🌊🌊"
+            ],
+            'legend': [
+                "🌊 Coastal Waters",
+                "🏠 Fisher Huts",
+                "⚓ Harbor"
+            ]
+        },
+        'plains': {
+            'layout': [
+                "🌾🌾🌾🌾🌾🌾🌾🌾🌾🌾",
+                "🌾  FARM VILLAGE  🌾",
+                "🌾   🏠  🏠  🏠   🌾",
+                "🌾      🗿      🌾",
+                "🌾🌾🌾🌾🌾🌾🌾🌾🌾🌾"
+            ],
+            'legend': [
+                "🌾 Grain Fields",
+                "🏠 Farm Houses",
+                "🗿 Ancient Stone"
+            ]
+        },
+        'swamp': {
+            'layout': [
+                "🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿",
+                "🌿  BOG VILLAGE   🌿",
+                "🌿   🏠  🏠  🏠   🌿",
+                "🌿      🐸      🌿",
+                "🌿🌿🌿🌿🌿🌿🌿🌿🌿🌿"
+            ],
+            'legend': [
+                "🌿 Swamp Reeds",
+                "🏠 Stilt Houses",
+                "🐸 Bog Shrine"
+            ]
+        }
+    }
+    
+    # Get layout for terrain type
+    layout_data = settlement_layouts.get(terrain, settlement_layouts['plains'])
+    
+    # Build the settlement map
+    settlement_map = f"""
+{settlement_name.upper()} - SETTLEMENT MAP
+{'=' * (len(settlement_name) + 20)}
+
+{chr(10).join(layout_data['layout'])}
+
+LEGEND:
+{chr(10).join(layout_data['legend'])}
+
+POPULATION: {population_size}
+TERRAIN: {terrain.title()}
+"""
+    
+    return settlement_map
 
 def generate_city_ascii_map(city_data, hex_code):
     """Generate ASCII map layout for a specific city."""

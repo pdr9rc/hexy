@@ -9,57 +9,100 @@ import os
 # Add current directory to path
 sys.path.insert(0, '.')
 
-def test_direct_generation():
-    """Test content generation directly"""
-    print("🧪 Testing direct content generation...")
+def test_hex_generator():
+    """Test the new unified hex generator"""
+    print("🧪 Testing unified hex generator...")
     
     try:
-        from dying_lands_generator import generate_hex_content
-        print("✅ Successfully imported generate_hex_content from dying_lands_generator")
+        from hex_generator import HexGenerator
+        print("✅ Successfully imported HexGenerator")
         
         # Test generation
-        hex_data = generate_hex_content('0601', 'forest')
+        generator = HexGenerator('en')
+        hex_data = generator.generate_hex_content('0601', 'forest')
         print(f"✅ Generated content for hex 0601:")
         print(f"   Encounter: {hex_data.get('encounter', 'None')}")
         print(f"   Terrain: {hex_data.get('terrain', 'None')}")
         return True
         
     except Exception as e:
-        print(f"❌ Error in direct generation: {e}")
+        print(f"❌ Error in hex generator: {e}")
         import traceback
         traceback.print_exc()
         return False
 
-def test_ascii_viewer_imports():
-    """Test the imports used in ascii_map_viewer"""
-    print("\n🧪 Testing ascii_map_viewer imports...")
+def test_terrain_system():
+    """Test the terrain system"""
+    print("\n🧪 Testing terrain system...")
     
     try:
-        from full_map_generator import generate_lore_hex_content
-        print("✅ Successfully imported generate_lore_hex_content from full_map_generator")
+        from terrain_system import terrain_system
+        print("✅ Successfully imported terrain_system")
         
-        from dying_lands_generator import generate_hex_content, write_hex_file
-        print("✅ Successfully imported generate_hex_content and write_hex_file from dying_lands_generator")
+        # Test terrain detection
+        terrain = terrain_system.get_terrain_for_hex('0601')
+        print(f"✅ Detected terrain for hex 0601: {terrain}")
         
         return True
         
     except Exception as e:
-        print(f"❌ Error in ascii_viewer imports: {e}")
+        print(f"❌ Error in terrain system: {e}")
         import traceback
         traceback.print_exc()
         return False
 
-def test_single_hex_flow():
-    """Test the complete single hex generation flow"""
-    print("\n🧪 Testing complete single hex flow...")
+def test_map_generator():
+    """Test the map generator"""
+    print("\n🧪 Testing map generator...")
     
     try:
-        # Import what ascii_map_viewer needs
-        from full_map_generator import generate_lore_hex_content
-        from dying_lands_generator import generate_hex_content, write_hex_file, detect_terrain_from_hex
+        from map_generator import map_generator
+        print("✅ Successfully imported map_generator")
+        
+        # Test map generation
+        result = map_generator.generate_map('en', ['0601', '0602'])
+        print(f"✅ Generated map with {len(result)} hexes")
+        
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error in map generator: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
+def test_lore_database():
+    """Test the lore database"""
+    print("\n🧪 Testing lore database...")
+    
+    try:
+        from mork_borg_lore_database import MorkBorgLoreDatabase
+        print("✅ Successfully imported MorkBorgLoreDatabase")
+        
+        # Test lore database
+        lore_db = MorkBorgLoreDatabase()
+        hardcoded = lore_db.get_hardcoded_hex('0601')
+        print(f"✅ Retrieved hardcoded data for hex 0601: {hardcoded is not None}")
+        
+        return True
+        
+    except Exception as e:
+        print(f"❌ Error in lore database: {e}")
+        import traceback
+        traceback.print_exc()
+        return False
+
+def test_complete_flow():
+    """Test the complete content generation flow"""
+    print("\n🧪 Testing complete content generation flow...")
+    
+    try:
+        from hex_generator import HexGenerator
+        from terrain_system import terrain_system
         from mork_borg_lore_database import MorkBorgLoreDatabase
         
-        # Initialize lore database
+        # Initialize components
+        generator = HexGenerator('en')
         lore_db = MorkBorgLoreDatabase()
         
         hex_code = "0601"
@@ -67,12 +110,12 @@ def test_single_hex_flow():
         # Check for hardcoded lore locations
         hardcoded = lore_db.get_hardcoded_hex(hex_code)
         if hardcoded and hardcoded.get('locked', False):
-            hex_data = generate_lore_hex_content(hex_code, hardcoded, 'en')
+            hex_data = generator.generate_hex_content(hex_code, lore_db=lore_db)
             print(f"✅ Generated lore-based content for {hex_code}")
         else:
-            # Use the terrain detection from dying_lands_generator
-            terrain = detect_terrain_from_hex(hex_code)
-            hex_data = generate_hex_content(hex_code, terrain)
+            # Use terrain detection
+            terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
+            hex_data = generator.generate_hex_content(hex_code, terrain, lore_db)
             print(f"✅ Generated terrain-based content for {hex_code} (terrain: {terrain})")
         
         print(f"   Encounter: {hex_data.get('encounter', 'None')}")
@@ -90,16 +133,20 @@ if __name__ == "__main__":
     print("🔬 Content Generation Debug Test")
     print("=" * 50)
     
-    success1 = test_direct_generation()
-    success2 = test_ascii_viewer_imports() 
-    success3 = test_single_hex_flow()
+    success1 = test_hex_generator()
+    success2 = test_terrain_system()
+    success3 = test_map_generator()
+    success4 = test_lore_database()
+    success5 = test_complete_flow()
     
     print("\n📊 Test Results:")
-    print(f"Direct generation: {'✅ PASS' if success1 else '❌ FAIL'}")
-    print(f"ASCII viewer imports: {'✅ PASS' if success2 else '❌ FAIL'}")
-    print(f"Complete flow: {'✅ PASS' if success3 else '❌ FAIL'}")
+    print(f"Hex generator: {'✅ PASS' if success1 else '❌ FAIL'}")
+    print(f"Terrain system: {'✅ PASS' if success2 else '❌ FAIL'}")
+    print(f"Map generator: {'✅ PASS' if success3 else '❌ FAIL'}")
+    print(f"Lore database: {'✅ PASS' if success4 else '❌ FAIL'}")
+    print(f"Complete flow: {'✅ PASS' if success5 else '❌ FAIL'}")
     
-    if all([success1, success2, success3]):
+    if all([success1, success2, success3, success4, success5]):
         print("\n🎉 All tests passed! Content generation should work.")
     else:
         print("\n💥 Some tests failed. Check errors above.") 
