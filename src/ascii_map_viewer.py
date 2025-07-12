@@ -1551,7 +1551,7 @@ def create_templates():
 
 if __name__ == '__main__':
     # Create templates
-    create_templates()
+    # create_templates()
     
     print("🌐 Starting The Dying Lands ASCII Map Viewer...")
     print("   Open http://localhost:5000 in your browser")

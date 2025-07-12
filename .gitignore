@@ -155,4 +155,4 @@ Thumbs.db
 \#*#
 
 # Additional files to ignore
-*/hex_*.md
+src/dying_lands_output/*
