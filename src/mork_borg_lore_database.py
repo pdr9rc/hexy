@@ -33,17 +33,13 @@ class MorkBorgLoreDatabase:
                     'Ruled by mysterious council',
                     'Famous for its hanging gardens of corpses',
                     'Underground sewers with ancient horrors',
-                    'Ministry of Wealth & Taxes extracting souls as currency',
-                    'Guild of the Utmost Eager Day Laborers seeking any work',
-                    'House of Binding Contracts where devils broker deals',
-                    'Daily mandatory festivals causing economic standstill',
-                    'Demon infestation in government buildings',
-                    'Silver coin shortage due to ravenous taxation',
-                    'Cult of the Golden Tongue corrupting merchants',
-                    'Heptaliths - seven cursed standing stones in the city center'
+                    'Schleswig district with demon infestation',
+                    'Ministry of Wealth & Taxes',
+                    'Guild of the Utmost Eager Day Laborers',
+                    'House of Binding Contracts'
                 ],
-                'key_npcs': ['Josilfa Migol', 'The Galgenbeck Council', 'Tax Collectors', 'Contract Devils', 'Eager Day Laborers'],
-                'atmosphere': 'Urban decay and ancient evil mixed with bureaucratic horror'
+                'key_npcs': ['Josilfa Migol', 'The Galgenbeck Council'],
+                'atmosphere': 'Urban decay and ancient evil'
             },
             
             'bergen_chrypt': {
@@ -194,68 +190,6 @@ class MorkBorgLoreDatabase:
                 'regions': ['northwest', 'forest'],
                 'influence': 'magical',
                 'goals': ['Protect ancient secrets', 'Maintain balance', 'Forest preservation']
-            },
-            
-            # NEW: Forgotten Gods Cults (from Ikhon supplement)
-            'bilkherd_cult': {
-                'name': 'Servants of the Bilkherd',
-                'name_pt': 'Servos do Bilkherd',
-                'description': 'Cattle herders and farmers serving the forgotten god of livestock',
-                'description_pt': 'Criadores de gado e fazendeiros servindo o deus esquecido do gado',
-                'regions': ['south', 'central', 'plains'],
-                'influence': 'agricultural',
-                'goals': ['Increase livestock yields', 'Perform cattle sacrifices', 'Spread pastoral corruption']
-            },
-            
-            'becklure_cult': {
-                'name': 'Drowned Servants of the Becklure',
-                'name_pt': 'Servos Afogados do Becklure',
-                'description': 'Fishermen and coastal dwellers serving the water deity',
-                'description_pt': 'Pescadores e moradores costeiros servindo a divindade da água',
-                'regions': ['coast', 'swamp'],
-                'influence': 'maritime',
-                'goals': ['Control waterways', 'Drown the unfaithful', 'Seek sunken treasures']
-            },
-            
-            'old_dead_cult': {
-                'name': 'Whisperers to the Old Dead',
-                'name_pt': 'Sussurradores aos Mortos Antigos',
-                'description': 'Necromancers and grave-robbers serving ancient corpses',
-                'description_pt': 'Necromantes e saqueadores de túmulos servindo cadáveres antigos',
-                'regions': ['north', 'mountain', 'underground'],
-                'influence': 'necromantic',
-                'goals': ['Commune with ancient dead', 'Gather lost knowledge', 'Raise forgotten armies']
-            },
-            
-            'silkfiend_cult': {
-                'name': 'Bound by the Silkfiend',
-                'name_pt': 'Presos pelo Demônio da Seda',
-                'description': 'Artists and craftsmen enslaved by the spider deity',
-                'description_pt': 'Artistas e artesãos escravizados pela divindade aranha',
-                'regions': ['central', 'urban'],
-                'influence': 'artistic',
-                'goals': ['Create cursed artworks', 'Weave fate itself', 'Trap souls in silk']
-            },
-            
-            # NEW: Recent supplement factions
-            'golden_tongue_cult': {
-                'name': 'Cult of the Golden Tongue',
-                'name_pt': 'Culto da Língua Dourada',
-                'description': 'Merchants and tax collectors serving greed incarnate',
-                'description_pt': 'Mercadores e cobradores de impostos servindo a ganância encarnada',
-                'regions': ['central', 'urban'],
-                'influence': 'economic',
-                'goals': ['Accumulate wealth', 'Corrupt through greed', 'Control commerce']
-            },
-            
-            'eager_day_laborers': {
-                'name': 'Guild of the Utmost Eager Day Laborers',
-                'name_pt': 'Guilda dos Mais Ansiosos Trabalhadores Diários',
-                'description': 'Desperate workers performing any task for coin',
-                'description_pt': 'Trabalhadores desesperados realizando qualquer tarefa por moedas',
-                'regions': ['central', 'urban'],
-                'influence': 'labor',
-                'goals': ['Find work at any cost', 'Serve highest bidder', 'Survive another day']
             }
         }
     
@@ -393,86 +327,6 @@ class MorkBorgLoreDatabase:
             'locked': True
         }
         
-        # NEW: Additional special locations from research
-        hardcoded['0812'] = {
-            'type': 'special_location',
-            'name': 'The Weeping Stones',
-            'name_pt': 'As Pedras Chorosas',
-            'terrain': 'plains',
-            'description': 'Ancient standing stones that bleed tears of the innocent',
-            'description_pt': 'Pedras eretas antigas que sangram lágrimas dos inocentes',
-            'atmosphere': 'Ancient sorrow and mystical power',
-            'notable_features': ['Healing tears', 'Attracts undead at night', 'Prophetic visions'],
-            'factions': ['nechrubel_cult', 'shadow_king_followers'],
-            'locked': True
-        }
-        
-        hardcoded['1820'] = {
-            'type': 'special_location',
-            'name': 'Plague Ship Graveyard',
-            'name_pt': 'Cemitério de Navios da Peste',
-            'terrain': 'coast',
-            'description': 'Dozens of diseased vessels run aground on cursed shores',
-            'description_pt': 'Dezenas de navios doentes encalhados em costas amaldiçoadas',
-            'atmosphere': 'Maritime decay and disease',
-            'notable_features': ['Valuable cargo among the dead', 'Plague zombies crew the ships', 'Storm spirits guard the wrecks'],
-            'factions': ['plague_bearers', 'becklure_cult'],
-            'locked': True
-        }
-        
-        hardcoded['0409'] = {
-            'type': 'special_location',
-            'name': 'The Carnival of Sorrows',
-            'name_pt': 'O Carnaval das Tristezas',
-            'terrain': 'plains',  # Mobile, but needs a starting terrain
-            'description': 'Cursed traveling carnival that appears without warning',
-            'description_pt': 'Carnaval amaldiçoado viajante que aparece sem aviso',
-            'atmosphere': 'False joy masking eternal torment',
-            'notable_features': ['Moves every 1d4 weeks', 'Soul gambling games', 'Demonic performers'],
-            'factions': ['silkfiend_cult', 'eager_day_laborers'],
-            'special_properties': ['mobile_location', 'changes_hex_randomly'],
-            'locked': True
-        }
-        
-        hardcoded['2205'] = {
-            'type': 'special_location',
-            'name': 'The Bone Crown Barrows',
-            'name_pt': 'Os Túmulos da Coroa Óssea',
-            'terrain': 'mountain',
-            'description': 'Ancient burial mounds of forgotten kings',
-            'description_pt': 'Montículos funerários antigos de reis esquecidos',
-            'atmosphere': 'Royal death and ancient majesty',
-            'notable_features': ['Crowned skeletons that still rule', 'Treasures beyond imagining', 'Curse upon grave robbers'],
-            'factions': ['old_dead_cult', 'shadow_king_followers'],
-            'locked': True
-        }
-        
-        hardcoded['1618'] = {
-            'type': 'special_location',
-            'name': 'The Ministry of Wealth & Taxes',
-            'name_pt': 'O Ministério da Riqueza e Impostos',
-            'terrain': 'plains',
-            'description': 'Demon-infested government building extracting wealth from souls',
-            'description_pt': 'Prédio governamental infestado de demônios extraindo riqueza das almas',
-            'atmosphere': 'Bureaucratic horror and financial damnation',
-            'notable_features': ['Devils in fine suits', 'Contracts written in blood', 'Vault of stolen souls'],
-            'factions': ['golden_tongue_cult', 'eager_day_laborers'],
-            'locked': True
-        }
-        
-        hardcoded['0722'] = {
-            'type': 'special_location',
-            'name': 'The Quarantine Islands',
-            'name_pt': 'As Ilhas de Quarentena',
-            'terrain': 'coast',
-            'description': 'Isolated islands where plague victims are abandoned',
-            'description_pt': 'Ilhas isoladas onde vítimas da peste são abandonadas',
-            'atmosphere': 'Abandonment and slow death',
-            'notable_features': ['Desperate survivors', 'Mutated plague strains', 'Hidden rebel camps'],
-            'factions': ['plague_bearers'],
-            'locked': True
-        }
-        
         return hardcoded
     
     def get_regional_bias(self, x: int, y: int) -> str:
@@ -508,54 +362,24 @@ class MorkBorgLoreDatabase:
     def get_regional_npcs(self, region: str) -> List[str]:
         """Get NPCs commonly found in a region."""
         regional_npcs = {
-            'north': [
-                'Undead Knight', 'Ice Witch', 'Frost Giant', 'Tomb Guardian',
-                # NEW: Enhanced with forgotten gods and new content
-                'Bone Crown Archaeologist', 'Old Dead Necromancer', 'Bergen Chrypt Warden',
-                'Ancient King\'s Spirit', 'Frozen Plague Doctor', 'Crypt Robber'
-            ],
-            'central': [
-                'Corrupt Merchant', 'Heretical Priest', 'City Guard', 'Plague Doctor',
-                # NEW: Enhanced with Galgenbeck and tax content
-                'Desperate Tax Collector', 'Soul Contract Negotiator', 'Eager Day Laborer',
-                'Golden Tongue Merchant', 'Ministry Demon', 'Carnival Performer'
-            ],
-            'south': [
-                'Weather Seer', 'Cattle Baron', 'Plague Farmer', 'Stone Circle Keeper',
-                # NEW: Enhanced with Bilkherd cult content
-                'Bilkherd Cattle Cultist', 'Infected Livestock Herder', 'Milk Shrine Keeper',
-                'Sacrificial Cowhand', 'Pastoral Horror Priest', 'Diseased Ranch Owner'
-            ],
-            'west': [
-                'Storm Caller', 'Plague Bearer', 'Desperate Survivor', 'Coastal Raider',
-                # NEW: Enhanced with Becklure and coastal content
-                'Drowned Fisherman', 'Quarantine Warden', 'Becklure Water Cultist',
-                'Plague Ship Captain', 'Lighthouse Keeper', 'Storm Cult Sailor'
-            ],
-            'east': [
-                'Nomad Warrior', 'Caravan Master', 'Desert Oracle', 'Treasure Hunter',
-                # NEW: Enhanced with frontier content
-                'Trade Route Guardian', 'Portal Seeker', 'Calendar Scholar',
-                'Faction Scout', 'Wasteland Guide', 'Resource Flow Merchant'
-            ],
-            'northwest': [
-                'Forest Witch', 'Tree Warden', 'Cursed Druid', 'Beast Speaker',
-                # NEW: Enhanced with Silkfiend and forest content
-                'Silkfiend Artist', 'Web-wrapped Hermit', 'Fate Weaver',
-                'Silk-bound Prisoner', 'Tree-silk Harvester', 'Pattern Reader'
-            ]
+            'north': ['Undead Knight', 'Ice Witch', 'Frost Giant', 'Tomb Guardian'],
+            'central': ['Corrupt Merchant', 'Heretical Priest', 'City Guard', 'Plague Doctor', 'Tax Collector'],
+            'south': ['Weather Seer', 'Cattle Baron', 'Plague Farmer', 'Stone Circle Keeper'],
+            'west': ['Storm Caller', 'Plague Bearer', 'Desperate Survivor', 'Coastal Raider'],
+            'east': ['Nomad Warrior', 'Caravan Master', 'Desert Oracle', 'Treasure Hunter'],
+            'northwest': ['Forest Witch', 'Tree Warden', 'Cursed Druid', 'Beast Speaker']
         }
         return regional_npcs.get(region, ['Wandering Survivor', 'Lost Soul', 'Desperate Scavenger'])
     
     def get_regional_factions(self, region: str) -> List[str]:
         """Get factions active in a region."""
         region_factions = {
-            'north': ['shadow_king_followers', 'heretical_priests', 'old_dead_cult'],
-            'central': ['nechrubel_cult', 'heretical_priests', 'golden_tongue_cult', 'eager_day_laborers'],
-            'south': ['plague_bearers', 'nechrubel_cult', 'bilkherd_cult'],
-            'west': ['plague_bearers', 'becklure_cult'],
+            'north': ['shadow_king_followers', 'heretical_priests'],
+            'central': ['nechrubel_cult', 'heretical_priests'],
+            'south': ['plague_bearers', 'nechrubel_cult'],
+            'west': ['plague_bearers'],
             'east': ['nechrubel_cult'],
-            'northwest': ['forest_witches', 'silkfiend_cult']
+            'northwest': ['forest_witches']
         }
         return region_factions.get(region, ['nechrubel_cult'])
 
