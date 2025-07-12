@@ -95,25 +95,16 @@ DUNGEON_TABLES = {
             "Ancient tomb", "Ruined temple", "Collapsed mine", "Forgotten crypt", "Abandoned tower", 
             "Underground warren", "Sunken cathedral", "Twisted labyrinth", "Bone pit", "Plague house", 
             "Cursed cellar", "Sacrificial chamber",
-            # NEW: From recent supplements and research
-            "Forgotten god-prison", "Plague research facility", "Demon binding circle", 
-            "Noble family crypt with undead patriarchs", "Heretic hideout library", 
-            "Troll warren with human pens", "Witch's reality laboratory", "Soul harvest shrine",
-            "Tax collection dungeon", "Contract devil's vault", "Carnival basement of horrors",
-            "Drowned ship's hold", "Bone crown burial chamber", "Silkfiend's web gallery"
+            # From Christian's supplements
+            "Tax collection dungeon", "Contract devil's vault"
         ],
         'dungeon_features': [
             "flooded with black water", "filled with poisonous gas", "haunted by restless spirits", 
             "overrun with vermin", "decorated with blasphemous murals", "littered with ancient bones", 
             "carved from living rock", "built on unholy ground", "twisted by dark magic", 
             "scarred by old battles", "abandoned in haste", "sealed for good reason",
-            # NEW: Features from recent content
-            "bound by forgotten god's influence", "echoing with cattle lowing from nowhere", 
-            "dripping with tears that form healing pools", "wrapped in silken webs that whisper secrets",
-            "filled with bureaucratic paperwork written in blood", "haunted by the voices of drowned sailors",
-            "decorated with tax ledgers of the damned", "pulsing with the heartbeat of ancient kings",
-            "crawling with plague-mutated vermin", "shifting layout based on lunar phases",
-            "guarded by bound spirits of contract-breakers", "lined with mirrors showing true selves"
+            # From Christian's supplements 
+            "filled with bureaucratic paperwork written in blood"
         ],
         'dungeon_dangers': [
             "Collapsing ceiling", "Pit trap with spikes", "Poisonous gas leak", "Unstable floor", 
@@ -165,14 +156,8 @@ DENIZEN_TABLES = {
             "Witch hunter", "Corrupted priest", "Feral child", "Broken soldier", "Death merchant", 
             "Bone collector", "Grave robber", "Cursed wanderer", "Zealot preacher", "Flesh trader", 
             "Scavenger lord", "Plague bearer", "Doom prophet",
-            # NEW: From recent supplements and forgotten gods
-            "Cattle cultist of the Bilkherd", "Drowned fisherman serving Becklure", 
-            "Necromancer communing with Old Dead", "Spider-silk artist bound to Silkfiend",
-            "Desperate tax collector", "Soul contract negotiator", "Eager day laborer",
-            "Golden tongue merchant", "Plague quarantine warden", "Carnival performer",
-            "Bone crown archaeologist", "Weather-reading witch", "Portal seeker",
-            "Calendar doomsday scholar", "Faction territorial scout", "Resource flow guardian",
-            "Mercy killer for plague victims", "Demon-possessed bureaucrat", "Cursed carnival barker"
+            # From Christian's supplements
+            "Desperate tax collector", "Eager day laborer", "Carnival performer"
         ],
         'denizen_motivations': [
             "seeks redemption for past sins", "hunts for forbidden knowledge", "flees from terrible pursuers",
@@ -221,14 +206,7 @@ BESTIARY_TABLES = {
         'beast_types': [
             "Plague rat", "Corpse crow", "Bone spider", "Blood leech", "Shadow wolf", "Carrion hound",
             "Sewer serpent", "Rust beetle", "Doom moth", "Acid toad", "Spine crawler", "Flesh wasp",
-            "Grave worm", "Blight bat", "Void spider", "Death adder", "Scream bird", "Terror mole",
-            # NEW: Beasts connected to forgotten gods and new factions
-            "Bilkherd's plague cattle", "Becklure's drowned horse", "Old Dead's bone hound", 
-            "Silkfiend's web spinner", "Tax collector's ledger imp", "Contract devil's paper wasp",
-            "Carnival nightmare beast", "Quarantine zone mutant", "Golden tongue greed worm",
-            "Weather-mad storm bird", "Portal-touched phase cat", "Calendar beast of time",
-            "Faction war hound", "Trade route pack mule of bones", "Eager laborer's burden beast",
-            "Weeping stone spirit", "Bone crown specter", "Ministry demon familiar"
+            "Grave worm", "Blight bat", "Void spider", "Death adder", "Scream bird", "Terror mole"
         ],
         'beast_features': [
             "glowing red eyes", "exposed ribs", "rotting flesh", "venomous bite", "acidic saliva",
@@ -308,14 +286,7 @@ LOOT_TABLES = {
         'treasure_types': [
             "Cursed jewelry", "Tainted coins", "Bone ornaments", "Blood gems", "Skull chalices",
             "Ritual daggers", "Plague masks", "Death totems", "Forbidden books", "Soul stones",
-            "Corpse candles", "Grave dirt", "Unholy relics", "Demon bottles", "Witch tools",
-            # NEW: Treasures from forgotten gods and recent supplements
-            "Bilkherd's milk chalice", "Becklure's drowned pearl", "Old Dead's memory stone", 
-            "Silkfiend's fate silk", "Tax ledger written in blood", "Infernal contract fragment",
-            "Carnival soul ticket", "Quarantine doctor's mask", "Golden tongue coin",
-            "Weather prediction bones", "Portal-seeking compass", "Calendar prophecy scroll",
-            "Faction identification badge", "Trade route toll tokens", "Eager laborer's tools",
-            "Weeping stone tears (bottled)", "Bone crown fragment", "Ministry demon seal"
+            "Corpse candles", "Grave dirt", "Unholy relics", "Demon bottles", "Witch tools"
         ],
         'treasure_values': [
             "Worthless but cursed", "Few copper pieces", "Handful of silver", "Small fortune in gold",
@@ -400,110 +371,6 @@ AFFILIATION_TABLES = {
     }
 }
 
-# ===== NEW: FORGOTTEN GODS TABLES =====
-FORGOTTEN_GODS_TABLES = {
-    'en': {
-        'forgotten_god_shrines': [
-            "Hidden cattle pen with Bilkherd altar beneath hay",
-            "Submerged cave shrine to Becklure accessed at low tide",
-            "Ancient tomb entrance guarded by Old Dead whispers",
-            "Silk-wrapped tree grove sacred to the Silkfiend",
-            "Roadside stone circle concealing forgotten god prison",
-            "Abandoned farmhouse cellar with bovine skull altar",
-            "Lighthouse foundation built around drowned god shrine",
-            "Burial mound with talking skeleton priests",
-            "Artist's studio filled with cursed silk tapestries",
-            "Tax office basement hiding infernal contract vault"
-        ],
-        'forgotten_god_gifts': [
-            "Cattle that produce healing milk once per week",
-            "Ability to breathe underwater for one hour daily",
-            "Commune with any corpse older than 100 years",
-            "Weave minor fate changes into reality",
-            "Animals obey simple commands willingly",
-            "Find safe passage across any body of water",
-            "Speak with spirits of the ancient dead",
-            "Create art that shows viewer's true desires",
-            "Livestock always know direction of nearest water",
-            "Dead fish and sea creatures answer questions"
-        ],
-        'forgotten_god_punishments': [
-            "All cattle in area sicken and die within days",
-            "Victim experiences drowning sensations randomly",
-            "Ancient dead rise to torment the unfaithful",
-            "Becomes entangled in unbreakable silk threads",
-            "Livestock flee in terror at victim's approach",
-            "Water turns to blood when victim tries to drink",
-            "Haunted by voices of disappointed ancestors",
-            "Everything victim touches becomes ugly",
-            "Cannot speak without bovine sounds mixing in",
-            "Dreams of drowning in silk cocoons nightly"
-        ],
-        'forgotten_god_rituals': [
-            "Sacrifice finest cow during harvest moon",
-            "Drown offering of fish in sacred tidal pool",
-            "Bury grave goods with ancient bone fragments",
-            "Weave personal secret into silk offering",
-            "Milk sacred cow while chanting prayers",
-            "Cast net into water during storm",
-            "Place skull in tomb while whispering names",
-            "Create artwork depicting patron's domain",
-            "Pour milk libation on stone altar",
-            "Offer drowned sailor's bones to waves"
-        ]
-    },
-    'pt': {
-        'forgotten_god_shrines': [
-            "Curral escondido com altar de Bilkherd sob o feno",
-            "Santuário de caverna submersa para Becklure acessível na maré baixa",
-            "Entrada de tumba antiga guardada por sussurros dos Mortos Antigos",
-            "Bosque de árvores envoltas em seda sagrado ao Demônio da Seda",
-            "Círculo de pedras na beira da estrada escondendo prisão de deus esquecido",
-            "Porão de casa de fazenda abandonada com altar de crânio bovino",
-            "Fundação de farol construída ao redor de santuário de deus afogado",
-            "Monte funerário com sacerdotes esqueletos falantes",
-            "Estúdio de artista cheio de tapeçarias de seda amaldiçoadas",
-            "Porão de escritório de impostos escondendo cofre de contrato infernal"
-        ],
-        'forgotten_god_gifts': [
-            "Gado que produz leite curativo uma vez por semana",
-            "Habilidade de respirar debaixo d'água por uma hora diariamente",
-            "Comungar com qualquer cadáver mais antigo que 100 anos",
-            "Tecer pequenas mudanças do destino na realidade",
-            "Animais obedecem comandos simples voluntariamente",
-            "Encontrar passagem segura através de qualquer corpo d'água",
-            "Falar com espíritos dos mortos antigos",
-            "Criar arte que mostra os verdadeiros desejos do observador",
-            "Gado sempre sabe direção da água mais próxima",
-            "Peixes e criaturas marinhas mortas respondem perguntas"
-        ],
-        'forgotten_god_punishments': [
-            "Todo gado na área adoece e morre em dias",
-            "Vítima experimenta sensações de afogamento aleatoriamente",
-            "Mortos antigos ressurgem para atormentar os infiéis",
-            "Fica emaranhado em fios de seda inquebráveis",
-            "Gado foge em terror na aproximação da vítima",
-            "Água vira sangue quando vítima tenta beber",
-            "Assombrado por vozes de ancestrais desapontados",
-            "Tudo que a vítima toca se torna feio",
-            "Não pode falar sem sons bovinos se misturando",
-            "Sonha com afogamento em casulos de seda todas as noites"
-        ],
-        'forgotten_god_rituals': [
-            "Sacrificar a melhor vaca durante a lua da colheita",
-            "Afogar oferta de peixe em poça sagrada da maré",
-            "Enterrar bens funerários com fragmentos de ossos antigos",
-            "Tecer segredo pessoal em oferta de seda",
-            "Ordenhar vaca sagrada enquanto canta orações",
-            "Lançar rede na água durante tempestade",
-            "Colocar crânio na tumba enquanto sussurra nomes",
-            "Criar obra de arte retratando domínio do patrono",
-            "Derramar libação de leite no altar de pedra",
-            "Oferecer ossos de marinheiro afogado às ondas"
-        ]
-    }
-}
-
 # ===== WILDERNESS TABLES =====
 WILDERNESS_TABLES = {
     'en': {
@@ -517,15 +384,8 @@ WILDERNESS_TABLES = {
             "Stone bridge over rushing water", "Grove of dead trees in perfect circle",
             "Merchant's bones picked clean by crows", "Cave mouth sealed with heavy stones",
             "Battlefield littered with old weapons", "Shrine to forgotten deity", "Gibbet cage swaying empty",
-            # NEW: Encounters referencing forgotten gods and recent content
-            "Abandoned cattle pen with Bilkherd shrine hidden beneath", "Fisherman's boat circling endlessly with no crew aboard",
-            "Tax collector's wagon overturned, papers scattered and bloodstained", "Carnival tent flapping empty in the wind",
-            "Ancient standing stones weeping tears that pool in healing puddles", "Silk-wrapped trees forming unnatural patterns",
-            "Quarantine flags marking a plague zone ahead", "Bone crown partially buried in roadside earth",
-            "Contract papers nailed to tree, written in infernal script", "Eager laborers digging a hole to nowhere",
-            "Weather vane spinning wildly despite no wind", "Portal-seeking expedition's abandoned camp",
-            "Calendar scholars' camp with astronomical instruments", "Faction scouts' hidden watchtower",
-            "Trade route guard post mysteriously empty", "Drowned sailor walking inland seeking the sea"
+            # From Christian's supplements
+            "Tax collector's wagon overturned, papers scattered and bloodstained"
         ],
         'random_events': [
             "A murder of crows follows the party ominously", "Strange lights dance in the distance",
@@ -551,15 +411,7 @@ WILDERNESS_TABLES = {
             "Ponte de pedra sobre água corrente", "Bosque de árvores mortas em círculo perfeito",
             "Ossos de mercador limpos por corvos", "Boca de caverna selada com pedras pesadas",
             "Campo de batalha coberto de armas velhas", "Santuário de divindade esquecida", "Gaiola de patíbulo balançando vazia",
-            # NEW: Encounters referencing forgotten gods and recent content
-            "Fazenda abandonada de gado com o santuário de Bilkherd escondido por baixo", "Barco do pescador que circula infinitamente sem tripulantes",
-            "Cavaleiro de cobrança de impostos com carroza virada, papéis espalhados e manchados de sangue", "Tentativa de circo vazia flutuando no vento",
-            "Pedras de pedra antigas chorando lágrimas que se acumulam em poças de cura", "Árvores enroscadas em padrões artificiais",
-            "Bandeiras de quarentena marcando uma zona de peste à frente", "Crista de caveira parcialmente enterrada na terra do lado da estrada",
-            "Papéis de contrato pregados em árvore, escritos em script infernal", "Trabalhadores ávidos cavando um buraco para onde não vai",
-            "Girassol com lâmpada que gira freneticamente sem vento", "Acampamento abandonado de expedicionário em busca de portal",
-            "Acampamento de estudiosos com instrumentos astronômicos", "Torre de vigia escondida de espiões",
-            "Posto de guarda de rota de comércio misteriosamente vazio", "Marinheiro afogado andando para terra em busca do mar"
+            "Cavaleiro de cobrança de impostos com carroza virada, papéis espalhados e manchados de sangue"
         ],
         'random_events': [
             "Um bando de corvos segue o grupo sinistro", "Luzes estranhas dançam na distância",
@@ -860,7 +712,6 @@ def get_table(category, table_name, language='en'):
         'enhanced_loot': ENHANCED_LOOT_TABLES,
         'terrain': TERRAIN_TABLES,
         'core': CORE_TABLES,
-        'forgotten_gods': FORGOTTEN_GODS_TABLES,
     }
     
     return table_categories.get(category, {}).get(language, {}).get(table_name, [])
@@ -871,7 +722,7 @@ def get_all_tables(language='en'):
     categories = [BASIC_TABLES, NAMING_TABLES, TAVERN_TABLES, DUNGEON_TABLES, 
                  DENIZEN_TABLES, BESTIARY_TABLES, SCROLL_TABLES, LOOT_TABLES, 
                  AFFILIATION_TABLES, WILDERNESS_TABLES, STATS_TABLES, ENHANCED_LOOT_TABLES,
-                 TERRAIN_TABLES, CORE_TABLES, FORGOTTEN_GODS_TABLES]
+                 TERRAIN_TABLES, CORE_TABLES]
     
     for category in categories:
         if language in category:
@@ -881,7 +732,7 @@ def get_all_tables(language='en'):
 
 def list_categories():
     """List all available table categories."""
-    return ['basic', 'naming', 'tavern', 'dungeon', 'denizen', 'bestiary', 'scroll', 'loot', 'affiliation', 'wilderness', 'stats', 'enhanced_loot', 'terrain', 'core', 'forgotten_gods']
+    return ['basic', 'naming', 'tavern', 'dungeon', 'denizen', 'bestiary', 'scroll', 'loot', 'affiliation', 'wilderness', 'stats', 'enhanced_loot', 'terrain', 'core']
 
 def list_tables_in_category(category, language='en'):
     """List all tables in a specific category."""
@@ -900,7 +751,6 @@ def list_tables_in_category(category, language='en'):
         'enhanced_loot': ENHANCED_LOOT_TABLES,
         'terrain': TERRAIN_TABLES,
         'core': CORE_TABLES,
-        'forgotten_gods': FORGOTTEN_GODS_TABLES,
     }
     
     category_tables = table_categories.get(category, {}).get(language, {})
