@@ -10,7 +10,7 @@ import markdown
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from mork_borg_lore_database import MorkBorgLoreDatabase
 
-app = Flask(__name__, template_folder='../web/templates')
+app = Flask(__name__, template_folder='../web/templates', static_folder='../web/static')
 
 # Initialize lore database
 lore_db = MorkBorgLoreDatabase()
