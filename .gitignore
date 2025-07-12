@@ -156,3 +156,4 @@ Thumbs.db
 
 # Additional files to ignore
 src/dying_lands_output/*
+/dying_lands_output/*
