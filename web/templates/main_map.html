@@ -140,34 +140,46 @@
 </head>
 <body>
     <div class="container-fluid">
-        <header>
+        <header class="text-center">
             <h1>THE DYING LANDS</h1>
-            <p>HEX MAP TERMINAL - {{ map_width }}×{{ map_height }} ({{ total_hexes }} HEXES)</p>
         </header>
         
         <!-- Control Panel -->
         <div class="control-panel">
             <div class="row">
+                <div class="legend" id="legend">
+                    <h6>🗂️ MAP LEGEND</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <strong>TERRAIN:</strong><br>
+                            <span class="terrain-mountain">^</span> MOUNTAIN &nbsp;
+                            <span class="terrain-forest">♠</span> FOREST &nbsp;
+                            <span class="terrain-coast">~</span> COAST<br>
+                            <span class="terrain-plains">.</span> PLAINS &nbsp;
+                            <span class="terrain-swamp">#</span> SWAMP
+                        </div>
+                        <div class="col-md-6">
+                            <strong>LOCATIONS:</strong><br>
+                            <span class="major-city">◆</span> MAJOR CITIES<br>
+                            <strong>BOLD</strong> = HAS CONTENT
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-md-8">
                     <div class="btn-group me-2" role="group">
                         <button class="btn btn-warning btn-sm" onclick="showTerrainOverview()">🗺️ TERRAIN</button>
                         <button class="btn btn-info btn-sm" onclick="showLoreOverview()">📜 LORE</button>
-                        <button class="btn btn-secondary btn-sm" onclick="showLegend()">🗂️ LEGEND</button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button class="btn btn-success btn-sm" onclick="generateFullMap()">⚡ GENERATE ALL</button>
                         <button class="btn btn-danger btn-sm" onclick="resetContinent()">🔄 RESET CONTINENT</button>
-                        <button class="btn btn-primary btn-sm" onclick="zoomIn()">🔍+</button>
-                        <button class="btn btn-primary btn-sm" onclick="zoomOut()">🔍-</button>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <small class="text-muted">
-                        CLICK HEXES TO VIEW/GENERATE CONTENT<br>
-                        <span class="major-city">◆</span> = MAJOR CITIES
-                    </small>
-                </div>
+
             </div>
+
         </div>
         
         <!-- Major Cities Overview -->
@@ -224,24 +236,7 @@
         </div>
         
         <!-- Legend -->
-        <div class="legend" id="legend">
-            <h6>🗂️ MAP LEGEND</h6>
-            <div class="row">
-                <div class="col-md-6">
-                    <strong>TERRAIN:</strong><br>
-                    <span class="terrain-mountain">^</span> MOUNTAIN &nbsp;
-                    <span class="terrain-forest">♠</span> FOREST &nbsp;
-                    <span class="terrain-coast">~</span> COAST<br>
-                    <span class="terrain-plains">.</span> PLAINS &nbsp;
-                    <span class="terrain-swamp">#</span> SWAMP
-                </div>
-                <div class="col-md-6">
-                    <strong>LOCATIONS:</strong><br>
-                    <span class="major-city">◆</span> MAJOR CITIES<br>
-                    <strong>BOLD</strong> = HAS CONTENT
-                </div>
-            </div>
-        </div>
+
     </div>
     
     <!-- Hex Details Modal -->
@@ -549,7 +544,10 @@
                                 <h6>📊 TERRAIN STATISTICS</h6>
                     `;
                     
-                    for (const [terrain, count] of Object.entries(data.distribution)) {
+                    for (const key in data.distribution) {
+                        if (!data.distribution.hasOwnProperty(key)) continue;
+                        const terrain = String(key);
+                        const count = data.distribution[key];
                         const percentage = ((count / (width * height)) * 100).toFixed(1);
                         html += `<div class="mb-2">
                             <span class="terrain-${terrain}">${getTerrainSymbol(terrain)}</span>
