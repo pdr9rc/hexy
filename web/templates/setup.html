@@ -3,311 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SETUP REQUIRED - THE DYING LANDS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+    <title>🗺️ Setup Required - The Dying Lands</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    /* MÖRK BORG STYLING - BRUTALIST APOCALYPTIC DESIGN */
-    
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
     body {
-        background: #000000;
-        color: #FFFFFF;
-        font-family: 'VT323', monospace;
-        font-size: 16px;
-        line-height: 1.4;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
+        color: #e0e0e0;
+        font-family: 'Courier New', monospace;
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-        position: relative;
-        overflow: hidden;
     }
     
-    /* DISTRESSED BACKGROUND EFFECT */
-    body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: 
-            radial-gradient(circle at 20% 80%, rgba(255, 255, 0, 0.1) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(255, 165, 0, 0.1) 0%, transparent 50%),
-            repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 2px,
-                rgba(255, 255, 255, 0.02) 2px,
-                rgba(255, 255, 255, 0.02) 4px
-            );
-        pointer-events: none;
-        z-index: -1;
-    }
-    
-    /* SCANNING LINE ANIMATION */
-    body::after {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #FFFF00, transparent);
-        animation: scanLine 4s infinite;
-        z-index: 1;
-    }
-    
-    @keyframes scanLine {
-        0% { left: -100%; }
-        100% { left: 100%; }
-    }
-    
-    /* SETUP CARD - BRUTALIST CENTER */
     .setup-card {
-        background: #000000;
-        border: 3px solid #FFFF00;
-        border-radius: 0;
-        padding: 50px;
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #444;
+        border-radius: 10px;
+        padding: 40px;
         text-align: center;
-        box-shadow: 
-            0 0 50px rgba(255, 255, 0, 0.5),
-            inset 0 0 30px rgba(255, 255, 0, 0.1);
-        position: relative;
-        z-index: 2;
-        max-width: 600px;
-        width: 90%;
-    }
-    
-    .setup-card::before {
-        content: 'SYSTEM INITIALIZATION';
-        position: absolute;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #000000;
-        color: #FFFF00;
-        font-family: 'VT323', monospace;
-        font-size: 0.9rem;
-        padding: 0 20px;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-    }
-    
-    /* HEADER - BRUTALIST TYPOGRAPHY */
-    .setup-card h1 {
-        font-family: 'Special Elite', cursive;
-        font-size: 3rem;
-        font-weight: normal;
-        text-transform: uppercase;
-        letter-spacing: 0.2em;
-        color: #FFFF00;
-        text-shadow: 
-            0 0 10px #FFFF00,
-            0 0 20px #FFFF00,
-            0 0 30px #FFFF00;
-        margin-bottom: 30px;
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.8; }
-    }
-    
-    .setup-card h3 {
-        font-family: 'Special Elite', cursive;
-        color: #FFA500;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 20px;
-        font-size: 1.5rem;
-    }
-    
-    .setup-card p {
-        font-family: 'VT323', monospace;
-        font-size: 1.1rem;
-        color: #888888;
-        margin-bottom: 30px;
-        line-height: 1.6;
-    }
-    
-    /* BUTTONS - BRUTALIST STYLE */
-    .btn {
-        font-family: 'VT323', monospace;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        border: 2px solid;
-        border-radius: 0;
-        padding: 15px 30px;
-        margin: 10px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        background: #000000;
-        color: #FFFFFF;
-        cursor: pointer;
-        min-width: 200px;
-    }
-    
-    .btn::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-        transition: left 0.5s;
-    }
-    
-    .btn:hover::before {
-        left: 100%;
-    }
-    
-    .btn-success {
-        border-color: #00FF00;
-        color: #00FF00;
-    }
-    
-    .btn-success:hover {
-        background: #00FF00;
-        color: #000000;
-        box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
-        transform: translateY(-2px);
-    }
-    
-    .btn-warning {
-        border-color: #FFA500;
-        color: #FFA500;
-    }
-    
-    .btn-warning:hover {
-        background: #FFA500;
-        color: #000000;
-        box-shadow: 0 0 30px rgba(255, 165, 0, 0.5);
-        transform: translateY(-2px);
-    }
-    
-    .btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-        transform: none !important;
-    }
-    
-    /* STATUS MESSAGES */
-    #status {
-        margin-top: 20px;
-        font-family: 'VT323', monospace;
-        font-size: 1rem;
-    }
-    
-    #status .text-info {
-        color: #00FFFF !important;
-        text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-    }
-    
-    #status .text-success {
-        color: #00FF00 !important;
-        text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-    }
-    
-    #status .text-danger {
-        color: #FFFF00 !important;
-        text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
-    }
-    
-    #status .text-warning {
-        color: #FFA500 !important;
-        text-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
-    }
-    
-    /* BUTTON CONTAINER */
-    .d-flex {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    /* RESPONSIVE DESIGN */
-    @media (max-width: 768px) {
-        .setup-card {
-            padding: 30px 20px;
-        }
-        
-        .setup-card h1 {
-            font-size: 2rem;
-        }
-        
-        .setup-card h3 {
-            font-size: 1.2rem;
-        }
-        
-        .btn {
-            font-size: 1rem;
-            padding: 12px 20px;
-            min-width: 150px;
-        }
-        
-        .d-flex {
-            flex-direction: column;
-            align-items: center;
-        }
-    }
-    
-    /* GLITCH EFFECT */
-    .setup-card h1::before {
-        content: 'THE DYING LANDS';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        color: #FFFF00;
-        animation: glitch 3s infinite;
-        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    }
-    
-    .setup-card h1::after {
-        content: 'THE DYING LANDS';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: #000000;
-        color: #00FFFF;
-        animation: glitch 3s infinite reverse;
-        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    }
-    
-    @keyframes glitch {
-        0%, 100% { transform: translate(0); }
-        20% { transform: translate(-2px, 2px); }
-        40% { transform: translate(-2px, -2px); }
-        60% { transform: translate(2px, 2px); }
-        80% { transform: translate(2px, -2px); }
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
     }
     </style>
 </head>
 <body>
     <div class="setup-card">
-        <h1>THE DYING LANDS</h1>
-        <h3>{{ message }}</h3>
-        <p>{{ action }}</p>
-        <div class="d-flex">
-            <button class="btn btn-success" onclick="generateMap()">🚀 GENERATE FULL MAP</button>
-            <button class="btn btn-warning" onclick="resetAndGenerate()">🔄 RESET & GENERATE</button>
+        <h1 class="mb-4">🗺️ The Dying Lands</h1>
+        <h3 class="text-warning mb-3">{{ message }}</h3>
+        <p class="mb-4">{{ action }}</p>
+        <div class="d-flex gap-3 justify-content-center">
+            <button class="btn btn-success btn-lg" onclick="generateMap()">🚀 Generate Full Map</button>
+            <button class="btn btn-warning btn-lg" onclick="resetAndGenerate()">🔄 Reset & Generate</button>
         </div>
-        <div id="status"></div>
+        <div id="status" class="mt-3"></div>
     </div>
     
     <script>
@@ -316,8 +44,8 @@
         const status = document.getElementById('status');
         
         btn.disabled = true;
-        btn.textContent = '⏳ GENERATING MAP...';
-        status.innerHTML = '<div class="text-info">THIS MAY TAKE A FEW MINUTES...</div>';
+        btn.textContent = '⏳ Generating Map...';
+        status.innerHTML = '<div class="text-info">This may take a few minutes...</div>';
         
         fetch('/api/generate-full-map', {
             method: 'POST',
@@ -326,19 +54,19 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                status.innerHTML = `<div class="text-success">✅ GENERATED ${data.count} HEXES!</div>`;
+                status.innerHTML = `<div class="text-success">✅ Generated ${data.count} hexes!</div>`;
                 setTimeout(() => window.location.reload(), 2000);
             } else {
-                status.innerHTML = `<div class="text-danger">❌ ERROR: ${data.error}</div>`;
+                status.innerHTML = `<div class="text-danger">❌ Error: ${data.error}</div>`;
                 btn.disabled = false;
-                btn.textContent = '🚀 GENERATE FULL MAP';
+                btn.textContent = '🚀 Generate Full Map';
             }
         })
         .catch(error => {
-            console.error('ERROR:', error);
-            status.innerHTML = '<div class="text-danger">❌ GENERATION FAILED</div>';
+            console.error('Error:', error);
+            status.innerHTML = '<div class="text-danger">❌ Generation failed</div>';
             btn.disabled = false;
-            btn.textContent = '🚀 GENERATE FULL MAP';
+            btn.textContent = '🚀 Generate Full Map';
         });
     }
     
@@ -347,8 +75,8 @@
         const status = document.getElementById('status');
         
         btn.disabled = true;
-        btn.textContent = '🔄 RESETTING & GENERATING...';
-        status.innerHTML = '<div class="text-warning">🗑️ CLEARING OLD CONTENT AND GENERATING FRESH MAP...</div>';
+        btn.textContent = '🔄 Resetting & Generating...';
+        status.innerHTML = '<div class="text-warning">🗑️ Clearing old content and generating fresh map...</div>';
         
         fetch('/api/reset-continent', {
             method: 'POST',
@@ -360,16 +88,16 @@
                 status.innerHTML = `<div class="text-success">✅ ${data.message}</div>`;
                 setTimeout(() => window.location.reload(), 2000);
             } else {
-                status.innerHTML = `<div class="text-danger">❌ ERROR: ${data.error}</div>`;
+                status.innerHTML = `<div class="text-danger">❌ Error: ${data.error}</div>`;
                 btn.disabled = false;
-                btn.textContent = '🔄 RESET & GENERATE';
+                btn.textContent = '🔄 Reset & Generate';
             }
         })
         .catch(error => {
-            console.error('ERROR:', error);
-            status.innerHTML = '<div class="text-danger">❌ RESET FAILED</div>';
+            console.error('Error:', error);
+            status.innerHTML = '<div class="text-danger">❌ Reset failed</div>';
             btn.disabled = false;
-            btn.textContent = '🔄 RESET & GENERATE';
+            btn.textContent = '🔄 Reset & Generate';
         });
     }
     </script>
