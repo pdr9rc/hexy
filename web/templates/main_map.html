@@ -459,7 +459,43 @@
         <div class="map-container">
                 <div class="hex-grid" id="hexGrid">
                     <!-- Map content will be loaded here -->
-                    <div style="color: red; font-size: 20px;">MAP LOADING...</div>
+                    {% if ascii_map %}
+                        <!-- Column headers -->
+                        <div class="text-center mb-2">
+                            <span style="margin-right: 20px;"></span>
+                            {% for x in range(1, map_width + 1) %}
+                                <span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">{{ '%02d' % x }}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <!-- Map rows -->
+                        {% for y in range(1, map_height + 1) %}
+                            <div class="map-row">
+                                <span class="row-number">{{ '%02d' % y }}</span>
+                                {% for x in range(1, map_width + 1) %}
+                                    {% set hex_code = '%02d%02d' % (x, y) %}
+                                    {% set hex_data = ascii_map[hex_code] %}
+                                    {% if hex_data %}
+                                        {% set css_class = hex_data.css_class %}
+                                        {% set symbol = hex_data.symbol %}
+                                        {% set has_content = 'has-content' if hex_data.has_content else 'no-content' %}
+                                        {% set title = 'HEX ' + hex_code + ' - ' + hex_data.city_name if hex_data.is_city else 'HEX ' + hex_code %}
+                                        <span class="hex-cell {{ css_class }} {{ has_content }}" 
+                                              onclick="showHexDetails('{{ hex_code }}')" 
+                                              data-hex="{{ hex_code }}"
+                                              title="{{ title }}">{{ symbol }}</span>
+                                    {% else %}
+                                        <span class="hex-cell terrain-unknown no-content" 
+                                              onclick="showHexDetails('{{ hex_code }}')" 
+                                              data-hex="{{ hex_code }}"
+                                              title="HEX {{ hex_code }}">?</span>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div style="color: red; font-size: 20px;">MAP LOADING...</div>
+                    {% endif %}
                 </div>
             </div>
                 </div>
@@ -610,9 +646,6 @@
         console.log('Map width:', mapWidth, 'Map height:', mapHeight);
         
         let html = '';
-        
-        // Add a test message to see if the function is running
-        html += '<div style="color: green; font-size: 16px; margin-bottom: 10px;">MAP IS RENDERING!</div>';
         
         // Add column headers
         html += '<div class="text-center mb-2">';
