@@ -6,7 +6,13 @@ Interactive web viewer for the hex-based map with ASCII representation.
 
 import os
 import json
-import markdown
+try:
+    import markdown
+    MARKDOWN_AVAILABLE = True
+except ImportError:
+    MARKDOWN_AVAILABLE = False
+    print("⚠️  Markdown module not available - using text fallback")
+
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from terrain_system import terrain_system
@@ -98,9 +104,9 @@ def get_hex_info(hex_code):
                 })
             
             # Regular hex content
-            try:
+            if MARKDOWN_AVAILABLE:
                 html = markdown.markdown(content, extensions=['codehilite', 'fenced_code', 'tables'])
-            except NameError:
+            else:
                 # Fallback if markdown module is not available
                 html = f'<pre>{content}</pre>'
             title = extract_title(content)
@@ -153,9 +159,9 @@ def get_hex_info(hex_code):
             
             # Generate markdown content
             markdown_content = main_map_generator._generate_markdown_content(hex_data)
-            try:
+            if MARKDOWN_AVAILABLE:
                 html = markdown.markdown(markdown_content, extensions=['codehilite', 'fenced_code', 'tables'])
-            except NameError:
+            else:
                 # Fallback if markdown module is not available
                 html = f'<pre>{markdown_content}</pre>'
             
