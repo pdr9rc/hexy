@@ -283,6 +283,7 @@ def get_settlement_details(hex_code):
     """Get detailed settlement information."""
     hex_file = f"dying_lands_output/hexes/hex_{hex_code}.md"
     
+    # Try to load from existing file first
     if os.path.exists(hex_file):
         try:
             with open(hex_file, 'r', encoding='utf-8') as f:
@@ -309,7 +310,40 @@ def get_settlement_details(hex_code):
         except Exception as e:
             return jsonify({'success': False, 'error': str(e)})
     
-    return jsonify({'success': False, 'error': 'Settlement not found'})
+    # Generate settlement on demand
+    try:
+        terrain = get_terrain_for_hex(hex_code)
+        hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
+        
+        if hex_data.get('is_settlement'):
+            # Create settlement data structure expected by frontend
+            settlement_data = {
+                'name': hex_data.get('name', f'Settlement {hex_code}'),
+                'description': hex_data.get('denizen', 'A settlement'),
+                'population': hex_data.get('population', 'Unknown'),
+                'atmosphere': hex_data.get('atmosphere', 'Unknown'),
+                'notable_feature': hex_data.get('notable_feature', 'Unknown'),
+                'local_tavern': hex_data.get('local_tavern', 'Unknown'),
+                'local_power': hex_data.get('local_power', 'Unknown'),
+                'hex_code': hex_code
+            }
+            
+            # Generate settlement ASCII map
+            settlement_map = generate_settlement_ascii_map(settlement_data, hex_code)
+            
+            return jsonify({
+                'success': True,
+                'settlement': settlement_data,
+                'terrain': terrain,
+                'hex_code': hex_code,
+                'settlement_map': settlement_map,
+                'settlement_art': hex_data.get('settlement_art', '')
+            })
+        else:
+            return jsonify({'success': False, 'error': 'Hex is not a settlement'})
+            
+    except Exception as e:
+        return jsonify({'success': False, 'error': f'Error generating settlement: {str(e)}'})
 
 @app.route('/api/lore-overview')
 def get_lore_overview():
