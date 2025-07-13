@@ -91,6 +91,8 @@ def get_hex_info(hex_code):
                 return jsonify({
                     'exists': True,
                     'is_settlement': True,
+                    'hex_type': 'settlement',
+                    'terrain': get_terrain_for_hex(hex_code),
                     'title': settlement_data['name'],
                     'description': settlement_data['description'],
                     'population': settlement_data['population'],
@@ -114,15 +116,35 @@ def get_hex_info(hex_code):
             # Extract structured data for the new modal system
             hex_data = extract_hex_data(content, hex_code)
             
+            # Determine hex type from content
+            hex_type = 'wilderness'
+            if '⌂ **' in content:
+                hex_type = 'settlement'
+            elif '▲ **' in content:
+                hex_type = 'dungeon'
+            elif '※ **' in content:
+                hex_type = 'beast'
+            elif '☉ **' in content:
+                hex_type = 'npc'
+                
+            # Get terrain from terrain system if not in parsed data
+            terrain = hex_data.get('terrain', 'unknown')
+            if terrain == 'unknown':
+                terrain = get_terrain_for_hex(hex_code)
+            
             return jsonify({
                 'exists': True,
                 'is_major_city': False,
-                'is_settlement': False,
+                'is_settlement': hex_type == 'settlement',
+                'is_dungeon': hex_type == 'dungeon',
+                'is_beast': hex_type == 'beast',
+                'is_npc': hex_type == 'npc',
+                'hex_type': hex_type,
                 'title': title,
                 'html': html,
                 'raw': content,
                 'hex_code': hex_code,
-                'terrain': hex_data.get('terrain', 'unknown'),
+                'terrain': terrain,
                 'encounter': hex_data.get('encounter', 'Unknown encounter'),
                 'denizen': hex_data.get('denizen', 'No denizen information'),
                 'notable_feature': hex_data.get('notable_feature', 'No notable features'),
@@ -140,11 +162,13 @@ def get_hex_info(hex_code):
             terrain = get_terrain_for_hex(hex_code)
             hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
             
-            # Check if it's a settlement
+                        # Check if it's a settlement
             if hex_data.get('is_settlement'):
                 return jsonify({
                     'exists': True,
                     'is_settlement': True,
+                    'hex_type': 'settlement',
+                    'terrain': hex_data.get('terrain', terrain),
                     'title': hex_data.get('name', f'Settlement {hex_code}'),
                     'description': hex_data.get('denizen', 'A settlement'),
                     'population': hex_data.get('population', 'Unknown'),
@@ -165,6 +189,17 @@ def get_hex_info(hex_code):
                 # Fallback if markdown module is not available
                 html = f'<pre>{markdown_content}</pre>'
             
+            # Determine hex type
+            hex_type = 'wilderness'
+            if hex_data.get('is_settlement'):
+                hex_type = 'settlement'
+            elif hex_data.get('is_dungeon'):
+                hex_type = 'dungeon'
+            elif hex_data.get('is_beast'):
+                hex_type = 'beast'
+            elif hex_data.get('is_npc'):
+                hex_type = 'npc'
+            
             return jsonify({
                 'exists': True,
                 'is_major_city': False,
@@ -172,6 +207,7 @@ def get_hex_info(hex_code):
                 'is_dungeon': hex_data.get('is_dungeon', False),
                 'is_beast': hex_data.get('is_beast', False),
                 'is_npc': hex_data.get('is_npc', False),
+                'hex_type': hex_type,
                 'title': f"Hex {hex_code}",
                 'html': html,
                 'raw': markdown_content,
@@ -185,7 +221,18 @@ def get_hex_info(hex_code):
                 'scroll': hex_data.get('scroll'),
                 'dungeon_type': hex_data.get('dungeon_type'),
                 'beast_type': hex_data.get('beast_type'),
-                'name': hex_data.get('name')
+                'name': hex_data.get('name'),
+                'population': hex_data.get('population'),
+                'local_tavern': hex_data.get('local_tavern'),
+                'local_power': hex_data.get('local_power'),
+                'settlement_art': hex_data.get('settlement_art'),
+                'beast_feature': hex_data.get('beast_feature'),
+                'beast_behavior': hex_data.get('beast_behavior'),
+                'motivation': hex_data.get('motivation'),
+                'feature': hex_data.get('feature'),
+                'demeanor': hex_data.get('demeanor'),
+                'danger': hex_data.get('danger'),
+                'treasure': hex_data.get('treasure')
             })
             
         except Exception as e:
