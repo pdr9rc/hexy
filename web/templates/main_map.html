@@ -21,10 +21,43 @@
     body {
         background: var(--mork-black);
         color: var(--mork-white);
-        font-family: 'pixelify-sans', monospace;
+        font-family: monospace;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
+    }
+    
+    /* Mörk Borg Scrollbar Styling */
+    ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--mork-black);
+        border: 1px solid var(--mork-cyan);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--mork-cyan);
+        border: 1px solid var(--mork-black);
+        border-radius: 0;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--mork-yellow);
+        box-shadow: 0 0 8px var(--mork-yellow);
+    }
+    
+    ::-webkit-scrollbar-corner {
+        background: var(--mork-black);
+        border: 1px solid var(--mork-cyan);
+    }
+    
+    /* Firefox scrollbar styling */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--mork-cyan) var(--mork-black);
     }
     
     h1, h2, h3, h4, h5, h6 {
@@ -157,27 +190,47 @@
     
     .hex-grid {
         font-family: 'Courier New', monospace;
-        font-size: 11px;
+        font-size: 0.9em;
         line-height: 1.1;
         overflow: auto;
         height: calc(100% - 40px);
         background: var(--mork-black);
-        padding: 15px;
+        padding: 1em;
         border: 1px solid var(--mork-cyan);
         text-align: center;
         white-space: nowrap;
+        /* Ensure proper scaling with browser zoom */
+        transform-origin: top left;
+        /* Consistent scrollbar styling */
+        scrollbar-width: thin;
+        scrollbar-color: var(--mork-cyan) var(--mork-black);
+        /* Enable middle mouse drag scrolling */
+        cursor: default;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .hex-grid.dragging {
+        cursor: grabbing;
+    }
+    
+    .hex-grid.dragging .hex-cell {
+        pointer-events: none;
     }
     
     .hex-cell {
         cursor: pointer;
-        padding: 1px 2px;
-        border-radius: 2px;
+        padding: 0.1em 0.2em;
+        border-radius: 0.2em;
         transition: all 0.2s;
         display: inline-block;
-        width: 16px;
+        width: 1.2em;
         text-align: center;
-        margin-right: 0px;
+        margin-right: 0;
         position: relative;
+        font-size: 1em;
     }
     
     .hex-cell:hover {
@@ -239,18 +292,23 @@
         height: 100%;
         overflow-y: auto;
         box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        /* Consistent scrollbar styling */
+        scrollbar-width: thin;
+        scrollbar-color: var(--mork-cyan) var(--mork-black);
     }
 
     .ascii-modal {
         font-family: 'Courier New', monospace;
-        font-size: 12px;
+        font-size: 0.9em;
         line-height: 1.3;
         color: var(--mork-cyan);
         background: var(--mork-black);
         border: 1px solid var(--mork-cyan);
-        padding: 15px;
-        margin: 10px 0;
+        padding: 1em;
+        margin: 0.8em 0;
         white-space: pre;
+        /* Ensure proper scaling with browser zoom */
+        transform-origin: top left;
     }
 
     /* Legend */
@@ -274,10 +332,11 @@
     
     .row-number {
         display: inline-block;
-        width: 30px;
+        width: 2.5em;
         text-align: right;
-        margin-right: 5px;
+        margin-right: 0.4em;
         color: var(--mork-cyan);
+        font-size: 0.9em;
     }
 
     /* Responsive Design */
@@ -466,16 +525,16 @@
         <!-- Left Side - Map -->
         <div class="map-side">
         <div class="map-container">
-                <div class="hex-grid" id="hexGrid">
-                    <!-- Map content will be loaded here -->
-                    {% if ascii_map %}
-                        <!-- Column headers -->
-                        <div class="text-center mb-2">
-                            <span style="margin-right: 20px;"></span>
-                            {% for x in range(1, map_width + 1) %}
-                                <span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">{{ '%02d' % x }}</span>
-                            {% endfor %}
-                        </div>
+            <div class="hex-grid" id="hexGrid">
+                <!-- Map content will be loaded here -->
+                {% if ascii_map %}
+                    <!-- Column headers -->
+                    <div class="text-center mb-2">
+                        <span style="margin-right: 1.5em;"></span>
+                        {% for x in range(1, map_width + 1) %}
+                            <span style="margin-right: 0.3em; font-size: 0.8em; display: inline-block; width: 1em; text-align: center;">{{ '%02d' % x }}</span>
+                        {% endfor %}
+                    </div>
                         
                         <!-- Map rows -->
                         {% for y in range(1, map_height + 1) %}
@@ -555,16 +614,26 @@
 
     <script>
         let currentHex = '';
-    let isEditMode = false;
-    let originalContent = '';
-    
-    // Map data from server - read from data attributes
-    let mapData = {};
-    let mapWidth = 0;
-    let mapHeight = 0;
+        let isEditMode = false;
+        let originalContent = '';
+        
+        // Map data from server - read from data attributes
+        let mapData = {};
+        let mapWidth = 0;
+        let mapHeight = 0;
+        
+
     
     // Define showHexDetails function first
     function showHexDetails(hexCode) {
+        console.log('showHexDetails called with:', hexCode, 'isDragging:', isDragging);
+        
+        // Don't proceed if we're in a drag state
+        if (isDragging) {
+            console.log('Ignoring hex click due to drag state');
+            return;
+        }
+        
         currentHex = hexCode;
         
         // Highlight selected hex on the map
@@ -689,6 +758,9 @@
     }
 
     function showCityDetailsInMap(hexCode) {
+        // Disable drag functionality when showing city details
+        disableDragFunctionality();
+        
         // Show loading state in map area
         showMapLoadingState();
         
@@ -777,6 +849,7 @@
         `;
                     
                     mapContainer.innerHTML = html;
+                    // Drag functionality is disabled for city details view
                 } else {
                     showMapErrorState(hexCode);
                 }
@@ -788,6 +861,9 @@
     }
 
     function showSettlementDetailsInMap(hexCode) {
+        // Disable drag functionality when showing settlement details
+        disableDragFunctionality();
+        
         // Show loading state in map area
         showMapLoadingState();
         
@@ -871,6 +947,7 @@
                     `;
                     
                     mapContainer.innerHTML = html;
+                    // Drag functionality is disabled for settlement details view
                 } else {
                     showMapErrorState(hexCode);
                 }
@@ -1169,6 +1246,7 @@
         const originalContent = mapContainer.getAttribute('data-original-content');
         if (originalContent) {
             mapContainer.innerHTML = originalContent;
+            
             // Restore hex selection after returning to map
             if (currentHex) {
                 const hexElement = document.querySelector(`[data-hex="${currentHex}"]`);
@@ -1176,6 +1254,36 @@
                     hexElement.classList.add('selected');
                 }
             }
+            
+            // Ensure drag functionality is completely reset and re-initialized
+            disableDragFunctionality();
+            initMiddleMouseScroll();
+            
+            // Force re-attach all hex click events to ensure they work
+            setTimeout(() => {
+                const hexCells = document.querySelectorAll('.hex-cell');
+                console.log('Re-attaching click events to', hexCells.length, 'hex cells');
+                
+                hexCells.forEach(hexCell => {
+                    const hexCode = hexCell.getAttribute('data-hex');
+                    if (hexCode) {
+                        // Remove any existing click listeners to avoid duplicates
+                        hexCell.onclick = null;
+                        
+                        // Add new click listener with drag check
+                        hexCell.onclick = function(e) {
+                            // Don't trigger hex details if we were just dragging
+                            if (isDragging) {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                return;
+                            }
+                            console.log('Hex clicked:', hexCode);
+                            showHexDetails(hexCode);
+                        };
+                    }
+                });
+            }, 100); // Small delay to ensure DOM is ready
         } else {
             window.location.reload();
         }
@@ -1430,6 +1538,14 @@
         // Global keyboard event listener
         document.addEventListener('keydown', function(e) {
             if (e.target.tagName === 'INPUT') return; // Don't interfere with input fields
+            
+            // Browser zoom shortcuts - let browser handle zoom naturally
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === '=' || e.key === '+' || e.key === '-') {
+                    // Don't prevent default - let browser handle zoom
+                    return;
+                }
+            }
             
             if (isEditMode) {
                 handleEditModeKey(e);
@@ -1735,7 +1851,182 @@
         
         // Initialize vim editing system
         initVimEditing();
+        
+        // Initialize middle mouse scroll functionality
+        initMiddleMouseScroll();
+        
+        // Clean up event listeners when page is unloaded
+        window.addEventListener('beforeunload', function() {
+            cleanupDragEventListeners();
+        });
     });
+    
+    // Middle mouse drag scrolling functionality - simplified approach
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let scrollStartX = 0;
+    let scrollStartY = 0;
+    let dragEnabled = false; // Global flag to control drag functionality
+    
+    function initMiddleMouseScroll() {
+        const hexGrid = document.getElementById('hexGrid');
+        if (!hexGrid) return;
+        
+        // Reset drag state
+        isDragging = false;
+        hexGrid.classList.remove('dragging');
+        hexGrid.style.cursor = 'default';
+        
+        // Clear any existing event handlers
+        hexGrid.onmousedown = null;
+        hexGrid.oncontextmenu = null;
+        hexGrid.onmouseleave = null;
+        document.onmousemove = null;
+        document.onmouseup = null;
+        
+        // Enable drag functionality
+        dragEnabled = true;
+        
+        // Simple event handlers - no complex cleanup needed
+        hexGrid.onmousedown = function(e) {
+            if (!dragEnabled) return; // Don't do anything if drag is disabled
+            
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+                e.stopPropagation();
+                
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                scrollStartX = hexGrid.scrollLeft;
+                scrollStartY = hexGrid.scrollTop;
+                
+                hexGrid.classList.add('dragging');
+                hexGrid.style.cursor = 'grabbing';
+            }
+        };
+        
+        // Use onmouseover/onmouseout instead of addEventListener to avoid conflicts
+        document.onmousemove = function(e) {
+            if (!dragEnabled || !isDragging) return;
+            
+            const deltaX = dragStartX - e.clientX;
+            const deltaY = dragStartY - e.clientY;
+            
+            hexGrid.scrollLeft = scrollStartX + deltaX;
+            hexGrid.scrollTop = scrollStartY + deltaY;
+        };
+        
+        document.onmouseup = function(e) {
+            if (!dragEnabled) return;
+            
+            if (isDragging) {
+                isDragging = false;
+                hexGrid.classList.remove('dragging');
+                hexGrid.style.cursor = 'default';
+                
+                // Prevent any click events from firing after drag
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Clear any potential hex selection that might have been triggered during drag
+                clearHexSelection();
+            }
+        };
+        
+        hexGrid.oncontextmenu = function(e) {
+            if (!dragEnabled) return;
+            
+            if (e.button === 1) {
+                e.preventDefault();
+            }
+        };
+        
+        hexGrid.onmouseleave = function(e) {
+            if (!dragEnabled) return;
+            
+            if (isDragging) {
+                isDragging = false;
+                hexGrid.classList.remove('dragging');
+                hexGrid.style.cursor = 'default';
+            }
+        };
+    }
+    
+    function cleanupDragEventListeners() {
+        // Reset all drag state variables
+        dragEnabled = false;
+        isDragging = false;
+        dragStartX = 0;
+        dragStartY = 0;
+        scrollStartX = 0;
+        scrollStartY = 0;
+        
+        const hexGrid = document.getElementById('hexGrid');
+        if (hexGrid) {
+            hexGrid.classList.remove('dragging');
+            hexGrid.style.cursor = 'default';
+        }
+    }
+    
+    function disableDragFunctionality() {
+        // Completely disable drag functionality
+        dragEnabled = false;
+        isDragging = false;
+        dragStartX = 0;
+        dragStartY = 0;
+        scrollStartX = 0;
+        scrollStartY = 0;
+        
+        const hexGrid = document.getElementById('hexGrid');
+        if (hexGrid) {
+            hexGrid.classList.remove('dragging');
+            hexGrid.style.cursor = 'default';
+            
+            // Clear all event handlers
+            hexGrid.onmousedown = null;
+            hexGrid.oncontextmenu = null;
+            hexGrid.onmouseleave = null;
+        }
+        
+        // Clear document event handlers
+        document.onmousemove = null;
+        document.onmouseup = null;
+    }
+    
+    // Global function to force reset drag state (can be called from console for debugging)
+    function forceResetDragState() {
+        console.log('Force resetting drag state');
+        dragEnabled = false;
+        isDragging = false;
+        dragStartX = 0;
+        dragStartY = 0;
+        scrollStartX = 0;
+        scrollStartY = 0;
+        
+        const hexGrid = document.getElementById('hexGrid');
+        if (hexGrid) {
+            hexGrid.classList.remove('dragging');
+            hexGrid.style.cursor = 'default';
+        }
+        
+        // Also clear any hex selections that might be stuck
+        clearHexSelection();
+    }
+    
+    // Global function to test hex click events (can be called from console for debugging)
+    function testHexClicks() {
+        console.log('Testing hex click events...');
+        const hexCells = document.querySelectorAll('.hex-cell');
+        console.log('Found', hexCells.length, 'hex cells');
+        
+        hexCells.forEach((hexCell, index) => {
+            const hexCode = hexCell.getAttribute('data-hex');
+            const hasOnclick = hexCell.onclick !== null;
+            console.log(`Hex ${index}: ${hexCode}, has onclick: ${hasOnclick}`);
+        });
+    }
     
     </script>
 </body>

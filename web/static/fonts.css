@@ -7,12 +7,3 @@
     font-style: normal;
     font-display: swap;
 }
-
-/* Pixelify Sans for body and UI */
-@font-face {
-    font-family: 'pixelify-sans';
-    src: url('/static/fonts/PixelifySans-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
