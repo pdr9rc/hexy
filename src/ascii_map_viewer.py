@@ -98,7 +98,11 @@ def get_hex_info(hex_code):
                 })
             
             # Regular hex content
-            html = markdown.markdown(content, extensions=['codehilite', 'fenced_code', 'tables'])
+            try:
+                html = markdown.markdown(content, extensions=['codehilite', 'fenced_code', 'tables'])
+            except NameError:
+                # Fallback if markdown module is not available
+                html = f'<pre>{content}</pre>'
             title = extract_title(content)
             
             # Extract structured data for the new modal system
@@ -125,13 +129,68 @@ def get_hex_info(hex_code):
                 'hex_code': hex_code
             })
     else:
-        return jsonify({
-            'exists': False,
-            'title': f'Hex {hex_code}',
-            'html': f'<p>No content generated for hex {hex_code}</p>',
-            'raw': f'No content for hex {hex_code}',
-            'hex_code': hex_code
-        })
+        # Generate hex content on demand
+        try:
+            terrain = get_terrain_for_hex(hex_code)
+            hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
+            
+            # Check if it's a settlement
+            if hex_data.get('is_settlement'):
+                return jsonify({
+                    'exists': True,
+                    'is_settlement': True,
+                    'title': hex_data.get('name', f'Settlement {hex_code}'),
+                    'description': hex_data.get('denizen', 'A settlement'),
+                    'population': hex_data.get('population', 'Unknown'),
+                    'atmosphere': hex_data.get('atmosphere', 'Unknown'),
+                    'notable_feature': hex_data.get('notable_feature', 'Unknown'),
+                    'local_tavern': hex_data.get('local_tavern', 'Unknown'),
+                    'local_power': hex_data.get('local_power', 'Unknown'),
+                    'settlement_art': hex_data.get('settlement_art', ''),
+                    'hex_code': hex_code,
+                    'redirect_to': 'settlement'
+                })
+            
+            # Generate markdown content
+            markdown_content = main_map_generator._generate_markdown_content(hex_data)
+            try:
+                html = markdown.markdown(markdown_content, extensions=['codehilite', 'fenced_code', 'tables'])
+            except NameError:
+                # Fallback if markdown module is not available
+                html = f'<pre>{markdown_content}</pre>'
+            
+            return jsonify({
+                'exists': True,
+                'is_major_city': False,
+                'is_settlement': hex_data.get('is_settlement', False),
+                'is_dungeon': hex_data.get('is_dungeon', False),
+                'is_beast': hex_data.get('is_beast', False),
+                'is_npc': hex_data.get('is_npc', False),
+                'title': f"Hex {hex_code}",
+                'html': html,
+                'raw': markdown_content,
+                'hex_code': hex_code,
+                'terrain': hex_data.get('terrain', terrain),
+                'encounter': hex_data.get('encounter', 'Unknown encounter'),
+                'denizen': hex_data.get('denizen', 'No denizen information'),
+                'notable_feature': hex_data.get('notable_feature', 'No notable features'),
+                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere'),
+                'loot': hex_data.get('loot'),
+                'scroll': hex_data.get('scroll'),
+                'dungeon_type': hex_data.get('dungeon_type'),
+                'beast_type': hex_data.get('beast_type'),
+                'name': hex_data.get('name')
+            })
+            
+        except Exception as e:
+            return jsonify({
+                'exists': False,
+                'error': str(e),
+                'title': f'Hex {hex_code}',
+                'html': f'<p>Error generating content for hex {hex_code}: {str(e)}</p>',
+                'raw': f'Error: {str(e)}',
+                'hex_code': hex_code
+            })
 
 @app.route('/api/city/<hex_code>')
 def get_city_details(hex_code):
@@ -230,12 +289,13 @@ def generate_single_hex():
             return jsonify({'success': False, 'error': 'Hex code required'})
         
         # Generate hex content using unified system
-        hex_data = main_map_generator.generate_single_hex(hex_code)
+        result = main_map_generator.generate_single_hex(hex_code)
         
         return jsonify({
             'success': True,
             'hex_code': hex_code,
-            'message': translation_system.t('hex_generated', hex_code=hex_code)
+            'message': f'Generated hex {hex_code}',
+            'content_type': result.get('content_type', 'unknown')
         })
         
     except Exception as e:
