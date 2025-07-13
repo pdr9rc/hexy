@@ -7,23 +7,152 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/fonts.css" rel="stylesheet">
     <style>
+    :root {
+        --mork-black: #000000;
+        --mork-cyan: #00FFFF;
+        --mork-yellow: #FFFF00;
+        --mork-green: #00FF00;
+        --mork-magenta: #FF00FF;
+        --mork-white: #FFFFFF;
+        --mork-orange: #FF8000;
+        --mork-gray: #808080;
+    }
+
     body {
-        background: #000000;
-        color: #ffffff;
+        background: var(--mork-black);
+        color: var(--mork-white);
         font-family: 'pixelify-sans', monospace;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
     }
     
     h1, h2, h3, h4, h5, h6 {
         font-family: 'adhesive-nr-seven', serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
-    
-    .map-container {
-        background: #000000;
-        border: 2px solid #00ffff;
+
+    /* Mörk Borg Button Styling */
+    .btn-mork-borg {
+        background: var(--mork-black);
+        border: 2px solid var(--mork-cyan);
+        color: var(--mork-cyan);
+        font-family: 'adhesive-nr-seven', serif;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+        padding: 8px 16px;
+        margin: 2px;
+        transition: all 0.3s ease;
         border-radius: 0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-mork-borg:hover {
+        background: var(--mork-cyan);
+        color: var(--mork-black);
+        box-shadow: 0 0 15px var(--mork-cyan);
+        transform: translateY(-2px);
+    }
+
+    .btn-mork-borg:active {
+        transform: translateY(0);
+        box-shadow: 0 0 8px var(--mork-cyan);
+    }
+
+    .btn-mork-borg.btn-warning {
+        border-color: var(--mork-yellow);
+        color: var(--mork-yellow);
+    }
+
+    .btn-mork-borg.btn-warning:hover {
+        background: var(--mork-yellow);
+        color: var(--mork-black);
+        box-shadow: 0 0 15px var(--mork-yellow);
+    }
+
+    .btn-mork-borg.btn-info {
+        border-color: var(--mork-green);
+        color: var(--mork-green);
+    }
+
+    .btn-mork-borg.btn-info:hover {
+        background: var(--mork-green);
+        color: var(--mork-black);
+        box-shadow: 0 0 15px var(--mork-green);
+    }
+
+    .btn-mork-borg.btn-danger {
+        border-color: var(--mork-magenta);
+        color: var(--mork-magenta);
+    }
+
+    .btn-mork-borg.btn-danger:hover {
+        background: var(--mork-magenta);
+        color: var(--mork-black);
+        box-shadow: 0 0 15px var(--mork-magenta);
+    }
+
+    /* Header Styling */
+    .main-header {
+        background: var(--mork-black);
+        border-bottom: 3px solid var(--mork-cyan);
+        padding: 20px 0;
+        margin-bottom: 0;
+        box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+    }
+
+    .main-header h1 {
+        color: var(--mork-cyan);
+        text-shadow: 0 0 10px var(--mork-cyan);
+        margin: 0;
+        font-size: 2.5rem;
+    }
+
+    /* Control Panel */
+    .control-panel {
+        background: var(--mork-black);
+        border: 2px solid var(--mork-cyan);
+        padding: 15px;
+        margin-bottom: 0;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+
+    /* Main Layout - Side by Side */
+    .main-content {
+        display: flex;
+        height: calc(100vh - 200px);
+        min-height: 600px;
+    }
+
+    .map-side {
+        flex: 1;
+        background: var(--mork-black);
+        border-right: 2px solid var(--mork-cyan);
         padding: 20px;
-        margin: 20px 0;
-        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .modal-side {
+        flex: 1;
+        background: var(--mork-black);
+        padding: 20px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Map Container */
+    .map-container {
+        background: var(--mork-black);
+        border: 2px solid var(--mork-cyan);
+        border-radius: 0;
+        padding: 15px;
+        height: 100%;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
     
     .hex-grid {
@@ -31,10 +160,10 @@
         font-size: 11px;
         line-height: 1.1;
         overflow: auto;
-        max-height: 70vh;
-        background: #000000;
+        height: calc(100% - 40px);
+        background: var(--mork-black);
         padding: 15px;
-        border: 1px solid #00ffff;
+        border: 1px solid var(--mork-cyan);
         text-align: center;
         white-space: nowrap;
     }
@@ -48,31 +177,40 @@
         width: 16px;
         text-align: center;
         margin-right: 0px;
+        position: relative;
     }
     
     .hex-cell:hover {
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(0, 255, 255, 0.3);
+        transform: scale(1.3);
+        z-index: 10;
+        box-shadow: 0 0 8px var(--mork-cyan);
+    }
+
+    .hex-cell.selected {
+        background-color: rgba(255, 255, 0, 0.4);
+        box-shadow: 0 0 10px var(--mork-yellow);
         transform: scale(1.2);
     }
     
     .major-city {
-        color: #ffff00 !important;
+        color: var(--mork-yellow) !important;
         font-weight: bold;
-        text-shadow: 0 0 5px #ffff00;
+        text-shadow: 0 0 5px var(--mork-yellow);
     }
     
     .settlement {
-        color: #00ff00 !important;
+        color: var(--mork-green) !important;
         font-weight: bold;
-        text-shadow: 0 0 5px #00ff00;
+        text-shadow: 0 0 5px var(--mork-green);
     }
     
-    .terrain-mountain { color: #ff00ff; }
-    .terrain-forest { color: #00ff00; }
-    .terrain-coast { color: #00ffff; }
-    .terrain-plains { color: #ffff00; }
-    .terrain-swamp { color: #ff8000; }
-    .terrain-unknown { color: #808080; }
+    .terrain-mountain { color: var(--mork-magenta); }
+    .terrain-forest { color: var(--mork-green); }
+    .terrain-coast { color: var(--mork-cyan); }
+    .terrain-plains { color: var(--mork-yellow); }
+    .terrain-swamp { color: var(--mork-orange); }
+    .terrain-unknown { color: var(--mork-gray); }
     
     .has-content {
         font-weight: bold;
@@ -83,58 +221,89 @@
         opacity: 0.6;
     }
     
-    .control-panel {
-        background: #000000;
-        border: 2px solid #00ffff;
-        padding: 15px;
+    /* Modal Side Content */
+    .modal-content-container {
+        background: var(--mork-black);
+        border: 2px solid var(--mork-cyan);
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
+
+    .modal-header {
+        border-bottom: 2px solid var(--mork-cyan);
+        padding-bottom: 15px;
         margin-bottom: 20px;
     }
     
-    .city-card {
-        background: #000000;
-        border: 1px solid #00ffff;
+    .modal-header h3 {
+        color: var(--mork-cyan);
+        margin: 0;
+        font-size: 1.8rem;
+    }
+
+    .close-btn {
+        background: var(--mork-black);
+        border: 2px solid var(--mork-magenta);
+        color: var(--mork-magenta);
+        font-size: 1.5rem;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+        background: var(--mork-magenta);
+        color: var(--mork-black);
+        box-shadow: 0 0 10px var(--mork-magenta);
+    }
+
+    .content-section {
+        margin-bottom: 25px;
+        padding: 15px;
+        border: 1px solid var(--mork-cyan);
+        background: rgba(0, 255, 255, 0.05);
+    }
+
+    .content-section h4 {
+        color: var(--mork-yellow);
         margin-bottom: 10px;
-        transition: transform 0.2s;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
-    
-    .city-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
+
+    .ascii-terrain {
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.2;
+        color: var(--mork-green);
+        margin: 10px 0;
+        text-align: center;
     }
-    
-    .modal-content {
-        background: #000000;
-        color: #ffffff;
-        border: 2px solid #00ffff;
+
+    .ascii-modal {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.3;
+        color: var(--mork-cyan);
+        background: var(--mork-black);
+        border: 1px solid var(--mork-cyan);
+        padding: 15px;
+        margin: 10px 0;
+        white-space: pre;
     }
-    
-    .modal-header {
-        border-bottom: 1px solid #00ffff;
-    }
-    
-    .modal-footer {
-        border-top: 1px solid #00ffff;
-    }
-    
-    .badge {
-        font-size: 0.8em;
-    }
-    
-    .legend {
-        background: #000000;
-        border: 1px solid #00ffff;
-        padding: 10px;
-        font-size: 0.9em;
-    }
-    
+
+    /* Legend */
     .legend-integrated {
         font-size: 0.85em;
-        color: #00ffff;
+        color: var(--mork-cyan);
         padding: 5px 0;
     }
     
     .legend-integrated strong {
-        color: #ffffff;
+        color: var(--mork-white);
         font-size: 0.9em;
     }
     
@@ -150,27 +319,113 @@
         width: 30px;
         text-align: right;
         margin-right: 5px;
-        color: #00ffff;
+        color: var(--mork-cyan);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .main-content {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .map-side, .modal-side {
+            flex: none;
+            width: 100%;
+        }
+
+        .map-side {
+            border-right: none;
+            border-bottom: 2px solid var(--mork-cyan);
+            height: 400px;
+        }
+
+        .modal-side {
+            height: 500px;
+        }
+
+        .main-header h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .control-panel .btn-group {
+            margin-bottom: 10px;
+        }
+
+        .legend-integrated {
+            font-size: 0.75em;
+        }
+    }
+
+    /* Loading States */
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        color: var(--mork-cyan);
+        font-size: 1.2rem;
+    }
+
+    .loading::after {
+        content: '';
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--mork-cyan);
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-left: 10px;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Empty State */
+    .empty-state {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        color: var(--mork-gray);
+        text-align: center;
+    }
+
+    .empty-state h4 {
+        color: var(--mork-cyan);
+        margin-bottom: 15px;
+    }
+
+    .empty-state p {
+        font-size: 0.9rem;
+        line-height: 1.5;
     }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="main-header">
     <div class="container-fluid">
-        <header class="text-center">
-            <h1>THE DYING LANDS</h1>
+            <h1 class="text-center">THE DYING LANDS</h1>
+        </div>
         </header>
         
-        <!-- Control Panel with Integrated Legend -->
+        <!-- Control Panel -->
         <div class="control-panel">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="btn-group me-2" role="group">
-                        <button class="btn btn-warning btn-sm" onclick="showTerrainOverview()">🗺️ TERRAIN</button>
-                        <button class="btn btn-info btn-sm" onclick="showLoreOverview()">📜 LORE</button>
+                        <button class="btn btn-mork-borg btn-warning" onclick="showTerrainOverview()">🗺️ TERRAIN</button>
+                        <button class="btn btn-mork-borg btn-info" onclick="showLoreOverview()">📜 LORE</button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button class="btn btn-danger btn-sm" onclick="resetContinent()">🔄 RESET CONTINENT</button>
-
+                        <button class="btn btn-mork-borg btn-danger" onclick="resetContinent()">🔄 RESET CONTINENT</button>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -183,74 +438,69 @@
                                 <span class="terrain-coast">~</span> COAST<br>
                                 <span class="terrain-plains">.</span> PLAINS &nbsp;
                                 <span class="terrain-swamp">#</span> SWAMP
-                            </div>
+                </div>
                             <div class="col-md-6">
                                 <strong>LOCATIONS:</strong><br>
                                 <span class="major-city">◆</span> MAJOR CITIES<br>
                                 <span class="settlement">⌂</span> SETTLEMENTS<br>
                                 <strong>BOLD</strong> = HAS CONTENT
+            </div>
+        </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Major Cities Overview -->
-        <div class="row mb-3" style="display: none;">
-            <div class="col-12">
-                <h5>🏰 MAJOR CITIES</h5>
-                <div class="row">
-                    {% for city in major_cities %}
-                    <div class="col-md-4 col-lg-3">
-                        <div class="city-card card" onclick="showCityDetails('{{ city.hex_code }}')">
-                            <div class="card-body py-2">
-                                <h6 class="card-title mb-1">{{ city.name }}</h6>
-                                <small class="text-muted">
-                                    {{ city.hex_code }} - {{ city.region.title() }}<br>
-                                    POP: {{ city.population }}
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        
-        <!-- ASCII Map -->
+    <!-- Main Content - Side by Side Layout -->
+    <div class="main-content">
+        <!-- Left Side - Map -->
+        <div class="map-side">
         <div class="map-container">
-            <div class="hex-grid" id="map-grid">
-                <!-- Column headers -->
-                <div class="text-center mb-2">
-                    <span style="margin-right: 20px;"></span>
-                    {% for x in range(1, map_width + 1) %}
-                        {% if x <= 9 %}
-                            <span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">0{{ x }}</span>
-                        {% else %}
-                            <span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">{{ x }}</span>
-                        {% endif %}
-                    {% endfor %}
+                <div class="hex-grid" id="hexGrid">
+                    <!-- Map content will be loaded here -->
+                    <div style="color: red; font-size: 20px;">MAP LOADING...</div>
+                </div>
+            </div>
                 </div>
                 
-                <!-- Map rows -->
-                {% for y in range(1, map_height + 1) %}
-                <div class="map-row">
-                    <span class="row-number">{{ "%02d"|format(y) }}</span>
-                    {% for x in range(1, map_width + 1) %}
-                        {% set hex_code = "%02d%02d"|format(x, y) %}
-                        {% set hex_data = ascii_map[hex_code] %}
-                        <span class="hex-cell {{ hex_data.css_class }} {{ 'has-content' if hex_data.has_content else 'no-content' }}"
-                              onclick="showHexDetails('{{ hex_code }}')"
-                              title="HEX {{ hex_code }}{% if hex_data.is_city %} - {{ hex_data.city_name }}{% endif %}">{{ hex_data.symbol }}</span>
-                    {% endfor %}
+        <!-- Right Side - Modal Content -->
+        <div class="modal-side">
+            <div class="modal-content-container" id="modalContainer">
+                <div class="empty-state">
+                    <h4>SELECT A HEX</h4>
+                    <p>Click on any hex on the map to view its details, encounters, and lore.</p>
+                    <div class="ascii-modal">
+╔══════════════════════════════════════════════════════════════╗
+║                    THE DYING LANDS                           ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  Click a hex to explore its mysteries...                    ║
+║                                                              ║
+║  Each hex contains unique encounters, denizens,             ║
+║  and secrets waiting to be discovered.                      ║
+║                                                              ║
+║  The world is dying, but adventure lives on.                ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
                 </div>
-                {% endfor %}
+                </div>
+            </div>
             </div>
         </div>
         
-        <!-- Legend -->
-
+    <!-- Hidden Modal for Mobile -->
+    <div class="modal fade" id="mobileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mobileModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="mobileModalBody">
+                </div>
+            </div>
+        </div>
     </div>
     
     <!-- Hex Details Modal -->
@@ -322,17 +572,108 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+    console.log('=== SCRIPT STARTING ===');
+    
     let currentHex = '';
     let mapZoom = 1;
     
+    // Map data from server
+    let mapData = {};
+    let mapWidth = 0;
+    let mapHeight = 0;
+    try {
+        mapData = {{ ascii_map | tojson | safe }};
+        mapWidth = {{ map_width|int }};
+        mapHeight = {{ map_height|int }};
+    } catch (error) {
+        console.error('Error loading map data:', error);
+        window.mapDataError = error.message;
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        renderMap();
+    });
+    
+    function renderMap() {
+        const hexGrid = document.getElementById('hexGrid');
+        if (!hexGrid) {
+            console.error('hexGrid element not found');
+            return;
+        }
+        if (window.mapDataError) {
+            hexGrid.innerHTML = '<div style="color: red; font-size: 20px;">ERROR LOADING MAP DATA: ' + window.mapDataError + '</div>';
+            return;
+        }
+        
+        console.log('Found hexGrid element, rendering map...');
+        console.log('Map data keys:', Object.keys(mapData).length);
+        console.log('Map width:', mapWidth, 'Map height:', mapHeight);
+        
+        let html = '';
+        
+        // Add a test message to see if the function is running
+        html += '<div style="color: green; font-size: 16px; margin-bottom: 10px;">MAP IS RENDERING!</div>';
+        
+        // Add column headers
+        html += '<div class="text-center mb-2">';
+        html += '<span style="margin-right: 20px;"></span>';
+        for (let x = 1; x <= mapWidth; x++) {
+            const xLabel = x <= 9 ? `0${x}` : `${x}`;
+            html += `<span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">${xLabel}</span>`;
+        }
+        html += '</div>';
+        
+        // Render map rows
+        for (let y = 1; y <= mapHeight; y++) {
+            html += '<div class="map-row">';
+            html += `<span class="row-number">${y.toString().padStart(2, '0')}</span>`;
+            
+            for (let x = 1; x <= mapWidth; x++) {
+                const hexCode = `${x.toString().padStart(2, '0')}${y.toString().padStart(2, '0')}`;
+                const hexData = mapData[hexCode];
+                
+                if (hexData) {
+                    const cssClass = hexData.css_class;
+                    const symbol = hexData.symbol;
+                    const hasContent = hexData.has_content ? 'has-content' : 'no-content';
+                    const title = hexData.is_city ? `HEX ${hexCode} - ${hexData.city_name}` : `HEX ${hexCode}`;
+                    
+                    html += `<span class="hex-cell ${cssClass} ${hasContent}" 
+                                   onclick="showHexDetails('${hexCode}')" 
+                                   data-hex="${hexCode}"
+                                   title="${title}">${symbol}</span>`;
+                } else {
+                    html += `<span class="hex-cell terrain-unknown no-content" 
+                                   onclick="showHexDetails('${hexCode}')" 
+                                   data-hex="${hexCode}"
+                                   title="HEX ${hexCode}">?</span>`;
+                }
+            }
+            
+            html += '</div>';
+        }
+        
+        console.log('Setting innerHTML, length:', html.length);
+        hexGrid.innerHTML = html;
+        console.log('=== MAP RENDERED SUCCESSFULLY ===');
+    }
+
     function showHexDetails(hexCode) {
         currentHex = hexCode;
+        
+        // Highlight selected hex on the map
+        clearHexSelection();
+        const hexElement = document.querySelector(`[data-hex="${hexCode}"]`);
+        if (hexElement) {
+            hexElement.classList.add('selected');
+        }
+        
+        // Show loading state
+        showLoadingState();
         
         fetch(`/api/hex/${hexCode}`)
             .then(response => response.json())
             .then(data => {
-                document.getElementById('hexModalTitle').textContent = data.title;
-                
                 if (data.is_major_city) {
                     showCityDetails(hexCode);
                     return;
@@ -343,21 +684,172 @@
                     return;
                 }
                 
-                let html = '';
-                if (data.exists) {
-                    html = data.html || `<p>${data.description || 'NO DESCRIPTION AVAILABLE'}</p>`;
-                } else {
-                    html = `<p>NO CONTENT GENERATED FOR HEX ${hexCode}</p>`;
-                }
-                
-                document.getElementById('hexModalBody').innerHTML = html;
-                new bootstrap.Modal(document.getElementById('hexModal')).show();
+                // Display content in the side panel
+                displayHexContent(data, hexCode);
             })
             .catch(error => {
-                console.error('ERROR LOADING HEX:', error);
-                document.getElementById('hexModalBody').innerHTML = '<p class="text-danger">ERROR LOADING HEX CONTENT</p>';
-                new bootstrap.Modal(document.getElementById('hexModal')).show();
+                console.error('Error fetching hex details:', error);
+                showErrorState(hexCode);
             });
+    }
+
+    function clearHexSelection() {
+        document.querySelectorAll('.hex-cell.selected').forEach(el => {
+            el.classList.remove('selected');
+        });
+    }
+
+    function showLoadingState() {
+        const modalContainer = document.getElementById('modalContainer');
+        modalContainer.innerHTML = `
+            <div class="loading">
+                Loading hex details...
+            </div>
+        `;
+    }
+
+    function showErrorState(hexCode) {
+        const modalContainer = document.getElementById('modalContainer');
+        modalContainer.innerHTML = `
+            <div class="empty-state">
+                <h4>ERROR LOADING HEX ${hexCode}</h4>
+                <p>Failed to load hex details. Please try again.</p>
+            </div>
+        `;
+    }
+
+    function displayHexContent(data, hexCode) {
+        const modalContainer = document.getElementById('modalContainer');
+        
+        let html = '';
+        if (data.exists) {
+            html = generateHexModalHTML(data, hexCode);
+        } else {
+            html = generateEmptyHexHTML(hexCode);
+        }
+        
+        modalContainer.innerHTML = html;
+    }
+
+    function generateHexModalHTML(data, hexCode) {
+        const terrain = data.terrain || 'unknown';
+        const encounter = data.encounter || 'Unknown encounter';
+        const denizen = data.denizen || 'No denizen information';
+        const notableFeature = data.notable_feature || 'No notable features';
+        const atmosphere = data.atmosphere || 'Unknown atmosphere';
+        
+        // Generate ASCII terrain art
+        const asciiTerrain = getAsciiTerrain(terrain);
+        
+        // Generate ASCII modal frame
+        const asciiModal = generateAsciiModal(data, hexCode);
+        
+        return `
+            <div class="modal-header">
+                <h3>HEX ${hexCode} - ${terrain.toUpperCase()}</h3>
+                <button class="close-btn" onclick="clearHexSelection()">×</button>
+            </div>
+            
+            <div class="content-section">
+                <h4>TERRAIN</h4>
+                <p>${terrain.charAt(0).toUpperCase() + terrain.slice(1)}</p>
+                <div class="ascii-terrain">
+${asciiTerrain}
+                </div>
+            </div>
+            
+            <div class="content-section">
+                <h4>ENCOUNTER</h4>
+                <p>${encounter}</p>
+            </div>
+            
+            <div class="content-section">
+                <h4>DENIZEN</h4>
+                <p>${denizen}</p>
+            </div>
+            
+            <div class="content-section">
+                <h4>NOTABLE FEATURES</h4>
+                <p>${notableFeature}</p>
+            </div>
+            
+            <div class="content-section">
+                <h4>ATMOSPHERE</h4>
+                <p>${atmosphere}</p>
+            </div>
+            
+            <div class="ascii-modal">
+${asciiModal}
+            </div>
+        `;
+    }
+
+    function generateEmptyHexHTML(hexCode) {
+        return `
+            <div class="modal-header">
+                <h3>HEX ${hexCode}</h3>
+                <button class="close-btn" onclick="clearHexSelection()">×</button>
+            </div>
+            
+            <div class="empty-state">
+                <h4>NO CONTENT GENERATED</h4>
+                <p>This hex has no content yet. Click "Generate Content" to create encounters and details.</p>
+                <button class="btn btn-mork-borg" onclick="generateHexContent('${hexCode}')">GENERATE CONTENT</button>
+            </div>
+        `;
+    }
+
+    function getAsciiTerrain(terrain) {
+        const terrainArt = {
+            'mountain': `    /\\   /\\   /\\
+   /  \\_/  \\_/  \\
+  /            \\
+ /              \\`,
+            'forest': `      /\\      /\\
+     /  \\    /  \\
+    /____\\  /____\\
+      ||      ||`,
+            'coast': `   ~   ~   ~   ~
+ ~   ~   ~   ~
+   ~   ~   ~   ~`,
+            'plains': `  .  .  .  .  .
+ .  .  .  .  .
+  .  .  .  .  .`,
+            'swamp': `  # # # # # #
+ # # # # # # #
+  # # # # # #`,
+            'desert': `  ~~~~~~~~~~~
+ ~~~~~.~~~~~
+  ~~~~~~~~~~~`
+        };
+        
+        return terrainArt[terrain] || terrainArt['plains'];
+    }
+
+    function generateAsciiModal(data, hexCode) {
+        const terrain = data.terrain || 'unknown';
+        const encounter = data.encounter || 'Unknown encounter';
+        const denizen = data.denizen || 'No denizen information';
+        const notableFeature = data.notable_feature || 'No notable features';
+        const atmosphere = data.atmosphere || 'Unknown atmosphere';
+        
+                 return `╔══════════════════════════════════════════════════════════════╗
+║                    HEX ${hexCode} - ${terrain.toUpperCase()}                    ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  TERRAIN: ${terrain.padEnd(50)} ║
+║  ${getAsciiTerrain(terrain).split('\\n').map(line => `  ${line.padEnd(50)} ║`).join('\\n')}
+║                                                              ║
+║  ENCOUNTER: ${encounter.substring(0, 50).padEnd(50)} ║
+║                                                              ║
+║  DENIZEN: ${denizen.substring(0, 50).padEnd(50)} ║
+║                                                              ║
+║  FEATURES: ${notableFeature.substring(0, 50).padEnd(50)} ║
+║                                                              ║
+║  ATMOSPHERE: ${atmosphere.substring(0, 50).padEnd(50)} ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝`;
+     }
     }
     
     function showCityDetails(hexCode) {
@@ -740,7 +1232,7 @@
     }
     
     function applyZoom() {
-        const mapElement = document.getElementById('map-grid');
+        const mapElement = document.getElementById('hexGrid'); // Changed from map-grid to hexGrid
         if (mapElement) {
             mapElement.style.transform = `scale(${mapZoom})`;
             mapElement.style.transformOrigin = 'top left';

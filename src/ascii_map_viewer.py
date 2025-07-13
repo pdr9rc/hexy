@@ -101,6 +101,9 @@ def get_hex_info(hex_code):
             html = markdown.markdown(content, extensions=['codehilite', 'fenced_code', 'tables'])
             title = extract_title(content)
             
+            # Extract structured data for the new modal system
+            hex_data = extract_hex_data(content, hex_code)
+            
             return jsonify({
                 'exists': True,
                 'is_major_city': False,
@@ -108,7 +111,12 @@ def get_hex_info(hex_code):
                 'title': title,
                 'html': html,
                 'raw': content,
-                'hex_code': hex_code
+                'hex_code': hex_code,
+                'terrain': hex_data.get('terrain', 'unknown'),
+                'encounter': hex_data.get('encounter', 'Unknown encounter'),
+                'denizen': hex_data.get('denizen', 'No denizen information'),
+                'notable_feature': hex_data.get('notable_feature', 'No notable features'),
+                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere')
             })
         except Exception as e:
             return jsonify({
@@ -383,6 +391,56 @@ def extract_title(content):
         if line.startswith('# '):
             return line[2:].strip()
     return "Untitled"
+
+def extract_hex_data(content, hex_code):
+    """Extract structured data from hex content for the new modal system."""
+    lines = content.split('\n')
+    hex_data = {
+        'terrain': 'unknown',
+        'encounter': 'Unknown encounter',
+        'denizen': 'No denizen information',
+        'notable_feature': 'No notable features',
+        'atmosphere': 'Unknown atmosphere'
+    }
+    
+    current_section = None
+    
+    for line in lines:
+        line = line.strip()
+        
+        # Extract terrain from title
+        if line.startswith('# Hex ') and ' - ' in line:
+            parts = line.split(' - ')
+            if len(parts) > 1:
+                hex_data['terrain'] = parts[1].strip()
+        
+        # Extract encounter
+        elif '**' in line and any(symbol in line for symbol in ['※', '▲', '☉', '⌂']):
+            hex_data['encounter'] = line.strip()
+        
+        # Extract denizen information
+        elif '**' in line and ('Motivation:' in line or 'Feature:' in line or 'Demeanor:' in line):
+            if current_section == 'denizen':
+                hex_data['denizen'] += '\n' + line.strip()
+            else:
+                hex_data['denizen'] = line.strip()
+                current_section = 'denizen'
+        
+        # Extract notable feature
+        elif 'Notable Feature' in line or 'NOTABLE FEATURES' in line:
+            current_section = 'notable_feature'
+        elif current_section == 'notable_feature' and line and not line.startswith('#'):
+            hex_data['notable_feature'] = line.strip()
+            current_section = None
+        
+        # Extract atmosphere
+        elif 'Atmosphere' in line or 'ATMOSPHERE' in line:
+            current_section = 'atmosphere'
+        elif current_section == 'atmosphere' and line and not line.startswith('#'):
+            hex_data['atmosphere'] = line.strip()
+            current_section = None
+    
+    return hex_data
 
 def extract_settlement_data(content, hex_code):
     """Extract settlement data from markdown content."""
