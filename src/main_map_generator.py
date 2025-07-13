@@ -40,12 +40,12 @@ class MainMapGenerator:
         
         # Generation rules
         self.generation_rules = self.config.get('generation_rules', {
-            'settlement_chance': 0.15,
-            'dungeon_chance': 0.20,
-            'beast_chance': 0.20,
-            'npc_chance': 0.45,
-            'loot_chance': 0.30,
-            'scroll_chance': 0.20
+            'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
+            'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
+            'beast_chance': 0.50,       # Increased from 0.35 - more beasts!
+            'npc_chance': 0.40,         # Reduced to make room for more dungeons/beasts
+            'loot_chance': 0.60,        # Increased from 0.50 - more loot!
+            'scroll_chance': 0.35       # Increased from 0.30
         })
         
         # Output formats
@@ -62,12 +62,12 @@ class MainMapGenerator:
             'map_start': (1, 1),
             'output_directory': 'dying_lands_output',
             'generation_rules': {
-                'settlement_chance': 0.15,
-                'dungeon_chance': 0.20,
-                'beast_chance': 0.20,
-                'npc_chance': 0.45,
-                'loot_chance': 0.30,
-                'scroll_chance': 0.20
+                'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
+                'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
+                'beast_chance': 0.50,       # Increased from 0.35 - more beasts!
+                'npc_chance': 0.40,         # Reduced to make room for more dungeons/beasts
+                'loot_chance': 0.60,        # Increased from 0.50 - more loot!
+                'scroll_chance': 0.35       # Increased from 0.30
             },
             'output_formats': ['markdown', 'ascii'],
             'skip_existing': True,
@@ -232,6 +232,10 @@ class MainMapGenerator:
     
     def _generate_terrain_hex_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate terrain-aware content for a hex."""
+        # Special handling for sea terrain
+        if terrain == 'sea':
+            return self._generate_sea_content(hex_code)
+        
         # Get terrain-specific tables
         terrain_data = self.terrain_tables.get(terrain, {})
         encounters = terrain_data.get('encounters', [])
@@ -243,16 +247,110 @@ class MainMapGenerator:
         atmosphere = self._generate_atmosphere()
         
         # Determine content type based on generation rules
-        content_roll = random.random()
+        weights = [
+            ('settlement', self.generation_rules['settlement_chance']),
+            ('dungeon', self.generation_rules['dungeon_chance']),
+            ('beast', self.generation_rules['beast_chance']),
+            ('npc', self.generation_rules['npc_chance']),
+        ]
+        total = sum(w for _, w in weights)
+        roll = random.uniform(0, total)
+        upto = 0
+        for kind, weight in weights:
+            if upto + weight >= roll:
+                if kind == 'settlement':
+                    return self._generate_settlement_content(hex_code, terrain)
+                elif kind == 'dungeon':
+                    return self._generate_dungeon_content(hex_code, terrain)
+                elif kind == 'beast':
+                    return self._generate_beast_content(hex_code, terrain)
+                elif kind == 'npc':
+                    return self._generate_npc_content(hex_code, terrain, denizen_types)
+            upto += weight
+        # fallback (shouldn't happen)
+        return self._generate_npc_content(hex_code, terrain, denizen_types)
+
+    def _generate_sea_content(self, hex_code: str) -> Dict[str, Any]:
+        """Generate sea encounter content with Tephrotic nightmares and oceanic horrors."""
+        # Sea encounter types
+        sea_encounters = [
+            "Tephrotic Nightmare",
+            "Sea Horror",
+            "Oceanic Terror", 
+            "Abyssal Entity",
+            "Drowned Horror",
+            "Sea Wraith",
+            "Oceanic Nightmare",
+            "Abyssal Nightmare"
+        ]
         
-        if content_roll <= self.generation_rules['settlement_chance']:
-            return self._generate_settlement_content(hex_code, terrain)
-        elif content_roll <= self.generation_rules['settlement_chance'] + self.generation_rules['dungeon_chance']:
-            return self._generate_dungeon_content(hex_code, terrain)
-        elif content_roll <= self.generation_rules['settlement_chance'] + self.generation_rules['dungeon_chance'] + self.generation_rules['beast_chance']:
-            return self._generate_beast_content(hex_code, terrain)
-        else:
-            return self._generate_npc_content(hex_code, terrain, denizen_types)
+        # Tephrotic nightmare descriptions
+        tephrotic_descriptions = [
+            "A writhing mass of tentacles and eyes that defies mortal comprehension",
+            "A being of pure nightmare that swims through the depths of the dying world",
+            "An entity that exists between dreams and reality, haunting the ocean's edge",
+            "A horror from beyond the stars that has made the sea its domain",
+            "A creature of pure malevolence that feeds on the fear of those who gaze upon it",
+            "An ancient terror that has slumbered beneath the waves for eons"
+        ]
+        
+        # Sea atmosphere descriptions
+        sea_atmospheres = [
+            "The air is thick with the stench of decay and salt",
+            "A cold wind carries whispers of ancient horrors",
+            "The water seems to pulse with an unnatural rhythm",
+            "Shadows dance beneath the surface, hinting at things best left unseen",
+            "The sea itself seems to breathe with malevolent intent",
+            "An oppressive silence broken only by distant, unearthly sounds"
+        ]
+        
+        # Notable sea features
+        sea_features = [
+            "Waters that whisper of forgotten terrors",
+            "A place where reality and nightmare blur",
+            "Ancient ruins visible beneath the waves",
+            "A spot where the sea seems to bleed darkness",
+            "Waters that reflect impossible geometries",
+            "A location where time itself seems to flow differently"
+        ]
+        
+        # Generate encounter
+        encounter_type = random.choice(sea_encounters)
+        description = random.choice(tephrotic_descriptions)
+        atmosphere = random.choice(sea_atmospheres)
+        feature = random.choice(sea_features)
+        
+        # Generate loot (sea encounters might have sunken treasure)
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.8 else None
+        
+        # Build the encounter description
+        encounter_desc = f"**{encounter_type}**\n\n"
+        encounter_desc += f"{description}.\n\n"
+        encounter_desc += f"**Origin:** This entity emerged from the depths when the world began to die. "
+        encounter_desc += f"It is said to be one of the Tephrotic nightmares that plague the dying lands.\n\n"
+        encounter_desc += f"**Behavior:** The creature {random.choice(['stalks', 'hunts', 'haunts', 'terrorizes'])} "
+        encounter_desc += f"this area of the sea, {random.choice(['seeking prey', 'spreading corruption', 'gathering power', 'performing ancient rituals'])}.\n\n"
+        encounter_desc += f"**Threat Level:** Catastrophic - this entity represents an existential threat to all who encounter it.\n\n"
+        encounter_desc += f"**Territory:** This section of the sea has been claimed by the nightmare, "
+        encounter_desc += f"its influence corrupting the very waters themselves."
+        
+        # Add loot if present
+        if loot:
+            encounter_desc += f"\n\n**Sunken Treasure:** {loot['description']} (lost to the depths)"
+        
+        return {
+            'hex_code': hex_code,
+            'terrain': 'sea',
+            'encounter': f"≈ **{encounter_type} Encounter**",
+            'denizen': encounter_desc,
+            'notable_feature': feature,
+            'atmosphere': atmosphere,
+            'threat_level': "Catastrophic - this entity represents an existential threat to all who encounter it.",
+            'territory': f"This section of the sea has been claimed by the nightmare, its influence corrupting the very waters themselves.",
+            'loot': loot,
+            'is_sea_encounter': True,
+            'encounter_type': encounter_type
+        }
     
     def _generate_settlement_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate settlement-specific content."""
@@ -272,6 +370,9 @@ class MainMapGenerator:
         # Generate settlement art
         settlement_art = self._generate_settlement_art(name, terrain)
         
+        # Generate loot (settlements might have valuable items)
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.5 else None
+        
         return {
             'hex_code': hex_code,
             'terrain': terrain,
@@ -285,6 +386,7 @@ class MainMapGenerator:
             'population': population,
             'name': name,
             'settlement_type': population,
+            'loot': loot,
             'is_settlement': True
         }
     
@@ -357,10 +459,17 @@ class MainMapGenerator:
         feature = random.choice(beast_features) if beast_features else "unnatural appearance"
         behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
         
+        # Generate loot (beasts might have treasure from their victims)
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.7 else None
+        
         # Build description
         description = f"A {beast_type} with {feature} that {behavior}.\n\n"
         description += f"**Territory:** This creature has claimed this area of {terrain} as its hunting ground.\n"
         description += f"**Threat Level:** High - approach with extreme caution.\n"
+        
+        # Add loot if present
+        if loot:
+            description += f"\n**Treasure Found:** {loot['description']} (remains of previous victims)\n"
         
         return {
             'hex_code': hex_code,
@@ -372,6 +481,9 @@ class MainMapGenerator:
             'beast_type': beast_type,
             'beast_feature': feature,
             'beast_behavior': behavior,
+            'threat_level': "High - approach with extreme caution.",
+            'territory': f"This creature has claimed this area of {terrain} as its hunting ground.",
+            'loot': loot,
             'is_beast': True
         }
     
@@ -407,12 +519,19 @@ class MainMapGenerator:
         feature = random.choice(features) if features else "Has an unsettling presence"
         demeanor = random.choice(demeanors) if demeanors else "Cryptic"
         
+        # Generate loot (NPCs might carry valuable items)
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.6 else None
+        
         # Build description
         description = f"**{name}** - {denizen_type}\n\n"
         description += f"**Motivation:** {motivation}\n"
         description += f"**Feature:** {feature}\n"
         description += f"**Demeanor:** {demeanor}\n"
         description += f"**Location:** Wandering the {terrain}\n"
+        
+        # Add loot if present
+        if loot:
+            description += f"\n**Carries:** {loot['description']}\n"
         
         return {
             'hex_code': hex_code,
@@ -426,6 +545,7 @@ class MainMapGenerator:
             'motivation': motivation,
             'feature': feature,
             'demeanor': demeanor,
+            'loot': loot,
             'is_npc': True
         }
     
@@ -624,6 +744,11 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             lines.append("## Settlement Layout")
             lines.append(hex_data.get('settlement_art', ''))
             lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
         
         # Dungeon-specific content
         if hex_data.get('is_dungeon'):
@@ -650,6 +775,44 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
             lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
             lines.append("")
+            
+            # Add threat level and territory as separate sections
+            if hex_data.get('threat_level'):
+                lines.append("## Threat Level")
+                lines.append(hex_data['threat_level'])
+                lines.append("")
+            
+            if hex_data.get('territory'):
+                lines.append("## Territory")
+                lines.append(hex_data['territory'])
+                lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
+        
+        # Sea-specific content
+        if hex_data.get('is_sea_encounter'):
+            lines.append("## Sea Encounter Details")
+            lines.append(f"**Type:** {hex_data.get('encounter_type', 'Unknown')}")
+            lines.append("")
+            
+            # Add threat level and territory as separate sections
+            if hex_data.get('threat_level'):
+                lines.append("## Threat Level")
+                lines.append(hex_data['threat_level'])
+                lines.append("")
+            
+            if hex_data.get('territory'):
+                lines.append("## Territory")
+                lines.append(hex_data['territory'])
+                lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
         
         # NPC-specific content
         if hex_data.get('is_npc'):
@@ -660,6 +823,11 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             lines.append(f"**Feature:** {hex_data.get('feature', 'Unknown')}")
             lines.append(f"**Demeanor:** {hex_data.get('demeanor', 'Unknown')}")
             lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
         
         return '\n'.join(lines)
     

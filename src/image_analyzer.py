@@ -20,18 +20,19 @@ class ImageAnalyzer:
         """Initialize the image analyzer with the official map."""
         self.map_image_path = map_image_path
         self.map_image = None
-        self.map_width = 30  # Standard Mork Borg hex map width
-        self.map_height = 25  # Standard Mork Borg hex map height
+        self.map_width = 25  # Standard Mork Borg hex map width (X axis)
+        self.map_height = 30  # Standard Mork Borg hex map height (Y axis)
         self.terrain_cache = {}
         
         # Color mappings for terrain detection (RGB values)
         self.terrain_colors = {
-            'mountain': [(139, 69, 19), (101, 67, 33), (160, 82, 45)],  # Brown tones
-            'forest': [(34, 139, 34), (0, 100, 0), (85, 107, 47)],      # Green tones  
-            'coast': [(70, 130, 180), (30, 144, 255), (135, 206, 235)], # Blue tones
-            'plains': [(255, 222, 173), (238, 203, 173), (205, 133, 63)], # Tan/beige
-            'swamp': [(107, 142, 35), (85, 107, 47), (124, 135, 42)],   # Dark green
-            'desert': [(244, 164, 96), (255, 218, 185), (210, 180, 140)] # Sandy colors
+            'mountain': [(139, 69, 19), (101, 67, 33), (160, 82, 45), (139, 115, 85)],  # Brown tones
+            'forest': [(34, 139, 34), (0, 100, 0), (85, 107, 47), (50, 120, 50)],      # Green tones  
+            'coast': [(70, 130, 180), (30, 144, 255), (100, 149, 237), (64, 224, 208)], # Lighter blue/cyan
+            'plains': [(149, 142, 90), (222, 184, 135), (210, 180, 140), (255, 222, 173), (238, 203, 173), (205, 133, 63), (245, 222, 179)], # Tan/brown
+            'swamp': [(107, 142, 35), (85, 107, 47), (124, 135, 42), (105, 130, 40)],   # Dark green
+            'desert': [(244, 164, 96), (255, 218, 185), (210, 180, 140), (238, 203, 173)], # Sandy colors
+            'sea': [(0, 87, 183), (0, 105, 148), (0, 119, 190), (25, 25, 112), (0, 0, 128)] # Deep blue only
         }
         
         self._load_map_image()
@@ -98,91 +99,117 @@ class ImageAnalyzer:
             raise ValueError(f"Invalid hex code {hex_code}: {e}")
     
     def _hex_to_pixel_coordinates(self, hex_x: int, hex_y: int) -> Tuple[int, int]:
-        """Convert hex coordinates to pixel coordinates on the image."""
+        """Convert hex coordinates to pixel coordinates on the image, scaling the image to fit the entire grid."""
         if not self.map_image:
             raise RuntimeError("No map image loaded")
-        
+
         img_width, img_height = self.map_image.size
+        grid_width, grid_height = self.map_width, self.map_height
+
+        # Calculate scale to fit image within grid bounds
+        scale_x = grid_width / img_width
+        scale_y = grid_height / img_height
         
-        # Calculate pixel position based on hex grid
-        # Hex grids have offset rows, so we need to account for that
-        pixel_x = int((hex_x - 1) * (img_width / self.map_width))
-        pixel_y = int((hex_y - 1) * (img_height / self.map_height))
+        # Use the smaller scale to ensure image fits completely
+        scale = min(scale_x, scale_y)
         
-        # Add offset for hex grid (every other row is shifted)
-        if hex_y % 2 == 0:
-            pixel_x += int((img_width / self.map_width) / 2)
+        # Calculate scaled image dimensions
+        scaled_img_width = int(img_width * scale)
+        scaled_img_height = int(img_height * scale)
         
-        # Ensure coordinates are within image bounds
-        pixel_x = max(0, min(pixel_x, img_width - 1))
-        pixel_y = max(0, min(pixel_y, img_height - 1))
+        # Calculate padding to center the scaled image
+        pad_x = (grid_width - scaled_img_width) // 2
+        pad_y = (grid_height - scaled_img_height) // 2
         
-        return pixel_x, pixel_y
-    
+        # Map hex coordinates to scaled image coordinates
+        # First, map hex to grid position (0-based)
+        grid_x = hex_x - 1
+        grid_y = hex_y - 1
+        
+        # Adjust for padding
+        adjusted_x = grid_x - pad_x
+        adjusted_y = grid_y - pad_y
+        
+        # Convert to original image coordinates
+        if 0 <= adjusted_x < scaled_img_width and 0 <= adjusted_y < scaled_img_height:
+            pixel_x = int(adjusted_x / scale)
+            pixel_y = int(adjusted_y / scale)
+            
+            # Ensure coordinates are within image bounds
+            if 0 <= pixel_x < img_width and 0 <= pixel_y < img_height:
+                return pixel_x, pixel_y
+        
+        # If outside the scaled image area, return -1, -1
+        return -1, -1
+
     def _analyze_pixel_terrain(self, pixel_x: int, pixel_y: int) -> str:
         """Analyze the terrain at a specific pixel location."""
-        if not self.map_image:
-            return 'plains'
-        
+        if pixel_x == -1 or pixel_y == -1 or not self.map_image:
+            return 'sea'
         # Sample a small area around the pixel for better accuracy
         sample_size = 5
         colors = []
-        
         for dx in range(-sample_size, sample_size + 1):
             for dy in range(-sample_size, sample_size + 1):
                 x = max(0, min(pixel_x + dx, self.map_image.size[0] - 1))
                 y = max(0, min(pixel_y + dy, self.map_image.size[1] - 1))
-                
                 try:
                     color = self.map_image.getpixel((x, y))
                     if isinstance(color, tuple) and len(color) >= 3:
                         colors.append(color[:3])  # RGB only
                 except Exception:
                     continue
-        
         if not colors:
             return 'plains'
-        
         # Find the most common terrain type based on color matching
         terrain_scores = {}
-        
         for color in colors:
+            r, g, b = color  # Ensure r, g, b are defined for each color
             for terrain, terrain_color_list in self.terrain_colors.items():
                 for terrain_color in terrain_color_list:
                     # Calculate color distance
                     distance = sum(abs(c1 - c2) for c1, c2 in zip(color, terrain_color))
-                    
                     # Closer colors get higher scores
                     score = max(0, 255 * 3 - distance)  # Max distance is 255*3
-                    
+                    # Reduce score for green detection to avoid false positives
+                    if terrain == 'forest' and g > r + 30 and g > b + 30:
+                        score *= 0.7  # Reduce forest score for very green pixels
                     if terrain not in terrain_scores:
                         terrain_scores[terrain] = 0
                     terrain_scores[terrain] += score
-        
         # Return the terrain with the highest score
         if terrain_scores:
             best_terrain = max(terrain_scores, key=terrain_scores.get)
             return best_terrain
-        
-        return 'plains'  # Default fallback
+        return 'plains'  # Default to plains for unknown areas
     
     def _fallback_terrain(self, hex_code: str) -> str:
         """Fallback terrain detection when image analysis is not available."""
         try:
             x, y = self._hex_code_to_coordinates(hex_code)
             
-            # Simple coordinate-based terrain assignment
+            # Define the continent boundaries (rough approximation)
+            # Areas outside these bounds should be sea
+            continent_x_min, continent_x_max = 2, 23  # Continent spans roughly X=2 to X=23
+            continent_y_min, continent_y_max = 3, 27  # Continent spans roughly Y=3 to Y=27
+            
+            # Check if hex is outside continent bounds
+            if (x < continent_x_min or x > continent_x_max or 
+                y < continent_y_min or y > continent_y_max):
+                return 'sea'
+            
+            # Simple coordinate-based terrain assignment for continent areas
             # This mimics the layout of a typical Mork Borg map
             
             # Mountains in the northern regions
             if y <= 8:
-                if x <= 10 or x >= 25:
+                if x <= 10 or x >= 20:
                     return 'mountain'
                 else:
                     return 'forest' if x % 3 == 0 else 'plains'
             
             # Coastal areas
-            elif x <= 3 or x >= 28:
+            elif x <= 5 or x >= 20:
                 return 'coast'
             
             # Central dying lands
@@ -202,7 +229,7 @@ class ImageAnalyzer:
                     return 'forest' if (x + y) % 3 == 0 else 'plains'
                     
         except Exception:
-            return 'plains'
+            return 'plains'  # Default to plains for unknown areas
     
     def generate_terrain_overview(self) -> Dict[str, int]:
         """Generate an overview of terrain distribution across the map."""

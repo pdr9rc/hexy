@@ -32,12 +32,12 @@ class GenerationEngine:
         
         # Generation rules (can be overridden)
         self.default_rules = {
-            'settlement_chance': 0.15,
-            'dungeon_chance': 0.20,
-            'beast_chance': 0.20,
-            'npc_chance': 0.45,
-            'loot_chance': 0.30,
-            'scroll_chance': 0.20
+            'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
+            'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
+            'beast_chance': 0.50,       # Increased from 0.35 - more beasts!
+            'npc_chance': 0.40,         # Reduced to make room for more dungeons/beasts
+            'loot_chance': 0.60,        # Increased from 0.50 - more loot!
+            'scroll_chance': 0.35       # Increased from 0.30
         }
         
         # Content generators registry
