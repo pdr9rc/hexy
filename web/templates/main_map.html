@@ -191,6 +191,16 @@
         background-color: rgba(255, 255, 0, 0.4);
         box-shadow: 0 0 10px var(--mork-yellow);
         transform: scale(1.2);
+        animation: blink 1s ease-in-out infinite;
+    }
+    
+    @keyframes blink {
+        0%, 50% {
+            opacity: 1;
+        }
+        25%, 75% {
+            opacity: 0.3;
+        }
     }
     
     .major-city {
@@ -229,58 +239,6 @@
         height: 100%;
         overflow-y: auto;
         box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-    }
-
-    .modal-header {
-        border-bottom: 2px solid var(--mork-cyan);
-        padding-bottom: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .modal-header h3 {
-        color: var(--mork-cyan);
-        margin: 0;
-        font-size: 1.8rem;
-    }
-
-    .close-btn {
-        background: var(--mork-black);
-        border: 2px solid var(--mork-magenta);
-        color: var(--mork-magenta);
-        font-size: 1.5rem;
-        padding: 5px 10px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .close-btn:hover {
-        background: var(--mork-magenta);
-        color: var(--mork-black);
-        box-shadow: 0 0 10px var(--mork-magenta);
-    }
-
-    .content-section {
-        margin-bottom: 25px;
-        padding: 15px;
-        border: 1px solid var(--mork-cyan);
-        background: rgba(0, 255, 255, 0.05);
-    }
-
-    .content-section h4 {
-        color: var(--mork-yellow);
-        margin-bottom: 10px;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .ascii-terrain {
-        font-family: 'Courier New', monospace;
-        font-size: 14px;
-        line-height: 1.2;
-        color: var(--mork-green);
-        margin: 10px 0;
-        text-align: center;
     }
 
     .ascii-modal {
@@ -525,86 +483,9 @@
             </div>
         </div>
         
-    <!-- Hidden Modal for Mobile -->
-    <div class="modal fade" id="mobileModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="mobileModalTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="mobileModalBody">
-                </div>
-            </div>
-        </div>
-    </div>
+
     
-    <!-- Hex Details Modal -->
-    <div class="modal fade" id="hexModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="hexModalTitle">HEX DETAILS</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="hexModalBody">
-                    LOADING...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
-                    <button type="button" class="btn btn-primary" onclick="generateHexContent()">GENERATE CONTENT</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- City Details Modal -->
-    <div class="modal fade" id="cityModal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cityModalTitle">CITY DETAILS</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="cityModalBody">
-                    LOADING...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Terrain Overview Modal -->
-    <div class="modal fade" id="terrainModal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">🗺️ TERRAIN OVERVIEW</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="terrainModalBody">
-                    LOADING...
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Lore Overview Modal -->
-    <div class="modal fade" id="loreModal" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">📜 MÖRK BORG LORE</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body" id="loreModalBody">
-                    LOADING...
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -615,12 +496,9 @@
          data-height="{{ map_height|int if map_height else 0 }}"
          style="display: none;">
     </div>
-    
+
     <script>
-    console.log('=== SCRIPT STARTING ===');
-    
-    let currentHex = '';
-    let mapZoom = 1;
+        let currentHex = '';
     
     // Map data from server - read from data attributes
     let mapData = {};
@@ -635,7 +513,6 @@
                 mapData = JSON.parse(mapDataElement.dataset.map || '{}');
                 mapWidth = parseInt(mapDataElement.dataset.width || '0');
                 mapHeight = parseInt(mapDataElement.dataset.height || '0');
-                console.log('Map data loaded:', Object.keys(mapData).length, 'hexes');
             } catch (error) {
                 console.error('Error loading map data:', error);
             }
@@ -644,7 +521,6 @@
     
     // Define showHexDetails function first
     function showHexDetails(hexCode) {
-        console.log('showHexDetails called with:', hexCode);
         currentHex = hexCode;
         
         // Highlight selected hex on the map
@@ -654,96 +530,36 @@
             hexElement.classList.add('selected');
         }
         
-        // Show loading state
-        showLoadingState();
-        
         fetch(`/api/hex/${hexCode}`)
             .then(response => response.json())
             .then(data => {
                 if (data.is_major_city) {
-                    showCityDetails(hexCode);
+                    // Cities show in left panel (map area) with ASCII style
+                    showCityDetailsInMap(hexCode);
                     return;
                 }
                 
                 if (data.is_settlement) {
-                    showSettlementDetails(hexCode);
+                    // Settlements show in left panel (map area) with ASCII style
+                    showSettlementDetailsInMap(hexCode);
                     return;
                 }
                 
-                // Display content in the side panel
+                // Regular hexes (encounters, dungeons, etc.) show in right panel
                 displayHexContent(data, hexCode);
             })
             .catch(error => {
                 console.error('Error fetching hex details:', error);
+                // Show error in appropriate panel based on hex type
+                if (currentHex && (currentHex.includes('city') || currentHex.includes('settlement'))) {
+                    showMapErrorState(hexCode);
+                } else {
                 showErrorState(hexCode);
+                }
             });
     }
     
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded, map should be server-rendered');
-        // Don't call renderMap() - use server-side rendered HTML instead
-    });
-    
-    function renderMap() {
-        const hexGrid = document.getElementById('hexGrid');
-        if (!hexGrid) {
-            console.error('hexGrid element not found');
-            return;
-        }
-        if (window.mapDataError) {
-            hexGrid.innerHTML = '<div style="color: red; font-size: 20px;">ERROR LOADING MAP DATA: ' + window.mapDataError + '</div>';
-            return;
-        }
-        
-        console.log('Found hexGrid element, rendering map...');
-        console.log('Map data keys:', Object.keys(mapData).length);
-        console.log('Map width:', mapWidth, 'Map height:', mapHeight);
-        
-        let html = '';
-        
-        // Add column headers
-        html += '<div class="text-center mb-2">';
-        html += '<span style="margin-right: 20px;"></span>';
-        for (let x = 1; x <= mapWidth; x++) {
-            const xLabel = x <= 9 ? `0${x}` : `${x}`;
-            html += `<span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">${xLabel}</span>`;
-        }
-        html += '</div>';
-        
-        // Render map rows
-        for (let y = 1; y <= mapHeight; y++) {
-            html += '<div class="map-row">';
-            html += `<span class="row-number">${y.toString().padStart(2, '0')}</span>`;
-            
-            for (let x = 1; x <= mapWidth; x++) {
-                const hexCode = `${x.toString().padStart(2, '0')}${y.toString().padStart(2, '0')}`;
-                const hexData = mapData[hexCode];
-                
-                if (hexData) {
-                    const cssClass = hexData.css_class;
-                    const symbol = hexData.symbol;
-                    const hasContent = hexData.has_content ? 'has-content' : 'no-content';
-                    const title = hexData.is_city ? `HEX ${hexCode} - ${hexData.city_name}` : `HEX ${hexCode}`;
-                    
-                    html += `<span class="hex-cell ${cssClass} ${hasContent}" 
-                                   onclick="showHexDetails('${hexCode}')" 
-                                   data-hex="${hexCode}"
-                                   title="${title}">${symbol}</span>`;
-                } else {
-                    html += `<span class="hex-cell terrain-unknown no-content" 
-                                   onclick="showHexDetails('${hexCode}')" 
-                                   data-hex="${hexCode}"
-                                   title="HEX ${hexCode}">?</span>`;
-                }
-            }
-            
-            html += '</div>';
-        }
-        
-        console.log('Setting innerHTML, length:', html.length);
-        hexGrid.innerHTML = html;
-        console.log('=== MAP RENDERED SUCCESSFULLY ===');
-    }
+
 
 
 
@@ -751,6 +567,49 @@
         document.querySelectorAll('.hex-cell.selected').forEach(el => {
             el.classList.remove('selected');
         });
+    }
+
+    function showMapLoadingState() {
+        const mapContainer = document.querySelector('.map-container');
+        const originalContent = mapContainer.innerHTML;
+        mapContainer.setAttribute('data-original-content', originalContent);
+        
+        mapContainer.innerHTML = `
+            <div style="text-align: center; padding: 50px; color: var(--mork-cyan);">
+                <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+╔══════════════════════════════════════════════════════════════╗
+║                    LOADING HEX DETAILS...                    ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  Fetching encounters, denizens, and secrets...              ║
+║                                                              ║
+║  The dying lands reveal their mysteries slowly...           ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+        `;
+    }
+
+    function showMapErrorState(hexCode) {
+        const mapContainer = document.querySelector('.map-container');
+        mapContainer.innerHTML = `
+            <div style="text-align: center; padding: 50px; color: var(--mork-magenta);">
+                <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+╔══════════════════════════════════════════════════════════════╗
+║                    ERROR LOADING HEX ${hexCode}                    ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  Failed to load hex details.                                ║
+║  The darkness has consumed this knowledge...                ║
+║                                                              ║
+║  Please try again.                                          ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                </pre>
+                <button class="btn btn-mork-borg btn-danger mt-3" onclick="restoreMap()">RETURN TO MAP</button>
+            </div>
+        `;
     }
 
     function showLoadingState() {
@@ -785,6 +644,200 @@
         modalContainer.innerHTML = html;
     }
 
+    function showCityDetailsInMap(hexCode) {
+        // Show loading state in map area
+        showMapLoadingState();
+        
+        fetch(`/api/city/${hexCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const city = data.city;
+                    const mapContainer = document.querySelector('.map-container');
+                    
+                    let html = `
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <button class="btn btn-mork-borg btn-warning mb-4" onclick="restoreMap()">RETURN TO MAP</button>
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    ${city.name.toUpperCase().padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ LOCATION: HEX ${hexCode} - ${city.region.toUpperCase().padEnd(40)}║
+║ POPULATION: ${city.population.padEnd(50)}║
+║ ATMOSPHERE: ${city.atmosphere.substring(0, 50).padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ DESCRIPTION:                                                ║`;
+                    
+                    // Split description into lines
+                    const descLines = city.description.match(/.{1,58}/g) || [city.description];
+                    descLines.forEach(line => {
+                        html += `
+║ ${line.padEnd(58)}║`;
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ NOTABLE FEATURES:                                           ║`;
+                    
+                    city.notable_features.forEach(feature => {
+                        const featureLines = feature.match(/.{1,56}/g) || [feature];
+                        featureLines.forEach(line => {
+                            html += `
+║ • ${line.padEnd(56)}║`;
+                        });
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ KEY NPCS:                                                   ║`;
+                    
+                    city.key_npcs.forEach(npc => {
+                        const npcLines = npc.match(/.{1,56}/g) || [npc];
+                        npcLines.forEach(line => {
+                            html += `
+║ • ${line.padEnd(56)}║`;
+                        });
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ REGIONAL NPCS:                                              ║`;
+                    
+                    data.regional_npcs.forEach(npc => {
+                        const npcLines = npc.match(/.{1,56}/g) || [npc];
+                        npcLines.forEach(line => {
+                            html += `
+║ • ${line.padEnd(56)}║`;
+                        });
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ACTIVE FACTIONS:                                            ║`;
+                    
+                    data.factions.forEach(faction => {
+                        const factionText = `${faction.name} (${faction.influence}) - ${faction.description}`;
+                        const factionLines = factionText.match(/.{1,56}/g) || [factionText];
+                        factionLines.forEach(line => {
+                            html += `
+║ • ${line.padEnd(56)}║`;
+                        });
+                    });
+                    
+                    html += `
+╚══════════════════════════════════════════════════════════════╝
+                                </pre>
+                            </div>
+            </div>
+        `;
+                    
+                    mapContainer.innerHTML = html;
+                } else {
+                    showMapErrorState(hexCode);
+                }
+            })
+            .catch(error => {
+                console.error('ERROR LOADING CITY:', error);
+                showMapErrorState(hexCode);
+            });
+    }
+
+    function showSettlementDetailsInMap(hexCode) {
+        // Show loading state in map area
+        showMapLoadingState();
+        
+        fetch(`/api/settlement/${hexCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const settlement = data.settlement;
+                    const mapContainer = document.querySelector('.map-container');
+                    
+                    let html = `
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <button class="btn btn-mork-borg btn-warning mb-4" onclick="restoreMap()">RETURN TO MAP</button>
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    ${settlement.name.toUpperCase().padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ LOCATION: HEX ${hexCode} - ${data.terrain.toUpperCase().padEnd(40)}║
+║ POPULATION: ${settlement.population.padEnd(50)}║
+║ ATMOSPHERE: ${settlement.atmosphere.substring(0, 50).padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ DESCRIPTION:                                                ║`;
+                    
+                    // Split description into lines
+                    const descLines = settlement.description.match(/.{1,58}/g) || [settlement.description];
+                    descLines.forEach(line => {
+                        html += `
+║ ${line.padEnd(58)}║`;
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ NOTABLE FEATURE:                                            ║`;
+                    
+                    const featureLines = settlement.notable_feature.match(/.{1,58}/g) || [settlement.notable_feature];
+                    featureLines.forEach(line => {
+                        html += `
+║ ${line.padEnd(58)}║`;
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ LOCAL TAVERN:                                               ║`;
+                    
+                    const tavernLines = settlement.local_tavern.match(/.{1,58}/g) || [settlement.local_tavern];
+                    tavernLines.forEach(line => {
+                        html += `
+║ ${line.padEnd(58)}║`;
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║ LOCAL POWER:                                                ║`;
+                    
+                    const powerLines = settlement.local_power.match(/.{1,58}/g) || [settlement.local_power];
+                    powerLines.forEach(line => {
+                        html += `
+║ ${line.padEnd(58)}║`;
+                    });
+                    
+                    html += `
+╚══════════════════════════════════════════════════════════════╝
+                                </pre>
+                            </div>
+                        </div>
+                    `;
+                    
+                    mapContainer.innerHTML = html;
+                } else {
+                    showMapErrorState(hexCode);
+                }
+            })
+            .catch(error => {
+                console.error('ERROR LOADING SETTLEMENT:', error);
+                showMapErrorState(hexCode);
+            });
+    }
+
+
+
+    function displayHexContent(data, hexCode) {
+        const modalContainer = document.getElementById('modalContainer');
+        
+        let html = '';
+        if (data.exists) {
+            html = generateHexModalHTML(data, hexCode);
+        } else {
+            html = generateEmptyHexHTML(hexCode);
+        }
+        
+        modalContainer.innerHTML = html;
+    }
+
     function generateHexModalHTML(data, hexCode) {
         const terrain = data.terrain || 'unknown';
         const encounter = data.encounter || 'Unknown encounter';
@@ -795,62 +848,104 @@
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
         
-        // Generate ASCII modal frame
-        const asciiModal = generateAsciiModal(data, hexCode);
+        // Build the HTML string
+        let html = `
+            <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                    <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    HEX ${hexCode} - ${terrain.toUpperCase().padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ TERRAIN: ${terrain.charAt(0).toUpperCase() + terrain.slice(1).padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ TERRAIN ART:                                                ║`;
         
-        return `
-            <div class="modal-header">
-                <h3>HEX ${hexCode} - ${terrain.toUpperCase()}</h3>
-                <button class="close-btn" onclick="clearHexSelection()">×</button>
-            </div>
-            
-            <div class="content-section">
-                <h4>TERRAIN</h4>
-                <p>${terrain.charAt(0).toUpperCase() + terrain.slice(1)}</p>
-                <div class="ascii-terrain">
-${asciiTerrain}
+        // Add ASCII terrain art
+        const terrainLines = asciiTerrain.split('\n');
+        terrainLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ENCOUNTER:                                                  ║`;
+        
+        // Split encounter into lines
+        const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
+        encounterLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DENIZEN:                                                    ║`;
+        
+        // Split denizen into lines
+        const denizenLines = denizen.match(/.{1,58}/g) || [denizen];
+        denizenLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ NOTABLE FEATURES:                                           ║`;
+        
+        // Split notable features into lines
+        const featureLines = notableFeature.match(/.{1,58}/g) || [notableFeature];
+        featureLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ATMOSPHERE:                                                 ║`;
+        
+        // Split atmosphere into lines
+        const atmosphereLines = atmosphere.match(/.{1,58}/g) || [atmosphere];
+        atmosphereLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        html += `
+╚══════════════════════════════════════════════════════════════╝
+                    </pre>
                 </div>
             </div>
-            
-            <div class="content-section">
-                <h4>ENCOUNTER</h4>
-                <p>${encounter}</p>
-            </div>
-            
-            <div class="content-section">
-                <h4>DENIZEN</h4>
-                <p>${denizen}</p>
-            </div>
-            
-            <div class="content-section">
-                <h4>NOTABLE FEATURES</h4>
-                <p>${notableFeature}</p>
-            </div>
-            
-            <div class="content-section">
-                <h4>ATMOSPHERE</h4>
-                <p>${atmosphere}</p>
-            </div>
-            
-            <div class="ascii-modal">
-${asciiModal}
-            </div>
         `;
+        
+        return html;
     }
 
     function generateEmptyHexHTML(hexCode) {
         return `
-            <div class="modal-header">
-                <h3>HEX ${hexCode}</h3>
-                <button class="close-btn" onclick="clearHexSelection()">×</button>
-            </div>
-            
-            <div class="empty-state">
-                <h4>NO CONTENT GENERATED</h4>
-                <p>This hex has no content yet. Click "Generate Content" to create encounters and details.</p>
-                <button class="btn btn-mork-borg" onclick="generateHexContent('${hexCode}')">GENERATE CONTENT</button>
-            </div>
-        `;
+            <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                    <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    HEX ${hexCode} - EMPTY                    ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  NO CONTENT GENERATED                                        ║
+║                                                              ║
+║  This hex has no content yet.                               ║
+║  Click "GENERATE CONTENT" to create encounters              ║
+║  and details for this location.                             ║
+║                                                              ║
+║  The dying lands await your exploration...                  ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                    </pre>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-mork-borg" onclick="generateHexContent('${hexCode}')">GENERATE CONTENT</button>
+                    </div>
+                            </div>
+                        </div>
+                    `;
     }
 
     function getAsciiTerrain(terrain) {
@@ -880,178 +975,25 @@ ${asciiModal}
         return terrainArt[terrain] || terrainArt['plains'];
     }
 
-    function generateAsciiModal(data, hexCode) {
-        const terrain = data.terrain || 'unknown';
-        const encounter = data.encounter || 'Unknown encounter';
-        const denizen = data.denizen || 'No denizen information';
-        const notableFeature = data.notable_feature || 'No notable features';
-        const atmosphere = data.atmosphere || 'Unknown atmosphere';
-        
-                 return `╔══════════════════════════════════════════════════════════════╗
-║                    HEX ${hexCode} - ${terrain.toUpperCase()}                    ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  TERRAIN: ${terrain.padEnd(50)} ║
-║  ${getAsciiTerrain(terrain).split('\\n').map(line => `  ${line.padEnd(50)} ║`).join('\\n')}
-║                                                              ║
-║  ENCOUNTER: ${encounter.substring(0, 50).padEnd(50)} ║
-║                                                              ║
-║  DENIZEN: ${denizen.substring(0, 50).padEnd(50)} ║
-║                                                              ║
-║  FEATURES: ${notableFeature.substring(0, 50).padEnd(50)} ║
-║                                                              ║
-║  ATMOSPHERE: ${atmosphere.substring(0, 50).padEnd(50)} ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝`;
-    }
+
     
-    function showCityDetails(hexCode) {
-        fetch(`/api/city/${hexCode}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const city = data.city;
-                    document.getElementById('cityModalTitle').textContent = city.name;
-                    
-                    let html = `
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>🗺️ CITY MAP</h6>
-                                <pre>${data.city_map}</pre>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>🏰 CITY INFORMATION</h6>
-                                <p><strong>LOCATION:</strong> HEX ${hexCode} (${city.region.charAt(0).toUpperCase() + city.region.slice(1)})</p>
-                                <p><strong>POPULATION:</strong> ${city.population}</p>
-                                <p><strong>DESCRIPTION:</strong> ${city.description}</p>
-                                <p><strong>ATMOSPHERE:</strong> ${city.atmosphere}</p>
-                                
-                                <h6 class="mt-3">NOTABLE FEATURES</h6>
-                                <ul style="font-size:0.9em;">
-                    `;
-                    
-                    city.notable_features.forEach(feature => {
-                        html += `<li>${feature}</li>`;
-                    });
-                    
-                    html += `
-                                </ul>
-                                
-                                <h6 class="mt-3">KEY NPCS</h6>
-                                <div class="d-flex flex-wrap gap-2">
-                    `;
-                    
-                    city.key_npcs.forEach(npc => {
-                        html += `<span class="badge bg-info">${npc}</span>`;
-                    });
-                    
-                    html += `
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <h6>🏰 REGIONAL NPCS</h6>
-                                <div class="d-flex flex-wrap gap-2 mb-3">
-                    `;
-                    
-                    data.regional_npcs.forEach(npc => {
-                        html += `<span class="badge bg-secondary">${npc}</span>`;
-                    });
-                    
-                    html += `
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>⚔️ ACTIVE FACTIONS</h6>
-                    `;
-                    
-                    data.factions.forEach(faction => {
-                        const influenceColors = {
-                            'religious': 'warning',
-                            'apocalyptic': 'danger',
-                            'political': 'primary',
-                            'biological': 'success',
-                            'magical': 'info'
-                        };
-                        const badgeColor = influenceColors[faction.influence] || 'secondary';
-                        
-                        html += `
-                            <div class="card mb-2">
-                                <div class="card-body py-2">
-                                    <h6 class="mb-1" style="font-size:0.9em;">${faction.name} <span class="badge bg-${badgeColor}">${faction.influence}</span></h6>
-                                    <small class="text-muted">${faction.description}</small>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    html += `
-                            </div>
-                        </div>
-                    `;
-                    
-                    document.getElementById('cityModalBody').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('cityModal')).show();
-                } else {
-                    alert('ERROR LOADING CITY DETAILS: ' + data.error);
-                }
-            })
-            .catch(error => {
-                console.error('ERROR LOADING CITY:', error);
-                alert('ERROR LOADING CITY DETAILS');
-            });
-    }
+
     
-    function showSettlementDetails(hexCode) {
-        fetch(`/api/settlement/${hexCode}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const settlement = data.settlement;
-                    document.getElementById('cityModalTitle').textContent = settlement.name;
-                    
-                    let html = `
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>🗺️ SETTLEMENT MAP</h6>
-                                <pre>${data.settlement_map}</pre>
-                            </div>
-                            <div class="col-md-6">
-                                <h6>⌂ SETTLEMENT INFORMATION</h6>
-                                <p><strong>LOCATION:</strong> HEX ${hexCode} (${data.terrain.charAt(0).toUpperCase() + data.terrain.slice(1)})</p>
-                                <p><strong>POPULATION:</strong> ${settlement.population}</p>
-                                <p><strong>DESCRIPTION:</strong> ${settlement.description}</p>
-                                <p><strong>ATMOSPHERE:</strong> ${settlement.atmosphere}</p>
-                                
-                                <h6 class="mt-3">NOTABLE FEATURE</h6>
-                                <p style="font-size:0.9em;">${settlement.notable_feature}</p>
-                                
-                                <h6 class="mt-3">LOCAL TAVERN</h6>
-                                <p style="font-size:0.9em;">${settlement.local_tavern}</p>
-                                
-                                <h6 class="mt-3">LOCAL POWER</h6>
-                                <p style="font-size:0.9em;">${settlement.local_power}</p>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col-12">
-                                <h6>🏗️ SETTLEMENT LAYOUT</h6>
-                                <pre style="font-size:0.8em; background: #000; border: 1px solid #00ffff; padding: 10px;">${settlement.settlement_art}</pre>
-                            </div>
-                        </div>
-                    `;
-                    
-                    document.getElementById('cityModalBody').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('cityModal')).show();
-                } else {
-                    alert('ERROR LOADING SETTLEMENT DETAILS: ' + data.error);
+    function restoreMap() {
+        const mapContainer = document.querySelector('.map-container');
+        const originalContent = mapContainer.getAttribute('data-original-content');
+        if (originalContent) {
+            mapContainer.innerHTML = originalContent;
+            // Restore hex selection after returning to map
+            if (currentHex) {
+                const hexElement = document.querySelector(`[data-hex="${currentHex}"]`);
+                if (hexElement) {
+                    hexElement.classList.add('selected');
                 }
-            })
-            .catch(error => {
-                console.error('ERROR LOADING SETTLEMENT:', error);
-                alert('ERROR LOADING SETTLEMENT DETAILS');
-            });
+            }
+        } else {
+            window.location.reload();
+        }
     }
     
     function generateHexContent() {
@@ -1145,124 +1087,144 @@ ${asciiModal}
     }
     
     function showTerrainOverview() {
+        // Show loading state in right panel
+        showLoadingState();
+        
         fetch('/api/terrain-overview')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     const [width, height] = data.dimensions;
+                    const modalContainer = document.getElementById('modalContainer');
+                    
                     let html = `
-                        <div class="row">
-                            <div class="col-md-8">
-                                <pre>${data.terrain_map}</pre>
-                            </div>
-                            <div class="col-md-4">
-                                <h6>📊 TERRAIN STATISTICS</h6>
-                    `;
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    🗺️ TERRAIN OVERVIEW                       ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  TERRAIN MAP:                                                ║
+║                                                              ║`;
+                    
+                    // Add terrain map
+                    const mapLines = data.terrain_map.split('\n');
+                    mapLines.forEach(line => {
+                        html += `
+║ ${line.padEnd(58)}║`;
+                    });
+                    
+                    html += `
+╠══════════════════════════════════════════════════════════════╣
+║  📊 TERRAIN STATISTICS:                                      ║
+║                                                              ║`;
                     
                     for (const key in data.distribution) {
                         if (!data.distribution.hasOwnProperty(key)) continue;
                         const terrain = String(key);
                         const count = data.distribution[key];
                         const percentage = ((count / (width * height)) * 100).toFixed(1);
-                        html += `<div class="mb-2">
-                            <span class="terrain-${terrain}">${getTerrainSymbol(terrain)}</span>
-                            <strong>${terrain.charAt(0).toUpperCase() + terrain.slice(1)}</strong>: 
-                            ${count} HEXES (${percentage}%)
-                        </div>`;
+                        const terrainSymbol = getTerrainSymbol(terrain);
+                        const terrainName = terrain.charAt(0).toUpperCase() + terrain.slice(1);
+                        const statLine = `${terrainSymbol} ${terrainName}: ${count} HEXES (${percentage}%)`;
+                        const paddedLine = statLine.padEnd(58);
+                        html += `
+║ ${paddedLine}║`;
                     }
                     
                     html += `
-                                <hr>
-                                <h6>🗺️ MAP INFO</h6>
-                                <div class="small">
-                                    <strong>DIMENSIONS:</strong> ${width}×${height}<br>
-                                    <strong>TOTAL HEXES:</strong> ${width * height}<br>
-                                    <strong>LORE INTEGRATION:</strong> ✅ ACTIVE
-                                </div>
+╠══════════════════════════════════════════════════════════════╣
+║  🗺️ MAP INFO:                                               ║
+║                                                              ║
+║  DIMENSIONS: ${width}×${height}${' '.repeat(58 - (width + '×' + height).length)}║
+║  TOTAL HEXES: ${width * height}${' '.repeat(58 - String(width * height).length)}║
+║  LORE INTEGRATION: ✅ ACTIVE${' '.repeat(58 - 'LORE INTEGRATION: ✅ ACTIVE'.length)}║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                                </pre>
                             </div>
                         </div>
                     `;
                     
-                    document.getElementById('terrainModalBody').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('terrainModal')).show();
+                    modalContainer.innerHTML = html;
                 } else {
-                    alert('ERROR LOADING TERRAIN OVERVIEW: ' + data.error);
+                    showErrorState('terrain-overview');
                 }
             })
             .catch(error => {
                 console.error('ERROR LOADING TERRAIN OVERVIEW:', error);
-                alert('ERROR LOADING TERRAIN OVERVIEW');
+                showErrorState('terrain-overview');
             });
     }
     
     function showLoreOverview() {
+        // Show loading state in right panel
+        showLoadingState();
+        
         fetch('/api/lore-overview')
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
+                    const modalContainer = document.getElementById('modalContainer');
+                    
                     let html = `
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>🏰 MAJOR CITIES (${data.major_cities})</h6>
-                    `;
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    📜 MÖRK BORG LORE                         ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  🏰 MAJOR CITIES (${data.major_cities}):                        ║
+║                                                              ║`;
                     
                     data.cities_data.forEach(city => {
+                        const cityLine = `  ${city.name} (${city.hex_code}) - ${city.region}`;
+                        const paddedLine = cityLine.padEnd(58);
                         html += `
-                            <div class="card mb-2" onclick="showCityDetails('${city.hex_code}')" style="cursor:pointer;">
-                                <div class="card-body py-2">
-                                    <h6 class="mb-1">${city.name} <span class="badge bg-secondary">${city.hex_code}</span></h6>
-                                    <small class="text-muted">${city.region} - ${city.population}</small>
-                                </div>
-                            </div>
-                        `;
+║ ${paddedLine}║`;
                     });
                     
                     html += `
-                            </div>
-                            <div class="col-md-6">
-                                <h6>⚔️ MAJOR FACTIONS (${data.factions})</h6>
-                    `;
+╠══════════════════════════════════════════════════════════════╣
+║  ⚔️ MAJOR FACTIONS (${data.factions}):                         ║
+║                                                              ║`;
                     
                     data.factions_data.forEach(faction => {
-                        const influenceColors = {
-                            'religious': 'warning',
-                            'apocalyptic': 'danger',
-                            'political': 'primary',
-                            'biological': 'success',
-                            'magical': 'info'
-                        };
-                        const badgeColor = influenceColors[faction.influence] || 'secondary';
-                        
+                        const factionLine = `  ${faction.name} (${faction.influence})`;
+                        const paddedLine = factionLine.padEnd(58);
                         html += `
-                            <div class="card mb-2">
-                                <div class="card-body py-2">
-                                    <h6 class="mb-1">${faction.name} <span class="badge bg-${badgeColor}">${faction.influence}</span></h6>
-                                    <small class="text-muted">ACTIVE IN: ${faction.regions.join(', ')}</small>
-                                </div>
-                            </div>
-                        `;
+║ ${paddedLine}║`;
+                        
+                        const regionsLine = `    Active in: ${faction.regions.join(', ')}`;
+                        const paddedRegionsLine = regionsLine.padEnd(58);
+                        html += `
+║ ${paddedRegionsLine}║`;
                     });
                     
                     html += `
-                            </div>
-                        </div>
-                        <div class="mt-3 text-center">
-                            <div class="alert alert-info">
-                                <strong>🎲 GAME MASTER NOTE:</strong> THIS LORE IS INTEGRATED INTO HEX GENERATION. 
-                                CITIES AND FACTIONS INFLUENCE CONTENT IN THEIR REGIONS.
+╠══════════════════════════════════════════════════════════════╣
+║  🎲 GAME MASTER NOTE:                                        ║
+║                                                              ║
+║  LORE INTEGRATION: THIS LORE IS INTEGRATED INTO              ║
+║  HEX GENERATION. CITIES AND FACTIONS INFLUENCE              ║
+║  CONTENT IN THEIR REGIONS.                                   ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                                </pre>
                             </div>
                         </div>
                     `;
                     
-                    document.getElementById('loreModalBody').innerHTML = html;
-                    new bootstrap.Modal(document.getElementById('loreModal')).show();
+                    modalContainer.innerHTML = html;
                 } else {
-                    alert('ERROR LOADING LORE OVERVIEW: ' + data.error);
+                    showErrorState('lore-overview');
                 }
             })
             .catch(error => {
                 console.error('ERROR LOADING LORE OVERVIEW:', error);
-                alert('ERROR LOADING LORE OVERVIEW');
+                showErrorState('lore-overview');
             });
     }
     
@@ -1274,27 +1236,6 @@ ${asciiModal}
         return symbols[terrain] || '?';
     }
     
-    function zoomIn() {
-        mapZoom = Math.min(mapZoom * 1.2, 3);
-        applyZoom();
-    }
-    
-    function zoomOut() {
-        mapZoom = Math.max(mapZoom / 1.2, 0.5);
-        applyZoom();
-    }
-    
-    function applyZoom() {
-        const mapElement = document.getElementById('hexGrid'); // Changed from map-grid to hexGrid
-        if (mapElement) {
-            mapElement.style.transform = `scale(${mapZoom})`;
-            mapElement.style.transformOrigin = 'top left';
-        }
-    }
-    
-    function showLegend() {
-        document.getElementById('legend').scrollIntoView({ behavior: 'smooth' });
-    }
     </script>
 </body>
 </html>
