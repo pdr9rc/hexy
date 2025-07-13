@@ -33,13 +33,27 @@ class MorkBorgLoreDatabase:
                     'Ruled by mysterious council',
                     'Famous for its hanging gardens of corpses',
                     'Underground sewers with ancient horrors',
+                    # From Christian's "Death and Taxes"
                     'Schleswig district with demon infestation',
-                    'Ministry of Wealth & Taxes',
+                    'Ministry of Wealth & Taxes extracting souls as currency',
+                    'Office of the Holy Inquisition (ruined)',
+                    'Cursed Heptaliths throughout the city',
+                    'City (Bone) Mill grinding bones to flour',
                     'Guild of the Utmost Eager Day Laborers',
-                    'House of Binding Contracts'
+                    'House of Binding Contracts for soul trading',
+                    'Cult of the Golden Tongue operating in shadows',
+                    'Mandatory daily festivals causing economic standstill',
+                    # From Christian's "Galgenbeck: Sacrifice"
+                    'Josilfa beheading the unwanted to appease Nechrubel',
+                    'Citizens vanishing from memory when sacrificed',
+                    'Ravens and worse drawn to the stench of corpses',
+                    'Half the population mysteriously gone but unnoticed'
                 ],
-                'key_npcs': ['Josilfa Migol', 'The Galgenbeck Council'],
-                'atmosphere': 'Urban decay and ancient evil'
+                'trade_goods': ['Corpse flowers', 'Bone meal', 'Grave dirt', 'Soul contracts'],
+                'dangers': ['Demon infestation', 'Tax collectors', 'Memory erasure', 'Soul traders'],
+                'ruler': 'Mysterious Council and Josilfa the Sacrificer',
+                'key_npcs': ['Josilfa the Sacrificer', 'The Galgenbeck Council', 'Contract Devils'],
+                'atmosphere': 'Urban decay, sacrifice, and soul trading'
             },
             
             'bergen_chrypt': {
@@ -190,6 +204,48 @@ class MorkBorgLoreDatabase:
                 'regions': ['northwest', 'forest'],
                 'influence': 'magical',
                 'goals': ['Protect ancient secrets', 'Maintain balance', 'Forest preservation']
+            },
+            
+            # From Christian's "Death and Taxes"
+            'eager_day_laborers': {
+                'name': 'Guild of the Utmost Eager Day Laborers',
+                'name_pt': 'Guilda dos Trabalhadores Diários Extremamente Ansiosos',
+                'description': 'Desperate workers seeking any employment in Galgenbeck',
+                'description_pt': 'Trabalhadores desesperados procurando qualquer emprego em Galgenbeck',
+                'regions': ['central'],
+                'influence': 'economic',
+                'goals': ['Find work', 'Survive poverty', 'Serve the wealthy']
+            },
+            
+            'binding_contracts': {
+                'name': 'House of Binding Contracts',
+                'name_pt': 'Casa dos Contratos Vinculativos',
+                'description': 'Soul traders and contract devils operating in Galgenbeck',
+                'description_pt': 'Comerciantes de almas e demônios contratantes operando em Galgenbeck',
+                'regions': ['central'],
+                'influence': 'infernal',
+                'goals': ['Acquire souls', 'Enforce contracts', 'Spread corruption']
+            },
+            
+            'golden_tongue': {
+                'name': 'Cult of the Golden Tongue',
+                'name_pt': 'Culto da Língua Dourada',
+                'description': 'Secret cult obsessed with wealth and golden words',
+                'description_pt': 'Culto secreto obcecado com riqueza e palavras douradas',
+                'regions': ['central'],
+                'influence': 'religious',
+                'goals': ['Hoard gold', 'Speak persuasively', 'Corrupt through greed']
+            },
+            
+            # From Christian's "Bergen Chrypt: Archfrost"
+            'corpse_golem_cults': {
+                'name': 'Corpse Golem Cults',
+                'name_pt': 'Cultos dos Golems de Cadáver',
+                'description': 'Necromantic cults creating undead servants in the mountains',
+                'description_pt': 'Cultos necromânticos criando servos mortos-vivos nas montanhas',
+                'regions': ['north', 'northwest'],
+                'influence': 'necromantic',
+                'goals': ['Raise corpse golems', 'Seek immortality', 'Control the dead']
             }
         }
     
@@ -327,6 +383,25 @@ class MorkBorgLoreDatabase:
             'locked': True
         }
         
+        # Add Bergen Chrypt from Christian's supplement
+        hardcoded['0408'] = {
+            'type': 'special_location',
+            'name': 'Bergen Chrypt',
+            'name_pt': 'Bergen Chrypt',
+            'terrain': 'mountain',
+            'description': 'The most haunted mountain range of the dying lands',
+            'description_pt': 'A cordilheira mais assombrada das terras moribundas',
+            'atmosphere': 'Dark desolation, rifts of unknown make, occult channelers',
+            'features': [
+                'Corpse golem cults',
+                'Unctuous secrets buried in ice',
+                'Rifts of unknown origin',
+                'Occult channelers seeking the Elixir of Life',
+                'Infectious rash upon the skin of the earth'
+            ],
+            'locked': True
+        }
+        
         return hardcoded
     
     def get_regional_bias(self, x: int, y: int) -> str:
@@ -362,14 +437,39 @@ class MorkBorgLoreDatabase:
     def get_regional_npcs(self, region: str) -> List[str]:
         """Get NPCs commonly found in a region."""
         regional_npcs = {
-            'north': ['Undead Knight', 'Ice Witch', 'Frost Giant', 'Tomb Guardian'],
-            'central': ['Corrupt Merchant', 'Heretical Priest', 'City Guard', 'Plague Doctor', 'Tax Collector'],
-            'south': ['Weather Seer', 'Cattle Baron', 'Plague Farmer', 'Stone Circle Keeper'],
-            'west': ['Storm Caller', 'Plague Bearer', 'Desperate Survivor', 'Coastal Raider'],
-            'east': ['Nomad Warrior', 'Caravan Master', 'Desert Oracle', 'Treasure Hunter'],
-            'northwest': ['Forest Witch', 'Tree Warden', 'Cursed Druid', 'Beast Speaker']
+            'north': [
+                'Undead Knight', 'Ice Witch', 'Frost Giant', 'Tomb Guardian',
+                # From Christian's supplements
+                'Corpse Golem Cultist', 'Occult Channeler', 'Bergen Chrypt Explorer'
+            ],
+            'central': [
+                'Corrupt Merchant', 'Heretical Priest', 'City Guard', 'Plague Doctor', 
+                # From Christian's supplements
+                'Desperate Tax Collector', 'Eager Day Laborer', 'Soul Contract Negotiator',
+                'Sacrifice Heretic', 'Golden Tongue Preacher', 'Memory Eraser', 'Bone Mill Worker'
+            ],
+            'south': [
+                'Weather Seer', 'Cattle Baron', 'Plague Farmer', 'Stone Circle Keeper',
+                # From Christian's supplements
+                'Traveling Tax Collector', 'Contract Devil'
+            ],
+            'west': [
+                'Storm Caller', 'Plague Bearer', 'Desperate Survivor', 'Coastal Raider',
+                # From Christian's supplements
+                'Sea Demon', 'Drowned Soul Trader'
+            ],
+            'east': [
+                'Nomad Warrior', 'Caravan Master', 'Desert Oracle', 'Treasure Hunter',
+                # From Christian's supplements
+                'Corpse Golem Hunter', 'Occult Artifact Seeker'
+            ],
+            'northwest': [
+                'Forest Witch', 'Tree Warden', 'Cursed Druid', 'Beast Speaker',
+                # From Christian's supplements
+                'Corpse Golem Cultist', 'Mountain Occult Channeler'
+            ]
         }
-        return regional_npcs.get(region, ['Wandering Survivor', 'Lost Soul', 'Desperate Scavenger'])
+        return regional_npcs.get(region, ['Wandering Scavenger', 'Plague Victim', 'Mad Hermit'])
     
     def get_regional_factions(self, region: str) -> List[str]:
         """Get factions active in a region."""

@@ -96,7 +96,9 @@ DUNGEON_TABLES = {
             "Underground warren", "Sunken cathedral", "Twisted labyrinth", "Bone pit", "Plague house", 
             "Cursed cellar", "Sacrificial chamber",
             # From Christian's supplements
-            "Tax collection dungeon", "Contract devil's vault"
+            "Tax collection dungeon", "Contract devil's vault", "Demon-infested vault", 
+            "Corpse golem laboratory", "Occult channeling circle", "Soul binding chamber",
+            "Sacrifice altar complex", "Heretic hideout", "Golden tongue shrine"
         ],
         'dungeon_features': [
             "flooded with black water", "filled with poisonous gas", "haunted by restless spirits", 
@@ -157,7 +159,9 @@ DENIZEN_TABLES = {
             "Bone collector", "Grave robber", "Cursed wanderer", "Zealot preacher", "Flesh trader", 
             "Scavenger lord", "Plague bearer", "Doom prophet",
             # From Christian's supplements
-            "Desperate tax collector", "Eager day laborer", "Carnival performer"
+            "Desperate tax collector", "Eager day laborer", "Soul contract negotiator", 
+            "Sacrifice heretic", "Corpse golem cultist", "Occult channeler", "Golden tongue preacher",
+            "Contract devil", "Memory eraser", "Bone mill worker"
         ],
         'denizen_motivations': [
             "seeks redemption for past sins", "hunts for forbidden knowledge", "flees from terrible pursuers",
@@ -286,7 +290,11 @@ LOOT_TABLES = {
         'treasure_types': [
             "Cursed jewelry", "Tainted coins", "Bone ornaments", "Blood gems", "Skull chalices",
             "Ritual daggers", "Plague masks", "Death totems", "Forbidden books", "Soul stones",
-            "Corpse candles", "Grave dirt", "Unholy relics", "Demon bottles", "Witch tools"
+            "Corpse candles", "Grave dirt", "Unholy relics", "Demon bottles", "Witch tools",
+            # From Christian's supplements
+            "Soul contract parchment", "Tax ledger written in blood", "Sacrifice knife", 
+            "Corpse golem parts", "Occult channeling crystal", "Golden tongue coin",
+            "Memory stone", "Heretic's diary", "Demon binding chains", "Bone mill flour"
         ],
         'treasure_values': [
             "Worthless but cursed", "Few copper pieces", "Handful of silver", "Small fortune in gold",
@@ -305,7 +313,10 @@ LOOT_TABLES = {
             "Joias amaldiçoadas", "Moedas contaminadas", "Ornamentos de osso", "Gemas sangrentas", 
             "Cálices de caveira", "Punhais rituais", "Máscaras da peste", "Totens da morte", 
             "Livros proibidos", "Pedras da alma", "Velas de cadáver", "Terra de sepultura", 
-            "Relíquias profanas", "Garrafas demoníacas", "Ferramentas de bruxa"
+            "Relíquias profanas", "Garrafas demoníacas", "Ferramentas de bruxa",
+            "Pergaminho de contrato de alma", "Caderneta de imposto de sangue escrita", "Faca de sacrifício",
+            "Partes de golema de cadáver", "Cristal de canalização oculto", "Moeda de língua dourada",
+            "Pedra da memória", "Diário do herege", "Cadeias de enfraquecimento demoníaco", "Farinha de moinho de ossos"
         ],
         'treasure_values': [
             "Sem valor mas amaldiçoado", "Algumas moedas de cobre", "Punhado de prata", 
@@ -382,10 +393,13 @@ WILDERNESS_TABLES = {
             "Ritual circle drawn in ash and bone", "Well with rope cut and bucket missing",
             "Trail of blood leading into darkness", "Shepherd's hut with door hanging open",
             "Stone bridge over rushing water", "Grove of dead trees in perfect circle",
-            "Merchant's bones picked clean by crows", "Cave mouth sealed with heavy stones",
-            "Battlefield littered with old weapons", "Shrine to forgotten deity", "Gibbet cage swaying empty",
+            "Merchant's bones picked clean by scavengers", "Abandoned camp with cold fire",
+            "Cursed windmill with broken blades", "Crossroads shrine to forgotten saints",
             # From Christian's supplements
-            "Tax collector's wagon overturned, papers scattered and bloodstained"
+            "Tax collector's overturned cart with spilled ledgers", "Soul contract fluttering in the wind",
+            "Sacrifice altar with dried blood stains", "Corpse golem shambling through the mist",
+            "Occult channelers performing mountain ritual", "Golden tongue cultist preaching to stones",
+            "Memory gap where something important was forgotten", "Heretic's abandoned hideout"
         ],
         'random_events': [
             "A murder of crows follows the party ominously", "Strange lights dance in the distance",
