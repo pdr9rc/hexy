@@ -805,6 +805,24 @@
 ║ ${line.padEnd(58)}║`;
                     });
                     
+                    // Add settlement layout if available
+                    if (data.settlement_art) {
+                        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SETTLEMENT LAYOUT:                                          ║
+╠══════════════════════════════════════════════════════════════╣`;
+                        
+                        const layoutLines = data.settlement_art.split('\n');
+                        layoutLines.forEach(line => {
+                            if (line.trim()) {
+                                // Center the layout line within the box
+                                const displayLine = line.substring(0, 58).padEnd(58);
+                                html += `
+║ ${displayLine}║`;
+                            }
+                        });
+                    }
+                    
                     html += `
 ╚══════════════════════════════════════════════════════════════╝
                                 </pre>

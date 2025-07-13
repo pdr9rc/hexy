@@ -304,7 +304,8 @@ def get_settlement_details(hex_code):
                     'settlement': settlement_data,
                     'terrain': terrain,
                     'hex_code': hex_code,
-                    'settlement_map': settlement_map
+                    'settlement_map': settlement_map,
+                    'settlement_art': settlement_data.get('settlement_art', '')
                 })
         
         except Exception as e:
