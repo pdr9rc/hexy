@@ -363,6 +363,57 @@
         font-size: 0.9rem;
         line-height: 1.5;
     }
+
+    /* Vim-like Editing Interface */
+    .vim-command-line {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--mork-black);
+        border-top: 2px solid var(--mork-cyan);
+        padding: 10px;
+        font-family: 'Courier New', monospace;
+        color: var(--mork-cyan);
+        display: none;
+        z-index: 1000;
+    }
+
+    .vim-command-line input {
+        background: var(--mork-black);
+        border: none;
+        color: var(--mork-cyan);
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        width: 100%;
+        outline: none;
+    }
+
+    .vim-command-line input::placeholder {
+        color: var(--mork-gray);
+    }
+
+    .vim-mode-indicator {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: var(--mork-black);
+        border: 1px solid var(--mork-cyan);
+        padding: 5px 10px;
+        font-family: 'Courier New', monospace;
+        color: var(--mork-cyan);
+        display: none;
+        z-index: 1000;
+    }
+
+    .edit-mode {
+        cursor: text;
+    }
+
+    .edit-mode .hex-content {
+        border: 2px solid var(--mork-yellow);
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+    }
     </style>
 </head>
 <body>
@@ -483,9 +534,14 @@
             </div>
         </div>
         
-
+    <!-- Vim-like Editing Interface -->
+    <div class="vim-command-line" id="vimCommandLine">
+        <input type="text" id="vimCommandInput" placeholder=":" autocomplete="off">
+    </div>
     
-
+    <div class="vim-mode-indicator" id="vimModeIndicator">
+        NORMAL
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -499,25 +555,13 @@
 
     <script>
         let currentHex = '';
+    let isEditMode = false;
+    let originalContent = '';
     
     // Map data from server - read from data attributes
     let mapData = {};
     let mapWidth = 0;
     let mapHeight = 0;
-    
-    // Load map data from data attributes
-    document.addEventListener('DOMContentLoaded', function() {
-        const mapDataElement = document.getElementById('mapData');
-        if (mapDataElement) {
-            try {
-                mapData = JSON.parse(mapDataElement.dataset.map || '{}');
-                mapWidth = parseInt(mapDataElement.dataset.width || '0');
-                mapHeight = parseInt(mapDataElement.dataset.height || '0');
-            } catch (error) {
-                console.error('Error loading map data:', error);
-            }
-        }
-    });
     
     // Define showHexDetails function first
     function showHexDetails(hexCode) {
@@ -805,6 +849,20 @@
 ║ ${line.padEnd(58)}║`;
                     });
                     
+                    // Add settlement layout if present
+                    if (data.settlement_layout && data.settlement_layout !== 'No settlement layout') {
+                        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SETTLEMENT LAYOUT:                                          ║`;
+                        const layoutLines = data.settlement_layout.split('\n');
+                        layoutLines.forEach(line => {
+                            html += `
+║ ${line.padEnd(58)}║`;
+                        });
+                    }
+                    
+
+                    
                     html += `
 ╚══════════════════════════════════════════════════════════════╝
                                 </pre>
@@ -844,6 +902,16 @@
         const denizen = data.denizen || 'No denizen information';
         const notableFeature = data.notable_feature || 'No notable features';
         const atmosphere = data.atmosphere || 'Unknown atmosphere';
+        const treasure = data.treasure || 'No treasure found';
+        const ancientKnowledge = data.ancient_knowledge || 'No ancient knowledge';
+        const danger = data.danger || 'No dangers present';
+        const threatLevel = data.threat_level || 'Unknown threat level';
+        const territory = data.territory || 'No territory claimed';
+        const location = data.location || 'Unknown location';
+        const motivation = data.motivation || 'Unknown motivation';
+        const demeanor = data.demeanor || 'Unknown demeanor';
+        const feature = data.feature || 'No notable features';
+        const settlementLayout = data.settlement_layout || '';
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
@@ -910,6 +978,123 @@
             html += `
 ║ ${line.padEnd(58)}║`;
         });
+        
+        // Add treasure if present
+        if (treasure && treasure !== 'No treasure found') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ TREASURE:                                                   ║`;
+            const treasureLines = treasure.match(/.{1,58}/g) || [treasure];
+            treasureLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add ancient knowledge if present
+        if (ancientKnowledge && ancientKnowledge !== 'No ancient knowledge') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ANCIENT KNOWLEDGE:                                          ║`;
+            const knowledgeLines = ancientKnowledge.match(/.{1,58}/g) || [ancientKnowledge];
+            knowledgeLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add danger if present
+        if (danger && danger !== 'No dangers present') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DANGER:                                                     ║`;
+            const dangerLines = danger.match(/.{1,58}/g) || [danger];
+            dangerLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add threat level if present
+        if (threatLevel && threatLevel !== 'Unknown threat level') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ THREAT LEVEL:                                               ║`;
+            const threatLines = threatLevel.match(/.{1,58}/g) || [threatLevel];
+            threatLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add territory if present
+        if (territory && territory !== 'No territory claimed') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ TERRITORY:                                                  ║`;
+            const territoryLines = territory.match(/.{1,58}/g) || [territory];
+            territoryLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add location if present
+        if (location && location !== 'Unknown location') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ LOCATION:                                                   ║`;
+            const locationLines = location.match(/.{1,58}/g) || [location];
+            locationLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add motivation if present
+        if (motivation && motivation !== 'Unknown motivation') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ MOTIVATION:                                                 ║`;
+            const motivationLines = motivation.match(/.{1,58}/g) || [motivation];
+            motivationLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add demeanor if present
+        if (demeanor && demeanor !== 'Unknown demeanor') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DEMEANOR:                                                   ║`;
+            const demeanorLines = demeanor.match(/.{1,58}/g) || [demeanor];
+            demeanorLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add feature if present
+        if (feature && feature !== 'No notable features') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ FEATURE:                                                    ║`;
+            const featureLines = feature.match(/.{1,58}/g) || [feature];
+            featureLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add settlement layout if present
+        if (settlementLayout && settlementLayout !== 'No settlement layout') {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ SETTLEMENT LAYOUT:                                          ║`;
+            const layoutLines = settlementLayout.split('\n');
+            layoutLines.forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
         
         html += `
 ╚══════════════════════════════════════════════════════════════╝
@@ -1235,6 +1420,322 @@
         };
         return symbols[terrain] || '?';
     }
+
+    // Vim-like Editing System
+    function initVimEditing() {
+        const commandLine = document.getElementById('vimCommandLine');
+        const commandInput = document.getElementById('vimCommandInput');
+        const modeIndicator = document.getElementById('vimModeIndicator');
+
+        // Global keyboard event listener
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName === 'INPUT') return; // Don't interfere with input fields
+            
+            if (isEditMode) {
+                handleEditModeKey(e);
+            } else {
+                handleNormalModeKey(e);
+            }
+        });
+
+        // Command input handling
+        commandInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const command = commandInput.value.trim();
+                processVimCommand(command);
+                commandInput.value = '';
+                hideCommandLine();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                commandInput.value = '';
+                hideCommandLine();
+            }
+        });
+    }
+
+    function handleNormalModeKey(e) {
+        if (e.key === 'i' && currentHex) {
+            e.preventDefault();
+            e.stopPropagation();
+            enterInsertMode();
+        } else if (e.key === ':') {
+            e.preventDefault();
+            e.stopPropagation();
+            showCommandLine();
+        }
+    }
+
+    function handleEditModeKey(e) {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            e.stopPropagation();
+            exitInsertMode();
+        }
+    }
+
+    function enterInsertMode() {
+        isEditMode = true;
+        document.body.classList.add('edit-mode');
+        showModeIndicator('INSERT');
+        
+        // Store original content
+        const modalContainer = document.getElementById('modalContainer');
+        if (modalContainer) {
+            originalContent = modalContainer.innerHTML;
+            makeContentEditable(modalContainer);
+        }
+    }
+
+    function exitInsertMode() {
+        isEditMode = false;
+        document.body.classList.remove('edit-mode');
+        showModeIndicator('NORMAL');
+        
+        // Make content non-editable
+        const modalContainer = document.getElementById('modalContainer');
+        if (modalContainer) {
+            makeContentNonEditable(modalContainer);
+        }
+    }
+
+    function makeContentEditable(container) {
+        const preElements = container.querySelectorAll('pre');
+        console.log('Making pre elements editable:', preElements.length);
+        preElements.forEach((pre, index) => {
+            pre.contentEditable = true;
+            pre.style.outline = '2px solid var(--mork-yellow)';
+            pre.style.padding = '5px';
+            console.log(`Made pre element ${index} editable`);
+        });
+        
+        // Focus on the first pre element
+        if (preElements.length > 0) {
+            preElements[0].focus();
+        }
+    }
+
+    function makeContentNonEditable(container) {
+        const preElements = container.querySelectorAll('pre');
+        console.log('Making pre elements non-editable:', preElements.length);
+        preElements.forEach((pre, index) => {
+            pre.contentEditable = false;
+            pre.style.outline = 'none';
+            pre.style.padding = '';
+            console.log(`Made pre element ${index} non-editable`);
+        });
+    }
+
+    function showCommandLine() {
+        const commandLine = document.getElementById('vimCommandLine');
+        const commandInput = document.getElementById('vimCommandInput');
+        commandLine.style.display = 'block';
+        commandInput.focus();
+    }
+
+    function hideCommandLine() {
+        const commandLine = document.getElementById('vimCommandLine');
+        const commandInput = document.getElementById('vimCommandInput');
+        commandLine.style.display = 'none';
+        commandInput.value = '';
+        commandInput.blur();
+    }
+
+    function showModeIndicator(mode) {
+        const indicator = document.getElementById('vimModeIndicator');
+        indicator.textContent = mode;
+        indicator.style.display = 'block';
+        
+        // Hide after 2 seconds
+        setTimeout(() => {
+            indicator.style.display = 'none';
+        }, 2000);
+    }
+
+    function processVimCommand(command) {
+        switch (command) {
+            case 'wq':
+                saveAndQuit();
+                break;
+            case 'q':
+                quitWithoutSaving();
+                break;
+            case 'w':
+                saveContent();
+                break;
+            default:
+                if (command.startsWith('s/')) {
+                    // Simple search and replace
+                    const parts = command.split('/');
+                    if (parts.length >= 3) {
+                        const search = parts[1];
+                        const replace = parts[2];
+                        searchAndReplace(search, replace);
+                    }
+                } else {
+                    showVimMessage(`Unknown command: ${command}`);
+                }
+        }
+    }
+
+    function saveAndQuit() {
+        saveContent();
+        exitInsertMode();
+        showVimMessage('Content saved and quit');
+        // Clear any potential input
+        document.activeElement.blur();
+    }
+
+    function quitWithoutSaving() {
+        // Restore original content
+        const modalContainer = document.getElementById('modalContainer');
+        if (modalContainer && originalContent) {
+            modalContainer.innerHTML = originalContent;
+        }
+        exitInsertMode();
+        showVimMessage('Quit without saving');
+        // Clear any potential input
+        document.activeElement.blur();
+    }
+
+    function saveContent() {
+        const modalContainer = document.getElementById('modalContainer');
+        if (!modalContainer || !currentHex) {
+            console.log('Save failed: No container or hex selected', { modalContainer: !!modalContainer, currentHex });
+            showVimMessage('No content to save');
+            return;
+        }
+
+        // Extract the edited content from the pre elements
+        const preElements = modalContainer.querySelectorAll('pre');
+        console.log('Found pre elements:', preElements.length);
+        
+        let editedContent = '';
+        preElements.forEach((pre, index) => {
+            // Get the text content and preserve line breaks
+            const content = pre.textContent || pre.innerText;
+            console.log(`Pre element ${index} content:`, content.substring(0, 100) + '...');
+            editedContent += content + '\n';
+        });
+
+        // Clean up the content - remove any extra whitespace
+        editedContent = editedContent.trim();
+        console.log('Final edited content length:', editedContent.length);
+
+        if (!editedContent) {
+            console.log('Save failed: No content extracted');
+            showVimMessage('No content to save');
+            return;
+        }
+
+        // Show saving indicator
+        showVimMessage('Saving...');
+        console.log('Sending save request for hex:', currentHex);
+
+        // Send the edited content to the server
+        fetch(`/api/save-hex/${currentHex}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                hex_code: currentHex,
+                content: editedContent
+            })
+        })
+        .then(response => {
+            console.log('Save response status:', response.status);
+            return response.json();
+        })
+        .then(data => {
+            console.log('Save response data:', data);
+            if (data.success) {
+                showVimMessage('Content saved successfully');
+                // Refresh the hex content to show the updated version
+                showHexDetails(currentHex);
+            } else {
+                showVimMessage(`Save failed: ${data.error}`);
+            }
+        })
+        .catch(error => {
+            console.error('Error saving content:', error);
+            showVimMessage('Save failed: Network error');
+        });
+    }
+
+    function searchAndReplace(search, replace) {
+        const modalContainer = document.getElementById('modalContainer');
+        if (modalContainer) {
+            const content = modalContainer.innerHTML;
+            const newContent = content.replace(new RegExp(search, 'g'), replace);
+            modalContainer.innerHTML = newContent;
+            showVimMessage(`Replaced '${search}' with '${replace}'`);
+        }
+    }
+
+    function showVimMessage(message) {
+        const indicator = document.getElementById('vimModeIndicator');
+        indicator.textContent = message;
+        indicator.style.display = 'block';
+        
+        setTimeout(() => {
+            indicator.style.display = 'none';
+        }, 2000);
+    }
+
+    // Debug function - can be called from browser console
+    function testSave() {
+        console.log('Testing save functionality...');
+        console.log('Current hex:', currentHex);
+        console.log('Is edit mode:', isEditMode);
+        
+        const modalContainer = document.getElementById('modalContainer');
+        console.log('Modal container:', modalContainer);
+        
+        if (modalContainer) {
+            const preElements = modalContainer.querySelectorAll('pre');
+            console.log('Pre elements found:', preElements.length);
+            preElements.forEach((pre, index) => {
+                console.log(`Pre ${index}:`, pre.textContent.substring(0, 50));
+            });
+        }
+        
+        // Try to save
+        saveContent();
+    }
+
+    // Initialize vim editing when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        const mapDataElement = document.getElementById('mapData');
+        if (mapDataElement) {
+            try {
+                const mapDataString = mapDataElement.dataset.map || '{}';
+                console.log('Raw map data string length:', mapDataString.length);
+                
+                // Check if the string is valid JSON
+                if (mapDataString.trim() === '') {
+                    console.warn('Empty map data, using empty object');
+                    mapData = {};
+                } else {
+                    mapData = JSON.parse(mapDataString);
+                    console.log('Map data loaded successfully:', Object.keys(mapData).length, 'hexes');
+                }
+                
+                mapWidth = parseInt(mapDataElement.dataset.width || '0');
+                mapHeight = parseInt(mapDataElement.dataset.height || '0');
+            } catch (error) {
+                console.error('Error loading map data:', error);
+                console.error('Map data string preview:', mapDataElement.dataset.map?.substring(0, 200));
+                // Use empty data as fallback
+                mapData = {};
+                mapWidth = 0;
+                mapHeight = 0;
+            }
+        }
+        
+        // Initialize vim editing system
+        initVimEditing();
+    });
     
     </script>
 </body>
