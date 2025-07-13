@@ -148,7 +148,27 @@ def get_hex_info(hex_code):
                 'encounter': hex_data.get('encounter', 'Unknown encounter'),
                 'denizen': hex_data.get('denizen', 'No denizen information'),
                 'notable_feature': hex_data.get('notable_feature', 'No notable features'),
-                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere')
+                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere'),
+                # NPC specific fields
+                'name': hex_data.get('name'),
+                'motivation': hex_data.get('motivation'),
+                'feature': hex_data.get('feature'),
+                'demeanor': hex_data.get('demeanor'),
+                'denizen_type': hex_data.get('denizen_type'),
+                # Beast specific fields
+                'beast_type': hex_data.get('beast_type'),
+                'beast_behavior': hex_data.get('beast_behavior'),
+                'beast_feature': hex_data.get('beast_feature'),
+                # Dungeon specific fields (for completeness)
+                'danger': hex_data.get('danger'),
+                'treasure': hex_data.get('treasure'),
+                'loot': hex_data.get('loot'),
+                'scroll': hex_data.get('scroll'),
+                # Settlement specific fields
+                'population': hex_data.get('population'),
+                'local_tavern': hex_data.get('local_tavern'),
+                'local_power': hex_data.get('local_power'),
+                'settlement_art': hex_data.get('settlement_art')
             })
         except Exception as e:
             return jsonify({
@@ -177,6 +197,7 @@ def get_hex_info(hex_code):
                     'local_tavern': hex_data.get('local_tavern', 'Unknown'),
                     'local_power': hex_data.get('local_power', 'Unknown'),
                     'settlement_art': hex_data.get('settlement_art', ''),
+                    'name': hex_data.get('name', f'Settlement {hex_code}'),
                     'hex_code': hex_code,
                     'redirect_to': 'settlement'
                 })
@@ -561,18 +582,79 @@ def extract_hex_data(content, hex_code):
             parts = line.split(' - ')
             if len(parts) > 1:
                 hex_data['terrain'] = parts[1].strip()
+        elif line.startswith('**Terrain:**'):
+            hex_data['terrain'] = line.replace('**Terrain:**', '').strip()
         
         # Extract encounter
         elif '**' in line and any(symbol in line for symbol in ['※', '▲', '☉', '⌂']):
             hex_data['encounter'] = line.strip()
+            
+            # Extract name from encounter line for settlements and dungeons
+            if '⌂ **' in line:
+                start = line.find('⌂ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['name'] = line[start:end]
+                # Extract population from settlement encounter line
+                if ' - A ' in line and ' settlement' in line:
+                    pop_start = line.find(' - A ') + 4
+                    pop_end = line.find(' settlement')
+                    if pop_start > 3 and pop_end > pop_start:
+                        hex_data['population'] = line[pop_start:pop_end]
+            elif '▲ **' in line:
+                start = line.find('▲ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['dungeon_type'] = line[start:end]
         
-        # Extract denizen information
-        elif '**' in line and ('Motivation:' in line or 'Feature:' in line or 'Demeanor:' in line):
-            if current_section == 'denizen':
-                hex_data['denizen'] += '\n' + line.strip()
-            else:
+        # Extract denizen information (but not the individual fields we parse separately)
+        elif current_section == 'denizen' and line and not line.startswith('#') and not any(field in line for field in ['**Motivation:**', '**Feature:**', '**Demeanor:**', '**Name:**', '**Type:**', '**Behavior:**']):
+            if hex_data['denizen'] == 'No denizen information':
                 hex_data['denizen'] = line.strip()
-                current_section = 'denizen'
+            else:
+                hex_data['denizen'] += '\n' + line.strip()
+        
+        # Extract NPC name from denizen section
+        elif current_section == 'denizen' and '**' in line and '**' in line[line.find('**')+2:] and ' - ' in line:
+            # Extract name between ** **
+            start = line.find('**') + 2
+            end = line.find('**', start)
+            if start > 1 and end > start:
+                hex_data['name'] = line[start:end]
+        
+        # Extract specific fields from both denizen section and details sections
+        elif '**Motivation:**' in line:
+            hex_data['motivation'] = line.replace('**Motivation:**', '').strip()
+        elif '**Demeanor:**' in line:
+            hex_data['demeanor'] = line.replace('**Demeanor:**', '').strip()
+        elif '**Name:**' in line:
+            hex_data['name'] = line.replace('**Name:**', '').strip()
+        elif '**Type:**' in line:
+            type_value = line.replace('**Type:**', '').strip()
+            # Check context to determine if it's beast or NPC
+            if '※ **' in content:  # Beast content
+                hex_data['beast_type'] = type_value
+            elif '☉ **' in content:  # NPC content
+                hex_data['denizen_type'] = type_value
+        elif '**Behavior:**' in line:
+            hex_data['beast_behavior'] = line.replace('**Behavior:**', '').strip()
+        elif '**Feature:**' in line:
+            feature_value = line.replace('**Feature:**', '').strip()
+            # Check context to determine if it's beast or NPC feature
+            if '※ **' in content:  # Beast content
+                hex_data['beast_feature'] = feature_value
+            else:  # NPC content
+                hex_data['feature'] = feature_value
+        elif '**Danger:**' in line:
+            hex_data['danger'] = line.replace('**Danger:**', '').strip()
+        elif '**Treasure:**' in line:
+            hex_data['treasure'] = line.replace('**Treasure:**', '').strip()
+        elif '**Ancient Knowledge:**' in line:
+            hex_data['scroll'] = line.replace('**Ancient Knowledge:**', '').strip()
+        elif '**Local Tavern:**' in line:
+            hex_data['local_tavern'] = line.replace('**Local Tavern:**', '').strip()
+        elif '**Local Power:**' in line:
+            hex_data['local_power'] = line.replace('**Local Power:**', '').strip()
         
         # Extract notable feature
         elif 'Notable Feature' in line or 'NOTABLE FEATURES' in line:
@@ -587,6 +669,10 @@ def extract_hex_data(content, hex_code):
         elif current_section == 'atmosphere' and line and not line.startswith('#'):
             hex_data['atmosphere'] = line.strip()
             current_section = None
+        
+        # Extract denizen section
+        elif '## Denizen' in line:
+            current_section = 'denizen'
     
     return hex_data
 
