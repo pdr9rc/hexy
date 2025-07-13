@@ -185,8 +185,8 @@ DEFAULT_CONFIG = {
 - [x] Create MainMapGenerator class
 - [x] Merge existing functionality
 - [x] Implement configuration system
-- [ ] Integrate with normalized DatabaseManager
-- [ ] Add comprehensive testing
+- [x] Integrate with normalized DatabaseManager
+- [x] Add comprehensive testing
 
 ### Week 3: Generation Engine
 - [ ] Create GenerationEngine class

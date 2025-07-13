@@ -9,7 +9,7 @@ import os
 import random
 import shutil
 from typing import Dict, List, Tuple, Optional, Any
-from content_tables import get_all_tables, get_table
+from database_manager import database_manager
 from terrain_system import terrain_system
 from translation_system import translation_system
 from mork_borg_lore_database import MorkBorgLoreDatabase
@@ -29,7 +29,7 @@ class MainMapGenerator:
         self.lore_db = MorkBorgLoreDatabase()
         
         # Load content tables
-        self.content_tables = get_all_tables(self.language)
+        self.content_tables = database_manager.load_tables(self.language)
         self.terrain_tables = self.content_tables.get('terrain_tables', {})
         self.core_tables = self.content_tables.get('core_tables', {})
         
@@ -289,11 +289,11 @@ class MainMapGenerator:
     def _generate_dungeon_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate dungeon/ruins content."""
         # Get dungeon tables
-        dungeon_types = get_table('dungeon', 'dungeon_types', self.language)
-        dungeon_features = get_table('dungeon', 'dungeon_features', self.language)
-        dungeon_dangers = get_table('dungeon', 'dungeon_dangers', self.language)
-        dungeon_treasures = get_table('dungeon', 'dungeon_treasures', self.language)
-        dungeon_atmospheres = get_table('dungeon', 'dungeon_atmospheres', self.language)
+        dungeon_types = database_manager.get_table('dungeon', 'dungeon_types', self.language)
+        dungeon_features = database_manager.get_table('dungeon', 'dungeon_features', self.language)
+        dungeon_dangers = database_manager.get_table('dungeon', 'dungeon_dangers', self.language)
+        dungeon_treasures = database_manager.get_table('dungeon', 'dungeon_treasures', self.language)
+        dungeon_atmospheres = database_manager.get_table('dungeon', 'dungeon_atmospheres', self.language)
         
         # Generate dungeon elements
         dungeon_type = random.choice(dungeon_types) if dungeon_types else "Ancient ruins"
@@ -332,9 +332,9 @@ class MainMapGenerator:
     def _generate_beast_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate beast encounter content."""
         # Get bestiary tables
-        beast_types = get_table('bestiary', 'beast_types', self.language)
-        beast_features = get_table('bestiary', 'beast_features', self.language)
-        beast_behaviors = get_table('bestiary', 'beast_behaviors', self.language)
+        beast_types = database_manager.get_table('bestiary', 'beast_types', self.language)
+        beast_features = database_manager.get_table('bestiary', 'beast_features', self.language)
+        beast_behaviors = database_manager.get_table('bestiary', 'beast_behaviors', self.language)
         
         # Generate beast elements
         beast_type = random.choice(beast_types) if beast_types else "Wild beast"
@@ -491,16 +491,16 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         loot_roll = random.randint(1, 100)
         
         if loot_roll <= 30:  # 30% weapons
-            loot_item = random.choice(get_table('enhanced_loot', 'weapon_loot', self.language) or ["Rusty sword"])
+            loot_item = random.choice(database_manager.get_table('enhanced_loot', 'weapon_loot', self.language) or ["Rusty sword"])
             loot_type = 'weapon'
         elif loot_roll <= 50:  # 20% armor
-            loot_item = random.choice(get_table('enhanced_loot', 'armor_loot', self.language) or ["Leather armor"])
+            loot_item = random.choice(database_manager.get_table('enhanced_loot', 'armor_loot', self.language) or ["Leather armor"])
             loot_type = 'armor'
         elif loot_roll <= 80:  # 30% valuable items
-            loot_item = random.choice(get_table('enhanced_loot', 'valuable_loot', self.language) or ["Silver coins"])
+            loot_item = random.choice(database_manager.get_table('enhanced_loot', 'valuable_loot', self.language) or ["Silver coins"])
             loot_type = 'valuable'
         else:  # 20% utility items
-            loot_item = random.choice(get_table('enhanced_loot', 'utility_loot', self.language) or ["Rope"])
+            loot_item = random.choice(database_manager.get_table('enhanced_loot', 'utility_loot', self.language) or ["Rope"])
             loot_type = 'utility'
         
         # Generate magical effect
@@ -517,9 +517,9 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
     def _generate_scroll(self) -> Optional[Dict[str, Any]]:
         """Generate ancient scroll/knowledge."""
         # Get scroll tables
-        scroll_types = get_table('scroll', 'scroll_types', self.language) or ["Ancient parchment"]
-        scroll_content = get_table('scroll', 'scroll_content', self.language) or ["forbidden knowledge"]
-        scroll_effects = get_table('scroll', 'scroll_effects', self.language) or ["causes nightmares when read"]
+        scroll_types = database_manager.get_table('scroll', 'scroll_types', self.language) or ["Ancient parchment"]
+        scroll_content = database_manager.get_table('scroll', 'scroll_content', self.language) or ["forbidden knowledge"]
+        scroll_effects = database_manager.get_table('scroll', 'scroll_effects', self.language) or ["causes nightmares when read"]
         
         # Generate scroll elements
         scroll_type = random.choice(scroll_types)
@@ -769,7 +769,7 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         if 'language' in new_config:
             self.language = new_config['language']
             self.translation_system.set_language(self.language)
-            self.content_tables = get_all_tables(self.language)
+            self.content_tables = database_manager.load_tables(self.language)
             self.terrain_tables = self.content_tables.get('terrain_tables', {})
             self.core_tables = self.content_tables.get('core_tables', {})
         
