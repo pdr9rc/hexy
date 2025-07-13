@@ -35,10 +35,15 @@ class TerrainSystem:
     def _initialize_image_analyzer(self):
         """Initialize image-based terrain analysis if images are available."""
         try:
-            # Image analysis functionality has been integrated into this class
-            # For now, we'll use coordinate-based detection
-            print("✅ Coordinate-based terrain analysis enabled")
-            self.use_image_analysis = False
+            from image_analyzer import image_analyzer
+            self.image_analyzer = image_analyzer
+            if image_analyzer.is_available():
+                print("✅ Official Mork Borg map analysis enabled")
+                print(f"   Map info: {image_analyzer.get_map_info()}")
+                self.use_image_analysis = True
+            else:
+                print("✅ Coordinate-based terrain analysis enabled")
+                self.use_image_analysis = False
         except Exception as e:
             print(f"⚠️  Image analysis disabled: {e}")
             self.use_image_analysis = False
