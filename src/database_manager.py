@@ -396,4 +396,6 @@ class DatabaseManager:
 
 
 # Global database manager instance
-database_manager = DatabaseManager()
+import os
+_database_path = "../databases" if os.path.exists("../databases") else "databases"
+database_manager = DatabaseManager(_database_path)

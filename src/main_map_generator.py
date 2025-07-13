@@ -319,6 +319,17 @@ class MainMapGenerator:
         if scroll:
             description += f"**Ancient Knowledge:** {scroll['description']}\n"
         
+        # ASCII ruins layout
+        ruins_art = '''
+      /\\  /\\  /\\
+     /  \\/  \\/  \\
+    [    ][    ]
+    | ?? || ?? |
+    [____][____]
+        '''
+        
+        description += f"\n```{ruins_art}```\n"
+        
         return {
             'hex_code': hex_code,
             'terrain': terrain,
@@ -366,12 +377,16 @@ class MainMapGenerator:
     
     def _generate_npc_content(self, hex_code: str, terrain: str, denizen_types: List[str]) -> Dict[str, Any]:
         """Generate NPC/denizen content."""
-        # Get core tables
-        name_prefixes = self.core_tables.get('denizen_names_prefix', [])
-        name_suffixes = self.core_tables.get('denizen_names_suffix', [])
-        motivations = self.core_tables.get('denizen_motivations', [])
-        features = self.core_tables.get('denizen_features', [])
-        demeanors = self.core_tables.get('denizen_demeanors', [])
+        # Get name tables from database
+        name_prefixes = database_manager.get_table('content', 'denizen_names_prefix', self.language)
+        name_suffixes = database_manager.get_table('content', 'denizen_names_suffix', self.language)
+        
+
+        
+        # Get denizen detail tables
+        motivations = database_manager.get_table('denizen', 'denizen_motivations', self.language)
+        features = database_manager.get_table('denizen', 'denizen_features', self.language)
+        demeanors = database_manager.get_table('denizen', 'denizen_demeanors', self.language)
         
         # Generate NPC elements
         if name_prefixes and name_suffixes:
@@ -608,6 +623,42 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             lines.append("")
             lines.append("## Settlement Layout")
             lines.append(hex_data.get('settlement_art', ''))
+            lines.append("")
+        
+        # Dungeon-specific content
+        if hex_data.get('is_dungeon'):
+            lines.append("## Dungeon Details")
+            lines.append(f"**Type:** {hex_data.get('dungeon_type', 'Unknown')}")
+            lines.append(f"**Danger:** {hex_data.get('danger', 'Unknown')}")
+            lines.append(f"**Treasure:** {hex_data.get('treasure', 'Unknown')}")
+            lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
+            
+            if hex_data.get('scroll'):
+                lines.append("## Ancient Knowledge")
+                lines.append(hex_data['scroll'].get('full_description', hex_data['scroll'].get('description', 'Unknown knowledge')))
+                lines.append("")
+        
+        # Beast-specific content
+        if hex_data.get('is_beast'):
+            lines.append("## Beast Details")
+            lines.append(f"**Type:** {hex_data.get('beast_type', 'Unknown')}")
+            lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
+            lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
+            lines.append("")
+        
+        # NPC-specific content
+        if hex_data.get('is_npc'):
+            lines.append("## NPC Details")
+            lines.append(f"**Name:** {hex_data.get('name', 'Unknown')}")
+            lines.append(f"**Type:** {hex_data.get('denizen_type', 'Unknown')}")
+            lines.append(f"**Motivation:** {hex_data.get('motivation', 'Unknown')}")
+            lines.append(f"**Feature:** {hex_data.get('feature', 'Unknown')}")
+            lines.append(f"**Demeanor:** {hex_data.get('demeanor', 'Unknown')}")
             lines.append("")
         
         return '\n'.join(lines)
