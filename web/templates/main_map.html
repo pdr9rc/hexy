@@ -607,27 +607,81 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Map data stored in data attributes to avoid linter issues -->
+    <div id="mapData" 
+         data-map="{{ ascii_map | tojson | safe if ascii_map else '{}' }}"
+         data-width="{{ map_width|int if map_width else 0 }}"
+         data-height="{{ map_height|int if map_height else 0 }}"
+         style="display: none;">
+    </div>
+    
     <script>
     console.log('=== SCRIPT STARTING ===');
     
     let currentHex = '';
     let mapZoom = 1;
     
-    // Map data from server
+    // Map data from server - read from data attributes
     let mapData = {};
     let mapWidth = 0;
     let mapHeight = 0;
-    try {
-        mapData = {{ ascii_map | tojson | safe }};
-        mapWidth = {{ map_width|int }};
-        mapHeight = {{ map_height|int }};
-    } catch (error) {
-        console.error('Error loading map data:', error);
-        window.mapDataError = error.message;
+    
+    // Load map data from data attributes
+    document.addEventListener('DOMContentLoaded', function() {
+        const mapDataElement = document.getElementById('mapData');
+        if (mapDataElement) {
+            try {
+                mapData = JSON.parse(mapDataElement.dataset.map || '{}');
+                mapWidth = parseInt(mapDataElement.dataset.width || '0');
+                mapHeight = parseInt(mapDataElement.dataset.height || '0');
+                console.log('Map data loaded:', Object.keys(mapData).length, 'hexes');
+            } catch (error) {
+                console.error('Error loading map data:', error);
+            }
+        }
+    });
+    
+    // Define showHexDetails function first
+    function showHexDetails(hexCode) {
+        console.log('showHexDetails called with:', hexCode);
+        currentHex = hexCode;
+        
+        // Highlight selected hex on the map
+        clearHexSelection();
+        const hexElement = document.querySelector(`[data-hex="${hexCode}"]`);
+        if (hexElement) {
+            hexElement.classList.add('selected');
+        }
+        
+        // Show loading state
+        showLoadingState();
+        
+        fetch(`/api/hex/${hexCode}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.is_major_city) {
+                    showCityDetails(hexCode);
+                    return;
+                }
+                
+                if (data.is_settlement) {
+                    showSettlementDetails(hexCode);
+                    return;
+                }
+                
+                // Display content in the side panel
+                displayHexContent(data, hexCode);
+            })
+            .catch(error => {
+                console.error('Error fetching hex details:', error);
+                showErrorState(hexCode);
+            });
     }
     
     document.addEventListener('DOMContentLoaded', function() {
-        renderMap();
+        console.log('DOM loaded, map should be server-rendered');
+        // Don't call renderMap() - use server-side rendered HTML instead
     });
     
     function renderMap() {
@@ -691,40 +745,7 @@
         console.log('=== MAP RENDERED SUCCESSFULLY ===');
     }
 
-    function showHexDetails(hexCode) {
-        currentHex = hexCode;
-        
-        // Highlight selected hex on the map
-        clearHexSelection();
-        const hexElement = document.querySelector(`[data-hex="${hexCode}"]`);
-        if (hexElement) {
-            hexElement.classList.add('selected');
-        }
-        
-        // Show loading state
-        showLoadingState();
-        
-        fetch(`/api/hex/${hexCode}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.is_major_city) {
-                    showCityDetails(hexCode);
-                    return;
-                }
-                
-                if (data.is_settlement) {
-                    showSettlementDetails(hexCode);
-                    return;
-                }
-                
-                // Display content in the side panel
-                displayHexContent(data, hexCode);
-            })
-            .catch(error => {
-                console.error('Error fetching hex details:', error);
-                showErrorState(hexCode);
-            });
-    }
+
 
     function clearHexSelection() {
         document.querySelectorAll('.hex-cell.selected').forEach(el => {
@@ -882,7 +903,6 @@ ${asciiModal}
 ║  ATMOSPHERE: ${atmosphere.substring(0, 50).padEnd(50)} ║
 ║                                                              ║
 ╚══════════════════════════════════════════════════════════════╝`;
-     }
     }
     
     function showCityDetails(hexCode) {
