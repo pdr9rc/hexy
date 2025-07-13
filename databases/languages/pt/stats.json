@@ -1,0 +1,106 @@
+{
+  "category": "stats",
+  "tables": {
+    "creature_stats": {
+      "weak": {
+        "hp": "1d4",
+        "armor": "10",
+        "morale": "6",
+        "damage": "1d4"
+      },
+      "normal": {
+        "hp": "1d6",
+        "armor": "12",
+        "morale": "7",
+        "damage": "1d6"
+      },
+      "strong": {
+        "hp": "2d6",
+        "armor": "14",
+        "morale": "8",
+        "damage": "1d8"
+      },
+      "elite": {
+        "hp": "3d6",
+        "armor": "16",
+        "morale": "9",
+        "damage": "1d10"
+      },
+      "boss": {
+        "hp": "4d6+4",
+        "armor": "18",
+        "morale": "10",
+        "damage": "2d6"
+      }
+    },
+    "npc_stats": {
+      "peasant": {
+        "hp": "1d4",
+        "armor": "10",
+        "morale": "5",
+        "damage": "1d3"
+      },
+      "soldier": {
+        "hp": "1d6+1",
+        "armor": "14",
+        "morale": "7",
+        "damage": "1d6"
+      },
+      "veteran": {
+        "hp": "2d6",
+        "armor": "16",
+        "morale": "8",
+        "damage": "1d8"
+      },
+      "leader": {
+        "hp": "3d6",
+        "armor": "18",
+        "morale": "9",
+        "damage": "1d10"
+      },
+      "champion": {
+        "hp": "4d6+2",
+        "armor": "20",
+        "morale": "10",
+        "damage": "2d6"
+      }
+    },
+    "special_abilities": [
+      "Regenera 1 PV por turno",
+      "Imune a armas normais",
+      "Causa medo (moral -2)",
+      "Ataque venenoso (save ou morre)",
+      "Invisível até atacar",
+      "Voa à vontade",
+      "Sopra fogo (2d6 dano)",
+      "Drena força vital",
+      "Divide-se quando morto",
+      "Atravessa paredes",
+      "Convoca reforços",
+      "Reflete magia",
+      "Fúria berserker (+2 dano)",
+      "Maldição da morte no assassino",
+      "Explode quando morto"
+    ],
+    "weaknesses": [
+      "Vulnerável à prata",
+      "Ferido por símbolos sagrados",
+      "Teme luz brilhante",
+      "Não pode cruzar água corrente",
+      "Repelido por alho",
+      "Enfraquecido por ferro",
+      "Afetado por círculos de sal",
+      "Danificado por água benta",
+      "Preso por nomes verdadeiros",
+      "Confundido por espelhos",
+      "Paralisado por música",
+      "Retardado por ferro frio"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-07-13T10:26:38.981282",
+    "migrated_from": "content_tables.py"
+  }
+}

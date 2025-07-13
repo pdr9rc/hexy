@@ -1,0 +1,71 @@
+{
+  "category": "denizen",
+  "tables": {
+    "denizen_types": [
+      "Diseased beggar",
+      "Mad hermit",
+      "Wandering cultist",
+      "Desperate bandit",
+      "Plague doctor",
+      "Witch hunter",
+      "Corrupted priest",
+      "Feral child",
+      "Broken soldier",
+      "Death merchant",
+      "Bone collector",
+      "Grave robber",
+      "Cursed wanderer",
+      "Zealot preacher",
+      "Flesh trader",
+      "Scavenger lord",
+      "Plague bearer",
+      "Doom prophet"
+    ],
+    "denizen_motivations": [
+      "seeks redemption for past sins",
+      "hunts for forbidden knowledge",
+      "flees from terrible pursuers",
+      "searches for lost family",
+      "collects trophies from the dead",
+      "spreads word of the coming end",
+      "guards ancient secrets",
+      "trades in human misery",
+      "seeks to break an ancient curse",
+      "worships forgotten gods",
+      "harvests organs for dark rituals",
+      "prophesies doom and destruction"
+    ],
+    "denizen_features": [
+      "Covered in ritual scars",
+      "Missing several fingers",
+      "Eyes clouded with cataracts",
+      "Speaks in whispers",
+      "Constantly muttering prayers",
+      "Smells of decay",
+      "Wears tattered robes",
+      "Carries strange implements",
+      "Bears holy symbols",
+      "Has visible plague marks",
+      "Moves with unnatural stiffness",
+      "Avoids eye contact",
+      "Nervous tics and twitches",
+      "Unnaturally pale skin",
+      "Teeth filed to points",
+      "Burns easily in sunlight"
+    ],
+    "denizen_demeanors": [
+      "Hostile",
+      "Suspicious",
+      "Desperate",
+      "Helpful",
+      "Indifferent",
+      "Cryptic"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-07-13T10:26:38.980175",
+    "migrated_from": "content_tables.py"
+  }
+}

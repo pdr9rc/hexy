@@ -1,0 +1,58 @@
+{
+  "category": "loot",
+  "tables": {
+    "treasure_types": [
+      "Joias amaldiçoadas",
+      "Moedas contaminadas",
+      "Ornamentos de osso",
+      "Gemas sangrentas",
+      "Cálices de caveira",
+      "Punhais rituais",
+      "Máscaras da peste",
+      "Totens da morte",
+      "Livros proibidos",
+      "Pedras da alma",
+      "Velas de cadáver",
+      "Terra de sepultura",
+      "Relíquias profanas",
+      "Garrafas demoníacas",
+      "Ferramentas de bruxa"
+    ],
+    "treasure_values": [
+      "Sem valor mas amaldiçoado",
+      "Algumas moedas de cobre",
+      "Punhado de prata",
+      "Pequena fortuna em ouro",
+      "Inestimável mas perigoso",
+      "Valioso para cultistas",
+      "Procurado por colecionadores",
+      "Vale uma vida",
+      "Magicamente valioso",
+      "Historicamente significativo",
+      "Religiosamente importante",
+      "Extremamente raro"
+    ],
+    "treasure_effects": [
+      "traz má sorte",
+      "atrai mortos-vivos",
+      "causa pesadelos",
+      "concede visões sombrias",
+      "sussurra constantemente",
+      "sente-se anormalmente frio",
+      "pulsa com energia maligna",
+      "corrompe itens próximos",
+      "revela passagens ocultas",
+      "permite comunhão com mortos",
+      "protege de símbolos sagrados",
+      "intensifica magia sombria",
+      "marca portador para morte",
+      "drena lentamente força vital"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-07-13T10:26:38.980725",
+    "migrated_from": "content_tables.py"
+  }
+}

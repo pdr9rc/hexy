@@ -1,0 +1,59 @@
+{
+  "category": "enhanced_loot",
+  "tables": {
+    "weapon_loot": [
+      "Espada enferrujada (+1 dano, quebra em 1)",
+      "Punhal de osso (1d4, +1 vs mortos-vivos)",
+      "Bengala do médico da peste (1d6, causa doença)",
+      "Machado do carrasco (1d8, intimidador)",
+      "Besta do caçador de bruxas (1d6, +2 vs usuários de magia)",
+      "Pé de cabra do saqueador (1d4, ferramenta útil)",
+      "Lâmina amaldiçoada (1d8, fere portador em 1)",
+      "Maça com símbolo sagrado (1d6, +1 vs mortos-vivos)",
+      "Estilete envenenado (1d4, save ou paralisado)",
+      "Espada quebrada do cavaleiro (1d6, outrora nobre)"
+    ],
+    "armor_loot": [
+      "Armadura de couro esfarrapada (CA 12, cheira mal)",
+      "Vestes do médico da peste (CA 11, imunidade à doença)",
+      "Cota de malha enferrujada (CA 14, barulhenta)",
+      "Armadura de placas de osso (CA 15, intimidadora)",
+      "Manto da bruxa (CA 11, +1 vs magia)",
+      "Revestimento de terra de sepultura (CA 10, mortos-vivos te ignoram)",
+      "Elmo amaldiçoado (CA +1, sussurros constantes)",
+      "Vestimentas sagradas (CA 12, +1 vs mal)",
+      "Couro de ladrão (CA 13, +1 furtividade)",
+      "Escudo quebrado (CA +1, outrora magnífico)"
+    ],
+    "valuable_loot": [
+      "Saco de dentes de prata (50 moedas)",
+      "Joias amaldiçoadas (100 moedas, má sorte)",
+      "Máscara da peste rara (200 moedas para colecionadores)",
+      "Tomo antigo (300 moedas, conhecimento proibido)",
+      "Gema da alma (500 moedas, sussurra constantemente)",
+      "Cálice de caveira dourada (150 moedas, profano)",
+      "Grimório da bruxa (400 moedas, feitiços perigosos)",
+      "Anel de selo nobre (80 moedas, valor político)",
+      "Garrafa demoníaca (600 moedas, contém algo)",
+      "Osso relíquia (250 moedas, poder sagrado/profano)"
+    ],
+    "utility_loot": [
+      "Ferramentas de ladrão (kit de gazua)",
+      "Poção de cura (restaura 1d6 PV)",
+      "Corda (50 pés, resistente)",
+      "Lanterna com óleo (6 horas de luz)",
+      "Gancho de escalada (ajuda de escalada)",
+      "Frasco de veneno (aplicar na arma)",
+      "Água benta (1d4 dano em mortos-vivos)",
+      "Bomba de fumaça (ajuda de fuga)",
+      "Pé de cabra (ferramenta útil)",
+      "Algemas (dispositivo de contenção)"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-07-13T10:26:38.981487",
+    "migrated_from": "content_tables.py"
+  }
+}
