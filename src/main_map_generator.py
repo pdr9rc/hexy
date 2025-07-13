@@ -283,6 +283,8 @@ class MainMapGenerator:
             'local_power': local_power,
             'settlement_art': settlement_art,
             'population': population,
+            'name': name,
+            'settlement_type': population,
             'is_settlement': True
         }
     
@@ -320,12 +322,15 @@ class MainMapGenerator:
         return {
             'hex_code': hex_code,
             'terrain': terrain,
-            'encounter': "▲ **Ancient Ruins**",
+            'encounter': f"▲ **{dungeon_type}**",
             'denizen': description,
             'notable_feature': f"Ancient {dungeon_type.lower()}",
             'atmosphere': atmosphere,
             'loot': loot,
             'scroll': scroll,
+            'dungeon_type': dungeon_type,
+            'danger': danger,
+            'treasure': treasure,
             'is_dungeon': True
         }
     
@@ -349,10 +354,13 @@ class MainMapGenerator:
         return {
             'hex_code': hex_code,
             'terrain': terrain,
-            'encounter': f"※ **Wild Beast Encounter**",
+            'encounter': f"※ **{beast_type.title()} Encounter**",
             'denizen': description,
             'notable_feature': f"Beast territory",
             'atmosphere': "Tense and dangerous",
+            'beast_type': beast_type,
+            'beast_feature': feature,
+            'beast_behavior': behavior,
             'is_beast': True
         }
     
@@ -398,6 +406,11 @@ class MainMapGenerator:
             'denizen': description,
             'notable_feature': f"NPC territory",
             'atmosphere': "Mysterious and unpredictable",
+            'name': name,
+            'denizen_type': denizen_type,
+            'motivation': motivation,
+            'feature': feature,
+            'demeanor': demeanor,
             'is_npc': True
         }
     
