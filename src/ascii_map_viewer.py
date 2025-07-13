@@ -10,14 +10,14 @@ import markdown
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from terrain_system import terrain_system
-from hex_generator import hex_generator
-from map_generator import map_generator
+from main_map_generator import MainMapGenerator
 from translation_system import translation_system
 
 app = Flask(__name__, template_folder='../web/templates', static_folder='../web/static')
 
 # Initialize systems
 lore_db = MorkBorgLoreDatabase()
+main_map_generator = MainMapGenerator()
 
 def get_map_dimensions():
     """Get map dimensions from terrain system."""
@@ -34,7 +34,7 @@ def main_map():
         os.makedirs('dying_lands_output', exist_ok=True)
         return render_template('setup.html', 
                              title="The Dying Lands - Setup", 
-                             action="Run map_generator.py to create the map")
+                             action="Run main_map_generator.py to create the map")
     
     # Get map dimensions
     map_width, map_height = get_map_dimensions()
@@ -204,7 +204,7 @@ def get_lore_overview():
     """Get complete lore overview."""
     try:
         # Use unified map generator
-        result = map_generator.get_lore_overview()
+        result = main_map_generator.get_lore_overview()
         return jsonify(result)
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
@@ -214,7 +214,7 @@ def get_terrain_overview():
     """Get terrain analysis."""
     try:
         # Use unified terrain system
-        result = map_generator.get_terrain_overview()
+        result = main_map_generator.get_terrain_overview()
         return jsonify(result)
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
@@ -230,7 +230,7 @@ def generate_single_hex():
             return jsonify({'success': False, 'error': 'Hex code required'})
         
         # Generate hex content using unified system
-        hex_data = map_generator.generate_single_hex(hex_code)
+        hex_data = main_map_generator.generate_single_hex(hex_code)
         
         return jsonify({
             'success': True,
@@ -247,7 +247,7 @@ def generate_full_map():
     """Generate content for the entire map."""
     try:
         # Generate using unified system
-        hex_data_list = map_generator.generate_full_map(skip_existing=False)
+        hex_data_list = main_map_generator.generate_full_map(options={'skip_existing': False})
         
         return jsonify({
             'success': True,
@@ -264,7 +264,7 @@ def reset_continent():
     """Reset the entire continent by deleting all content and regenerating."""
     try:
         # Reset using unified system
-        result = map_generator.reset_continent()
+        result = main_map_generator.reset_continent()
         
         return jsonify(result)
         
