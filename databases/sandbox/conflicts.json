@@ -1,0 +1,38 @@
+{
+  "territorial_disputes": [
+    "Border conflict between nations",
+    "Land dispute between nobles",
+    "Resource competition in wilderness",
+    "Trade route control dispute",
+    "Fishing rights conflict",
+    "Mining rights dispute",
+    "Forest logging conflict",
+    "Water rights dispute",
+    "Hunting ground conflict",
+    "Settlement expansion dispute"
+  ],
+  "ideological_conflicts": [
+    "Religious schism or heresy",
+    "Political ideology clash",
+    "Cultural tradition dispute",
+    "Philosophical disagreement",
+    "Moral or ethical conflict",
+    "Social class struggle",
+    "Educational method dispute",
+    "Artistic style conflict",
+    "Scientific theory debate",
+    "Legal interpretation dispute"
+  ],
+  "economic_conflicts": [
+    "Trade monopoly dispute",
+    "Taxation and tariff conflict",
+    "Labor and wage dispute",
+    "Resource distribution conflict",
+    "Market control competition",
+    "Currency or banking dispute",
+    "Property ownership conflict",
+    "Investment or loan dispute",
+    "Price fixing or competition",
+    "Economic policy disagreement"
+  ]
+}

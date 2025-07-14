@@ -1,0 +1,122 @@
+{
+  "village": [
+    "Farming village",
+    "Mining village", 
+    "Fishing village",
+    "Forest village",
+    "Mountain village",
+    "Swamp village",
+    "Desert village",
+    "Trading village",
+    "Religious village",
+    "Military village"
+  ],
+  "town": [
+    "Market town",
+    "Trading post",
+    "Military outpost",
+    "University town",
+    "Religious center",
+    "Crafting town",
+    "Mining town",
+    "Fishing town",
+    "Border town",
+    "Crossroads town"
+  ],
+  "city": [
+    "Port city",
+    "Capital city",
+    "University city",
+    "Religious city",
+    "Trading city",
+    "Military city",
+    "Crafting city",
+    "Mining city",
+    "Border city",
+    "Ancient city"
+  ],
+  "castle": [
+    "Royal castle",
+    "Noble castle",
+    "Military castle",
+    "Border castle",
+    "Mountain castle",
+    "Coastal castle",
+    "Forest castle",
+    "Desert castle",
+    "Ruined castle",
+    "Haunted castle"
+  ],
+  "fortress": [
+    "Border fortress",
+    "Mountain fortress",
+    "Coastal fortress",
+    "Desert fortress",
+    "Military fortress",
+    "Prison fortress",
+    "Temple fortress",
+    "Mining fortress",
+    "Trading fortress",
+    "Ancient fortress"
+  ],
+  "monastery": [
+    "Benedictine monastery",
+    "Cistercian monastery",
+    "Military monastery",
+    "Scholarly monastery",
+    "Hermit monastery",
+    "Mountain monastery",
+    "Forest monastery",
+    "Coastal monastery",
+    "Desert monastery",
+    "Ancient monastery"
+  ],
+  "trading_post": [
+    "Border trading post",
+    "Mountain trading post",
+    "Coastal trading post",
+    "Desert trading post",
+    "Forest trading post",
+    "River trading post",
+    "Crossroads trading post",
+    "Military trading post",
+    "Religious trading post",
+    "Ancient trading post"
+  ],
+  "mining_camp": [
+    "Gold mining camp",
+    "Iron mining camp",
+    "Coal mining camp",
+    "Gem mining camp",
+    "Salt mining camp",
+    "Copper mining camp",
+    "Silver mining camp",
+    "Ancient mining camp",
+    "Abandoned mining camp",
+    "Cursed mining camp"
+  ],
+  "fishing_village": [
+    "Coastal fishing village",
+    "River fishing village",
+    "Lake fishing village",
+    "Deep sea fishing village",
+    "Whaling village",
+    "Pearl diving village",
+    "Crab fishing village",
+    "Ancient fishing village",
+    "Abandoned fishing village",
+    "Cursed fishing village"
+  ],
+  "bandit_camp": [
+    "Forest bandit camp",
+    "Mountain bandit camp",
+    "Desert bandit camp",
+    "Swamp bandit camp",
+    "Coastal bandit camp",
+    "Cave bandit camp",
+    "Ruined bandit camp",
+    "Hidden bandit camp",
+    "Temporary bandit camp",
+    "Permanent bandit camp"
+  ]
+} 

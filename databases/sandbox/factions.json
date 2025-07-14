@@ -1,0 +1,72 @@
+{
+  "noble": [
+    "Local Baron seeking expansion",
+    "Exiled noble planning return",
+    "Knight-Commander of military order",
+    "Merchant prince with political ambitions",
+    "Landless knight seeking territory",
+    "Noble house in decline",
+    "Ambitious courtier",
+    "Feudal lord consolidating power"
+  ],
+  "religious": [
+    "Orthodox temple maintaining tradition",
+    "Heretical cult spreading influence",
+    "Monastic order preserving knowledge",
+    "Death cult preparing for apocalypse",
+    "Nature worshipers protecting sacred sites",
+    "Scholarly order studying ancient texts",
+    "Charitable organization helping the poor",
+    "Militant religious order"
+  ],
+  "mercantile": [
+    "Merchant guild controlling trade routes",
+    "Banking house with political influence",
+    "Craft guild protecting trade secrets",
+    "Trading company expanding operations",
+    "Smuggling ring avoiding taxes",
+    "Artisan collective maintaining quality",
+    "Caravan master controlling transport",
+    "Market master regulating commerce"
+  ],
+  "criminal": [
+    "Thieves guild controlling trade routes",
+    "Bandit clan raiding settlements",
+    "Smugglers moving contraband",
+    "Assassins guild accepting contracts",
+    "Pirate crew terrorizing coasts",
+    "Fence network handling stolen goods",
+    "Corrupt officials abusing power",
+    "Gang warring for territory"
+  ],
+  "military": [
+    "Mercenary company for hire",
+    "Garrison protecting borders",
+    "Veteran soldiers seeking purpose",
+    "Military order defending faith",
+    "Rebel forces fighting authority",
+    "Band of deserters surviving",
+    "Elite guard protecting nobles",
+    "Frontier scouts exploring wilderness"
+  ],
+  "scholarly": [
+    "Wizard's guild studying magic",
+    "Historian preserving ancient knowledge",
+    "Alchemist seeking immortality",
+    "Astronomer predicting omens",
+    "Cartographer mapping unknown lands",
+    "Linguist deciphering ancient texts",
+    "Naturalist cataloging creatures",
+    "Philosopher debating truth"
+  ],
+  "natural": [
+    "Druid circle protecting nature",
+    "Ranger company patrolling wilderness",
+    "Beast master controlling animals",
+    "Hermit seeking solitude",
+    "Hunting lodge managing game",
+    "Forest spirits demanding tribute",
+    "Mountain clan living traditionally",
+    "Swamp witch practicing magic"
+  ]
+} 

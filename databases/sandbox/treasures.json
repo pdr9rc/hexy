@@ -1,0 +1,38 @@
+{
+  "magical_items": [
+    "Sword that glows in the presence of evil",
+    "Ring that grants invisibility",
+    "Amulet that protects from magic",
+    "Staff that can control weather",
+    "Crystal ball that shows the future",
+    "Boots that allow flight",
+    "Cloak that makes the wearer silent",
+    "Gloves that enhance strength",
+    "Helmet that grants wisdom",
+    "Shield that reflects spells"
+  ],
+  "artifacts": [
+    "Ancient crown of a lost kingdom",
+    "Sacred relic of a forgotten god",
+    "Map to a hidden treasure",
+    "Key to an ancient vault",
+    "Scroll containing forbidden knowledge",
+    "Crystal that stores memories",
+    "Mirror that shows other worlds",
+    "Book that contains all knowledge",
+    "Sword that can slay any creature",
+    "Crown that controls the weather"
+  ],
+  "valuables": [
+    "Pouch of rare gemstones",
+    "Chest of ancient gold coins",
+    "Jeweled crown or tiara",
+    "Golden statue or figurine",
+    "Precious metal ingots",
+    "Rare artwork or painting",
+    "Exotic spices or perfumes",
+    "Fine silk or velvet",
+    "Rare books or scrolls",
+    "Ancient pottery or ceramics"
+  ]
+}

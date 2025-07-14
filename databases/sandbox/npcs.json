@@ -1,0 +1,50 @@
+{
+  "noble_npcs": [
+    "Ambitious young lord seeking power",
+    "Wise old noble advising the ruler",
+    "Corrupt official abusing authority",
+    "Exiled noble plotting return",
+    "Noble scholar studying ancient texts",
+    "Military noble leading troops",
+    "Merchant noble controlling trade",
+    "Religious noble serving the faith",
+    "Noble adventurer seeking glory",
+    "Noble diplomat negotiating peace"
+  ],
+  "merchant_npcs": [
+    "Wealthy merchant controlling trade routes",
+    "Crafty trader dealing in exotic goods",
+    "Banker with political influence",
+    "Smuggler avoiding taxes and laws",
+    "Guild master protecting trade secrets",
+    "Caravan master leading expeditions",
+    "Market master regulating commerce",
+    "Merchant spy gathering information",
+    "Merchant prince with noble ambitions",
+    "Merchant scholar studying economics"
+  ],
+  "religious_npcs": [
+    "Orthodox priest maintaining tradition",
+    "Heretical cult leader spreading influence",
+    "Monastic scholar preserving knowledge",
+    "Religious zealot enforcing doctrine",
+    "Charitable cleric helping the poor",
+    "Militant paladin fighting evil",
+    "Mystical druid protecting nature",
+    "Religious diplomat negotiating peace",
+    "Prophet predicting the future",
+    "Religious spy gathering intelligence"
+  ],
+  "criminal_npcs": [
+    "Thieves guild master controlling crime",
+    "Bandit chief leading raids",
+    "Assassin accepting contracts",
+    "Smuggler moving contraband",
+    "Fence handling stolen goods",
+    "Pirate captain terrorizing coasts",
+    "Corrupt official abusing power",
+    "Gang leader warring for territory",
+    "Criminal informant selling secrets",
+    "Criminal mastermind plotting schemes"
+  ]
+}

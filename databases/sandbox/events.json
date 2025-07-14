@@ -1,0 +1,38 @@
+{
+  "settlement_events": [
+    "Festival celebrating the harvest",
+    "Arrival of a traveling merchant caravan",
+    "Wedding of two prominent families",
+    "Funeral of a respected elder",
+    "Market day with exotic goods",
+    "Religious ceremony or ritual",
+    "Military parade or training exercise",
+    "Arrival of foreign dignitaries",
+    "Natural disaster (flood, fire, storm)",
+    "Outbreak of disease or plague"
+  ],
+  "wilderness_events": [
+    "Mysterious lights in the distance",
+    "Strange animal behavior",
+    "Unusual weather patterns",
+    "Discovery of ancient ruins",
+    "Encounter with nomadic travelers",
+    "Natural phenomenon (aurora, eclipse)",
+    "Wild animal migration",
+    "Forest fire or natural disaster",
+    "Mysterious disappearances",
+    "Signs of ancient magic"
+  ],
+  "faction_events": [
+    "Diplomatic meeting between factions",
+    "Trade agreement or dispute",
+    "Military conflict or skirmish",
+    "Religious ceremony or ritual",
+    "Criminal activity or investigation",
+    "Political intrigue or conspiracy",
+    "Alliance formation or betrayal",
+    "Resource competition or conflict",
+    "Cultural exchange or festival",
+    "Espionage or sabotage"
+  ]
+}

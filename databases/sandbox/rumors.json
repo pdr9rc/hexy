@@ -1,0 +1,38 @@
+{
+  "settlement_rumors": [
+    "The mayor is secretly a werewolf",
+    "A hidden treasure is buried under the town square",
+    "The local priest is actually a cult leader",
+    "Merchants are smuggling contraband through the town",
+    "A ghost haunts the old inn",
+    "The well water is poisoned",
+    "Bandits are planning to raid the town",
+    "A mysterious stranger has been asking questions",
+    "The crops are failing due to a curse",
+    "A dragon has been spotted in the nearby mountains"
+  ],
+  "faction_rumors": [
+    "The noble house is plotting against the king",
+    "The merchant guild is involved in illegal trade",
+    "The religious order is hiding ancient artifacts",
+    "The thieves guild has infiltrated the government",
+    "The military is preparing for war",
+    "The scholars have discovered forbidden knowledge",
+    "The druids are protecting a sacred site",
+    "The cult is planning a ritual sacrifice",
+    "The bandits have a secret hideout",
+    "The wizards are experimenting with dangerous magic"
+  ],
+  "dungeon_rumors": [
+    "Ancient treasure lies in the depths",
+    "A powerful monster guards the entrance",
+    "The dungeon is cursed and drives people mad",
+    "Secret passages lead to other locations",
+    "The dungeon was built by an ancient civilization",
+    "A magical portal exists somewhere inside",
+    "The dungeon is actually alive",
+    "Time flows differently inside",
+    "The dungeon is connected to the underworld",
+    "A powerful artifact is hidden within"
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "trade_goods": {
+    "mountain_goods": [
+      "Iron ore and ingots",
+      "Precious metals (gold, silver)",
+      "Gemstones and crystals",
+      "Stone and marble",
+      "Coal and charcoal",
+      "Metal weapons and tools",
+      "Mountain herbs and spices",
+      "Dwarven crafts",
+      "Mountain furs",
+      "Mineral water"
+    ],
+    "forest_goods": [
+      "Timber and lumber",
+      "Furs and leather",
+      "Herbs and medicinal plants",
+      "Honey and beeswax",
+      "Wild game meat",
+      "Mushrooms and truffles",
+      "Resin and pitch",
+      "Bark and dyes",
+      "Nuts and berries",
+      "Wooden crafts"
+    ],
+    "coast_goods": [
+      "Fish and seafood",
+      "Salt and seaweed",
+      "Shells and pearls",
+      "Shipbuilding materials",
+      "Marine oils",
+      "Coastal herbs",
+      "Coral and amber",
+      "Sea salt",
+      "Dried fish",
+      "Marine artifacts"
+    ],
+    "plains_goods": [
+      "Grain and flour",
+      "Livestock and meat",
+      "Wool and textiles",
+      "Leather and hides",
+      "Dairy products",
+      "Vegetables and fruits",
+      "Horses and cattle",
+      "Plains herbs",
+      "Bread and pastries",
+      "Agricultural tools"
+    ],
+    "swamp_goods": [
+      "Rare herbs and plants",
+      "Bog iron",
+      "Swamp creatures",
+      "Poisonous substances",
+      "Mystical ingredients",
+      "Reeds and rushes",
+      "Swamp mud (for pottery)",
+      "Medicinal mosses",
+      "Swamp fish",
+      "Ancient artifacts"
+    ],
+    "desert_goods": [
+      "Spices and incense",
+      "Precious stones",
+      "Desert herbs",
+      "Camel products",
+      "Desert metals",
+      "Ancient artifacts",
+      "Desert textiles",
+      "Oasis fruits",
+      "Desert salt",
+      "Exotic animals"
+    ]
+  },
+  "economic_activities": {
+    "primary_industries": [
+      "Mining and extraction",
+      "Farming and agriculture",
+      "Fishing and aquaculture",
+      "Logging and forestry",
+      "Hunting and trapping",
+      "Herding and ranching",
+      "Gathering and foraging",
+      "Crafting and manufacturing",
+      "Trading and commerce",
+      "Service industries"
+    ],
+    "secondary_industries": [
+      "Metalworking and smithing",
+      "Textile production",
+      "Food processing",
+      "Construction and building",
+      "Transportation and shipping",
+      "Banking and finance",
+      "Education and training",
+      "Entertainment and recreation",
+      "Religious services",
+      "Military and security"
+    ],
+    "tertiary_industries": [
+      "Government and administration",
+      "Healthcare and medicine",
+      "Education and research",
+      "Entertainment and arts",
+      "Hospitality and tourism",
+      "Legal and judicial services",
+      "Religious and spiritual services",
+      "Information and communication",
+      "Financial and insurance services",
+      "Professional and technical services"
+    ]
+  },
+  "market_types": [
+    "Daily market",
+    "Weekly market",
+    "Monthly fair",
+    "Seasonal festival",
+    "Annual trade fair",
+    "Specialty market",
+    "Black market",
+    "Guild market",
+    "Religious market",
+    "Military market"
+  ],
+  "trade_routes": {
+    "land_routes": [
+      "Ancient road network",
+      "Caravan trails",
+      "Military roads",
+      "Pilgrimage routes",
+      "Trade highways",
+      "Mountain passes",
+      "Forest paths",
+      "Desert tracks",
+      "Plains trails",
+      "Swamp causeways"
+    ],
+    "water_routes": [
+      "River trade routes",
+      "Coastal shipping lanes",
+      "Canal networks",
+      "Lake trade routes",
+      "Underground rivers",
+      "Port-to-port routes",
+      "Fishing routes",
+      "Pirate routes",
+      "Merchant routes",
+      "Exploration routes"
+    ]
+  },
+  "economic_events": [
+    "Market day with exotic goods",
+    "Trade caravan arrival",
+    "Merchant guild meeting",
+    "Tax collection day",
+    "Harvest festival",
+    "Fishing season opening",
+    "Mining expedition return",
+    "Craft fair",
+    "Livestock auction",
+    "Grain harvest celebration"
+  ]
+} 

@@ -438,6 +438,9 @@
                     <div class="btn-group me-2" role="group">
                         <button class="btn btn-mork-borg" onclick="showLoreOverview()">📜 LORE</button>
                     </div>
+                    <div class="btn-group me-2" role="group">
+                        
+                    </div>
                     <div class="btn-group" role="group">
                         <button class="btn btn-mork-borg" onclick="resetContinent()">🔄 RESET CONTINENT</button>
                     </div>
@@ -564,12 +567,13 @@
     </div>
 
     <script>
-        let currentHex = '';
-        let isDragging = false;
-        let dragStartX = 0;
-        let dragStartY = 0;
-        let scrollStartX = 0;
-        let scrollStartY = 0;
+            let currentHex = '';
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let scrollStartX = 0;
+    let scrollStartY = 0;
+
     
     // Map data from server - read from data attributes
     let mapData = {};
@@ -1033,12 +1037,29 @@
         
         let html = '';
         if (data.exists) {
-            html = generateHexModalHTML(data, hexCode);
+            // Try to get enhanced data first
+            fetch(`/api/enhanced-hex/${hexCode}`)
+                .then(response => response.json())
+                .then(enhancedData => {
+                    if (enhancedData.error) {
+                        // Fallback to basic data
+                        html = generateHexModalHTML(data, hexCode);
+                        modalContainer.innerHTML = html;
+                    } else {
+                        // Use enhanced data
+                        html = generateEnhancedHexModalHTML(enhancedData, hexCode);
+                        modalContainer.innerHTML = html;
+                    }
+                })
+                .catch(error => {
+                    console.log('Enhanced data not available, using basic data');
+                    html = generateHexModalHTML(data, hexCode);
+                    modalContainer.innerHTML = html;
+                });
         } else {
             html = generateEmptyHexHTML(hexCode);
+            modalContainer.innerHTML = html;
         }
-        
-        modalContainer.innerHTML = html;
     }
 
     function generateHexModalHTML(data, hexCode) {
@@ -1218,6 +1239,142 @@
 ║ DEMEANOR:                                                   ║`;
             const demeanorLines = demeanor.match(/.{1,58}/g) || [demeanor];
             demeanorLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        html += `
+╚══════════════════════════════════════════════════════════════╝
+                    </pre>
+                </div>
+            </div>
+        `;
+        
+        return html;
+    }
+
+    function generateEnhancedHexModalHTML(data, hexCode) {
+        const terrain = data.terrain || 'unknown';
+        const terrainName = data.terrain_name || terrain.charAt(0).toUpperCase() + terrain.slice(1);
+        const encounter = data.enhanced_encounter || data.encounter || 'Unknown encounter';
+        const summary = data.summary || 'No summary available';
+        
+
+        
+        // Generate ASCII terrain art
+        const asciiTerrain = getAsciiTerrain(terrain);
+        
+        // Build the HTML string
+        let html = `
+            <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    HEX ${hexCode} - ${terrainName.toUpperCase().padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ ENHANCED SUMMARY:                                           ║`;
+        
+        // Add summary
+        const summaryLines = summary.match(/.{1,58}/g) || [summary];
+        summaryLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ENHANCED ENCOUNTER:                                         ║`;
+        
+        // Add enhanced encounter
+        const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
+        encounterLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        // Add factions if present
+        if (factions.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ FACTIONS:                                                   ║`;
+            factions.forEach(faction => {
+                const factionLine = `- ${faction.name} (${faction.type}) - Power: ${faction.power_level}`;
+                const factionLines = factionLine.match(/.{1,58}/g) || [factionLine];
+                factionLines.forEach(line => {
+                    html += `
+║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        
+        // Add settlements if present
+        if (settlements.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SETTLEMENTS:                                                ║`;
+            settlements.forEach(settlement => {
+                const settlementLine = `- ${settlement.name} (${settlement.type}) - Pop: ${settlement.population}`;
+                const settlementLines = settlementLine.match(/.{1,58}/g) || [settlementLine];
+                settlementLines.forEach(line => {
+                    html += `
+║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        
+        // Add castles if present
+        if (castles.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ CASTLES:                                                    ║`;
+            castles.forEach(castle => {
+                const castleLine = `- ${castle.name} - ${castle.condition}`;
+                const castleLines = castleLine.match(/.{1,58}/g) || [castleLine];
+                castleLines.forEach(line => {
+                    html += `
+║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        
+        // Add conflicts if present
+        if (conflicts.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ CONFLICTS:                                                  ║`;
+            conflicts.slice(0, 3).forEach(conflict => { // Show first 3 conflicts
+                const conflictLine = `- ${conflict.type} between ${conflict.factions.join(' & ')}`;
+                const conflictLines = conflictLine.match(/.{1,58}/g) || [conflictLine];
+                conflictLines.forEach(line => {
+                    html += `
+║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        
+        // Add plot hooks if present
+        if (plotHooks.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ PLOT HOOKS:                                                 ║`;
+            plotHooks.slice(0, 3).forEach(hook => { // Show first 3 plot hooks
+                const hookLines = hook.match(/.{1,58}/g) || [hook];
+                hookLines.forEach(line => {
+                    html += `
+║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        
+        // Add economic data if present
+        if (economicData.trade_routes && economicData.trade_routes.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ECONOMIC DATA:                                              ║`;
+            const tradeLine = `Trade Routes: ${economicData.trade_routes.join(', ')}`;
+            const tradeLines = tradeLine.match(/.{1,58}/g) || [tradeLine];
+            tradeLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
@@ -1539,6 +1696,8 @@
                 showErrorState('lore-overview');
             });
     }
+    
+
     
     function getTerrainSymbol(terrain) {
         const symbols = {

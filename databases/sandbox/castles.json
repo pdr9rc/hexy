@@ -1,0 +1,102 @@
+{
+  "conditions": [
+    "Pristine - Well maintained and fully functional",
+    "Good - Minor repairs needed but fully habitable",
+    "Fair - Some structural damage but still defensible",
+    "Poor - Major repairs required, partially habitable",
+    "Ruined - Partially collapsed, dangerous to enter",
+    "Abandoned - Overgrown ruins with no inhabitants",
+    "Haunted - Cursed or inhabited by undead",
+    "Occupied - Inhabited by squatters or bandits",
+    "Restored - Recently repaired and modernized",
+    "Ancient - Pre-dating current civilization"
+  ],
+  "defenses": [
+    "High stone walls with towers",
+    "Deep moat with drawbridge",
+    "Murder holes and portcullis",
+    "Concentric wall design",
+    "Natural cliff protection",
+    "Magical ward stones",
+    "Arrow slits and battlements",
+    "Underground escape tunnels",
+    "Hidden passages and secret doors",
+    "Boiling oil and pitch defenses",
+    "Crossbow positions on walls",
+    "Siege engine platforms",
+    "Water-filled moat with crocodiles",
+    "Poisoned arrow traps",
+    "Collapsible bridges"
+  ],
+  "garrison_sizes": {
+    "small": {
+      "total": 20,
+      "cavalry": 2,
+      "archers": 6,
+      "infantry": 12,
+      "description": "Minimal garrison for small castle"
+    },
+    "medium": {
+      "total": 50,
+      "cavalry": 8,
+      "archers": 15,
+      "infantry": 27,
+      "description": "Standard garrison for medium castle"
+    },
+    "large": {
+      "total": 100,
+      "cavalry": 15,
+      "archers": 30,
+      "infantry": 55,
+      "description": "Large garrison for major castle"
+    },
+    "huge": {
+      "total": 200,
+      "cavalry": 30,
+      "archers": 60,
+      "infantry": 110,
+      "description": "Massive garrison for fortress"
+    }
+  },
+  "special_features": [
+    "Ancient library with forbidden knowledge",
+    "Underground dungeon complex",
+    "Secret treasure vault",
+    "Magical portal to another realm",
+    "Sacred chapel with holy relics",
+    "Alchemist's laboratory",
+    "Astronomical observatory",
+    "Underground spring and cisterns",
+    "Hidden armory with magical weapons",
+    "Ancient throne room",
+    "Dragon's lair in the highest tower",
+    "Ghostly banquet hall",
+    "Cursed mirror that shows the future",
+    "Underground temple to forgotten gods",
+    "Secret passage to nearby settlement"
+  ],
+  "lord_types": [
+    "Noble lord with political ambitions",
+    "Retired military commander",
+    "Scholarly noble studying ancient texts",
+    "Merchant prince with military interests",
+    "Religious leader with temporal power",
+    "Exiled noble seeking revenge",
+    "Adventurer who claimed the castle",
+    "Ancient being who never ages",
+    "Corrupt official abusing power",
+    "Benevolent ruler protecting the people"
+  ],
+  "treasury_contents": [
+    "Gold coins and precious metals",
+    "Gems and jewelry",
+    "Ancient artifacts and relics",
+    "Magical weapons and armor",
+    "Important documents and maps",
+    "Rare books and scrolls",
+    "Exotic trade goods",
+    "Tribute from vassals",
+    "War booty and plunder",
+    "Family heirlooms and treasures"
+  ]
+} 

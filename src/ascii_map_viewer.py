@@ -454,6 +454,50 @@ def get_terrain_overview():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
+@app.route('/api/enhanced-hex/<hex_code>')
+def get_enhanced_hex_info(hex_code):
+    """Get enhanced hex information with integrated sandbox data."""
+    try:
+        # Get terrain for the hex
+        terrain = get_terrain_for_hex(hex_code)
+        
+        # Generate enhanced content using the integrated generation engine
+        enhanced_data = main_map_generator.generate_hex_content(hex_code, terrain)
+        
+        # Add API-specific formatting
+        api_data = {
+            'hex_code': hex_code,
+            'terrain': terrain,
+            'terrain_name': main_map_generator._get_translated_terrain_name(terrain),
+            'content_type': enhanced_data.get('content_type', 'unknown'),
+            'encounter': enhanced_data.get('enhanced_encounter', enhanced_data.get('encounter', 'Unknown encounter')),
+            'base_content': enhanced_data.get('base_content', {}),
+            'sandbox_data': enhanced_data.get('sandbox_data', {}),
+            'formatted_content': enhanced_data.get('formatted_content', ''),
+            'language': current_language
+        }
+        
+        return jsonify(api_data)
+    except Exception as e:
+        return jsonify({
+            'error': f'Failed to get enhanced hex data: {str(e)}',
+            'hex_code': hex_code
+        }), 500
+
+@app.route('/api/enhanced-region/<center_hex>')
+def get_enhanced_region_info(center_hex):
+    """Get enhanced region information with sandbox data."""
+    try:
+        from sandbox_integration import sandbox_integration
+        radius = request.args.get('radius', 9, type=int)
+        region_data = sandbox_integration.get_region_api_data(center_hex, radius)
+        return jsonify(region_data)
+    except Exception as e:
+        return jsonify({
+            'error': f'Failed to get enhanced region data: {str(e)}',
+            'center_hex': center_hex
+        }), 500
+
 @app.route('/api/generate-hex', methods=['POST'])
 def generate_single_hex():
     """Generate content for a single hex."""
