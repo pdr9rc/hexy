@@ -95,7 +95,7 @@ def set_language():
 
 @app.route('/api/hex/<hex_code>')
 def get_hex_info(hex_code):
-    """Get hex information for popup."""
+    """Get hex information for popup with enhanced data from simplified generation engine."""
     hex_file = f"dying_lands_output/hexes/hex_{hex_code}.md"
     
     # Check if it's a major city
@@ -239,93 +239,72 @@ def get_hex_info(hex_code):
                 'hex_code': hex_code
             })
     else:
-        # Generate hex content on demand with current language
+        # Generate hex content on demand with current language using simplified generation engine
         try:
             terrain = get_terrain_for_hex(hex_code)
-            # Use the current main_map_generator which has the correct language
-            hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
+            
+            # Use simplified generation engine for enhanced hex data
+            from simplified_generation_engine import SimplifiedGenerationEngine
+            gen_engine = SimplifiedGenerationEngine(current_language)
+            hex_content = gen_engine.generate_hex_content(hex_code, terrain)
             
             # Get translated terrain name for display
             terrain_name = main_map_generator._get_translated_terrain_name(terrain)
             
             # Check if it's a settlement
-            if hex_data.get('is_settlement'):
+            if hex_content.get('settlements'):
                 return jsonify({
                     'exists': True,
                     'is_settlement': True,
                     'hex_type': 'settlement',
-                    'terrain': hex_data.get('terrain', terrain),
-                    'title': hex_data.get('name', f'Settlement {hex_code}'),
-                    'description': hex_data.get('denizen', 'A settlement'),
-                    'population': hex_data.get('population', 'Unknown'),
-                    'atmosphere': hex_data.get('atmosphere', 'Unknown'),
-                    'notable_feature': hex_data.get('notable_feature', 'Unknown'),
-                    'local_tavern': hex_data.get('local_tavern', 'Unknown'),
-                    'local_power': hex_data.get('local_power', 'Unknown'),
-                    'settlement_art': hex_data.get('settlement_art', ''),
-                    'name': hex_data.get('name', f'Settlement {hex_code}'),
+                    'terrain': hex_content.get('terrain_type', terrain),
+                    'title': f'Settlement {hex_code}',
+                    'description': hex_content.get('description', 'A settlement'),
+                    'population': 'Unknown',
+                    'atmosphere': 'Unknown',
+                    'notable_feature': 'Unknown',
+                    'local_tavern': 'Unknown',
+                    'local_power': 'Unknown',
+                    'settlement_art': '',
+                    'name': f'Settlement {hex_code}',
                     'hex_code': hex_code,
                     'redirect_to': 'settlement'
                 })
             
-            # Generate markdown content
-            markdown_content = main_map_generator._generate_markdown_content(hex_data)
-            if MARKDOWN_AVAILABLE:
-                html = markdown.markdown(markdown_content, extensions=['codehilite', 'fenced_code', 'tables'])
-            else:
-                # Fallback if markdown module is not available
-                html = f'<pre>{markdown_content}</pre>'
-            
-            # Determine hex type
-            hex_type = 'wilderness'
-            if hex_data.get('is_settlement'):
-                hex_type = 'settlement'
-            elif hex_data.get('is_dungeon'):
-                hex_type = 'dungeon'
-            elif hex_data.get('is_beast'):
-                hex_type = 'beast'
-            elif hex_data.get('is_npc'):
-                hex_type = 'npc'
-            
+            # Return simplified generation engine data structure
             return jsonify({
                 'exists': True,
                 'is_major_city': False,
-                'is_settlement': hex_data.get('is_settlement', False),
-                'is_dungeon': hex_data.get('is_dungeon', False),
-                'is_beast': hex_data.get('is_beast', False),
-                'is_npc': hex_data.get('is_npc', False),
-                'hex_type': hex_type,
+                'is_settlement': bool(hex_content.get('settlements')),
+                'is_dungeon': False,
+                'is_beast': False,
+                'is_npc': bool(hex_content.get('npcs')),
+                'hex_type': 'wilderness',
                 'title': f"Hex {hex_code}",
-                'html': html,
-                'raw': markdown_content,
                 'hex_code': hex_code,
-                'terrain': hex_data.get('terrain', terrain),
+                'terrain': hex_content.get('terrain_type', terrain),
                 'terrain_name': terrain_name,
-                'encounter': hex_data.get('encounter', 'Unknown encounter'),
-                'denizen': hex_data.get('denizen', 'No denizen information'),
-                'notable_feature': hex_data.get('notable_feature', 'No notable features'),
-                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere'),
-                'loot': hex_data.get('loot'),
-                'scroll': hex_data.get('scroll'),
-                'dungeon_type': hex_data.get('dungeon_type'),
-                'beast_type': hex_data.get('beast_type'),
-                'name': hex_data.get('name'),
-                'population': hex_data.get('population'),
-                'local_tavern': hex_data.get('local_tavern'),
-                'local_power': hex_data.get('local_power'),
-                'settlement_art': hex_data.get('settlement_art'),
-                'beast_feature': hex_data.get('beast_feature'),
-                'beast_behavior': hex_data.get('beast_behavior'),
-                'motivation': hex_data.get('motivation'),
-                'feature': hex_data.get('feature'),
-                'demeanor': hex_data.get('demeanor'),
-                'denizen_type': hex_data.get('denizen_type'),
-                'threat_level': hex_data.get('threat_level'),
-                'territory': hex_data.get('territory'),
-                'encounter_type': hex_data.get('encounter_type'),
-                'is_sea_encounter': hex_data.get('is_sea_encounter', False),
-                'danger': hex_data.get('danger'),
-                'treasure': hex_data.get('treasure')
+                'weather': hex_content.get('weather', 'Clear skies'),
+                'difficulty': hex_content.get('difficulty', 'Normal'),
+                'description': hex_content.get('description', 'A hex in the dying lands'),
+                'encounters': hex_content.get('encounters', []),
+                'npcs': hex_content.get('npcs', []),
+                'settlements': hex_content.get('settlements', []),
+                'loot': hex_content.get('loot', []),
+                # Legacy fields for compatibility
+                'encounter': hex_content.get('encounters', ['Unknown encounter'])[0] if hex_content.get('encounters') else 'Unknown encounter',
+                'denizen': hex_content.get('npcs', ['No denizen information'])[0] if hex_content.get('npcs') else 'No denizen information',
+                'notable_feature': 'No notable features',
+                'atmosphere': 'Unknown atmosphere',
+                'treasure': hex_content.get('loot', ['No treasure found'])[0] if hex_content.get('loot') else 'No treasure found',
+                'ancient_knowledge': 'No ancient knowledge',
+                'danger': 'No dangers present',
+                'threat_level': hex_content.get('difficulty', 'Normal'),
+                'territory': 'No territory claimed',
+                'location': f'Hex {hex_code}',
+                'motivation': 'Unknown motivation',
+                'demeanor': 'Unknown demeanor',
+                'feature': 'No notable features'
             })
         except Exception as e:
             return jsonify({
@@ -505,7 +484,7 @@ def get_enhanced_region_info(center_hex):
 
 @app.route('/api/generate-hex', methods=['POST'])
 def generate_single_hex():
-    """Generate content for a single hex."""
+    """Generate content for a single hex using simplified generation engine."""
     try:
         data = request.get_json()
         hex_code = data.get('hex')
@@ -513,14 +492,23 @@ def generate_single_hex():
         if not hex_code:
             return jsonify({'success': False, 'error': 'Hex code required'})
         
-        # Generate hex content using unified system
+        # Get terrain type for the hex
+        terrain_type = get_terrain_for_hex(hex_code)
+        
+        # Generate hex content using simplified generation engine
+        from simplified_generation_engine import SimplifiedGenerationEngine
+        gen_engine = SimplifiedGenerationEngine(current_language)
+        hex_content = gen_engine.generate_hex_content(hex_code, terrain_type)
+        
+        # Also generate using unified system for file output
         result = main_map_generator.generate_single_hex(hex_code)
         
         return jsonify({
             'success': True,
             'hex_code': hex_code,
             'message': f'Generated hex {hex_code}',
-            'content_type': result.get('content_type', 'unknown')
+            'content_type': result.get('content_type', 'unknown'),
+            'hex_content': hex_content
         })
         
     except Exception as e:

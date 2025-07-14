@@ -6,7 +6,6 @@
     <title>🗺️ The Dying Lands - Interactive Map</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/static/fonts.css" rel="stylesheet">
-    <link href="/static/data-tables.css" rel="stylesheet">
     <style>
     :root {
         --mork-black: #000000;
@@ -558,7 +557,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/data-tables.js"></script>
     
     <!-- Map data stored in data attributes to avoid linter issues -->
     <div id="mapData" 
@@ -814,9 +812,9 @@
         
         let html = '';
         if (data.exists) {
-            html = generateHexDataTable(data, hexCode);
+            html = generateHexModalHTML(data, hexCode);
         } else {
-            html = generateEmptyHexTable(hexCode);
+            html = generateEmptyHexHTML(hexCode);
         }
         
         modalContainer.innerHTML = html;
@@ -837,7 +835,15 @@
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <button class="btn btn-mork-borg btn-warning mb-4" onclick="restoreMap()">RETURN TO MAP</button>
                             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-                                ${generateCityDataTable(city, hexCode, data)}
+                                <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    ${city.name.toUpperCase().padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ LOCATION: HEX ${hexCode} - ${city.region.toUpperCase().padEnd(40)}║
+║ POPULATION: ${city.population.padEnd(50)}║
+║ ATMOSPHERE: ${city.atmosphere.substring(0, 50).padEnd(50)}║
+╠══════════════════════════════════════════════════════════════╣
+║ DESCRIPTION:                                                ║`;
                     
                     // Split description into lines
                     const descLines = city.description.match(/.{1,58}/g) || [city.description];
@@ -1057,7 +1063,7 @@
     }
 
     function generateHexModalHTML(data, hexCode) {
-        const terrain = data.terrain || 'unknown';
+        const terrain = data.terrain || data.terrain_type || 'unknown';
         const terrainName = data.terrain_name || terrain.charAt(0).toUpperCase() + terrain.slice(1);
         const encounter = data.encounter || 'Unknown encounter';
         const denizen = data.denizen || 'No denizen information';
@@ -1074,6 +1080,15 @@
         const feature = data.feature || 'No notable features';
         const settlementLayout = data.settlement_layout || '';
         
+        // New fields from simplified generation engine
+        const weather = data.weather || 'Clear skies';
+        const difficulty = data.difficulty || 'Normal';
+        const description = data.description || 'A hex in the dying lands';
+        const encounters = data.encounters || [];
+        const npcs = data.npcs || [];
+        const settlements = data.settlements || [];
+        const loot = data.loot || [];
+        
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
         
@@ -1086,6 +1101,8 @@
 ║                    HEX ${hexCode} - ${terrainName.toUpperCase().padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRAIN: ${terrainName.padEnd(50)}║
+║ WEATHER: ${weather.padEnd(50)}║
+║ DIFFICULTY: ${difficulty.padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRAIN ART:                                                ║`;
         
@@ -1096,57 +1113,118 @@
 ║ ${line.padEnd(58)}║`;
         });
         
+        // Add description
         html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DESCRIPTION:                                                ║`;
+        const descLines = description.match(/.{1,58}/g) || [description];
+        descLines.forEach(line => {
+            html += `
+║ ${line.padEnd(58)}║`;
+        });
+        
+        // Add encounters if they exist
+        if (encounters.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ENCOUNTERS:                                                 ║`;
+            encounters.forEach((enc, index) => {
+                const encounterLines = enc.match(/.{1,56}/g) || [enc];
+                encounterLines.forEach(line => {
+                    html += `
+║ ${index === 0 ? '•' : ' '} ${line.padEnd(56)}║`;
+                });
+            });
+        } else if (encounter && encounter !== 'Unknown encounter') {
+            html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ ENCOUNTER:                                                  ║`;
-        
-        // Split encounter into lines
-        const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
-        encounterLines.forEach(line => {
-            html += `
+            const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
+            encounterLines.forEach(line => {
+                html += `
 ║ ${line.padEnd(58)}║`;
-        });
+            });
+        }
         
-        html += `
+        // Add NPCs if they exist
+        if (npcs.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ NPCS:                                                       ║`;
+            npcs.forEach((npc, index) => {
+                const npcLines = npc.match(/.{1,56}/g) || [npc];
+                npcLines.forEach(line => {
+                    html += `
+║ ${index === 0 ? '•' : ' '} ${line.padEnd(56)}║`;
+                });
+            });
+        } else if (denizen && denizen !== 'No denizen information') {
+            html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ DENIZEN:                                                    ║`;
-        
-        // Split denizen into lines
-        const denizenLines = denizen.match(/.{1,58}/g) || [denizen];
-        denizenLines.forEach(line => {
-            html += `
+            const denizenLines = denizen.match(/.{1,58}/g) || [denizen];
+            denizenLines.forEach(line => {
+                html += `
 ║ ${line.padEnd(58)}║`;
-        });
+            });
+        }
         
-        html += `
+        // Add settlements if they exist
+        if (settlements.length > 0) {
+            html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ NOTABLE FEATURES:                                           ║`;
+║ SETTLEMENTS:                                                ║`;
+            settlements.forEach((settlement, index) => {
+                const settLines = settlement.match(/.{1,56}/g) || [settlement];
+                settLines.forEach(line => {
+                    html += `
+║ ${index === 0 ? '•' : ' '} ${line.padEnd(56)}║`;
+                });
+            });
+        }
         
-        // Split notable features into lines
-        const featureLines = notableFeature.match(/.{1,58}/g) || [notableFeature];
-        featureLines.forEach(line => {
+        // Add loot if it exists
+        if (loot.length > 0) {
             html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ ATMOSPHERE:                                                 ║`;
-        
-        // Split atmosphere into lines
-        const atmosphereLines = atmosphere.match(/.{1,58}/g) || [atmosphere];
-        atmosphereLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        // Add treasure if present
-        if (treasure && treasure !== 'No treasure found') {
+║ LOOT:                                                       ║`;
+            loot.forEach((item, index) => {
+                const lootLines = item.match(/.{1,56}/g) || [item];
+                lootLines.forEach(line => {
+                    html += `
+║ ${index === 0 ? '•' : ' '} ${line.padEnd(56)}║`;
+                });
+            });
+        } else if (treasure && treasure !== 'No treasure found') {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ TREASURE:                                                   ║`;
             const treasureLines = treasure.match(/.{1,58}/g) || [treasure];
             treasureLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add notable features
+        if (notableFeature && notableFeature !== 'No notable features') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ NOTABLE FEATURES:                                           ║`;
+            const featureLines = notableFeature.match(/.{1,58}/g) || [notableFeature];
+            featureLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add atmosphere
+        if (atmosphere && atmosphere !== 'Unknown atmosphere') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ATMOSPHERE:                                                 ║`;
+            const atmosphereLines = atmosphere.match(/.{1,58}/g) || [atmosphere];
+            atmosphereLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
@@ -1181,7 +1259,6 @@
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ THREAT LEVEL:                                               ║`;
-            
             const threatLines = threatLevel.match(/.{1,58}/g) || [threatLevel];
             threatLines.forEach(line => {
                 html += `
@@ -1194,7 +1271,6 @@
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRITORY:                                                  ║`;
-            
             const territoryLines = territory.match(/.{1,58}/g) || [territory];
             territoryLines.forEach(line => {
                 html += `
@@ -1389,7 +1465,32 @@
         return html;
     }
 
-    // This function is now handled by generateEmptyHexTable() in data-tables.js
+    function generateEmptyHexHTML(hexCode) {
+        return `
+            <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+╔══════════════════════════════════════════════════════════════╗
+║                    HEX ${hexCode} - EMPTY                    ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  NO CONTENT GENERATED                                        ║
+║                                                              ║
+║  This hex has no content yet.                               ║
+║  Click "GENERATE CONTENT" to create encounters              ║
+║  and details for this location.                             ║
+║                                                              ║
+║  The dying lands await your exploration...                  ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                    </pre>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-mork-borg" onclick="generateHexContent('${hexCode}')">GENERATE CONTENT</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
 
     function getAsciiTerrain(terrain) {
         const terrainArt = {
