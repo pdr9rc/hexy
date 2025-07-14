@@ -5,7 +5,10 @@ Interactive web viewer for the hex-based map with ASCII representation.
 """
 
 import os
+import sys
 import json
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 try:
     import markdown
     MARKDOWN_AVAILABLE = True
@@ -471,6 +474,8 @@ def get_enhanced_hex_info(hex_code):
             'terrain_name': main_map_generator._get_translated_terrain_name(terrain),
             'content_type': enhanced_data.get('content_type', 'unknown'),
             'encounter': enhanced_data.get('enhanced_encounter', enhanced_data.get('encounter', 'Unknown encounter')),
+            'enhanced_encounter': enhanced_data.get('enhanced_encounter', enhanced_data.get('encounter', 'Unknown encounter')),
+            'summary': enhanced_data.get('summary', enhanced_data.get('encounter', 'No summary available')),
             'base_content': enhanced_data.get('base_content', {}),
             'sandbox_data': enhanced_data.get('sandbox_data', {}),
             'formatted_content': enhanced_data.get('formatted_content', ''),

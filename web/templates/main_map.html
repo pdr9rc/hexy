@@ -1260,7 +1260,12 @@
         const encounter = data.enhanced_encounter || data.encounter || 'Unknown encounter';
         const summary = data.summary || 'No summary available';
         
-
+        // Extract sandbox data
+        const sandboxData = data.sandbox_data || {};
+        const factions = sandboxData.factions || [];
+        const settlements = sandboxData.settlements || [];
+        const castles = sandboxData.castles || [];
+        const conflicts = sandboxData.conflicts || [];
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
