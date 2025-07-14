@@ -202,29 +202,32 @@ def get_hex_info(hex_code):
                 'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere'),
                 # NPC specific fields
                 'name': hex_data.get('name'),
-                'motivation': hex_data.get('motivation'),
-                'feature': hex_data.get('feature'),
-                'demeanor': hex_data.get('demeanor'),
+                'motivation': hex_data.get('motivation', 'Unknown motivation'),
+                'feature': hex_data.get('feature', 'No notable features'),
+                'demeanor': hex_data.get('demeanor', 'Unknown demeanor'),
                 'denizen_type': hex_data.get('denizen_type'),
                 # Beast specific fields
                 'beast_type': hex_data.get('beast_type'),
                 'beast_behavior': hex_data.get('beast_behavior'),
                 'beast_feature': hex_data.get('beast_feature'),
-                'threat_level': hex_data.get('threat_level'),
-                'territory': hex_data.get('territory'),
+                'threat_level': hex_data.get('threat_level', 'Unknown threat level'),
+                'territory': hex_data.get('territory', 'No territory claimed'),
                 # Sea encounter specific fields
                 'encounter_type': hex_data.get('encounter_type'),
                 'is_sea_encounter': hex_data.get('is_sea_encounter', False),
-                # Dungeon specific fields (for completeness)
-                'danger': hex_data.get('danger'),
-                'treasure': hex_data.get('treasure'),
+                # Dungeon specific fields
+                'danger': hex_data.get('danger', 'No dangers present'),
+                'treasure': hex_data.get('treasure', 'No treasure found'),
                 'loot': hex_data.get('loot'),
                 'scroll': hex_data.get('scroll'),
+                'ancient_knowledge': hex_data.get('ancient_knowledge', 'No ancient knowledge'),
                 # Settlement specific fields
                 'population': hex_data.get('population'),
                 'local_tavern': hex_data.get('local_tavern'),
                 'local_power': hex_data.get('local_power'),
-                'settlement_art': hex_data.get('settlement_art')
+                'settlement_art': hex_data.get('settlement_art'),
+                'settlement_layout': hex_data.get('settlement_layout', 'No settlement layout'),
+                'location': hex_data.get('location', 'Unknown location')
             })
         except Exception as e:
             return jsonify({
@@ -388,7 +391,9 @@ def get_settlement_details(hex_code):
                     'terrain': terrain,
                     'hex_code': hex_code,
                     'settlement_map': settlement_map,
-                    'settlement_art': settlement_data.get('settlement_art', '')
+                    'settlement_art': settlement_data.get('settlement_art', ''),
+                    'settlement_layout': settlement_data.get('settlement_art', 'No settlement layout'),
+                    'custom_settlement_layout': settlement_data.get('custom_settlement_layout', 'No custom settlement layout')
                 })
         
         except Exception as e:

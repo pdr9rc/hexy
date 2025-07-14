@@ -978,13 +978,14 @@
                     });
                     
                     // Add settlement layout if available
-                    if (data.settlement_art) {
+                    if (data.settlement_art || data.settlement_layout) {
                         html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ SETTLEMENT LAYOUT:                                          ║
 ╠══════════════════════════════════════════════════════════════╣`;
                         
-                        const layoutLines = data.settlement_art.split('\n');
+                        const layoutContent = data.settlement_art || data.settlement_layout;
+                        const layoutLines = layoutContent.split('\n');
                         layoutLines.forEach(line => {
                             if (line.trim()) {
                                 // Center the layout line within the box
@@ -992,6 +993,18 @@
                                 html += `
 ║ ${displayLine}║`;
                             }
+                        });
+                    }
+                    
+                    // Add settlement layout if present (separate from art)
+                    if (data.settlement_layout && data.settlement_layout !== 'No settlement layout' && data.settlement_layout !== data.settlement_art) {
+                        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SETTLEMENT LAYOUT:                                          ║`;
+                        const layoutLines = data.settlement_layout.split('\n');
+                        layoutLines.forEach(line => {
+                            html += `
+║ ${line.padEnd(58)}║`;
                         });
                     }
                     
@@ -1035,8 +1048,16 @@
         const denizen = data.denizen || 'No denizen information';
         const notableFeature = data.notable_feature || 'No notable features';
         const atmosphere = data.atmosphere || 'Unknown atmosphere';
+        const treasure = data.treasure || 'No treasure found';
+        const ancientKnowledge = data.ancient_knowledge || 'No ancient knowledge';
+        const danger = data.danger || 'No dangers present';
         const threatLevel = data.threat_level || 'Unknown threat level';
-        const territory = data.territory || 'No territory information';
+        const territory = data.territory || 'No territory claimed';
+        const location = data.location || 'Unknown location';
+        const motivation = data.motivation || 'Unknown motivation';
+        const demeanor = data.demeanor || 'Unknown demeanor';
+        const feature = data.feature || 'No notable features';
+        const settlementLayout = data.settlement_layout || '';
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
@@ -1104,6 +1125,42 @@
 ║ ${line.padEnd(58)}║`;
         });
         
+        // Add treasure if present
+        if (treasure && treasure !== 'No treasure found') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ TREASURE:                                                   ║`;
+            const treasureLines = treasure.match(/.{1,58}/g) || [treasure];
+            treasureLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add ancient knowledge if present
+        if (ancientKnowledge && ancientKnowledge !== 'No ancient knowledge') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ ANCIENT KNOWLEDGE:                                          ║`;
+            const knowledgeLines = ancientKnowledge.match(/.{1,58}/g) || [ancientKnowledge];
+            knowledgeLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add danger if present
+        if (danger && danger !== 'No dangers present') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DANGER:                                                     ║`;
+            const dangerLines = danger.match(/.{1,58}/g) || [danger];
+            dangerLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
         // Add threat level section if available
         if (threatLevel && threatLevel !== 'Unknown threat level') {
             html += `
@@ -1118,13 +1175,49 @@
         }
         
         // Add territory section if available
-        if (territory && territory !== 'No territory information') {
+        if (territory && territory !== 'No territory claimed') {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRITORY:                                                  ║`;
             
             const territoryLines = territory.match(/.{1,58}/g) || [territory];
             territoryLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add location if present
+        if (location && location !== 'Unknown location') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ LOCATION:                                                   ║`;
+            const locationLines = location.match(/.{1,58}/g) || [location];
+            locationLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add motivation if present
+        if (motivation && motivation !== 'Unknown motivation') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ MOTIVATION:                                                 ║`;
+            const motivationLines = motivation.match(/.{1,58}/g) || [motivation];
+            motivationLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add demeanor if present
+        if (demeanor && demeanor !== 'Unknown demeanor') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DEMEANOR:                                                   ║`;
+            const demeanorLines = demeanor.match(/.{1,58}/g) || [demeanor];
+            demeanorLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
