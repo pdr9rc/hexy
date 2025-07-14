@@ -111,6 +111,45 @@
         font-size: 2.5rem;
     }
 
+    .header-ascii {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.2;
+        color: var(--mork-cyan);
+        margin: 0;
+        text-shadow: 0 0 10px var(--mork-cyan);
+    }
+
+    .dice-yellow {
+        color: var(--mork-yellow);
+        text-shadow: 0 0 10px var(--mork-yellow);
+    }
+
+    .dice-red {
+        color: var(--mork-magenta);
+        text-shadow: 0 0 10px var(--mork-magenta);
+    }
+
+    @media (max-width: 768px) {
+        .header-ascii {
+            font-size: 8px;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .header-ascii {
+            font-size: 6px;
+        }
+        
+        .main-header h1 {
+            font-size: 1.5rem;
+        }
+    }
+
     /* Control Panel */
     .control-panel {
         background: var(--mork-black);
@@ -369,21 +408,47 @@
 <body>
     <!-- Header -->
     <header class="main-header">
-    <div class="container-fluid">
-            <h1 class="text-center">THE DYING LANDS</h1>
+        <div class="container-fluid">
+            <div class="text-center">
+                <pre class="header-ascii" id="headerAscii">
+       *                                                   *
+      *                                                     *
+    **                                                       **
+*   **                                                       **   *
+**   **          *                               *          **   **
+***    *         **                             **         *    ***
+ ****            *********************************            ****
+   *******      ***           *******           ***      *******
+      ************   <span id="dice1">6</span>         *****   <span id="dice2">6</span>         ************
+         **********    **** * **   ** *******   **********
+               ********** ** **     ** ****************
+         *************** ** **  ***  **  *****************
+          ******   *********************  ******   ******
+                </pre>
+                <h1 style="margin-top: 10px;">THE DYING LANDS</h1>
+            </div>
         </div>
-        </header>
+    </header>
         
         <!-- Control Panel -->
         <div class="control-panel">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="btn-group me-2" role="group">
                         <button class="btn btn-mork-borg" onclick="showLoreOverview()">📜 LORE</button>
                     </div>
                     <div class="btn-group" role="group">
                         <button class="btn btn-mork-borg" onclick="resetContinent()">🔄 RESET CONTINENT</button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="language-select" style="color: var(--mork-cyan); font-size: 0.9em; margin-bottom: 5px;">LANGUAGE:</label>
+                        <select id="language-select" class="form-control" style="background: var(--mork-black); border: 1px solid var(--mork-cyan); color: var(--mork-cyan); font-family: 'pixelify-sans', monospace; font-size: 0.9em;" onchange="changeLanguage(this.value)">
+                            <option value="en">ENGLISH</option>
+                            <option value="pt">PORTUGUÊS</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -526,7 +591,38 @@
         
         // Setup middle-click drag functionality
         setupMapDrag();
+        
+        // Generate random dice numbers
+        generateDiceNumbers();
     });
+
+    function generateDiceNumbers() {
+        const dice1 = Math.floor(Math.random() * 6) + 1;
+        const dice2 = Math.floor(Math.random() * 6) + 1;
+        
+        const dice1Element = document.getElementById('dice1');
+        const dice2Element = document.getElementById('dice2');
+        
+        if (dice1Element && dice2Element) {
+            dice1Element.textContent = dice1;
+            dice2Element.textContent = dice2;
+            
+            // Remove existing color classes
+            dice1Element.classList.remove('dice-yellow', 'dice-red');
+            dice2Element.classList.remove('dice-yellow', 'dice-red');
+            
+            // Apply color based on dice values
+            if (dice1 === 6 && dice2 === 6) {
+                // Both sixes = red
+                dice1Element.classList.add('dice-red');
+                dice2Element.classList.add('dice-red');
+            } else {
+                // Otherwise = yellow
+                dice1Element.classList.add('dice-yellow');
+                dice2Element.classList.add('dice-yellow');
+            }
+        }
+    }
     
     function setupMapDrag() {
         const hexGrid = document.getElementById('hexGrid');
@@ -567,6 +663,34 @@
         });
     }
     
+    // Language change function
+    function changeLanguage(language) {
+        fetch('/api/set-language', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ language: language })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log(`Language changed to ${language}`);
+                // If a hex is currently selected, refresh its content
+                if (currentHex) {
+                    showHexDetails(currentHex);
+                }
+            } else {
+                console.error('Failed to change language:', data.error);
+                // Reset the select to the previous value
+                document.getElementById('language-select').value = language === 'en' ? 'pt' : 'en';
+            }
+        })
+        .catch(error => {
+            console.error('Error changing language:', error);
+            // Reset the select to the previous value
+            document.getElementById('language-select').value = language === 'en' ? 'pt' : 'en';
+        });
+    }
+
     // Define showHexDetails function first
     function showHexDetails(hexCode) {
         currentHex = hexCode;
@@ -906,6 +1030,7 @@
 
     function generateHexModalHTML(data, hexCode) {
         const terrain = data.terrain || 'unknown';
+        const terrainName = data.terrain_name || terrain.charAt(0).toUpperCase() + terrain.slice(1);
         const encounter = data.encounter || 'Unknown encounter';
         const denizen = data.denizen || 'No denizen information';
         const notableFeature = data.notable_feature || 'No notable features';
@@ -922,9 +1047,9 @@
                 <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
                     <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
 ╔══════════════════════════════════════════════════════════════╗
-║                    HEX ${hexCode} - ${terrain.toUpperCase().padEnd(50)}║
+║                    HEX ${hexCode} - ${terrainName.toUpperCase().padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
-║ TERRAIN: ${terrain.charAt(0).toUpperCase() + terrain.slice(1).padEnd(50)}║
+║ TERRAIN: ${terrainName.padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRAIN ART:                                                ║`;
         

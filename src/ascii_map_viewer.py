@@ -13,7 +13,7 @@ except ImportError:
     MARKDOWN_AVAILABLE = False
     print("⚠️  Markdown module not available - using text fallback")
 
-from flask import Flask, render_template, jsonify, request, send_from_directory
+from flask import Flask, render_template, jsonify, request, send_from_directory, redirect, url_for
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from terrain_system import terrain_system
 from main_map_generator import MainMapGenerator
@@ -23,7 +23,18 @@ app = Flask(__name__, template_folder='../web/templates', static_folder='../web/
 
 # Initialize systems
 lore_db = MorkBorgLoreDatabase()
-main_map_generator = MainMapGenerator()
+
+# Global language setting - defaults to English
+current_language = 'en'
+
+# Initialize main map generator with current language
+def get_main_map_generator():
+    """Get main map generator with current language configuration."""
+    global current_language
+    return MainMapGenerator({'language': current_language})
+
+# Initialize with default language
+main_map_generator = get_main_map_generator()
 
 def get_map_dimensions():
     """Get map dimensions from terrain system."""
@@ -55,6 +66,30 @@ def main_map():
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height)
 
+@app.route('/api/set-language', methods=['POST'])
+def set_language():
+    """Set the current language for content generation."""
+    global current_language, main_map_generator
+    
+    data = request.get_json()
+    new_language = data.get('language', 'en')
+    
+    if new_language in ['en', 'pt']:
+        current_language = new_language
+        # Re-initialize main map generator with new language
+        main_map_generator = get_main_map_generator()
+        
+        return jsonify({
+            'success': True,
+            'language': current_language,
+            'message': f'Language set to {current_language}'
+        })
+    else:
+        return jsonify({
+            'success': False,
+            'error': 'Invalid language. Use "en" or "pt"'
+        }), 400
+
 @app.route('/api/hex/<hex_code>')
 def get_hex_info(hex_code):
     """Get hex information for popup."""
@@ -66,15 +101,27 @@ def get_hex_info(hex_code):
         city_key = hardcoded['city_key']
         city_data = lore_db.major_cities[city_key]
         
+        # Use Portuguese fields if available and language is Portuguese
+        if current_language == 'pt':
+            title = city_data.get('name_pt', city_data['name'])
+            description = city_data.get('description_pt', city_data['description'])
+            atmosphere = city_data.get('atmosphere_pt', city_data['atmosphere'])
+            notable_features = city_data.get('notable_features_pt', city_data['notable_features'])
+        else:
+            title = city_data['name']
+            description = city_data['description']
+            atmosphere = city_data['atmosphere']
+            notable_features = city_data['notable_features']
+        
         return jsonify({
             'exists': True,
             'is_major_city': True,
-            'title': city_data['name'],
-            'description': city_data['description'],
+            'title': title,
+            'description': description,
             'population': city_data['population'],
             'region': city_data['region'],
-            'atmosphere': city_data['atmosphere'],
-            'notable_features': city_data['notable_features'],
+            'atmosphere': atmosphere,
+            'notable_features': notable_features,
             'key_npcs': city_data['key_npcs'],
             'hex_code': hex_code
         })
@@ -132,6 +179,9 @@ def get_hex_info(hex_code):
             if terrain == 'unknown':
                 terrain = get_terrain_for_hex(hex_code)
             
+            # Get translated terrain name for display
+            terrain_name = main_map_generator._get_translated_terrain_name(terrain)
+            
             return jsonify({
                 'exists': True,
                 'is_major_city': False,
@@ -145,6 +195,7 @@ def get_hex_info(hex_code):
                 'raw': content,
                 'hex_code': hex_code,
                 'terrain': terrain,
+                'terrain_name': terrain_name,
                 'encounter': hex_data.get('encounter', 'Unknown encounter'),
                 'denizen': hex_data.get('denizen', 'No denizen information'),
                 'notable_feature': hex_data.get('notable_feature', 'No notable features'),
@@ -182,12 +233,16 @@ def get_hex_info(hex_code):
                 'hex_code': hex_code
             })
     else:
-        # Generate hex content on demand
+        # Generate hex content on demand with current language
         try:
             terrain = get_terrain_for_hex(hex_code)
+            # Use the current main_map_generator which has the correct language
             hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
             
-                        # Check if it's a settlement
+            # Get translated terrain name for display
+            terrain_name = main_map_generator._get_translated_terrain_name(terrain)
+            
+            # Check if it's a settlement
             if hex_data.get('is_settlement'):
                 return jsonify({
                     'exists': True,
@@ -239,6 +294,7 @@ def get_hex_info(hex_code):
                 'raw': markdown_content,
                 'hex_code': hex_code,
                 'terrain': hex_data.get('terrain', terrain),
+                'terrain_name': terrain_name,
                 'encounter': hex_data.get('encounter', 'Unknown encounter'),
                 'denizen': hex_data.get('denizen', 'No denizen information'),
                 'notable_feature': hex_data.get('notable_feature', 'No notable features'),
@@ -257,17 +313,18 @@ def get_hex_info(hex_code):
                 'motivation': hex_data.get('motivation'),
                 'feature': hex_data.get('feature'),
                 'demeanor': hex_data.get('demeanor'),
+                'denizen_type': hex_data.get('denizen_type'),
+                'threat_level': hex_data.get('threat_level'),
+                'territory': hex_data.get('territory'),
+                'encounter_type': hex_data.get('encounter_type'),
+                'is_sea_encounter': hex_data.get('is_sea_encounter', False),
                 'danger': hex_data.get('danger'),
                 'treasure': hex_data.get('treasure')
             })
-            
         except Exception as e:
             return jsonify({
                 'exists': False,
                 'error': str(e),
-                'title': f'Hex {hex_code}',
-                'html': f'<p>Error generating content for hex {hex_code}: {str(e)}</p>',
-                'raw': f'Error: {str(e)}',
                 'hex_code': hex_code
             })
 
@@ -1955,6 +2012,15 @@ def create_templates():
     
     with open('../web/templates/setup.html', 'w') as f:
         f.write(setup_template)
+
+@app.route('/generate', methods=['POST'])
+def generate_map():
+    global main_map_generator
+    language = request.form.get('language', 'en')
+    # Re-instantiate the map generator with the new language
+    main_map_generator = MainMapGenerator({'language': language})
+    main_map_generator.generate_full_map({'language': language})
+    return redirect(url_for('main_map'))
 
 if __name__ == '__main__':
     # Create templates

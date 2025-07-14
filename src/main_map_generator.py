@@ -703,6 +703,33 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(content)
     
+    def _get_translated_terrain_name(self, terrain: str) -> str:
+        """Get terrain name in the current language."""
+        terrain_names = {
+            'en': {
+                'mountain': 'Mountain',
+                'forest': 'Forest', 
+                'coast': 'Coast',
+                'plains': 'Plains',
+                'swamp': 'Swamp',
+                'desert': 'Desert',
+                'sea': 'Sea',
+                'unknown': 'Unknown'
+            },
+            'pt': {
+                'mountain': 'Montanha',
+                'forest': 'Floresta',
+                'coast': 'Costa', 
+                'plains': 'Planícies',
+                'swamp': 'Pântano',
+                'desert': 'Deserto',
+                'sea': 'Mar',
+                'unknown': 'Desconhecido'
+            }
+        }
+        
+        return terrain_names.get(self.language, terrain_names['en']).get(terrain, terrain.title())
+
     def _generate_markdown_content(self, hex_data: Dict[str, Any]) -> str:
         """Generate markdown content for the hex."""
         lines = []
@@ -711,8 +738,9 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         lines.append(f"# Hex {hex_data['hex_code']}")
         lines.append("")
         
-        # Terrain
-        lines.append(f"**Terrain:** {hex_data['terrain'].title()}")
+        # Terrain - use translated name
+        terrain_name = self._get_translated_terrain_name(hex_data['terrain'])
+        lines.append(f"**Terrain:** {terrain_name}")
         lines.append("")
         
         # Encounter
