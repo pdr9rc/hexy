@@ -1,0 +1,166 @@
+/* Enhanced Data Tables for Mörk Borg Theme */
+
+:root {
+    --mork-black: #000000;
+    --mork-cyan: #00FFFF;
+    --mork-yellow: #FFFF00;
+    --mork-green: #00FF00;
+    --mork-magenta: #FF00FF;
+    --mork-white: #FFFFFF;
+    --mork-orange: #FF8000;
+    --mork-gray: #808080;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--mork-black);
+    border: 2px solid var(--mork-cyan);
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.data-table th {
+    background: var(--mork-black);
+    color: var(--mork-cyan);
+    border: 1px solid var(--mork-cyan);
+    padding: 12px;
+    text-align: left;
+    font-family: 'adhesive-nr-seven', serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.data-table td {
+    background: var(--mork-black);
+    color: var(--mork-white);
+    border: 1px solid var(--mork-gray);
+    padding: 10px;
+    font-family: 'pixelify-sans', monospace;
+    line-height: 1.4;
+}
+
+.data-table tr:hover {
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.data-table .label {
+    color: var(--mork-yellow);
+    font-weight: bold;
+    width: 30%;
+}
+
+.data-table .value {
+    color: var(--mork-white);
+}
+
+.data-table .highlight {
+    color: var(--mork-green);
+    font-weight: bold;
+}
+
+.data-table .danger {
+    color: var(--mork-magenta);
+    font-weight: bold;
+}
+
+.data-table .warning {
+    color: var(--mork-orange);
+    font-weight: bold;
+}
+
+/* Compact table variant */
+.data-table-compact {
+    font-size: 0.9em;
+}
+
+.data-table-compact th,
+.data-table-compact td {
+    padding: 8px;
+}
+
+/* List table for NPCs, features, etc. */
+.data-list {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--mork-black);
+    border: 1px solid var(--mork-cyan);
+    margin: 10px 0;
+}
+
+.data-list li {
+    display: table-row;
+    border-bottom: 1px solid var(--mork-gray);
+}
+
+.data-list li:last-child {
+    border-bottom: none;
+}
+
+.data-list .item {
+    display: table-cell;
+    padding: 8px;
+    color: var(--mork-white);
+    font-family: 'pixelify-sans', monospace;
+}
+
+.data-list .item::before {
+    content: "• ";
+    color: var(--mork-cyan);
+    font-weight: bold;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .data-table {
+        font-size: 0.8em;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 6px;
+    }
+    
+    .data-table .label {
+        width: 40%;
+    }
+}
+
+/* Special table sections */
+.section-header {
+    background: var(--mork-black);
+    color: var(--mork-cyan);
+    text-align: center;
+    padding: 15px;
+    font-family: 'adhesive-nr-seven', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid var(--mork-cyan);
+    margin: 20px 0 10px 0;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--mork-cyan);
+    border-radius: 0;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: var(--mork-black);
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: var(--mork-cyan);
+    border-radius: 0;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: var(--mork-yellow);
+}

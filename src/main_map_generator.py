@@ -13,7 +13,7 @@ from database_manager import database_manager
 from terrain_system import terrain_system
 from translation_system import translation_system
 from mork_borg_lore_database import MorkBorgLoreDatabase
-from generation_engine import GenerationEngine
+from simplified_generation_engine import SimplifiedGenerationEngine
 
 class MainMapGenerator:
     """Unified map generator - single entry point for all map generation."""
@@ -29,10 +29,10 @@ class MainMapGenerator:
         self.translation_system.set_language(self.language)
         self.lore_db = MorkBorgLoreDatabase()
         
-        # Initialize enhanced generation engine with sandbox integration
-        self.generation_engine = GenerationEngine()
+        # Initialize simplified generation engine
+        self.generation_engine = SimplifiedGenerationEngine(self.language)
         
-        # Load content tables
+        # Load content tables (now handled by simplified generation engine)
         self.content_tables = database_manager.load_tables(self.language)
         self.terrain_tables = self.content_tables.get('terrain_tables', {})
         self.core_tables = self.content_tables.get('core_tables', {})
@@ -42,8 +42,8 @@ class MainMapGenerator:
         self.start_x, self.start_y = self.config.get('map_start', (1, 1))
         self.output_dir = self.config.get('output_directory', 'dying_lands_output')
         
-        # Generation rules (now using enhanced engine rules)
-        self.generation_rules = self.generation_engine.default_rules
+        # Generation rules (now using simplified engine rules)
+        self.generation_rules = self.generation_engine.rules
         self.generation_rules.update(self.config.get('generation_rules', {}))
         
         # Output formats
