@@ -172,19 +172,9 @@ class MainMapGenerator:
         return self._generate_enhanced_hex_content(hex_code, terrain)
     
     def _generate_enhanced_hex_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
-        """Generate enhanced hex content using the generation engine with sandbox integration."""
-        # Determine content type using enhanced engine
-        content_type = self.generation_engine.determine_content_type(hex_code, terrain, self.generation_rules)
-        
-        # Generate content with sandbox enhancements
-        context = {
-            'hex_code': hex_code,
-            'terrain': terrain,
-            'language': self.language,
-            'rules': self.generation_rules
-        }
-        
-        enhanced_content = self.generation_engine.generate_content(content_type, context)
+        """Generate enhanced hex content using the simplified generation engine."""
+        # Use simplified generation engine directly
+        enhanced_content = self.generation_engine.generate_hex_content(hex_code, terrain)
         
         # Add hex metadata
         enhanced_content['hex_code'] = hex_code
