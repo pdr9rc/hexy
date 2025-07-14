@@ -1,0 +1,62 @@
+{
+  "category": "bestiary",
+  "tables": {
+    "beast_types": [
+      "Plague rat",
+      "Corpse crow",
+      "Bone spider",
+      "Blood leech",
+      "Shadow wolf",
+      "Carrion hound",
+      "Sewer serpent",
+      "Rust beetle",
+      "Doom moth",
+      "Acid toad",
+      "Spine crawler",
+      "Flesh wasp",
+      "Grave worm",
+      "Blight bat",
+      "Void spider",
+      "Death adder",
+      "Scream bird",
+      "Terror mole"
+    ],
+    "beast_features": [
+      "glowing red eyes",
+      "exposed ribs",
+      "rotting flesh",
+      "venomous bite",
+      "acidic saliva",
+      "razor-sharp claws",
+      "diseased fur",
+      "multiple heads",
+      "wings of bone",
+      "metallic scales",
+      "constantly bleeding",
+      "emits toxic fumes",
+      "translucent skin",
+      "backwards joints"
+    ],
+    "beast_behaviors": [
+      "hunts in packs",
+      "feeds on corpses",
+      "burrows underground",
+      "hangs from ceilings",
+      "stalks silently",
+      "ambushes from shadows",
+      "screams before attacking",
+      "plays dead",
+      "spits acid",
+      "drains blood",
+      "spreads disease",
+      "mimics voices",
+      "phases through walls"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-07-13T10:26:38.980348",
+    "migrated_from": "content_tables.py"
+  }
+}

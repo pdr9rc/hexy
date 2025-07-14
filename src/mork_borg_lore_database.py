@@ -19,120 +19,357 @@ class MorkBorgLoreDatabase:
     def _init_major_cities(self) -> Dict:
         """Initialize major cities from Mörk Borg lore."""
         return {
-            # Core Rulebook Cities
             'galgenbeck': {
                 'name': 'Galgenbeck',
-                'name_pt': 'Galgenbeck',
-                'description': 'City built upon ancient ruins and corpses',
-                'description_pt': 'Cidade construída sobre ruínas antigas e cadáveres',
-                'population': '501-1000',
+                'description': 'A sprawling metropolis built atop the bones of countless civilizations. Its infamous Hanging Gardens sway with the corpses of the condemned, and the air is thick with the scent of rot and incense. The city is ruled by a secretive council, and its labyrinthine sewers are said to house ancient, unspeakable horrors.',
+                'population': '1000+',
                 'terrain': 'plains',
                 'region': 'central',
-                'coordinates': (12, 15),  # Central location
+                'coordinates': (15, 13),
                 'notable_features': [
-                    'Built on layers of previous cities',
-                    'Ruled by mysterious council',
-                    'Famous for its hanging gardens of corpses',
-                    'Underground sewers with ancient horrors'
+                    'Hanging Gardens of Corpses',
+                    'Secretive ruling council',
+                    'Labyrinthine sewers',
+                    'Ancient, forbidden catacombs'
                 ],
                 'key_npcs': ['Josilfa Migol', 'The Galgenbeck Council'],
-                'atmosphere': 'Urban decay and ancient evil'
+                'atmosphere': 'Urban decay, perpetual twilight, and the ever-present threat of betrayal.'
             },
-            
-            'bergen_chrypt': {
-                'name': 'Bergen Chrypt',
-                'name_pt': 'Bergen Cripta',
-                'description': 'Ancient fortress-city in the northern wastes',
-                'description_pt': 'Antiga cidade-fortaleza nas terras devastadas do norte',
-                'population': '101-500',
-                'terrain': 'mountain',
-                'region': 'north',
-                'coordinates': (8, 5),  # Northern mountains
-                'notable_features': [
-                    'Fortress built into mountain',
-                    'Crypts extend deep underground',
-                    'Ruled by undead nobility',
-                    'Gateway to the Sarkash Forest'
-                ],
-                'key_npcs': ['The Crypt Lords', 'Bergen Wardens'],
-                'atmosphere': 'Ancient fortress and undead nobility'
-            },
-            
-            'sarkash': {
-                'name': 'Sarkash Forest Settlement',
-                'name_pt': 'Povoado da Floresta Sarkash',
-                'description': 'Hidden settlement within the cursed forest',
-                'description_pt': 'Povoado escondido na floresta amaldiçoada',
-                'population': '51-100',
-                'terrain': 'forest',
-                'region': 'northwest',
-                'coordinates': (5, 8),  # Northwest forests
-                'notable_features': [
-                    'Built in treetops for safety',
-                    'Surrounded by cursed woods',
-                    'Home to forest witches',
-                    'Protected by ancient ward stones'
-                ],
-                'key_npcs': ['Forest Witches', 'Tree Wardens'],
-                'atmosphere': 'Dark forest magic and ancient curses'
-            },
-            
-            'tveland': {
-                'name': 'Tveland Outpost',
-                'name_pt': 'Posto Avançado de Tveland',
-                'description': 'Fortified outpost on the eastern steppes',
-                'description_pt': 'Posto fortificado nas estepes orientais',
-                'population': '51-100',
+            'allians': {
+                'name': 'Allians',
+                'description': 'An isolated city of scholars and mystics, Allians is built around a crumbling library said to contain the last true histories of the world. The city is shrouded in secrecy, and its towers are lit by ghostly blue flames.',
+                'population': '500',
                 'terrain': 'plains',
                 'region': 'east',
-                'coordinates': (20, 12),  # Eastern plains
+                'coordinates': (5, 7),
                 'notable_features': [
-                    'Last outpost before the wastes',
-                    'Trading post for nomads',
-                    'Watchtowers scan the horizon',
-                    'Stockpiles weapons and supplies'
+                    'Crumbling library of forbidden knowledge',
+                    'Blue-flamed towers',
+                    'Secretive scholar-council',
+                    'Occult rituals at midnight'
                 ],
-                'key_npcs': ['Captain of the Watch', 'Nomad Traders'],
-                'atmosphere': 'Frontier outpost and nomadic traders'
+                'key_npcs': ['The Archivist', 'Mistress of Tomes'],
+                'atmosphere': 'Scholarly, secretive, and haunted by knowledge.'
             },
-            
             'kergus': {
-                'name': 'Kergus Plains Settlement',
-                'name_pt': 'Povoado das Planícies de Kergus',
-                'description': 'Pastoral settlement on the southern plains',
-                'description_pt': 'Povoado pastoral nas planícies do sul',
-                'population': '101-500',
+                'name': 'Kergus',
+                'description': 'A farming community plagued by unnatural weather and stranger livestock. Stone circles dot the fields, and the locals speak of things that move beneath the earth.',
+                'population': '800',
                 'terrain': 'plains',
                 'region': 'south',
-                'coordinates': (15, 25),  # Southern plains
+                'coordinates': (7, 8),
                 'notable_features': [
-                    'Agricultural community',
-                    'Herds of strange cattle',
-                    'Ancient stone circles',
-                    'Plagued by weird weather'
+                    'Twisted livestock',
+                    'Stone circles',
+                    'Weather-warped fields',
+                    'Subterranean rumblings'
                 ],
-                'key_npcs': ['Cattle Barons', 'Weather Seers'],
-                'atmosphere': 'Pastoral horror and strange livestock'
+                'key_npcs': ['Cattle Baron', 'Weather Seer'],
+                'atmosphere': 'Bleak, windswept, and tinged with dread.'
             },
-            
-            # Additional settlements from supplements
-            'pyre_chrypt': {
-                'name': 'Pyre-Chrypt',
-                'name_pt': 'Pira-Cripta',
-                'description': 'Dead plague city, walled and abandoned',
-                'description_pt': 'Cidade morta pela peste, murada e abandonada',
-                'population': '0 (abandoned)',
+            'sarkash': {
+                'name': 'Sarkash Forest Settlement',
+                'description': 'Hidden high in the ancient trees, this settlement is protected by powerful ward stones and the enigmatic Forest Witches. The woods below are thick with curses, and the wind carries whispers of old magic.',
+                'population': '120',
+                'terrain': 'forest',
+                'region': 'northwest',
+                'coordinates': (9, 8),
+                'notable_features': [
+                    'Ward stones',
+                    'Forest Witch coven',
+                    'Cursed glades',
+                    'Living trees'
+                ],
+                'key_npcs': ['Forest Witch', 'Tree Warden'],
+                'atmosphere': 'Gloomy, tangled, and alive with secrets.'
+            },
+            'graven_tosk': {
+                'name': 'Graven-Tosk',
+                'description': 'A city of graveyards and necromancers, Graven-Tosk is a place where the living and the dead intermingle. Bone fields stretch to the horizon, and the air is thick with the scent of incense and decay.',
+                'population': '300',
+                'terrain': 'swamp',
+                'region': 'west',
+                'coordinates': (19, 8),
+                'notable_features': [
+                    'Endless graveyards',
+                    'Necromancer guilds',
+                    'Bone fields',
+                    'Funeral processions at all hours'
+                ],
+                'key_npcs': ['Bone Priest', 'Gravekeeper'],
+                'atmosphere': 'Somber, funereal, and thick with the presence of the dead.'
+            },
+            'tveland': {
+                'name': 'Tveland Outpost',
+                'description': 'A battered outpost on the edge of the known world, Tveland is a haven for exiles, traders, and those fleeing darker things. Its watchtowers are always manned, and the horizon is a line of perpetual storms.',
+                'population': '200',
+                'terrain': 'plains',
+                'region': 'east',
+                'coordinates': (21, 7),
+                'notable_features': [
+                    'Storm-wracked horizon',
+                    'Nomad trading post',
+                    'Exile camps',
+                    'Perpetual watchtowers'
+                ],
+                'key_npcs': ['Captain of the Watch', 'Nomad Trader'],
+                'atmosphere': 'Windswept, tense, and haunted by the unknown.'
+            },
+            'grift': {
+                'name': 'Grift',
+                'description': 'A city of pilgrimage and ruins, Grift is known for its crumbling temples and the endless procession of the faithful seeking absolution. The city is a crossroads for all manner of travelers.',
+                'population': '600',
+                'terrain': 'plains',
+                'region': 'south',
+                'coordinates': (23, 13),
+                'notable_features': [
+                    'Crumbling temples',
+                    'Pilgrim camps',
+                    'Sacred crossroads',
+                    'Relic markets'
+                ],
+                'key_npcs': ['High Pilgrim', 'Relic Seller'],
+                'atmosphere': 'Sacred, bustling, and filled with desperate hope.'
+            },
+            'schleswig': {
+                'name': 'Schleswig',
+                'description': 'A battered fishing town on the storm-lashed coast. Schleswig is isolated, its people hard and suspicious. The sea brings both bounty and terror.',
+                'population': '350',
+                'terrain': 'coast',
+                'region': 'west',
+                'coordinates': (10, 17),
+                'notable_features': [
+                    'Storm-battered docks',
+                    'Salt-stained houses',
+                    'Sea-worn shrines',
+                    'Fishermen who never speak'
+                ],
+                'key_npcs': ['Harbormaster', 'Old Fisher'],
+                'atmosphere': 'Salt-stained, ruined, and desperate.'
+            },
+            'wastland': {
+                'name': 'Wästland',
+                'description': 'A ruined city in the endless desert, Wästland is a place of scavengers and lost secrets. Sand-choked streets hide treasures and dangers in equal measure.',
+                'population': '100',
+                'terrain': 'desert',
+                'region': 'east',
+                'coordinates': (12, 21),
+                'notable_features': [
+                    'Sand-choked ruins',
+                    'Scavenger camps',
+                    'Ancient obelisks',
+                    'Mirage-haunted streets'
+                ],
+                'key_npcs': ['Sand Prophet', 'Scavenger King'],
+                'atmosphere': 'Harsh, windswept, and mysterious.'
+            },
+            'bergen_chrypt': {
+                'name': 'Bergen Chrypt',
+                'description': 'Carved into the heart of a glacier, Bergen Chrypt is a fortress-city where the living and the dead walk side by side. The crypts beneath the city stretch for miles, and the nobility are rumored to be centuries old.',
+                'population': '400',
+                'terrain': 'mountain',
+                'region': 'north',
+                'coordinates': (15, 7),
+                'notable_features': [
+                    'Glacier-carved fortress',
+                    'Endless crypts',
+                    'Undead nobility',
+                    'Frozen battlements'
+                ],
+                'key_npcs': ['Crypt Lord', 'Bergen Warden'],
+                'atmosphere': 'Bitter cold, echoing silence, and the oppressive weight of the past.'
+            },
+            'valley_of_unfortunate_undead': {
+                'name': 'Valley of Unfortunate Undead',
+                'description': 'A vast valley filled with mass graves and restless spirits. The ground is always soft, and the air is thick with the moans of the dead.',
+                'population': '0',
+                'terrain': 'plains',
+                'region': 'central',
+                'coordinates': (8, 14),
+                'notable_features': [
+                    'Mass graves',
+                    'Restless spirits',
+                    'Bone-choked river',
+                    'Eternal fog'
+                ],
+                'key_npcs': ['The Mourner', 'Bone Whisperer'],
+                'atmosphere': 'Sorrowful, mist-shrouded, and haunted.'
+            },
+            'ucalegon': {
+                'name': 'Ucalegon',
+                'description': 'The Lost Kingdom of Ucalegon. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'mountain',
+                'region': 'southwest',
+                'coordinates': (4, 23),
+                'notable_features': ['Ruins', 'Black salt peaks'],
+                'key_npcs': [],
+                'atmosphere': 'Ruined, lost, and mysterious.'
+            },
+            'sanalassio': {
+                'name': 'Sanalassio',
+                'description': 'The Ruins of Sanalassio. Placeholder description.',
+                'population': '0',
+                'terrain': 'mountain',
+                'region': 'southwest',
+                'coordinates': (7, 22),
+                'notable_features': ['Ruins'],
+                'key_npcs': [],
+                'atmosphere': 'Ruined and ancient.'
+            },
+            'ligure': {
+                'name': 'Ligure',
+                'description': 'The Ruins of Ligure. Placeholder description.',
+                'population': '0',
+                'terrain': 'island',
+                'region': 'southwest',
+                'coordinates': (2, 23),
+                'notable_features': ['Island of Sages'],
+                'key_npcs': [],
+                'atmosphere': 'Isolated and wise.'
+            },
+            'aurilliac': {
+                'name': 'Aurilliac',
+                'description': 'Aurilliac. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'northwest',
+                'coordinates': (8, 7),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'brackenfurt': {
+                'name': 'Brackenfurt',
+                'description': 'Brackenfurt. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'north',
+                'coordinates': (15, 7),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'norvarad': {
+                'name': 'Norvarad',
+                'description': 'The Ruins of Norvarad. Placeholder description.',
+                'population': '0',
+                'terrain': 'ruins',
+                'region': 'northeast',
+                'coordinates': (23, 7),
+                'notable_features': ['Ruins'],
+                'key_npcs': [],
+                'atmosphere': 'Ruined and ancient.'
+            },
+            'jericho_asylum': {
+                'name': 'Jericho Asylum',
+                'description': 'Jericho Asylum. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'asylum',
+                'region': 'east',
+                'coordinates': (25, 10),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Madness and isolation.'
+            },
+            'verisaille': {
+                'name': 'Verisaille',
+                'description': 'Verisaille. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'southeast',
+                'coordinates': (25, 17),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'merodville': {
+                'name': 'Merodville',
+                'description': 'The Eastern Kingdom of Merodville. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'southeast',
+                'coordinates': (23, 21),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'severing': {
+                'name': 'Severing',
+                'description': 'The Barony of Severing. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'south',
+                'coordinates': (18, 23),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'ferrox': {
+                'name': 'Ferrox',
+                'description': 'Ferrox. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'south',
+                'coordinates': (24, 23),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'issiore': {
+                'name': 'Issiore',
+                'description': 'Issiore. Placeholder description.',
+                'population': 'unknown',
                 'terrain': 'plains',
                 'region': 'west',
-                'coordinates': (6, 18),  # Western area
-                'notable_features': [
-                    'Completely abandoned due to plague',
-                    'Walls sealed from outside',
-                    'Treasures locked within',
-                    'Source of plague in iron ziggurat'
-                ],
-                'key_npcs': ['Plague Spirits', 'The Last Survivor'],
-                'atmosphere': 'Abandoned plague city and locked secrets'
+                'coordinates': (7, 13),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'lanciano': {
+                'name': 'Lanciano',
+                'description': 'Lanciano. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'plains',
+                'region': 'west',
+                'coordinates': (4, 15),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'saltcrest_hills': {
+                'name': 'Saltcrest Hills',
+                'description': 'Saltcrest Hills. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'hills',
+                'region': 'east',
+                'coordinates': (20, 14),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'borrow_hills': {
+                'name': 'Borrow Hills',
+                'description': 'Borrow Hills. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'hills',
+                'region': 'east',
+                'coordinates': (22, 16),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
+            },
+            'dalmore_mountains': {
+                'name': 'Dalmore Mountains',
+                'description': 'Dalmore Mountains. Placeholder description.',
+                'population': 'unknown',
+                'terrain': 'mountain',
+                'region': 'east',
+                'coordinates': (24, 13),
+                'notable_features': [],
+                'key_npcs': [],
+                'atmosphere': 'Unknown.'
             }
         }
     
@@ -302,7 +539,7 @@ class MorkBorgLoreDatabase:
             }
         
         # Add special locations
-        hardcoded['1010'] = {
+        hardcoded['1012'] = {
             'type': 'special_location',
             'name': 'The Bone Temple',
             'name_pt': 'O Templo dos Ossos',
@@ -313,7 +550,7 @@ class MorkBorgLoreDatabase:
             'locked': True
         }
         
-        hardcoded['0615'] = {
+        hardcoded['0614'] = {
             'type': 'special_location',
             'name': 'The Weeping Lake',
             'name_pt': 'O Lago Chorão',
@@ -395,10 +632,6 @@ def main():
     print(f"\n⚔️ Factions: {len(lore_db.factions)}")
     for faction_key, faction in lore_db.factions.items():
         print(f"  {faction['name']} - {faction['influence']}")
-    
-    print(f"\n🗺️ Hardcoded Hexes: {len(lore_db.hardcoded_hexes)}")
-    for hex_code, data in lore_db.hardcoded_hexes.items():
-        print(f"  {hex_code}: {data['name']} ({data['type']})")
     
     print(f"\n🌍 Regional Biases:")
     for region, data in lore_db.regional_lore.items():

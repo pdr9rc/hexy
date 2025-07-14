@@ -14,11 +14,11 @@ def test_hex_generator():
     print("🧪 Testing unified hex generator...")
     
     try:
-        from hex_generator import HexGenerator
-        print("✅ Successfully imported HexGenerator")
+        from main_map_generator import MainMapGenerator
+        print("✅ Successfully imported MainMapGenerator")
         
         # Test generation
-        generator = HexGenerator('en')
+        generator = MainMapGenerator({'language': 'en'})
         hex_data = generator.generate_hex_content('0601', 'forest')
         print(f"✅ Generated content for hex 0601:")
         print(f"   Encounter: {hex_data.get('encounter', 'None')}")
@@ -56,12 +56,14 @@ def test_map_generator():
     print("\n🧪 Testing map generator...")
     
     try:
-        from map_generator import map_generator
-        print("✅ Successfully imported map_generator")
+        from main_map_generator import MainMapGenerator
+        print("✅ Successfully imported MainMapGenerator")
         
         # Test map generation
-        result = map_generator.generate_map('en', ['0601', '0602'])
-        print(f"✅ Generated map with {len(result)} hexes")
+        generator = MainMapGenerator()
+        overview = generator.get_terrain_overview()
+        print(f"✅ Retrieved terrain overview: {overview['success']}")
+        print(f"   Map dimensions: {overview['dimensions']}")
         
         return True
         
@@ -97,12 +99,12 @@ def test_complete_flow():
     print("\n🧪 Testing complete content generation flow...")
     
     try:
-        from hex_generator import HexGenerator
+        from main_map_generator import MainMapGenerator
         from terrain_system import terrain_system
         from mork_borg_lore_database import MorkBorgLoreDatabase
         
         # Initialize components
-        generator = HexGenerator('en')
+        generator = MainMapGenerator({'language': 'en'})
         lore_db = MorkBorgLoreDatabase()
         
         hex_code = "0601"
@@ -110,12 +112,12 @@ def test_complete_flow():
         # Check for hardcoded lore locations
         hardcoded = lore_db.get_hardcoded_hex(hex_code)
         if hardcoded and hardcoded.get('locked', False):
-            hex_data = generator.generate_hex_content(hex_code, lore_db=lore_db)
+            hex_data = generator.generate_hex_content(hex_code)
             print(f"✅ Generated lore-based content for {hex_code}")
         else:
             # Use terrain detection
             terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
-            hex_data = generator.generate_hex_content(hex_code, terrain, lore_db)
+            hex_data = generator.generate_hex_content(hex_code, terrain)
             print(f"✅ Generated terrain-based content for {hex_code} (terrain: {terrain})")
         
         print(f"   Encounter: {hex_data.get('encounter', 'None')}")

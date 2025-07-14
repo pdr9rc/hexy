@@ -6,18 +6,24 @@ Interactive web viewer for the hex-based map with ASCII representation.
 
 import os
 import json
-import markdown
+try:
+    import markdown
+    MARKDOWN_AVAILABLE = True
+except ImportError:
+    MARKDOWN_AVAILABLE = False
+    print("⚠️  Markdown module not available - using text fallback")
+
 from flask import Flask, render_template, jsonify, request, send_from_directory
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from terrain_system import terrain_system
-from hex_generator import hex_generator
-from map_generator import map_generator
+from main_map_generator import MainMapGenerator
 from translation_system import translation_system
 
 app = Flask(__name__, template_folder='../web/templates', static_folder='../web/static')
 
 # Initialize systems
 lore_db = MorkBorgLoreDatabase()
+main_map_generator = MainMapGenerator()
 
 def get_map_dimensions():
     """Get map dimensions from terrain system."""
@@ -34,7 +40,7 @@ def main_map():
         os.makedirs('dying_lands_output', exist_ok=True)
         return render_template('setup.html', 
                              title="The Dying Lands - Setup", 
-                             action="Run map_generator.py to create the map")
+                             action="Run main_map_generator.py to create the map")
     
     # Get map dimensions
     map_width, map_height = get_map_dimensions()
@@ -85,6 +91,8 @@ def get_hex_info(hex_code):
                 return jsonify({
                     'exists': True,
                     'is_settlement': True,
+                    'hex_type': 'settlement',
+                    'terrain': get_terrain_for_hex(hex_code),
                     'title': settlement_data['name'],
                     'description': settlement_data['description'],
                     'population': settlement_data['population'],
@@ -98,25 +106,74 @@ def get_hex_info(hex_code):
                 })
             
             # Regular hex content
-            html = markdown.markdown(content, extensions=['codehilite', 'fenced_code', 'tables'])
+            if MARKDOWN_AVAILABLE:
+                html = markdown.markdown(content, extensions=['codehilite', 'fenced_code', 'tables'])
+            else:
+                # Fallback if markdown module is not available
+                html = f'<pre>{content}</pre>'
             title = extract_title(content)
             
             # Extract structured data for the new modal system
             hex_data = extract_hex_data(content, hex_code)
             
+            # Determine hex type from content
+            hex_type = 'wilderness'
+            if '⌂ **' in content:
+                hex_type = 'settlement'
+            elif '▲ **' in content:
+                hex_type = 'dungeon'
+            elif '※ **' in content:
+                hex_type = 'beast'
+            elif '☉ **' in content:
+                hex_type = 'npc'
+                
+            # Get terrain from terrain system if not in parsed data
+            terrain = hex_data.get('terrain', 'unknown')
+            if terrain == 'unknown':
+                terrain = get_terrain_for_hex(hex_code)
+            
             return jsonify({
                 'exists': True,
                 'is_major_city': False,
-                'is_settlement': False,
+                'is_settlement': hex_type == 'settlement',
+                'is_dungeon': hex_type == 'dungeon',
+                'is_beast': hex_type == 'beast',
+                'is_npc': hex_type == 'npc',
+                'hex_type': hex_type,
                 'title': title,
                 'html': html,
                 'raw': content,
                 'hex_code': hex_code,
-                'terrain': hex_data.get('terrain', 'unknown'),
+                'terrain': terrain,
                 'encounter': hex_data.get('encounter', 'Unknown encounter'),
                 'denizen': hex_data.get('denizen', 'No denizen information'),
                 'notable_feature': hex_data.get('notable_feature', 'No notable features'),
-                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere')
+                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere'),
+                # NPC specific fields
+                'name': hex_data.get('name'),
+                'motivation': hex_data.get('motivation'),
+                'feature': hex_data.get('feature'),
+                'demeanor': hex_data.get('demeanor'),
+                'denizen_type': hex_data.get('denizen_type'),
+                # Beast specific fields
+                'beast_type': hex_data.get('beast_type'),
+                'beast_behavior': hex_data.get('beast_behavior'),
+                'beast_feature': hex_data.get('beast_feature'),
+                'threat_level': hex_data.get('threat_level'),
+                'territory': hex_data.get('territory'),
+                # Sea encounter specific fields
+                'encounter_type': hex_data.get('encounter_type'),
+                'is_sea_encounter': hex_data.get('is_sea_encounter', False),
+                # Dungeon specific fields (for completeness)
+                'danger': hex_data.get('danger'),
+                'treasure': hex_data.get('treasure'),
+                'loot': hex_data.get('loot'),
+                'scroll': hex_data.get('scroll'),
+                # Settlement specific fields
+                'population': hex_data.get('population'),
+                'local_tavern': hex_data.get('local_tavern'),
+                'local_power': hex_data.get('local_power'),
+                'settlement_art': hex_data.get('settlement_art')
             })
         except Exception as e:
             return jsonify({
@@ -125,13 +182,94 @@ def get_hex_info(hex_code):
                 'hex_code': hex_code
             })
     else:
-        return jsonify({
-            'exists': False,
-            'title': f'Hex {hex_code}',
-            'html': f'<p>No content generated for hex {hex_code}</p>',
-            'raw': f'No content for hex {hex_code}',
-            'hex_code': hex_code
-        })
+        # Generate hex content on demand
+        try:
+            terrain = get_terrain_for_hex(hex_code)
+            hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
+            
+                        # Check if it's a settlement
+            if hex_data.get('is_settlement'):
+                return jsonify({
+                    'exists': True,
+                    'is_settlement': True,
+                    'hex_type': 'settlement',
+                    'terrain': hex_data.get('terrain', terrain),
+                    'title': hex_data.get('name', f'Settlement {hex_code}'),
+                    'description': hex_data.get('denizen', 'A settlement'),
+                    'population': hex_data.get('population', 'Unknown'),
+                    'atmosphere': hex_data.get('atmosphere', 'Unknown'),
+                    'notable_feature': hex_data.get('notable_feature', 'Unknown'),
+                    'local_tavern': hex_data.get('local_tavern', 'Unknown'),
+                    'local_power': hex_data.get('local_power', 'Unknown'),
+                    'settlement_art': hex_data.get('settlement_art', ''),
+                    'name': hex_data.get('name', f'Settlement {hex_code}'),
+                    'hex_code': hex_code,
+                    'redirect_to': 'settlement'
+                })
+            
+            # Generate markdown content
+            markdown_content = main_map_generator._generate_markdown_content(hex_data)
+            if MARKDOWN_AVAILABLE:
+                html = markdown.markdown(markdown_content, extensions=['codehilite', 'fenced_code', 'tables'])
+            else:
+                # Fallback if markdown module is not available
+                html = f'<pre>{markdown_content}</pre>'
+            
+            # Determine hex type
+            hex_type = 'wilderness'
+            if hex_data.get('is_settlement'):
+                hex_type = 'settlement'
+            elif hex_data.get('is_dungeon'):
+                hex_type = 'dungeon'
+            elif hex_data.get('is_beast'):
+                hex_type = 'beast'
+            elif hex_data.get('is_npc'):
+                hex_type = 'npc'
+            
+            return jsonify({
+                'exists': True,
+                'is_major_city': False,
+                'is_settlement': hex_data.get('is_settlement', False),
+                'is_dungeon': hex_data.get('is_dungeon', False),
+                'is_beast': hex_data.get('is_beast', False),
+                'is_npc': hex_data.get('is_npc', False),
+                'hex_type': hex_type,
+                'title': f"Hex {hex_code}",
+                'html': html,
+                'raw': markdown_content,
+                'hex_code': hex_code,
+                'terrain': hex_data.get('terrain', terrain),
+                'encounter': hex_data.get('encounter', 'Unknown encounter'),
+                'denizen': hex_data.get('denizen', 'No denizen information'),
+                'notable_feature': hex_data.get('notable_feature', 'No notable features'),
+                'atmosphere': hex_data.get('atmosphere', 'Unknown atmosphere'),
+                'loot': hex_data.get('loot'),
+                'scroll': hex_data.get('scroll'),
+                'dungeon_type': hex_data.get('dungeon_type'),
+                'beast_type': hex_data.get('beast_type'),
+                'name': hex_data.get('name'),
+                'population': hex_data.get('population'),
+                'local_tavern': hex_data.get('local_tavern'),
+                'local_power': hex_data.get('local_power'),
+                'settlement_art': hex_data.get('settlement_art'),
+                'beast_feature': hex_data.get('beast_feature'),
+                'beast_behavior': hex_data.get('beast_behavior'),
+                'motivation': hex_data.get('motivation'),
+                'feature': hex_data.get('feature'),
+                'demeanor': hex_data.get('demeanor'),
+                'danger': hex_data.get('danger'),
+                'treasure': hex_data.get('treasure')
+            })
+            
+        except Exception as e:
+            return jsonify({
+                'exists': False,
+                'error': str(e),
+                'title': f'Hex {hex_code}',
+                'html': f'<p>Error generating content for hex {hex_code}: {str(e)}</p>',
+                'raw': f'Error: {str(e)}',
+                'hex_code': hex_code
+            })
 
 @app.route('/api/city/<hex_code>')
 def get_city_details(hex_code):
@@ -171,6 +309,7 @@ def get_settlement_details(hex_code):
     """Get detailed settlement information."""
     hex_file = f"dying_lands_output/hexes/hex_{hex_code}.md"
     
+    # Try to load from existing file first
     if os.path.exists(hex_file):
         try:
             with open(hex_file, 'r', encoding='utf-8') as f:
@@ -191,20 +330,54 @@ def get_settlement_details(hex_code):
                     'settlement': settlement_data,
                     'terrain': terrain,
                     'hex_code': hex_code,
-                    'settlement_map': settlement_map
+                    'settlement_map': settlement_map,
+                    'settlement_art': settlement_data.get('settlement_art', '')
                 })
         
         except Exception as e:
             return jsonify({'success': False, 'error': str(e)})
     
-    return jsonify({'success': False, 'error': 'Settlement not found'})
+    # Generate settlement on demand
+    try:
+        terrain = get_terrain_for_hex(hex_code)
+        hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
+        
+        if hex_data.get('is_settlement'):
+            # Create settlement data structure expected by frontend
+            settlement_data = {
+                'name': hex_data.get('name', f'Settlement {hex_code}'),
+                'description': hex_data.get('denizen', 'A settlement'),
+                'population': hex_data.get('population', 'Unknown'),
+                'atmosphere': hex_data.get('atmosphere', 'Unknown'),
+                'notable_feature': hex_data.get('notable_feature', 'Unknown'),
+                'local_tavern': hex_data.get('local_tavern', 'Unknown'),
+                'local_power': hex_data.get('local_power', 'Unknown'),
+                'hex_code': hex_code
+            }
+            
+            # Generate settlement ASCII map
+            settlement_map = generate_settlement_ascii_map(settlement_data, hex_code)
+            
+            return jsonify({
+                'success': True,
+                'settlement': settlement_data,
+                'terrain': terrain,
+                'hex_code': hex_code,
+                'settlement_map': settlement_map,
+                'settlement_art': hex_data.get('settlement_art', '')
+            })
+        else:
+            return jsonify({'success': False, 'error': 'Hex is not a settlement'})
+            
+    except Exception as e:
+        return jsonify({'success': False, 'error': f'Error generating settlement: {str(e)}'})
 
 @app.route('/api/lore-overview')
 def get_lore_overview():
     """Get complete lore overview."""
     try:
         # Use unified map generator
-        result = map_generator.get_lore_overview()
+        result = main_map_generator.get_lore_overview()
         return jsonify(result)
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
@@ -214,7 +387,7 @@ def get_terrain_overview():
     """Get terrain analysis."""
     try:
         # Use unified terrain system
-        result = map_generator.get_terrain_overview()
+        result = main_map_generator.get_terrain_overview()
         return jsonify(result)
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
@@ -230,12 +403,13 @@ def generate_single_hex():
             return jsonify({'success': False, 'error': 'Hex code required'})
         
         # Generate hex content using unified system
-        hex_data = map_generator.generate_single_hex(hex_code)
+        result = main_map_generator.generate_single_hex(hex_code)
         
         return jsonify({
             'success': True,
             'hex_code': hex_code,
-            'message': translation_system.t('hex_generated', hex_code=hex_code)
+            'message': f'Generated hex {hex_code}',
+            'content_type': result.get('content_type', 'unknown')
         })
         
     except Exception as e:
@@ -247,7 +421,7 @@ def generate_full_map():
     """Generate content for the entire map."""
     try:
         # Generate using unified system
-        hex_data_list = map_generator.generate_full_map(skip_existing=False)
+        hex_data_list = main_map_generator.generate_full_map(options={'skip_existing': False})
         
         return jsonify({
             'success': True,
@@ -264,7 +438,7 @@ def reset_continent():
     """Reset the entire continent by deleting all content and regenerating."""
     try:
         # Reset using unified system
-        result = map_generator.reset_continent()
+        result = main_map_generator.reset_continent()
         
         return jsonify(result)
         
@@ -302,15 +476,22 @@ def generate_ascii_map_data():
             else:
                 # Regular terrain - check for generated content to add visual indicators
                 terrain = get_terrain_for_hex(hex_code)
-                has_content = os.path.exists(f"dying_lands_output/hexes/hex_{hex_code}.md")
+                hex_file_exists = os.path.exists(f"dying_lands_output/hexes/hex_{hex_code}.md")
+                
+                # Check if hex has loot (this determines bold styling)
+                has_loot = False
+                content_type = None
+                
+                if hex_file_exists:
+                    # Check what type of content exists to add visual indicators
+                    content_type = get_hex_content_type(hex_code)
+                    # Check if hex has loot by reading the file
+                    has_loot = check_hex_has_loot(hex_code)
                 
                 # Determine symbol based on content and terrain
                 symbol = get_terrain_symbol(terrain)
-                content_type = None
                 
-                if has_content:
-                    # Check what type of content exists to add visual indicators
-                    content_type = get_hex_content_type(hex_code)
+                if hex_file_exists:
                     if content_type == 'settlement':
                         symbol = '⌂'  # Settlement marker
                     elif content_type == 'ruins':
@@ -319,13 +500,15 @@ def generate_ascii_map_data():
                         symbol = '※'  # Beast marker
                     elif content_type == 'npc':
                         symbol = '☉'  # NPC marker
+                    elif content_type == 'sea_encounter':
+                        symbol = '≈'  # Sea encounter marker
                     # Otherwise keep terrain symbol for basic content
                 
                 # Determine CSS class based on content type
                 css_class = f'terrain-{terrain}'
                 if content_type == 'settlement':
                     css_class = 'settlement'
-                elif has_content:
+                elif has_loot:
                     css_class += ' has-content'
                 
                 grid[hex_code] = {
@@ -333,7 +516,7 @@ def generate_ascii_map_data():
                     'terrain': terrain,
                     'symbol': symbol,
                     'is_city': False,
-                    'has_content': has_content,
+                    'has_content': has_loot,  # Now based on loot presence
                     'content_type': content_type,
                     'css_class': css_class
                 }
@@ -359,6 +542,29 @@ def get_terrain_symbol(terrain):
     """Get symbol for terrain type."""
     return terrain_system.get_terrain_symbol(terrain)
 
+def check_hex_has_loot(hex_code):
+    """Check if a hex file contains loot/treasure."""
+    try:
+        hex_file_path = f"dying_lands_output/hexes/hex_{hex_code}.md"
+        if not os.path.exists(hex_file_path):
+            return False
+            
+        with open(hex_file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        # Check for loot indicators in the content
+        loot_indicators = [
+            '## Loot Found',
+            '**Treasure Found:**',
+            '**Loot:**',
+            '**Treasure:**'
+        ]
+        
+        return any(indicator in content for indicator in loot_indicators)
+            
+    except Exception:
+        return False
+
 def get_hex_content_type(hex_code):
     """Determine content type from hex file for visual indicators."""
     try:
@@ -374,10 +580,12 @@ def get_hex_content_type(hex_code):
             return 'settlement'
         elif '▲ **Ancient Ruins**' in content:  # Ruins marker
             return 'ruins'
-        elif '※ **Wild Beast' in content:  # Beast marker
+        elif '※ **' in content:  # Beast marker (any beast)
             return 'beast'
         elif '☉ **Wandering' in content:  # NPC marker
             return 'npc'
+        elif '≈ **' in content:  # Sea encounter marker
+            return 'sea_encounter'
         else:
             return 'basic'  # Basic terrain content
             
@@ -413,18 +621,88 @@ def extract_hex_data(content, hex_code):
             parts = line.split(' - ')
             if len(parts) > 1:
                 hex_data['terrain'] = parts[1].strip()
+        elif line.startswith('**Terrain:**'):
+            hex_data['terrain'] = line.replace('**Terrain:**', '').strip()
         
         # Extract encounter
-        elif '**' in line and any(symbol in line for symbol in ['※', '▲', '☉', '⌂']):
+        elif '**' in line and any(symbol in line for symbol in ['※', '▲', '☉', '⌂', '≈']):
             hex_data['encounter'] = line.strip()
+            
+            # Extract name from encounter line for settlements and dungeons
+            if '⌂ **' in line:
+                start = line.find('⌂ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['name'] = line[start:end]
+                # Extract population from settlement encounter line
+                if ' - A ' in line and ' settlement' in line:
+                    pop_start = line.find(' - A ') + 4
+                    pop_end = line.find(' settlement')
+                    if pop_start > 3 and pop_end > pop_start:
+                        hex_data['population'] = line[pop_start:pop_end]
+            elif '▲ **' in line:
+                start = line.find('▲ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['dungeon_type'] = line[start:end]
+            elif '≈ **' in line:
+                start = line.find('≈ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['encounter_type'] = line[start:end]
         
-        # Extract denizen information
-        elif '**' in line and ('Motivation:' in line or 'Feature:' in line or 'Demeanor:' in line):
-            if current_section == 'denizen':
-                hex_data['denizen'] += '\n' + line.strip()
-            else:
+        # Extract denizen information (but not the individual fields we parse separately)
+        elif current_section == 'denizen' and line and not line.startswith('#') and not any(field in line for field in ['**Motivation:**', '**Feature:**', '**Demeanor:**', '**Name:**', '**Type:**', '**Behavior:**']):
+            if hex_data['denizen'] == 'No denizen information':
                 hex_data['denizen'] = line.strip()
-                current_section = 'denizen'
+            else:
+                hex_data['denizen'] += '\n' + line.strip()
+        
+        # Extract NPC name from denizen section
+        elif current_section == 'denizen' and '**' in line and '**' in line[line.find('**')+2:] and ' - ' in line:
+            # Extract name between ** **
+            start = line.find('**') + 2
+            end = line.find('**', start)
+            if start > 1 and end > start:
+                hex_data['name'] = line[start:end]
+        
+        # Extract specific fields from both denizen section and details sections
+        elif '**Motivation:**' in line:
+            hex_data['motivation'] = line.replace('**Motivation:**', '').strip()
+        elif '**Demeanor:**' in line:
+            hex_data['demeanor'] = line.replace('**Demeanor:**', '').strip()
+        elif '**Name:**' in line:
+            hex_data['name'] = line.replace('**Name:**', '').strip()
+        elif '**Type:**' in line:
+            type_value = line.replace('**Type:**', '').strip()
+            # Check context to determine if it's beast or NPC
+            if '※ **' in content:  # Beast content
+                hex_data['beast_type'] = type_value
+            elif '☉ **' in content:  # NPC content
+                hex_data['denizen_type'] = type_value
+        elif '**Behavior:**' in line:
+            hex_data['beast_behavior'] = line.replace('**Behavior:**', '').strip()
+        elif '**Feature:**' in line:
+            feature_value = line.replace('**Feature:**', '').strip()
+            # Check context to determine if it's beast or NPC feature
+            if '※ **' in content:  # Beast content
+                hex_data['beast_feature'] = feature_value
+            else:  # NPC content
+                hex_data['feature'] = feature_value
+        elif '**Danger:**' in line:
+            hex_data['danger'] = line.replace('**Danger:**', '').strip()
+        elif '**Treasure:**' in line:
+            hex_data['treasure'] = line.replace('**Treasure:**', '').strip()
+        elif '**Ancient Knowledge:**' in line:
+            hex_data['scroll'] = line.replace('**Ancient Knowledge:**', '').strip()
+        elif '**Local Tavern:**' in line:
+            hex_data['local_tavern'] = line.replace('**Local Tavern:**', '').strip()
+        elif '**Local Power:**' in line:
+            hex_data['local_power'] = line.replace('**Local Power:**', '').strip()
+        elif '**Threat Level:**' in line:
+            hex_data['threat_level'] = line.replace('**Threat Level:**', '').strip()
+        elif '**Territory:**' in line:
+            hex_data['territory'] = line.replace('**Territory:**', '').strip()
         
         # Extract notable feature
         elif 'Notable Feature' in line or 'NOTABLE FEATURES' in line:
@@ -433,12 +711,30 @@ def extract_hex_data(content, hex_code):
             hex_data['notable_feature'] = line.strip()
             current_section = None
         
+        # Extract threat level
+        elif 'Threat Level' in line or 'THREAT LEVEL' in line:
+            current_section = 'threat_level'
+        elif current_section == 'threat_level' and line and not line.startswith('#'):
+            hex_data['threat_level'] = line.strip()
+            current_section = None
+        
+        # Extract territory
+        elif 'Territory' in line or 'TERRITORY' in line:
+            current_section = 'territory'
+        elif current_section == 'territory' and line and not line.startswith('#'):
+            hex_data['territory'] = line.strip()
+            current_section = None
+        
         # Extract atmosphere
         elif 'Atmosphere' in line or 'ATMOSPHERE' in line:
             current_section = 'atmosphere'
         elif current_section == 'atmosphere' and line and not line.startswith('#'):
             hex_data['atmosphere'] = line.strip()
             current_section = None
+        
+        # Extract denizen section
+        elif '## Denizen' in line:
+            current_section = 'denizen'
     
     return hex_data
 

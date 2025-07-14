@@ -220,6 +220,7 @@
     .terrain-coast { color: var(--mork-cyan); }
     .terrain-plains { color: var(--mork-yellow); }
     .terrain-swamp { color: var(--mork-orange); }
+    .terrain-sea { color: var(--mork-cyan); }
     .terrain-unknown { color: var(--mork-gray); }
     
     .has-content {
@@ -379,11 +380,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="btn-group me-2" role="group">
-                        <button class="btn btn-mork-borg btn-warning" onclick="showTerrainOverview()">🗺️ TERRAIN</button>
-                        <button class="btn btn-mork-borg btn-info" onclick="showLoreOverview()">📜 LORE</button>
+                        <button class="btn btn-mork-borg" onclick="showLoreOverview()">📜 LORE</button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button class="btn btn-mork-borg btn-danger" onclick="resetContinent()">🔄 RESET CONTINENT</button>
+                        <button class="btn btn-mork-borg" onclick="resetContinent()">🔄 RESET CONTINENT</button>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -391,11 +391,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <strong>TERRAIN:</strong><br>
-                                <span class="terrain-mountain">^</span> MOUNTAIN &nbsp;
-                                <span class="terrain-forest">♠</span> FOREST &nbsp;
-                                <span class="terrain-coast">~</span> COAST<br>
-                                <span class="terrain-plains">.</span> PLAINS &nbsp;
-                                <span class="terrain-swamp">#</span> SWAMP
+                                                    <span class="terrain-mountain">^</span> MOUNTAIN &nbsp;
+                    <span class="terrain-forest">♠</span> FOREST &nbsp;
+                    <span class="terrain-coast">~</span> COAST<br>
+                    <span class="terrain-plains">.</span> PLAINS &nbsp;
+                    <span class="terrain-swamp">#</span> SWAMP &nbsp;
+                    <span class="terrain-sea">≈</span> SEA
                 </div>
                             <div class="col-md-6">
                                 <strong>LOCATIONS:</strong><br>
@@ -499,6 +500,11 @@
 
     <script>
         let currentHex = '';
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let scrollStartX = 0;
+        let scrollStartY = 0;
     
     // Map data from server - read from data attributes
     let mapData = {};
@@ -517,7 +523,49 @@
                 console.error('Error loading map data:', error);
             }
         }
+        
+        // Setup middle-click drag functionality
+        setupMapDrag();
     });
+    
+    function setupMapDrag() {
+        const hexGrid = document.getElementById('hexGrid');
+        if (!hexGrid) return;
+        
+        // Middle mouse button drag
+        hexGrid.addEventListener('mousedown', function(e) {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                scrollStartX = hexGrid.scrollLeft;
+                scrollStartY = hexGrid.scrollTop;
+                hexGrid.style.cursor = 'grabbing';
+            }
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                const deltaX = e.clientX - dragStartX;
+                const deltaY = e.clientY - dragStartY;
+                hexGrid.scrollLeft = scrollStartX - deltaX;
+                hexGrid.scrollTop = scrollStartY - deltaY;
+            }
+        });
+        
+        document.addEventListener('mouseup', function(e) {
+            if (isDragging) {
+                isDragging = false;
+                hexGrid.style.cursor = 'default';
+            }
+        });
+        
+        // Prevent context menu on middle click
+        hexGrid.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    }
     
     // Define showHexDetails function first
     function showHexDetails(hexCode) {
@@ -576,7 +624,7 @@
         
         mapContainer.innerHTML = `
             <div style="text-align: center; padding: 50px; color: var(--mork-cyan);">
-                <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+                <pre style="font-family: 'pixelify-sans', monospace; font-size: 14px;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    LOADING HEX DETAILS...                    ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -595,7 +643,7 @@
         const mapContainer = document.querySelector('.map-container');
         mapContainer.innerHTML = `
             <div style="text-align: center; padding: 50px; color: var(--mork-magenta);">
-                <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+                <pre style="font-family: 'pixelify-sans', monospace; font-size: 14px;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    ERROR LOADING HEX ${hexCode}                    ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -805,6 +853,24 @@
 ║ ${line.padEnd(58)}║`;
                     });
                     
+                    // Add settlement layout if available
+                    if (data.settlement_art) {
+                        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SETTLEMENT LAYOUT:                                          ║
+╠══════════════════════════════════════════════════════════════╣`;
+                        
+                        const layoutLines = data.settlement_art.split('\n');
+                        layoutLines.forEach(line => {
+                            if (line.trim()) {
+                                // Center the layout line within the box
+                                const displayLine = line.substring(0, 58).padEnd(58);
+                                html += `
+║ ${displayLine}║`;
+                            }
+                        });
+                    }
+                    
                     html += `
 ╚══════════════════════════════════════════════════════════════╝
                                 </pre>
@@ -844,6 +910,8 @@
         const denizen = data.denizen || 'No denizen information';
         const notableFeature = data.notable_feature || 'No notable features';
         const atmosphere = data.atmosphere || 'Unknown atmosphere';
+        const threatLevel = data.threat_level || 'Unknown threat level';
+        const territory = data.territory || 'No territory information';
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
@@ -852,7 +920,7 @@
         let html = `
             <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                 <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-                    <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    HEX ${hexCode} - ${terrain.toUpperCase().padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
@@ -911,6 +979,32 @@
 ║ ${line.padEnd(58)}║`;
         });
         
+        // Add threat level section if available
+        if (threatLevel && threatLevel !== 'Unknown threat level') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ THREAT LEVEL:                                               ║`;
+            
+            const threatLines = threatLevel.match(/.{1,58}/g) || [threatLevel];
+            threatLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        // Add territory section if available
+        if (territory && territory !== 'No territory information') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ TERRITORY:                                                  ║`;
+            
+            const territoryLines = territory.match(/.{1,58}/g) || [territory];
+            territoryLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
         html += `
 ╚══════════════════════════════════════════════════════════════╝
                     </pre>
@@ -925,7 +1019,7 @@
         return `
             <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                 <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-                    <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    HEX ${hexCode} - EMPTY                    ║
 ╠══════════════════════════════════════════════════════════════╣

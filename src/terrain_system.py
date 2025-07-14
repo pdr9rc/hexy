@@ -19,6 +19,7 @@ class TerrainType(Enum):
     PLAINS = "plains"
     SWAMP = "swamp"
     DESERT = "desert"
+    SEA = "sea"
     UNKNOWN = "unknown"
 
 class TerrainSystem:
@@ -35,10 +36,15 @@ class TerrainSystem:
     def _initialize_image_analyzer(self):
         """Initialize image-based terrain analysis if images are available."""
         try:
-            # Image analysis functionality has been integrated into this class
-            # For now, we'll use coordinate-based detection
-            print("✅ Coordinate-based terrain analysis enabled")
-            self.use_image_analysis = False
+            from image_analyzer import image_analyzer
+            self.image_analyzer = image_analyzer
+            if image_analyzer.is_available():
+                print("✅ Official Mork Borg map analysis enabled")
+                print(f"   Map info: {image_analyzer.get_map_info()}")
+                self.use_image_analysis = True
+            else:
+                print("✅ Coordinate-based terrain analysis enabled")
+                self.use_image_analysis = False
         except Exception as e:
             print(f"⚠️  Image analysis disabled: {e}")
             self.use_image_analysis = False
@@ -78,6 +84,15 @@ class TerrainSystem:
         except (ValueError, IndexError):
             return 'plains'
         
+        # Define continent boundaries
+        continent_x_min, continent_x_max = 2, 23
+        continent_y_min, continent_y_max = 3, 27
+        
+        # Check if hex is outside continent bounds
+        if (x < continent_x_min or x > continent_x_max or 
+            y < continent_y_min or y > continent_y_max):
+            return 'sea'
+        
         # Western coast (x <= 4)
         if x <= 4:
             if y <= 10:
@@ -87,15 +102,15 @@ class TerrainSystem:
             else:
                 return 'plains'
         
-        # Eastern mountains (x >= 22)
-        elif x >= 22:
+        # Eastern mountains (x >= 21)
+        elif x >= 21:
             return 'mountain'
         
         # Central regions
         else:
             # Northern forests (y <= 10)
             if y <= 10:
-                if 5 <= x <= 15:
+                if 6 <= x <= 15:
                     return 'forest'
                 else:
                     return 'plains'
@@ -127,6 +142,7 @@ class TerrainSystem:
             'plains': '.',
             'swamp': '#',
             'desert': 'ä',
+            'sea': '≈',
             'unknown': '?'
         }
         return symbols.get(terrain, '?')
@@ -137,7 +153,7 @@ class TerrainSystem:
     
     def get_map_dimensions(self) -> Tuple[int, int]:
         """Get the map dimensions."""
-        return (25, 30)  # Width, Height
+        return (25, 30)  # Width, Height (X, Y)
     
     def create_terrain_overview_map(self) -> Dict[str, str]:
         """Create a terrain overview map for all hexes."""

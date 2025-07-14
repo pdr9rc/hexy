@@ -1,1 +1,32 @@
-flask>=2.3.0 
+# 💀 THE DYING LANDS - HARDCORE MORK BORG DISTRIBUTION 💀
+# Core Dependencies for the Apocalypse
+
+# Web Framework (for the dying world interface)
+flask>=3.0.0
+markdown>=3.8.0
+
+# Image Processing (for official map integration)
+Pillow>=10.0.0
+
+# Data Processing 
+jsonschema>=4.19.0
+
+# Optional: Enhanced features
+# Uncomment these for additional hardcore features:
+
+# PDF Generation
+# reportlab>=4.0.0
+# weasyprint>=60.0.0
+
+# Advanced Map Processing  
+# opencv-python>=4.8.0
+# numpy>=1.24.0
+
+# Database Support (if you want persistent storage)
+# sqlalchemy>=2.0.0
+# sqlite3
+
+# Development Tools (for modding the apocalypse)
+# pytest>=7.4.0
+# black>=23.0.0
+# flake8>=6.0.0 
