@@ -35,10 +35,16 @@
         <h1 class="mb-4">🗺️ The Dying Lands</h1>
         <h3 class="text-warning mb-3">{{ message }}</h3>
         <p class="mb-4">{{ action }}</p>
-        <div class="d-flex gap-3 justify-content-center">
-            <button class="btn btn-success btn-lg" onclick="generateMap()">🚀 Generate Full Map</button>
-            <button class="btn btn-warning btn-lg" onclick="resetAndGenerate()">🔄 Reset & Generate</button>
-        </div>
+        <form id="setup-form" method="post" action="/generate">
+            <div class="form-group">
+                <label for="language">Language:</label>
+                <select id="language" name="language" class="form-control">
+                    <option value="en">English</option>
+                    <option value="pt">Português</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate</button>
+        </form>
         <div id="status" class="mt-3"></div>
     </div>
     
@@ -74,36 +80,7 @@
         });
     }
     
-    function resetAndGenerate() {
-        const btn = event.target;
-        const status = document.getElementById('status');
-        
-        btn.disabled = true;
-        btn.textContent = '🔄 Resetting & Generating...';
-        status.innerHTML = '<div class="text-warning">🗑️ Clearing old content and generating fresh map...</div>';
-        
-        fetch('/api/reset-continent', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                status.innerHTML = `<div class="text-success">✅ ${data.message}</div>`;
-                setTimeout(() => window.location.reload(), 2000);
-            } else {
-                status.innerHTML = `<div class="text-danger">❌ Error: ${data.error}</div>`;
-                btn.disabled = false;
-                btn.textContent = '🔄 Reset & Generate';
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            status.innerHTML = '<div class="text-danger">❌ Reset failed</div>';
-            btn.disabled = false;
-            btn.textContent = '🔄 Reset & Generate';
-        });
-    }
+
     </script>
 </body>
 </html>

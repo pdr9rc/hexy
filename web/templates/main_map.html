@@ -21,43 +21,10 @@
     body {
         background: var(--mork-black);
         color: var(--mork-white);
-        font-family: monospace;
+        font-family: 'pixelify-sans', monospace;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
-    }
-    
-    /* Mörk Borg Scrollbar Styling */
-    ::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--mork-black);
-        border: 1px solid var(--mork-cyan);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: var(--mork-cyan);
-        border: 1px solid var(--mork-black);
-        border-radius: 0;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--mork-yellow);
-        box-shadow: 0 0 8px var(--mork-yellow);
-    }
-    
-    ::-webkit-scrollbar-corner {
-        background: var(--mork-black);
-        border: 1px solid var(--mork-cyan);
-    }
-    
-    /* Firefox scrollbar styling */
-    * {
-        scrollbar-width: thin;
-        scrollbar-color: var(--mork-cyan) var(--mork-black);
     }
     
     h1, h2, h3, h4, h5, h6 {
@@ -144,6 +111,45 @@
         font-size: 2.5rem;
     }
 
+    .header-ascii {
+        font-family: 'Courier New', monospace;
+        font-size: 12px;
+        line-height: 1.2;
+        color: var(--mork-cyan);
+        margin: 0;
+        text-shadow: 0 0 10px var(--mork-cyan);
+    }
+
+    .dice-yellow {
+        color: var(--mork-yellow);
+        text-shadow: 0 0 10px var(--mork-yellow);
+    }
+
+    .dice-red {
+        color: var(--mork-magenta);
+        text-shadow: 0 0 10px var(--mork-magenta);
+    }
+
+    @media (max-width: 768px) {
+        .header-ascii {
+            font-size: 8px;
+        }
+        
+        .main-header h1 {
+            font-size: 2rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .header-ascii {
+            font-size: 6px;
+        }
+        
+        .main-header h1 {
+            font-size: 1.5rem;
+        }
+    }
+
     /* Control Panel */
     .control-panel {
         background: var(--mork-black);
@@ -190,47 +196,27 @@
     
     .hex-grid {
         font-family: 'Courier New', monospace;
-        font-size: 0.9em;
+        font-size: 11px;
         line-height: 1.1;
         overflow: auto;
         height: calc(100% - 40px);
         background: var(--mork-black);
-        padding: 1em;
+        padding: 15px;
         border: 1px solid var(--mork-cyan);
         text-align: center;
         white-space: nowrap;
-        /* Ensure proper scaling with browser zoom */
-        transform-origin: top left;
-        /* Consistent scrollbar styling */
-        scrollbar-width: thin;
-        scrollbar-color: var(--mork-cyan) var(--mork-black);
-        /* Enable middle mouse drag scrolling */
-        cursor: default;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-    
-    .hex-grid.dragging {
-        cursor: grabbing;
-    }
-    
-    .hex-grid.dragging .hex-cell {
-        pointer-events: none;
     }
     
     .hex-cell {
         cursor: pointer;
-        padding: 0.1em 0.2em;
-        border-radius: 0.2em;
+        padding: 1px 2px;
+        border-radius: 2px;
         transition: all 0.2s;
         display: inline-block;
-        width: 1.2em;
+        width: 16px;
         text-align: center;
-        margin-right: 0;
+        margin-right: 0px;
         position: relative;
-        font-size: 1em;
     }
     
     .hex-cell:hover {
@@ -273,6 +259,7 @@
     .terrain-coast { color: var(--mork-cyan); }
     .terrain-plains { color: var(--mork-yellow); }
     .terrain-swamp { color: var(--mork-orange); }
+    .terrain-sea { color: var(--mork-cyan); }
     .terrain-unknown { color: var(--mork-gray); }
     
     .has-content {
@@ -292,23 +279,18 @@
         height: 100%;
         overflow-y: auto;
         box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-        /* Consistent scrollbar styling */
-        scrollbar-width: thin;
-        scrollbar-color: var(--mork-cyan) var(--mork-black);
     }
 
     .ascii-modal {
         font-family: 'Courier New', monospace;
-        font-size: 0.9em;
+        font-size: 12px;
         line-height: 1.3;
         color: var(--mork-cyan);
         background: var(--mork-black);
         border: 1px solid var(--mork-cyan);
-        padding: 1em;
-        margin: 0.8em 0;
+        padding: 15px;
+        margin: 10px 0;
         white-space: pre;
-        /* Ensure proper scaling with browser zoom */
-        transform-origin: top left;
     }
 
     /* Legend */
@@ -332,11 +314,10 @@
     
     .row-number {
         display: inline-block;
-        width: 2.5em;
+        width: 30px;
         text-align: right;
-        margin-right: 0.4em;
+        margin-right: 5px;
         color: var(--mork-cyan);
-        font-size: 0.9em;
     }
 
     /* Responsive Design */
@@ -422,78 +403,52 @@
         font-size: 0.9rem;
         line-height: 1.5;
     }
-
-    /* Vim-like Editing Interface */
-    .vim-command-line {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--mork-black);
-        border-top: 2px solid var(--mork-cyan);
-        padding: 10px;
-        font-family: 'Courier New', monospace;
-        color: var(--mork-cyan);
-        display: none;
-        z-index: 1000;
-    }
-
-    .vim-command-line input {
-        background: var(--mork-black);
-        border: none;
-        color: var(--mork-cyan);
-        font-family: 'Courier New', monospace;
-        font-size: 14px;
-        width: 100%;
-        outline: none;
-    }
-
-    .vim-command-line input::placeholder {
-        color: var(--mork-gray);
-    }
-
-    .vim-mode-indicator {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        background: var(--mork-black);
-        border: 1px solid var(--mork-cyan);
-        padding: 5px 10px;
-        font-family: 'Courier New', monospace;
-        color: var(--mork-cyan);
-        display: none;
-        z-index: 1000;
-    }
-
-    .edit-mode {
-        cursor: text;
-    }
-
-    .edit-mode .hex-content {
-        border: 2px solid var(--mork-yellow);
-        box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
-    }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="main-header">
-    <div class="container-fluid">
-            <h1 class="text-center">THE DYING LANDS</h1>
+        <div class="container-fluid">
+            <div class="text-center">
+                <pre class="header-ascii" id="headerAscii">
+       *                                                   *
+      *                                                     *
+    **                                                       **
+*   **                                                       **   *
+**   **          *                               *          **   **
+***    *         **                             **         *    ***
+ ****            *********************************            ****
+   *******      ***           *******           ***      *******
+      ************   <span id="dice1">6</span>         *****   <span id="dice2">6</span>         ************
+         **********    **** * **   ** *******   **********
+               ********** ** **     ** ****************
+         *************** ** **  ***  **  *****************
+          ******   *********************  ******   ******
+                </pre>
+                <h1 style="margin-top: 10px;">THE DYING LANDS</h1>
+            </div>
         </div>
-        </header>
+    </header>
         
         <!-- Control Panel -->
         <div class="control-panel">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="btn-group me-2" role="group">
-                        <button class="btn btn-mork-borg btn-warning" onclick="showTerrainOverview()">🗺️ TERRAIN</button>
-                        <button class="btn btn-mork-borg btn-info" onclick="showLoreOverview()">📜 LORE</button>
+                        <button class="btn btn-mork-borg" onclick="showLoreOverview()">📜 LORE</button>
                     </div>
                     <div class="btn-group" role="group">
-                        <button class="btn btn-mork-borg btn-danger" onclick="resetContinent()">🔄 RESET CONTINENT</button>
+                        <button class="btn btn-mork-borg" onclick="resetContinent()">🔄 RESET CONTINENT</button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="language-select" style="color: var(--mork-cyan); font-size: 0.9em; margin-bottom: 5px;">LANGUAGE:</label>
+                        <select id="language-select" class="form-control" style="background: var(--mork-black); border: 1px solid var(--mork-cyan); color: var(--mork-cyan); font-family: 'pixelify-sans', monospace; font-size: 0.9em;" onchange="changeLanguage(this.value)">
+                            <option value="en">ENGLISH</option>
+                            <option value="pt">PORTUGUÊS</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -501,11 +456,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <strong>TERRAIN:</strong><br>
-                                <span class="terrain-mountain">^</span> MOUNTAIN &nbsp;
-                                <span class="terrain-forest">♠</span> FOREST &nbsp;
-                                <span class="terrain-coast">~</span> COAST<br>
-                                <span class="terrain-plains">.</span> PLAINS &nbsp;
-                                <span class="terrain-swamp">#</span> SWAMP
+                                                    <span class="terrain-mountain">^</span> MOUNTAIN &nbsp;
+                    <span class="terrain-forest">♠</span> FOREST &nbsp;
+                    <span class="terrain-coast">~</span> COAST<br>
+                    <span class="terrain-plains">.</span> PLAINS &nbsp;
+                    <span class="terrain-swamp">#</span> SWAMP &nbsp;
+                    <span class="terrain-sea">≈</span> SEA
                 </div>
                             <div class="col-md-6">
                                 <strong>LOCATIONS:</strong><br>
@@ -525,16 +481,16 @@
         <!-- Left Side - Map -->
         <div class="map-side">
         <div class="map-container">
-            <div class="hex-grid" id="hexGrid">
-                <!-- Map content will be loaded here -->
-                {% if ascii_map %}
-                    <!-- Column headers -->
-                    <div class="text-center mb-2">
-                        <span style="margin-right: 1.5em;"></span>
-                        {% for x in range(1, map_width + 1) %}
-                            <span style="margin-right: 0.3em; font-size: 0.8em; display: inline-block; width: 1em; text-align: center;">{{ '%02d' % x }}</span>
-                        {% endfor %}
-                    </div>
+                <div class="hex-grid" id="hexGrid">
+                    <!-- Map content will be loaded here -->
+                    {% if ascii_map %}
+                        <!-- Column headers -->
+                        <div class="text-center mb-2">
+                            <span style="margin-right: 20px;"></span>
+                            {% for x in range(1, map_width + 1) %}
+                                <span style="margin-right: 4px; font-size: 9px; display: inline-block; width: 12px; text-align: center;">{{ '%02d' % x }}</span>
+                            {% endfor %}
+                        </div>
                         
                         <!-- Map rows -->
                         {% for y in range(1, map_height + 1) %}
@@ -593,14 +549,9 @@
             </div>
         </div>
         
-    <!-- Vim-like Editing Interface -->
-    <div class="vim-command-line" id="vimCommandLine">
-        <input type="text" id="vimCommandInput" placeholder=":" autocomplete="off">
-    </div>
+
     
-    <div class="vim-mode-indicator" id="vimModeIndicator">
-        NORMAL
-    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     
@@ -614,26 +565,134 @@
 
     <script>
         let currentHex = '';
-        let isEditMode = false;
-        let originalContent = '';
-        
-        // Map data from server - read from data attributes
-        let mapData = {};
-        let mapWidth = 0;
-        let mapHeight = 0;
-        
-
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let scrollStartX = 0;
+        let scrollStartY = 0;
     
-    // Define showHexDetails function first
-    function showHexDetails(hexCode) {
-        console.log('showHexDetails called with:', hexCode, 'isDragging:', isDragging);
-        
-        // Don't proceed if we're in a drag state
-        if (isDragging) {
-            console.log('Ignoring hex click due to drag state');
-            return;
+    // Map data from server - read from data attributes
+    let mapData = {};
+    let mapWidth = 0;
+    let mapHeight = 0;
+    
+    // Load map data from data attributes
+    document.addEventListener('DOMContentLoaded', function() {
+        const mapDataElement = document.getElementById('mapData');
+        if (mapDataElement) {
+            try {
+                mapData = JSON.parse(mapDataElement.dataset.map || '{}');
+                mapWidth = parseInt(mapDataElement.dataset.width || '0');
+                mapHeight = parseInt(mapDataElement.dataset.height || '0');
+            } catch (error) {
+                console.error('Error loading map data:', error);
+            }
         }
         
+        // Setup middle-click drag functionality
+        setupMapDrag();
+        
+        // Generate random dice numbers
+        generateDiceNumbers();
+    });
+
+    function generateDiceNumbers() {
+        const dice1 = Math.floor(Math.random() * 6) + 1;
+        const dice2 = Math.floor(Math.random() * 6) + 1;
+        
+        const dice1Element = document.getElementById('dice1');
+        const dice2Element = document.getElementById('dice2');
+        
+        if (dice1Element && dice2Element) {
+            dice1Element.textContent = dice1;
+            dice2Element.textContent = dice2;
+            
+            // Remove existing color classes
+            dice1Element.classList.remove('dice-yellow', 'dice-red');
+            dice2Element.classList.remove('dice-yellow', 'dice-red');
+            
+            // Apply color based on dice values
+            if (dice1 === 6 && dice2 === 6) {
+                // Both sixes = red
+                dice1Element.classList.add('dice-red');
+                dice2Element.classList.add('dice-red');
+            } else {
+                // Otherwise = yellow
+                dice1Element.classList.add('dice-yellow');
+                dice2Element.classList.add('dice-yellow');
+            }
+        }
+    }
+    
+    function setupMapDrag() {
+        const hexGrid = document.getElementById('hexGrid');
+        if (!hexGrid) return;
+        
+        // Middle mouse button drag
+        hexGrid.addEventListener('mousedown', function(e) {
+            if (e.button === 1) { // Middle mouse button
+                e.preventDefault();
+                isDragging = true;
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                scrollStartX = hexGrid.scrollLeft;
+                scrollStartY = hexGrid.scrollTop;
+                hexGrid.style.cursor = 'grabbing';
+            }
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                const deltaX = e.clientX - dragStartX;
+                const deltaY = e.clientY - dragStartY;
+                hexGrid.scrollLeft = scrollStartX - deltaX;
+                hexGrid.scrollTop = scrollStartY - deltaY;
+            }
+        });
+        
+        document.addEventListener('mouseup', function(e) {
+            if (isDragging) {
+                isDragging = false;
+                hexGrid.style.cursor = 'default';
+            }
+        });
+        
+        // Prevent context menu on middle click
+        hexGrid.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    }
+    
+    // Language change function
+    function changeLanguage(language) {
+        fetch('/api/set-language', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ language: language })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log(`Language changed to ${language}`);
+                // If a hex is currently selected, refresh its content
+                if (currentHex) {
+                    showHexDetails(currentHex);
+                }
+            } else {
+                console.error('Failed to change language:', data.error);
+                // Reset the select to the previous value
+                document.getElementById('language-select').value = language === 'en' ? 'pt' : 'en';
+            }
+        })
+        .catch(error => {
+            console.error('Error changing language:', error);
+            // Reset the select to the previous value
+            document.getElementById('language-select').value = language === 'en' ? 'pt' : 'en';
+        });
+    }
+
+    // Define showHexDetails function first
+    function showHexDetails(hexCode) {
         currentHex = hexCode;
         
         // Highlight selected hex on the map
@@ -689,7 +748,7 @@
         
         mapContainer.innerHTML = `
             <div style="text-align: center; padding: 50px; color: var(--mork-cyan);">
-                <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+                <pre style="font-family: 'pixelify-sans', monospace; font-size: 14px;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    LOADING HEX DETAILS...                    ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -708,7 +767,7 @@
         const mapContainer = document.querySelector('.map-container');
         mapContainer.innerHTML = `
             <div style="text-align: center; padding: 50px; color: var(--mork-magenta);">
-                <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+                <pre style="font-family: 'pixelify-sans', monospace; font-size: 14px;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    ERROR LOADING HEX ${hexCode}                    ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -758,9 +817,6 @@
     }
 
     function showCityDetailsInMap(hexCode) {
-        // Disable drag functionality when showing city details
-        disableDragFunctionality();
-        
         // Show loading state in map area
         showMapLoadingState();
         
@@ -849,7 +905,6 @@
         `;
                     
                     mapContainer.innerHTML = html;
-                    // Drag functionality is disabled for city details view
                 } else {
                     showMapErrorState(hexCode);
                 }
@@ -861,9 +916,6 @@
     }
 
     function showSettlementDetailsInMap(hexCode) {
-        // Disable drag functionality when showing settlement details
-        disableDragFunctionality();
-        
         // Show loading state in map area
         showMapLoadingState();
         
@@ -925,8 +977,27 @@
 ║ ${line.padEnd(58)}║`;
                     });
                     
-                    // Add settlement layout if present
-                    if (data.settlement_layout && data.settlement_layout !== 'No settlement layout') {
+                    // Add settlement layout if available
+                    if (data.settlement_art || data.settlement_layout) {
+                        html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SETTLEMENT LAYOUT:                                          ║
+╠══════════════════════════════════════════════════════════════╣`;
+                        
+                        const layoutContent = data.settlement_art || data.settlement_layout;
+                        const layoutLines = layoutContent.split('\n');
+                        layoutLines.forEach(line => {
+                            if (line.trim()) {
+                                // Center the layout line within the box
+                                const displayLine = line.substring(0, 58).padEnd(58);
+                                html += `
+║ ${displayLine}║`;
+                            }
+                        });
+                    }
+                    
+                    // Add settlement layout if present (separate from art)
+                    if (data.settlement_layout && data.settlement_layout !== 'No settlement layout' && data.settlement_layout !== data.settlement_art) {
                         html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ SETTLEMENT LAYOUT:                                          ║`;
@@ -937,8 +1008,6 @@
                         });
                     }
                     
-
-                    
                     html += `
 ╚══════════════════════════════════════════════════════════════╝
                                 </pre>
@@ -947,7 +1016,6 @@
                     `;
                     
                     mapContainer.innerHTML = html;
-                    // Drag functionality is disabled for settlement details view
                 } else {
                     showMapErrorState(hexCode);
                 }
@@ -975,6 +1043,7 @@
 
     function generateHexModalHTML(data, hexCode) {
         const terrain = data.terrain || 'unknown';
+        const terrainName = data.terrain_name || terrain.charAt(0).toUpperCase() + terrain.slice(1);
         const encounter = data.encounter || 'Unknown encounter';
         const denizen = data.denizen || 'No denizen information';
         const notableFeature = data.notable_feature || 'No notable features';
@@ -997,11 +1066,11 @@
         let html = `
             <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                 <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-                    <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
 ╔══════════════════════════════════════════════════════════════╗
-║                    HEX ${hexCode} - ${terrain.toUpperCase().padEnd(50)}║
+║                    HEX ${hexCode} - ${terrainName.toUpperCase().padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
-║ TERRAIN: ${terrain.charAt(0).toUpperCase() + terrain.slice(1).padEnd(50)}║
+║ TERRAIN: ${terrainName.padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRAIN ART:                                                ║`;
         
@@ -1092,11 +1161,12 @@
             });
         }
         
-        // Add threat level if present
+        // Add threat level section if available
         if (threatLevel && threatLevel !== 'Unknown threat level') {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ THREAT LEVEL:                                               ║`;
+            
             const threatLines = threatLevel.match(/.{1,58}/g) || [threatLevel];
             threatLines.forEach(line => {
                 html += `
@@ -1104,11 +1174,12 @@
             });
         }
         
-        // Add territory if present
+        // Add territory section if available
         if (territory && territory !== 'No territory claimed') {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRITORY:                                                  ║`;
+            
             const territoryLines = territory.match(/.{1,58}/g) || [territory];
             territoryLines.forEach(line => {
                 html += `
@@ -1152,27 +1223,6 @@
             });
         }
         
-        // Add feature if present
-        if (feature && feature !== 'No notable features') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ FEATURE:                                                    ║`;
-            const featureLines = feature.match(/.{1,58}/g) || [feature];
-            featureLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add settlement layout if present
-        if (settlementLayout && settlementLayout !== 'No settlement layout') {
-            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ SETTLEMENT LAYOUT:                                          ║`;
-            const layoutLines = settlementLayout.split('\n');
-            layoutLines.forEach(line => {
-                html += `\n║ ${line.padEnd(58)}║`;
-            });
-        }
-        
         html += `
 ╚══════════════════════════════════════════════════════════════╝
                     </pre>
@@ -1187,7 +1237,7 @@
         return `
             <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                 <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-                    <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
 ╔══════════════════════════════════════════════════════════════╗
 ║                    HEX ${hexCode} - EMPTY                    ║
 ╠══════════════════════════════════════════════════════════════╣
@@ -1246,7 +1296,6 @@
         const originalContent = mapContainer.getAttribute('data-original-content');
         if (originalContent) {
             mapContainer.innerHTML = originalContent;
-            
             // Restore hex selection after returning to map
             if (currentHex) {
                 const hexElement = document.querySelector(`[data-hex="${currentHex}"]`);
@@ -1254,36 +1303,6 @@
                     hexElement.classList.add('selected');
                 }
             }
-            
-            // Ensure drag functionality is completely reset and re-initialized
-            disableDragFunctionality();
-            initMiddleMouseScroll();
-            
-            // Force re-attach all hex click events to ensure they work
-            setTimeout(() => {
-                const hexCells = document.querySelectorAll('.hex-cell');
-                console.log('Re-attaching click events to', hexCells.length, 'hex cells');
-                
-                hexCells.forEach(hexCell => {
-                    const hexCode = hexCell.getAttribute('data-hex');
-                    if (hexCode) {
-                        // Remove any existing click listeners to avoid duplicates
-                        hexCell.onclick = null;
-                        
-                        // Add new click listener with drag check
-                        hexCell.onclick = function(e) {
-                            // Don't trigger hex details if we were just dragging
-                            if (isDragging) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                return;
-                            }
-                            console.log('Hex clicked:', hexCode);
-                            showHexDetails(hexCode);
-                        };
-                    }
-                });
-            }, 100); // Small delay to ensure DOM is ready
         } else {
             window.location.reload();
         }
@@ -1527,505 +1546,6 @@
             'plains': '.', 'swamp': '#', 'unknown': '?'
         };
         return symbols[terrain] || '?';
-    }
-
-    // Vim-like Editing System
-    function initVimEditing() {
-        const commandLine = document.getElementById('vimCommandLine');
-        const commandInput = document.getElementById('vimCommandInput');
-        const modeIndicator = document.getElementById('vimModeIndicator');
-
-        // Global keyboard event listener
-        document.addEventListener('keydown', function(e) {
-            if (e.target.tagName === 'INPUT') return; // Don't interfere with input fields
-            
-            // Browser zoom shortcuts - let browser handle zoom naturally
-            if (e.ctrlKey || e.metaKey) {
-                if (e.key === '=' || e.key === '+' || e.key === '-') {
-                    // Don't prevent default - let browser handle zoom
-                    return;
-                }
-            }
-            
-            if (isEditMode) {
-                handleEditModeKey(e);
-            } else {
-                handleNormalModeKey(e);
-            }
-        });
-
-        // Command input handling
-        commandInput.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const command = commandInput.value.trim();
-                processVimCommand(command);
-                commandInput.value = '';
-                hideCommandLine();
-            } else if (e.key === 'Escape') {
-                e.preventDefault();
-                commandInput.value = '';
-                hideCommandLine();
-            }
-        });
-    }
-
-    function handleNormalModeKey(e) {
-        if (e.key === 'i' && currentHex) {
-            e.preventDefault();
-            e.stopPropagation();
-            enterInsertMode();
-        } else if (e.key === ':') {
-            e.preventDefault();
-            e.stopPropagation();
-            showCommandLine();
-        }
-    }
-
-    function handleEditModeKey(e) {
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            e.stopPropagation();
-            exitInsertMode();
-        }
-    }
-
-    function enterInsertMode() {
-        isEditMode = true;
-        document.body.classList.add('edit-mode');
-        showModeIndicator('INSERT');
-        
-        // Store original content
-        const modalContainer = document.getElementById('modalContainer');
-        if (modalContainer) {
-            originalContent = modalContainer.innerHTML;
-            makeContentEditable(modalContainer);
-        }
-    }
-
-    function exitInsertMode() {
-        isEditMode = false;
-        document.body.classList.remove('edit-mode');
-        showModeIndicator('NORMAL');
-        
-        // Make content non-editable
-        const modalContainer = document.getElementById('modalContainer');
-        if (modalContainer) {
-            makeContentNonEditable(modalContainer);
-        }
-    }
-
-    function makeContentEditable(container) {
-        const preElements = container.querySelectorAll('pre');
-        console.log('Making pre elements editable:', preElements.length);
-        preElements.forEach((pre, index) => {
-            pre.contentEditable = true;
-            pre.style.outline = '2px solid var(--mork-yellow)';
-            pre.style.padding = '5px';
-            console.log(`Made pre element ${index} editable`);
-        });
-        
-        // Focus on the first pre element
-        if (preElements.length > 0) {
-            preElements[0].focus();
-        }
-    }
-
-    function makeContentNonEditable(container) {
-        const preElements = container.querySelectorAll('pre');
-        console.log('Making pre elements non-editable:', preElements.length);
-        preElements.forEach((pre, index) => {
-            pre.contentEditable = false;
-            pre.style.outline = 'none';
-            pre.style.padding = '';
-            console.log(`Made pre element ${index} non-editable`);
-        });
-    }
-
-    function showCommandLine() {
-        const commandLine = document.getElementById('vimCommandLine');
-        const commandInput = document.getElementById('vimCommandInput');
-        commandLine.style.display = 'block';
-        commandInput.focus();
-    }
-
-    function hideCommandLine() {
-        const commandLine = document.getElementById('vimCommandLine');
-        const commandInput = document.getElementById('vimCommandInput');
-        commandLine.style.display = 'none';
-        commandInput.value = '';
-        commandInput.blur();
-    }
-
-    function showModeIndicator(mode) {
-        const indicator = document.getElementById('vimModeIndicator');
-        indicator.textContent = mode;
-        indicator.style.display = 'block';
-        
-        // Hide after 2 seconds
-        setTimeout(() => {
-            indicator.style.display = 'none';
-        }, 2000);
-    }
-
-    function processVimCommand(command) {
-        switch (command) {
-            case 'wq':
-                saveAndQuit();
-                break;
-            case 'q':
-                quitWithoutSaving();
-                break;
-            case 'w':
-                saveContent();
-                break;
-            default:
-                if (command.startsWith('s/')) {
-                    // Simple search and replace
-                    const parts = command.split('/');
-                    if (parts.length >= 3) {
-                        const search = parts[1];
-                        const replace = parts[2];
-                        searchAndReplace(search, replace);
-                    }
-                } else {
-                    showVimMessage(`Unknown command: ${command}`);
-                }
-        }
-    }
-
-    function saveAndQuit() {
-        saveContent();
-        exitInsertMode();
-        showVimMessage('Content saved and quit');
-        // Clear any potential input
-        document.activeElement.blur();
-    }
-
-    function quitWithoutSaving() {
-        // Restore original content
-        const modalContainer = document.getElementById('modalContainer');
-        if (modalContainer && originalContent) {
-            modalContainer.innerHTML = originalContent;
-        }
-        exitInsertMode();
-        showVimMessage('Quit without saving');
-        // Clear any potential input
-        document.activeElement.blur();
-    }
-
-    function saveContent() {
-        const modalContainer = document.getElementById('modalContainer');
-        if (!modalContainer || !currentHex) {
-            console.log('Save failed: No container or hex selected', { modalContainer: !!modalContainer, currentHex });
-            showVimMessage('No content to save');
-            return;
-        }
-
-        // Extract the edited content from the pre elements
-        const preElements = modalContainer.querySelectorAll('pre');
-        console.log('Found pre elements:', preElements.length);
-        
-        let editedContent = '';
-        preElements.forEach((pre, index) => {
-            // Get the text content and preserve line breaks
-            const content = pre.textContent || pre.innerText;
-            console.log(`Pre element ${index} content:`, content.substring(0, 100) + '...');
-            editedContent += content + '\n';
-        });
-
-        // Clean up the content - remove any extra whitespace
-        editedContent = editedContent.trim();
-        console.log('Final edited content length:', editedContent.length);
-
-        if (!editedContent) {
-            console.log('Save failed: No content extracted');
-            showVimMessage('No content to save');
-            return;
-        }
-
-        // Show saving indicator
-        showVimMessage('Saving...');
-        console.log('Sending save request for hex:', currentHex);
-
-        // Send the edited content to the server
-        fetch(`/api/save-hex/${currentHex}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                hex_code: currentHex,
-                content: editedContent
-            })
-        })
-        .then(response => {
-            console.log('Save response status:', response.status);
-            return response.json();
-        })
-        .then(data => {
-            console.log('Save response data:', data);
-            if (data.success) {
-                showVimMessage('Content saved successfully');
-                // Refresh the hex content to show the updated version
-                showHexDetails(currentHex);
-            } else {
-                showVimMessage(`Save failed: ${data.error}`);
-            }
-        })
-        .catch(error => {
-            console.error('Error saving content:', error);
-            showVimMessage('Save failed: Network error');
-        });
-    }
-
-    function searchAndReplace(search, replace) {
-        const modalContainer = document.getElementById('modalContainer');
-        if (modalContainer) {
-            const content = modalContainer.innerHTML;
-            const newContent = content.replace(new RegExp(search, 'g'), replace);
-            modalContainer.innerHTML = newContent;
-            showVimMessage(`Replaced '${search}' with '${replace}'`);
-        }
-    }
-
-    function showVimMessage(message) {
-        const indicator = document.getElementById('vimModeIndicator');
-        indicator.textContent = message;
-        indicator.style.display = 'block';
-        
-        setTimeout(() => {
-            indicator.style.display = 'none';
-        }, 2000);
-    }
-
-    // Debug function - can be called from browser console
-    function testSave() {
-        console.log('Testing save functionality...');
-        console.log('Current hex:', currentHex);
-        console.log('Is edit mode:', isEditMode);
-        
-        const modalContainer = document.getElementById('modalContainer');
-        console.log('Modal container:', modalContainer);
-        
-        if (modalContainer) {
-            const preElements = modalContainer.querySelectorAll('pre');
-            console.log('Pre elements found:', preElements.length);
-            preElements.forEach((pre, index) => {
-                console.log(`Pre ${index}:`, pre.textContent.substring(0, 50));
-            });
-        }
-        
-        // Try to save
-        saveContent();
-    }
-
-    // Initialize vim editing when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        const mapDataElement = document.getElementById('mapData');
-        if (mapDataElement) {
-            try {
-                const mapDataString = mapDataElement.dataset.map || '{}';
-                console.log('Raw map data string length:', mapDataString.length);
-                
-                // Check if the string is valid JSON
-                if (mapDataString.trim() === '') {
-                    console.warn('Empty map data, using empty object');
-                    mapData = {};
-                } else {
-                    mapData = JSON.parse(mapDataString);
-                    console.log('Map data loaded successfully:', Object.keys(mapData).length, 'hexes');
-                }
-                
-                mapWidth = parseInt(mapDataElement.dataset.width || '0');
-                mapHeight = parseInt(mapDataElement.dataset.height || '0');
-            } catch (error) {
-                console.error('Error loading map data:', error);
-                console.error('Map data string preview:', mapDataElement.dataset.map?.substring(0, 200));
-                // Use empty data as fallback
-                mapData = {};
-                mapWidth = 0;
-                mapHeight = 0;
-            }
-        }
-        
-        // Initialize vim editing system
-        initVimEditing();
-        
-        // Initialize middle mouse scroll functionality
-        initMiddleMouseScroll();
-        
-        // Clean up event listeners when page is unloaded
-        window.addEventListener('beforeunload', function() {
-            cleanupDragEventListeners();
-        });
-    });
-    
-    // Middle mouse drag scrolling functionality - simplified approach
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let scrollStartX = 0;
-    let scrollStartY = 0;
-    let dragEnabled = false; // Global flag to control drag functionality
-    
-    function initMiddleMouseScroll() {
-        const hexGrid = document.getElementById('hexGrid');
-        if (!hexGrid) return;
-        
-        // Reset drag state
-        isDragging = false;
-        hexGrid.classList.remove('dragging');
-        hexGrid.style.cursor = 'default';
-        
-        // Clear any existing event handlers
-        hexGrid.onmousedown = null;
-        hexGrid.oncontextmenu = null;
-        hexGrid.onmouseleave = null;
-        document.onmousemove = null;
-        document.onmouseup = null;
-        
-        // Enable drag functionality
-        dragEnabled = true;
-        
-        // Simple event handlers - no complex cleanup needed
-        hexGrid.onmousedown = function(e) {
-            if (!dragEnabled) return; // Don't do anything if drag is disabled
-            
-            if (e.button === 1) { // Middle mouse button
-                e.preventDefault();
-                e.stopPropagation();
-                
-                isDragging = true;
-                dragStartX = e.clientX;
-                dragStartY = e.clientY;
-                scrollStartX = hexGrid.scrollLeft;
-                scrollStartY = hexGrid.scrollTop;
-                
-                hexGrid.classList.add('dragging');
-                hexGrid.style.cursor = 'grabbing';
-            }
-        };
-        
-        // Use onmouseover/onmouseout instead of addEventListener to avoid conflicts
-        document.onmousemove = function(e) {
-            if (!dragEnabled || !isDragging) return;
-            
-            const deltaX = dragStartX - e.clientX;
-            const deltaY = dragStartY - e.clientY;
-            
-            hexGrid.scrollLeft = scrollStartX + deltaX;
-            hexGrid.scrollTop = scrollStartY + deltaY;
-        };
-        
-        document.onmouseup = function(e) {
-            if (!dragEnabled) return;
-            
-            if (isDragging) {
-                isDragging = false;
-                hexGrid.classList.remove('dragging');
-                hexGrid.style.cursor = 'default';
-                
-                // Prevent any click events from firing after drag
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Clear any potential hex selection that might have been triggered during drag
-                clearHexSelection();
-            }
-        };
-        
-        hexGrid.oncontextmenu = function(e) {
-            if (!dragEnabled) return;
-            
-            if (e.button === 1) {
-                e.preventDefault();
-            }
-        };
-        
-        hexGrid.onmouseleave = function(e) {
-            if (!dragEnabled) return;
-            
-            if (isDragging) {
-                isDragging = false;
-                hexGrid.classList.remove('dragging');
-                hexGrid.style.cursor = 'default';
-            }
-        };
-    }
-    
-    function cleanupDragEventListeners() {
-        // Reset all drag state variables
-        dragEnabled = false;
-        isDragging = false;
-        dragStartX = 0;
-        dragStartY = 0;
-        scrollStartX = 0;
-        scrollStartY = 0;
-        
-        const hexGrid = document.getElementById('hexGrid');
-        if (hexGrid) {
-            hexGrid.classList.remove('dragging');
-            hexGrid.style.cursor = 'default';
-        }
-    }
-    
-    function disableDragFunctionality() {
-        // Completely disable drag functionality
-        dragEnabled = false;
-        isDragging = false;
-        dragStartX = 0;
-        dragStartY = 0;
-        scrollStartX = 0;
-        scrollStartY = 0;
-        
-        const hexGrid = document.getElementById('hexGrid');
-        if (hexGrid) {
-            hexGrid.classList.remove('dragging');
-            hexGrid.style.cursor = 'default';
-            
-            // Clear all event handlers
-            hexGrid.onmousedown = null;
-            hexGrid.oncontextmenu = null;
-            hexGrid.onmouseleave = null;
-        }
-        
-        // Clear document event handlers
-        document.onmousemove = null;
-        document.onmouseup = null;
-    }
-    
-    // Global function to force reset drag state (can be called from console for debugging)
-    function forceResetDragState() {
-        console.log('Force resetting drag state');
-        dragEnabled = false;
-        isDragging = false;
-        dragStartX = 0;
-        dragStartY = 0;
-        scrollStartX = 0;
-        scrollStartY = 0;
-        
-        const hexGrid = document.getElementById('hexGrid');
-        if (hexGrid) {
-            hexGrid.classList.remove('dragging');
-            hexGrid.style.cursor = 'default';
-        }
-        
-        // Also clear any hex selections that might be stuck
-        clearHexSelection();
-    }
-    
-    // Global function to test hex click events (can be called from console for debugging)
-    function testHexClicks() {
-        console.log('Testing hex click events...');
-        const hexCells = document.querySelectorAll('.hex-cell');
-        console.log('Found', hexCells.length, 'hex cells');
-        
-        hexCells.forEach((hexCell, index) => {
-            const hexCode = hexCell.getAttribute('data-hex');
-            const hasOnclick = hexCell.onclick !== null;
-            console.log(`Hex ${index}: ${hexCode}, has onclick: ${hasOnclick}`);
-        });
     }
     
     </script>
