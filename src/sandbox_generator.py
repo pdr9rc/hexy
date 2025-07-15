@@ -186,21 +186,52 @@ class SandboxGenerator:
             }
         }
     
+    def _generate_beasts(self, hex_code: str, terrain_type: str) -> list:
+        """Generate beast encounters for the hex."""
+        # Use bestiary tables if available, else return empty
+        try:
+            beast_types = self.db_manager.get_table('bestiary', 'beast_types', 'en')
+            beast_features = self.db_manager.get_table('bestiary', 'beast_features', 'en')
+            beast_behaviors = self.db_manager.get_table('bestiary', 'beast_behaviors', 'en')
+        except Exception:
+            beast_types, beast_features, beast_behaviors = [], [], []
+        
+        # 50% chance to generate a beast encounter (or adjust as needed)
+        if beast_types and random.random() < 0.5:
+            beast_type = random.choice(beast_types)
+            feature = random.choice(beast_features) if beast_features else "unnatural appearance"
+            behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
+            return [{
+                'beast_type': beast_type,
+                'beast_feature': feature,
+                'beast_behavior': behavior,
+                'description': f"A {beast_type} with {feature} that {behavior}.",
+                'threat_level': 'High',
+                'territory': f"This creature has claimed this area of {terrain_type} as its hunting ground."
+            }]
+        return []
+
     def generate_enhanced_hex_content(self, hex_code: str, terrain_type: str, language: str = 'en') -> Dict[str, Any]:
         """Generate enhanced hex content using Sandbox Generator methods."""
         # Get base terrain information
         terrain_info = self._get_terrain_info(hex_code, terrain_type)
         
-        # Generate sandbox elements
+        # Generate sandbox elements, always include all major sections
         sandbox_data = {
-            'factions': self._generate_local_factions(hex_code, terrain_type),
-            'settlements': self._generate_detailed_settlements(hex_code, terrain_type),
-            'castles': self._generate_castles(hex_code, terrain_type),
-            'conflicts': self._generate_faction_conflicts(hex_code),
-            'economic_data': self._generate_economic_data(hex_code, terrain_type),
-            'plot_hooks': self._generate_plot_hooks(hex_code, terrain_type),
-            'terrain_features': self._generate_terrain_features(hex_code, terrain_type)
+            'factions': self._generate_local_factions(hex_code, terrain_type) or [],
+            'settlements': self._generate_detailed_settlements(hex_code, terrain_type) or [],
+            'castles': self._generate_castles(hex_code, terrain_type) or [],
+            'dungeons': [],  # Placeholder for future dungeon integration
+            'beasts': self._generate_beasts(hex_code, terrain_type) or [],
+            'conflicts': self._generate_faction_conflicts(hex_code) or [],
+            'economic_data': self._generate_economic_data(hex_code, terrain_type) or {},
+            'plot_hooks': self._generate_plot_hooks(hex_code, terrain_type) or [],
+            'terrain_features': self._generate_terrain_features(hex_code, terrain_type) or []
         }
+        # Ensure all keys are present
+        for key in ['factions','settlements','castles','dungeons','beasts','conflicts','economic_data','plot_hooks','terrain_features']:
+            if key not in sandbox_data:
+                sandbox_data[key] = [] if key != 'economic_data' else {}
         
         # Combine with existing content
         enhanced_content = {
@@ -210,7 +241,6 @@ class SandboxGenerator:
             'sandbox_data': sandbox_data,
             'language': language
         }
-        
         return enhanced_content
     
     def _get_terrain_info(self, hex_code: str, terrain_type: str) -> Dict[str, Any]:

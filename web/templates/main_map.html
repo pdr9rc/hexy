@@ -1265,7 +1265,12 @@
         const factions = sandboxData.factions || [];
         const settlements = sandboxData.settlements || [];
         const castles = sandboxData.castles || [];
+        const dungeons = sandboxData.dungeons || [];
+        const beasts = sandboxData.beasts || [];
         const conflicts = sandboxData.conflicts || [];
+        const economicData = sandboxData.economic_data || {};
+        const plotHooks = sandboxData.plot_hooks || [];
+        const terrainFeatures = sandboxData.terrain_features || [];
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
@@ -1279,119 +1284,137 @@
 ║                    HEX ${hexCode} - ${terrainName.toUpperCase().padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
 ║ ENHANCED SUMMARY:                                           ║`;
-        
         // Add summary
         const summaryLines = summary.match(/.{1,58}/g) || [summary];
         summaryLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
+            html += `\n║ ${line.padEnd(58)}║`;
         });
-        
-        html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ENHANCED ENCOUNTER:                                         ║`;
-        
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ENHANCED ENCOUNTER:                                         ║`;
         // Add enhanced encounter
         const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
         encounterLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
+            html += `\n║ ${line.padEnd(58)}║`;
         });
-        
-        // Add factions if present
+        // Factions
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ FACTIONS:                                                   ║`;
         if (factions.length > 0) {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ FACTIONS:                                                   ║`;
             factions.forEach(faction => {
                 const factionLine = `- ${faction.name} (${faction.type}) - Power: ${faction.power_level}`;
                 const factionLines = factionLine.match(/.{1,58}/g) || [factionLine];
                 factionLines.forEach(line => {
-                    html += `
-║ ${line.padEnd(58)}║`;
+                    html += `\n║ ${line.padEnd(58)}║`;
                 });
             });
+        } else {
+            html += `\n║ None                                                        ║`;
         }
-        
-        // Add settlements if present
+        // Settlements
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ SETTLEMENTS:                                                ║`;
         if (settlements.length > 0) {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ SETTLEMENTS:                                                ║`;
             settlements.forEach(settlement => {
                 const settlementLine = `- ${settlement.name} (${settlement.type}) - Pop: ${settlement.population}`;
                 const settlementLines = settlementLine.match(/.{1,58}/g) || [settlementLine];
                 settlementLines.forEach(line => {
-                    html += `
-║ ${line.padEnd(58)}║`;
+                    html += `\n║ ${line.padEnd(58)}║`;
                 });
             });
+        } else {
+            html += `\n║ None                                                        ║`;
         }
-        
-        // Add castles if present
+        // Castles
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ CASTLES:                                                    ║`;
         if (castles.length > 0) {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ CASTLES:                                                    ║`;
             castles.forEach(castle => {
-                const castleLine = `- ${castle.name} - ${castle.condition}`;
+                const castleLine = `- ${castle.name || castle.type || 'Unknown'} - ${castle.condition || 'Unknown condition'}`;
                 const castleLines = castleLine.match(/.{1,58}/g) || [castleLine];
                 castleLines.forEach(line => {
-                    html += `
-║ ${line.padEnd(58)}║`;
+                    html += `\n║ ${line.padEnd(58)}║`;
                 });
             });
+        } else {
+            html += `\n║ None                                                        ║`;
         }
-        
-        // Add conflicts if present
+        // Dungeons
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ DUNGEONS:                                                   ║`;
+        if (dungeons.length > 0) {
+            dungeons.forEach(dungeon => {
+                const dungeonLine = `- ${dungeon.name || dungeon.type || 'Unknown'} | Danger: ${dungeon.danger || 'Unknown'} | Treasure: ${dungeon.treasure || 'None'}`;
+                const dungeonLines = dungeonLine.match(/.{1,58}/g) || [dungeonLine];
+                dungeonLines.forEach(line => {
+                    html += `\n║ ${line.padEnd(58)}║`;
+                });
+            });
+        } else {
+            html += `\n║ None                                                        ║`;
+        }
+        // Beasts
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ BEASTS:                                                     ║`;
+        if (beasts.length > 0) {
+            beasts.forEach(beast => {
+                const beastLine = `- ${beast.beast_type || 'Unknown'} | Feature: ${beast.beast_feature || 'Unknown'} | Behavior: ${beast.beast_behavior || 'Unknown'}`;
+                const beastLines = beastLine.match(/.{1,58}/g) || [beastLine];
+                beastLines.forEach(line => {
+                    html += `\n║ ${line.padEnd(58)}║`;
+                });
+                if (beast.description) {
+                    const descLines = beast.description.match(/.{1,58}/g) || [beast.description];
+                    descLines.forEach(line => {
+                        html += `\n║   ${line.padEnd(56)}║`;
+                    });
+                }
+            });
+        } else {
+            html += `\n║ None                                                        ║`;
+        }
+        // Conflicts
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ CONFLICTS:                                                  ║`;
         if (conflicts.length > 0) {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ CONFLICTS:                                                  ║`;
-            conflicts.slice(0, 3).forEach(conflict => { // Show first 3 conflicts
-                const conflictLine = `- ${conflict.type} between ${conflict.factions.join(' & ')}`;
+            conflicts.slice(0, 3).forEach(conflict => {
+                const conflictLine = `- ${conflict.type || 'Unknown'}${conflict.factions ? ' between ' + conflict.factions.join(' & ') : ''}`;
                 const conflictLines = conflictLine.match(/.{1,58}/g) || [conflictLine];
                 conflictLines.forEach(line => {
-                    html += `
-║ ${line.padEnd(58)}║`;
+                    html += `\n║ ${line.padEnd(58)}║`;
                 });
             });
+        } else {
+            html += `\n║ None                                                        ║`;
         }
-        
-        // Add plot hooks if present
-        if (plotHooks.length > 0) {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ PLOT HOOKS:                                                 ║`;
-            plotHooks.slice(0, 3).forEach(hook => { // Show first 3 plot hooks
-                const hookLines = hook.match(/.{1,58}/g) || [hook];
-                hookLines.forEach(line => {
-                    html += `
-║ ${line.padEnd(58)}║`;
-                });
-            });
-        }
-        
-        // Add economic data if present
+        // Economic Data
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ECONOMIC DATA:                                              ║`;
         if (economicData.trade_routes && economicData.trade_routes.length > 0) {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ECONOMIC DATA:                                              ║`;
             const tradeLine = `Trade Routes: ${economicData.trade_routes.join(', ')}`;
             const tradeLines = tradeLine.match(/.{1,58}/g) || [tradeLine];
             tradeLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
+                html += `\n║ ${line.padEnd(58)}║`;
             });
+        } else {
+            html += `\n║ None                                                        ║`;
         }
-        
-        html += `
-╚══════════════════════════════════════════════════════════════╝
-                    </pre>
-                </div>
-            </div>
-        `;
-        
+        // Plot Hooks
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ PLOT HOOKS:                                                 ║`;
+        if (plotHooks.length > 0) {
+            plotHooks.slice(0, 3).forEach(hook => {
+                const hookLines = hook.match(/.{1,58}/g) || [hook];
+                hookLines.forEach(line => {
+                    html += `\n║ ${line.padEnd(58)}║`;
+                });
+            });
+        } else {
+            html += `\n║ None                                                        ║`;
+        }
+        // Terrain Features
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ TERRAIN FEATURES:                                           ║`;
+        if (terrainFeatures.length > 0) {
+            terrainFeatures.slice(0, 3).forEach(feature => {
+                const featureLines = feature.match(/.{1,58}/g) || [feature];
+                featureLines.forEach(line => {
+                    html += `\n║ ${line.padEnd(58)}║`;
+                });
+            });
+        } else {
+            html += `\n║ None                                                        ║`;
+        }
+        html += `\n╚══════════════════════════════════════════════════════════════╝\n                    </pre>\n                </div>\n            </div>\n        `;
         return html;
     }
 
