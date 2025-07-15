@@ -721,8 +721,25 @@
                     return;
                 }
                 
-                // Regular hexes (encounters, dungeons, etc.) show in right panel
+                        // Regular hexes (encounters, dungeons, etc.) show in right panel
+        // Use enhanced hex API to get sandbox data
+        fetch(`/api/enhanced-hex/${hexCode}`)
+            .then(response => response.json())
+            .then(enhancedData => {
+                if (enhancedData.error) {
+                    // Fallback to regular hex data if enhanced fails
+                    displayHexContent(data, hexCode);
+                } else {
+                    // Merge enhanced data with existing data
+                    const mergedData = { ...data, ...enhancedData };
+                    displayHexContent(mergedData, hexCode);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching enhanced hex data:', error);
+                // Fallback to regular hex data
                 displayHexContent(data, hexCode);
+            });
             })
             .catch(error => {
                 console.error('Error fetching hex details:', error);
@@ -812,7 +829,12 @@
         
         let html = '';
         if (data.exists) {
-            html = generateHexModalHTML(data, hexCode);
+            // Check if we have sandbox data and use enhanced display
+            if (data.sandbox_data && Object.keys(data.sandbox_data).length > 0) {
+                html = generateEnhancedHexModalHTML(data, hexCode);
+            } else {
+                html = generateHexModalHTML(data, hexCode);
+            }
         } else {
             html = generateEmptyHexHTML(hexCode);
         }
@@ -1266,6 +1288,9 @@
         const settlements = sandboxData.settlements || [];
         const castles = sandboxData.castles || [];
         const conflicts = sandboxData.conflicts || [];
+        const plotHooks = sandboxData.plot_hooks || [];
+        const economicData = sandboxData.economic_data || {};
+        const terrainFeatures = sandboxData.terrain_features || [];
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
@@ -1297,6 +1322,43 @@
             html += `
 ║ ${line.padEnd(58)}║`;
         });
+        
+        // Add base content sections if present
+        if (data.beast_type && data.beast_type !== 'Unknown beast type') {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ BEAST:                                                      ║`;
+            const beastInfo = `Type: ${data.beast_type} | Behavior: ${data.beast_behavior || 'Unknown'} | Threat: ${data.threat_level || 'Unknown'}`;
+            const beastLines = beastInfo.match(/.{1,58}/g) || [beastInfo];
+            beastLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        if (data.is_dungeon || data.dungeon_type) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ DUNGEON:                                                    ║`;
+            const dungeonInfo = `Type: ${data.dungeon_type || 'Unknown'} | Danger: ${data.danger || 'Unknown'} | Treasure: ${data.treasure || 'None'}`;
+            const dungeonLines = dungeonInfo.match(/.{1,58}/g) || [dungeonInfo];
+            dungeonLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
+        
+        if (data.is_npc || data.name) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ NPC:                                                        ║`;
+            const npcInfo = `Name: ${data.name || 'Unknown'} | Motivation: ${data.motivation || 'Unknown'} | Demeanor: ${data.demeanor || 'Unknown'}`;
+            const npcLines = npcInfo.match(/.{1,58}/g) || [npcInfo];
+            npcLines.forEach(line => {
+                html += `
+║ ${line.padEnd(58)}║`;
+            });
+        }
         
         // Add factions if present
         if (factions.length > 0) {
@@ -1368,6 +1430,20 @@
                 hookLines.forEach(line => {
                     html += `
 ║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        
+        // Add terrain features if present
+        if (terrainFeatures.length > 0) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ TERRAIN FEATURES:                                           ║`;
+            terrainFeatures.slice(0, 3).forEach(feature => { // Show first 3 features
+                const featureLines = feature.match(/.{1,58}/g) || [feature];
+                featureLines.forEach(line => {
+                    html += `
+║ • ${line.padEnd(56)}║`;
                 });
             });
         }
