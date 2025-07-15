@@ -127,6 +127,8 @@ class MainMapGenerator:
         if self.config.get('create_ascii_map', True):
             self._create_ascii_map(all_hex_data)
         
+        self._write_ascii_features_table(all_hex_data)
+        
         print(f"\n✅ {self.translation_system.t('generation_complete')}!")
         print(f"📊 Generated: {generated_count} hexes")
         print(f"⏭️  Skipped: {skipped_count} hexes")
@@ -1180,6 +1182,36 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             f.write("# = Swamp\n")
             f.write("? = Unknown\n")
     
+    def _write_ascii_features_table(self, all_hex_data: List[Dict[str, Any]]):
+        """Write an ASCII summary table of enhanced features for each hex."""
+        filename = f"{self.output_dir}/ascii_hex_features.txt"
+        with open(filename, 'w', encoding='utf-8') as f:
+            headers = [
+                "Hex", "Terrain", "Settlement", "Faction", "Castle", "Conflict", "Economy"
+            ]
+            f.write(" | ".join(headers) + "\n")
+            f.write("-|-|-|-|-|-|-\n")
+            for hex_data in all_hex_data:
+                hex_code = hex_data.get('hex_code', '????')
+                terrain = hex_data.get('terrain', 'unknown')
+                # Check for features in sandbox_data
+                sandbox = hex_data.get('sandbox_data', {})
+                has_settlement = 'Yes' if (hex_data.get('is_settlement') or (sandbox.get('settlements') and len(sandbox['settlements']) > 0)) else 'No'
+                has_faction = 'Yes' if (sandbox.get('factions') and len(sandbox['factions']) > 0) else 'No'
+                has_castle = 'Yes' if (sandbox.get('castles') and len(sandbox['castles']) > 0) else 'No'
+                has_conflict = 'Yes' if (sandbox.get('conflicts') and len(sandbox['conflicts']) > 0) else 'No'
+                has_economy = 'Yes' if (sandbox.get('economic_data') and sandbox['economic_data'].get('resources')) else 'No'
+                row = [
+                    hex_code,
+                    terrain,
+                    has_settlement,
+                    has_faction,
+                    has_castle,
+                    has_conflict,
+                    has_economy
+                ]
+                f.write(" | ".join(row) + "\n")
+
     def _create_output_dirs(self):
         """Create necessary output directories."""
         dirs = [
