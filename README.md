@@ -9,13 +9,14 @@ A streamlined hexcrawl generator for **The Dying Lands** campaign with web-based
 - **Interactive web interface** for viewing and generating content
 - **Bilingual support** (English/Portuguese)
 - **Terrain-aware content** generation
+- **Normalized database system** with JSON storage
 
 ## 🚀 Quick Start
 
 ### Installation
 ```bash
-# Install Flask for web interface
-pip3 install flask
+# Install dependencies
+pip3 install -r requirements.txt
 
 # Clone repository
 git clone <repo-url>
@@ -25,15 +26,15 @@ cd hexy
 ### Generate Complete Map
 ```bash
 # Generate full 750-hex map in Portuguese
-python3 src/full_map_generator.py --language pt
+python3 src/main_map_generator.py --language pt
 
 # Generate in English  
-python3 src/full_map_generator.py --language en
+python3 src/main_map_generator.py --language en
 ```
 
 ### Launch Web Interface
 ```bash
-# Start the web viewer (only interface needed)
+# Start the web viewer
 python3 src/ascii_map_viewer.py
 
 # Visit http://localhost:5000
@@ -43,21 +44,27 @@ python3 src/ascii_map_viewer.py
 
 ```
 hexy/
-├── src/                              # Core system (6 files)
-│   ├── ascii_map_viewer.py          # 🌐 Web interface (ONLY viewer needed)
-│   ├── full_map_generator.py        # 🗺️ Complete map generation
-│   ├── dying_lands_generator.py     # 📍 Individual hex generator
+├── src/                              # Core system
+│   ├── ascii_map_viewer.py          # 🌐 Web interface
+│   ├── main_map_generator.py        # 🗺️ Complete map generation
+│   ├── database_manager.py          # 📊 Database management
 │   ├── mork_borg_lore_database.py   # 📚 Cities & lore placement
-│   ├── content_generator.py         # ⚙️ Content creation system
-│   └── content_tables.py            # 🎲 Random generation tables
-├── dying_lands_output/               # Generated content
-│   ├── hexes/ (750 files)           # Individual hex descriptions
-│   ├── npcs/                        # Generated NPCs
-│   ├── dying_lands_summary.md       # Complete campaign summary
-│   └── ascii_map.txt                # Simple ASCII overview
-├── data/                             # Campaign materials
+│   ├── generation_engine.py         # ⚙️ Content creation system
+│   ├── sandbox_generator.py         # 🏘️ Sandbox generation
+│   ├── terrain_system.py            # 🌍 Terrain management
+│   ├── translation_system.py        # 🌐 Language support
+│   └── migrate_tables.py            # 🔄 Database migration
+├── databases/                        # Normalized content database
+│   ├── core/                        # Core generation tables
+│   ├── content/                     # Content-specific tables
+│   ├── languages/                   # Language-specific content
+│   └── sandbox/                     # Sandbox-specific content
+├── data/                            # Campaign materials
 │   └── TheDyingLands-Campaign Sheet.png
-└── docs/                             # Documentation
+├── web/                             # Web interface assets
+│   ├── static/                      # Static files
+│   └── templates/                   # HTML templates
+└── docs/                            # Documentation
 ```
 
 ## 🏰 Major Cities
@@ -84,8 +91,8 @@ All **6 canonical Mörk Borg cities** are automatically placed:
 
 ### Generate Individual Hexes
 ```bash
-python3 src/dying_lands_generator.py
-# Enter: 0508-0510 (Sarkash Forest area)
+python3 src/main_map_generator.py --hex 0508
+# Generates content for hex 0508 (Sarkash Forest area)
 ```
 
 ### Web Interface Features
@@ -104,35 +111,26 @@ python3 src/dying_lands_generator.py
 
 ```bash
 # Portuguese generation (default for Mörk Borg atmosphere)
-python3 src/full_map_generator.py --language pt
+python3 src/main_map_generator.py --language pt
 
 # English generation
-python3 src/full_map_generator.py --language en
+python3 src/main_map_generator.py --language en
 ```
-
-## 📊 Web Interface Only
-
-This system is designed around the **single web interface**. No other viewers are needed:
-
-- ✅ **Interactive map visualization**
-- ✅ **Real-time content generation** 
-- ✅ **City and lore information**
-- ✅ **Mobile-friendly responsive design**
-- ✅ **All features integrated** in one interface
 
 ## 🔧 Advanced Usage
 
 ### Regenerate Existing Content
 ```bash
 # Force regeneration of all hexes
-python3 src/full_map_generator.py --regenerate --language pt
+python3 src/main_map_generator.py --regenerate --language pt
 ```
 
 ### Custom Content Generation
 ```python
 # Generate specific terrain types
-from src.dying_lands_generator import generate_hex_content
-hex_data = generate_hex_content("0508", "forest")
+from src.main_map_generator import MainMapGenerator
+generator = MainMapGenerator(language="pt")
+hex_data = generator.generate_hex_content("0508", "forest")
 ```
 
 ## 🎯 Perfect For
@@ -144,10 +142,10 @@ hex_data = generate_hex_content("0508", "forest")
 
 ## 📈 File Count
 
-- **Core system**: 6 Python files (streamlined)
-- **Generated content**: 750+ hex files + cities
+- **Core system**: 14 Python files (streamlined)
+- **Normalized database**: JSON-based content management
 - **Single web interface**: All viewing in one place
-- **No redundant viewers**: Clean, focused system
+- **Clean architecture**: Separation of concerns
 
 ---
 
