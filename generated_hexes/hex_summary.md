@@ -1,0 +1,786 @@
+# The Dying Lands - Hex Summary
+
+Generated 750 hexes
+
+## Sea (320 hexes)
+
+- **0101:** ※ **Wild Beast Encounter**
+- **0102:** ▲ **Ancient Ruins**
+- **0103:** ▲ **Ancient Ruins**
+- **0104:** ※ **Wild Beast Encounter**
+- **0105:** ⌂ **Schleger's Hill** - A 501-1000 settlement
+- **0106:** ※ **Wild Beast Encounter**
+- **0107:** ▲ **Ancient Ruins**
+- **0108:** ※ **Wild Beast Encounter**
+- **0109:** ※ **Wild Beast Encounter**
+- **0110:** ▲ **Ancient Ruins**
+- **0111:** ▲ **Ancient Ruins**
+- **0112:** ▲ **Ancient Ruins**
+- **0113:** ※ **Wild Beast Encounter**
+- **0116:** ▲ **Ancient Ruins**
+- **0117:** ⌂ **Trollblood Alley** - A 501-1000 settlement
+- **0118:** ※ **Wild Beast Encounter**
+- **0119:** ▲ **Ancient Ruins**
+- **0120:** ※ **Wild Beast Encounter**
+- **0121:** ▲ **Ancient Ruins**
+- **0122:** ⌂ **Sheep's Head Cove** - A 20-50 settlement
+- **0123:** ※ **Wild Beast Encounter**
+- **0124:** ▲ **Ancient Ruins**
+- **0125:** ▲ **Ancient Ruins**
+- **0201:** ※ **Wild Beast Encounter**
+- **0202:** ▲ **Ancient Ruins**
+- **0203:** ▲ **Ancient Ruins**
+- **0204:** ▲ **Ancient Ruins**
+- **0205:** ▲ **Ancient Ruins**
+- **0206:** ▲ **Ancient Ruins**
+- **0207:** ※ **Wild Beast Encounter**
+- **0208:** ※ **Wild Beast Encounter**
+- **0209:** ▲ **Ancient Ruins**
+- **0210:** ※ **Wild Beast Encounter**
+- **0211:** ※ **Wild Beast Encounter**
+- **0212:** ▲ **Ancient Ruins**
+- **0213:** ▲ **Ancient Ruins**
+- **0216:** ※ **Wild Beast Encounter**
+- **0218:** ▲ **Ancient Ruins**
+- **0219:** ※ **Wild Beast Encounter**
+- **0220:** ▲ **Ancient Ruins**
+- **0221:** ⌂ **Verhu's Grove** - A 51-100 settlement
+- **0222:** ⌂ **Beggar's Forge** - A 20-50 settlement
+- **0224:** ※ **Wild Beast Encounter**
+- **0225:** ※ **Wild Beast Encounter**
+- **0301:** ※ **Wild Beast Encounter**
+- **0302:** ▲ **Ancient Ruins**
+- **0303:** ⌂ **Weeping Creek** - A 101-500 settlement
+- **0304:** ▲ **Ancient Ruins**
+- **0305:** ▲ **Ancient Ruins**
+- **0306:** ▲ **Ancient Ruins**
+- **0310:** ⌂ **Mournful Hill** - A 20-50 settlement
+- **0311:** ▲ **Ancient Ruins**
+- **0312:** ▲ **Ancient Ruins**
+- **0313:** ▲ **Ancient Ruins**
+- **0314:** ※ **Wild Beast Encounter**
+- **0319:** ⌂ **Weeping Alley** - A 20-50 settlement
+- **0320:** ▲ **Ancient Ruins**
+- **0322:** ※ **Wild Beast Encounter**
+- **0323:** ※ **Wild Beast Encounter**
+- **0324:** ※ **Wild Beast Encounter**
+- **0325:** ▲ **Ancient Ruins**
+- **0401:** ▲ **Ancient Ruins**
+- **0402:** ※ **Wild Beast Encounter**
+- **0403:** ※ **Wild Beast Encounter**
+- **0404:** ▲ **Ancient Ruins**
+- **0405:** ▲ **Ancient Ruins**
+- **0406:** ※ **Wild Beast Encounter**
+- **0407:** ※ **Wild Beast Encounter**
+- **0410:** ※ **Wild Beast Encounter**
+- **0412:** ▲ **Ancient Ruins**
+- **0418:** ⌂ **Arkh's Forge** - A 501-1000 settlement
+- **0419:** ▲ **Ancient Ruins**
+- **0420:** ⌂ **Schleger's Crossing** - A 51-100 settlement
+- **0421:** ▲ **Ancient Ruins**
+- **0422:** ⌂ **Verhu's Creek** - A 501-1000 settlement
+- **0424:** ▲ **Ancient Ruins**
+- **0425:** ▲ **Ancient Ruins**
+- **0501:** ※ **Wild Beast Encounter**
+- **0502:** ⌂ **Verhu's Common** - A 501-1000 settlement
+- **0503:** ※ **Wild Beast Encounter**
+- **0504:** ▲ **Ancient Ruins**
+- **0505:** ⌂ **Sheep's Head Hollow** - A 501-1000 settlement
+- **0506:** ▲ **Ancient Ruins**
+- **0508:** ※ **Wild Beast Encounter**
+- **0518:** ▲ **Ancient Ruins**
+- **0520:** ※ **Wild Beast Encounter**
+- **0523:** ※ **Wild Beast Encounter**
+- **0524:** ※ **Wild Beast Encounter**
+- **0525:** ▲ **Ancient Ruins**
+- **0601:** ※ **Wild Beast Encounter**
+- **0602:** ※ **Wild Beast Encounter**
+- **0603:** ▲ **Ancient Ruins**
+- **0604:** ※ **Wild Beast Encounter**
+- **0605:** ▲ **Ancient Ruins**
+- **0606:** ▲ **Ancient Ruins**
+- **0607:** ※ **Wild Beast Encounter**
+- **0608:** ▲ **Ancient Ruins**
+- **0622:** ※ **Wild Beast Encounter**
+- **0623:** ※ **Wild Beast Encounter**
+- **0624:** ※ **Wild Beast Encounter**
+- **0625:** ※ **Wild Beast Encounter**
+- **0701:** ※ **Wild Beast Encounter**
+- **0702:** ⌂ **Weeping Cove** - A 51-100 settlement
+- **0703:** ▲ **Ancient Ruins**
+- **0704:** ▲ **Ancient Ruins**
+- **0705:** ⌂ **Damnation Forge** - A 501-1000 settlement
+- **0706:** ※ **Wild Beast Encounter**
+- **0707:** ※ **Wild Beast Encounter**
+- **0709:** ※ **Wild Beast Encounter**
+- **0710:** ※ **Wild Beast Encounter**
+- **0723:** ▲ **Ancient Ruins**
+- **0724:** ※ **Wild Beast Encounter**
+- **0725:** ※ **Wild Beast Encounter**
+- **0801:** ▲ **Ancient Ruins**
+- **0802:** ※ **Wild Beast Encounter**
+- **0803:** ▲ **Ancient Ruins**
+- **0804:** ▲ **Ancient Ruins**
+- **0805:** ※ **Wild Beast Encounter**
+- **0806:** ※ **Wild Beast Encounter**
+- **0808:** ※ **Wild Beast Encounter**
+- **0809:** ※ **Wild Beast Encounter**
+- **0810:** ※ **Wild Beast Encounter**
+- **0811:** ▲ **Ancient Ruins**
+- **0812:** ▲ **Ancient Ruins**
+- **0823:** ⌂ **Shadow Crossing** - A 51-100 settlement
+- **0824:** ※ **Wild Beast Encounter**
+- **0825:** ▲ **Ancient Ruins**
+- **0901:** ※ **Wild Beast Encounter**
+- **0902:** ※ **Wild Beast Encounter**
+- **0903:** ▲ **Ancient Ruins**
+- **0904:** ▲ **Ancient Ruins**
+- **0905:** ⌂ **Sheep's Head Hollow** - A 20-50 settlement
+- **0906:** ▲ **Ancient Ruins**
+- **0915:** ▲ **Ancient Ruins**
+- **0924:** ⌂ **Schleger's Creek** - A 501-1000 settlement
+- **0925:** ▲ **Ancient Ruins**
+- **1001:** ▲ **Ancient Ruins**
+- **1002:** ⌂ **Arkh's Forge** - A 20-50 settlement
+- **1003:** ▲ **Ancient Ruins**
+- **1004:** ⌂ **Trollblood Henge** - A 51-100 settlement
+- **1005:** ※ **Wild Beast Encounter**
+- **1006:** ▲ **Ancient Ruins**
+- **1021:** ▲ **Ancient Ruins**
+- **1022:** ※ **Wild Beast Encounter**
+- **1023:** ※ **Wild Beast Encounter**
+- **1024:** ※ **Wild Beast Encounter**
+- **1025:** ※ **Wild Beast Encounter**
+- **1101:** ※ **Wild Beast Encounter**
+- **1102:** ※ **Wild Beast Encounter**
+- **1103:** ▲ **Ancient Ruins**
+- **1104:** ⌂ **Verhu's Hill** - A 51-100 settlement
+- **1105:** ⌂ **Schleger's Cove** - A 20-50 settlement
+- **1106:** ※ **Wild Beast Encounter**
+- **1121:** ▲ **Ancient Ruins**
+- **1122:** ▲ **Ancient Ruins**
+- **1123:** ※ **Wild Beast Encounter**
+- **1124:** ▲ **Ancient Ruins**
+- **1125:** ▲ **Ancient Ruins**
+- **1201:** ▲ **Ancient Ruins**
+- **1202:** ▲ **Ancient Ruins**
+- **1203:** ▲ **Ancient Ruins**
+- **1204:** ▲ **Ancient Ruins**
+- **1205:** ⌂ **Weeping Common** - A 51-100 settlement
+- **1206:** ▲ **Ancient Ruins**
+- **1222:** ※ **Wild Beast Encounter**
+- **1223:** ▲ **Ancient Ruins**
+- **1224:** ▲ **Ancient Ruins**
+- **1225:** ▲ **Ancient Ruins**
+- **1301:** ▲ **Ancient Ruins**
+- **1302:** ▲ **Ancient Ruins**
+- **1303:** ⌂ **Schleger's Forge** - A 101-500 settlement
+- **1304:** ※ **Wild Beast Encounter**
+- **1305:** ※ **Wild Beast Encounter**
+- **1306:** ※ **Wild Beast Encounter**
+- **1324:** ▲ **Ancient Ruins**
+- **1325:** ⌂ **Beggar's Crossing** - A 20-50 settlement
+- **1401:** ▲ **Ancient Ruins**
+- **1402:** ▲ **Ancient Ruins**
+- **1403:** ※ **Wild Beast Encounter**
+- **1404:** ▲ **Ancient Ruins**
+- **1405:** ※ **Wild Beast Encounter**
+- **1406:** ▲ **Ancient Ruins**
+- **1425:** ※ **Wild Beast Encounter**
+- **1501:** ※ **Wild Beast Encounter**
+- **1502:** ※ **Wild Beast Encounter**
+- **1503:** ※ **Wild Beast Encounter**
+- **1504:** ⌂ **Verhu's Crossing** - A 20-50 settlement
+- **1505:** ※ **Wild Beast Encounter**
+- **1506:** ▲ **Ancient Ruins**
+- **1525:** ⌂ **Weeping Crossing** - A 101-500 settlement
+- **1601:** ▲ **Ancient Ruins**
+- **1602:** ▲ **Ancient Ruins**
+- **1603:** ▲ **Ancient Ruins**
+- **1604:** ※ **Wild Beast Encounter**
+- **1605:** ※ **Wild Beast Encounter**
+- **1606:** ※ **Wild Beast Encounter**
+- **1607:** ▲ **Ancient Ruins**
+- **1608:** ⌂ **Weeping Grove** - A 501-1000 settlement
+- **1612:** ⌂ **Trollblood Crossing** - A 20-50 settlement
+- **1615:** ▲ **Ancient Ruins**
+- **1623:** ⌂ **Trollblood Hollow** - A 20-50 settlement
+- **1624:** ▲ **Ancient Ruins**
+- **1625:** ※ **Wild Beast Encounter**
+- **1701:** ※ **Wild Beast Encounter**
+- **1702:** ⌂ **Trollblood Grove** - A 20-50 settlement
+- **1703:** ※ **Wild Beast Encounter**
+- **1704:** ⌂ **Schleger's Henge** - A 51-100 settlement
+- **1705:** ▲ **Ancient Ruins**
+- **1706:** ▲ **Ancient Ruins**
+- **1711:** ▲ **Ancient Ruins**
+- **1715:** ※ **Wild Beast Encounter**
+- **1722:** ※ **Wild Beast Encounter**
+- **1723:** ⌂ **Mournful Hollow** - A 101-500 settlement
+- **1724:** ▲ **Ancient Ruins**
+- **1725:** ▲ **Ancient Ruins**
+- **1801:** ▲ **Ancient Ruins**
+- **1802:** ▲ **Ancient Ruins**
+- **1803:** ⌂ **Trollblood Creek** - A 101-500 settlement
+- **1804:** ※ **Wild Beast Encounter**
+- **1805:** ※ **Wild Beast Encounter**
+- **1806:** ⌂ **Schleger's Creek** - A 51-100 settlement
+- **1807:** ▲ **Ancient Ruins**
+- **1808:** ※ **Wild Beast Encounter**
+- **1810:** ▲ **Ancient Ruins**
+- **1811:** ※ **Wild Beast Encounter**
+- **1815:** ※ **Wild Beast Encounter**
+- **1822:** ▲ **Ancient Ruins**
+- **1824:** ▲ **Ancient Ruins**
+- **1825:** ※ **Wild Beast Encounter**
+- **1901:** ▲ **Ancient Ruins**
+- **1902:** ※ **Wild Beast Encounter**
+- **1903:** ▲ **Ancient Ruins**
+- **1904:** ※ **Wild Beast Encounter**
+- **1905:** ▲ **Ancient Ruins**
+- **1906:** ※ **Wild Beast Encounter**
+- **1909:** ▲ **Ancient Ruins**
+- **1916:** ▲ **Ancient Ruins**
+- **1924:** ⌂ **Shadow Cove** - A 20-50 settlement
+- **1925:** ※ **Wild Beast Encounter**
+- **2001:** ▲ **Ancient Ruins**
+- **2002:** ⌂ **Schleger's Hill** - A 51-100 settlement
+- **2003:** ※ **Wild Beast Encounter**
+- **2004:** ▲ **Ancient Ruins**
+- **2005:** ▲ **Ancient Ruins**
+- **2006:** ※ **Wild Beast Encounter**
+- **2024:** ※ **Wild Beast Encounter**
+- **2025:** ※ **Wild Beast Encounter**
+- **2101:** ⌂ **Arkh's Henge** - A 501-1000 settlement
+- **2102:** ▲ **Ancient Ruins**
+- **2103:** ▲ **Ancient Ruins**
+- **2104:** ※ **Wild Beast Encounter**
+- **2105:** ▲ **Ancient Ruins**
+- **2106:** ▲ **Ancient Ruins**
+- **2117:** ▲ **Ancient Ruins**
+- **2122:** ※ **Wild Beast Encounter**
+- **2123:** ⌂ **Shadow Crossing** - A 20-50 settlement
+- **2124:** ⌂ **Shadow Creek** - A 501-1000 settlement
+- **2125:** ※ **Wild Beast Encounter**
+- **2201:** ▲ **Ancient Ruins**
+- **2202:** ※ **Wild Beast Encounter**
+- **2203:** ※ **Wild Beast Encounter**
+- **2204:** ▲ **Ancient Ruins**
+- **2205:** ⌂ **Shadow Common** - A 501-1000 settlement
+- **2206:** ※ **Wild Beast Encounter**
+- **2218:** ※ **Wild Beast Encounter**
+- **2219:** ※ **Wild Beast Encounter**
+- **2223:** ⌂ **Verhu's Hill** - A 51-100 settlement
+- **2224:** ▲ **Ancient Ruins**
+- **2225:** ▲ **Ancient Ruins**
+- **2301:** ▲ **Ancient Ruins**
+- **2302:** ※ **Wild Beast Encounter**
+- **2303:** ※ **Wild Beast Encounter**
+- **2304:** ※ **Wild Beast Encounter**
+- **2305:** ⌂ **Trollblood Henge** - A 101-500 settlement
+- **2306:** ▲ **Ancient Ruins**
+- **2308:** ⌂ **Verhu's Forge** - A 20-50 settlement
+- **2309:** ▲ **Ancient Ruins**
+- **2310:** ▲ **Ancient Ruins**
+- **2318:** ▲ **Ancient Ruins**
+- **2320:** ▲ **Ancient Ruins**
+- **2322:** ⌂ **Shadow Cove** - A 51-100 settlement
+- **2323:** ▲ **Ancient Ruins**
+- **2324:** ※ **Wild Beast Encounter**
+- **2325:** ⌂ **Schleger's Alley** - A 20-50 settlement
+- **2401:** ⌂ **Weeping Crossing** - A 20-50 settlement
+- **2402:** ※ **Wild Beast Encounter**
+- **2403:** ▲ **Ancient Ruins**
+- **2404:** ※ **Wild Beast Encounter**
+- **2405:** ※ **Wild Beast Encounter**
+- **2406:** ※ **Wild Beast Encounter**
+- **2407:** ▲ **Ancient Ruins**
+- **2408:** ※ **Wild Beast Encounter**
+- **2409:** ※ **Wild Beast Encounter**
+- **2410:** ▲ **Ancient Ruins**
+- **2415:** ▲ **Ancient Ruins**
+- **2416:** ⌂ **Shadow Crossing** - A 51-100 settlement
+- **2418:** ※ **Wild Beast Encounter**
+- **2419:** ※ **Wild Beast Encounter**
+- **2420:** ※ **Wild Beast Encounter**
+- **2421:** ※ **Wild Beast Encounter**
+- **2422:** ▲ **Ancient Ruins**
+- **2424:** ※ **Wild Beast Encounter**
+- **2425:** ▲ **Ancient Ruins**
+- **2501:** ※ **Wild Beast Encounter**
+- **2502:** ※ **Wild Beast Encounter**
+- **2503:** ※ **Wild Beast Encounter**
+- **2504:** ▲ **Ancient Ruins**
+- **2505:** ※ **Wild Beast Encounter**
+- **2506:** ⌂ **Damnation Grove** - A 501-1000 settlement
+- **2507:** ▲ **Ancient Ruins**
+- **2508:** ▲ **Ancient Ruins**
+- **2509:** ▲ **Ancient Ruins**
+- **2515:** ▲ **Ancient Ruins**
+- **2516:** ▲ **Ancient Ruins**
+- **2518:** ※ **Wild Beast Encounter**
+- **2520:** ▲ **Ancient Ruins**
+- **2522:** ▲ **Ancient Ruins**
+- **2523:** ※ **Wild Beast Encounter**
+- **2524:** ※ **Wild Beast Encounter**
+- **2525:** ※ **Wild Beast Encounter**
+
+## Plains (415 hexes)
+
+- **0114:** ※ **Wild Beast Encounter**
+- **0115:** ▲ **Ancient Ruins**
+- **0214:** ▲ **Ancient Ruins**
+- **0215:** ※ **Wild Beast Encounter**
+- **0217:** ▲ **Ancient Ruins**
+- **0307:** ▲ **Ancient Ruins**
+- **0308:** ▲ **Ancient Ruins**
+- **0309:** ※ **Wild Beast Encounter**
+- **0315:** ※ **Wild Beast Encounter**
+- **0316:** ⌂ **Trollblood Grove** - A 501-1000 settlement
+- **0317:** ※ **Wild Beast Encounter**
+- **0318:** ▲ **Ancient Ruins**
+- **0321:** ▲ **Ancient Ruins**
+- **0409:** ⌂ **Weeping Grove** - A 20-50 settlement
+- **0411:** ※ **Wild Beast Encounter**
+- **0413:** ▲ **Ancient Ruins**
+- **0414:** ⌂ **Beggar's Creek** - A 51-100 settlement
+- **0415:** Major City: Lanciano (Population: unknown)
+- **0416:** ※ **Wild Beast Encounter**
+- **0417:** ※ **Wild Beast Encounter**
+- **0507:** Major City: Allians (Population: 500)
+- **0509:** ※ **Wild Beast Encounter**
+- **0510:** ▲ **Ancient Ruins**
+- **0511:** ▲ **Ancient Ruins**
+- **0512:** ※ **Wild Beast Encounter**
+- **0513:** ▲ **Ancient Ruins**
+- **0514:** ▲ **Ancient Ruins**
+- **0515:** ▲ **Ancient Ruins**
+- **0516:** ▲ **Ancient Ruins**
+- **0517:** ※ **Wild Beast Encounter**
+- **0519:** ▲ **Ancient Ruins**
+- **0521:** ⌂ **Schleger's Hollow** - A 101-500 settlement
+- **0522:** ▲ **Ancient Ruins**
+- **0609:** ⌂ **Beggar's Henge** - A 101-500 settlement
+- **0610:** ※ **Wild Beast Encounter**
+- **0611:** ※ **Wild Beast Encounter**
+- **0612:** ※ **Wild Beast Encounter**
+- **0613:** ※ **Wild Beast Encounter**
+- **0615:** ※ **Wild Beast Encounter**
+- **0616:** ⌂ **Verhu's Hollow** - A 101-500 settlement
+- **0617:** ※ **Wild Beast Encounter**
+- **0618:** ▲ **Ancient Ruins**
+- **0619:** ▲ **Ancient Ruins**
+- **0620:** ※ **Wild Beast Encounter**
+- **0621:** ※ **Wild Beast Encounter**
+- **0708:** Major City: Kergus (Population: 800)
+- **0711:** ▲ **Ancient Ruins**
+- **0712:** ※ **Wild Beast Encounter**
+- **0713:** Major City: Issiore (Population: unknown)
+- **0714:** ▲ **Ancient Ruins**
+- **0715:** ※ **Wild Beast Encounter**
+- **0716:** ※ **Wild Beast Encounter**
+- **0717:** ▲ **Ancient Ruins**
+- **0718:** ※ **Wild Beast Encounter**
+- **0719:** ⌂ **Sheep's Head Hollow** - A 51-100 settlement
+- **0720:** ⌂ **Mournful Alley** - A 20-50 settlement
+- **0721:** ※ **Wild Beast Encounter**
+- **0807:** Major City: Aurilliac (Population: unknown)
+- **0813:** ▲ **Ancient Ruins**
+- **0814:** Major City: Valley of Unfortunate Undead (Population: 0)
+- **0815:** ▲ **Ancient Ruins**
+- **0816:** ⌂ **Mournful Crossing** - A 51-100 settlement
+- **0817:** ⌂ **Mournful Crossing** - A 20-50 settlement
+- **0818:** ▲ **Ancient Ruins**
+- **0819:** ▲ **Ancient Ruins**
+- **0820:** ▲ **Ancient Ruins**
+- **0821:** ▲ **Ancient Ruins**
+- **0822:** ※ **Wild Beast Encounter**
+- **0907:** ⌂ **Arkh's Hill** - A 501-1000 settlement
+- **0909:** ▲ **Ancient Ruins**
+- **0910:** ※ **Wild Beast Encounter**
+- **0911:** ▲ **Ancient Ruins**
+- **0912:** ⌂ **Shadow Crossing** - A 101-500 settlement
+- **0913:** ※ **Wild Beast Encounter**
+- **0914:** ▲ **Ancient Ruins**
+- **0916:** ⌂ **Verhu's Henge** - A 501-1000 settlement
+- **0917:** ▲ **Ancient Ruins**
+- **0918:** ※ **Wild Beast Encounter**
+- **0919:** ※ **Wild Beast Encounter**
+- **0920:** ※ **Wild Beast Encounter**
+- **0921:** ▲ **Ancient Ruins**
+- **0922:** ▲ **Ancient Ruins**
+- **0923:** ▲ **Ancient Ruins**
+- **1007:** ⌂ **Arkh's Common** - A 51-100 settlement
+- **1008:** ⌂ **Mournful Alley** - A 20-50 settlement
+- **1009:** ⌂ **Damnation Grove** - A 101-500 settlement
+- **1010:** ※ **Wild Beast Encounter**
+- **1011:** ⌂ **Shadow Crossing** - A 20-50 settlement
+- **1013:** ※ **Wild Beast Encounter**
+- **1014:** ▲ **Ancient Ruins**
+- **1015:** ⌂ **Sheep's Head Crossing** - A 101-500 settlement
+- **1016:** ▲ **Ancient Ruins**
+- **1018:** ▲ **Ancient Ruins**
+- **1019:** ※ **Wild Beast Encounter**
+- **1020:** ▲ **Ancient Ruins**
+- **1107:** ⌂ **Schleger's Grove** - A 51-100 settlement
+- **1108:** ▲ **Ancient Ruins**
+- **1109:** ▲ **Ancient Ruins**
+- **1110:** ▲ **Ancient Ruins**
+- **1111:** ※ **Wild Beast Encounter**
+- **1112:** ▲ **Ancient Ruins**
+- **1113:** ※ **Wild Beast Encounter**
+- **1114:** ▲ **Ancient Ruins**
+- **1115:** ▲ **Ancient Ruins**
+- **1116:** ※ **Wild Beast Encounter**
+- **1117:** ※ **Wild Beast Encounter**
+- **1118:** ※ **Wild Beast Encounter**
+- **1119:** ※ **Wild Beast Encounter**
+- **1120:** ※ **Wild Beast Encounter**
+- **1207:** ※ **Wild Beast Encounter**
+- **1208:** ※ **Wild Beast Encounter**
+- **1209:** ▲ **Ancient Ruins**
+- **1210:** ▲ **Ancient Ruins**
+- **1211:** ※ **Wild Beast Encounter**
+- **1212:** ※ **Wild Beast Encounter**
+- **1213:** ▲ **Ancient Ruins**
+- **1214:** ▲ **Ancient Ruins**
+- **1215:** ⌂ **Damnation Forge** - A 101-500 settlement
+- **1216:** ※ **Wild Beast Encounter**
+- **1217:** ※ **Wild Beast Encounter**
+- **1218:** ▲ **Ancient Ruins**
+- **1219:** ▲ **Ancient Ruins**
+- **1220:** ※ **Wild Beast Encounter**
+- **1307:** ※ **Wild Beast Encounter**
+- **1308:** ※ **Wild Beast Encounter**
+- **1309:** ※ **Wild Beast Encounter**
+- **1310:** ※ **Wild Beast Encounter**
+- **1311:** ※ **Wild Beast Encounter**
+- **1312:** ※ **Wild Beast Encounter**
+- **1313:** ▲ **Ancient Ruins**
+- **1314:** ▲ **Ancient Ruins**
+- **1315:** ※ **Wild Beast Encounter**
+- **1316:** ※ **Wild Beast Encounter**
+- **1317:** ▲ **Ancient Ruins**
+- **1318:** ▲ **Ancient Ruins**
+- **1319:** ※ **Wild Beast Encounter**
+- **1320:** ※ **Wild Beast Encounter**
+- **1321:** ※ **Wild Beast Encounter**
+- **1322:** ※ **Wild Beast Encounter**
+- **1323:** ▲ **Ancient Ruins**
+- **1407:** ▲ **Ancient Ruins**
+- **1408:** ⌂ **Mournful Grove** - A 20-50 settlement
+- **1409:** ⌂ **Schleger's Cove** - A 51-100 settlement
+- **1410:** ▲ **Ancient Ruins**
+- **1411:** ※ **Wild Beast Encounter**
+- **1412:** ▲ **Ancient Ruins**
+- **1413:** ▲ **Ancient Ruins**
+- **1414:** ※ **Wild Beast Encounter**
+- **1415:** ▲ **Ancient Ruins**
+- **1416:** ▲ **Ancient Ruins**
+- **1417:** ▲ **Ancient Ruins**
+- **1418:** ※ **Wild Beast Encounter**
+- **1419:** ※ **Wild Beast Encounter**
+- **1420:** ※ **Wild Beast Encounter**
+- **1421:** ▲ **Ancient Ruins**
+- **1422:** ▲ **Ancient Ruins**
+- **1423:** ⌂ **Schleger's Cove** - A 51-100 settlement
+- **1424:** ▲ **Ancient Ruins**
+- **1507:** Major City: Brackenfurt (Population: unknown)
+- **1508:** ▲ **Ancient Ruins**
+- **1509:** ⌂ **Damnation Forge** - A 501-1000 settlement
+- **1510:** ▲ **Ancient Ruins**
+- **1511:** ▲ **Ancient Ruins**
+- **1512:** ※ **Wild Beast Encounter**
+- **1513:** Major City: Galgenbeck (Population: 1000+)
+- **1514:** ※ **Wild Beast Encounter**
+- **1515:** ※ **Wild Beast Encounter**
+- **1516:** ▲ **Ancient Ruins**
+- **1517:** ⌂ **Mournful Hill** - A 501-1000 settlement
+- **1518:** ※ **Wild Beast Encounter**
+- **1519:** ▲ **Ancient Ruins**
+- **1520:** ※ **Wild Beast Encounter**
+- **1521:** ▲ **Ancient Ruins**
+- **1522:** ▲ **Ancient Ruins**
+- **1523:** ※ **Wild Beast Encounter**
+- **1524:** ▲ **Ancient Ruins**
+- **1609:** ※ **Wild Beast Encounter**
+- **1610:** ▲ **Ancient Ruins**
+- **1611:** ※ **Wild Beast Encounter**
+- **1613:** ※ **Wild Beast Encounter**
+- **1614:** ※ **Wild Beast Encounter**
+- **1616:** ▲ **Ancient Ruins**
+- **1617:** ▲ **Ancient Ruins**
+- **1618:** ▲ **Ancient Ruins**
+- **1619:** ▲ **Ancient Ruins**
+- **1620:** ▲ **Ancient Ruins**
+- **1621:** ※ **Wild Beast Encounter**
+- **1622:** ▲ **Ancient Ruins**
+- **1707:** ▲ **Ancient Ruins**
+- **1708:** ▲ **Ancient Ruins**
+- **1709:** ※ **Wild Beast Encounter**
+- **1710:** ▲ **Ancient Ruins**
+- **1712:** ※ **Wild Beast Encounter**
+- **1713:** ▲ **Ancient Ruins**
+- **1714:** ▲ **Ancient Ruins**
+- **1716:** ※ **Wild Beast Encounter**
+- **1717:** ▲ **Ancient Ruins**
+- **1718:** ▲ **Ancient Ruins**
+- **1719:** ▲ **Ancient Ruins**
+- **1720:** ▲ **Ancient Ruins**
+- **1721:** ▲ **Ancient Ruins**
+- **1809:** ※ **Wild Beast Encounter**
+- **1812:** ▲ **Ancient Ruins**
+- **1813:** ※ **Wild Beast Encounter**
+- **1814:** ※ **Wild Beast Encounter**
+- **1816:** ▲ **Ancient Ruins**
+- **1817:** ⌂ **Verhu's Alley** - A 501-1000 settlement
+- **1818:** ▲ **Ancient Ruins**
+- **1819:** ▲ **Ancient Ruins**
+- **1820:** ⌂ **Mournful Hollow** - A 501-1000 settlement
+- **1821:** ▲ **Ancient Ruins**
+- **1823:** Major City: Severing (Population: unknown)
+- **1907:** ※ **Wild Beast Encounter**
+- **1910:** ▲ **Ancient Ruins**
+- **1911:** ▲ **Ancient Ruins**
+- **1912:** ※ **Wild Beast Encounter**
+- **1913:** ⌂ **Trollblood Common** - A 501-1000 settlement
+- **1914:** ※ **Wild Beast Encounter**
+- **1915:** ▲ **Ancient Ruins**
+- **1917:** ▲ **Ancient Ruins**
+- **1918:** ※ **Wild Beast Encounter**
+- **1919:** ※ **Wild Beast Encounter**
+- **1920:** ▲ **Ancient Ruins**
+- **1921:** ▲ **Ancient Ruins**
+- **1922:** ※ **Wild Beast Encounter**
+- **1923:** ⌂ **Weeping Forge** - A 101-500 settlement
+- **2007:** ⌂ **Sheep's Head Creek** - A 51-100 settlement
+- **2008:** ※ **Wild Beast Encounter**
+- **2009:** ⌂ **Damnation Hill** - A 51-100 settlement
+- **2010:** ※ **Wild Beast Encounter**
+- **2011:** ※ **Wild Beast Encounter**
+- **2012:** ▲ **Ancient Ruins**
+- **2013:** ▲ **Ancient Ruins**
+- **2015:** ▲ **Ancient Ruins**
+- **2016:** ⌂ **Shadow Forge** - A 20-50 settlement
+- **2017:** ※ **Wild Beast Encounter**
+- **2018:** ※ **Wild Beast Encounter**
+- **2019:** ※ **Wild Beast Encounter**
+- **2020:** ※ **Wild Beast Encounter**
+- **2021:** ※ **Wild Beast Encounter**
+- **2022:** ▲ **Ancient Ruins**
+- **2023:** ※ **Wild Beast Encounter**
+- **2107:** Major City: Tveland Outpost (Population: 200)
+- **2108:** ▲ **Ancient Ruins**
+- **2109:** ⌂ **Trollblood Hollow** - A 501-1000 settlement
+- **2110:** ⌂ **Damnation Henge** - A 101-500 settlement
+- **2111:** ※ **Wild Beast Encounter**
+- **2112:** ※ **Wild Beast Encounter**
+- **2113:** ※ **Wild Beast Encounter**
+- **2114:** ※ **Wild Beast Encounter**
+- **2115:** ▲ **Ancient Ruins**
+- **2116:** ⌂ **Verhu's Creek** - A 101-500 settlement
+- **2118:** ▲ **Ancient Ruins**
+- **2119:** ▲ **Ancient Ruins**
+- **2120:** ※ **Wild Beast Encounter**
+- **2121:** ▲ **Ancient Ruins**
+- **2207:** ※ **Wild Beast Encounter**
+- **2208:** ▲ **Ancient Ruins**
+- **2209:** ▲ **Ancient Ruins**
+- **2210:** ※ **Wild Beast Encounter**
+- **2211:** ※ **Wild Beast Encounter**
+- **2212:** ▲ **Ancient Ruins**
+- **2213:** ▲ **Ancient Ruins**
+- **2214:** ※ **Wild Beast Encounter**
+- **2215:** ※ **Wild Beast Encounter**
+- **2217:** ▲ **Ancient Ruins**
+- **2220:** ⌂ **Schleger's Alley** - A 101-500 settlement
+- **2221:** ▲ **Ancient Ruins**
+- **2222:** ※ **Wild Beast Encounter**
+- **2311:** ⌂ **Trollblood Hollow** - A 20-50 settlement
+- **2312:** ※ **Wild Beast Encounter**
+- **2313:** Major City: Grift (Population: 600)
+- **2314:** ▲ **Ancient Ruins**
+- **2315:** ⌂ **Beggar's Alley** - A 20-50 settlement
+- **2316:** ※ **Wild Beast Encounter**
+- **2317:** ⌂ **Trollblood Cove** - A 51-100 settlement
+- **2319:** ▲ **Ancient Ruins**
+- **2321:** Major City: Merodville (Population: unknown)
+- **2411:** ※ **Wild Beast Encounter**
+- **2412:** ▲ **Ancient Ruins**
+- **2414:** ⌂ **Schleger's Crossing** - A 501-1000 settlement
+- **2417:** ⌂ **Damnation Crossing** - A 20-50 settlement
+- **2423:** Major City: Ferrox (Population: unknown)
+- **2511:** ⌂ **Shadow Common** - A 20-50 settlement
+- **2512:** ※ **Wild Beast Encounter**
+- **2513:** ▲ **Ancient Ruins**
+- **2514:** ※ **Wild Beast Encounter**
+- **2517:** Major City: Verisaille (Population: unknown)
+- **2519:** ※ **Wild Beast Encounter**
+- **2521:** ▲ **Ancient Ruins**
+- **2601:** ※ **Wild Beast Encounter**
+- **2602:** ▲ **Ancient Ruins**
+- **2603:** ※ **Wild Beast Encounter**
+- **2604:** ▲ **Ancient Ruins**
+- **2605:** ▲ **Ancient Ruins**
+- **2606:** ▲ **Ancient Ruins**
+- **2607:** ▲ **Ancient Ruins**
+- **2608:** ▲ **Ancient Ruins**
+- **2609:** ▲ **Ancient Ruins**
+- **2610:** ⌂ **Mournful Creek** - A 501-1000 settlement
+- **2611:** ※ **Wild Beast Encounter**
+- **2612:** ▲ **Ancient Ruins**
+- **2613:** ▲ **Ancient Ruins**
+- **2614:** ▲ **Ancient Ruins**
+- **2615:** ※ **Wild Beast Encounter**
+- **2616:** ※ **Wild Beast Encounter**
+- **2617:** ▲ **Ancient Ruins**
+- **2618:** ※ **Wild Beast Encounter**
+- **2619:** ▲ **Ancient Ruins**
+- **2620:** ※ **Wild Beast Encounter**
+- **2621:** ⌂ **Weeping Creek** - A 51-100 settlement
+- **2622:** ※ **Wild Beast Encounter**
+- **2623:** ▲ **Ancient Ruins**
+- **2624:** ※ **Wild Beast Encounter**
+- **2625:** ※ **Wild Beast Encounter**
+- **2701:** ▲ **Ancient Ruins**
+- **2702:** ▲ **Ancient Ruins**
+- **2703:** ▲ **Ancient Ruins**
+- **2704:** ※ **Wild Beast Encounter**
+- **2705:** ⌂ **Mournful Henge** - A 51-100 settlement
+- **2706:** ※ **Wild Beast Encounter**
+- **2707:** ▲ **Ancient Ruins**
+- **2708:** ⌂ **Verhu's Hollow** - A 20-50 settlement
+- **2709:** ▲ **Ancient Ruins**
+- **2710:** ※ **Wild Beast Encounter**
+- **2711:** ※ **Wild Beast Encounter**
+- **2712:** ▲ **Ancient Ruins**
+- **2713:** ⌂ **Sheep's Head Forge** - A 101-500 settlement
+- **2714:** ▲ **Ancient Ruins**
+- **2715:** ▲ **Ancient Ruins**
+- **2716:** ※ **Wild Beast Encounter**
+- **2717:** ※ **Wild Beast Encounter**
+- **2718:** ▲ **Ancient Ruins**
+- **2719:** ※ **Wild Beast Encounter**
+- **2720:** ※ **Wild Beast Encounter**
+- **2721:** ※ **Wild Beast Encounter**
+- **2722:** ※ **Wild Beast Encounter**
+- **2723:** ⌂ **Beggar's Henge** - A 501-1000 settlement
+- **2724:** ▲ **Ancient Ruins**
+- **2725:** ※ **Wild Beast Encounter**
+- **2801:** ▲ **Ancient Ruins**
+- **2802:** ※ **Wild Beast Encounter**
+- **2803:** ※ **Wild Beast Encounter**
+- **2804:** ⌂ **Schleger's Common** - A 20-50 settlement
+- **2805:** ※ **Wild Beast Encounter**
+- **2806:** ※ **Wild Beast Encounter**
+- **2807:** ※ **Wild Beast Encounter**
+- **2808:** ▲ **Ancient Ruins**
+- **2809:** ▲ **Ancient Ruins**
+- **2810:** ※ **Wild Beast Encounter**
+- **2811:** ▲ **Ancient Ruins**
+- **2812:** ⌂ **Beggar's Alley** - A 20-50 settlement
+- **2813:** ▲ **Ancient Ruins**
+- **2814:** ⌂ **Damnation Grove** - A 20-50 settlement
+- **2815:** ▲ **Ancient Ruins**
+- **2816:** ※ **Wild Beast Encounter**
+- **2817:** ▲ **Ancient Ruins**
+- **2818:** ※ **Wild Beast Encounter**
+- **2819:** ⌂ **Weeping Creek** - A 101-500 settlement
+- **2820:** ⌂ **Damnation Henge** - A 20-50 settlement
+- **2821:** ※ **Wild Beast Encounter**
+- **2822:** ※ **Wild Beast Encounter**
+- **2823:** ※ **Wild Beast Encounter**
+- **2824:** ※ **Wild Beast Encounter**
+- **2825:** ※ **Wild Beast Encounter**
+- **2901:** ▲ **Ancient Ruins**
+- **2902:** ▲ **Ancient Ruins**
+- **2903:** ※ **Wild Beast Encounter**
+- **2904:** ▲ **Ancient Ruins**
+- **2905:** ⌂ **Shadow Hollow** - A 501-1000 settlement
+- **2906:** ※ **Wild Beast Encounter**
+- **2907:** ※ **Wild Beast Encounter**
+- **2908:** ※ **Wild Beast Encounter**
+- **2909:** ⌂ **Schleger's Hollow** - A 20-50 settlement
+- **2910:** ※ **Wild Beast Encounter**
+- **2911:** ※ **Wild Beast Encounter**
+- **2912:** ▲ **Ancient Ruins**
+- **2913:** ▲ **Ancient Ruins**
+- **2914:** ⌂ **Arkh's Common** - A 51-100 settlement
+- **2915:** ※ **Wild Beast Encounter**
+- **2916:** ※ **Wild Beast Encounter**
+- **2917:** ⌂ **Damnation Common** - A 20-50 settlement
+- **2918:** ※ **Wild Beast Encounter**
+- **2919:** ▲ **Ancient Ruins**
+- **2920:** ※ **Wild Beast Encounter**
+- **2921:** ⌂ **Sheep's Head Alley** - A 20-50 settlement
+- **2922:** ▲ **Ancient Ruins**
+- **2923:** ▲ **Ancient Ruins**
+- **2924:** ※ **Wild Beast Encounter**
+- **2925:** ※ **Wild Beast Encounter**
+- **3001:** ▲ **Ancient Ruins**
+- **3002:** ⌂ **Trollblood Hollow** - A 501-1000 settlement
+- **3003:** ⌂ **Trollblood Henge** - A 20-50 settlement
+- **3004:** ※ **Wild Beast Encounter**
+- **3005:** ※ **Wild Beast Encounter**
+- **3006:** ▲ **Ancient Ruins**
+- **3007:** ※ **Wild Beast Encounter**
+- **3008:** ※ **Wild Beast Encounter**
+- **3009:** ▲ **Ancient Ruins**
+- **3010:** ※ **Wild Beast Encounter**
+- **3011:** ▲ **Ancient Ruins**
+- **3012:** ※ **Wild Beast Encounter**
+- **3013:** ※ **Wild Beast Encounter**
+- **3014:** ▲ **Ancient Ruins**
+- **3015:** ▲ **Ancient Ruins**
+- **3016:** ▲ **Ancient Ruins**
+- **3017:** ▲ **Ancient Ruins**
+- **3018:** ▲ **Ancient Ruins**
+- **3019:** ▲ **Ancient Ruins**
+- **3020:** ▲ **Ancient Ruins**
+- **3021:** ▲ **Ancient Ruins**
+- **3022:** ▲ **Ancient Ruins**
+- **3023:** ▲ **Ancient Ruins**
+- **3024:** ▲ **Ancient Ruins**
+- **3025:** ▲ **Ancient Ruins**
+
+## Island (1 hexes)
+
+- **0223:** Major City: Ligure (Population: 0)
+
+## Mountain (5 hexes)
+
+- **0408:** Major Location: Bergen Chrypt
+- **0423:** Major City: Ucalegon (Population: unknown)
+- **0722:** Major City: Sanalassio (Population: 0)
+- **1012:** Major Location: The Bone Temple
+- **2413:** Major City: Dalmore Mountains (Population: unknown)
+
+## Swamp (2 hexes)
+
+- **0614:** Major Location: The Weeping Lake
+- **1908:** Major City: Graven-Tosk (Population: 300)
+
+## Forest (1 hexes)
+
+- **0908:** Major City: Sarkash Forest Settlement (Population: 120)
+
+## Coast (1 hexes)
+
+- **1017:** Major City: Schleswig (Population: 350)
+
+## Desert (1 hexes)
+
+- **1221:** Major City: Wästland (Population: 100)
+
+## Hills (2 hexes)
+
+- **2014:** Major City: Saltcrest Hills (Population: unknown)
+- **2216:** Major City: Borrow Hills (Population: unknown)
+
+## Ruins (1 hexes)
+
+- **2307:** Major City: Norvarad (Population: 0)
+
+## Asylum (1 hexes)
+
+- **2510:** Major City: Jericho Asylum (Population: unknown)
