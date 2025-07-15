@@ -8,18 +8,32 @@ Consolidates MapGenerator and HexGenerator into one unified system.
 import os
 import random
 import shutil
-from typing import Dict, List, Tuple, Optional, Any
+from typing import Dict, List, Tuple, Optional, Any, Union
+from pathlib import Path
+from datetime import datetime
+
 from database_manager import database_manager
 from terrain_system import terrain_system
 from translation_system import translation_system
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from generation_engine import GenerationEngine
+try:
+    from .config import get_config, get_setting
+    from .logger import get_logger, log_info, log_warning, log_error
+    from .base_classes import BaseGenerator, GenerationError, ValidationError
+except ImportError:
+    from config import get_config, get_setting
+    from logger import get_logger, log_info, log_warning, log_error
+    from base_classes import BaseGenerator, GenerationError, ValidationError
 
-class MainMapGenerator:
+class MainMapGenerator(BaseGenerator):
     """Unified map generator - single entry point for all map generation."""
     
-    def __init__(self, config: Optional[Dict] = None):
+    def __init__(self, config: Optional[Dict[str, Any]] = None):
         """Initialize the main map generator with optional configuration."""
+        # Initialize base class
+        super().__init__(get_setting('language.default', 'en'))
+        
         # Load configuration
         self.config = self._load_config(config or {})
         
@@ -50,27 +64,28 @@ class MainMapGenerator:
         self.output_formats = self.config.get('output_formats', ['markdown', 'ascii'])
         
         # Custom content tables
-        self.custom_tables = {}
+        self.custom_tables: Dict[str, Any] = {}
     
-    def _load_config(self, config: Dict) -> Dict:
+    def _load_config(self, config: Dict[str, Any]) -> Dict[str, Any]:
         """Load and validate configuration."""
+        # Get default config from centralized config manager
+        config_manager = get_config()
         default_config = {
-            'language': 'en',
-            'map_dimensions': (30, 25),
-            'map_start': (1, 1),
-            'output_directory': 'dying_lands_output',
-            'generation_rules': {
-                'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
-                'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
-                'beast_chance': 0.50,       # Increased from 0.35 - more beasts!
-                'npc_chance': 0.40,         # Reduced to make room for more dungeons/beasts
-                'loot_chance': 0.60,        # Increased from 0.50 - more loot!
-                'scroll_chance': 0.35       # Increased from 0.30
-            },
-            'output_formats': ['markdown', 'ascii'],
-            'skip_existing': True,
-            'create_summary': True,
-            'create_ascii_map': True
+            'language': config_manager.get('language.default', 'en'),
+            'map_dimensions': (
+                config_manager.get('map.width', 30),
+                config_manager.get('map.height', 25)
+            ),
+            'map_start': (
+                config_manager.get('map.start_x', 1),
+                config_manager.get('map.start_y', 1)
+            ),
+            'output_directory': config_manager.get('map.output_directory', 'dying_lands_output'),
+            'generation_rules': config_manager.get_generation_config(),
+            'output_formats': config_manager.get('output.formats', ['markdown', 'ascii']),
+            'skip_existing': config_manager.get('generation.skip_existing', True),
+            'create_summary': config_manager.get('generation.create_summary', True),
+            'create_ascii_map': config_manager.get('generation.create_ascii_map', True)
         }
         
         if config:
@@ -80,11 +95,14 @@ class MainMapGenerator:
     
     # ===== MAIN GENERATION METHODS =====
     
-    def generate_full_map(self, options: Optional[Dict] = None) -> Dict:
+    def generate_full_map(self, options: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate content for the entire map."""
-        print(f"🗺️ {self.translation_system.t('generating_full_map')}...")
-        print(f"📍 {self.translation_system.t('map_size')}: {self.map_width}x{self.map_height} hexes")
-        print(f"🎯 {self.translation_system.t('language')}: {self.language}")
+        start_time = datetime.now()
+        
+        self.logger.log_map_generation_start(self.map_width, self.map_height, self.language)
+        log_info(f"🗺️ {self.translation_system.t('generating_full_map')}...")
+        log_info(f"📍 {self.translation_system.t('map_size')}: {self.map_width}x{self.map_height} hexes")
+        log_info(f"🎯 {self.translation_system.t('language')}: {self.language}")
         
         # Apply options
         if options:
@@ -92,53 +110,81 @@ class MainMapGenerator:
         else:
             skip_existing = self.config.get('skip_existing', True)
         
-        self._create_output_dirs()
+        try:
+            self._create_output_dirs()
+            
+            all_hex_data: List[Dict[str, Any]] = []
+            generated_count = 0
+            skipped_count = 0
+            total_hexes = self.map_width * self.map_height
+            
+            # Generate content for each hex
+            for x in range(self.start_x, self.start_x + self.map_width):
+                for y in range(self.start_y, self.start_y + self.map_height):
+                    hex_code = f"{x:02d}{y:02d}"
+                    hex_file = f"{self.output_dir}/hexes/hex_{hex_code}.md"
+                    
+                    # Skip if file exists and skip_existing is True
+                    if skip_existing and os.path.exists(hex_file):
+                        log_info(f"⏭️  {self.translation_system.t('skipping_existing')} {hex_code}")
+                        skipped_count += 1
+                        continue
+                    
+                    log_info(f"🎲 {self.translation_system.t('generating_hex')} {hex_code}...")
+                    
+                    try:
+                        # Generate hex content
+                        hex_data = self.generate_hex_content(hex_code)
+                        all_hex_data.append(hex_data)
+                        
+                        # Write hex file
+                        self._write_hex_file(hex_data)
+                        generated_count += 1
+                        
+                        # Log progress every 50 hexes
+                        if (generated_count + skipped_count) % 50 == 0:
+                            self.logger.log_map_generation_progress(generated_count + skipped_count, total_hexes)
+                    
+                    except Exception as e:
+                        log_error(f"Failed to generate hex {hex_code}: {e}")
+                        continue
+            
+            # Create additional outputs
+            if self.config.get('create_summary', True):
+                self._write_summary_file(all_hex_data)
+            
+            if self.config.get('create_ascii_map', True):
+                self._create_ascii_map(all_hex_data)
+            
+            end_time = datetime.now()
+            duration = (end_time - start_time).total_seconds()
+            
+            self.logger.log_map_generation_complete(generated_count, skipped_count)
+            self.logger.log_performance("full_map_generation", duration, 
+                                      generated=generated_count, skipped=skipped_count)
+            
+            log_info(f"\n✅ {self.translation_system.t('generation_complete')}!")
+            log_info(f"📊 Generated: {generated_count} hexes")
+            log_info(f"⏭️  Skipped: {skipped_count} hexes")
+            log_info(f"⏱️  Duration: {duration:.2f} seconds")
+            log_info(f"📁 Files in '{self.output_dir}/' directory")
+            
+            return {
+                'success': True,
+                'generated_count': generated_count,
+                'skipped_count': skipped_count,
+                'total_hexes': len(all_hex_data),
+                'hex_data': all_hex_data,
+                'duration': duration
+            }
         
-        all_hex_data = []
-        generated_count = 0
-        skipped_count = 0
-        
-        # Generate content for each hex
-        for x in range(self.start_x, self.start_x + self.map_width):
-            for y in range(self.start_y, self.start_y + self.map_height):
-                hex_code = f"{x:02d}{y:02d}"
-                hex_file = f"{self.output_dir}/hexes/hex_{hex_code}.md"
-                
-                # Skip if file exists and skip_existing is True
-                if skip_existing and os.path.exists(hex_file):
-                    print(f"⏭️  {self.translation_system.t('skipping_existing')} {hex_code}")
-                    skipped_count += 1
-                    continue
-                
-                print(f"🎲 {self.translation_system.t('generating_hex')} {hex_code}...")
-                
-                # Generate hex content
-                hex_data = self.generate_hex_content(hex_code)
-                all_hex_data.append(hex_data)
-                
-                # Write hex file
-                self._write_hex_file(hex_data)
-                generated_count += 1
-        
-        # Create additional outputs
-        if self.config.get('create_summary', True):
-            self._write_summary_file(all_hex_data)
-        
-        if self.config.get('create_ascii_map', True):
-            self._create_ascii_map(all_hex_data)
-        
-        print(f"\n✅ {self.translation_system.t('generation_complete')}!")
-        print(f"📊 Generated: {generated_count} hexes")
-        print(f"⏭️  Skipped: {skipped_count} hexes")
-        print(f"📁 Files in '{self.output_dir}/' directory")
-        
-        return {
-            'success': True,
-            'generated_count': generated_count,
-            'skipped_count': skipped_count,
-            'total_hexes': len(all_hex_data),
-            'hex_data': all_hex_data
-        }
+        except Exception as e:
+            log_error(f"Full map generation failed: {e}")
+            raise GenerationError(f"Full map generation failed: {e}", {
+                'map_width': self.map_width,
+                'map_height': self.map_height,
+                'language': self.language
+            })
     
     def generate_single_hex(self, hex_code: str) -> Dict:
         """Generate content for a single hex."""
