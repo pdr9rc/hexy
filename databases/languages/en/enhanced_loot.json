@@ -2,58 +2,59 @@
   "category": "enhanced_loot",
   "tables": {
     "weapon_loot": [
-      "Rusted sword (+1 damage, breaks on 1)",
-      "Bone dagger (1d4, +1 vs undead)",
-      "Plague doctor's cane (1d6, causes disease)",
-      "Executioner's axe (1d8, intimidating)",
-      "Witch hunter's crossbow (1d6, +2 vs magic users)",
-      "Grave robber's crowbar (1d4, useful tool)",
-      "Cursed blade (1d8, hurts wielder on 1)",
-      "Holy symbol mace (1d6, +1 vs undead)",
-      "Poisoned stiletto (1d4, save or paralyzed)",
-      "Broken knight's sword (1d6, once noble)"
+      "Rusted sword (+1 damage, breaks on 1) [5 coins]",
+      "Bone dagger (1d4, +1 vs undead) [8 coins]",
+      "Plague doctor's cane (1d6, causes disease) [25 coins]",
+      "Executioner's axe (1d8, intimidating) [35 coins]",
+      "Witch hunter's crossbow (1d6, +2 vs magic users) [45 coins]",
+      "Grave robber's crowbar (1d4, useful tool) [3 coins]",
+      "Cursed blade (1d8, hurts wielder on 1) [15 coins]",
+      "Holy symbol mace (1d6, +1 vs undead) [30 coins]",
+      "Poisoned stiletto (1d4, save or paralyzed) [40 coins]",
+      "Broken knight's sword (1d6, once noble) [12 coins]"
     ],
     "armor_loot": [
-      "Tattered leather armor (AC 12, smells awful)",
-      "Plague doctor's robes (AC 11, disease immunity)",
-      "Rusty chainmail (AC 14, noisy)",
-      "Bone plate armor (AC 15, intimidating)",
-      "Witch's cloak (AC 11, +1 vs magic)",
-      "Grave dirt coating (AC 10, undead ignore you)",
-      "Cursed helmet (AC +1, constant whispers)",
-      "Holy vestments (AC 12, +1 vs evil)",
-      "Thieves' leathers (AC 13, +1 stealth)",
-      "Broken shield (AC +1, once magnificent)"
+      "Tattered leather armor (AC 12, smells awful) [4 coins]",
+      "Plague doctor's robes (AC 11, disease immunity) [80 coins]",
+      "Rusty chainmail (AC 14, noisy) [20 coins]",
+      "Bone plate armor (AC 15, intimidating) [75 coins]",
+      "Witch's cloak (AC 11, +1 vs magic) [60 coins]",
+      "Grave dirt coating (AC 10, undead ignore you) [10 coins]",
+      "Cursed helmet (AC +1, constant whispers) [25 coins]",
+      "Holy vestments (AC 12, +1 vs evil) [50 coins]",
+      "Thieves' leathers (AC 13, +1 stealth) [35 coins]",
+      "Broken shield (AC +1, once magnificent) [8 coins]"
     ],
     "valuable_loot": [
-      "Bag of silver teeth (50 coins)",
-      "Cursed jewelry (100 coins, bad luck)",
-      "Rare plague mask (200 coins to collectors)",
-      "Ancient tome (300 coins, forbidden knowledge)",
-      "Soul gem (500 coins, whispers constantly)",
-      "Golden skull chalice (150 coins, unholy)",
-      "Witch's grimoire (400 coins, dangerous spells)",
-      "Noble's signet ring (80 coins, political value)",
-      "Demon bottle (600 coins, contains something)",
-      "Relic bone (250 coins, holy/unholy power)"
+      "Bag of silver teeth (50 coins) [Common]",
+      "Cursed jewelry (100 coins, bad luck) [Rare]",
+      "Rare plague mask (200 coins to collectors) [Legendary]",
+      "Ancient tome (300 coins, forbidden knowledge) [Legendary]",
+      "Soul gem (500 coins, whispers constantly) [Legendary]",
+      "Golden skull chalice (150 coins, unholy) [Rare]",
+      "Witch's grimoire (400 coins, dangerous spells) [Legendary]",
+      "Noble's signet ring (80 coins, political value) [Rare]",
+      "Demon bottle (600 coins, contains something) [Legendary]",
+      "Relic bone (250 coins, holy/unholy power) [Legendary]"
     ],
     "utility_loot": [
-      "Thieves' tools (lockpicking kit)",
-      "Healing potion (restore 1d6 HP)",
-      "Rope (50 feet, sturdy)",
-      "Lantern with oil (6 hours light)",
-      "Grappling hook (climbing aid)",
-      "Poison vial (coat weapon)",
-      "Holy water (1d4 damage to undead)",
-      "Smoke bomb (escape aid)",
-      "Crowbar (useful tool)",
-      "Manacles (restraint device)"
+      "Thieves' tools (lockpicking kit) [15 coins]",
+      "Healing potion (restore 1d6 HP) [25 coins]",
+      "Rope (50 feet, sturdy) [2 coins]",
+      "Lantern with oil (6 hours light) [5 coins]",
+      "Grappling hook (climbing aid) [8 coins]",
+      "Poison vial (coat weapon) [20 coins]",
+      "Holy water (1d4 damage to undead) [10 coins]",
+      "Smoke bomb (escape aid) [12 coins]",
+      "Crowbar (useful tool) [3 coins]",
+      "Manacles (restraint device) [6 coins]"
     ]
   },
   "metadata": {
-    "version": "1.0",
+    "version": "1.1",
     "language": "en",
-    "last_updated": "2025-07-13T10:26:38.981405",
-    "migrated_from": "content_tables.py"
+    "last_updated": "2025-07-15T00:56:00.000000",
+    "migrated_from": "content_tables.py",
+    "changes": "Standardized pricing scale and added rarity indicators"
   }
 }

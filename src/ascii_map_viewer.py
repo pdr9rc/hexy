@@ -243,10 +243,8 @@ def get_hex_info(hex_code):
         try:
             terrain = get_terrain_for_hex(hex_code)
             
-            # Use simplified generation engine for enhanced hex data
-            from simplified_generation_engine import SimplifiedGenerationEngine
-            gen_engine = SimplifiedGenerationEngine(current_language)
-            hex_content = gen_engine.generate_hex_content(hex_code, terrain)
+            # Use main map generator for enhanced hex data
+            hex_content = main_map_generator._generate_enhanced_hex_content(hex_code, terrain)
             
             # Get translated terrain name for display
             terrain_name = main_map_generator._get_translated_terrain_name(terrain)
@@ -495,10 +493,8 @@ def generate_single_hex():
         # Get terrain type for the hex
         terrain_type = get_terrain_for_hex(hex_code)
         
-        # Generate hex content using simplified generation engine
-        from simplified_generation_engine import SimplifiedGenerationEngine
-        gen_engine = SimplifiedGenerationEngine(current_language)
-        hex_content = gen_engine.generate_hex_content(hex_code, terrain_type)
+        # Generate hex content using main map generator
+        hex_content = main_map_generator._generate_enhanced_hex_content(hex_code, terrain_type)
         
         # Also generate using unified system for file output
         result = main_map_generator.generate_single_hex(hex_code)

@@ -2,24 +2,24 @@
   "category": "bestiary",
   "tables": {
     "beast_types": [
-      "Plague rat",
-      "Corpse crow",
-      "Bone spider",
-      "Blood leech",
-      "Shadow wolf",
-      "Carrion hound",
-      "Sewer serpent",
-      "Rust beetle",
-      "Doom moth",
-      "Acid toad",
-      "Spine crawler",
-      "Flesh wasp",
-      "Grave worm",
-      "Blight bat",
-      "Void spider",
-      "Death adder",
-      "Scream bird",
-      "Terror mole"
+      "Plague rat [Threat 1]",
+      "Corpse crow [Threat 2]",
+      "Bone spider [Threat 2]",
+      "Blood leech [Threat 1]",
+      "Shadow wolf [Threat 3]",
+      "Carrion hound [Threat 3]",
+      "Sewer serpent [Threat 2]",
+      "Rust beetle [Threat 1]",
+      "Doom moth [Threat 2]",
+      "Acid toad [Threat 2]",
+      "Spine crawler [Threat 3]",
+      "Flesh wasp [Threat 2]",
+      "Grave worm [Threat 1]",
+      "Blight bat [Threat 2]",
+      "Void spider [Threat 4]",
+      "Death adder [Threat 3]",
+      "Scream bird [Threat 3]",
+      "Terror mole [Threat 2]"
     ],
     "beast_features": [
       "glowing red eyes",
@@ -35,7 +35,11 @@
       "constantly bleeding",
       "emits toxic fumes",
       "translucent skin",
-      "backwards joints"
+      "backwards joints",
+      "missing patches of skin",
+      "too many teeth",
+      "unnatural size",
+      "glowing veins"
     ],
     "beast_behaviors": [
       "hunts in packs",
@@ -50,13 +54,19 @@
       "drains blood",
       "spreads disease",
       "mimics voices",
-      "phases through walls"
+      "phases through walls",
+      "follows scent trails",
+      "attacks during sleep",
+      "territorial guardian",
+      "flees from light",
+      "swarms when threatened"
     ]
   },
   "metadata": {
-    "version": "1.0",
+    "version": "1.1",
     "language": "en",
-    "last_updated": "2025-07-13T10:26:38.980348",
-    "migrated_from": "content_tables.py"
+    "last_updated": "2025-07-15T00:59:00.000000",
+    "migrated_from": "content_tables.py",
+    "changes": "Balanced all lists to 18 entries and added threat levels (1-5) to beast types"
   }
 }

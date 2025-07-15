@@ -19,40 +19,41 @@
       "Witch tools"
     ],
     "treasure_values": [
-      "Worthless but cursed",
-      "Few copper pieces",
-      "Handful of silver",
-      "Small fortune in gold",
-      "Priceless but dangerous",
-      "Valuable to cultists",
-      "Sought by collectors",
-      "Worth a life",
-      "Magically valuable",
-      "Historically significant",
-      "Religiously important",
-      "Extremely rare"
+      "Cursed but worthless [1 coin]",
+      "Few copper pieces [2-5 coins]",
+      "Handful of silver [6-15 coins]",
+      "Small fortune in gold [25-50 coins]",
+      "Priceless but dangerous [100-200 coins]",
+      "Valuable to cultists [30-60 coins]",
+      "Sought by collectors [80-150 coins]",
+      "Worth a life [200-500 coins]",
+      "Magically valuable [150-300 coins]",
+      "Historically significant [100-250 coins]",
+      "Religiously important [75-200 coins]",
+      "Extremely rare [300-600 coins]"
     ],
     "treasure_effects": [
-      "brings bad luck",
-      "attracts undead",
-      "causes nightmares",
-      "grants dark visions",
-      "whispers constantly",
-      "feels unnaturally cold",
-      "pulses with evil energy",
-      "corrupts nearby items",
-      "reveals hidden passages",
-      "allows communion with dead",
-      "protects from holy symbols",
-      "enhances dark magic",
-      "marks bearer for death",
-      "slowly drains life force"
+      "brings bad luck [Easy curse]",
+      "attracts undead [Normal threat]",
+      "causes nightmares [Easy curse]",
+      "grants dark visions [Normal blessing]",
+      "whispers constantly [Easy curse]",
+      "feels unnaturally cold [Easy curse]",
+      "pulses with evil energy [Normal curse]",
+      "corrupts nearby items [Hard curse]",
+      "reveals hidden passages [Normal blessing]",
+      "allows communion with dead [Hard blessing]",
+      "protects from holy symbols [Normal blessing]",
+      "enhances dark magic [Hard blessing]",
+      "marks bearer for death [Extreme curse]",
+      "slowly drains life force [Hard curse]"
     ]
   },
   "metadata": {
-    "version": "1.0",
+    "version": "1.1",
     "language": "en",
-    "last_updated": "2025-07-13T10:26:38.980648",
-    "migrated_from": "content_tables.py"
+    "last_updated": "2025-07-15T00:57:00.000000",
+    "migrated_from": "content_tables.py",
+    "changes": "Standardized pricing ranges and added curse/blessing difficulty levels"
   }
 }

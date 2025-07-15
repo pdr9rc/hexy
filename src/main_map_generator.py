@@ -13,7 +13,7 @@ from database_manager import database_manager
 from terrain_system import terrain_system
 from translation_system import translation_system
 from mork_borg_lore_database import MorkBorgLoreDatabase
-from simplified_generation_engine import SimplifiedGenerationEngine
+from generation_engine import GenerationEngine
 
 class MainMapGenerator:
     """Unified map generator - single entry point for all map generation."""
@@ -29,8 +29,8 @@ class MainMapGenerator:
         self.translation_system.set_language(self.language)
         self.lore_db = MorkBorgLoreDatabase()
         
-        # Initialize simplified generation engine
-        self.generation_engine = SimplifiedGenerationEngine(self.language)
+        # Initialize generation engine with sandbox integration
+        self.generation_engine = GenerationEngine()
         
         # Load content tables (now handled by simplified generation engine)
         self.content_tables = database_manager.load_tables(self.language)
@@ -42,8 +42,8 @@ class MainMapGenerator:
         self.start_x, self.start_y = self.config.get('map_start', (1, 1))
         self.output_dir = self.config.get('output_directory', 'dying_lands_output')
         
-        # Generation rules (now using simplified engine rules)
-        self.generation_rules = self.generation_engine.rules
+        # Generation rules (now using enhanced engine rules)
+        self.generation_rules = self.generation_engine.default_rules
         self.generation_rules.update(self.config.get('generation_rules', {}))
         
         # Output formats
@@ -172,9 +172,19 @@ class MainMapGenerator:
         return self._generate_enhanced_hex_content(hex_code, terrain)
     
     def _generate_enhanced_hex_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
-        """Generate enhanced hex content using the simplified generation engine."""
-        # Use simplified generation engine directly
-        enhanced_content = self.generation_engine.generate_hex_content(hex_code, terrain)
+        """Generate enhanced hex content using the generation engine with sandbox integration."""
+        # Determine content type using enhanced engine
+        content_type = self.generation_engine.determine_content_type(hex_code, terrain, self.generation_rules)
+        
+        # Generate content with sandbox enhancements
+        context = {
+            'hex_code': hex_code,
+            'terrain': terrain,
+            'language': self.language,
+            'rules': self.generation_rules
+        }
+        
+        enhanced_content = self.generation_engine.generate_content(content_type, context)
         
         # Add hex metadata
         enhanced_content['hex_code'] = hex_code
