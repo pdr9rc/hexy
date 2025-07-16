@@ -711,8 +711,39 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
     
     # ===== FILE I/O METHODS =====
     
+    def _enrich_with_display_names(self, hex_data: Dict[str, Any]):
+        """Enrich hex_data with human-readable names/descriptions for reference fields."""
+        # Example for local_faction
+        lore_db = getattr(self, 'lore_db', None)
+        if not lore_db:
+            return
+        # Handle local_faction
+        local_faction_key = hex_data.get('local_faction')
+        if local_faction_key and hasattr(lore_db, 'factions'):
+            faction_info = lore_db.factions.get(local_faction_key)
+            if faction_info:
+                hex_data['local_faction_name'] = faction_info.get('name')
+                hex_data['local_faction_description'] = faction_info.get('description')
+        # Handle sandbox_data factions
+        sandbox = hex_data.get('sandbox_data', {})
+        if 'factions' in sandbox and hasattr(lore_db, 'factions'):
+            for faction in sandbox['factions']:
+                key = faction.get('key') or faction.get('id') or faction.get('faction_key')
+                if not key and 'name' in faction:
+                    # Try to reverse lookup by name
+                    for k, v in lore_db.factions.items():
+                        if v.get('name') == faction['name']:
+                            key = k
+                            break
+                if key and key in lore_db.factions:
+                    faction_info = lore_db.factions[key]
+                    faction['name'] = faction_info.get('name', faction.get('name', key))
+                    faction['description'] = faction_info.get('description', '')
+        # ... add similar enrichment for other reference fields as needed ...
+
     def _write_hex_file(self, hex_data: Dict[str, Any]):
         """Write hex data to a markdown file and a JSON file."""
+        self._enrich_with_display_names(hex_data)
         hex_code = hex_data.get('hex_code')
         if not hex_code:
             return

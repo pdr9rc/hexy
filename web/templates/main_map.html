@@ -1150,7 +1150,11 @@
         if (sandbox.factions && sandbox.factions.length > 0) {
             html += `\n╠══════════════════════════════════════════════════════════════╣\n║ FACTIONS:                                                   ║`;
             sandbox.factions.forEach(faction => {
-                let factionLine = faction.name ? `${faction.name} (${faction.type || ''})` : JSON.stringify(faction);
+                // Prefer display name and description if present
+                let name = faction.name || faction.key || faction.id || 'Unknown Faction';
+                let desc = faction.description || '';
+                let type = faction.type || '';
+                let factionLine = name + (type ? ` (${type})` : '') + (desc ? ` - ${desc}` : '');
                 (factionLine.match(/.{1,58}/g) || [factionLine]).forEach(line => {
                     html += `\n║ ${line.padEnd(58)}║`;
                 });
