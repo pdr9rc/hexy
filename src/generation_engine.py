@@ -39,7 +39,6 @@ class GenerationEngine:
             'npc_chance': 0.40,         # Reduced to make room for more dungeons/beasts
             'loot_chance': 0.60,        # Increased from 0.50 - more loot!
             'scroll_chance': 0.35,      # Increased from 0.30
-            
             # Sandbox integration rules
             'sandbox_enabled': True,
             'faction_influence': True,
@@ -1199,7 +1198,6 @@ A {beast_type} with {feature} that {behavior}.
             'intensity_levels': [1, 2, 3, 4, 5],
             'resolution_methods': ['diplomacy', 'war', 'alliance', 'neutrality', 'escalation']
         }
-
 
 # Global generation engine instance
 generation_engine = GenerationEngine()

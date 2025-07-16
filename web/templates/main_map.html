@@ -438,9 +438,6 @@
                     <div class="btn-group me-2" role="group">
                         <button class="btn btn-mork-borg" onclick="showLoreOverview()">📜 LORE</button>
                     </div>
-                    <div class="btn-group me-2" role="group">
-                        
-                    </div>
                     <div class="btn-group" role="group">
                         <button class="btn btn-mork-borg" onclick="resetContinent()">🔄 RESET CONTINENT</button>
                     </div>
@@ -567,13 +564,12 @@
     </div>
 
     <script>
-            let currentHex = '';
-    let isDragging = false;
-    let dragStartX = 0;
-    let dragStartY = 0;
-    let scrollStartX = 0;
-    let scrollStartY = 0;
-
+        let currentHex = '';
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let scrollStartX = 0;
+        let scrollStartY = 0;
     
     // Map data from server - read from data attributes
     let mapData = {};
