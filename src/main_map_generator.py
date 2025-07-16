@@ -58,7 +58,7 @@ class MainMapGenerator:
             'language': 'en',
             'map_dimensions': (30, 25),
             'map_start': (1, 1),
-            'output_directory': 'generated_hexes',
+            'output_directory': 'dying_lands_output',
             'generation_rules': {
                 'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
                 'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
@@ -1283,8 +1283,8 @@ def main():
     parser.add_argument('--reset', action='store_true', help='Reset continent and regenerate all')
     parser.add_argument('--skip-existing', action='store_true', default=True,
                        help='Skip existing hex files (default: True)')
-    parser.add_argument('--output-dir', default='generated_hexes',
-                       help='Output directory (default: generated_hexes)')
+    parser.add_argument('--output-dir', default='dying_lands_output',
+                       help='Output directory (default: dying_lands_output)')
     parser.add_argument('--config', type=str, help='Path to JSON configuration file')
     
     args = parser.parse_args()

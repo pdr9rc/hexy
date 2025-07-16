@@ -8,7 +8,6 @@ import os
 import sys
 import json
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
 try:
     import markdown
     MARKDOWN_AVAILABLE = True
