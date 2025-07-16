@@ -742,8 +742,10 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         # ... add similar enrichment for other reference fields as needed ...
 
     def _write_hex_file(self, hex_data: Dict[str, Any]):
-        """Write hex data to a markdown file and a JSON file."""
         self._enrich_with_display_names(hex_data)
+        # Ensure loot field is always present
+        if 'loot' not in hex_data:
+            hex_data['loot'] = None
         hex_code = hex_data.get('hex_code')
         if not hex_code:
             return

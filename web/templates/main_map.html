@@ -1146,6 +1146,14 @@
                 html += `\n║ ${line.padEnd(58)}║`;
             });
         }
+        // Show loot if present
+        if (data.loot !== undefined) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ LOOT:                                                       ║`;
+            let lootDesc = (data.loot && data.loot.full_description) ? data.loot.full_description : (data.loot && data.loot.description) ? data.loot.description : 'No loot found.';
+            (lootDesc.match(/.{1,58}/g) || [lootDesc]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
         // Sandbox Data (factions, settlements, etc.)
         if (sandbox.factions && sandbox.factions.length > 0) {
             html += `\n╠══════════════════════════════════════════════════════════════╣\n║ FACTIONS:                                                   ║`;
