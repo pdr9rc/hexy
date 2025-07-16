@@ -347,7 +347,10 @@ class MainMapGenerator:
         feature = random.choice(sea_features)
         
         # Generate loot (sea encounters might have sunken treasure)
-        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.8 else None
+        loot_chance = self.generation_rules.get('loot_chance', 0)
+        roll = random.random()
+        print(f"[DEBUG] Sea Encounter {hex_code}: loot_chance={loot_chance}, roll={roll}")
+        loot = self._generate_loot() if roll <= loot_chance * 0.8 else None
         
         # Build the encounter description
         encounter_desc = f"**{encounter_type}**\n\n"
@@ -397,7 +400,10 @@ class MainMapGenerator:
         settlement_art = self._generate_settlement_art(name, terrain)
         
         # Generate loot (settlements might have valuable items)
-        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.5 else None
+        loot_chance = self.generation_rules.get('loot_chance', 0)
+        roll = random.random()
+        print(f"[DEBUG] Settlement {hex_code}: loot_chance={loot_chance}, roll={roll}")
+        loot = self._generate_loot() if roll <= loot_chance * 0.5 else None
         
         return {
             'hex_code': hex_code,
@@ -433,7 +439,10 @@ class MainMapGenerator:
         atmosphere = random.choice(dungeon_atmospheres) if dungeon_atmospheres else "Oppressive silence"
         
         # Generate loot and scroll
-        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] else None
+        loot_chance = self.generation_rules.get('loot_chance', 0)
+        roll = random.random()
+        print(f"[DEBUG] Dungeon {hex_code}: loot_chance={loot_chance}, roll={roll}")
+        loot = self._generate_loot() if roll <= loot_chance else None
         scroll = self._generate_scroll() if random.random() <= self.generation_rules['scroll_chance'] else None
         
         # Build description
@@ -486,7 +495,10 @@ class MainMapGenerator:
         behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
         
         # Generate loot (beasts might have treasure from their victims)
-        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.7 else None
+        loot_chance = self.generation_rules.get('loot_chance', 0)
+        roll = random.random()
+        print(f"[DEBUG] Beast {hex_code}: loot_chance={loot_chance}, roll={roll}")
+        loot = self._generate_loot() if roll <= loot_chance * 0.7 else None
         
         # Build description
         description = f"A {beast_type} with {feature} that {behavior}.\n\n"
@@ -546,7 +558,10 @@ class MainMapGenerator:
         demeanor = random.choice(demeanors) if demeanors else "Cryptic"
         
         # Generate loot (NPCs might carry valuable items)
-        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.6 else None
+        loot_chance = self.generation_rules.get('loot_chance', 0)
+        roll = random.random()
+        print(f"[DEBUG] NPC {hex_code}: loot_chance={loot_chance}, roll={roll}")
+        loot = self._generate_loot() if roll <= loot_chance * 0.6 else None
         
         # Build description
         description = f"**{name}** - {denizen_type}\n\n"
