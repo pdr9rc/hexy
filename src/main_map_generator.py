@@ -14,6 +14,7 @@ from terrain_system import terrain_system
 from translation_system import translation_system
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from generation_engine import GenerationEngine
+import json
 
 class MainMapGenerator:
     """Unified map generator - single entry point for all map generation."""
@@ -126,6 +127,11 @@ class MainMapGenerator:
         
         if self.config.get('create_ascii_map', True):
             self._create_ascii_map(all_hex_data)
+        
+        # After generating all hexes, write unified all_hexes.json
+        all_json_path = f"{self.output_dir}/all_hexes.json"
+        with open(all_json_path, 'w', encoding='utf-8') as f:
+            json.dump({h['hex_code']: h for h in all_hex_data}, f, ensure_ascii=False, indent=2)
         
         print(f"\n✅ {self.translation_system.t('generation_complete')}!")
         print(f"📊 Generated: {generated_count} hexes")
@@ -706,22 +712,19 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
     # ===== FILE I/O METHODS =====
     
     def _write_hex_file(self, hex_data: Dict[str, Any]):
-        """Write hex content to a markdown file."""
-        if 'markdown' not in self.output_formats:
+        """Write hex data to a markdown file and a JSON file."""
+        hex_code = hex_data.get('hex_code')
+        if not hex_code:
             return
-        
-        hex_code = hex_data['hex_code']
-        filename = f"{self.output_dir}/hexes/hex_{hex_code}.md"
-        
-        # Ensure directory exists
-        os.makedirs(os.path.dirname(filename), exist_ok=True)
-        
-        # Generate markdown content
-        content = self._generate_markdown_content(hex_data)
-        
-        # Write file
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(content)
+        # Write markdown as before (if needed)
+        md_path = f"{self.output_dir}/hexes/hex_{hex_code}.md"
+        md_content = self._generate_markdown_content(hex_data)
+        with open(md_path, 'w', encoding='utf-8') as f:
+            f.write(md_content)
+        # Write JSON file
+        json_path = f"{self.output_dir}/hexes/hex_{hex_code}.json"
+        with open(json_path, 'w', encoding='utf-8') as f:
+            json.dump(hex_data, f, ensure_ascii=False, indent=2)
     
     def _get_translated_terrain_name(self, terrain: str) -> str:
         """Get terrain name in the current language."""
