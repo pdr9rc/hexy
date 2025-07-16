@@ -805,14 +805,12 @@
 
     function displayHexContent(data, hexCode) {
         const modalContainer = document.getElementById('modalContainer');
-        
         let html = '';
-        if (data.exists) {
-            html = generateHexModalHTML(data, hexCode);
+        if (data.exists || data.hex_code) {
+            html = generateUnifiedHexModalHTML(data, hexCode);
         } else {
             html = generateEmptyHexHTML(hexCode);
         }
-        
         modalContainer.innerHTML = html;
     }
 
@@ -1028,58 +1026,13 @@
 
 
 
-    function displayHexContent(data, hexCode) {
-        const modalContainer = document.getElementById('modalContainer');
-        
-        let html = '';
-        if (data.exists) {
-            // Try to get enhanced data first
-            fetch(`/api/enhanced-hex/${hexCode}`)
-                .then(response => response.json())
-                .then(enhancedData => {
-                    if (enhancedData.error) {
-                        // Fallback to basic data
-                        html = generateHexModalHTML(data, hexCode);
-                        modalContainer.innerHTML = html;
-                    } else {
-                        // Use enhanced data
-                        html = generateEnhancedHexModalHTML(enhancedData, hexCode);
-                        modalContainer.innerHTML = html;
-                    }
-                })
-                .catch(error => {
-                    console.log('Enhanced data not available, using basic data');
-                    html = generateHexModalHTML(data, hexCode);
-                    modalContainer.innerHTML = html;
-                });
-        } else {
-            html = generateEmptyHexHTML(hexCode);
-            modalContainer.innerHTML = html;
-        }
-    }
-
-    function generateHexModalHTML(data, hexCode) {
-        const terrain = data.terrain || 'unknown';
+    function generateUnifiedHexModalHTML(data, hexCode) {
+        // Prefer base_content and sandbox_data if present
+        const base = data.base_content || data;
+        const sandbox = data.sandbox_data || {};
+        const terrain = data.terrain || base.terrain || 'unknown';
         const terrainName = data.terrain_name || terrain.charAt(0).toUpperCase() + terrain.slice(1);
-        const encounter = data.encounter || 'Unknown encounter';
-        const denizen = data.denizen || 'No denizen information';
-        const notableFeature = data.notable_feature || 'No notable features';
-        const atmosphere = data.atmosphere || 'Unknown atmosphere';
-        const treasure = data.treasure || 'No treasure found';
-        const ancientKnowledge = data.ancient_knowledge || 'No ancient knowledge';
-        const danger = data.danger || 'No dangers present';
-        const threatLevel = data.threat_level || 'Unknown threat level';
-        const territory = data.territory || 'No territory claimed';
-        const location = data.location || 'Unknown location';
-        const motivation = data.motivation || 'Unknown motivation';
-        const demeanor = data.demeanor || 'Unknown demeanor';
-        const feature = data.feature || 'No notable features';
-        const settlementLayout = data.settlement_layout || '';
-        
-        // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
-        
-        // Build the HTML string
         let html = `
             <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                 <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
@@ -1090,327 +1043,146 @@
 ║ TERRAIN: ${terrainName.padEnd(50)}║
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRAIN ART:                                                ║`;
-        
-        // Add ASCII terrain art
-        const terrainLines = asciiTerrain.split('\n');
-        terrainLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ENCOUNTER:                                                  ║`;
-        
-        // Split encounter into lines
-        const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
-        encounterLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        html += `
-╠══════════════════════════════════════════════════════════════╣
-║ DENIZEN:                                                    ║`;
-        
-        // Split denizen into lines
-        const denizenLines = denizen.match(/.{1,58}/g) || [denizen];
-        denizenLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        html += `
-╠══════════════════════════════════════════════════════════════╣
-║ NOTABLE FEATURES:                                           ║`;
-        
-        // Split notable features into lines
-        const featureLines = notableFeature.match(/.{1,58}/g) || [notableFeature];
-        featureLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ATMOSPHERE:                                                 ║`;
-        
-        // Split atmosphere into lines
-        const atmosphereLines = atmosphere.match(/.{1,58}/g) || [atmosphere];
-        atmosphereLines.forEach(line => {
-            html += `
-║ ${line.padEnd(58)}║`;
-        });
-        
-        // Add treasure if present
-        if (treasure && treasure !== 'No treasure found') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ TREASURE:                                                   ║`;
-            const treasureLines = treasure.match(/.{1,58}/g) || [treasure];
-            treasureLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add ancient knowledge if present
-        if (ancientKnowledge && ancientKnowledge !== 'No ancient knowledge') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ANCIENT KNOWLEDGE:                                          ║`;
-            const knowledgeLines = ancientKnowledge.match(/.{1,58}/g) || [ancientKnowledge];
-            knowledgeLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add danger if present
-        if (danger && danger !== 'No dangers present') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ DANGER:                                                     ║`;
-            const dangerLines = danger.match(/.{1,58}/g) || [danger];
-            dangerLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add threat level section if available
-        if (threatLevel && threatLevel !== 'Unknown threat level') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ THREAT LEVEL:                                               ║`;
-            
-            const threatLines = threatLevel.match(/.{1,58}/g) || [threatLevel];
-            threatLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add territory section if available
-        if (territory && territory !== 'No territory claimed') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ TERRITORY:                                                  ║`;
-            
-            const territoryLines = territory.match(/.{1,58}/g) || [territory];
-            territoryLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add location if present
-        if (location && location !== 'Unknown location') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ LOCATION:                                                   ║`;
-            const locationLines = location.match(/.{1,58}/g) || [location];
-            locationLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add motivation if present
-        if (motivation && motivation !== 'Unknown motivation') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ MOTIVATION:                                                 ║`;
-            const motivationLines = motivation.match(/.{1,58}/g) || [motivation];
-            motivationLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        // Add demeanor if present
-        if (demeanor && demeanor !== 'Unknown demeanor') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ DEMEANOR:                                                   ║`;
-            const demeanorLines = demeanor.match(/.{1,58}/g) || [demeanor];
-            demeanorLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
-        }
-        
-        html += `
-╚══════════════════════════════════════════════════════════════╝
-                    </pre>
-                </div>
-            </div>
-        `;
-        
-        return html;
-    }
-
-    function generateEnhancedHexModalHTML(data, hexCode) {
-        const terrain = data.terrain || 'unknown';
-        const terrainName = data.terrain_name || terrain.charAt(0).toUpperCase() + terrain.slice(1);
-        const encounter = data.enhanced_encounter || data.encounter || 'Unknown encounter';
-        const summary = data.summary || 'No summary available';
-        
-        // Extract sandbox data
-        const sandboxData = data.sandbox_data || {};
-        const factions = sandboxData.factions || [];
-        const settlements = sandboxData.settlements || [];
-        const castles = sandboxData.castles || [];
-        const dungeons = sandboxData.dungeons || [];
-        const beasts = sandboxData.beasts || [];
-        const conflicts = sandboxData.conflicts || [];
-        const economicData = sandboxData.economic_data || {};
-        const plotHooks = sandboxData.plot_hooks || [];
-        const terrainFeatures = sandboxData.terrain_features || [];
-        
-        // Generate ASCII terrain art
-        const asciiTerrain = getAsciiTerrain(terrain);
-        
-        // Build the HTML string
-        let html = `
-            <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
-                <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-                    <pre style="font-family: 'pixelify-sans', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
-╔══════════════════════════════════════════════════════════════╗
-║                    HEX ${hexCode} - ${terrainName.toUpperCase().padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣
-║ ENHANCED SUMMARY:                                           ║`;
-        // Add summary
-        const summaryLines = summary.match(/.{1,58}/g) || [summary];
-        summaryLines.forEach(line => {
+        asciiTerrain.split('\n').forEach(line => {
             html += `\n║ ${line.padEnd(58)}║`;
         });
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ENHANCED ENCOUNTER:                                         ║`;
-        // Add enhanced encounter
-        const encounterLines = encounter.match(/.{1,58}/g) || [encounter];
-        encounterLines.forEach(line => {
+        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ENCOUNTER:                                                  ║`;
+        const encounter = data.enhanced_encounter || base.encounter || 'Unknown encounter';
+        (encounter.match(/.{1,58}/g) || [encounter]).forEach(line => {
             html += `\n║ ${line.padEnd(58)}║`;
         });
-        // Factions
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ FACTIONS:                                                   ║`;
-        if (factions.length > 0) {
-            factions.forEach(faction => {
-                const factionLine = `- ${faction.name} (${faction.type}) - Power: ${faction.power_level}`;
-                const factionLines = factionLine.match(/.{1,58}/g) || [factionLine];
-                factionLines.forEach(line => {
-                    html += `\n║ ${line.padEnd(58)}║`;
-                });
+        // Description/Denizen
+        if (base.description || base.denizen) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ DESCRIPTION:                                                ║`;
+            const desc = base.description || base.denizen;
+            (desc.match(/.{1,58}/g) || [desc]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Settlements
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ SETTLEMENTS:                                                ║`;
-        if (settlements.length > 0) {
-            settlements.forEach(settlement => {
-                const settlementLine = `- ${settlement.name} (${settlement.type}) - Pop: ${settlement.population}`;
-                const settlementLines = settlementLine.match(/.{1,58}/g) || [settlementLine];
-                settlementLines.forEach(line => {
-                    html += `\n║ ${line.padEnd(58)}║`;
-                });
+        // Notable Feature
+        if (base.notable_feature) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ NOTABLE FEATURE:                                            ║`;
+            (base.notable_feature.match(/.{1,58}/g) || [base.notable_feature]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Castles
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ CASTLES:                                                    ║`;
-        if (castles.length > 0) {
-            castles.forEach(castle => {
-                const castleLine = `- ${castle.name || castle.type || 'Unknown'} - ${castle.condition || 'Unknown condition'}`;
-                const castleLines = castleLine.match(/.{1,58}/g) || [castleLine];
-                castleLines.forEach(line => {
-                    html += `\n║ ${line.padEnd(58)}║`;
-                });
+        // Atmosphere
+        if (base.atmosphere) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ATMOSPHERE:                                                 ║`;
+            (base.atmosphere.match(/.{1,58}/g) || [base.atmosphere]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Dungeons
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ DUNGEONS:                                                   ║`;
-        if (dungeons.length > 0) {
-            dungeons.forEach(dungeon => {
-                const dungeonLine = `- ${dungeon.name || dungeon.type || 'Unknown'} | Danger: ${dungeon.danger || 'Unknown'} | Treasure: ${dungeon.treasure || 'None'}`;
-                const dungeonLines = dungeonLine.match(/.{1,58}/g) || [dungeonLine];
-                dungeonLines.forEach(line => {
-                    html += `\n║ ${line.padEnd(58)}║`;
-                });
+        // Population
+        if (base.population) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ POPULATION:                                                 ║`;
+            (base.population.toString().match(/.{1,58}/g) || [base.population.toString()]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Beasts
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ BEASTS:                                                     ║`;
-        if (beasts.length > 0) {
-            beasts.forEach(beast => {
-                const beastLine = `- ${beast.beast_type || 'Unknown'} | Feature: ${beast.beast_feature || 'Unknown'} | Behavior: ${beast.beast_behavior || 'Unknown'}`;
-                const beastLines = beastLine.match(/.{1,58}/g) || [beastLine];
-                beastLines.forEach(line => {
+        // Local Tavern
+        if (base.local_tavern) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ LOCAL TAVERN:                                               ║`;
+            (base.local_tavern.match(/.{1,58}/g) || [base.local_tavern]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
+        // Local Power
+        if (base.local_power) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ LOCAL POWER:                                                ║`;
+            (base.local_power.match(/.{1,58}/g) || [base.local_power]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
+        // Government
+        if (base.government) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ GOVERNMENT:                                                 ║`;
+            (base.government.match(/.{1,58}/g) || [base.government]).forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
+        // Economy
+        if (base.economy) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ECONOMY:                                                    ║`;
+            const econ = base.economy;
+            if (econ.primary_industry) html += `\n║ Industry: ${econ.primary_industry.padEnd(47)}║`;
+            if (econ.trade_goods) html += `\n║ Goods: ${(econ.trade_goods.join(', ')).substring(0, 47).padEnd(47)}║`;
+            if (econ.wealth_level) html += `\n║ Wealth: ${econ.wealth_level.toString().padEnd(50)}║`;
+            if (econ.trade_routes) html += `\n║ Trade Routes: ${econ.trade_routes.toString().padEnd(44)}║`;
+        }
+        // Defenses
+        if (base.defenses && Array.isArray(base.defenses)) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ DEFENSES:                                                   ║`;
+            base.defenses.forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
+        // Notable Locations
+        if (base.notable_locations && Array.isArray(base.notable_locations)) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ NOTABLE LOCATIONS:                                          ║`;
+            base.notable_locations.forEach(line => {
+                html += `\n║ ${line.padEnd(58)}║`;
+            });
+        }
+        // Key NPCs
+        if (base.key_npcs && Array.isArray(base.key_npcs)) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ KEY NPCS:                                                   ║`;
+            base.key_npcs.forEach(npc => {
+                let npcLine = npc.name ? `${npc.name} (${npc.role || ''})` : npc;
+                (npcLine.match(/.{1,58}/g) || [npcLine]).forEach(line => {
                     html += `\n║ ${line.padEnd(58)}║`;
                 });
-                if (beast.description) {
-                    const descLines = beast.description.match(/.{1,58}/g) || [beast.description];
-                    descLines.forEach(line => {
+                if (npc.description) {
+                    (npc.description.match(/.{1,58}/g) || [npc.description]).forEach(line => {
                         html += `\n║   ${line.padEnd(56)}║`;
                     });
                 }
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Conflicts
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ CONFLICTS:                                                  ║`;
-        if (conflicts.length > 0) {
-            conflicts.slice(0, 3).forEach(conflict => {
-                const conflictLine = `- ${conflict.type || 'Unknown'}${conflict.factions ? ' between ' + conflict.factions.join(' & ') : ''}`;
-                const conflictLines = conflictLine.match(/.{1,58}/g) || [conflictLine];
-                conflictLines.forEach(line => {
-                    html += `\n║ ${line.padEnd(58)}║`;
-                });
-            });
-        } else {
-            html += `\n║ None                                                        ║`;
-        }
-        // Economic Data
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ ECONOMIC DATA:                                              ║`;
-        if (economicData.trade_routes && economicData.trade_routes.length > 0) {
-            const tradeLine = `Trade Routes: ${economicData.trade_routes.join(', ')}`;
-            const tradeLines = tradeLine.match(/.{1,58}/g) || [tradeLine];
-            tradeLines.forEach(line => {
+        // Rumors
+        if (base.rumors && Array.isArray(base.rumors)) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ RUMORS:                                                     ║`;
+            base.rumors.forEach(line => {
                 html += `\n║ ${line.padEnd(58)}║`;
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Plot Hooks
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ PLOT HOOKS:                                                 ║`;
-        if (plotHooks.length > 0) {
-            plotHooks.slice(0, 3).forEach(hook => {
-                const hookLines = hook.match(/.{1,58}/g) || [hook];
-                hookLines.forEach(line => {
+        // Sandbox Data (factions, settlements, etc.)
+        if (sandbox.factions && sandbox.factions.length > 0) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ FACTIONS:                                                   ║`;
+            sandbox.factions.forEach(faction => {
+                let factionLine = faction.name ? `${faction.name} (${faction.type || ''})` : JSON.stringify(faction);
+                (factionLine.match(/.{1,58}/g) || [factionLine]).forEach(line => {
                     html += `\n║ ${line.padEnd(58)}║`;
                 });
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        // Terrain Features
-        html += `\n╠══════════════════════════════════════════════════════════════╣\n║ TERRAIN FEATURES:                                           ║`;
-        if (terrainFeatures.length > 0) {
-            terrainFeatures.slice(0, 3).forEach(feature => {
-                const featureLines = feature.match(/.{1,58}/g) || [feature];
-                featureLines.forEach(line => {
+        if (sandbox.settlements && sandbox.settlements.length > 0) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ SETTLEMENTS:                                                ║`;
+            sandbox.settlements.forEach(settlement => {
+                let settlementLine = settlement.name ? `${settlement.name} (${settlement.type || ''})` : JSON.stringify(settlement);
+                (settlementLine.match(/.{1,58}/g) || [settlementLine]).forEach(line => {
                     html += `\n║ ${line.padEnd(58)}║`;
                 });
             });
-        } else {
-            html += `\n║ None                                                        ║`;
         }
-        html += `\n╚══════════════════════════════════════════════════════════════╝\n                    </pre>\n                </div>\n            </div>\n        `;
+        if (sandbox.conflicts && sandbox.conflicts.length > 0) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ CONFLICTS:                                                  ║`;
+            sandbox.conflicts.forEach(conflict => {
+                let conflictLine = conflict.type ? `${conflict.type}: ${conflict.description}` : JSON.stringify(conflict);
+                (conflictLine.match(/.{1,58}/g) || [conflictLine]).forEach(line => {
+                    html += `\n║ ${line.padEnd(58)}║`;
+                });
+            });
+        }
+        if (sandbox.economic_data) {
+            html += `\n╠══════════════════════════════════════════════════════════════╣\n║ SANDBOX ECONOMY:                                            ║`;
+            const econ = sandbox.economic_data;
+            if (econ.trade_routes) html += `\n║ Trade Routes: ${econ.trade_routes.toString().padEnd(44)}║`;
+            if (econ.resources) html += `\n║ Resources: ${(econ.resources.join(', ')).substring(0, 47).padEnd(47)}║`;
+            if (econ.economic_activity) html += `\n║ Activity: ${econ.economic_activity.padEnd(47)}║`;
+            if (econ.wealth_level) html += `\n║ Wealth: ${econ.wealth_level.toString().padEnd(50)}║`;
+        }
+        html += `\n╚══════════════════════════════════════════════════════════════╝\n                </pre>\n            </div>\n        </div>\n    `;
         return html;
     }
 
