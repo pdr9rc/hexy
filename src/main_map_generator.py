@@ -13,8 +13,6 @@ from database_manager import database_manager
 from terrain_system import terrain_system
 from translation_system import translation_system
 from mork_borg_lore_database import MorkBorgLoreDatabase
-from generation_engine import GenerationEngine
-import json
 
 class MainMapGenerator:
     """Unified map generator - single entry point for all map generation."""
@@ -30,9 +28,6 @@ class MainMapGenerator:
         self.translation_system.set_language(self.language)
         self.lore_db = MorkBorgLoreDatabase()
         
-        # Initialize enhanced generation engine with sandbox integration
-        self.generation_engine = GenerationEngine()
-        
         # Load content tables
         self.content_tables = database_manager.load_tables(self.language)
         self.terrain_tables = self.content_tables.get('terrain_tables', {})
@@ -43,9 +38,15 @@ class MainMapGenerator:
         self.start_x, self.start_y = self.config.get('map_start', (1, 1))
         self.output_dir = self.config.get('output_directory', 'dying_lands_output')
         
-        # Generation rules (now using enhanced engine rules)
-        self.generation_rules = self.generation_engine.default_rules
-        self.generation_rules.update(self.config.get('generation_rules', {}))
+        # Generation rules
+        self.generation_rules = self.config.get('generation_rules', {
+            'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
+            'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
+            'beast_chance': 0.50,       # Increased from 0.35 - more beasts!
+            'npc_chance': 0.40,         # Reduced to make room for more dungeons/beasts
+            'loot_chance': 0.60,        # Increased from 0.50 - more loot!
+            'scroll_chance': 0.35       # Increased from 0.30
+        })
         
         # Output formats
         self.output_formats = self.config.get('output_formats', ['markdown', 'ascii'])
@@ -128,11 +129,6 @@ class MainMapGenerator:
         if self.config.get('create_ascii_map', True):
             self._create_ascii_map(all_hex_data)
         
-        # After generating all hexes, write unified all_hexes.json
-        all_json_path = f"{self.output_dir}/all_hexes.json"
-        with open(all_json_path, 'w', encoding='utf-8') as f:
-            json.dump({h['hex_code']: h for h in all_hex_data}, f, ensure_ascii=False, indent=2)
-        
         print(f"\n✅ {self.translation_system.t('generation_complete')}!")
         print(f"📊 Generated: {generated_count} hexes")
         print(f"⏭️  Skipped: {skipped_count} hexes")
@@ -164,7 +160,7 @@ class MainMapGenerator:
         return hex_data
     
     def generate_hex_content(self, hex_code: str, terrain: Optional[str] = None) -> Dict[str, Any]:
-        """Generate complete content for a hex using enhanced generation engine."""
+        """Generate complete content for a hex."""
         # Determine terrain if not provided
         if terrain is None:
             terrain = terrain_system.get_terrain_for_hex(hex_code, self.lore_db)
@@ -174,30 +170,8 @@ class MainMapGenerator:
         if hardcoded and hardcoded.get('locked', False):
             return self._generate_lore_hex_content(hex_code, hardcoded)
         
-        # Use enhanced generation engine with sandbox integration
-        return self._generate_enhanced_hex_content(hex_code, terrain)
-    
-    def _generate_enhanced_hex_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
-        """Generate enhanced hex content using the generation engine with sandbox integration."""
-        # Determine content type using enhanced engine
-        content_type = self.generation_engine.determine_content_type(hex_code, terrain, self.generation_rules)
-        
-        # Generate content with sandbox enhancements
-        context = {
-            'hex_code': hex_code,
-            'terrain': terrain,
-            'language': self.language,
-            'rules': self.generation_rules
-        }
-        
-        enhanced_content = self.generation_engine.generate_content(content_type, context)
-        
-        # Add hex metadata
-        enhanced_content['hex_code'] = hex_code
-        enhanced_content['terrain'] = terrain
-        enhanced_content['language'] = self.language
-        
-        return enhanced_content
+        # Generate terrain-aware content
+        return self._generate_terrain_hex_content(hex_code, terrain)
     
     def reset_continent(self) -> Dict:
         """Reset the entire continent and regenerate all content."""
@@ -347,10 +321,7 @@ class MainMapGenerator:
         feature = random.choice(sea_features)
         
         # Generate loot (sea encounters might have sunken treasure)
-        loot_chance = self.generation_rules.get('loot_chance', 0)
-        roll = random.random()
-        print(f"[DEBUG] Sea Encounter {hex_code}: loot_chance={loot_chance}, roll={roll}")
-        loot = self._generate_loot() if roll <= loot_chance * 0.8 else None
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.8 else None
         
         # Build the encounter description
         encounter_desc = f"**{encounter_type}**\n\n"
@@ -400,10 +371,7 @@ class MainMapGenerator:
         settlement_art = self._generate_settlement_art(name, terrain)
         
         # Generate loot (settlements might have valuable items)
-        loot_chance = self.generation_rules.get('loot_chance', 0)
-        roll = random.random()
-        print(f"[DEBUG] Settlement {hex_code}: loot_chance={loot_chance}, roll={roll}")
-        loot = self._generate_loot() if roll <= loot_chance * 0.5 else None
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.5 else None
         
         return {
             'hex_code': hex_code,
@@ -439,10 +407,7 @@ class MainMapGenerator:
         atmosphere = random.choice(dungeon_atmospheres) if dungeon_atmospheres else "Oppressive silence"
         
         # Generate loot and scroll
-        loot_chance = self.generation_rules.get('loot_chance', 0)
-        roll = random.random()
-        print(f"[DEBUG] Dungeon {hex_code}: loot_chance={loot_chance}, roll={roll}")
-        loot = self._generate_loot() if roll <= loot_chance else None
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] else None
         scroll = self._generate_scroll() if random.random() <= self.generation_rules['scroll_chance'] else None
         
         # Build description
@@ -495,10 +460,7 @@ class MainMapGenerator:
         behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
         
         # Generate loot (beasts might have treasure from their victims)
-        loot_chance = self.generation_rules.get('loot_chance', 0)
-        roll = random.random()
-        print(f"[DEBUG] Beast {hex_code}: loot_chance={loot_chance}, roll={roll}")
-        loot = self._generate_loot() if roll <= loot_chance * 0.7 else None
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.7 else None
         
         # Build description
         description = f"A {beast_type} with {feature} that {behavior}.\n\n"
@@ -558,10 +520,7 @@ class MainMapGenerator:
         demeanor = random.choice(demeanors) if demeanors else "Cryptic"
         
         # Generate loot (NPCs might carry valuable items)
-        loot_chance = self.generation_rules.get('loot_chance', 0)
-        roll = random.random()
-        print(f"[DEBUG] NPC {hex_code}: loot_chance={loot_chance}, roll={roll}")
-        loot = self._generate_loot() if roll <= loot_chance * 0.6 else None
+        loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.6 else None
         
         # Build description
         description = f"**{name}** - {denizen_type}\n\n"
@@ -726,53 +685,23 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
     
     # ===== FILE I/O METHODS =====
     
-    def _enrich_with_display_names(self, hex_data: Dict[str, Any]):
-        """Enrich hex_data with human-readable names/descriptions for reference fields."""
-        # Example for local_faction
-        lore_db = getattr(self, 'lore_db', None)
-        if not lore_db:
-            return
-        # Handle local_faction
-        local_faction_key = hex_data.get('local_faction')
-        if local_faction_key and hasattr(lore_db, 'factions'):
-            faction_info = lore_db.factions.get(local_faction_key)
-            if faction_info:
-                hex_data['local_faction_name'] = faction_info.get('name')
-                hex_data['local_faction_description'] = faction_info.get('description')
-        # Handle sandbox_data factions
-        sandbox = hex_data.get('sandbox_data', {})
-        if 'factions' in sandbox and hasattr(lore_db, 'factions'):
-            for faction in sandbox['factions']:
-                key = faction.get('key') or faction.get('id') or faction.get('faction_key')
-                if not key and 'name' in faction:
-                    # Try to reverse lookup by name
-                    for k, v in lore_db.factions.items():
-                        if v.get('name') == faction['name']:
-                            key = k
-                            break
-                if key and key in lore_db.factions:
-                    faction_info = lore_db.factions[key]
-                    faction['name'] = faction_info.get('name', faction.get('name', key))
-                    faction['description'] = faction_info.get('description', '')
-        # ... add similar enrichment for other reference fields as needed ...
-
     def _write_hex_file(self, hex_data: Dict[str, Any]):
-        self._enrich_with_display_names(hex_data)
-        # Ensure loot field is always present
-        if 'loot' not in hex_data:
-            hex_data['loot'] = None
-        hex_code = hex_data.get('hex_code')
-        if not hex_code:
+        """Write hex content to a markdown file."""
+        if 'markdown' not in self.output_formats:
             return
-        # Write markdown as before (if needed)
-        md_path = f"{self.output_dir}/hexes/hex_{hex_code}.md"
-        md_content = self._generate_markdown_content(hex_data)
-        with open(md_path, 'w', encoding='utf-8') as f:
-            f.write(md_content)
-        # Write JSON file
-        json_path = f"{self.output_dir}/hexes/hex_{hex_code}.json"
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(hex_data, f, ensure_ascii=False, indent=2)
+        
+        hex_code = hex_data['hex_code']
+        filename = f"{self.output_dir}/hexes/hex_{hex_code}.md"
+        
+        # Ensure directory exists
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        
+        # Generate markdown content
+        content = self._generate_markdown_content(hex_data)
+        
+        # Write file
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(content)
     
     def _get_translated_terrain_name(self, terrain: str) -> str:
         """Get terrain name in the current language."""
@@ -802,7 +731,7 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         return terrain_names.get(self.language, terrain_names['en']).get(terrain, terrain.title())
 
     def _generate_markdown_content(self, hex_data: Dict[str, Any]) -> str:
-        """Generate markdown content for the hex with enhanced data structure."""
+        """Generate markdown content for the hex."""
         lines = []
         
         # Title
@@ -814,323 +743,121 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         lines.append(f"**Terrain:** {terrain_name}")
         lines.append("")
         
-        # Enhanced encounter description
-        if 'enhanced_encounter' in hex_data:
-            lines.append("## Encounter")
-            lines.append(hex_data['enhanced_encounter'])
+        # Encounter
+        lines.append("## Encounter")
+        lines.append(hex_data['encounter'])
+        lines.append("")
+        
+        # Denizen
+        lines.append("## Denizen")
+        lines.append(hex_data['denizen'])
+        lines.append("")
+        
+        # Notable Feature
+        lines.append("## Notable Feature")
+        lines.append(hex_data['notable_feature'])
+        lines.append("")
+        
+        # Atmosphere
+        lines.append("## Atmosphere")
+        lines.append(hex_data['atmosphere'])
+        lines.append("")
+        
+        # Settlement-specific content
+        if hex_data.get('is_settlement'):
+            lines.append("**Local Tavern:** " + hex_data.get('local_tavern', 'Unknown'))
             lines.append("")
-        elif 'encounter' in hex_data:
-            lines.append("## Encounter")
-            lines.append(hex_data['encounter'])
+            lines.append("**Local Power:** " + hex_data.get('local_power', 'Unknown'))
             lines.append("")
-        
-        # Base content from generation engine
-        if 'base_content' in hex_data:
-            base_content = hex_data['base_content']
-            
-            # Add base content fields if they exist
-            if 'denizen' in base_content:
-                lines.append("## Denizen")
-                lines.append(base_content['denizen'])
-                lines.append("")
-            
-            if 'notable_feature' in base_content:
-                lines.append("## Notable Feature")
-                lines.append(base_content['notable_feature'])
-                lines.append("")
-            
-            if 'atmosphere' in base_content:
-                lines.append("## Atmosphere")
-                lines.append(base_content['atmosphere'])
-                lines.append("")
-            
-            # Add formatted content if available
-            if 'formatted_content' in base_content:
-                lines.append("## Details")
-                lines.append(base_content['formatted_content'])
-                lines.append("")
-        
-        # Fallback for old data structure
-        else:
-            if 'denizen' in hex_data:
-                lines.append("## Denizen")
-                lines.append(hex_data['denizen'])
-                lines.append("")
-            
-            if 'notable_feature' in hex_data:
-                lines.append("## Notable Feature")
-                lines.append(hex_data['notable_feature'])
-                lines.append("")
-            
-            if 'atmosphere' in hex_data:
-                lines.append("## Atmosphere")
-                lines.append(hex_data['atmosphere'])
-                lines.append("")
-        
-        # Content-specific sections based on content type
-        content_type = hex_data.get('content_type', 'unknown')
-        
-        if content_type == 'settlement':
-            # Settlement-specific content from base_content
-            if 'base_content' in hex_data:
-                base = hex_data['base_content']
-                if 'local_tavern' in base:
-                    lines.append("**Local Tavern:** " + base['local_tavern'])
-                    lines.append("")
-                if 'local_power' in base:
-                    lines.append("**Local Power:** " + base['local_power'])
-                    lines.append("")
-                if 'population' in base:
-                    lines.append("**Population:** " + base['population'])
-                    lines.append("")
-        
-        elif content_type == 'dungeon':
-            # Dungeon-specific content from base_content
-            if 'base_content' in hex_data:
-                base = hex_data['base_content']
-                if 'dungeon_type' in base:
-                    lines.append("**Dungeon Type:** " + base['dungeon_type'])
-                    lines.append("")
-                if 'danger' in base:
-                    lines.append("**Danger:** " + base['danger'])
-                    lines.append("")
-        
-        elif content_type == 'beast':
-            # Beast-specific content from base_content
-            if 'base_content' in hex_data:
-                base = hex_data['base_content']
-                if 'beast_type' in base:
-                    lines.append("**Beast Type:** " + base['beast_type'])
-                    lines.append("")
-                if 'feature' in base:
-                    lines.append("**Feature:** " + base['feature'])
-                    lines.append("")
-                if 'behavior' in base:
-                    lines.append("**Behavior:** " + base['behavior'])
-                    lines.append("")
-        
-        elif content_type == 'npc':
-            # NPC-specific content from base_content
-            if 'base_content' in hex_data:
-                base = hex_data['base_content']
-                if 'name' in base:
-                    lines.append("**Name:** " + base['name'])
-                    lines.append("")
-                if 'denizen_type' in base:
-                    lines.append("**Type:** " + base['denizen_type'])
-                    lines.append("")
-                if 'motivation' in base:
-                    lines.append("**Motivation:** " + base['motivation'])
-                    lines.append("")
-        
-        # Add loot information if present
-        if 'base_content' in hex_data and 'loot' in hex_data['base_content']:
-            loot = hex_data['base_content']['loot']
-            lines.append("## Loot Found")
-            lines.append(loot.get('full_description', loot.get('description', 'Unknown treasure')))
+            lines.append("## Settlement Layout")
+            lines.append(hex_data.get('settlement_art', ''))
             lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
         
-        # Add scroll information if present
-        if 'base_content' in hex_data and 'scroll' in hex_data['base_content']:
-            scroll = hex_data['base_content']['scroll']
-            lines.append("## Ancient Knowledge")
-            lines.append(scroll.get('full_description', scroll.get('description', 'Unknown knowledge')))
+        # Dungeon-specific content
+        if hex_data.get('is_dungeon'):
+            lines.append("## Dungeon Details")
+            lines.append(f"**Type:** {hex_data.get('dungeon_type', 'Unknown')}")
+            lines.append(f"**Danger:** {hex_data.get('danger', 'Unknown')}")
+            lines.append(f"**Treasure:** {hex_data.get('treasure', 'Unknown')}")
             lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
+            
+            if hex_data.get('scroll'):
+                lines.append("## Ancient Knowledge")
+                lines.append(hex_data['scroll'].get('full_description', hex_data['scroll'].get('description', 'Unknown knowledge')))
+                lines.append("")
         
-        # Fallback for old data structure
-        else:
-            # Settlement-specific content
-            if hex_data.get('is_settlement'):
-                lines.append("**Local Tavern:** " + hex_data.get('local_tavern', 'Unknown'))
-                lines.append("")
-                lines.append("**Local Power:** " + hex_data.get('local_power', 'Unknown'))
-                lines.append("")
-                lines.append("## Settlement Layout")
-                lines.append(hex_data.get('settlement_art', ''))
-                lines.append("")
-                
-                if hex_data.get('loot'):
-                    lines.append("## Loot Found")
-                    lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                    lines.append("")
+        # Beast-specific content
+        if hex_data.get('is_beast'):
+            lines.append("## Beast Details")
+            lines.append(f"**Type:** {hex_data.get('beast_type', 'Unknown')}")
+            lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
+            lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
+            lines.append("")
             
-            # Dungeon-specific content
-            if hex_data.get('is_dungeon'):
-                lines.append("## Dungeon Details")
-                lines.append(f"**Type:** {hex_data.get('dungeon_type', 'Unknown')}")
-                lines.append(f"**Danger:** {hex_data.get('danger', 'Unknown')}")
-                lines.append(f"**Treasure:** {hex_data.get('treasure', 'Unknown')}")
+            # Add threat level and territory as separate sections
+            if hex_data.get('threat_level'):
+                lines.append("## Threat Level")
+                lines.append(hex_data['threat_level'])
                 lines.append("")
-                
-                if hex_data.get('loot'):
-                    lines.append("## Loot Found")
-                    lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                    lines.append("")
-                
-                if hex_data.get('scroll'):
-                    lines.append("## Ancient Knowledge")
-                    lines.append(hex_data['scroll'].get('full_description', hex_data['scroll'].get('description', 'Unknown knowledge')))
-                    lines.append("")
             
-            # Beast-specific content
-            if hex_data.get('is_beast'):
-                lines.append("## Beast Details")
-                lines.append(f"**Type:** {hex_data.get('beast_type', 'Unknown')}")
-                lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
-                lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
+            if hex_data.get('territory'):
+                lines.append("## Territory")
+                lines.append(hex_data['territory'])
                 lines.append("")
-                
-                # Add threat level and territory as separate sections
-                if hex_data.get('threat_level'):
-                    lines.append("## Threat Level")
-                    lines.append(hex_data['threat_level'])
-                    lines.append("")
-                
-                if hex_data.get('territory'):
-                    lines.append("## Territory")
-                    lines.append(hex_data['territory'])
-                    lines.append("")
-                
-                if hex_data.get('loot'):
-                    lines.append("## Loot Found")
-                    lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                    lines.append("")
             
-            # Sea-specific content
-            if hex_data.get('is_sea_encounter'):
-                lines.append("## Sea Encounter Details")
-                lines.append(f"**Type:** {hex_data.get('encounter_type', 'Unknown')}")
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
                 lines.append("")
-                
-                # Add threat level and territory as separate sections
-                if hex_data.get('threat_level'):
-                    lines.append("## Threat Level")
-                    lines.append(hex_data['threat_level'])
-                    lines.append("")
-                
-                if hex_data.get('territory'):
-                    lines.append("## Territory")
-                    lines.append(hex_data['territory'])
-                    lines.append("")
-                
-                if hex_data.get('loot'):
-                    lines.append("## Loot Found")
-                    lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                    lines.append("")
-            
-            # NPC-specific content
-            if hex_data.get('is_npc'):
-                lines.append("## NPC Details")
-                lines.append(f"**Name:** {hex_data.get('name', 'Unknown')}")
-                lines.append(f"**Type:** {hex_data.get('denizen_type', 'Unknown')}")
-                lines.append(f"**Motivation:** {hex_data.get('motivation', 'Unknown')}")
-                lines.append(f"**Feature:** {hex_data.get('feature', 'Unknown')}")
-                lines.append(f"**Demeanor:** {hex_data.get('demeanor', 'Unknown')}")
-                lines.append("")
-                
-                if hex_data.get('loot'):
-                    lines.append("## Loot Found")
-                    lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                    lines.append("")
         
-        # Add sandbox enhancements
-        if 'sandbox_data' in hex_data:
-            lines.extend(self._generate_sandbox_markdown(hex_data['sandbox_data']))
+        # Sea-specific content
+        if hex_data.get('is_sea_encounter'):
+            lines.append("## Sea Encounter Details")
+            lines.append(f"**Type:** {hex_data.get('encounter_type', 'Unknown')}")
+            lines.append("")
+            
+            # Add threat level and territory as separate sections
+            if hex_data.get('threat_level'):
+                lines.append("## Threat Level")
+                lines.append(hex_data['threat_level'])
+                lines.append("")
+            
+            if hex_data.get('territory'):
+                lines.append("## Territory")
+                lines.append(hex_data['territory'])
+                lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
+        
+        # NPC-specific content
+        if hex_data.get('is_npc'):
+            lines.append("## NPC Details")
+            lines.append(f"**Name:** {hex_data.get('name', 'Unknown')}")
+            lines.append(f"**Type:** {hex_data.get('denizen_type', 'Unknown')}")
+            lines.append(f"**Motivation:** {hex_data.get('motivation', 'Unknown')}")
+            lines.append(f"**Feature:** {hex_data.get('feature', 'Unknown')}")
+            lines.append(f"**Demeanor:** {hex_data.get('demeanor', 'Unknown')}")
+            lines.append("")
+            
+            if hex_data.get('loot'):
+                lines.append("## Loot Found")
+                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+                lines.append("")
         
         return '\n'.join(lines)
-    
-    def _generate_sandbox_markdown(self, sandbox_data: Dict[str, Any]) -> List[str]:
-        """Generate markdown for sandbox enhancements."""
-        lines = []
-        
-        # Add factions section
-        if sandbox_data.get('factions'):
-            lines.append("## Factions")
-            for faction in sandbox_data['factions']:
-                lines.append(f"**{faction['name']}** ({faction['type']})")
-                lines.append(f"- Influence Level: {faction['influence_level']}")
-                lines.append(f"- Goals: {', '.join(faction['goals'])}")
-                lines.append(f"- Resources: Wealth {faction['resources']['wealth']}, Military {faction['resources']['military']}, Knowledge {faction['resources']['knowledge']}")
-                lines.append("")
-        
-        # Add enhanced settlement details
-        if sandbox_data.get('settlements'):
-            for settlement in sandbox_data['settlements']:
-                if 'government' in settlement:
-                    lines.append("## Government")
-                    lines.append(f"**Type:** {settlement['government']}")
-                    lines.append("")
-                
-                if 'economy' in settlement:
-                    lines.append("## Economy")
-                    lines.append(f"**Primary Industry:** {settlement['economy']['primary_industry']}")
-                    lines.append(f"**Trade Goods:** {', '.join(settlement['economy']['trade_goods'])}")
-                    lines.append(f"**Wealth Level:** {settlement['economy']['wealth_level']}/10")
-                    lines.append(f"**Trade Routes:** {settlement['economy']['trade_routes']}")
-                    lines.append("")
-                
-                if 'defenses' in settlement:
-                    lines.append("## Defenses")
-                    for defense in settlement['defenses']:
-                        lines.append(f"- {defense}")
-                    lines.append("")
-                
-                if 'notable_locations' in settlement:
-                    lines.append("## Notable Locations")
-                    for location in settlement['notable_locations']:
-                        lines.append(f"- {location}")
-                    lines.append("")
-                
-                if 'key_npcs' in settlement:
-                    lines.append("## Key NPCs")
-                    for npc in settlement['key_npcs']:
-                        lines.append(f"**{npc['name']}** - {npc['role']}")
-                        lines.append(f"*{npc['description']}*")
-                        lines.append("")
-                
-                if 'rumors' in settlement:
-                    lines.append("## Rumors")
-                    for rumor in settlement['rumors']:
-                        lines.append(f"- {rumor}")
-                    lines.append("")
-        
-        # Add castles section
-        if sandbox_data.get('castles'):
-            lines.append("## Castles")
-            for castle in sandbox_data['castles']:
-                lines.append(f"**{castle['name']}** ({castle['type']})")
-                lines.append(f"- Condition: {castle['condition']}")
-                lines.append(f"- Lord: {castle['lord']}")
-                lines.append(f"- Defenses: {', '.join(castle['defenses'])}")
-                lines.append(f"- Garrison: {castle['garrison']['total']} troops")
-                lines.append(f"- Strategic Value: {castle['strategic_value']}/10")
-                lines.append("")
-        
-        # Add conflicts section
-        if sandbox_data.get('conflicts'):
-            lines.append("## Conflicts")
-            for conflict in sandbox_data['conflicts']:
-                lines.append(f"**{conflict['type'].title()} Conflict** (Intensity: {conflict['intensity']}/5)")
-                if 'factions' in conflict:
-                    lines.append(f"- Factions: {', '.join(conflict['factions'])}")
-                lines.append(f"- Description: {conflict['description']}")
-                if 'plot_hooks' in conflict:
-                    lines.append("- Plot Hooks:")
-                    for hook in conflict['plot_hooks']:
-                        lines.append(f"  - {hook}")
-                lines.append("")
-        
-        # Add economic data section
-        if sandbox_data.get('economic_data'):
-            economy = sandbox_data['economic_data']
-            lines.append("## Economic Data")
-            lines.append(f"**Trade Routes:** {economy.get('trade_routes', 0)}")
-            lines.append(f"**Resources:** {', '.join(economy.get('resources', []))}")
-            lines.append(f"**Economic Activity:** {economy.get('economic_activity', 'Unknown')}")
-            lines.append(f"**Wealth Level:** {economy.get('wealth_level', 0)}/10")
-            lines.append("")
-        
-        return lines
     
     def _write_summary_file(self, all_hex_data: List[Dict[str, Any]]):
         """Write a summary file of all generated hexes."""
