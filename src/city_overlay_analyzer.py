@@ -37,11 +37,30 @@ class CityOverlayAnalyzer:
             os.makedirs(self.overlay_directory, exist_ok=True)
             print(f"DEBUG: Created overlay directory at: {self.overlay_directory}")
             
-        self.output_directory = 'dying_lands_output/city_overlays'
+        # Try multiple possible paths for the output directory
+        possible_output_paths = [
+            'dying_lands_output/city_overlays',           # From project root
+            '../dying_lands_output/city_overlays',        # From src directory  
+            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'dying_lands_output', 'city_overlays')  # Relative to this file
+        ]
         
-        # Ensure directories exist
-        os.makedirs(self.output_directory, exist_ok=True)
-        print(f"DEBUG: Output directory: {self.output_directory}")
+        self.output_directory = None
+        for path in possible_output_paths:
+            try:
+                os.makedirs(path, exist_ok=True)
+                self.output_directory = path
+                print(f"DEBUG: Created/found output directory at: {path}")
+                break
+            except Exception as e:
+                print(f"DEBUG: Could not create output directory at {path}: {e}")
+                continue
+        
+        if not self.output_directory:
+            # Default to first option
+            self.output_directory = 'dying_lands_output/city_overlays'
+        
+        # Final verification
+        print(f"DEBUG: Final output directory: {self.output_directory}")
         print(f"DEBUG: Output directory exists: {os.path.exists(self.output_directory)}")
         
         # Load content tables for random generation
