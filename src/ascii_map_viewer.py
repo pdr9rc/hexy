@@ -514,12 +514,30 @@ def get_city_overlays():
     """Get list of available city overlay images."""
     try:
         overlays = city_overlay_analyzer.get_available_overlays()
-        return jsonify({
+        response = jsonify({
             'success': True,
             'overlays': overlays
         })
+        
+        # Set headers to prevent caching issues
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        
+        return response
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/test')
+def api_test():
+    """Simple test endpoint to verify API is working."""
+    return jsonify({
+        'success': True,
+        'message': 'API is working',
+        'timestamp': str(__import__('datetime').datetime.now())
+    })
 
 @app.route('/api/city-overlay/<overlay_name>')
 def get_city_overlay(overlay_name):
@@ -535,11 +553,47 @@ def get_city_overlay(overlay_name):
         if not overlay_data:
             return jsonify({'success': False, 'error': 'Failed to generate overlay data'})
         
-        return jsonify({
+        # Create a more compact response format to avoid size issues
+        compact_overlay = {
+            'name': overlay_data['name'],
+            'display_name': overlay_data['display_name'],
+            'filename': overlay_data['filename'],
+            'grid_size': overlay_data['grid_size'],
+            'hex_grid': {},
+            'total_hexes': overlay_data['total_hexes']
+        }
+        
+        # Only include essential hex data to reduce size
+        for hex_id, hex_data in overlay_data['hex_grid'].items():
+            compact_overlay['hex_grid'][hex_id] = {
+                'id': hex_data['id'],
+                'row': hex_data['row'],
+                'col': hex_data['col'],
+                'content': {
+                    'name': hex_data['content']['name'],
+                    'type': hex_data['content']['type'],
+                    'description': hex_data['content']['description'][:200] + '...' if len(hex_data['content']['description']) > 200 else hex_data['content']['description'],
+                    'encounter': hex_data['content']['encounter'][:150] + '...' if len(hex_data['content']['encounter']) > 150 else hex_data['content']['encounter'],
+                    'atmosphere': hex_data['content']['atmosphere'][:100] + '...' if len(hex_data['content']['atmosphere']) > 100 else hex_data['content']['atmosphere'],
+                    'position_type': hex_data['content']['position_type']
+                }
+            }
+        
+        response = jsonify({
             'success': True,
-            'overlay': overlay_data
+            'overlay': compact_overlay
         })
+        
+        # Set headers to prevent caching issues
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        
+        return response
+        
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/city-overlay/<overlay_name>/ascii')
@@ -568,11 +622,22 @@ def get_city_overlay_hex(overlay_name, hex_id):
         if not hex_data:
             return jsonify({'success': False, 'error': 'Hex not found'})
         
-        return jsonify({
+        # Return full hex data for detailed view
+        response = jsonify({
             'success': True,
             'hex': hex_data
         })
+        
+        # Set headers to prevent caching issues
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        
+        return response
+        
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({'success': False, 'error': str(e)})
 
 def generate_ascii_map_data():

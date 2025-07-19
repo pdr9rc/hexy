@@ -1947,8 +1947,30 @@ ${data.ascii}
         // Show loading state
         showMapLoadingState();
         
-        fetch(`/api/city-overlay/${overlayName}`)
-            .then(response => response.json())
+        fetch(`/api/city-overlay/${overlayName}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            },
+            timeout: 30000  // 30 second timeout
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.text();  // Get as text first to debug
+            })
+            .then(text => {
+                try {
+                    const data = JSON.parse(text);
+                    return data;
+                } catch (e) {
+                    console.error('JSON Parse Error:', e);
+                    console.error('Raw response:', text.substring(0, 500) + '...');
+                    throw new Error('Invalid JSON response from server');
+                }
+            })
             .then(data => {
                 if (data.success) {
                     const overlay = data.overlay;
@@ -2022,7 +2044,33 @@ ${data.ascii}
             })
             .catch(error => {
                 console.error('ERROR LOADING CITY OVERLAY GRID:', error);
-                showMapErrorState('city-overlay-grid');
+                
+                // Show detailed error message in map area
+                const mapContainer = document.querySelector('.map-container');
+                mapContainer.innerHTML = `
+                    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                        <div class="mb-4">
+                            <button class="btn btn-mork-borg btn-warning" onclick="showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
+                        </div>
+                        <div style="background: var(--mork-black); border: 2px solid var(--mork-red); padding: 20px; box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);">
+                            <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-red); margin: 0; white-space: pre-wrap;">
+╔══════════════════════════════════════════════════════════════╗
+║                    API ERROR                                 ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  Failed to load city overlay data.                          ║
+║  Error: ${error.message.substring(0, 45).padEnd(45)}║
+║                                                              ║
+║  Please check:                                              ║
+║  • Flask server is running                                  ║
+║  • API endpoints are accessible                             ║
+║  • Browser console for details                              ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+                            </pre>
+                        </div>
+                    </div>
+                `;
             });
     }
     
@@ -2062,8 +2110,28 @@ ${data.ascii}
     }
     
     function showCityHexDetailsInMap(overlayName, hexId) {
-        fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`)
-            .then(response => response.json())
+        fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Cache-Control': 'no-cache'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.text();
+            })
+            .then(text => {
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    console.error('JSON Parse Error:', e);
+                    console.error('Raw response:', text.substring(0, 200));
+                    throw new Error('Invalid JSON response');
+                }
+            })
             .then(data => {
                 if (data.success) {
                     const modalContainer = document.getElementById('modalContainer');
@@ -2160,6 +2228,28 @@ ${data.ascii}
             })
             .catch(error => {
                 console.error('ERROR LOADING HEX DETAILS:', error);
+                
+                // Show error in right panel
+                const modalContainer = document.getElementById('modalContainer');
+                modalContainer.innerHTML = `
+                    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                        <div style="background: var(--mork-black); border: 2px solid var(--mork-red); padding: 20px; box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);">
+                            <h4 style="color: var(--mork-red); margin-bottom: 15px;">
+                                HEX DETAILS ERROR
+                            </h4>
+                            <div style="text-align: left; color: var(--mork-white);">
+                                <strong style="color: var(--mork-yellow);">Error:</strong><br>
+                                <span style="color: var(--mork-red);">${error.message}</span><br><br>
+                                
+                                <strong style="color: var(--mork-yellow);">Troubleshooting:</strong><br>
+                                • Check browser console for details<br>
+                                • Verify Flask server is running<br>
+                                • Try refreshing the page<br>
+                                • Check network connectivity
+                            </div>
+                        </div>
+                    </div>
+                `;
             });
     }
     
