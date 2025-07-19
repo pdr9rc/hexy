@@ -1922,7 +1922,8 @@ ${data.ascii}
     
     function showCityOverlayInMap(hexCode) {
         // Extract city name from hex code using lore database
-        showMapLoadingState();
+        // Don't call showMapLoadingState() here to preserve original map content
+        // when transitioning from city details to city overlays
         
         // First, get city information to determine the city name
         fetch(`/api/city/${hexCode}`)
@@ -1930,22 +1931,24 @@ ${data.ascii}
             .then(cityData => {
                 if (cityData.success) {
                     const cityName = cityData.city.name.toLowerCase().replace(/\s+/g, '_');
-                    return showCityOverlayGridInMap(cityName, hexCode);
+                    return showCityOverlayGridInMap(cityName, hexCode, false); // Pass false to not save state again
                 } else {
                     // Fallback: try galgenbeck for testing
-                    return showCityOverlayGridInMap('galgenbeck', hexCode);
+                    return showCityOverlayGridInMap('galgenbeck', hexCode, false);
                 }
             })
             .catch(error => {
                 console.error('Error determining city name:', error);
                 // Fallback: try galgenbeck for testing
-                showCityOverlayGridInMap('galgenbeck', hexCode);
+                showCityOverlayGridInMap('galgenbeck', hexCode, false);
             });
     }
     
-    function showCityOverlayGridInMap(overlayName, hexCode) {
-        // Show loading state
-        showMapLoadingState();
+    function showCityOverlayGridInMap(overlayName, hexCode, saveState = true) {
+        // Show loading state only if we need to save the current state
+        if (saveState) {
+            showMapLoadingState();
+        }
         
         fetch(`/api/city-overlay/${overlayName}`, {
             method: 'GET',
@@ -1980,7 +1983,7 @@ ${data.ascii}
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <div class="mb-4">
                                 <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
-                                <button class="btn btn-mork-borg" onclick="showCityOverlayAsciiInMap('${overlayName}', '${hexCode}')" style="margin-left: 10px;">📜 ASCII VIEW</button>
+                                <button class="btn btn-mork-borg" onclick="showCityOverlayAsciiInMap('${overlayName}', '${hexCode}', false)" style="margin-left: 10px;">📜 ASCII VIEW</button>
                             </div>
                             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
                                 <h3 style="color: var(--mork-cyan); margin: 10px 0;">${overlay.display_name}</h3>
@@ -2074,9 +2077,11 @@ ${data.ascii}
             });
     }
     
-    function showCityOverlayAsciiInMap(overlayName, hexCode) {
-        // Show loading state
-        showMapLoadingState();
+    function showCityOverlayAsciiInMap(overlayName, hexCode, saveState = true) {
+        // Show loading state only if we need to save the current state
+        if (saveState) {
+            showMapLoadingState();
+        }
         
         fetch(`/api/city-overlay/${overlayName}/ascii`)
             .then(response => response.json())
@@ -2087,7 +2092,7 @@ ${data.ascii}
                     let html = `
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <div class="mb-4">
-                                <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityOverlayGridInMap('${overlayName}', '${hexCode}')">← BACK TO GRID</button>
+                                <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityOverlayGridInMap('${overlayName}', '${hexCode}', false)">← BACK TO GRID</button>
                                 <button class="btn btn-mork-borg" onclick="showCityDetailsInMap('${hexCode}')" style="margin-left: 10px;">🏰 RETURN TO CITY</button>
                             </div>
                             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
