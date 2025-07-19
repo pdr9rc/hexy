@@ -16,7 +16,27 @@ class CityOverlayAnalyzer:
     
     def __init__(self):
         self.lore_db = MorkBorgLoreDatabase()
-        self.overlay_directory = 'data/city_overlays'
+        
+        # Try multiple possible paths for the overlay directory
+        possible_overlay_paths = [
+            'data/city_overlays',           # From project root
+            '../data/city_overlays',        # From src directory  
+            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'city_overlays')  # Relative to this file
+        ]
+        
+        self.overlay_directory = None
+        for path in possible_overlay_paths:
+            if os.path.exists(path):
+                self.overlay_directory = path
+                print(f"DEBUG: Found overlay directory at: {path}")
+                break
+        
+        if not self.overlay_directory:
+            # Default to first option and create it
+            self.overlay_directory = 'data/city_overlays'
+            os.makedirs(self.overlay_directory, exist_ok=True)
+            print(f"DEBUG: Created overlay directory at: {self.overlay_directory}")
+            
         self.output_directory = 'dying_lands_output/city_overlays'
         
         # Ensure directories exist
@@ -32,7 +52,18 @@ class CityOverlayAnalyzer:
         """Get list of available city overlay images."""
         overlays = []
         
+        # Debug: Print current working directory and paths
+        print(f"DEBUG: Current working directory: {os.getcwd()}")
+        print(f"DEBUG: Looking for overlays in: {self.overlay_directory}")
+        print(f"DEBUG: Absolute path: {os.path.abspath(self.overlay_directory)}")
+        print(f"DEBUG: Directory exists: {os.path.exists(self.overlay_directory)}")
+        
+        if os.path.exists(self.overlay_directory):
+            files = os.listdir(self.overlay_directory)
+            print(f"DEBUG: Files in directory: {files}")
+        
         if not os.path.exists(self.overlay_directory):
+            print(f"DEBUG: Directory {self.overlay_directory} does not exist")
             return overlays
             
         for filename in os.listdir(self.overlay_directory):
