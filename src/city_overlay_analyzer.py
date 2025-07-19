@@ -50,14 +50,29 @@ class CityOverlayAnalyzer:
         return overlays
     
     def _format_overlay_name(self, name: str) -> str:
-        """Format overlay name for display."""
-        # Convert image1 -> Image 1, galgenbeck -> Galgenbeck, etc.
+        """Format overlay name for display using Mork Borg database."""
+        # Map image1 to galgenbeck as requested
         if name.lower() == 'image1':
-            return "Historical City Map (Example)"
-        elif name.lower() == 'galgenbeck':
-            return "Galgenbeck - The Corpse City"
-        else:
-            return name.replace('_', ' ').title()
+            name = 'galgenbeck'
+        
+        # Try to find city in Mork Borg database
+        city_key = name.lower()
+        if city_key in self.lore_db.major_cities:
+            city_data = self.lore_db.major_cities[city_key]
+            return city_data['name']
+        
+        # Try to load city-specific database
+        city_db_path = f'databases/cities/{city_key}.json'
+        if os.path.exists(city_db_path):
+            try:
+                with open(city_db_path, 'r', encoding='utf-8') as f:
+                    city_data = json.load(f)
+                    return city_data.get('display_name', city_data.get('city_name', name.title()))
+            except Exception:
+                pass
+        
+        # Fallback to formatted name
+        return name.replace('_', ' ').title()
     
     def generate_city_overlay(self, overlay_name: str) -> Dict[str, Any]:
         """Generate a 5x5 hex grid overlay for a city image."""
@@ -106,6 +121,12 @@ class CityOverlayAnalyzer:
     
     def _generate_hex_content(self, row: int, col: int, overlay_name: str) -> Dict[str, Any]:
         """Generate random content for a single hex in the city overlay."""
+        # Map image1 to galgenbeck
+        city_name = 'galgenbeck' if overlay_name.lower() == 'image1' else overlay_name.lower()
+        
+        # Load city-specific database
+        city_data = self._load_city_database(city_name)
+        
         # Different content types for city hexes
         city_content_types = [
             'district',
@@ -150,7 +171,7 @@ class CityOverlayAnalyzer:
         content_type = self._weighted_choice(content_weights)
         
         # Generate content based on type
-        content = self._generate_content_by_type(content_type, row, col, overlay_name)
+        content = self._generate_content_by_type(content_type, row, col, city_name, city_data)
         
         return content
     
@@ -160,7 +181,18 @@ class CityOverlayAnalyzer:
         weights_list = list(weights.values())
         return random.choices(items, weights=weights_list)[0]
     
-    def _generate_content_by_type(self, content_type: str, row: int, col: int, overlay_name: str) -> Dict[str, Any]:
+    def _load_city_database(self, city_name: str) -> Optional[Dict[str, Any]]:
+        """Load city-specific database if available."""
+        city_db_path = f'databases/cities/{city_name}.json'
+        if os.path.exists(city_db_path):
+            try:
+                with open(city_db_path, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except Exception as e:
+                print(f"Warning: Could not load city database for {city_name}: {e}")
+        return None
+    
+    def _generate_content_by_type(self, content_type: str, row: int, col: int, city_name: str, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate specific content based on type."""
         # Base content structure
         content = {
@@ -178,79 +210,95 @@ class CityOverlayAnalyzer:
         
         # Generate content based on type
         if content_type == 'district':
-            content.update(self._generate_district_content())
+            content.update(self._generate_district_content(city_data))
         elif content_type == 'building':
-            content.update(self._generate_building_content())
+            content.update(self._generate_building_content(city_data))
         elif content_type == 'street':
-            content.update(self._generate_street_content())
+            content.update(self._generate_street_content(city_data))
         elif content_type == 'landmark':
-            content.update(self._generate_landmark_content())
+            content.update(self._generate_landmark_content(city_data))
         elif content_type == 'market':
-            content.update(self._generate_market_content())
+            content.update(self._generate_market_content(city_data))
         elif content_type == 'temple':
-            content.update(self._generate_temple_content())
+            content.update(self._generate_temple_content(city_data))
         elif content_type == 'tavern':
-            content.update(self._generate_tavern_content())
+            content.update(self._generate_tavern_content(city_data))
         elif content_type == 'guild':
-            content.update(self._generate_guild_content())
+            content.update(self._generate_guild_content(city_data))
         elif content_type == 'residence':
-            content.update(self._generate_residence_content())
+            content.update(self._generate_residence_content(city_data))
         elif content_type == 'ruins':
-            content.update(self._generate_ruins_content())
+            content.update(self._generate_ruins_content(city_data))
         
         # Add position-specific modifiers
         content = self._add_position_modifiers(content, row, col)
         
         return content
     
-    def _generate_district_content(self) -> Dict[str, Any]:
+    def _get_city_content_list(self, city_data: Optional[Dict[str, Any]], content_type: str, fallback: List[str]) -> List[str]:
+        """Get city-specific content list or fallback to generic."""
+        if city_data and content_type in city_data:
+            return city_data[content_type]
+        return fallback
+    
+    def _get_city_encounters(self, city_data: Optional[Dict[str, Any]], content_type: str, fallback: List[str]) -> List[str]:
+        """Get city-specific encounters or fallback to generic."""
+        if city_data and 'encounters' in city_data and content_type in city_data['encounters']:
+            return city_data['encounters'][content_type]
+        return fallback
+    
+    def _get_city_random_table(self, city_data: Optional[Dict[str, Any]], content_type: str, fallback_method) -> List[str]:
+        """Get city-specific random table or fallback to generic."""
+        if city_data and 'random_tables' in city_data and content_type in city_data['random_tables']:
+            return city_data['random_tables'][content_type]
+        return fallback_method()
+    
+    def _get_city_atmospheres(self, city_data: Optional[Dict[str, Any]], fallback: List[str]) -> List[str]:
+        """Get city-specific atmosphere modifiers or fallback to generic."""
+        if city_data and 'atmosphere_modifiers' in city_data:
+            return city_data['atmosphere_modifiers']
+        return fallback
+    
+    def _generate_district_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate district content."""
-        districts = [
-            "The Corpse Quarter",
-            "Merchant's Decay",
-            "The Bone Markets",
-            "Plague Ward",
-            "The Hanging Gardens",
-            "Scholar's Ruin",
-            "Thieves' Paradise",
-            "The Bleeding Streets",
-            "Noble's Decay",
-            "The Cursed Commons"
+        fallback_districts = [
+            "The Corpse Quarter", "Merchant's Decay", "The Bone Markets", "Plague Ward",
+            "The Hanging Gardens", "Scholar's Ruin", "Thieves' Paradise", "The Bleeding Streets",
+            "Noble's Decay", "The Cursed Commons"
+        ]
+        fallback_encounters = [
+            "Plague-ridden beggars seeking alms", "Corrupt city guards demanding bribes",
+            "Mysterious figures in black robes", "Mad prophet screaming prophecies",
+            "Pack of starving dogs", "Lost soul wandering aimlessly"
+        ]
+        fallback_atmospheres = [
+            "Thick with the stench of decay", "Perpetual twilight shrouds the streets",
+            "Whispers echo from empty buildings", "Shadows move where no one walks",
+            "The air tastes of copper and fear", "Strange lights flicker in windows"
         ]
         
-        atmospheres = [
-            "Thick with the stench of decay",
-            "Perpetual twilight shrouds the streets",
-            "Whispers echo from empty buildings",
-            "Shadows move where no one walks",
-            "The air tastes of copper and fear",
-            "Strange lights flicker in windows"
-        ]
-        
-        encounters = [
-            "Plague-ridden beggars seeking alms",
-            "Corrupt city guards demanding bribes",
-            "Mysterious figures in black robes",
-            "Mad prophet screaming prophecies",
-            "Pack of starving dogs",
-            "Lost soul wandering aimlessly"
-        ]
+        districts = self._get_city_content_list(city_data, 'districts', fallback_districts)
+        encounters = self._get_city_encounters(city_data, 'district', fallback_encounters)
+        atmospheres = self._get_city_atmospheres(city_data, fallback_atmospheres)
+        random_table = self._get_city_random_table(city_data, 'district', self._generate_district_random_table)
         
         name = random.choice(districts)
+        encounter = random.choice(encounters) if encounters else "Mysterious activities in the district"
+        atmosphere = random.choice(atmospheres) if atmospheres else "Dark and foreboding"
         
         return {
             'name': name,
-            'description': f"A decaying district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}.",
-            'encounter': random.choice(encounters),
-            'atmosphere': random.choice(atmospheres),
-            'random_table': self._generate_district_random_table(),
+            'description': f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}.",
+            'encounter': encounter,
+            'atmosphere': atmosphere,
+            'random_table': random_table,
             'notable_features': [
                 random.choice(["Crumbling mansions", "Narrow alleyways", "Ancient statues", "Broken fountains"]),
                 random.choice(["Abandoned shops", "Boarded windows", "Graffiti-covered walls", "Overgrown gardens"])
             ]
         }
     
-    def _generate_building_content(self) -> Dict[str, Any]:
+    def _generate_building_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate building content."""
         buildings = [
             "The Moldering Manor",
@@ -286,7 +334,7 @@ class CityOverlayAnalyzer:
             'treasures': [random.choice(["Hidden vault", "Secret passage", "Cursed artifact", "Ancient tome"])]
         }
     
-    def _generate_street_content(self) -> Dict[str, Any]:
+    def _generate_street_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate street content."""
         streets = [
             "Corpse Alley",
@@ -322,7 +370,7 @@ class CityOverlayAnalyzer:
             'threats': [random.choice(["Unstable buildings", "Roving gangs", "Supernatural manifestations", "Poisonous vapors"])]
         }
     
-    def _generate_landmark_content(self) -> Dict[str, Any]:
+    def _generate_landmark_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate landmark content."""
         landmarks = [
             "The Weeping Obelisk",
@@ -361,7 +409,7 @@ class CityOverlayAnalyzer:
             ]
         }
     
-    def _generate_market_content(self) -> Dict[str, Any]:
+    def _generate_market_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate market content."""
         markets = [
             "The Bone Bazaar",
@@ -400,7 +448,7 @@ class CityOverlayAnalyzer:
             ]
         }
     
-    def _generate_temple_content(self) -> Dict[str, Any]:
+    def _generate_temple_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate temple content."""
         temples = [
             "Temple of the Dying God",
@@ -439,7 +487,7 @@ class CityOverlayAnalyzer:
             ]
         }
     
-    def _generate_tavern_content(self) -> Dict[str, Any]:
+    def _generate_tavern_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate tavern content."""
         taverns = [
             "The Rotting Corpse",
@@ -478,7 +526,7 @@ class CityOverlayAnalyzer:
             ]
         }
     
-    def _generate_guild_content(self) -> Dict[str, Any]:
+    def _generate_guild_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate guild content."""
         guilds = [
             "The Corpse Collectors",
@@ -517,7 +565,7 @@ class CityOverlayAnalyzer:
             ]
         }
     
-    def _generate_residence_content(self) -> Dict[str, Any]:
+    def _generate_residence_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate residence content."""
         residences = [
             "The Mourning House",
@@ -553,7 +601,7 @@ class CityOverlayAnalyzer:
             'treasures': [random.choice(["Family heirloom", "Hidden vault", "Personal diary", "Secret passage"])]
         }
     
-    def _generate_ruins_content(self) -> Dict[str, Any]:
+    def _generate_ruins_content(self, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate ruins content."""
         ruins = [
             "The Fallen Spire",

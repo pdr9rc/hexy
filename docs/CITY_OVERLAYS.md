@@ -19,9 +19,10 @@ The City Overlays feature allows you to generate detailed 5x5 hex grids from cit
 
 1. Place city images in the `data/city_overlays/` directory
 2. Supported formats: `.jpg`, `.jpeg`, `.png`, `.gif`, `.bmp`
-3. Example files:
-   - `image1.jpg` - Historical city map (provided as example)
-   - `galgenbeck.jpg` - For the canonical Mörk Borg city
+3. Name files after the city (e.g., `galgenbeck.jpg`, `bergen_chrypt.jpg`)
+4. Example files:
+   - `galgenbeck.jpg` - The Corpse City (provided as example)
+   - `bergen_chrypt.jpg` - For the Frozen Necropolis
 
 ### 2. Accessing City Overlays
 
@@ -113,13 +114,18 @@ Returns detailed information for a specific hex.
 
 ```
 data/city_overlays/              # City overlay images
-├── image1.jpg                   # Example historical map
-├── galgenbeck.jpg              # Galgenbeck city (add your image)
+├── galgenbeck.jpg              # The Corpse City
+├── bergen_chrypt.jpg           # The Frozen Necropolis (add your image)
 └── your_city.png               # Any additional city images
 
+databases/cities/                # City-specific content databases
+├── galgenbeck.json             # Galgenbeck lore and content
+├── bergen_chrypt.json          # Bergen Chrypt lore and content
+└── your_city.json              # Custom city content
+
 dying_lands_output/city_overlays/  # Generated overlay data
-├── image1_overlay.json         # Cached overlay data
-└── galgenbeck_overlay.json     # Generated when accessed
+├── galgenbeck_overlay.json     # Cached overlay data
+└── your_city_overlay.json      # Generated when accessed
 
 src/
 ├── city_overlay_analyzer.py    # Main overlay processing

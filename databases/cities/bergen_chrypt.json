@@ -1,0 +1,355 @@
+{
+  "city_name": "Bergen Chrypt",
+  "display_name": "Bergen Chrypt - The Frozen Necropolis",
+  "description": "Carved into the heart of a glacier, where the living and dead walk side by side",
+  "theme": "frozen_undead_fortress",
+  
+  "districts": [
+    "The Upper Crypts",
+    "Noble Undead Quarter", 
+    "Frozen Battlements",
+    "The Glacier Heart",
+    "Servant's Tunnels",
+    "The Ancient Vaults",
+    "Ice Palace District",
+    "The Eternal Watch",
+    "Crypt Lord's Domain",
+    "The Frozen Gates"
+  ],
+  
+  "buildings": [
+    "Crypt Lord's Ice Palace",
+    "The Eternal Throne Room",
+    "Frozen Mausoleum",
+    "Undead Noble Mansion",
+    "The Ice Archive",
+    "Glacier Carved Cathedral",
+    "The Cold Treasury",
+    "Ancient Nordic Hall",
+    "The Warden's Tower",
+    "The Preservation Chamber"
+  ],
+  
+  "streets": [
+    "Frozen Path of Sorrows",
+    "The Undead Promenade",
+    "Ice Crystal Avenue",
+    "The Eternal March",
+    "Crypt Lord's Way",
+    "The Preservation Walk",
+    "Glacier Heart Road",
+    "The Noble's Passage",
+    "The Warden's Patrol",
+    "The Ancient Processional"
+  ],
+  
+  "landmarks": [
+    "The Glacier Heart",
+    "Eternal Ice Throne",
+    "The Great Crypt Spiral",
+    "Undead Noble Monument",
+    "The Preservation Engine",
+    "Ancient Nordic Runestone",
+    "The Frozen Watchtower",
+    "The Crypt Lord's Seal",
+    "The Ice Crystal Chandelier",
+    "The Eternal Flame (Cold)"
+  ],
+  
+  "markets": [
+    "The Preservation Market",
+    "Undead Servants Exchange",
+    "The Cold Storage",
+    "Nordic Relic Bazaar",
+    "The Ice Craft Fair",
+    "Eternal Service Market",
+    "The Frozen Goods",
+    "Crypt Supplies Exchange",
+    "The Noble's Commerce",
+    "The Glacier Harvest"
+  ],
+  
+  "temples": [
+    "Temple of Eternal Preservation",
+    "Shrine of the Undead Noble",
+    "The Frozen Altar",
+    "Cathedral of Endless Winter",
+    "The Crypt Lord's Chapel",
+    "Temple of the Glacier Heart",
+    "Shrine of Nordic Ancestors",
+    "The Ice Crystal Sanctuary",
+    "Temple of Beautiful Death",
+    "The Preservation Shrine"
+  ],
+  
+  "taverns": [
+    "The Frozen Goblet",
+    "The Undead's Rest",
+    "The Icy Draught",
+    "The Eternal Tavern",
+    "The Crypt's Warmth",
+    "The Noble's Table",
+    "The Glacier Inn",
+    "The Preserved Spirits",
+    "The Cold Comfort",
+    "The Warden's Lodge"
+  ],
+  
+  "guilds": [
+    "The Preservation Society",
+    "Guild of Undead Servants",
+    "The Ice Crafters",
+    "Nordic Grave Tenders",
+    "The Eternal Guard",
+    "Crypt Maintenance Union",
+    "The Noble's Attendants",
+    "Glacier Sculptors Guild",
+    "The Cold Preservers",
+    "Ancient Rune Keepers"
+  ],
+  
+  "residences": [
+    "Undead Noble's Mansion",
+    "The Warden's Quarters",
+    "Servant's Ice Chambers",
+    "The Preservation House",
+    "Ancient Nordic Lodge",
+    "The Eternal Residence",
+    "Crypt Keeper's Home",
+    "The Frozen Manor",
+    "Ice Palace Apartments",
+    "The Noble's Estate"
+  ],
+  
+  "ruins": [
+    "Pre-Undead Nordic Ruins",
+    "Collapsed Ice Palace Wing",
+    "The Shattered Watchtower",
+    "Ancient Glacier Caves",
+    "Ruined Preservation Engine",
+    "The Fallen Crypt Spire",
+    "Broken Ice Sculptures",
+    "The Lost Nordic Hall",
+    "Abandoned Servant Quarters",
+    "The Cracked Glacier Heart"
+  ],
+  
+  "encounters": {
+    "district": [
+      "Undead nobles conducting eternal court business",
+      "Crypt Lord's servants maintaining the glacier",
+      "Ancient Nordic spirits warning of forgotten laws",
+      "Preservation engines humming with cold magic",
+      "Ice crystals forming spontaneously in the air",
+      "Eternal guards patrolling with centuries of discipline",
+      "Frozen battlements manned by undead sentries",
+      "Noble undead discussing politics from past ages",
+      "Servants preparing the district for eternal winter",
+      "The Glacier Heart pulsing with ancient power"
+    ],
+    "building": [
+      "The structure maintains itself through undead magic",
+      "Ice never melts within these preserved walls",
+      "Undead nobles conduct eternal business here",
+      "Ancient Nordic runes power the building",
+      "The Crypt Lord's authority emanates from within",
+      "Preservation engines keep everything frozen",
+      "Servants who died centuries ago still work here",
+      "The building exists partially in the realm of death",
+      "Glacier ice forms the very foundation",
+      "Cold magic preserves all who enter"
+    ],
+    "street": [
+      "Undead nobles process in ancient ceremonial order",
+      "Ice crystals make the pathway treacherous",
+      "Ancient Nordic spirits patrol the streets",
+      "The Crypt Lord's procession passes through",
+      "Preservation magic keeps the path eternally frozen",
+      "Servants clear ice that forms continuously",
+      "The street leads deeper into the glacier",
+      "Cold wind carries whispers of the long dead",
+      "Frozen statues of ancient heroes line the way",
+      "The path is lit by cold, eternal flames"
+    ],
+    "landmark": [
+      "The monument preserves ancient Nordic glory",
+      "Undead nobles gather here for eternal ceremonies",
+      "The Crypt Lord appears for important occasions",
+      "Ice magic emanates from the structure",
+      "Ancient runes activate when approached",
+      "The landmark serves as a gateway to death",
+      "Preservation magic keeps it eternally perfect",
+      "Nordic ancestors manifest around the monument",
+      "The structure connects to the Glacier Heart",
+      "Cold flames burn eternally around the landmark"
+    ],
+    "market": [
+      "Trade conducted with services instead of coin",
+      "Undead nobles purchase eternal luxuries",
+      "Ancient Nordic artifacts change hands",
+      "Preservation services are the main commerce",
+      "The Crypt Lord's servants oversee all trade",
+      "Ice crafts that never melt are highly valued",
+      "Services for the dead and undead are common",
+      "Nordic runes are carved into trading tokens",
+      "Cold magic enhances all goods sold here",
+      "Eternal contracts bind all transactions"
+    ],
+    "temple": [
+      "The altar preserves offerings for eternity",
+      "Undead nobles seek blessings for their condition",
+      "Ancient Nordic gods still receive worship",
+      "The Crypt Lord conducts dark ceremonies",
+      "Ice forms sacred patterns during rituals",
+      "Preservation magic sanctifies the space",
+      "The dead and undead worship together",
+      "Nordic runes channel divine cold energy",
+      "Eternal flames provide sacred illumination",
+      "The temple exists in both life and death"
+    ],
+    "tavern": [
+      "Drinks are supernaturally preserved and never spoil",
+      "Undead nobles share tales of past centuries",
+      "Ancient Nordic drinking songs echo eternally",
+      "The Crypt Lord's servants gather information",
+      "Ice wine that burns cold is the specialty",
+      "Preservation magic keeps food fresh forever",
+      "Nordic heroes' spirits join in revelry",
+      "Cold magic makes all drinks refreshingly frozen",
+      "Eternal warmth emanates from the hearth",
+      "The tavern serves both living and dead patrons"
+    ],
+    "guild": [
+      "Guild members serve the city's undead nobility",
+      "Ancient Nordic crafting techniques are preserved",
+      "The Crypt Lord's authority governs all guilds",
+      "Preservation magic enhances all guild work",
+      "Undead masters teach eternal apprentices",
+      "Ice crafting requires centuries to master",
+      "Guild halls are carved from glacier ice",
+      "Nordic runes mark all guild certifications",
+      "Cold magic is essential to most professions",
+      "Eternal contracts bind guild memberships"
+    ],
+    "residence": [
+      "The home is preserved in eternal perfection",
+      "Undead nobles live in timeless luxury",
+      "Ancient Nordic family spirits inhabit rooms",
+      "Preservation magic maintains all furnishings",
+      "The Crypt Lord's favor protects residents",
+      "Ice never forms inside due to special wards",
+      "Servants who died centuries ago still work",
+      "Nordic heritage is displayed prominently",
+      "Cold magic keeps the home eternally comfortable",
+      "The residence exists partially in death's realm"
+    ],
+    "ruins": [
+      "Ancient Nordic power still lingers in the stones",
+      "The Crypt Lord's magic failed to preserve this",
+      "Undead from before the preservation wander here",
+      "Ice has reclaimed what magic could not save",
+      "Nordic spirits mourn their forgotten home",
+      "Preservation attempts left strange magical effects",
+      "The ruins serve as a warning of impermanence",
+      "Ancient runes flicker with dying power",
+      "Cold magic here is wild and unpredictable",
+      "The glacier slowly consumes the ruins"
+    ]
+  },
+  
+  "random_tables": {
+    "district": [
+      "1-2: Undead nobles hold court, discussing centuries-old politics",
+      "3-4: Preservation engines malfunction, causing rapid ice formation",
+      "5-6: Ancient Nordic spirits manifest, seeking forgotten justice",
+      "7-8: The Crypt Lord's procession passes through the district",
+      "9-10: Glacier shifts, revealing new chambers and passages",
+      "11-12: Eternal guards challenge all who lack proper authorization"
+    ],
+    "building": [
+      "1-2: The structure phases between life and death realms",
+      "3-4: Preservation magic fails temporarily, causing rapid decay",
+      "5-6: Undead nobility conduct eternal administrative business",
+      "7-8: Ancient Nordic runes activate, changing the building",
+      "9-10: The Crypt Lord's servants perform maintenance rituals",
+      "11-12: Ice magic creates new rooms and passages"
+    ],
+    "street": [
+      "1-2: Undead noble procession blocks passage for hours",
+      "3-4: Ice crystals form rapidly, making travel dangerous",
+      "5-6: Ancient Nordic spirits demand respect for old laws",
+      "7-8: Preservation magic creates temporal anomalies",
+      "9-10: The Crypt Lord's authority is questioned publicly",
+      "11-12: Cold magic makes the air visible and hard to breathe"
+    ],
+    "landmark": [
+      "1-2: The monument activates ancient Nordic magic",
+      "3-4: Undead nobles gather for ceremonial purposes",
+      "5-6: The Crypt Lord appears to make pronouncements",
+      "7-8: Preservation magic creates an eternal moment",
+      "9-10: Ice forms sacred patterns around the landmark",
+      "11-12: Ancient spirits manifest to share forgotten wisdom"
+    ],
+    "market": [
+      "1-2: Eternal contracts bind unwary customers forever",
+      "3-4: Undead nobles purchase services for the afterlife",
+      "5-6: Ancient Nordic artifacts gain magical properties",
+      "7-8: Preservation services are traded for life essence",
+      "9-10: The Crypt Lord's tax collectors demand tribute",
+      "11-12: Ice crafts spontaneously gain sentience"
+    ],
+    "temple": [
+      "1-2: Ancient Nordic gods manifest during worship",
+      "3-4: The altar demands preservation of life essence",
+      "5-6: Undead nobles seek blessings for eternal rest",
+      "7-8: Preservation magic sanctifies offerings permanently",
+      "9-10: The Crypt Lord conducts marriage ceremonies",
+      "11-12: Ice forms divine patterns during rituals"
+    ],
+    "tavern": [
+      "1-2: Undead nobles share centuries-old gossip and secrets",
+      "3-4: Ancient Nordic drinking songs summon ancestral spirits",
+      "5-6: Ice wine grants visions of the past and future",
+      "7-8: Preservation magic keeps conversations eternally fresh",
+      "9-10: The Crypt Lord's spies gather information from patrons",
+      "11-12: Cold magic makes drinks burn with frozen fire"
+    ],
+    "guild": [
+      "1-2: Guild masters offer apprenticeships lasting centuries",
+      "3-4: Ancient Nordic techniques are jealously guarded",
+      "5-6: The Crypt Lord commissions eternal public works",
+      "7-8: Preservation magic enhances all crafted items",
+      "9-10: Undead craftsmen compete with living workers",
+      "11-12: Ice magic creates tools that work themselves"
+    ],
+    "residence": [
+      "1-2: Ancient Nordic family spirits demand recognition",
+      "3-4: The home exists simultaneously in multiple time periods",
+      "5-6: Undead nobles entertain guests from past centuries",
+      "7-8: Preservation magic maintains perfect cleanliness",
+      "9-10: The Crypt Lord's servants conduct surprise inspections",
+      "11-12: Ice magic creates rooms that change with the seasons"
+    ],
+    "ruins": [
+      "1-2: Ancient Nordic treasure is discovered in the rubble",
+      "3-4: Preservation magic attempts to restore the ruins",
+      "5-6: Undead from before the city's transformation appear",
+      "7-8: The Crypt Lord's power cannot reach this place",
+      "9-10: Ice magic runs wild, creating dangerous formations",
+      "11-12: Nordic spirits offer quests to restore their homes"
+    ]
+  },
+  
+  "atmosphere_modifiers": [
+    "The air is so cold it burns the lungs",
+    "Ice crystals form with each breath",
+    "Ancient Nordic chants echo from the glacier",
+    "The sound of preservation engines humming",
+    "Undead nobility conversing in archaic languages",
+    "Cold magic makes the air shimmer with frost",
+    "The creaking of ancient ice under pressure",
+    "Whispers of the long dead carried on cold winds",
+    "The smell of eternal preservation and old ice",
+    "Light refracting through countless ice formations"
+  ]
+}
