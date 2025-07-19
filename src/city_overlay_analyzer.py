@@ -108,9 +108,22 @@ class CityOverlayAnalyzer:
     def generate_city_overlay(self, overlay_name: str) -> Dict[str, Any]:
         """Generate a 5x5 hex grid overlay for a city image."""
         overlays = self.get_available_overlays()
+        print(f"DEBUG: Requested overlay: '{overlay_name}'")
+        print(f"DEBUG: Available overlays: {[o['name'] for o in overlays]}")
+        
         overlay_info = next((o for o in overlays if o['name'] == overlay_name), None)
         
         if not overlay_info:
+            print(f"DEBUG: No exact match found for '{overlay_name}'")
+            # Try case-insensitive match
+            overlay_info = next((o for o in overlays if o['name'].lower() == overlay_name.lower()), None)
+            if overlay_info:
+                print(f"DEBUG: Found case-insensitive match: {overlay_info['name']}")
+        
+        if not overlay_info:
+            print(f"DEBUG: Still no match found. Available overlay details:")
+            for overlay in overlays:
+                print(f"  - Name: '{overlay['name']}', Filename: '{overlay['filename']}'")
             raise ValueError(f"City overlay '{overlay_name}' not found")
         
         # Generate 5x5 hex grid (25 hexes total)
