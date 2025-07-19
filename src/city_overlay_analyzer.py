@@ -41,6 +41,8 @@ class CityOverlayAnalyzer:
         
         # Ensure directories exist
         os.makedirs(self.output_directory, exist_ok=True)
+        print(f"DEBUG: Output directory: {self.output_directory}")
+        print(f"DEBUG: Output directory exists: {os.path.exists(self.output_directory)}")
         
         # Load content tables for random generation
         self.content_tables = database_manager.load_tables('en')
