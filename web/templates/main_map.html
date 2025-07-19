@@ -432,7 +432,6 @@
                 <div class="col-md-4">
                     <div class="btn-group me-2" role="group">
                         <button class="btn btn-mork-borg" onclick="showLoreOverview()">📜 LORE</button>
-                        <button class="btn btn-mork-borg" onclick="showCityOverlays()">🏰 CITY OVERLAYS</button>
                     </div>
                     <div class="btn-group" role="group">
                         <button class="btn btn-mork-borg" onclick="resetContinent()">🔄 RESET CONTINENT</button>
@@ -825,7 +824,10 @@
                     
                     let html = `
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
-                            <button class="btn btn-mork-borg btn-warning mb-4" onclick="restoreMap()">RETURN TO MAP</button>
+                            <div class="mb-4">
+                                <button class="btn btn-mork-borg btn-warning me-2" onclick="restoreMap()">RETURN TO MAP</button>
+                                <button class="btn btn-mork-borg" onclick="showCityOverlayInMap('${hexCode}')">🏰 CITY OVERLAYS</button>
+                            </div>
                             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
                                 <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
 ╔══════════════════════════════════════════════════════════════╗
@@ -1909,6 +1911,249 @@ ${data.ascii}
                     }
                     
                     hexDetailsDiv.innerHTML = html;
+                } else {
+                    console.error('Error loading hex details');
+                }
+            })
+            .catch(error => {
+                console.error('ERROR LOADING HEX DETAILS:', error);
+            });
+    }
+    
+    function showCityOverlayInMap(hexCode) {
+        // Extract city name from hex code using lore database
+        showMapLoadingState();
+        
+        // First, get city information to determine the city name
+        fetch(`/api/city/${hexCode}`)
+            .then(response => response.json())
+            .then(cityData => {
+                if (cityData.success) {
+                    const cityName = cityData.city.name.toLowerCase().replace(/\s+/g, '_');
+                    return showCityOverlayGridInMap(cityName, hexCode);
+                } else {
+                    // Fallback: try galgenbeck for testing
+                    return showCityOverlayGridInMap('galgenbeck', hexCode);
+                }
+            })
+            .catch(error => {
+                console.error('Error determining city name:', error);
+                // Fallback: try galgenbeck for testing
+                showCityOverlayGridInMap('galgenbeck', hexCode);
+            });
+    }
+    
+    function showCityOverlayGridInMap(overlayName, hexCode) {
+        // Show loading state
+        showMapLoadingState();
+        
+        fetch(`/api/city-overlay/${overlayName}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const overlay = data.overlay;
+                    const mapContainer = document.querySelector('.map-container');
+                    
+                    let html = `
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <div class="mb-4">
+                                <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
+                                <button class="btn btn-mork-borg" onclick="showCityOverlayAsciiInMap('${overlayName}', '${hexCode}')" style="margin-left: 10px;">📜 ASCII VIEW</button>
+                            </div>
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <h3 style="color: var(--mork-cyan); margin: 10px 0;">${overlay.display_name}</h3>
+                                <p style="color: var(--mork-white); font-size: 0.9em; margin-bottom: 20px;">Interactive 5x5 Hex Grid - Click hexes for details</p>
+                                
+                                <div style="display: grid; grid-template-columns: repeat(5, 80px); gap: 5px; justify-content: center; margin: 20px 0;">
+                    `;
+                    
+                    for (let row = 0; row < 5; row++) {
+                        for (let col = 0; col < 5; col++) {
+                            const hexId = `${row}_${col}`;
+                            const hexData = overlay.hex_grid[hexId];
+                            const content = hexData.content;
+                            const symbol = content.type.charAt(0).toUpperCase();
+                            
+                            html += `
+                                <div class="city-hex" 
+                                     style="width: 80px; height: 80px; border: 2px solid var(--mork-cyan); 
+                                            background: rgba(0, 255, 255, 0.1); display: flex; 
+                                            align-items: center; justify-content: center; 
+                                            cursor: pointer; transition: all 0.3s; position: relative;"
+                                     onclick="showCityHexDetailsInMap('${overlayName}', '${hexId}')"
+                                     title="${content.name}">
+                                    <div style="text-align: center;">
+                                        <div style="color: var(--mork-cyan); font-size: 24px; font-weight: bold;">${symbol}</div>
+                                        <div style="color: var(--mork-white); font-size: 10px;">${row+1},${col+1}</div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    }
+                    
+                    html += `
+                                </div>
+                                
+                                <div style="margin-top: 20px; text-align: left; font-size: 0.9em; color: var(--mork-white);">
+                                    <strong>Legend:</strong><br>
+                                    D=District, B=Building, S=Street, L=Landmark, M=Market<br>
+                                    T=Temple, V=Tavern, G=Guild, R=Residence, U=Ruins
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    mapContainer.innerHTML = html;
+                    
+                    // Add hover effects to hexes
+                    document.querySelectorAll('.city-hex').forEach(hex => {
+                        hex.addEventListener('mouseenter', function() {
+                            this.style.background = 'rgba(0, 255, 255, 0.3)';
+                            this.style.transform = 'scale(1.1)';
+                        });
+                        hex.addEventListener('mouseleave', function() {
+                            this.style.background = 'rgba(0, 255, 255, 0.1)';
+                            this.style.transform = 'scale(1)';
+                        });
+                    });
+                } else {
+                    showMapErrorState('city-overlay-grid');
+                }
+            })
+            .catch(error => {
+                console.error('ERROR LOADING CITY OVERLAY GRID:', error);
+                showMapErrorState('city-overlay-grid');
+            });
+    }
+    
+    function showCityOverlayAsciiInMap(overlayName, hexCode) {
+        // Show loading state
+        showMapLoadingState();
+        
+        fetch(`/api/city-overlay/${overlayName}/ascii`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const mapContainer = document.querySelector('.map-container');
+                    
+                    let html = `
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <div class="mb-4">
+                                <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityOverlayGridInMap('${overlayName}', '${hexCode}')">← BACK TO GRID</button>
+                                <button class="btn btn-mork-borg" onclick="showCityDetailsInMap('${hexCode}')" style="margin-left: 10px;">🏰 RETURN TO CITY</button>
+                            </div>
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
+${data.ascii}
+                                </pre>
+                            </div>
+                        </div>
+                    `;
+                    
+                    mapContainer.innerHTML = html;
+                } else {
+                    showMapErrorState('city-overlay-ascii');
+                }
+            })
+            .catch(error => {
+                console.error('ERROR LOADING CITY OVERLAY ASCII:', error);
+                showMapErrorState('city-overlay-ascii');
+            });
+    }
+    
+    function showCityHexDetailsInMap(overlayName, hexId) {
+        fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const modalContainer = document.getElementById('modalContainer');
+                    const hex = data.hex;
+                    const content = hex.content;
+                    
+                    let html = `
+                        <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+                            <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
+                                <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
+                                    ${content.name} [${hex.row+1},${hex.col+1}]
+                                </h4>
+                                
+                                <div style="margin-bottom: 15px; text-align: left;">
+                                    <strong style="color: var(--mork-yellow);">Type:</strong> ${content.type.charAt(0).toUpperCase() + content.type.slice(1)}<br>
+                                    <strong style="color: var(--mork-yellow);">Position:</strong> ${content.position_type}
+                                </div>
+                                
+                                <div style="margin-bottom: 15px; text-align: left;">
+                                    <strong style="color: var(--mork-yellow);">Description:</strong><br>
+                                    <span style="color: var(--mork-white);">${content.description}</span>
+                                </div>
+                                
+                                <div style="margin-bottom: 15px; text-align: left;">
+                                    <strong style="color: var(--mork-yellow);">Encounter:</strong><br>
+                                    <span style="color: var(--mork-white);">${content.encounter}</span>
+                                </div>
+                                
+                                <div style="margin-bottom: 15px; text-align: left;">
+                                    <strong style="color: var(--mork-yellow);">Atmosphere:</strong><br>
+                                    <span style="color: var(--mork-white);">${content.atmosphere}</span>
+                                </div>
+                    `;
+                    
+                    if (content.random_table && content.random_table.length > 0) {
+                        html += `
+                            <div style="margin-bottom: 15px; text-align: left;">
+                                <strong style="color: var(--mork-yellow);">Random Events:</strong><br>
+                                <div style="font-family: 'Courier New', monospace; font-size: 0.9em; color: var(--mork-white);">
+                        `;
+                        
+                        content.random_table.forEach(event => {
+                            html += `<div style="margin: 5px 0;">${event}</div>`;
+                        });
+                        
+                        html += `</div></div>`;
+                    }
+                    
+                    if (content.npcs && content.npcs.length > 0) {
+                        html += `
+                            <div style="margin-bottom: 15px; text-align: left;">
+                                <strong style="color: var(--mork-yellow);">NPCs:</strong><br>
+                                <span style="color: var(--mork-white);">${content.npcs.join(', ')}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    if (content.treasures && content.treasures.length > 0) {
+                        html += `
+                            <div style="margin-bottom: 15px; text-align: left;">
+                                <strong style="color: var(--mork-yellow);">Treasures:</strong><br>
+                                <span style="color: var(--mork-white);">${content.treasures.join(', ')}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    if (content.threats && content.threats.length > 0) {
+                        html += `
+                            <div style="margin-bottom: 15px; text-align: left;">
+                                <strong style="color: var(--mork-yellow);">Threats:</strong><br>
+                                <span style="color: var(--mork-white);">${content.threats.join(', ')}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    if (content.notable_features && content.notable_features.length > 0) {
+                        html += `
+                            <div style="text-align: left;">
+                                <strong style="color: var(--mork-yellow);">Notable Features:</strong><br>
+                                <span style="color: var(--mork-white);">${content.notable_features.join(', ')}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    html += `
+                            </div>
+                        </div>
+                    `;
+                    
+                    modalContainer.innerHTML = html;
                 } else {
                     console.error('Error loading hex details');
                 }
