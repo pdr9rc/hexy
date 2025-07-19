@@ -9,6 +9,10 @@ import os
 import random
 import shutil
 from typing import Dict, List, Tuple, Optional, Any
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from database_manager import database_manager
 from terrain_system import terrain_system
 from translation_system import translation_system

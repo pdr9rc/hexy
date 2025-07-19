@@ -8,6 +8,10 @@ import os
 import random
 import json
 from typing import Dict, List, Tuple, Optional, Any
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from database_manager import database_manager
 

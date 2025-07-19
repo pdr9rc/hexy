@@ -10,7 +10,6 @@ import shutil
 from typing import Dict, List, Optional, Any, Callable
 from datetime import datetime
 import sys
-import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from database_manager import database_manager
@@ -462,10 +461,9 @@ A {beast_type} with {feature} that {behavior}.
         print("🔄 Initializing database...")
         
         if force_migration:
-            # Run migration script
-            from migrate_tables import TableMigrator
-            migrator = TableMigrator()
-            migrator.migrate_all_tables()
+            # Migration is handled by database_manager
+            print("⚠️  Migration is now handled by DatabaseManager")
+            self.db_manager.initialize_database()
         
         # Validate database
         validation_report = self.db_manager.validate_schema()

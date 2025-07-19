@@ -14,6 +14,10 @@ except ImportError:
     print("⚠️  Markdown module not available - using text fallback")
 
 from flask import Flask, render_template, jsonify, request, send_from_directory, redirect, url_for
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from terrain_system import terrain_system
 from main_map_generator import MainMapGenerator
@@ -2244,4 +2248,4 @@ if __name__ == '__main__':
     print("   • Full map generation capabilities")
     print("   Press Ctrl+C to stop the server")
     
-    app.run(debug=False, host='127.0.0.1', port=5000) 
+    app.run(debug=False, host='127.0.0.1', port=5001) 

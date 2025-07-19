@@ -25,16 +25,16 @@ cd hexy
 ### Generate Complete Map
 ```bash
 # Generate full 750-hex map in Portuguese
-python3 src/full_map_generator.py --language pt
+cd src && python3 main_map_generator.py --language pt
 
 # Generate in English  
-python3 src/full_map_generator.py --language en
+cd src && python3 main_map_generator.py --language en
 ```
 
 ### Launch Web Interface
 ```bash
 # Start the web viewer (only interface needed)
-python3 src/ascii_map_viewer.py
+cd src && python3 ascii_map_viewer.py
 
 # Visit http://localhost:5000
 ```
@@ -43,13 +43,16 @@ python3 src/ascii_map_viewer.py
 
 ```
 hexy/
-├── src/                              # Core system (6 files)
+├── src/                              # Core system (10 files)
 │   ├── ascii_map_viewer.py          # 🌐 Web interface (ONLY viewer needed)
-│   ├── full_map_generator.py        # 🗺️ Complete map generation
-│   ├── dying_lands_generator.py     # 📍 Individual hex generator
+│   ├── main_map_generator.py        # 🗺️ Complete map generation
+│   ├── generation_engine.py         # ⚙️ Content creation system
 │   ├── mork_borg_lore_database.py   # 📚 Cities & lore placement
-│   ├── content_generator.py         # ⚙️ Content creation system
-│   └── content_tables.py            # 🎲 Random generation tables
+│   ├── database_manager.py          # 🗄️ Database management
+│   ├── terrain_system.py            # 🗺️ Terrain analysis
+│   ├── translation_system.py        # 🌍 Translation support
+│   ├── city_overlay_analyzer.py     # 🏙️ City overlay system
+│   └── image_analyzer.py            # 🖼️ Image processing
 ├── dying_lands_output/               # Generated content
 │   ├── hexes/ (750 files)           # Individual hex descriptions
 │   ├── npcs/                        # Generated NPCs
@@ -84,8 +87,8 @@ All **6 canonical Mörk Borg cities** are automatically placed:
 
 ### Generate Individual Hexes
 ```bash
-python3 src/dying_lands_generator.py
-# Enter: 0508-0510 (Sarkash Forest area)
+cd src && python3 main_map_generator.py --hex 0508
+# Generate specific hex: 0508 (Sarkash Forest area)
 ```
 
 ### Web Interface Features
@@ -104,10 +107,10 @@ python3 src/dying_lands_generator.py
 
 ```bash
 # Portuguese generation (default for Mörk Borg atmosphere)
-python3 src/full_map_generator.py --language pt
+cd src && python3 main_map_generator.py --language pt
 
 # English generation
-python3 src/full_map_generator.py --language en
+cd src && python3 main_map_generator.py --language en
 ```
 
 ## 📊 Web Interface Only
@@ -125,14 +128,15 @@ This system is designed around the **single web interface**. No other viewers ar
 ### Regenerate Existing Content
 ```bash
 # Force regeneration of all hexes
-python3 src/full_map_generator.py --regenerate --language pt
+cd src && python3 main_map_generator.py --reset --language pt
 ```
 
 ### Custom Content Generation
 ```python
 # Generate specific terrain types
-from src.dying_lands_generator import generate_hex_content
-hex_data = generate_hex_content("0508", "forest")
+from src.main_map_generator import MainMapGenerator
+generator = MainMapGenerator({'language': 'en'})
+hex_data = generator.generate_hex("0508")
 ```
 
 ## 🎯 Perfect For
@@ -144,7 +148,7 @@ hex_data = generate_hex_content("0508", "forest")
 
 ## 📈 File Count
 
-- **Core system**: 6 Python files (streamlined)
+- **Core system**: 10 Python files (streamlined)
 - **Generated content**: 750+ hex files + cities
 - **Single web interface**: All viewing in one place
 - **No redundant viewers**: Clean, focused system
