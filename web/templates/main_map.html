@@ -739,7 +739,12 @@
     function showMapLoadingState() {
         const mapContainer = document.querySelector('.map-container');
         const originalContent = mapContainer.innerHTML;
-        mapContainer.setAttribute('data-original-content', originalContent);
+        
+        // Only save the original content if it hasn't been saved yet
+        // This prevents overwriting the true original map with intermediate views
+        if (!mapContainer.getAttribute('data-original-content')) {
+            mapContainer.setAttribute('data-original-content', originalContent);
+        }
         
         mapContainer.innerHTML = `
             <div style="text-align: center; padding: 50px; color: var(--mork-cyan);">
@@ -1384,6 +1389,8 @@
         const originalContent = mapContainer.getAttribute('data-original-content');
         if (originalContent) {
             mapContainer.innerHTML = originalContent;
+            // Clear the saved state so future navigations start fresh
+            mapContainer.removeAttribute('data-original-content');
             // Restore hex selection after returning to map
             if (currentHex) {
                 const hexElement = document.querySelector(`[data-hex="${currentHex}"]`);
@@ -1922,7 +1929,7 @@ ${data.ascii}
     
     function showCityOverlayInMap(hexCode) {
         // Extract city name from hex code using lore database
-        showMapLoadingState();
+        showMapLoadingState(); // This will now only save state if not already saved
         
         // First, get city information to determine the city name
         fetch(`/api/city/${hexCode}`)
@@ -1944,7 +1951,7 @@ ${data.ascii}
     }
     
     function showCityOverlayGridInMap(overlayName, hexCode) {
-        // Show loading state
+        // Show loading state (will only save original content if not already saved)
         showMapLoadingState();
         
         fetch(`/api/city-overlay/${overlayName}`, {
@@ -1979,6 +1986,7 @@ ${data.ascii}
                     let html = `
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <div class="mb-4">
+                                <button class="btn btn-mork-borg btn-danger me-2" onclick="restoreMap()">RETURN TO MAP</button>
                                 <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
                                 <button class="btn btn-mork-borg" onclick="showCityOverlayAsciiInMap('${overlayName}', '${hexCode}')" style="margin-left: 10px;">📜 ASCII VIEW</button>
                             </div>
@@ -2050,6 +2058,7 @@ ${data.ascii}
                 mapContainer.innerHTML = `
                     <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                         <div class="mb-4">
+                            <button class="btn btn-mork-borg btn-danger me-2" onclick="restoreMap()">RETURN TO MAP</button>
                             <button class="btn btn-mork-borg btn-warning" onclick="showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
                         </div>
                         <div style="background: var(--mork-black); border: 2px solid var(--mork-red); padding: 20px; box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);">
@@ -2075,7 +2084,7 @@ ${data.ascii}
     }
     
     function showCityOverlayAsciiInMap(overlayName, hexCode) {
-        // Show loading state
+        // Show loading state (will only save original content if not already saved)
         showMapLoadingState();
         
         fetch(`/api/city-overlay/${overlayName}/ascii`)
@@ -2087,6 +2096,7 @@ ${data.ascii}
                     let html = `
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <div class="mb-4">
+                                <button class="btn btn-mork-borg btn-danger me-2" onclick="restoreMap()">RETURN TO MAP</button>
                                 <button class="btn btn-mork-borg btn-warning me-2" onclick="showCityOverlayGridInMap('${overlayName}', '${hexCode}')">← BACK TO GRID</button>
                                 <button class="btn btn-mork-borg" onclick="showCityDetailsInMap('${hexCode}')" style="margin-left: 10px;">🏰 RETURN TO CITY</button>
                             </div>
