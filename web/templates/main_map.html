@@ -383,6 +383,17 @@
         100% { transform: rotate(360deg); }
     }
 
+    @keyframes retro-glow {
+        0% { 
+            text-shadow: 0 0 5px var(--mork-cyan);
+            box-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+        100% { 
+            text-shadow: 0 0 10px var(--mork-cyan), 0 0 15px var(--mork-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+        }
+    }
+
     /* Empty State */
     .empty-state {
         display: flex;
@@ -1750,60 +1761,112 @@ ${data.ascii}
         // Show loading state
         showLoadingState();
         
-        fetch(`/api/city-overlay/${overlayName}`)
+        fetch(`/api/city-overlay/${overlayName}/ascii-map`)
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
                     const modalContainer = document.getElementById('modalContainer');
-                    const overlay = data.overlay;
+                    const asciiMap = data.ascii_map;
+                    const overlay = data.overlay_data;
                     
                     let html = `
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
                                 <div style="margin-bottom: 20px;">
-                                    <button class="btn btn-mork-borg" onclick="showCityOverlay('${overlayName}')" style="margin-bottom: 10px;">← BACK TO ASCII</button>
+                                    <button class="btn btn-mork-borg" onclick="showCityOverlay('${overlayName}')" style="margin-bottom: 10px;">← BACK TO TEXT VIEW</button>
                                     <h3 style="color: var(--mork-cyan); margin: 10px 0;">${overlay.display_name}</h3>
-                                    <p style="color: var(--mork-white); font-size: 0.9em;">Interactive 5x5 Hex Grid - Click hexes for details</p>
+                                    <p style="color: var(--mork-white); font-size: 0.9em;">Interactive ASCII City Map - Click coordinates for details</p>
                                 </div>
                                 
-                                <div style="display: grid; grid-template-columns: repeat(5, 80px); gap: 5px; justify-content: center; margin: 20px 0;">
+                                <div style="position: relative; display: inline-block; margin: 20px 0;">
+                                    <!-- Column headers (A-E) -->
+                                    <div style="display: flex; justify-content: center; margin-bottom: 5px;">
+                                        <div style="width: 30px;"></div> <!-- Space for row numbers -->
+                                        <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; width: 10px; text-align: center; margin: 0 2px;">A</div>
+                                        <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; width: 10px; text-align: center; margin: 0 2px;">B</div>
+                                        <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; width: 10px; text-align: center; margin: 0 2px;">C</div>
+                                        <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; width: 10px; text-align: center; margin: 0 2px;">D</div>
+                                        <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; width: 10px; text-align: center; margin: 0 2px;">E</div>
+                                    </div>
+                                    
+                                    <div style="display: flex; align-items: flex-start;">
+                                        <!-- Row numbers (1-5) -->
+                                        <div style="display: flex; flex-direction: column; margin-right: 5px;">
+                                            <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; height: 20px; display: flex; align-items: center; margin: 1px 0;">1</div>
+                                            <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; height: 20px; display: flex; align-items: center; margin: 1px 0;">2</div>
+                                            <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; height: 20px; display: flex; align-items: center; margin: 1px 0;">3</div>
+                                            <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; height: 20px; display: flex; align-items: center; margin: 1px 0;">4</div>
+                                            <div style="color: var(--mork-cyan); font-family: 'Courier New', monospace; font-weight: bold; font-size: 14px; height: 20px; display: flex; align-items: center; margin: 1px 0;">5</div>
+                                        </div>
+                                        
+                                        <!-- ASCII Map Container -->
+                                        <div style="position: relative;">
+                                            <pre id="ascii-city-map" style="
+                                                color: var(--mork-white); 
+                                                font-family: 'Courier New', monospace; 
+                                                font-size: 10px; 
+                                                line-height: 1.0; 
+                                                margin: 0; 
+                                                padding: 0;
+                                                background: rgba(0, 0, 0, 0.8);
+                                                border: 1px solid var(--mork-cyan);
+                                                text-shadow: 0 0 2px rgba(0, 255, 255, 0.3);
+                                            ">${asciiMap}</pre>
+                                            
+                                            <!-- Invisible overlay grid for clicking -->
+                                            <div id="grid-overlay" style="
+                                                position: absolute; 
+                                                top: 0; 
+                                                left: 0; 
+                                                width: 100%; 
+                                                height: 100%;
+                                                display: grid; 
+                                                grid-template-columns: repeat(5, 1fr); 
+                                                grid-template-rows: repeat(5, 1fr);
+                                                gap: 0;
+                                            ">
                     `;
                     
+                    // Create invisible clickable areas for each hex
                     for (let row = 0; row < 5; row++) {
                         for (let col = 0; col < 5; col++) {
                             const hexId = `${row}_${col}`;
                             const hexData = overlay.hex_grid[hexId];
                             const content = hexData.content;
-                            const symbol = content.type.charAt(0).toUpperCase();
+                            const colLetter = String.fromCharCode(65 + col); // A-E
                             
                             html += `
-                                <div class="city-hex" 
-                                     style="width: 80px; height: 80px; border: 2px solid var(--mork-cyan); 
-                                            background: rgba(0, 255, 255, 0.1); display: flex; 
-                                            align-items: center; justify-content: center; 
-                                            cursor: pointer; transition: all 0.3s; position: relative;"
+                                <div class="ascii-hex-overlay" 
+                                     data-hex-id="${hexId}"
+                                     data-coordinates="${colLetter}${row + 1}"
+                                     style="
+                                         background: transparent; 
+                                         cursor: pointer; 
+                                         transition: all 0.3s;
+                                         border: 1px solid transparent;
+                                     "
                                      onclick="showCityHexDetails('${overlayName}', '${hexId}')"
-                                     title="${content.name}">
-                                    <div style="text-align: center;">
-                                        <div style="color: var(--mork-cyan); font-size: 24px; font-weight: bold;">${symbol}</div>
-                                        <div style="color: var(--mork-white); font-size: 10px;">${row+1},${col+1}</div>
-                                    </div>
+                                     title="${content.name} [${colLetter}${row + 1}]">
                                 </div>
                             `;
                         }
                     }
                     
                     html += `
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <div style="margin-top: 20px; text-align: left; font-size: 0.9em; color: var(--mork-white);">
                                     <strong>Legend:</strong><br>
                                     D=District, B=Building, S=Street, L=Landmark, M=Market<br>
-                                    T=Temple, V=Tavern, G=Guild, R=Residence, U=Ruins
+                                    T=Temple, V=Tavern, G=Guild, R=Residence, U=Ruins<br>
+                                    <em>Click on grid sections to explore areas</em>
                                 </div>
                                 
                                 <div id="hex-details" style="margin-top: 20px; min-height: 200px; border: 1px solid var(--mork-cyan); padding: 15px; text-align: left; background: rgba(0, 255, 255, 0.05);">
-                                    <p style="color: var(--mork-cyan); text-align: center;">Click a hex above to view its details</p>
+                                    <p style="color: var(--mork-cyan); text-align: center;">Click a grid section above to view its details</p>
                                 </div>
                             </div>
                         </div>
@@ -1811,15 +1874,34 @@ ${data.ascii}
                     
                     modalContainer.innerHTML = html;
                     
-                    // Add hover effects to hexes
-                    document.querySelectorAll('.city-hex').forEach(hex => {
-                        hex.addEventListener('mouseenter', function() {
-                            this.style.background = 'rgba(0, 255, 255, 0.3)';
-                            this.style.transform = 'scale(1.1)';
+                    // Add hover effects to grid overlay cells
+                    document.querySelectorAll('.ascii-hex-overlay').forEach(cell => {
+                        cell.addEventListener('mouseenter', function() {
+                            this.style.background = 'rgba(0, 255, 255, 0.15)';
+                            this.style.border = '1px solid var(--mork-cyan)';
+                            this.style.boxShadow = '0 0 10px rgba(0, 255, 255, 0.3)';
+                            const coordinates = this.getAttribute('data-coordinates');
+                            this.style.position = 'relative';
+                            this.innerHTML = `<div style="
+                                position: absolute; 
+                                top: 2px; 
+                                right: 2px; 
+                                color: var(--mork-cyan); 
+                                font-family: 'Courier New', monospace;
+                                font-size: 10px; 
+                                font-weight: bold; 
+                                background: rgba(0, 0, 0, 0.9); 
+                                padding: 2px 4px; 
+                                border: 1px solid var(--mork-cyan);
+                                text-shadow: 0 0 5px var(--mork-cyan);
+                                animation: retro-glow 1s ease-in-out infinite alternate;
+                            ">[${coordinates}]</div>`;
                         });
-                        hex.addEventListener('mouseleave', function() {
-                            this.style.background = 'rgba(0, 255, 255, 0.1)';
-                            this.style.transform = 'scale(1)';
+                        cell.addEventListener('mouseleave', function() {
+                            this.style.background = 'transparent';
+                            this.style.border = '1px solid transparent';
+                            this.style.boxShadow = 'none';
+                            this.innerHTML = '';
                         });
                     });
                 } else {
@@ -1841,9 +1923,12 @@ ${data.ascii}
                     const hex = data.hex;
                     const content = hex.content;
                     
+                    const colLetter = String.fromCharCode(65 + hex.col); // A-E
+                    const coordinates = `${colLetter}${hex.row + 1}`;
+                    
                     let html = `
                         <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
-                            ${content.name} [${hex.row+1},${hex.col+1}]
+                            ${content.name} [${coordinates}]
                         </h4>
                         
                         <div style="margin-bottom: 15px;">
@@ -2148,11 +2233,14 @@ ${data.ascii}
                     const hex = data.hex;
                     const content = hex.content;
                     
+                    const colLetter = String.fromCharCode(65 + hex.col); // A-E
+                    const coordinates = `${colLetter}${hex.row + 1}`;
+                    
                     let html = `
                         <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
                             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
                                 <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
-                                    ${content.name} [${hex.row+1},${hex.col+1}]
+                                    ${content.name} [${coordinates}]
                                 </h4>
                                 
                                 <div style="margin-bottom: 15px; text-align: left;">

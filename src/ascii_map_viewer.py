@@ -608,6 +608,24 @@ def get_city_overlay_ascii(overlay_name):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
+@app.route('/api/city-overlay/<overlay_name>/ascii-map')
+def get_city_overlay_ascii_map(overlay_name):
+    """Get visual ASCII art representation of city overlay for grid display."""
+    try:
+        ascii_map = city_overlay_analyzer.get_city_ascii_map(overlay_name)
+        overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
+        
+        if not overlay_data:
+            overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
+        
+        return jsonify({
+            'success': True,
+            'ascii_map': ascii_map,
+            'overlay_data': overlay_data
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
 @app.route('/api/city-overlay/<overlay_name>/hex/<hex_id>')
 def get_city_overlay_hex(overlay_name, hex_id):
     """Get specific hex data from city overlay."""

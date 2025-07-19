@@ -10,6 +10,13 @@ import json
 from typing import Dict, List, Tuple, Optional, Any
 from mork_borg_lore_database import MorkBorgLoreDatabase
 from database_manager import database_manager
+from PIL import Image, ImageDraw
+try:
+    from PIL import Image
+    PILLOW_AVAILABLE = True
+except ImportError:
+    PILLOW_AVAILABLE = False
+    print("⚠️  Pillow not available - ASCII conversion disabled")
 
 class CityOverlayAnalyzer:
     """Analyzes city overlay images and generates 5x5 hex grids."""
@@ -931,6 +938,115 @@ class CityOverlayAnalyzer:
                         lines.append(f"  {event}")
         
         return "\n".join(lines)
+
+    def image_to_ascii(self, image_path: str, width: int = 50, height: int = 25) -> str:
+        """Convert an image to ASCII art representation."""
+        if not PILLOW_AVAILABLE:
+            return self._generate_fallback_ascii_map(width, height)
+        
+        if not os.path.exists(image_path):
+            return self._generate_fallback_ascii_map(width, height)
+        
+        try:
+            # Enhanced ASCII characters for more retro city feel (darkest to lightest)
+            ascii_chars = "@&#%*+=~^':\".-· "
+            
+            # Open and process the image
+            img = Image.open(image_path)
+            
+            # Convert to grayscale
+            img = img.convert('L')
+            
+            # Resize image to desired dimensions
+            img = img.resize((width, height), Image.Resampling.LANCZOS)
+            
+            # Get pixel data for contrast enhancement
+            pixels = list(img.getdata())
+            min_val = min(pixels)
+            max_val = max(pixels)
+            contrast_range = max_val - min_val if max_val > min_val else 1
+            
+            # Convert pixels to ASCII with enhanced contrast
+            ascii_lines = []
+            for y in range(height):
+                line = ""
+                for x in range(width):
+                    pixel_value = img.getpixel((x, y))
+                    
+                    # Enhance contrast
+                    enhanced_value = (pixel_value - min_val) / contrast_range
+                    
+                    # Map to ASCII character
+                    ascii_index = int(enhanced_value * (len(ascii_chars) - 1))
+                    
+                    # Add subtle randomization for texture (10% chance)
+                    if random.random() < 0.1:
+                        ascii_index = max(0, min(len(ascii_chars) - 1, 
+                                               ascii_index + random.randint(-1, 1)))
+                    
+                    line += ascii_chars[ascii_index]
+                ascii_lines.append(line)
+            
+            return "\n".join(ascii_lines)
+            
+        except Exception as e:
+            print(f"Error converting image to ASCII: {e}")
+            return self._generate_fallback_ascii_map(width, height)
+    
+    def _generate_fallback_ascii_map(self, width: int = 50, height: int = 25) -> str:
+        """Generate a fallback ASCII city map when image processing fails."""
+        ascii_lines = []
+        
+        # Enhanced ASCII characters for retro city elements
+        city_chars = {
+            'wall': '#',
+            'building': ['█', '▓', '▒', '░'],
+            'street': ['.', ':', '·'],
+            'plaza': ' ',
+            'ruins': ['%', '*', '+'],
+            'special': ['@', '&', '$']
+        }
+        
+        for y in range(height):
+            line = ""
+            for x in range(width):
+                # Create a more complex city pattern
+                # Outer walls
+                if y == 0 or y == height - 1 or x == 0 or x == width - 1:
+                    line += city_chars['wall']
+                # Major streets (grid pattern)
+                elif y % 8 == 0 or x % 12 == 0:
+                    line += random.choice(city_chars['street'])
+                # Central plaza areas
+                elif (y % 16 == 8 and x % 24 == 12):
+                    line += city_chars['plaza']
+                # Special landmarks (scattered)
+                elif random.random() < 0.05:  # 5% chance
+                    line += random.choice(city_chars['special'])
+                # Ruins (occasional)
+                elif random.random() < 0.08:  # 8% chance
+                    line += random.choice(city_chars['ruins'])
+                # Buildings (varied density)
+                elif random.random() < 0.4:  # 40% chance
+                    line += random.choice(city_chars['building'])
+                # Default to streets/paths
+                else:
+                    line += random.choice(city_chars['street'])
+            ascii_lines.append(line)
+        
+        return "\n".join(ascii_lines)
+
+    def get_city_ascii_map(self, overlay_name: str) -> str:
+        """Get ASCII art representation of the city overlay."""
+        # Try to load the city overlay image
+        image_path = f"data/city_overlays/{overlay_name}.jpg"
+        if not os.path.exists(image_path):
+            image_path = f"data/city_overlays/{overlay_name}.png"
+        
+        # Generate ASCII art from the image
+        ascii_art = self.image_to_ascii(image_path, width=50, height=25)
+        
+        return ascii_art
 
 # Global instance
 city_overlay_analyzer = CityOverlayAnalyzer()
