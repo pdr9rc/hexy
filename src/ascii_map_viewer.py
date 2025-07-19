@@ -18,6 +18,7 @@ from mork_borg_lore_database import MorkBorgLoreDatabase
 from terrain_system import terrain_system
 from main_map_generator import MainMapGenerator
 from translation_system import translation_system
+from city_overlay_analyzer import city_overlay_analyzer
 
 app = Flask(__name__, template_folder='../web/templates', static_folder='../web/static')
 
@@ -506,6 +507,69 @@ def reset_continent():
         
     except Exception as e:
         print(f"Reset error: {e}")
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/city-overlays')
+def get_city_overlays():
+    """Get list of available city overlay images."""
+    try:
+        overlays = city_overlay_analyzer.get_available_overlays()
+        return jsonify({
+            'success': True,
+            'overlays': overlays
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/city-overlay/<overlay_name>')
+def get_city_overlay(overlay_name):
+    """Get or generate city overlay data."""
+    try:
+        # Check if overlay exists in cache
+        overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
+        
+        if not overlay_data:
+            # Generate new overlay
+            overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
+        
+        return jsonify({
+            'success': True,
+            'overlay': overlay_data
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/city-overlay/<overlay_name>/ascii')
+def get_city_overlay_ascii(overlay_name):
+    """Get ASCII representation of city overlay."""
+    try:
+        ascii_view = city_overlay_analyzer.get_overlay_ascii_view(overlay_name)
+        return jsonify({
+            'success': True,
+            'ascii': ascii_view
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/city-overlay/<overlay_name>/hex/<hex_id>')
+def get_city_overlay_hex(overlay_name, hex_id):
+    """Get specific hex data from city overlay."""
+    try:
+        overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
+        
+        if not overlay_data:
+            overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
+        
+        hex_data = overlay_data['hex_grid'].get(hex_id)
+        
+        if not hex_data:
+            return jsonify({'success': False, 'error': 'Hex not found'})
+        
+        return jsonify({
+            'success': True,
+            'hex': hex_data
+        })
+    except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
 
 def generate_ascii_map_data():
