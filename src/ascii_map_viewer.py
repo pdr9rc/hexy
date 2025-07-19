@@ -123,7 +123,7 @@ def get_hex_info(hex_code):
             'atmosphere': atmosphere,
             'notable_features': notable_features,
             'key_npcs': city_data['key_npcs'],
-            'hex_code': hex_code
+            'hex_code': hex_code,
         })
     
     # Check if it's a settlement
@@ -670,7 +670,29 @@ def extract_hex_data(content, hex_code):
         'encounter': 'Unknown encounter',
         'denizen': 'No denizen information',
         'notable_feature': 'No notable features',
-        'atmosphere': 'Unknown atmosphere'
+        'atmosphere': 'Unknown atmosphere',
+        'loot': None,
+        'scroll': None,
+        'threat_level': None,
+        'territory': None,
+        'danger': None,
+        'treasure': None,
+        'beast_type': None,
+        'beast_feature': None,
+        'beast_behavior': None,
+        'dungeon_type': None,
+        'encounter_type': None,
+        'name': None,
+        'denizen_type': None,
+        'motivation': None,
+        'feature': None,
+        'demeanor': None,
+        'carries': None,
+        'is_beast': False,
+        'is_dungeon': False,
+        'is_npc': False,
+        'is_sea_encounter': False,
+        'is_settlement': False
     }
     
     current_section = None
@@ -686,12 +708,31 @@ def extract_hex_data(content, hex_code):
         elif line.startswith('**Terrain:**'):
             hex_data['terrain'] = line.replace('**Terrain:**', '').strip()
         
-        # Extract encounter
+        # Extract encounter and determine hex type
         elif '**' in line and any(symbol in line for symbol in ['※', '▲', '☉', '⌂', '≈']):
             hex_data['encounter'] = line.strip()
             
-            # Extract name from encounter line for settlements and dungeons
-            if '⌂ **' in line:
+            # Determine hex type based on encounter symbol
+            if '※ **' in line:
+                hex_data['is_beast'] = True
+                start = line.find('※ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['beast_type'] = line[start:end]
+            elif '▲ **' in line:
+                hex_data['is_dungeon'] = True
+                start = line.find('▲ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['dungeon_type'] = line[start:end]
+            elif '☉ **' in line:
+                hex_data['is_npc'] = True
+                start = line.find('☉ **') + 4
+                end = line.find('**', start)
+                if start > 3 and end > start:
+                    hex_data['name'] = line[start:end]
+            elif '⌂ **' in line:
+                hex_data['is_settlement'] = True
                 start = line.find('⌂ **') + 4
                 end = line.find('**', start)
                 if start > 3 and end > start:
@@ -702,19 +743,15 @@ def extract_hex_data(content, hex_code):
                     pop_end = line.find(' settlement')
                     if pop_start > 3 and pop_end > pop_start:
                         hex_data['population'] = line[pop_start:pop_end]
-            elif '▲ **' in line:
-                start = line.find('▲ **') + 4
-                end = line.find('**', start)
-                if start > 3 and end > start:
-                    hex_data['dungeon_type'] = line[start:end]
             elif '≈ **' in line:
+                hex_data['is_sea_encounter'] = True
                 start = line.find('≈ **') + 4
                 end = line.find('**', start)
                 if start > 3 and end > start:
                     hex_data['encounter_type'] = line[start:end]
         
         # Extract denizen information (but not the individual fields we parse separately)
-        elif current_section == 'denizen' and line and not line.startswith('#') and not any(field in line for field in ['**Motivation:**', '**Feature:**', '**Demeanor:**', '**Name:**', '**Type:**', '**Behavior:**']):
+        elif current_section == 'denizen' and line and not line.startswith('#') and not any(field in line for field in ['**Motivation:**', '**Feature:**', '**Demeanor:**', '**Name:**', '**Type:**', '**Behavior:**', '**Danger:**', '**Atmosphere:**', '**Territory:**', '**Threat Level:**', '**Treasure Found:**', '**Ancient Knowledge:**', '**Carries:**']):
             if hex_data['denizen'] == 'No denizen information':
                 hex_data['denizen'] = line.strip()
             else:
@@ -765,6 +802,41 @@ def extract_hex_data(content, hex_code):
             hex_data['threat_level'] = line.replace('**Threat Level:**', '').strip()
         elif '**Territory:**' in line:
             hex_data['territory'] = line.replace('**Territory:**', '').strip()
+        elif '**Carries:**' in line:
+            hex_data['carries'] = line.replace('**Carries:**', '').strip()
+        
+        # Extract loot information
+        elif '**Treasure Found:**' in line:
+            loot_text = line.replace('**Treasure Found:**', '').strip()
+            if loot_text and loot_text != 'No treasure found':
+                hex_data['loot'] = {
+                    'description': loot_text,
+                    'full_description': loot_text
+                }
+        
+        # Extract loot details from Loot Found section
+        elif '**Loot Found:**' in line:
+            current_section = 'loot'
+        elif current_section == 'loot' and line and not line.startswith('#') and not line.startswith('**'):
+            if not hex_data['loot']:
+                hex_data['loot'] = {}
+            hex_data['loot']['description'] = line.strip()
+            current_section = None
+        
+        # Extract magical effect from loot
+        elif '**Magical Effect:**' in line:
+            magical_effect = line.replace('**Magical Effect:**', '').strip()
+            if hex_data['loot']:
+                hex_data['loot']['magical_effect'] = magical_effect
+        
+        # Extract ancient knowledge details
+        elif '**Ancient Knowledge:**' in line:
+            current_section = 'ancient_knowledge'
+        elif current_section == 'ancient_knowledge' and line and not line.startswith('#') and not line.startswith('**'):
+            if not hex_data['scroll']:
+                hex_data['scroll'] = {}
+            hex_data['scroll']['description'] = line.strip()
+            current_section = None
         
         # Extract notable feature
         elif 'Notable Feature' in line or 'NOTABLE FEATURES' in line:

@@ -411,12 +411,7 @@
         <div class="container-fluid">
             <div class="text-center">
                 <pre class="header-ascii" id="headerAscii">
-       *                                                   *
-      *                                                     *
-    **                                                       **
-*   **                                                       **   *
-**   **          *                               *          **   **
-***    *         **                             **         *    ***
+
  ****            *********************************            ****
    *******      ***           *******           ***      *******
       ************   <span id="dice1">6</span>         *****   <span id="dice2">6</span>         ************
@@ -1048,16 +1043,6 @@
         const denizen = data.denizen || 'No denizen information';
         const notableFeature = data.notable_feature || 'No notable features';
         const atmosphere = data.atmosphere || 'Unknown atmosphere';
-        const treasure = data.treasure || 'No treasure found';
-        const ancientKnowledge = data.ancient_knowledge || 'No ancient knowledge';
-        const danger = data.danger || 'No dangers present';
-        const threatLevel = data.threat_level || 'Unknown threat level';
-        const territory = data.territory || 'No territory claimed';
-        const location = data.location || 'Unknown location';
-        const motivation = data.motivation || 'Unknown motivation';
-        const demeanor = data.demeanor || 'Unknown demeanor';
-        const feature = data.feature || 'No notable features';
-        const settlementLayout = data.settlement_layout || '';
         
         // Generate ASCII terrain art
         const asciiTerrain = getAsciiTerrain(terrain);
@@ -1125,99 +1110,199 @@
 ║ ${line.padEnd(58)}║`;
         });
         
-        // Add treasure if present
-        if (treasure && treasure !== 'No treasure found') {
+        // Add beast-specific details
+        if (data.is_beast && data.beast_type) {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ TREASURE:                                                   ║`;
-            const treasureLines = treasure.match(/.{1,58}/g) || [treasure];
-            treasureLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
+║ BEAST DETAILS:                                              ║`;
+            
+            if (data.beast_type) {
+                const beastTypeLines = data.beast_type.match(/.{1,58}/g) || [data.beast_type];
+                beastTypeLines.forEach(line => {
+                    html += `
+║ Type: ${line.padEnd(53)}║`;
+                });
+            }
+            
+            if (data.beast_feature) {
+                const beastFeatureLines = data.beast_feature.match(/.{1,58}/g) || [data.beast_feature];
+                beastFeatureLines.forEach(line => {
+                    html += `
+║ Feature: ${line.padEnd(50)}║`;
+                });
+            }
+            
+            if (data.beast_behavior) {
+                const beastBehaviorLines = data.beast_behavior.match(/.{1,58}/g) || [data.beast_behavior];
+                beastBehaviorLines.forEach(line => {
+                    html += `
+║ Behavior: ${line.padEnd(48)}║`;
+                });
+            }
         }
         
-        // Add ancient knowledge if present
-        if (ancientKnowledge && ancientKnowledge !== 'No ancient knowledge') {
+        // Add dungeon-specific details
+        if (data.is_dungeon && data.dungeon_type) {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ ANCIENT KNOWLEDGE:                                          ║`;
-            const knowledgeLines = ancientKnowledge.match(/.{1,58}/g) || [ancientKnowledge];
-            knowledgeLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
+║ DUNGEON DETAILS:                                            ║`;
+            
+            if (data.dungeon_type) {
+                const dungeonTypeLines = data.dungeon_type.match(/.{1,58}/g) || [data.dungeon_type];
+                dungeonTypeLines.forEach(line => {
+                    html += `
+║ Type: ${line.padEnd(53)}║`;
+                });
+            }
+            
+            if (data.danger) {
+                const dangerLines = data.danger.match(/.{1,58}/g) || [data.danger];
+                dangerLines.forEach(line => {
+                    html += `
+║ Danger: ${line.padEnd(51)}║`;
+                });
+            }
+            
+            if (data.treasure) {
+                const treasureLines = data.treasure.match(/.{1,58}/g) || [data.treasure];
+                treasureLines.forEach(line => {
+                    html += `
+║ Treasure: ${line.padEnd(49)}║`;
+                });
+            }
         }
         
-        // Add danger if present
-        if (danger && danger !== 'No dangers present') {
+        // Add NPC-specific details
+        if (data.is_npc && data.name) {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ DANGER:                                                     ║`;
-            const dangerLines = danger.match(/.{1,58}/g) || [danger];
-            dangerLines.forEach(line => {
-                html += `
-║ ${line.padEnd(58)}║`;
-            });
+║ NPC DETAILS:                                                ║`;
+            
+            if (data.name) {
+                const nameLines = data.name.match(/.{1,58}/g) || [data.name];
+                nameLines.forEach(line => {
+                    html += `
+║ Name: ${line.padEnd(53)}║`;
+                });
+            }
+            
+            if (data.denizen_type) {
+                const typeLines = data.denizen_type.match(/.{1,58}/g) || [data.denizen_type];
+                typeLines.forEach(line => {
+                    html += `
+║ Type: ${line.padEnd(53)}║`;
+                });
+            }
+            
+            if (data.motivation) {
+                const motivationLines = data.motivation.match(/.{1,58}/g) || [data.motivation];
+                motivationLines.forEach(line => {
+                    html += `
+║ Motivation: ${line.padEnd(47)}║`;
+                });
+            }
+            
+            if (data.feature) {
+                const featureLines = data.feature.match(/.{1,58}/g) || [data.feature];
+                featureLines.forEach(line => {
+                    html += `
+║ Feature: ${line.padEnd(50)}║`;
+                });
+            }
+            
+            if (data.demeanor) {
+                const demeanorLines = data.demeanor.match(/.{1,58}/g) || [data.demeanor];
+                demeanorLines.forEach(line => {
+                    html += `
+║ Demeanor: ${line.padEnd(49)}║`;
+                });
+            }
+            
+            if (data.carries) {
+                const carriesLines = data.carries.match(/.{1,58}/g) || [data.carries];
+                carriesLines.forEach(line => {
+                    html += `
+║ Carries: ${line.padEnd(50)}║`;
+                });
+            }
         }
         
-        // Add threat level section if available
-        if (threatLevel && threatLevel !== 'Unknown threat level') {
+        // Add sea encounter details
+        if (data.is_sea_encounter && data.encounter_type) {
+            html += `
+╠══════════════════════════════════════════════════════════════╣
+║ SEA ENCOUNTER DETAILS:                                      ║`;
+            
+            if (data.encounter_type) {
+                const encounterTypeLines = data.encounter_type.match(/.{1,58}/g) || [data.encounter_type];
+                encounterTypeLines.forEach(line => {
+                    html += `
+║ Type: ${line.padEnd(53)}║`;
+                });
+            }
+        }
+        
+        // Add threat level if present
+        if (data.threat_level && data.threat_level !== 'Unknown threat level') {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ THREAT LEVEL:                                               ║`;
             
-            const threatLines = threatLevel.match(/.{1,58}/g) || [threatLevel];
+            const threatLines = data.threat_level.match(/.{1,58}/g) || [data.threat_level];
             threatLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
         }
         
-        // Add territory section if available
-        if (territory && territory !== 'No territory claimed') {
+        // Add territory if present
+        if (data.territory && data.territory !== 'No territory claimed') {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
 ║ TERRITORY:                                                  ║`;
             
-            const territoryLines = territory.match(/.{1,58}/g) || [territory];
+            const territoryLines = data.territory.match(/.{1,58}/g) || [data.territory];
             territoryLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
         }
         
-        // Add location if present
-        if (location && location !== 'Unknown location') {
+        // Add loot if present
+        if (data.loot && data.loot.description) {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ LOCATION:                                                   ║`;
-            const locationLines = location.match(/.{1,58}/g) || [location];
-            locationLines.forEach(line => {
+║ LOOT FOUND:                                                 ║`;
+            
+            const lootDesc = data.loot.description || data.loot.full_description || 'Unknown loot';
+            const lootLines = lootDesc.match(/.{1,58}/g) || [lootDesc];
+            lootLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
-        }
-        
-        // Add motivation if present
-        if (motivation && motivation !== 'Unknown motivation') {
-            html += `
-╠══════════════════════════════════════════════════════════════╣
-║ MOTIVATION:                                                 ║`;
-            const motivationLines = motivation.match(/.{1,58}/g) || [motivation];
-            motivationLines.forEach(line => {
+            
+            if (data.loot.magical_effect) {
                 html += `
+╠══════════════════════════════════════════════════════════════╣
+║ MAGICAL EFFECT:                                             ║`;
+                
+                const magicalLines = data.loot.magical_effect.match(/.{1,58}/g) || [data.loot.magical_effect];
+                magicalLines.forEach(line => {
+                    html += `
 ║ ${line.padEnd(58)}║`;
-            });
+                });
+            }
         }
         
-        // Add demeanor if present
-        if (demeanor && demeanor !== 'Unknown demeanor') {
+        // Add scroll/ancient knowledge if present
+        if (data.scroll && data.scroll.description) {
             html += `
 ╠══════════════════════════════════════════════════════════════╣
-║ DEMEANOR:                                                   ║`;
-            const demeanorLines = demeanor.match(/.{1,58}/g) || [demeanor];
-            demeanorLines.forEach(line => {
+║ ANCIENT KNOWLEDGE:                                          ║`;
+            
+            const scrollDesc = data.scroll.description || data.scroll.full_description || 'Unknown knowledge';
+            const scrollLines = scrollDesc.match(/.{1,58}/g) || [scrollDesc];
+            scrollLines.forEach(line => {
                 html += `
 ║ ${line.padEnd(58)}║`;
             });
