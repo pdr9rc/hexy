@@ -532,6 +532,9 @@ def get_city_overlay(overlay_name):
             # Generate new overlay
             overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
         
+        if not overlay_data:
+            return jsonify({'success': False, 'error': 'Failed to generate overlay data'})
+        
         return jsonify({
             'success': True,
             'overlay': overlay_data
