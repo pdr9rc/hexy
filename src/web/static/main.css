@@ -1,0 +1,746 @@
+/**
+ * The Dying Lands - Interactive Map Viewer
+ * Main stylesheet with Mörk Borg aesthetic
+ */
+
+/* ===== CSS VARIABLES ===== */
+
+:root {
+  /* Color Palette */
+  --mork-black: #000000;
+  --mork-cyan: #00FFFF;
+  --mork-yellow: #FFFF00;
+  --mork-green: #00FF00;
+  --mork-magenta: #FF00FF;
+  --mork-white: #FFFFFF;
+  --mork-orange: #FF8000;
+  --mork-gray: #808080;
+  
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  
+  /* Border Radius */
+  --border-radius: 0;
+  --border-radius-sm: 2px;
+  
+  /* Shadows */
+  --shadow-cyan: 0 0 15px var(--mork-cyan);
+  --shadow-yellow: 0 0 15px var(--mork-yellow);
+  --shadow-green: 0 0 15px var(--mork-green);
+  --shadow-magenta: 0 0 15px var(--mork-magenta);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--mork-black);
+  color: var(--mork-white);
+  font-family: 'pixelify-sans', monospace;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'adhesive-nr-seven', serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ===== HEADER STYLES ===== */
+
+.main-header {
+  background: var(--mork-black);
+  border-bottom: none;
+  padding: var(--spacing-lg) 0;
+  margin-bottom: 0;
+  box-shadow: 0 4px 20px rgba(0, 255, 255, 0.3);
+  text-align: center;
+}
+
+.main-header h1 {
+  color: var(--mork-cyan);
+  text-shadow: 0 0 10px var(--mork-cyan);
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.header-ascii {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--mork-cyan);
+  margin: 0;
+  text-shadow: 0 0 10px var(--mork-cyan);
+}
+
+.dice-yellow {
+  color: var(--mork-yellow);
+  text-shadow: 0 0 10px var(--mork-yellow);
+}
+
+.dice-red {
+  color: var(--mork-magenta);
+  text-shadow: 0 0 10px var(--mork-magenta);
+}
+
+/* ===== CONTROL PANEL ===== */
+
+.control-panel {
+  background: var(--mork-black);
+  border: none;
+  padding: 0;
+  margin-bottom: 0;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.controls-group {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.legend-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  font-size: 0.85em;
+  color: var(--mork-cyan);
+}
+
+.legend-terrain, .legend-locations {
+  color: var(--mork-cyan);
+}
+
+.legend-terrain strong, .legend-locations strong {
+  color: var(--mork-white);
+  font-size: 0.9em;
+}
+
+/* ===== BUTTON STYLES ===== */
+
+.btn-mork-borg {
+  background: var(--mork-black);
+  border: 2px solid var(--mork-cyan);
+  color: var(--mork-cyan);
+  font-family: 'adhesive-nr-seven', serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: 2px;
+  transition: all var(--transition-normal);
+  border-radius: var(--border-radius);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-mork-borg:hover {
+  background: var(--mork-cyan);
+  color: var(--mork-black);
+  box-shadow: var(--shadow-cyan);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.btn-mork-borg:active {
+  transform: translateY(0);
+  box-shadow: 0 0 8px var(--mork-cyan);
+}
+
+.btn-mork-borg.btn-warning {
+  border-color: var(--mork-yellow);
+  color: var(--mork-yellow);
+}
+
+.btn-mork-borg.btn-warning:hover {
+  background: var(--mork-yellow);
+  color: var(--mork-black);
+  box-shadow: var(--shadow-yellow);
+}
+
+.btn-mork-borg:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Language Selector */
+.lang-label {
+  color: var(--mork-cyan);
+  margin-right: var(--spacing-sm);
+}
+
+.lang-select {
+  background: var(--mork-black);
+  color: var(--mork-cyan);
+  border: 1px solid var(--mork-cyan);
+  font-family: inherit;
+  font-size: 1rem;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+/* ===== MAIN LAYOUT ===== */
+
+.main-content {
+  display: flex;
+  height: calc(100vh - 200px);
+  min-height: 600px;
+  width: 100%;
+  gap: 0;
+}
+
+/* Map Side (Left Panel) */
+.map-side {
+  flex: 1;
+  background: var(--mork-black);
+  border-right: none;
+  padding: 0;
+  overflow: auto;
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container {
+  background: var(--mork-black);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 15px;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: auto;
+}
+
+/* Modal Side (Right Panel) */
+.modal-side {
+  flex: 1;
+  background: var(--mork-black);
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content-container {
+  background: var(--mork-black);
+  border: 2px solid var(--mork-cyan);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  height: 100%;
+  overflow-y: auto;
+  color: var(--mork-white);
+  flex: 1;
+}
+
+/* ===== HEX GRID STYLES ===== */
+
+.hex-grid {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.1;
+  color: var(--mork-white);
+  text-shadow: 0 0 5px var(--mork-white);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  overflow: auto;
+  height: calc(100% - 40px);
+  background: var(--mork-black);
+  padding: 15px;
+  border: 1px solid var(--mork-cyan);
+  text-align: center;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.map-row {
+  display: block;
+  text-align: left;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.row-number {
+  display: inline-block;
+  width: 30px;
+  text-align: right;
+  margin-right: 5px;
+  color: var(--mork-cyan);
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.hex-cell {
+  cursor: pointer;
+  padding: 1px 2px;
+  border-radius: 2px;
+  transition: all var(--transition-fast);
+  display: inline-block;
+  width: 16px;
+  text-align: center;
+  margin-right: 0px;
+  position: relative;
+}
+
+.hex-cell:hover {
+  background-color: rgba(0, 255, 255, 0.3);
+  transform: scale(1.3);
+  z-index: 10;
+  box-shadow: 0 0 8px var(--mork-cyan);
+}
+
+.hex-cell.selected {
+  background-color: rgba(255, 255, 0, 0.4);
+  box-shadow: 0 0 10px var(--mork-yellow);
+  transform: scale(1.2);
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  25%, 75% { opacity: 0.3; }
+}
+
+.hex-cell.has-content {
+  font-weight: bold;
+  opacity: 1;
+}
+
+.hex-cell.no-content {
+  opacity: 0.6;
+}
+
+/* ===== TERRAIN & CONTENT CLASSES ===== */
+
+/* Terrain Colors */
+.terrain-mountain { color: var(--mork-magenta); }
+.terrain-forest { color: var(--mork-green); }
+.terrain-coast { color: var(--mork-cyan); }
+.terrain-plains { color: var(--mork-yellow); }
+.terrain-swamp { color: var(--mork-orange); }
+.terrain-sea { color: var(--mork-cyan); }
+.terrain-unknown { color: var(--mork-gray); }
+
+/* Location Types */
+.major-city {
+  color: var(--mork-yellow) !important;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-yellow);
+}
+
+.settlement {
+  color: var(--mork-green) !important;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-green);
+}
+
+.hex-cell.dungeon {
+  color: var(--mork-orange) !important;
+  text-shadow: 0 0 8px var(--mork-orange) !important;
+}
+
+.hex-cell.selected {
+  background: var(--mork-cyan);
+  color: var(--mork-black) !important;
+  text-shadow: none !important;
+  box-shadow: 0 0 15px var(--mork-cyan);
+}
+
+/* ===== ASCII ART STYLES ===== */
+
+.ascii-modal {
+  background: var(--mork-black);
+  border: 2px solid var(--mork-cyan);
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  margin: 10px 0;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.ascii-modal pre {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  line-height: 1.2;
+  color: var(--mork-cyan);
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-shadow: 0 0 5px var(--mork-cyan);
+  max-width: 100%;
+}
+
+/* ===== CONTENT STYLES ===== */
+
+.hex-content {
+  padding: 20px;
+  color: var(--mork-white);
+}
+
+.hex-content h2 {
+  color: var(--mork-cyan);
+  margin-bottom: 15px;
+  text-shadow: 0 0 5px var(--mork-cyan);
+}
+
+.hex-details {
+  margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-left: 3px solid var(--mork-cyan);
+}
+
+.hex-details p {
+  margin: 5px 0;
+}
+
+.hex-details strong {
+  color: var(--mork-yellow);
+}
+
+.hex-html {
+  background: var(--mork-black);
+  border: 1px solid var(--mork-cyan);
+  padding: 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--mork-white);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* ===== STATE STYLES ===== */
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--mork-white);
+}
+
+.empty-state h2 {
+  color: var(--mork-cyan);
+  margin-bottom: 15px;
+  text-shadow: 0 0 5px var(--mork-cyan);
+}
+
+.empty-state p {
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.error-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--mork-magenta);
+}
+
+.error-state h2 {
+  margin-bottom: 15px;
+  text-shadow: 0 0 5px var(--mork-magenta);
+}
+
+.error-state p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+.me-2 { margin-right: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+/* ===== LOADING & NOTIFICATIONS ===== */
+
+#modalContainer {
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: var(--mork-black);
+  border: 2px solid var(--mork-cyan);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: var(--mork-cyan);
+}
+
+/* Force hide elements with hidden attribute */
+[hidden] {
+  display: none !important;
+}
+
+.loading-spinner {
+  border: 4px solid var(--mork-cyan);
+  border-top: 4px solid var(--mork-magenta);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1001;
+  background: var(--mork-black);
+  color: var(--mork-yellow);
+  border: 2px solid var(--mork-cyan);
+  border-radius: 6px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  min-width: 200px;
+  box-shadow: 0 0 10px var(--mork-cyan);
+  display: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1200px) {
+  .main-content {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .map-side, .modal-side {
+    flex: none;
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid var(--mork-cyan);
+  }
+  
+  .map-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-ascii {
+    font-size: 8px;
+  }
+  
+  .main-header h1 {
+    font-size: 2rem;
+  }
+  
+  .hex-grid {
+    font-size: 9px;
+  }
+  
+  .ascii-modal pre {
+    font-size: 9px;
+  }
+  
+  .btn-mork-borg {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-ascii {
+    font-size: 6px;
+  }
+  
+  .main-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .hex-grid {
+    font-size: 8px;
+  }
+  
+  .ascii-modal pre {
+    font-size: 8px;
+  }
+  
+  .control-panel {
+    padding: var(--spacing-sm);
+  }
+  
+  .map-side, .modal-side {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ===== CITY OVERLAY STYLES ===== */
+
+.city-overlay-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.city-hex-cell {
+  border: 1px solid var(--mork-cyan);
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: rgba(0, 255, 255, 0.1);
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.city-hex-cell:hover {
+  background: rgba(0, 255, 255, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--mork-cyan);
+}
+
+.city-hex-symbol {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.city-hex-type {
+  font-size: 10px;
+  color: var(--mork-gray);
+}
+
+/* City hex cell types */
+.city-hex-cell.city-district {
+  color: var(--mork-magenta);
+  border-color: var(--mork-magenta);
+}
+
+.city-hex-cell.city-building {
+  color: var(--mork-yellow);
+  border-color: var(--mork-yellow);
+}
+
+.city-hex-cell.city-street {
+  color: var(--mork-gray);
+  border-color: var(--mork-gray);
+}
+
+.city-hex-cell.city-landmark {
+  color: var(--mork-cyan);
+  border-color: var(--mork-cyan);
+}
+
+.city-hex-cell.city-market {
+  color: var(--mork-green);
+  border-color: var(--mork-green);
+}
+
+.city-hex-cell.city-temple {
+  color: var(--mork-magenta);
+  border-color: var(--mork-magenta);
+}
+
+.city-hex-cell.city-tavern {
+  color: var(--mork-orange);
+  border-color: var(--mork-orange);
+}
+
+.city-hex-cell.city-guild {
+  color: var(--mork-yellow);
+  border-color: var(--mork-yellow);
+}
+
+.city-hex-cell.city-residence {
+  color: var(--mork-white);
+  border-color: var(--mork-white);
+}
+
+.city-hex-cell.city-ruins {
+  color: var(--mork-gray);
+  border-color: var(--mork-gray);
+}
+
+.city-hex-cell.city-unknown {
+  color: var(--mork-gray);
+  border-color: var(--mork-gray);
+}
+
+/* ===== FOCUS STYLES ===== */
+
+.btn-mork-borg:focus,
+.hex-cell:focus {
+  outline: 2px solid var(--mork-cyan);
+  outline-offset: 2px;
+} 

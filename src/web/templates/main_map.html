@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive map viewer for The Dying Lands - Mörk Borg hexcrawl">
+  <title>🗺️ The Dying Lands - Interactive Map</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="main-header">
+    <div class="header-ascii" aria-hidden="true">
+      <pre>
+        @@@@@@@ @@@  @@@ @@@@@@@@      @@@@@@@  @@@ @@@ @@@ @@@  @@@  @@@@@@@       @@@       @@@@@@  @@@  @@@ @@@@@@@   @@@@@@
+        @@!   @@!  @@@ @@!           @@!  @@@ @@! !@@ @@! @@!@!@@@ !@@            @@!      @@!  @@@ @@!@!@@@ @@!  @@@ !@@    
+        @!!   @!@!@!@! @!!!:!        @!@  !@!  !@!@!  !!@ @!@@!!@! !@! @!@!@      @!!      @!@!@!@! @!@@!!@! @!@  !@!  !@@!! 
+        !!:   !!:  !!! !!:           !!:  !!!   !!:   !!: !!:  !!! :!!   !!:      !!:      !!:  !!! !!:  !!! !!:  !!!     !:!
+         :     :   : : : :: :::      :: :  :    .:    :   ::    :   :: :: :       : ::.: :  :   : : ::    :  :: :  :  ::.: :                                                                                                                                
+                              </pre>
+    </div>
+
+  </header>
+
+  <!-- Control Panel -->
+  <nav class="control-panel" aria-label="Map controls">
+    <div class="controls-row">
+      <!-- Action Controls -->
+      <div class="controls-group">
+        <button class="btn-mork-borg" id="lore-btn" aria-label="Show Lore">
+          📜 Lore
+        </button>
+        <button class="btn-mork-borg btn-warning" id="reset-btn" aria-label="Reset Continent">
+          🔄 Reset
+        </button>
+      </div>
+
+      <!-- Language Selector -->
+      <div class="controls-group">
+        <label for="language-selector" class="lang-label">Language:</label>
+        <select id="language-selector" class="lang-select" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
+      </div>
+
+      <!-- Map Legend -->
+      <div class="legend-group">
+        <div class="legend-terrain">
+          <strong>Terrain:</strong>
+          <span class="terrain-mountain">^</span> Mountain
+          <span class="terrain-forest">♠</span> Forest
+          <span class="terrain-coast">~</span> Coast
+          <span class="terrain-plains">.</span> Plains
+          <span class="terrain-swamp">#</span> Swamp
+          <span class="terrain-sea">≈</span> Sea
+        </div>
+        <div class="legend-locations">
+          <strong>Locations:</strong>
+          <span class="major-city">◆</span> Major Cities
+          <span class="settlement">⌂</span> Settlements
+          <strong>BOLD</strong> = Has Content
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Application Content -->
+  <main class="main-content">
+    <!-- Map Panel (Left) -->
+    <section class="map-side" aria-label="Hex Map">
+      <div class="map-container">
+        <div class="hex-grid" id="hexGrid" aria-label="Hex Map Grid">
+          <!-- Map content will be rendered here by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Details Panel (Right) -->
+    <section class="modal-side" aria-label="Hex Details">
+      <div class="modal-content-container" id="modalContainer">
+        <!-- Default empty state -->
+        <div class="empty-state">
+          <h2>Select a Hex</h2>
+          <p>Click on any hex on the map to view its details, encounters, and lore.</p>
+          <div class="ascii-modal">
+╔══════════════════════════════════════════════════════════════╗
+║                    THE DYING LANDS                           ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  Click a hex to explore its mysteries...                    ║
+║                                                              ║
+║  Each hex contains unique encounters, denizens,             ║
+║  and secrets waiting to be discovered.                      ║
+║                                                              ║
+║  The world is dying, but adventure lives on.                ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Loading Indicator -->
+  <div id="loading-indicator" class="loading-indicator" role="status" aria-live="polite" hidden>
+    <div class="loading-spinner"></div>
+    <span id="loading-message">Loading...</span>
+  </div>
+
+  <!-- Notification Container -->
+  <div id="notification-container" class="notification-container" aria-live="polite"></div>
+
+  <!-- Hidden Map Data -->
+  <div id="mapData"
+       data-map='{{ (ascii_map or {}) | tojson }}'
+       data-width="{{ map_width|int if map_width else 0 }}"
+       data-height="{{ map_height|int if map_height else 0 }}"
+       hidden
+       aria-hidden="true">
+  </div>
+
+  <!-- Application Scripts -->
+  <script type="module" src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+</html> 

@@ -30,3 +30,6 @@ jsonschema>=4.19.0
 # pytest>=7.4.0
 # black>=23.0.0
 # flake8>=6.0.0 
+
+# Optional: System monitoring (for performance tracking)
+# psutil>=5.9.0 

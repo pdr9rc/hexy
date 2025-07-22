@@ -10,6 +10,7 @@ import os
 import random
 from typing import Dict, Tuple, Optional, List
 from enum import Enum
+import json
 
 class TerrainType(Enum):
     """Enumeration of terrain types."""
@@ -24,15 +25,43 @@ class TerrainType(Enum):
 
 class TerrainSystem:
     """Unified terrain system for The Dying Lands."""
-    
-    def __init__(self, use_image_analysis: bool = True):
+    DEFAULT_TERRAIN_TYPES = [
+        'mountain', 'forest', 'coast', 'plains', 'swamp', 'desert', 'sea', 'unknown'
+    ]
+    DEFAULT_BOUNDARIES = {
+        'continent_x_min': 2, 'continent_x_max': 23,
+        'continent_y_min': 3, 'continent_y_max': 27,
+        'western_coast_x': 4, 'eastern_mountain_x': 21,
+        'northern_forest_y': 10, 'southern_swamp_y': 22,
+        'central_forest_x_min': 6, 'central_forest_x_max': 15,
+        'central_belt_x_min': 8, 'central_belt_x_max': 16,
+        'central_belt_y_min': 12, 'central_belt_y_max': 18,
+        'southern_y': 20, 'eastern_mountain_x2': 18,
+    }
+    def __init__(self, use_image_analysis: bool = True, config_path: str = None):
         self.use_image_analysis = use_image_analysis
         self.terrain_cache = {}
         self.image_analyzer = None
-        
+        self.terrain_types = self.DEFAULT_TERRAIN_TYPES.copy()
+        self.boundaries = self.DEFAULT_BOUNDARIES.copy()
+        if config_path and os.path.exists(config_path):
+            self._load_config(config_path)
         if use_image_analysis:
             self._initialize_image_analyzer()
-    
+    def _load_config(self, config_path):
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+            if 'terrain_types' in config:
+                self.terrain_types = config['terrain_types']
+            if 'boundaries' in config:
+                self.boundaries.update(config['boundaries'])
+            print(f"✅ Loaded terrain config from {config_path}")
+        except Exception as e:
+            print(f"⚠️  Failed to load terrain config: {e}")
+    def reload_config(self, config_path: str):
+        self._load_config(config_path)
+        self.clear_cache()
     def _initialize_image_analyzer(self):
         """Initialize image-based terrain analysis if images are available."""
         try:
@@ -48,87 +77,85 @@ class TerrainSystem:
         except Exception as e:
             print(f"⚠️  Image analysis disabled: {e}")
             self.use_image_analysis = False
-    
     def get_terrain_for_hex(self, hex_code: str, lore_db=None) -> str:
         """Get terrain type for a hex using the best available method."""
         if hex_code in self.terrain_cache:
             return self.terrain_cache[hex_code]
-        
         # Check for hardcoded lore locations first
         if lore_db:
             hardcoded = lore_db.get_hardcoded_hex(hex_code)
             if hardcoded and hardcoded.get('locked', False):
                 terrain = hardcoded.get('terrain', 'plains')
+                if terrain not in self.terrain_types:
+                    print(f"⚠️  Unknown terrain type in lore: {terrain}")
                 self.terrain_cache[hex_code] = terrain
                 return terrain
-        
         # Try image analysis if available
         if self.use_image_analysis and self.image_analyzer:
             try:
                 terrain = self.image_analyzer.get_terrain_for_hex(hex_code)
                 if terrain and terrain != 'unknown':
+                    if terrain not in self.terrain_types:
+                        print(f"⚠️  Unknown terrain type from image analysis: {terrain}")
                     self.terrain_cache[hex_code] = terrain
                     return terrain
             except Exception as e:
                 print(f"⚠️  Image analysis failed for hex {hex_code}: {e}")
-        
         # Fallback to coordinate-based detection
-        terrain = self._get_coordinate_based_terrain(hex_code)
-        self.terrain_cache[hex_code] = terrain
-        return terrain
-    
+        try:
+            terrain = self._get_coordinate_based_terrain(hex_code)
+            if terrain not in self.terrain_types:
+                print(f"⚠️  Unknown terrain type from coordinate rules: {terrain}")
+            self.terrain_cache[hex_code] = terrain
+            return terrain
+        except Exception as e:
+            print(f"⚠️  Coordinate-based terrain detection failed for hex {hex_code}: {e}")
+            self.terrain_cache[hex_code] = 'unknown'
+            return 'unknown'
     def _get_coordinate_based_terrain(self, hex_code: str) -> str:
-        """Get terrain based on hex coordinates using heuristics."""
+        """Get terrain based on hex coordinates using heuristics (now data-driven)."""
         try:
             x, y = int(hex_code[:2]), int(hex_code[2:])
         except (ValueError, IndexError):
             return 'plains'
-        
+        b = self.boundaries
         # Define continent boundaries
-        continent_x_min, continent_x_max = 2, 23
-        continent_y_min, continent_y_max = 3, 27
-        
-        # Check if hex is outside continent bounds
-        if (x < continent_x_min or x > continent_x_max or 
-            y < continent_y_min or y > continent_y_max):
+        if (x < b['continent_x_min'] or x > b['continent_x_max'] or 
+            y < b['continent_y_min'] or y > b['continent_y_max']):
             return 'sea'
-        
-        # Western coast (x <= 4)
-        if x <= 4:
-            if y <= 10:
+        # Western coast
+        if x <= b['western_coast_x']:
+            if y <= b['northern_forest_y']:
                 return 'coast'
-            elif y >= 22:
+            elif y >= b['southern_swamp_y']:
                 return 'swamp'
             else:
                 return 'plains'
-        
-        # Eastern mountains (x >= 21)
-        elif x >= 21:
+        # Eastern mountains
+        elif x >= b['eastern_mountain_x']:
             return 'mountain'
-        
         # Central regions
         else:
-            # Northern forests (y <= 10)
-            if y <= 10:
-                if 6 <= x <= 15:
+            # Northern forests
+            if y <= b['northern_forest_y']:
+                if b['central_forest_x_min'] <= x <= b['central_forest_x_max']:
                     return 'forest'
                 else:
                     return 'plains'
-            
-            # Southern regions (y >= 20)
-            elif y >= 20:
+            # Southern regions
+            elif y >= b['southern_y']:
                 if x <= 10:
                     return 'swamp'
-                elif x >= 18:
+                elif x >= b['eastern_mountain_x2']:
                     return 'mountain'
                 else:
                     return 'plains'
-            
             # Central belt
             else:
-                if 8 <= x <= 16 and 12 <= y <= 18:
+                if (b['central_belt_x_min'] <= x <= b['central_belt_x_max'] and 
+                    b['central_belt_y_min'] <= y <= b['central_belt_y_max']):
                     return 'forest'
-                elif x >= 18:
+                elif x >= b['eastern_mountain_x2']:
                     return 'mountain'
                 else:
                     return 'plains'

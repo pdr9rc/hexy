@@ -770,23 +770,83 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         
         # Encounter
         lines.append("## Encounter")
-        lines.append(hex_data['encounter'])
+        encounter = hex_data['encounter']['raw'] if isinstance(hex_data.get('encounter'), dict) and 'raw' in hex_data['encounter'] else hex_data.get('encounter', '')
+        lines.append(encounter)
         lines.append("")
-        
         # Denizen
         lines.append("## Denizen")
-        lines.append(hex_data['denizen'])
+        if isinstance(hex_data.get('denizen'), dict):
+            lines.append(hex_data['denizen'].get('raw', ''))
+            # Print subfields
+            for k, v in hex_data['denizen'].get('fields', {}).items():
+                if isinstance(v, list):
+                    for item in v:
+                        lines.append(f"**{k.replace('_', ' ').title()}:** {item}")
+                else:
+                    lines.append(f"**{k.replace('_', ' ').title()}:** {v}")
+            # Print ASCII art
+            for art in hex_data['denizen'].get('ascii_art', []):
+                lines.append(art)
+        else:
+            lines.append(hex_data.get('denizen', ''))
         lines.append("")
-        
         # Notable Feature
         lines.append("## Notable Feature")
-        lines.append(hex_data['notable_feature'])
+        if isinstance(hex_data.get('notable_feature'), dict):
+            lines.append(hex_data['notable_feature'].get('raw', ''))
+            for k, v in hex_data['notable_feature'].get('fields', {}).items():
+                if isinstance(v, list):
+                    for item in v:
+                        lines.append(f"**{k.replace('_', ' ').title()}:** {item}")
+                else:
+                    lines.append(f"**{k.replace('_', ' ').title()}:** {v}")
+            for art in hex_data['notable_feature'].get('ascii_art', []):
+                lines.append(art)
+        else:
+            lines.append(hex_data.get('notable_feature', ''))
         lines.append("")
-        
         # Atmosphere
         lines.append("## Atmosphere")
-        lines.append(hex_data['atmosphere'])
+        if isinstance(hex_data.get('atmosphere'), dict):
+            lines.append(hex_data['atmosphere'].get('raw', ''))
+            for k, v in hex_data['atmosphere'].get('fields', {}).items():
+                if isinstance(v, list):
+                    for item in v:
+                        lines.append(f"**{k.replace('_', ' ').title()}:** {item}")
+                else:
+                    lines.append(f"**{k.replace('_', ' ').title()}:** {v}")
+            for art in hex_data['atmosphere'].get('ascii_art', []):
+                lines.append(art)
+        else:
+            lines.append(hex_data.get('atmosphere', ''))
         lines.append("")
+        # Loot
+        if hex_data.get('loot'):
+            lines.append("## Loot Found")
+            loot = hex_data['loot']
+            if isinstance(loot, list):
+                for item in loot:
+                    if isinstance(item, dict):
+                        for k, v in item.items():
+                            lines.append(f"**{k.replace('_', ' ').title()}:** {v}")
+                    else:
+                        lines.append(str(item))
+            elif isinstance(loot, dict):
+                for k, v in loot.items():
+                    lines.append(f"**{k.replace('_', ' ').title()}:** {v}")
+            else:
+                lines.append(str(loot))
+            lines.append("")
+        # Scroll/Ancient Knowledge
+        if hex_data.get('scroll'):
+            lines.append("## Ancient Knowledge")
+            scroll = hex_data['scroll']
+            if isinstance(scroll, dict):
+                for k, v in scroll.items():
+                    lines.append(f"**{k.replace('_', ' ').title()}:** {v}")
+            else:
+                lines.append(str(scroll))
+            lines.append("")
         
         # Settlement-specific content
         if hex_data.get('is_settlement'):
