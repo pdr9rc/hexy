@@ -5,143 +5,93 @@ import * as ui from './uiUtils.js';
 
 export async function renderHexDetails(app: DyingLandsApp, hexCode: string) {
   ui.showLoading('Loading hex details...');
-  
   try {
     const hexData = await api.getHex(hexCode);
     
-    if (!hexData || !hexData.exists) {
-      showEmptyState(app);
+    if (!hexData || hexData.exists === false) {
+      showErrorState('Hex not found');
       return;
     }
 
-    // Check if it's a major city
-    if (hexData.is_major_city) {
-      await showCityDetailsInMap(app, hexCode);
-      return;
-    }
-
-    // Check if it's a settlement
-    if (hexData.is_settlement) {
-      await showSettlementDetailsInMap(app, hexCode);
-      return;
-    }
-
-    // Regular hex content - show in right panel
     displayHexContent(hexData);
-    
   } catch (error) {
     console.error('Error loading hex details:', error);
     showErrorState('Failed to load hex details');
-  } finally {
-    ui.hideLoading();
   }
 }
+
+export { showCityDetailsInMap as showCityDetails, showSettlementDetailsInMap as showSettlementDetails, renderHexDetails as showHexDetails };
 
 async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
   try {
       const cityData = await api.getCity(hexCode);
-    
     if (!cityData || !cityData.success) {
       showErrorState('City not found');
       return;
     }
-
     const city = cityData.city;
     const mapContainer = document.querySelector('.map-container');
     if (!mapContainer) return;
-
     // Save original content for restoration
     if (!mapContainer.hasAttribute('data-original-content')) {
       mapContainer.setAttribute('data-original-content', mapContainer.innerHTML);
     }
-
+    // Prepare fields
+    const name = city.name || '?';
+    const location = `HEX ${hexCode} - ${city.region || '?'}`;
+    const population = city.population || '?';
+    const atmosphere = city.atmosphere || '?';
+    const description = city.description?.raw || city.description || 'No description available';
+    const features = (city.notable_features && city.notable_features.length > 0) ? city.notable_features.join("\n") : '';
+    const keyNpcs = (city.key_npcs && city.key_npcs.length > 0) ? city.key_npcs.join("\n") : '';
+    const regionalNpcs = (cityData.regional_npcs && cityData.regional_npcs.length > 0) ? cityData.regional_npcs.join("\n") : '';
+    const factions = (cityData.factions && cityData.factions.length > 0) ? cityData.factions.map((f: any) => `${f.name} (${f.influence}) - ${f.description}`).join("\n") : '';
+    // Build HTML
     let html = `
-      <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
-        <div class="mb-4">
+      <div class="city-hex-details-box">
+        <div class="ascii-box">
+          <div class="ascii-inner-box">
+            <div class="mb-4" style="text-align:center;">
           <button class="btn btn-mork-borg me-2" onclick="window.app.showCityOverlayInMap('${hexCode}')">MAP GRID</button>
-          <button class="btn btn-mork-borg me-2" onclick="window.app.onHexClick('${hexCode}')">RETURN TO HEX</button>
+          <button class="btn btn-mork-borg me-2" onclick="window.app.showHexDetails('${hexCode}')">RETURN TO HEX</button>
           <button class="btn btn-mork-borg btn-warning" onclick="window.app.restoreMap()">RETURN TO MAP</button>
         </div>
-        <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-          <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
-╔══════════════════════════════��═══════════════════════════════╗
-
-║                    ${city.name.toUpperCase().padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣
-║ LOCATION: HEX ${hexCode} - ${city.region.toUpperCase().padEnd(40)}║
-║ POPULATION: ${city.population.padEnd(50)}║
-║ ATMOSPHERE: ${city.atmosphere.substring(0, 50).padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣
-║ DESCRIPTION:                                                ║`;
-
-    // Split description into lines
-    const cityDescription = city.description?.raw || city.description || 'No description available';
-    const descLines = cityDescription.match(/.{1,58}/g) || [cityDescription];
-    descLines.forEach((line: string) => {
-      html += `
-║ ${line.padEnd(58)}║`;
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ NOTABLE FEATURES:                                           ║`;
-
-    city.notable_features.forEach((feature: any) => {
-      const featureText = feature?.raw || feature || 'Unknown feature';
-      const featureLines = featureText.match(/.{1,56}/g) || [featureText];
-      featureLines.forEach((line: string) => {
-        html += `
-║ • ${line.padEnd(56)}║`;
-      });
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ KEY NPCS:                                                   ║`;
-
-    city.key_npcs.forEach((npc: any) => {
-      const npcText = npc?.raw || npc || 'Unknown NPC';
-      const npcLines = npcText.match(/.{1,56}/g) || [npcText];
-      npcLines.forEach((line: string) => {
-        html += `
-║ • ${line.padEnd(56)}║`;
-      });
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ REGIONAL NPCS:                                              ║`;
-
-    cityData.regional_npcs.forEach((npc: string) => {
-      const npcLines = npc.match(/.{1,56}/g) || [npc];
-      npcLines.forEach((line: string) => {
-        html += `
-║ • ${line.padEnd(56)}║`;
-      });
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ACTIVE FACTIONS:                                            ║`;
-
-    cityData.factions.forEach((faction: any) => {
-      const factionText = `${faction.name} (${faction.influence}) - ${faction.description}`;
-      const factionLines = factionText.match(/.{1,56}/g) || [factionText];
-      factionLines.forEach((line: string) => {
-        html += `
-║ • ${line.padEnd(56)}║`;
-      });
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-          </pre>
+            <div class="ascii-section ascii-city-name">
+              <span>${name}</span>
+            </div>
+            <div class="ascii-section ascii-city-location">
+              <span>LOCATION: ${location}</span>
+            </div>
+            <div class="ascii-section ascii-city-population">
+              <span>POPULATION: ${population}</span>
+            </div>
+            <div class="ascii-section ascii-city-atmosphere">
+              <span>ATMOSPHERE: ${atmosphere}</span>
+            </div>
+            <div class="ascii-section ascii-city-description">
+              <span>DESCRIPTION:</span>
+              <pre>${description}</pre>
+            </div>
+            <div class="ascii-section ascii-city-features">
+              <span>NOTABLE FEATURES:</span>
+              <pre>${features}</pre>
+            </div>
+            <div class="ascii-section ascii-city-key-npcs">
+              <span>KEY NPCS:</span>
+              <pre>${keyNpcs}</pre>
+            </div>
+            <div class="ascii-section ascii-city-regional-npcs">
+              <span>REGIONAL NPCS:</span>
+              <pre>${regionalNpcs}</pre>
+            </div>
+            <div class="ascii-section ascii-city-factions">
+              <span>ACTIVE FACTIONS:</span>
+              <pre>${factions}</pre>
+            </div>
+          </div>
         </div>
       </div>
     `;
-
     mapContainer.innerHTML = html;
   } catch (error) {
     console.error('Error loading city details:', error);
@@ -152,99 +102,66 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
 async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
   try {
       const settlementData = await api.getSettlement(hexCode);
-    
     if (!settlementData || !settlementData.success) {
       showErrorState('Settlement not found');
       return;
     }
-
     const settlement = settlementData.settlement;
     const mapContainer = document.querySelector('.map-container');
     if (!mapContainer) return;
-
     // Save original content for restoration
     if (!mapContainer.hasAttribute('data-original-content')) {
       mapContainer.setAttribute('data-original-content', mapContainer.innerHTML);
     }
-
+    // Prepare fields
+    const name = settlement.name || '?';
+    const location = `HEX ${hexCode} - ${settlement.region || '?'}`;
+    const population = settlement.population || '?';
+    const atmosphere = settlement.atmosphere || '?';
+    const description = settlement.description || '';
+    const features = (settlement.notable_features && settlement.notable_features.length > 0) ? settlement.notable_features.join("\n") : '';
+    const tavern = settlement.local_tavern || '';
+    const power = settlement.local_power || '';
+    // Build HTML
     let html = `
-      <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
-        <div class="mb-4">
+      <div class="city-hex-details-box">
+        <div class="ascii-box">
+          <div class="ascii-inner-box">
+            <div class="mb-4" style="text-align:center;">
           <button class="btn btn-mork-borg btn-warning me-2" onclick="window.app.restoreMap()">RETURN TO MAP</button>
         </div>
-        <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-          <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
-╔══════════════════════════════════════════════════════════════╗
-║                    ${settlement.name.toUpperCase().padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣
-║ LOCATION: HEX ${hexCode} - ${settlement.terrain.toUpperCase().padEnd(40)}║
-║ POPULATION: ${settlement.population.padEnd(50)}║
-║ ATMOSPHERE: ${settlement.atmosphere.substring(0, 50).padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣
-║ DESCRIPTION:                                                ║`;
-
-    // Split description into lines
-    const descLines = settlement.description.match(/.{1,58}/g) || [settlement.description];
-    descLines.forEach((line: string) => {
-      html += `
-║ ${line.padEnd(58)}║`;
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ NOTABLE FEATURE:                                            ║`;
-
-    // Fix: always treat as string
-    let notableFeature = settlement.notable_feature;
-    if (typeof notableFeature === 'object' && notableFeature !== null) {
-      notableFeature = notableFeature.raw || notableFeature.html || '';
-    }
-    notableFeature = String(notableFeature);
-    const featureLines = notableFeature.match(/.{1,56}/g) || [notableFeature];
-    featureLines.forEach((line: string) => {
-      html += `
-║ • ${line.padEnd(56)}║`;
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ LOCAL TAVERN:                                               ║`;
-
-    let localTavern = settlement.local_tavern;
-    if (typeof localTavern === 'object' && localTavern !== null) {
-      localTavern = localTavern.raw || localTavern.html || '';
-    }
-    localTavern = String(localTavern);
-    const tavernLines = localTavern.match(/.{1,56}/g) || [localTavern];
-    tavernLines.forEach((line: string) => {
-      html += `
-║ • ${line.padEnd(56)}║`;
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║ LOCAL POWER:                                                ║`;
-
-    let localPower = settlement.local_power;
-    if (typeof localPower === 'object' && localPower !== null) {
-      localPower = localPower.raw || localPower.html || '';
-    }
-    localPower = String(localPower);
-    const powerLines = localPower.match(/.{1,56}/g) || [localPower];
-    powerLines.forEach((line: string) => {
-      html += `
-║ • ${line.padEnd(56)}║`;
-    });
-
-    html += `
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-          </pre>
+            <div class="ascii-section ascii-settlement-name">
+              <span>${name}</span>
+            </div>
+            <div class="ascii-section ascii-settlement-location">
+              <span>LOCATION: ${location}</span>
+            </div>
+            <div class="ascii-section ascii-settlement-population">
+              <span>POPULATION: ${population}</span>
+            </div>
+            <div class="ascii-section ascii-settlement-atmosphere">
+              <span>ATMOSPHERE: ${atmosphere}</span>
+            </div>
+            <div class="ascii-section ascii-settlement-description">
+              <span>DESCRIPTION:</span>
+              <pre>${description}</pre>
+            </div>
+            <div class="ascii-section ascii-settlement-features">
+              <span>NOTABLE FEATURES:</span>
+              <pre>${features}</pre>
+            </div>
+            <div class="ascii-section ascii-settlement-tavern">
+              <span>LOCAL TAVERN:</span>
+              <pre>${tavern}</pre>
+            </div>
+            <div class="ascii-section ascii-settlement-power">
+              <span>LOCAL POWER:</span>
+              <pre>${power}</pre>
+            </div>
+          </div>
         </div>
       </div>
     `;
-
     mapContainer.innerHTML = html;
   } catch (error) {
     console.error('Error loading settlement details:', error);
@@ -253,158 +170,153 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
 }
 
 function displayHexContent(hexData: any) {
-  const container = document.getElementById('modalContainer');
+  const container = document.getElementById('details-panel');
   if (!container) return;
 
   console.log('🔍 Hex data for display:', hexData);
 
+  // Prepare fields
+  const title = hexData.title || `HEX ${hexData.hex_code}`;
+  const terrain = hexData.terrain_name || hexData.terrain || 'Unknown';
+  const hexType = hexData.hex_type || 'Unknown';
+  const encounter = hexData.encounter?.html || hexData.encounter?.raw || hexData.encounter || '';
+  const denizen = hexData.denizen?.html || hexData.denizen?.raw || hexData.denizen || '';
+  const notableFeature = hexData.notable_feature?.html || hexData.notable_feature?.raw || hexData.notable_feature || '';
+  const atmosphere = hexData.atmosphere?.html || hexData.atmosphere?.raw || hexData.atmosphere || '';
+  const loot = (hexData.loot && hexData.loot.length > 0) ? hexData.loot.map((item: any) => item.name || JSON.stringify(item)).join("\n") : '';
+
   let html = `
-    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
-      <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
-        <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word;">
-╔══════════════════════════════════════════════════════════════╗
-║                    ${(hexData.title || `HEX ${hexData.hex_code}`).toUpperCase().padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣
-║ TERRAIN: ${(hexData.terrain_name || hexData.terrain || 'Unknown').toUpperCase().padEnd(50)}║
-║ TYPE: ${(hexData.hex_type || 'Unknown').toUpperCase().padEnd(50)}║
-╠══════════════════════════════════════════════════════════════╣`;
+    <div class="city-hex-details-box">
+      <div class="ascii-box">
+        <div class="ascii-inner-box">
+          <div class="ascii-section ascii-hex-title">
+            <span>${title}</span>
+          </div>
+          <div class="ascii-section ascii-hex-terrain">
+            <span>TERRAIN: ${terrain}</span>
+          </div>
+          <div class="ascii-section ascii-hex-type">
+            <span>TYPE: ${hexType}</span>
+          </div>
+  `;
 
-  // Display encounter content
-  if (hexData.encounter) {
-    const encounterContent = hexData.encounter.html || hexData.encounter.raw || hexData.encounter;
-    if (encounterContent) {
-      html += `
-║ ENCOUNTER:                                                 ║`;
-      
-      // Clean up markdown and split into lines
-      const cleanEncounter = encounterContent.replace(/\*\*/g, '').replace(/\*/g, '※');
-      const encounterLines = cleanEncounter.match(/.{1,58}/g) || [cleanEncounter];
-      encounterLines.forEach((line: string) => {
+  if (encounter) {
         html += `
-║ ${line.padEnd(58)}║`;
-      });
-    }
+          <div class="ascii-section ascii-hex-encounter">
+            <span>ENCOUNTER:</span>
+            <pre>${encounter}</pre>
+          </div>
+    `;
   }
 
-  // Display denizen content
-  if (hexData.denizen) {
-    const denizenContent = hexData.denizen.html || hexData.denizen.raw || hexData.denizen;
-    if (denizenContent) {
+  if (denizen) {
       html += `
-╠══════════════════════════════════════════════════════════════╣
-║ DENIZEN:                                                   ║`;
-      
-      const denizenLines = denizenContent.match(/.{1,58}/g) || [denizenContent];
-      denizenLines.forEach((line: string) => {
-        html += `
-║ ${line.padEnd(58)}║`;
-      });
-    }
+          <div class="ascii-section ascii-hex-denizen">
+            <span>DENIZEN:</span>
+            <pre>${denizen}</pre>
+          </div>
+    `;
   }
 
-  // Display notable feature
-  if (hexData.notable_feature) {
-    const featureContent = hexData.notable_feature.html || hexData.notable_feature.raw || hexData.notable_feature;
-    if (featureContent) {
+  if (notableFeature) {
       html += `
-╠══════════════════════════════════════════════════════════════╣
-║ NOTABLE FEATURE:                                           ║`;
-      
-      const featureLines = featureContent.match(/.{1,58}/g) || [featureContent];
-      featureLines.forEach((line: string) => {
-        html += `
-║ ${line.padEnd(58)}║`;
-      });
-    }
+          <div class="ascii-section ascii-hex-feature">
+            <span>NOTABLE FEATURE:</span>
+            <pre>${notableFeature}</pre>
+          </div>
+    `;
   }
 
-  // Display atmosphere
-  if (hexData.atmosphere) {
-    const atmosphereContent = hexData.atmosphere.html || hexData.atmosphere.raw || hexData.atmosphere;
-    if (atmosphereContent) {
+  if (atmosphere) {
       html += `
-╠══════════════════════════════════════════════════════════════╣
-║ ATMOSPHERE:                                                ║`;
-      
-      const atmosphereLines = atmosphereContent.match(/.{1,58}/g) || [atmosphereContent];
-      atmosphereLines.forEach((line: string) => {
-        html += `
-║ ${line.padEnd(58)}║`;
-      });
-    }
+          <div class="ascii-section ascii-hex-atmosphere">
+            <span>ATMOSPHERE:</span>
+            <pre>${atmosphere}</pre>
+          </div>
+    `;
   }
 
-  // Display loot if available
-  if (hexData.loot && hexData.loot.length > 0) {
+  if (loot) {
     html += `
-╠══════════════════════════════════════════════════════════════╣
-║ LOOT:                                                      ║`;
-    
-    hexData.loot.forEach((item: any) => {
-      const itemText = item.name || JSON.stringify(item);
-      const itemLines = itemText.match(/.{1,56}/g) || [itemText];
-      itemLines.forEach((line: string) => {
-        html += `
-║ • ${line.padEnd(56)}║`;
-      });
-    });
+          <div class="ascii-section ascii-hex-loot">
+            <span>LOOT:</span>
+            <pre>${loot}</pre>
+          </div>
+    `;
   }
 
   // If no content was found, show a message
-  if (!hexData.encounter && !hexData.denizen && !hexData.notable_feature && !hexData.atmosphere && (!hexData.loot || hexData.loot.length === 0)) {
+  if (!encounter && !denizen && !notableFeature && !atmosphere && !loot) {
     html += `
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  No additional content available for this hex.              ║
-║                                                              ║`;
+          <div class="ascii-section ascii-hex-no-content">
+            <span>No additional content available for this hex.</span>
+          </div>
+    `;
   }
 
   html += `
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
-        </pre>
+        </div>
       </div>
     </div>
   `;
 
+  console.log('Setting details panel:', container, html, hexData); // Add this line before setting innerHTML
   container.innerHTML = html;
 }
 
 function showEmptyState(app: DyingLandsApp) {
-  const container = document.getElementById('modalContainer');
+  const container = document.getElementById('details-panel');
   if (!container) return;
 
   container.innerHTML = `
-    <div class="empty-state">
-      <h2>Select a Hex</h2>
-      <p>Click on any hex on the map to view its details, encounters, and lore.</p>
-      <div class="ascii-modal">
-╔══════════════════════════════════════════════════════════════╗
-║                    THE DYING LANDS                           ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  Click a hex to explore its mysteries...                    ║
-║                                                              ║
-║  Each hex contains unique encounters, denizens,             ║
-║  and secrets waiting to be discovered.                      ║
-║                                                              ║
-║  The world is dying, but adventure lives on.                ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
+    <div class="city-hex-details-box">
+      <div class="ascii-box">
+        <div class="ascii-inner-box">
+          <div class="ascii-section ascii-hex-title">
+            <span>THE DYING LANDS</span>
+          </div>
+          <div class="ascii-section ascii-hex-description">
+            <span>WELCOME TO THE HEXCRAWL</span>
+            <pre>
+Click a hex to explore its mysteries...
+
+Each hex contains unique encounters, denizens,
+and secrets waiting to be discovered.
+
+The world is dying, but adventure lives on.
+            </pre>
+          </div>
+          <div class="ascii-section ascii-hex-instructions">
+            <span>INSTRUCTIONS</span>
+            <pre>
+• Click any hex on the map to view its details
+• Major cities (◆) have additional overlay views
+• Settlements (⌂) provide local information
+• Bold hexes contain special content
+            </pre>
+          </div>
+        </div>
       </div>
     </div>
   `;
 }
 
 function showErrorState(message: string) {
-  const container = document.getElementById('modalContainer');
+  const container = document.getElementById('details-panel');
   if (!container) return;
 
   container.innerHTML = `
-    <div class="error-state">
-      <h2>Error</h2>
-      <p>${message}</p>
+    <div class="city-hex-details-box">
+      <div class="ascii-box">
+        <div class="ascii-inner-box">
+          <div class="ascii-section">
+            <span>ERROR</span>
+          </div>
+          <div class="ascii-section">
+            <pre>${message}</pre>
+          </div>
+        </div>
+      </div>
     </div>
   `;
 } 

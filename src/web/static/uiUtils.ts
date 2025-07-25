@@ -23,51 +23,56 @@ export function showNotification(msg: string, type: 'info' | 'error' = 'info') {
   setTimeout(() => { el.style.display = 'none'; }, 3500);
 }
 
+export const showError = (msg: string) => showNotification(msg, 'error');
+
 export function showLoreModal(lore: any) {
-  const container = document.getElementById('modalContainer');
+  const container = document.getElementById('details-panel');
   if (!container) return;
-  let html = `<div class="ascii-modal"><pre>\n`;
-  html += `╔══════════════════════════════════════════════════════════════╗\n`;
-  html += `║                        LORE OVERVIEW                        ║\n`;
-  html += `╠══════════════════════════════════════════════════════════════╣\n`;
+  
+  let html = `
+    <div class="city-hex-details-box">
+      <div class="ascii-box">
+        <div class="ascii-inner-box">
+          <div class="ascii-section ascii-lore-title">
+            <span>LORE OVERVIEW</span>
+          </div>`;
+  
   if (lore.major_cities) {
-    html += `║ Major Cities:                                               ║\n`;
-    (lore.major_cities as string[]).forEach(city => {
-      (city.match(/.{1,58}/g) || [city]).forEach(line => {
-        html += `║ ${line.padEnd(58)}║\n`;
-      });
-    });
-    html += `╠══════════════════════════════════════════════════════════════╣\n`;
+    html += `
+          <div class="ascii-section ascii-lore-cities">
+            <span>MAJOR CITIES</span>
+            <pre>${(lore.major_cities as string[]).join('\n')}</pre>
+          </div>`;
   }
+  
   if (lore.factions) {
-    html += `║ Factions:                                                   ║\n`;
-    (lore.factions as string[]).forEach(faction => {
-      (faction.match(/.{1,58}/g) || [faction]).forEach(line => {
-        html += `║ ${line.padEnd(58)}║\n`;
-      });
-    });
-    html += `╠══════════════════════════════════════════════════════════════╣\n`;
+    html += `
+          <div class="ascii-section ascii-lore-factions">
+            <span>FACTIONS</span>
+            <pre>${(lore.factions as string[]).join('\n')}</pre>
+          </div>`;
   }
+  
   if (lore.notable_npcs) {
-    html += `║ Notable NPCs:                                               ║\n`;
-    (lore.notable_npcs as string[]).forEach(npc => {
-      (npc.match(/.{1,58}/g) || [npc]).forEach(line => {
-        html += `║ ${line.padEnd(58)}║\n`;
-      });
-    });
-    html += `╠══════════════════════════════════════════════════════════════╣\n`;
+    html += `
+          <div class="ascii-section ascii-lore-npcs">
+            <span>NOTABLE NPCS</span>
+            <pre>${(lore.notable_npcs as string[]).join('\n')}</pre>
+          </div>`;
   }
+  
   if (lore.regional_lore) {
-    html += `║ Regional Lore:                                              ║\n`;
-    (lore.regional_lore as string[]).forEach(region => {
-      (region.match(/.{1,58}/g) || [region]).forEach(line => {
-        html += `║ ${line.padEnd(58)}║\n`;
-      });
-    });
-    html += `╠══════════════════════════════════════════════════════════════╣\n`;
+    html += `
+          <div class="ascii-section ascii-lore-regions">
+            <span>REGIONAL LORE</span>
+            <pre>${(lore.regional_lore as string[]).join('\n')}</pre>
+          </div>`;
   }
-  html += `║                                                              ║\n`;
-  html += `╚══════════════════════════════════════════════════════════════╝\n`;
-  html += `</pre></div>`;
+  
+  html += `
+        </div>
+      </div>
+    </div>`;
+  
   container.innerHTML = html;
 } 

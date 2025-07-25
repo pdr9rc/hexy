@@ -1,0 +1,320 @@
+{
+  "category": "terrain",
+  "tables": {
+    "mountain": {
+      "en": {
+        "encounters": [
+          "Ancient stone circle on peak",
+          "Collapsed mine entrance",
+          "Eagle's nest with strange eggs",
+          "Frozen waterfall hiding cave",
+          "Monastery ruins on cliff",
+          "Giant skeleton embedded in rock",
+          "Avalanche-blocked pass",
+          "Hermit's cave dwelling",
+          "Dragon bones scattered about",
+          "Sacred burial cairns",
+          "Wind-carved stone faces",
+          "Hidden valley below"
+        ],
+        "denizen_types": [
+          "Mountain hermit",
+          "Stone giant",
+          "Highland bandit",
+          "Cave troll",
+          "Wind spirit"
+        ],
+        "features": [
+          "Treacherous cliffs",
+          "Hidden passes",
+          "Ancient carved steps",
+          "Sacred peaks",
+          "Deep chasms"
+        ]
+      },
+      "pt": {
+        "encounters": [
+          "Círculo de pedras antigas no pico",
+          "Entrada de mina desabada",
+          "Ninho de águia com ovos estranhos",
+          "Cachoeira congelada escondendo caverna",
+          "Ruínas de mosteiro no penhasco",
+          "Esqueleto gigante incrustado na rocha",
+          "Passagem bloqueada por avalanche",
+          "Caverna habitada por eremita",
+          "Ossos de dragão espalhados",
+          "Cairns sagrados de sepultura",
+          "Faces esculpidas pelo vento na pedra",
+          "Vale escondido abaixo"
+        ],
+        "denizen_types": [
+          "Eremita da montanha",
+          "Gigante de pedra",
+          "Bandido das terras altas",
+          "Troll das cavernas",
+          "Espírito do vento"
+        ],
+        "features": [
+          "Penhascos traiçoeiros",
+          "Passagens escondidas",
+          "Degraus antigos esculpidos",
+          "Picos sagrados",
+          "Abismos profundos"
+        ]
+      }
+    },
+    "forest": {
+      "en": {
+        "encounters": [
+          "Circle of twisted trees",
+          "Abandoned woodcutter's camp",
+          "Shrine overgrown with vines",
+          "Pack of dire wolves",
+          "Fairy ring of mushrooms",
+          "Hanging corpses in trees",
+          "Druid's sacred grove",
+          "Hunting lodge in ruins",
+          "Ancient tree with hollow trunk",
+          "Stream of black water",
+          "Spider webs everywhere",
+          "Will-o'-wisps dancing"
+        ],
+        "denizen_types": [
+          "Wild druid",
+          "Forest witch",
+          "Bandit chief",
+          "Tree shepherd",
+          "Beast hunter"
+        ],
+        "features": [
+          "Dense undergrowth",
+          "Ancient oaks",
+          "Hidden clearings",
+          "Overgrown paths",
+          "Babbling brooks"
+        ]
+      },
+      "pt": {
+        "encounters": [
+          "Círculo de árvores retorcidas",
+          "Acampamento abandonado de lenhador",
+          "Santuário coberto por vinhas",
+          "Matilha de lobos terríveis",
+          "Círculo de fadas com cogumelos",
+          "Cadáveres pendurados em árvores",
+          "Bosque sagrado do druida",
+          "Cabana de caça em ruínas",
+          "Árvore antiga com tronco oco",
+          "Riacho de água negra",
+          "Teias de aranha por toda parte",
+          "Fogos-fátuos dançando"
+        ],
+        "denizen_types": [
+          "Druida selvagem",
+          "Bruxa da floresta",
+          "Chefe de bandidos",
+          "Pastor de árvores",
+          "Caçador de feras"
+        ],
+        "features": [
+          "Vegetação densa",
+          "Carvalhos antigos",
+          "Clareiras escondidas",
+          "Trilhas cobertas",
+          "Riachos murmurantes"
+        ]
+      }
+    },
+    "coast": {
+      "en": {
+        "encounters": [
+          "Shipwreck on rocky shore",
+          "Tide pools with strange creatures",
+          "Lighthouse abandoned",
+          "Sea cave with echoing depths",
+          "Driftwood shrine",
+          "Beached whale carcass",
+          "Fishing village ruins",
+          "Smuggler's hidden cove",
+          "Siren's rocky perch",
+          "Message in bottle",
+          "Seaweed-wrapped bones",
+          "Storm approaching fast"
+        ],
+        "denizen_types": [
+          "Shipwreck survivor",
+          "Sea witch",
+          "Smuggler",
+          "Lighthouse keeper",
+          "Siren"
+        ],
+        "features": [
+          "Rocky cliffs",
+          "Sandy beaches",
+          "Hidden coves",
+          "Tidal caves",
+          "Salt marshes"
+        ]
+      },
+      "pt": {
+        "encounters": [
+          "Naufrágio na costa rochosa",
+          "Poças de maré com criaturas estranhas",
+          "Farol abandonado",
+          "Caverna marinha com profundezas ecoantes",
+          "Santuário de madeira flutuante",
+          "Carcaça de baleia encalhada",
+          "Ruínas de vila de pescadores",
+          "Enseada escondida de contrabandistas",
+          "Poleiro rochoso da sereia",
+          "Mensagem na garrafa",
+          "Ossos envoltos em algas",
+          "Tempestade se aproximando rapidamente"
+        ],
+        "denizen_types": [
+          "Sobrevivente de naufrágio",
+          "Bruxa do mar",
+          "Contrabandista",
+          "Faroleiro",
+          "Sereia"
+        ],
+        "features": [
+          "Penhascos rochosos",
+          "Praias arenosas",
+          "Enseadas escondidas",
+          "Cavernas de maré",
+          "Pântanos salgados"
+        ]
+      }
+    },
+    "plains": {
+      "en": {
+        "encounters": [
+          "Merchant caravan under attack",
+          "Circle of standing stones",
+          "Abandoned farmstead",
+          "Wild horse herd",
+          "Battlefield with old bones",
+          "Windmill with broken sails",
+          "Crossroads with gibbet",
+          "Traveling circus camp",
+          "Nomad tent circle",
+          "Ancient road marker",
+          "Grazing land turned sour",
+          "Dust devil approaching"
+        ],
+        "denizen_types": [
+          "Wandering merchant",
+          "Plains rider",
+          "Shepherd",
+          "Road warden",
+          "Nomad chief"
+        ],
+        "features": [
+          "Rolling hills",
+          "Tall grass",
+          "Ancient roads",
+          "Scattered farms",
+          "Open sky"
+        ]
+      },
+      "pt": {
+        "encounters": [
+          "Caravana de mercadores sob ataque",
+          "Círculo de pedras eretas",
+          "Fazenda abandonada",
+          "Manada de cavalos selvagens",
+          "Campo de batalha com ossos velhos",
+          "Moinho com velas quebradas",
+          "Encruzilhada com patíbulo",
+          "Acampamento de circo viajante",
+          "Círculo de tendas nômades",
+          "Marco antigo da estrada",
+          "Terra de pastagem azedada",
+          "Redemoinho de poeira se aproximando"
+        ],
+        "denizen_types": [
+          "Mercador andarilho",
+          "Cavaleiro das planícies",
+          "Pastor",
+          "Guarda da estrada",
+          "Chefe nômade"
+        ],
+        "features": [
+          "Colinas ondulantes",
+          "Grama alta",
+          "Estradas antigas",
+          "Fazendas espalhadas",
+          "Céu aberto"
+        ]
+      }
+    },
+    "swamp": {
+      "en": {
+        "encounters": [
+          "Witch's hut on stilts",
+          "Swamp gas bubbling up",
+          "Corpse hanging from tree",
+          "Bog with floating bodies",
+          "Fireflies leading astray",
+          "Alligator nest",
+          "Sunken temple ruins",
+          "Will-o'-wisp trail",
+          "Plague victim camp",
+          "Quicksand pit hidden",
+          "Frog chorus deafening",
+          "Mist obscuring vision"
+        ],
+        "denizen_types": [
+          "Swamp witch",
+          "Bog lurker",
+          "Disease bearer",
+          "Marsh hunter",
+          "Lost soul"
+        ],
+        "features": [
+          "Stagnant pools",
+          "Twisted cypresses",
+          "Floating islands",
+          "Thick mist",
+          "Sucking mud"
+        ]
+      },
+      "pt": {
+        "encounters": [
+          "Cabana de bruxa sobre palafitas",
+          "Gás do pântano borbulhando",
+          "Cadáver pendurado em árvore",
+          "Lama com corpos flutuando",
+          "Vaga-lumes desviando o caminho",
+          "Ninho de jacaré",
+          "Ruínas de templo submerso",
+          "Trilha de fogo-fátuo",
+          "Acampamento de vítimas da peste",
+          "Poço de areia movediça escondido",
+          "Coro de sapos ensurdecedor",
+          "Névoa obscurecendo a visão"
+        ],
+        "denizen_types": [
+          "Bruxa do pântano",
+          "Espreitador do brejo",
+          "Portador de doença",
+          "Caçador do charco",
+          "Alma perdida"
+        ],
+        "features": [
+          "Poças estagnadas",
+          "Ciprestes retorcidos",
+          "Ilhas flutuantes",
+          "Névoa espessa",
+          "Lama sugadora"
+        ]
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2025-07-13T10:26:38.981580",
+    "migrated_from": "content_tables.py"
+  }
+}

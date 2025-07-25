@@ -146,4 +146,4 @@ export async function getCityOverlayHex(overlayName: string, hexId: string): Pro
     console.error('Error fetching city overlay hex:', error);
     throw error;
   }
-} 
+}

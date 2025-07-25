@@ -11,14 +11,14 @@
 <body>
   <!-- Header Section -->
   <header class="main-header">
-    <div class="header-ascii" aria-hidden="true">
+    <div class="header-ascii" style="text-align: center;" aria-hidden="true">
       <pre>
         @@@@@@@ @@@  @@@ @@@@@@@@      @@@@@@@  @@@ @@@ @@@ @@@  @@@  @@@@@@@       @@@       @@@@@@  @@@  @@@ @@@@@@@   @@@@@@
         @@!   @@!  @@@ @@!           @@!  @@@ @@! !@@ @@! @@!@!@@@ !@@            @@!      @@!  @@@ @@!@!@@@ @@!  @@@ !@@    
         @!!   @!@!@!@! @!!!:!        @!@  !@!  !@!@!  !!@ @!@@!!@! !@! @!@!@      @!!      @!@!@!@! @!@@!!@! @!@  !@!  !@@!! 
         !!:   !!:  !!! !!:           !!:  !!!   !!:   !!: !!:  !!! :!!   !!:      !!:      !!:  !!! !!:  !!! !!:  !!!     !:!
-         :     :   : : : :: :::      :: :  :    .:    :   ::    :   :: :: :       : ::.: :  :   : : ::    :  :: :  :  ::.: :                                                                                                                                
-                              </pre>
+         :     :   : : : :: :::      :: :  :    .:    :   ::    :   :: :: :       : ::.: :  :   : : ::    :  :: :  :  ::.: :
+        </pre>
     </div>
 
   </header>
@@ -70,7 +70,7 @@
   <main class="main-content">
     <!-- Map Panel (Left) -->
     <section class="map-side" aria-label="Hex Map">
-      <div class="map-container">
+      <div class="map-container" id="map-container">
         <div class="hex-grid" id="hexGrid" aria-label="Hex Map Grid">
           <!-- Map content will be rendered here by JavaScript -->
         </div>
@@ -79,24 +79,35 @@
 
     <!-- Details Panel (Right) -->
     <section class="modal-side" aria-label="Hex Details">
-      <div class="modal-content-container" id="modalContainer">
+      <div class="modal-content-container" id="details-panel">
         <!-- Default empty state -->
-        <div class="empty-state">
-          <h2>Select a Hex</h2>
-          <p>Click on any hex on the map to view its details, encounters, and lore.</p>
-          <div class="ascii-modal">
-╔══════════════════════════════════════════════════════════════╗
-║                    THE DYING LANDS                           ║
-╠══════════════════════════════════════════════════════════════╣
-║                                                              ║
-║  Click a hex to explore its mysteries...                    ║
-║                                                              ║
-║  Each hex contains unique encounters, denizens,             ║
-║  and secrets waiting to be discovered.                      ║
-║                                                              ║
-║  The world is dying, but adventure lives on.                ║
-║                                                              ║
-╚══════════════════════════════════════════════════════════════╝
+        <div class="city-hex-details-box">
+          <div class="ascii-box">
+            <div class="ascii-inner-box">
+              <div class="ascii-section ascii-hex-title">
+                <span>THE DYING LANDS</span>
+              </div>
+              <div class="ascii-section ascii-hex-description">
+                <span>WELCOME TO THE HEXCRAWL</span>
+                <pre>
+Click a hex to explore its mysteries...
+
+Each hex contains unique encounters, denizens,
+and secrets waiting to be discovered.
+
+The world is dying, but adventure lives on.
+                </pre>
+              </div>
+              <div class="ascii-section ascii-hex-instructions">
+                <span>INSTRUCTIONS</span>
+                <pre>
+• Click any hex on the map to view its details
+• Major cities (◆) have additional overlay views
+• Settlements (⌂) provide local information
+• Bold hexes contain special content
+                </pre>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -113,13 +124,8 @@
   <div id="notification-container" class="notification-container" aria-live="polite"></div>
 
   <!-- Hidden Map Data -->
-  <div id="mapData"
-       data-map='{{ (ascii_map or {}) | tojson }}'
-       data-width="{{ map_width|int if map_width else 0 }}"
-       data-height="{{ map_height|int if map_height else 0 }}"
-       hidden
-       aria-hidden="true">
-  </div>
+  <div id="map-data" style="display:none;">{{ (ascii_map or {}) | tojson }}</div>
+  <div id="map-dimensions" style="display:none;">[{{ map_width }}, {{ map_height }}]</div>
 
   <!-- Application Scripts -->
   <script type="module" src="{{ url_for('static', filename='main.js') }}"></script>

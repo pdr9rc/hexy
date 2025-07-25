@@ -1,0 +1,67 @@
+{
+  "category": "affiliation",
+  "tables": {
+    "monster_affiliations": [
+      "Cult of the Dying God",
+      "Brotherhood of Bones",
+      "Circle of Carrion",
+      "Order of the Black Sun",
+      "Servants of the Void",
+      "Children of Pestilence",
+      "Followers of the Last Prophet",
+      "Legion of the Damned",
+      "Covenant of Shadows",
+      "Disciples of Decay",
+      "Heralds of the End",
+      "Apostles of Agony"
+    ],
+    "npc_affiliations": [
+      "Royal Guard remnants",
+      "Merchant Guild outcasts",
+      "Heretical clergy",
+      "Plague survivors",
+      "Bandit confederations",
+      "Witch covens",
+      "Grave robber crews",
+      "Mercenary companies",
+      "Cultist cells",
+      "Refugee communities",
+      "Scavenger gangs",
+      "Death merchant cartels"
+    ],
+    "faction_affiliations": [
+      "The Dying Church",
+      "House of Broken Nobles",
+      "Merchants of Misery",
+      "The Bone Throne",
+      "Plague Wardens",
+      "Shadow Parliament",
+      "Carrion Court",
+      "The Last Kingdom",
+      "Brotherhood of the Grave",
+      "Order of Silent Bells",
+      "Council of Worms",
+      "Throne of Skulls"
+    ],
+    "affiliation_attitudes": [
+      "Violently hostile",
+      "Deeply suspicious",
+      "Cautiously neutral",
+      "Grudgingly helpful",
+      "Opportunistically friendly",
+      "Desperately seeking aid",
+      "Fanatically devoted",
+      "Secretly plotting",
+      "Openly contemptuous",
+      "Fearfully obedient",
+      "Reluctantly cooperative",
+      "Blindly loyal"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-07-13T10:26:38.980820",
+    "migrated_from": "content_tables.py"
+  }
+}

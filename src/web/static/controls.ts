@@ -3,6 +3,8 @@ import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
 
+export { setupControls as initializeControls };
+
 export function setupControls(app: DyingLandsApp) {
   // Lore button
   const loreBtn = document.getElementById('lore-btn');

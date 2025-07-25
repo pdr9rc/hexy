@@ -382,14 +382,15 @@ class HexModelManager:
         else:
             return WildernessHex(hex_code=hex_code, terrain=terrain)
     
-    def _create_loot_item(self, loot_data: Dict[str, Any]) -> LootItem:
-        """Create a LootItem from raw data."""
+    def _create_loot_item(self, loot_data: Dict[str, Any]) -> Optional[LootItem]:
+        if not isinstance(loot_data, dict):
+            return None
         return LootItem(
             description=loot_data.get('description', ''),
             full_description=loot_data.get('full_description', ''),
             item=loot_data.get('item', ''),
-            type=LootType(loot_data.get('type', 'valuable')),
-            magical_effect=loot_data.get('magical_effect')
+            type=loot_data.get('type', None),
+            magical_effect=loot_data.get('magical_effect', None)
         )
     
     def _create_ancient_knowledge(self, scroll_data: Dict[str, Any]) -> AncientKnowledge:

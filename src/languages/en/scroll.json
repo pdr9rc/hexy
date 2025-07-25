@@ -1,0 +1,53 @@
+{
+  "category": "scroll",
+  "tables": {
+    "scroll_types": [
+      "Crumbling parchment",
+      "Blood-stained vellum",
+      "Bone tablets",
+      "Metal scrolls",
+      "Flesh pages",
+      "Stone inscriptions",
+      "Tree bark writings",
+      "Skin manuscripts",
+      "Clay fragments",
+      "Wax tablets"
+    ],
+    "scroll_content": [
+      "heretical prayers",
+      "forbidden spells",
+      "plague recipes",
+      "death rituals",
+      "curses and hexes",
+      "prophecies of doom",
+      "maps to lost places",
+      "alchemical formulas",
+      "summoning circles",
+      "torture methods",
+      "poison guides",
+      "necromantic arts",
+      "demonic contracts",
+      "blasphemous hymns"
+    ],
+    "scroll_effects": [
+      "causes nightmares when read",
+      "burns the reader's hands",
+      "whispers dark secrets",
+      "ages the reader rapidly",
+      "summons malevolent spirits",
+      "inflicts temporary blindness",
+      "drives reader temporarily mad",
+      "reveals hidden truths",
+      "grants dark knowledge",
+      "curses the reader",
+      "attracts undead",
+      "causes uncontrollable fear"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-07-13T10:26:38.980498",
+    "migrated_from": "content_tables.py"
+  }
+}

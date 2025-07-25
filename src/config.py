@@ -13,7 +13,7 @@ from pathlib import Path
 class MapConfig:
     """Map generation configuration."""
     width: int = 30
-    height: int = 25
+    height: int = 60
     start_x: int = 1
     start_y: int = 1
     

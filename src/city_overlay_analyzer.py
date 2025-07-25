@@ -16,93 +16,25 @@ from mork_borg_lore_database import MorkBorgLoreDatabase
 from database_manager import database_manager
 
 class CityOverlayAnalyzer:
-    """Analyzes city overlay images and generates 5x5 hex grids."""
-    
+    """Generates 5x5 hex grids for city overlays using random/content-table based generation only. No image file logic."""
     def __init__(self):
         self.lore_db = MorkBorgLoreDatabase()
-        
-        # Try multiple possible paths for the overlay directory
-        possible_overlay_paths = [
-            'data/city_overlays',           # From project root
-            '../data/city_overlays',        # From src directory  
-            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'city_overlays')  # Relative to this file
-        ]
-        
-        self.overlay_directory = None
-        for path in possible_overlay_paths:
-            if os.path.exists(path):
-                self.overlay_directory = path
-                print(f"DEBUG: Found overlay directory at: {path}")
-                break
-        
-        if not self.overlay_directory:
-            # Default to first option and create it
-            self.overlay_directory = 'data/city_overlays'
-            os.makedirs(self.overlay_directory, exist_ok=True)
-            print(f"DEBUG: Created overlay directory at: {self.overlay_directory}")
-            
-        # Try multiple possible paths for the output directory
-        possible_output_paths = [
-            'dying_lands_output/city_overlays',           # From project root
-            '../dying_lands_output/city_overlays',        # From src directory  
-            os.path.join(os.path.dirname(os.path.dirname(__file__)), 'dying_lands_output', 'city_overlays')  # Relative to this file
-        ]
-        
-        self.output_directory = None
-        for path in possible_output_paths:
-            try:
-                os.makedirs(path, exist_ok=True)
-                self.output_directory = path
-                print(f"DEBUG: Created/found output directory at: {path}")
-                break
-            except Exception as e:
-                print(f"DEBUG: Could not create output directory at {path}: {e}")
-                continue
-        
-        if not self.output_directory:
-            # Default to first option
-            self.output_directory = 'dying_lands_output/city_overlays'
-        
-        # Final verification
-        print(f"DEBUG: Final output directory: {self.output_directory}")
-        print(f"DEBUG: Output directory exists: {os.path.exists(self.output_directory)}")
-        
-        # Load content tables for random generation
+        self.output_directory = 'dying_lands_output/city_overlays'
+        os.makedirs(self.output_directory, exist_ok=True)
         self.content_tables = database_manager.load_tables('en')
-        
-        # City overlay data cache
         self.overlays_cache = {}
-        
+
     def get_available_overlays(self) -> List[Dict[str, Any]]:
-        """Get list of available city overlay images."""
+        """Get list of available city overlays by name only (no image files)."""
         overlays = []
-        
-        # Debug: Print current working directory and paths
-        print(f"DEBUG: Current working directory: {os.getcwd()}")
-        print(f"DEBUG: Looking for overlays in: {self.overlay_directory}")
-        print(f"DEBUG: Absolute path: {os.path.abspath(self.overlay_directory)}")
-        print(f"DEBUG: Directory exists: {os.path.exists(self.overlay_directory)}")
-        
-        if os.path.exists(self.overlay_directory):
-            files = os.listdir(self.overlay_directory)
-            print(f"DEBUG: Files in directory: {files}")
-        
-        if not os.path.exists(self.overlay_directory):
-            print(f"DEBUG: Directory {self.overlay_directory} does not exist")
-            return overlays
-            
-        for filename in os.listdir(self.overlay_directory):
-            if filename.lower().endswith(('.jpg', '.jpeg', '.png', '.gif', '.bmp')):
-                overlay_name = os.path.splitext(filename)[0]
-                overlay_path = os.path.join(self.overlay_directory, filename)
-                
-                overlays.append({
-                    'name': overlay_name,
-                    'filename': filename,
-                    'path': overlay_path,
-                    'display_name': self._format_overlay_name(overlay_name)
-                })
-        
+        # Example: populate overlays from lore_db major cities
+        for city_key, city_data in self.lore_db.major_cities.items():
+            overlays.append({
+                'name': city_key,
+                'display_name': city_data['name'],
+                'filename': None,
+                'path': None
+            })
         return overlays
     
     def _format_overlay_name(self, name: str) -> str:
@@ -845,6 +777,8 @@ class CityOverlayAnalyzer:
     
     def _save_overlay_data(self, overlay_name: str, overlay_data: Dict[str, Any]):
         """Save overlay data to a JSON file."""
+        # Ensure the output directory exists
+        os.makedirs(self.output_directory, exist_ok=True)
         filename = os.path.join(self.output_directory, f"{overlay_name}_overlay.json")
         
         with open(filename, 'w', encoding='utf-8') as f:

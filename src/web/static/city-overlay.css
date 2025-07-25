@@ -1,0 +1,265 @@
+/* City Overlay Styles */
+.city-overlay-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.city-overlay-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #8b4513;
+}
+
+.city-overlay-header h2 {
+  color: #8b4513;
+  margin: 0;
+  font-family: "Jacquard 12", monospace;
+}
+
+.city-overlay-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.city-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 20px;
+  background: #2a1810;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #8b4513;
+}
+
+.city-row {
+  display: flex;
+  gap: 2px;
+}
+
+.city-hex-cell {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  font-family: "Pixelify Sans", monospace;
+}
+
+.city-hex-cell:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+}
+
+.city-hex-symbol {
+  font-size: 24px;
+  font-weight: bold;
+  color: #daa520;
+}
+
+.city-hex-coords {
+  font-size: 10px;
+  color: #8b4513;
+  position: absolute;
+  bottom: 2px;
+  right: 4px;
+}
+
+/* City hex type colors */
+.city-district {
+  background: #4a3728;
+}
+.city-building {
+  background: #5a4a3a;
+}
+.city-street {
+  background: #3a3a3a;
+}
+.city-landmark {
+  background: #6a4a2a;
+}
+.city-market {
+  background: #4a5a3a;
+}
+.city-temple {
+  background: #5a3a4a;
+}
+.city-tavern {
+  background: #5a4a2a;
+}
+.city-guild {
+  background: #3a4a5a;
+}
+.city-residence {
+  background: #4a4a4a;
+}
+.city-ruins {
+  background: #2a2a2a;
+}
+
+.city-legend {
+  background: #2a1810;
+  padding: 15px;
+  border-radius: 8px;
+  border: 2px solid #8b4513;
+}
+
+.city-legend h4 {
+  color: #daa520;
+  margin: 0 0 10px 0;
+  font-family: "Jacquard 12", monospace;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #d2b48c;
+  font-size: 14px;
+}
+
+.legend-item .symbol {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: #8b4513;
+  color: #daa520;
+  text-align: center;
+  line-height: 20px;
+  font-weight: bold;
+  border-radius: 3px;
+}
+
+/* City hex details */
+.city-hex-details {
+  padding: 20px;
+}
+
+.city-hex-details h3 {
+  color: #daa520;
+  margin: 0 0 10px 0;
+  font-family: "Jacquard 12", monospace;
+}
+
+.hex-type-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.hex-type-badge.city-district {
+  background: #4a3728;
+  color: #daa520;
+}
+.hex-type-badge.city-building {
+  background: #5a4a3a;
+  color: #daa520;
+}
+.hex-type-badge.city-street {
+  background: #3a3a3a;
+  color: #daa520;
+}
+.hex-type-badge.city-landmark {
+  background: #6a4a2a;
+  color: #daa520;
+}
+.hex-type-badge.city-market {
+  background: #4a5a3a;
+  color: #daa520;
+}
+.hex-type-badge.city-temple {
+  background: #5a3a4a;
+  color: #daa520;
+}
+.hex-type-badge.city-tavern {
+  background: #5a4a2a;
+  color: #daa520;
+}
+.hex-type-badge.city-guild {
+  background: #3a4a5a;
+  color: #daa520;
+}
+.hex-type-badge.city-residence {
+  background: #4a4a4a;
+  color: #daa520;
+}
+.hex-type-badge.city-ruins {
+  background: #2a2a2a;
+  color: #daa520;
+}
+
+.detail-section {
+  margin-bottom: 15px;
+}
+
+.detail-section h4 {
+  color: #8b4513;
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.detail-section p {
+  color: #d2b48c;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.detail-section ul {
+  color: #d2b48c;
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.random-table {
+  background: #2a1810;
+  padding: 10px;
+  border-radius: 4px;
+  border-left: 3px solid #8b4513;
+}
+
+.position-info {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #8b4513;
+  color: #8b4513;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .city-overlay-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .city-hex-cell {
+    width: 60px;
+    height: 60px;
+  }
+
+  .city-hex-symbol {
+    font-size: 18px;
+  }
+
+  .legend-items {
+    gap: 10px;
+  }
+}

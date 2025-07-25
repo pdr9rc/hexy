@@ -1,0 +1,353 @@
+{
+  "city_name": "Galgenbeck",
+  "display_name": "Galgenbeck - The Corpse City",
+  "description": "A sprawling metropolis built atop the bones of countless civilizations",
+  "theme": "urban_decay_necropolis",
+  
+  "districts": [
+    "New Kurk",
+    "Rattingen", 
+    "Chalk",
+    "Downwind",
+    "Riverside",
+    "Larchengrund",
+    "Altmarkt",
+    "Ehrenfeld"
+  ],
+  
+  "buildings": [
+    "Ministry of Wealth & Taxes",
+    "Office of the Holy Inquisition (Ruined)",
+    "The City (Bone) Mill",
+    "Council Chambers",
+    "The Corpse Warehouse",
+    "Demon Embassy (Schleswig)",
+    "Soul Collection Center",
+    "The Hanging Courthouse",
+    "Ancient Bone Library",
+    "The Rotting Mansion"
+  ],
+  
+  "streets": [
+    "Corpse Alley",
+    "The Bone Road",
+    "Gallows Way",
+    "Soul Tax Avenue",
+    "Hanging Gardens Path",
+    "The Condemned Walk",
+    "Ministry Street",
+    "Council's Road",
+    "The Bleeding Path",
+    "Sewer Entrance Lane"
+  ],
+  
+  "landmarks": [
+    "The Hanging Gardens of Corpses",
+    "Central Heptalith",
+    "The Great Gallows",
+    "Bone Mill Tower",
+    "Council's Throne",
+    "The Soul Well",
+    "Schleswig Gate",
+    "The Corpse Clock",
+    "Ancient Catacombs Entrance",
+    "The Weeping Fountain"
+  ],
+  
+  "markets": [
+    "The Soul Bazaar",
+    "Corpse Parts Market",
+    "The Bone Exchange",
+    "Schleswig Demon Market",
+    "Tax Collection Plaza",
+    "The Hanging Market",
+    "Condemned Goods Fair",
+    "The Flesh Trade",
+    "Ministry Commerce Hub",
+    "The Death Dealers"
+  ],
+  
+  "temples": [
+    "Temple of the Dying God",
+    "Shrine of Bone Collection",
+    "The Gallows Chapel",
+    "Holy Inquisition Cathedral (Ruined)",
+    "The Soul Sanctuary",
+    "Temple of Final Judgement",
+    "The Corpse Cathedral",
+    "Shrine of the Condemned",
+    "The Last Prayer House",
+    "Temple of Beautiful Endings"
+  ],
+  
+  "taverns": [
+    "The Hanged Man",
+    "The Corpse's Rest",
+    "The Final Drop",
+    "The Bone and Gristle",
+    "The Soul's Lament",
+    "The Dying Light",
+    "The Condemned's Last",
+    "The Weeping Wound",
+    "The Gallows Humor",
+    "The Rotting Goat"
+  ],
+  
+  "guilds": [
+    "The Corpse Collectors Guild",
+    "Soul Tax Assessors",
+    "Bone Mill Workers Union",
+    "Guild of Sacred Executioners",
+    "The Hanging Gardeners",
+    "Ministry Clerks Association",
+    "Demon Negotiators (Schleswig)",
+    "The Council's Servants",
+    "Catacomb Explorers Guild",
+    "The Death Certificate Society"
+  ],
+  
+  "residences": [
+    "Council Member's Manor",
+    "Tax Collector's House",
+    "The Mourning Mansion",
+    "Executioner's Lodge",
+    "Demon Ambassador's Residence",
+    "Bone Miller's Home",
+    "The Condemned House",
+    "Corpse Handler's Quarters",
+    "Soul Clerk's Dwelling",
+    "The Weeping Estate"
+  ],
+  
+  "ruins": [
+    "Ruins of the Old Palace",
+    "Collapsed Holy Inquisition Wing",
+    "The Fallen Ministry Tower",
+    "Ancient Pre-Council Buildings",
+    "The Shattered Cathedral",
+    "Broken Heptalith Fragments",
+    "The Ruined First Gallows",
+    "Collapsed Sewer Sections",
+    "The Forgotten Bone Works",
+    "Pre-Corpse City Remnants"
+  ],
+  
+  "encounters": {
+    "district": [
+      "Soul tax collectors demanding payment in memories",
+      "Demon-possessed citizens from Schleswig district",
+      "Corpse collectors hauling fresh bodies",
+      "Ministry officials checking identification papers",
+      "Escaped prisoners from the Hanging Gardens",
+      "Council spies gathering information",
+      "Bone mill workers covered in bone dust",
+      "Catacomb explorers selling forbidden artifacts",
+      "Heptalith cultists performing dark rituals",
+      "Condemned souls wandering in despair"
+    ],
+    "building": [
+      "The building processes souls into currency",
+      "Demons conduct official city business within",
+      "Corpses are systematically processed here",
+      "Ministry officials extract taxes from visitors",
+      "The structure serves the ruling council",
+      "Bone grinding operations run day and night",
+      "Holy inquisitors once tortured heretics here",
+      "The building connects to the ancient catacombs",
+      "Heptalith magic powers the structure",
+      "Condemned souls are processed here"
+    ],
+    "street": [
+      "Soul tax collection checkpoint",
+      "Corpse cart blocking the way",
+      "Demons patrolling from Schleswig",
+      "Gallows procession heading to execution",
+      "Ministry officials conducting inspections",
+      "Bone dust fills the air, making breathing difficult",
+      "Council enforcers questioning citizens",
+      "Catacomb entrance hidden beneath street stones",
+      "Heptalith energy causes street stones to weep",
+      "Condemned souls follow you, begging for release"
+    ],
+    "landmark": [
+      "The landmark demands a sacrifice of memories",
+      "Souls are publicly extracted here for taxes",
+      "Corpses hang permanently, never decaying",
+      "The structure serves the city's dark purposes",
+      "Council members hold secret meetings here",
+      "Bone grinding can be heard from within",
+      "The landmark connects to the ancient catacombs",
+      "Heptalith magic emanates from the structure",
+      "Demons from Schleswig gather here at midnight",
+      "The condemned come here to meet their fate"
+    ],
+    "market": [
+      "Souls are traded as the primary currency",
+      "Corpse parts sold for bone mill processing",
+      "Demons from Schleswig sell forbidden services",
+      "Ministry tax collectors extract fees from vendors",
+      "Council-approved merchants have exclusive rights",
+      "Bone meal and corpse flour are sold openly",
+      "Condemned goods from executed criminals",
+      "Catacomb artifacts traded in secret",
+      "Heptalith-powered devices and cursed items",
+      "Information about the city's secrets for sale"
+    ],
+    "temple": [
+      "The altar demands souls instead of gold",
+      "Corpses are blessed before bone mill processing",
+      "Demons conduct unholy services",
+      "Ministry officials collect religious taxes",
+      "The council uses the temple for dark ceremonies",
+      "Bone fragments serve as holy relics",
+      "The condemned seek final absolution",
+      "Catacomb spirits manifest during services",
+      "Heptalith magic powers the sacred rituals",
+      "Soul extraction ceremonies occur at midnight"
+    ],
+    "tavern": [
+      "Drinks are paid for with memories and experiences",
+      "Corpse handlers share stories of their work",
+      "Demons from Schleswig recruit new servants",
+      "Ministry spies gather information from patrons",
+      "Council business is conducted in back rooms",
+      "Bone meal bread is the only food available",
+      "The condemned drink away their final hours",
+      "Catacomb explorers plan dangerous expeditions",
+      "Heptalith magic causes ales to taste of sorrow",
+      "Soul tax debts are settled with violence"
+    ],
+    "guild": [
+      "The guild serves the city's corpse-based economy",
+      "Members process souls for the Ministry",
+      "Demons from Schleswig hold guild positions",
+      "Council representatives oversee guild operations",
+      "Bone processing techniques are jealously guarded",
+      "Guild members explore the forbidden catacombs",
+      "The condemned are processed through guild systems",
+      "Heptalith magic enhances guild work",
+      "Soul taxation affects all guild transactions",
+      "Guild halls connect to the ancient sewer system"
+    ],
+    "residence": [
+      "The home is paid for with processed souls",
+      "Corpses are stored in the basement",
+      "Demons from Schleswig visit regularly",
+      "Ministry officials conduct surprise inspections",
+      "Council loyalty is demonstrated through home decor",
+      "Bone meal supplies are stored for winter",
+      "The condemned once lived here before execution",
+      "Catacomb entrances are hidden in the cellar",
+      "Heptalith symbols ward the house",
+      "Soul tax assessments determine property value"
+    ],
+    "ruins": [
+      "Souls of the building's former purpose linger",
+      "Corpses from ancient times are found within",
+      "Demons have claimed the ruins as territory",
+      "Ministry archaeologists catalog valuable remains",
+      "Council history is hidden in the rubble",
+      "Bone fragments from the building's destruction",
+      "The condemned hide here from city authorities",
+      "Catacomb connections lie beneath the ruins",
+      "Heptalith magic caused the original destruction",
+      "Ancient soul taxation records are buried here"
+    ]
+  },
+  
+  "random_tables": {
+    "district": [
+      "1-2: Ministry officials demand soul tax payment from all inhabitants",
+      "3-4: Corpse collection day - bodies are systematically gathered",
+      "5-6: Demons from Schleswig district conduct 'recruitment'",
+      "7-8: Council enforcers search for dissidents and heretics",
+      "9-10: Bone mill workers protest working conditions",
+      "11-12: Ancient catacomb entrance discovered beneath district"
+    ],
+    "building": [
+      "1-2: The building processes a different resource each day",
+      "3-4: Ministry inspectors arrive for surprise soul auditing",
+      "5-6: Demons conduct official business within the structure",
+      "7-8: Council members hold secret meetings here",
+      "9-10: Bone grinding operations malfunction spectacularly",
+      "11-12: Catacomb connection discovered in the basement"
+    ],
+    "street": [
+      "1-2: Soul tax checkpoint established by Ministry officials",
+      "3-4: Corpse cart procession blocks all traffic",
+      "5-6: Demon patrol from Schleswig demands tribute",
+      "7-8: Gallows procession heading to public execution",
+      "9-10: Council enforcers question suspicious individuals",
+      "11-12: Street stones weep from Heptalith magic"
+    ],
+    "landmark": [
+      "1-2: The landmark activates, demanding a sacrifice",
+      "3-4: Ministry ceremony extracts souls publicly",
+      "5-6: Council members appear for dark rituals",
+      "7-8: Demons from Schleswig gather at midnight",
+      "9-10: Bone grinding sounds emanate from within",
+      "11-12: Ancient catacomb entrance is revealed"
+    ],
+    "market": [
+      "1-2: Soul currency exchange rate fluctuates wildly",
+      "3-4: Ministry collectors tax all transactions",
+      "5-6: Demons sell services that violate natural law",
+      "7-8: Council-approved merchants get exclusive rights",
+      "9-10: Corpse parts shortage affects bone mill",
+      "11-12: Catacomb artifacts appear mysteriously"
+    ],
+    "temple": [
+      "1-2: The altar demands souls instead of traditional offerings",
+      "3-4: Ministry officials collect religious taxes",
+      "5-6: Demons conduct unholy wedding ceremonies",
+      "7-8: Council uses temple for dark ceremonies",
+      "9-10: Bone fragments manifest as holy relics",
+      "11-12: Catacomb spirits manifest during service"
+    ],
+    "tavern": [
+      "1-2: Payment required in memories instead of coin",
+      "3-4: Ministry spies gather information from patrons",
+      "5-6: Demons recruit new servants over drinks",
+      "7-8: Council business conducted in back rooms",
+      "9-10: Bone meal bread is the only food available",
+      "11-12: Soul tax debts settled with violence"
+    ],
+    "guild": [
+      "1-2: Guild initiations require processing corpses",
+      "3-4: Ministry audits guild soul processing records",
+      "5-6: Demons hold official guild positions",
+      "7-8: Council representatives oversee operations",
+      "9-10: Guild explores forbidden catacomb sections",
+      "11-12: Heptalith magic enhances guild work"
+    ],
+    "residence": [
+      "1-2: Property taxes paid in processed souls",
+      "3-4: Ministry inspection reveals corpses in basement",
+      "5-6: Demons from Schleswig visit regularly",
+      "7-8: Council loyalty demonstrated through home decor",
+      "9-10: Hidden catacomb entrance in cellar",
+      "11-12: Heptalith symbols ward the house"
+    ],
+    "ruins": [
+      "1-2: Ancient soul taxation records found in rubble",
+      "3-4: Ministry archaeologists catalog valuable remains",
+      "5-6: Demons claim ruins as new territory",
+      "7-8: Council history hidden in the destruction",
+      "9-10: Catacomb entrance discovered beneath ruins",
+      "11-12: Heptalith magic caused original destruction"
+    ]
+  },
+  
+  "atmosphere_modifiers": [
+    "The air tastes of bone dust and old blood",
+    "Soul extraction machines hum in the distance",
+    "The stench of the corpse processing industry",
+    "Gallows creaking in the perpetual wind",
+    "Whispers of the condemned echo everywhere",
+    "Demon negotiations can be overheard",
+    "Ministry tax collectors patrol constantly",
+    "The grinding of bones provides background noise",
+    "Ancient catacombs exhale cold air",
+    "Heptalith magic makes the air shimmer"
+  ]
+}

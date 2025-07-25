@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+:root {
+  --mork-black: #000000;
+  --mork-cyan: #00FFFF;
+  --mork-yellow: #FFFF00;
+  --mork-green: #00FF00;
+  --mork-magenta: #FF00FF;
+  --mork-white: #FFFFFF;
+  --mork-gray: #222222;
+}
+
+.split-screen {
+  display: flex;
+  min-height: 100vh;
+  background: var(--mork-black);
+  color: var(--mork-cyan);
+}
+.map-panel {
+  flex: 1 1 50%;
+  border-right: 2px solid var(--mork-cyan);
+  background: var(--mork-black);
+  overflow: auto;
+}
+.details-panel {
+  flex: 1 1 50%;
+  background: var(--mork-gray);
+  color: var(--mork-yellow);
+  overflow: auto;
+}
+@media (max-width: 900px) {
+  .split-screen {
+    flex-direction: column;
+  }
+  .map-panel, .details-panel {
+    flex: none;
+    min-height: 40vh;
+    border-right: none;
+    border-bottom: 2px solid var(--mork-cyan);
+  }
+}
+
+.btn-mork-borg {
+  background: var(--mork-black);
+  border: 2px solid var(--mork-cyan);
+  color: var(--mork-cyan);
+  font-family: 'Adhesive NR Seven', serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  padding: 0.5em 1.5em;
+  cursor: pointer;
+}
+.btn-mork-borg:hover {
+  background: var(--mork-cyan);
+  color: var(--mork-black);
+  box-shadow: 0 0 10px var(--mork-cyan);
+}
+
+.main-header {
+  text-align: center;
+
+}
+
+.header-ascii pre{
+  color: var(--mork-yellow);
+  font-family: 'Pixelify Sans', monospace;
+  font-size: 3.3rem;
+  margin: 0;
+  text-shadow: 0 0 8px var(--mork-yellow);
+}
+
+.control-panel {
+  background: var(--mork-gray);
+  color: var(--mork-yellow);
+  border-bottom: 2px solid var(--mork-cyan);
+  padding: 1rem 0.5rem;
+  box-shadow: 0 2px 12px 0 rgba(0,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.controls-group, .legend-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.legend-group strong {
+  color: var(--mork-magenta);
+}
+
+.legend-terrain span, .legend-locations span {
+  margin-right: 0.5em;
+  color: var(--mork-cyan);
+  font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .main-header, .control-panel {
+    text-align: center;
+    padding: 1rem 0.2rem;
+  }
+  .controls-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

@@ -1466,7 +1466,6 @@ def create_templates():
     .hex-cell {
         cursor: pointer;
         padding: 1px 2px;
-        border-radius: 2px;
         transition: all 0.2s;
         display: inline-block;
         width: 16px;

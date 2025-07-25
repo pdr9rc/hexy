@@ -38,7 +38,7 @@ class MainMapGenerator:
         self.core_tables = self.content_tables.get('core_tables', {})
         
         # Map configuration
-        self.map_width, self.map_height = self.config.get('map_dimensions', terrain_system.get_map_dimensions())
+        self.map_width, self.map_height = self.config.get('map_dimensions', (30, 60))
         self.start_x, self.start_y = self.config.get('map_start', (1, 1))
         self.output_dir = self.config.get('output_directory', 'dying_lands_output')
         
@@ -57,12 +57,23 @@ class MainMapGenerator:
         
         # Custom content tables
         self.custom_tables = {}
+        
+        # Initialize terrain system with correct map size
+        global terrain_system
+        from terrain_system import TerrainSystem
+        terrain_system = TerrainSystem(
+            map_width=self.map_width,
+            map_height=self.map_height,
+            image_path="data/mork_borg_official_map.jpg",
+            mapping_mode="letterbox",
+            debug=False
+        )
     
     def _load_config(self, config: Dict) -> Dict:
         """Load and validate configuration."""
         default_config = {
             'language': 'en',
-            'map_dimensions': (30, 25),
+            'map_dimensions': (30, 60),
             'map_start': (1, 1),
             'output_directory': 'dying_lands_output',
             'generation_rules': {
@@ -259,18 +270,18 @@ class MainMapGenerator:
         """Generate terrain-aware content for a hex."""
         # Special handling for sea terrain
         if terrain == 'sea':
-            return self._generate_sea_content(hex_code)
-        
+            hex_data = self._generate_sea_content(hex_code, terrain)
+            if hex_code == "1606":
+                print(f"DEBUG 1606: terrain={hex_data.get('terrain')}, content_type={hex_data.get('content_type')}")
+            return hex_data
         # Get terrain-specific tables
         terrain_data = self.terrain_tables.get(terrain, {})
         encounters = terrain_data.get('encounters', [])
         denizen_types = terrain_data.get('denizen_types', [])
         features = terrain_data.get('features', [])
-        
         # Generate base content
         notable_feature = self._generate_notable_feature(terrain, features)
         atmosphere = self._generate_atmosphere()
-        
         # Determine content type based on generation rules
         weights = [
             ('settlement', self.generation_rules['settlement_chance']),
@@ -284,18 +295,24 @@ class MainMapGenerator:
         for kind, weight in weights:
             if upto + weight >= roll:
                 if kind == 'settlement':
-                    return self._generate_settlement_content(hex_code, terrain)
+                    hex_data = self._generate_settlement_content(hex_code, terrain)
                 elif kind == 'dungeon':
-                    return self._generate_dungeon_content(hex_code, terrain)
+                    hex_data = self._generate_dungeon_content(hex_code, terrain)
                 elif kind == 'beast':
-                    return self._generate_beast_content(hex_code, terrain)
+                    hex_data = self._generate_beast_content(hex_code, terrain)
                 elif kind == 'npc':
-                    return self._generate_npc_content(hex_code, terrain, denizen_types)
+                    hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
+                if hex_code == "1606":
+                    print(f"DEBUG 1606: terrain={hex_data.get('terrain')}, content_type={hex_data.get('content_type')}")
+                return hex_data
             upto += weight
         # fallback (shouldn't happen)
-        return self._generate_npc_content(hex_code, terrain, denizen_types)
+        hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
+        if hex_code == "1606":
+            print(f"DEBUG 1606: terrain={hex_data.get('terrain')}, content_type={hex_data.get('content_type')}")
+        return hex_data
 
-    def _generate_sea_content(self, hex_code: str) -> Dict[str, Any]:
+    def _generate_sea_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate sea encounter content with Tephrotic nightmares and oceanic horrors."""
         # Sea encounter types
         sea_encounters = [
@@ -308,7 +325,6 @@ class MainMapGenerator:
             "Oceanic Nightmare",
             "Abyssal Nightmare"
         ]
-        
         # Tephrotic nightmare descriptions
         tephrotic_descriptions = [
             "A writhing mass of tentacles and eyes that defies mortal comprehension",
@@ -318,7 +334,6 @@ class MainMapGenerator:
             "A creature of pure malevolence that feeds on the fear of those who gaze upon it",
             "An ancient terror that has slumbered beneath the waves for eons"
         ]
-        
         # Sea atmosphere descriptions
         sea_atmospheres = [
             "The air is thick with the stench of decay and salt",
@@ -328,7 +343,6 @@ class MainMapGenerator:
             "The sea itself seems to breathe with malevolent intent",
             "An oppressive silence broken only by distant, unearthly sounds"
         ]
-        
         # Notable sea features
         sea_features = [
             "Waters that whisper of forgotten terrors",
@@ -338,16 +352,13 @@ class MainMapGenerator:
             "Waters that reflect impossible geometries",
             "A location where time itself seems to flow differently"
         ]
-        
         # Generate encounter
         encounter_type = random.choice(sea_encounters)
         description = random.choice(tephrotic_descriptions)
         atmosphere = random.choice(sea_atmospheres)
         feature = random.choice(sea_features)
-        
         # Generate loot (sea encounters might have sunken treasure)
         loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.8 else None
-        
         # Build the encounter description
         encounter_desc = f"**{encounter_type}**\n\n"
         encounter_desc += f"{description}.\n\n"
@@ -358,14 +369,12 @@ class MainMapGenerator:
         encounter_desc += f"**Threat Level:** Catastrophic - this entity represents an existential threat to all who encounter it.\n\n"
         encounter_desc += f"**Territory:** This section of the sea has been claimed by the nightmare, "
         encounter_desc += f"its influence corrupting the very waters themselves."
-        
         # Add loot if present
         if loot:
             encounter_desc += f"\n\n**Sunken Treasure:** {loot['description']} (lost to the depths)"
-        
         return {
             'hex_code': hex_code,
-            'terrain': 'sea',
+            'terrain': terrain,  # always use the passed terrain
             'encounter': f"≈ **{encounter_type} Encounter**",
             'denizen': encounter_desc,
             'notable_feature': feature,
@@ -374,7 +383,8 @@ class MainMapGenerator:
             'territory': f"This section of the sea has been claimed by the nightmare, its influence corrupting the very waters themselves.",
             'loot': loot,
             'is_sea_encounter': True,
-            'encounter_type': encounter_type
+            'encounter_type': encounter_type,
+            'content_type': 'sea_encounter'
         }
     
     def _generate_settlement_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:

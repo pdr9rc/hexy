@@ -8,9 +8,14 @@ import cv2
 import numpy as np
 import os
 import random
-from typing import Dict, Tuple, Optional, List
+from typing import Dict, Tuple, Optional
 from enum import Enum
 import json
+import math
+try:
+    from src.image_analyzer import ImageAnalyzer
+except ImportError:
+    from image_analyzer import ImageAnalyzer
 
 class TerrainType(Enum):
     """Enumeration of terrain types."""
@@ -24,142 +29,148 @@ class TerrainType(Enum):
     UNKNOWN = "unknown"
 
 class TerrainSystem:
-    """Unified terrain system for The Dying Lands."""
-    DEFAULT_TERRAIN_TYPES = [
-        'mountain', 'forest', 'coast', 'plains', 'swamp', 'desert', 'sea', 'unknown'
-    ]
-    DEFAULT_BOUNDARIES = {
-        'continent_x_min': 2, 'continent_x_max': 23,
-        'continent_y_min': 3, 'continent_y_max': 27,
-        'western_coast_x': 4, 'eastern_mountain_x': 21,
-        'northern_forest_y': 10, 'southern_swamp_y': 22,
-        'central_forest_x_min': 6, 'central_forest_x_max': 15,
-        'central_belt_x_min': 8, 'central_belt_x_max': 16,
-        'central_belt_y_min': 12, 'central_belt_y_max': 18,
-        'southern_y': 20, 'eastern_mountain_x2': 18,
-    }
-    def __init__(self, use_image_analysis: bool = True, config_path: str = None):
-        self.use_image_analysis = use_image_analysis
-        self.terrain_cache = {}
+    """
+    Unified terrain system for The Dying Lands.
+    Handles terrain assignment using (in order):
+    - Locked/hardcoded hexes
+    - Image analysis
+    - Coordinate-based fallback
+    All logic is config-driven and supports any map size.
+    """
+    def __init__(self, map_width: int, map_height: int, image_path: Optional[str] = None, mapping_mode: str = "letterbox", debug: bool = False):
+        # If image analysis is enabled and image is available, auto-set grid size to match image aspect ratio (flat-topped hexes)
         self.image_analyzer = None
-        self.terrain_types = self.DEFAULT_TERRAIN_TYPES.copy()
-        self.boundaries = self.DEFAULT_BOUNDARIES.copy()
-        if config_path and os.path.exists(config_path):
-            self._load_config(config_path)
-        if use_image_analysis:
-            self._initialize_image_analyzer()
-    def _load_config(self, config_path):
-        try:
-            with open(config_path, 'r', encoding='utf-8') as f:
-                config = json.load(f)
-            if 'terrain_types' in config:
-                self.terrain_types = config['terrain_types']
-            if 'boundaries' in config:
-                self.boundaries.update(config['boundaries'])
-            print(f"✅ Loaded terrain config from {config_path}")
-        except Exception as e:
-            print(f"⚠️  Failed to load terrain config: {e}")
-    def reload_config(self, config_path: str):
-        self._load_config(config_path)
-        self.clear_cache()
-    def _initialize_image_analyzer(self):
-        """Initialize image-based terrain analysis if images are available."""
-        try:
-            from image_analyzer import image_analyzer
-            self.image_analyzer = image_analyzer
-            if image_analyzer.is_available():
-                print("✅ Official Mork Borg map analysis enabled")
-                print(f"   Map info: {image_analyzer.get_map_info()}")
+        self.use_image_analysis = False
+        if image_path:
+            temp_width = map_width
+            temp_height = map_height
+            self.image_analyzer = ImageAnalyzer(image_path, temp_width, temp_height, mapping_mode=mapping_mode, debug=debug)
+            if self.image_analyzer.map_image is not None:
                 self.use_image_analysis = True
-            else:
-                print("✅ Coordinate-based terrain analysis enabled")
-                self.use_image_analysis = False
-        except Exception as e:
-            print(f"⚠️  Image analysis disabled: {e}")
-            self.use_image_analysis = False
+                img_width, img_height = self.image_analyzer.map_image.size
+                img_aspect = img_width / img_height
+                # Use actual frontend hex dimensions (flat-topped):
+                w = 40.0  # px, from --hex-width-base
+                h = 35.0  # px, from --hex-height-base
+                grid_px_width = w * (temp_width + 0.5)
+                # grid_px_height = h * (map_height * 0.75 + 0.25)
+                # (w * (map_width + 0.5)) / (h * (map_height * 0.75 + 0.25)) = img_aspect
+                map_height = int(round(((w * (temp_width + 0.5)) / (img_aspect * h) - 0.25) / 0.75))
+                map_width = temp_width
+        self.map_width = map_width
+        self.map_height = map_height
+        self.terrain_types = [
+            'plains',    # .terrain-plains
+            'forest',    # .terrain-forest
+            'mountain',  # .terrain-mountain
+            'coast',     # .terrain-coast
+            'swamp',     # .terrain-swamp
+            'desert',    # .terrain-desert
+            'sea',       # .terrain-sea
+            'road',      # .terrain-road
+            'snow',      # .terrain-snow
+            'unknown'    # .terrain-unknown (fallback)
+        ]
+        self.terrain_cache: Dict[str, str] = {}
+        self.debug = debug
+
     def get_terrain_for_hex(self, hex_code: str, lore_db=None) -> str:
-        """Get terrain type for a hex using the best available method."""
         if hex_code in self.terrain_cache:
             return self.terrain_cache[hex_code]
-        # Check for hardcoded lore locations first
+        # 1. Locked/hardcoded hexes
         if lore_db:
             hardcoded = lore_db.get_hardcoded_hex(hex_code)
             if hardcoded and hardcoded.get('locked', False):
                 terrain = hardcoded.get('terrain', 'plains')
-                if terrain not in self.terrain_types:
-                    print(f"⚠️  Unknown terrain type in lore: {terrain}")
+                if self.debug:
+                    print(f"[TerrainSystem] HEX {hex_code} locked: {terrain}")
                 self.terrain_cache[hex_code] = terrain
                 return terrain
-        # Try image analysis if available
+        # 2. Image analysis
         if self.use_image_analysis and self.image_analyzer:
             try:
                 terrain = self.image_analyzer.get_terrain_for_hex(hex_code)
                 if terrain and terrain != 'unknown':
-                    if terrain not in self.terrain_types:
-                        print(f"⚠️  Unknown terrain type from image analysis: {terrain}")
+                    if self.debug:
+                        print(f"[TerrainSystem] HEX {hex_code} image: {terrain}")
                     self.terrain_cache[hex_code] = terrain
                     return terrain
             except Exception as e:
-                print(f"⚠️  Image analysis failed for hex {hex_code}: {e}")
-        # Fallback to coordinate-based detection
-        try:
-            terrain = self._get_coordinate_based_terrain(hex_code)
-            if terrain not in self.terrain_types:
-                print(f"⚠️  Unknown terrain type from coordinate rules: {terrain}")
-            self.terrain_cache[hex_code] = terrain
-            return terrain
-        except Exception as e:
-            print(f"⚠️  Coordinate-based terrain detection failed for hex {hex_code}: {e}")
-            self.terrain_cache[hex_code] = 'unknown'
-            return 'unknown'
-    def _get_coordinate_based_terrain(self, hex_code: str) -> str:
-        """Get terrain based on hex coordinates using heuristics (now data-driven)."""
+                if self.debug:
+                    print(f"[TerrainSystem] Image analysis failed for {hex_code}: {e}")
+        # 3. Coordinate-based fallback
+        terrain = self._get_coordinate_based_terrain(hex_code, lore_db)
+        if self.debug:
+            print(f"[TerrainSystem] HEX {hex_code} fallback: {terrain}")
+        self.terrain_cache[hex_code] = terrain
+        return terrain
+
+    def analyze_image_colors_and_update_biases(self, lore_db=None):
+        """Analyze the average color for each hex and compute new terrain biases based on image colors."""
+        if not self.use_image_analysis or not self.image_analyzer:
+            print("[TerrainSystem] Image analysis not available.")
+            return
+        import collections
+        region_color_counts = collections.defaultdict(lambda: collections.Counter())
+        region_terrain_counts = collections.defaultdict(lambda: collections.Counter())
+        for x in range(1, self.map_width + 1):
+            for y in range(1, self.map_height + 1):
+                hex_code = f"{x:02d}{y:02d}"
+                avg_color = self.image_analyzer.get_average_color_for_hex(x, y)
+                # Find closest terrain by color
+                best_terrain = 'unknown'
+                best_dist = float('inf')
+                for terrain, color_list in self.image_analyzer.terrain_colors.items():
+                    for tcolor in color_list:
+                        dist = sum(abs(c1 - c2) for c1, c2 in zip(avg_color, tcolor))
+                        if dist < best_dist:
+                            best_dist = dist
+                            best_terrain = terrain
+                if lore_db:
+                    region = lore_db.get_regional_bias(x, y)
+                else:
+                    region = 'all'
+                region_color_counts[region][avg_color] += 1
+                region_terrain_counts[region][best_terrain] += 1
+        # Print summary and suggested biases
+        for region in region_terrain_counts:
+            total = sum(region_terrain_counts[region].values())
+            print(f"\n[TerrainSystem] Region: {region}")
+            for terrain, count in region_terrain_counts[region].most_common():
+                weight = round(count / total, 2) if total else 0
+                print(f"  {terrain}: {count} ({weight})")
+            print(f"  Suggested bias: {{ {', '.join(f'\'{t}\': {round(c/total,2)}' for t,c in region_terrain_counts[region].items())} }}")
+        return region_terrain_counts
+
+    def _get_coordinate_based_terrain(self, hex_code: str, lore_db=None) -> str:
+        import random
         try:
             x, y = int(hex_code[:2]), int(hex_code[2:])
         except (ValueError, IndexError):
             return 'plains'
-        b = self.boundaries
-        # Define continent boundaries
-        if (x < b['continent_x_min'] or x > b['continent_x_max'] or 
-            y < b['continent_y_min'] or y > b['continent_y_max']):
+        if x < 1 or x > self.map_width or y < 1 or y > self.map_height:
             return 'sea'
-        # Western coast
-        if x <= b['western_coast_x']:
-            if y <= b['northern_forest_y']:
-                return 'coast'
-            elif y >= b['southern_swamp_y']:
-                return 'swamp'
-            else:
-                return 'plains'
-        # Eastern mountains
-        elif x >= b['eastern_mountain_x']:
-            return 'mountain'
-        # Central regions
-        else:
-            # Northern forests
-            if y <= b['northern_forest_y']:
-                if b['central_forest_x_min'] <= x <= b['central_forest_x_max']:
-                    return 'forest'
-                else:
-                    return 'plains'
-            # Southern regions
-            elif y >= b['southern_y']:
-                if x <= 10:
-                    return 'swamp'
-                elif x >= b['eastern_mountain_x2']:
-                    return 'mountain'
-                else:
-                    return 'plains'
-            # Central belt
-            else:
-                if (b['central_belt_x_min'] <= x <= b['central_belt_x_max'] and 
-                    b['central_belt_y_min'] <= y <= b['central_belt_y_max']):
-                    return 'forest'
-                elif x >= b['eastern_mountain_x2']:
-                    return 'mountain'
-                else:
-                    return 'plains'
-    
+        # Use image color-based bias if available
+        # if self.use_image_analysis and self.image_analyzer:
+        #     avg_color = self.image_analyzer.get_average_color_for_hex(x, y)
+        #     best_terrain = 'unknown'
+        #     best_dist = float('inf')
+        #     for terrain, color_list in self.image_analyzer.terrain_colors.items():
+        #         for tcolor in color_list:
+        #             dist = sum(abs(c1 - c2) for c1, c2 in zip(avg_color, tcolor))
+        #             if dist < best_dist:
+        #                 best_dist = dist
+        #                 best_terrain = terrain
+        #     return best_terrain
+        # Otherwise, use regional bias if available
+        if lore_db:
+            region = lore_db.get_regional_bias(x, y)
+            bias = getattr(lore_db, 'regional_lore', {}).get(region, {}).get('terrain_bias', {})
+            if bias:
+                terrains, weights = zip(*bias.items())
+                return random.choices(terrains, weights=weights, k=1)[0]
+        return 'plains'
+
     def get_terrain_symbol(self, terrain: str) -> str:
         """Get ASCII symbol for terrain type."""
         symbols = {
@@ -179,31 +190,27 @@ class TerrainSystem:
         return f'terrain-{terrain}'
     
     def get_map_dimensions(self) -> Tuple[int, int]:
-        """Get the map dimensions."""
-        return (25, 30)  # Width, Height (X, Y)
+        return self.map_width, self.map_height
     
     def create_terrain_overview_map(self) -> Dict[str, str]:
-        """Create a terrain overview map for all hexes."""
-        width, height = self.get_map_dimensions()
-        terrain_map = {}
-        
-        for x in range(1, width + 1):
-            for y in range(1, height + 1):
+        overview = {}
+        for x in range(1, self.map_width + 1):
+            for y in range(1, self.map_height + 1):
                 hex_code = f"{x:02d}{y:02d}"
-                terrain = self.get_terrain_for_hex(hex_code)
-                terrain_map[hex_code] = terrain
-        
-        return terrain_map
+                overview[hex_code] = self.get_terrain_for_hex(hex_code)
+        return overview
     
     def get_terrain_distribution(self) -> Dict[str, int]:
-        """Get distribution of terrain types across the map."""
-        terrain_map = self.create_terrain_overview_map()
-        distribution = {}
-        
-        for terrain in terrain_map.values():
-            distribution[terrain] = distribution.get(terrain, 0) + 1
-        
-        return distribution
+        dist = {t: 0 for t in self.terrain_types}
+        for x in range(1, self.map_width + 1):
+            for y in range(1, self.map_height + 1):
+                hex_code = f"{x:02d}{y:02d}"
+                terrain = self.get_terrain_for_hex(hex_code)
+                if terrain in dist:
+                    dist[terrain] += 1
+                else:
+                    dist[terrain] = 1
+        return dist
     
     def analyze_region(self, center_hex: str, radius: int = 3) -> Dict[str, int]:
         """Analyze terrain distribution in a region around a hex."""
@@ -219,7 +226,7 @@ class TerrainSystem:
                 x = center_x + dx
                 y = center_y + dy
                 
-                if 1 <= x <= 25 and 1 <= y <= 30:
+                if 1 <= x <= self.map_width and 1 <= y <= self.map_height:
                     hex_code = f"{x:02d}{y:02d}"
                     terrain = self.get_terrain_for_hex(hex_code)
                     region_terrain[terrain] = region_terrain.get(terrain, 0) + 1
@@ -227,7 +234,6 @@ class TerrainSystem:
         return region_terrain
     
     def clear_cache(self):
-        """Clear the terrain cache."""
         self.terrain_cache.clear()
     
     def get_terrain_description(self, terrain: str, language: str = 'en') -> str:
@@ -255,4 +261,4 @@ class TerrainSystem:
         return descriptions.get(language, descriptions['en']).get(terrain, 'Unknown terrain')
 
 # Global terrain system instance
-terrain_system = TerrainSystem() 
+terrain_system = TerrainSystem(map_width=30, map_height=60) 

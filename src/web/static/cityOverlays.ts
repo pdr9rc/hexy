@@ -3,49 +3,51 @@
  * Clean implementation for city layouts and overlays
  */
 
-import * as api from './api.js';
-import * as ui from './uiUtils.js';
+import * as api from "./api.js"
+import * as ui from "./uiUtils.js"
 
 /**
  * Show city overlay grid view
  */
 export async function showCityOverlayGrid(app: any, hexCode: string) {
   try {
-    ui.showLoading('Loading city overlays...');
-    
-    // Get available overlays
-    const overlaysResponse = await api.getCityOverlays();
-    if (!overlaysResponse.success || overlaysResponse.overlays.length === 0) {
-      throw new Error('No city overlays available');
-    }
+    console.log("DEBUG: showCityOverlayGrid called with app, hexCode:", app, hexCode);
+    ui.showLoading("Loading city overlays...")
 
-    const overlayName = overlaysResponse.overlays[0].name;
-    const overlayResponse = await api.getCityOverlay(overlayName);
-    
+    // For now, use 'galgenbeck' as default overlay name
+    // In the future, this could be determined by the hex code
+    const overlayName = "galgenbeck"
+
+    const overlayResponse = await api.getCityOverlay(overlayName)
+
+    console.log("DEBUG: overlayResponse:", overlayResponse);
+
     if (!overlayResponse.success) {
-      throw new Error('Failed to load city overlay');
+      throw new Error("Failed to load city overlay")
     }
 
-    const overlay = overlayResponse.overlay;
-    const mapContainer = document.querySelector('.map-container');
-    
+    const overlay = overlayResponse.overlay
+    const mapContainer = document.querySelector(".map-container")
+
     if (!mapContainer) {
-      throw new Error('Map container not found');
+      throw new Error("Map container not found")
     }
 
     // Save original content if not already saved
-    if (!mapContainer.hasAttribute('data-original-content')) {
-      mapContainer.setAttribute('data-original-content', mapContainer.innerHTML);
+    if (!mapContainer.hasAttribute("data-original-content")) {
+      mapContainer.setAttribute("data-original-content", mapContainer.innerHTML)
     }
 
-    const html = generateCityOverlayGridHTML(overlay, hexCode);
-    mapContainer.innerHTML = html;
-    
-    ui.hideLoading();
+    const html = generateCityOverlayGridHTML(overlay, hexCode, overlayName)
+    console.log("DEBUG: Generated overlay grid HTML:", html);
+    mapContainer.innerHTML = html
+    console.log("DEBUG: .city-overlay-grid in DOM after injection:", document.querySelector('.city-overlay-grid'));
+
+    ui.hideLoading()
   } catch (error) {
-    console.error('Error loading city overlay grid:', error);
-    ui.showNotification('Failed to load city overlays', 'error');
-    ui.hideLoading();
+    console.error("Error loading city overlay grid:", error)
+    ui.showNotification("Failed to load city overlays", "error")
+    ui.hideLoading()
   }
 }
 
@@ -54,27 +56,27 @@ export async function showCityOverlayGrid(app: any, hexCode: string) {
  */
 export async function showCityOverlayAscii(app: any, overlayName: string, hexCode: string) {
   try {
-    ui.showLoading('Loading ASCII view...');
-    
-    const response = await api.getCityOverlayAscii(overlayName);
-    
+    ui.showLoading("Loading ASCII view...")
+
+    const response = await api.getCityOverlayAscii(overlayName)
+
     if (!response.success) {
-      throw new Error('Failed to load ASCII view');
+      throw new Error("Failed to load ASCII view")
     }
 
-    const mapContainer = document.querySelector('.map-container');
+    const mapContainer = document.querySelector(".map-container")
     if (!mapContainer) {
-      throw new Error('Map container not found');
+      throw new Error("Map container not found")
     }
 
-    const html = generateCityOverlayAsciiHTML(response.ascii, overlayName, hexCode);
-    mapContainer.innerHTML = html;
-    
-    ui.hideLoading();
+    const html = generateCityOverlayAsciiHTML(response.ascii, overlayName, hexCode)
+    mapContainer.innerHTML = html
+
+    ui.hideLoading()
   } catch (error) {
-    console.error('Error loading ASCII view:', error);
-    ui.showNotification('Failed to load ASCII view', 'error');
-    ui.hideLoading();
+    console.error("Error loading ASCII view:", error)
+    ui.showNotification("Failed to load ASCII view", "error")
+    ui.hideLoading()
   }
 }
 
@@ -83,45 +85,45 @@ export async function showCityOverlayAscii(app: any, overlayName: string, hexCod
  */
 export async function showCityHexDetails(app: any, overlayName: string, hexId: string) {
   try {
-    ui.showLoading('Loading hex details...');
-    
-    const response = await api.getCityOverlayHex(overlayName, hexId);
-    
+    ui.showLoading("Loading hex details...")
+
+    const response = await api.getCityOverlayHex(overlayName, hexId)
+
     if (!response.success) {
-      throw new Error('Failed to load hex details');
+      throw new Error("Failed to load hex details")
     }
 
-    const hex = response.hex;
-    const content = hex.content;
-    const modalContainer = document.getElementById('modalContainer');
-    
-    if (!modalContainer) {
-      throw new Error('Modal container not found');
+    const hex = response.hex
+    const content = hex.content
+    const detailsPanel = document.getElementById("details-panel")
+
+    if (!detailsPanel) {
+      throw new Error("Details panel not found")
     }
 
-    const html = generateCityHexDetailsHTML(content);
-    modalContainer.innerHTML = html;
-    
-    ui.hideLoading();
+    const html = generateCityHexDetailsHTML(content)
+    detailsPanel.innerHTML = html
+
+    ui.hideLoading()
   } catch (error) {
-    console.error('Error loading city hex details:', error);
-    ui.showNotification('Failed to load hex details', 'error');
-    ui.hideLoading();
+    console.error("Error loading city hex details:", error)
+    ui.showNotification("Failed to load hex details", "error")
+    ui.hideLoading()
   }
 }
 
 /**
  * Generate city overlay grid HTML
  */
-function generateCityOverlayGridHTML(overlay: any, hexCode: string): string {
-  const gridHTML = generateCityGrid(overlay.hex_grid);
-  
+function generateCityOverlayGridHTML(overlay: any, hexCode: string, overlayName: string): string {
+  const gridHTML = generateCityGrid(overlay.hex_grid, overlayName)
+
   return `
     <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
       <div class="mb-4">
         <button class="btn-mork-borg btn-warning me-2" onclick="window.app.restoreMap()">RETURN TO MAP</button>
-        <button class="btn-mork-borg me-2" onclick="window.app.showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
-        <button class="btn-mork-borg" onclick="window.app.showCityOverlayAscii('${overlay.name}', '${hexCode}')">📜 ASCII VIEW</button>
+        <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${hexCode}')">← RETURN TO HEX</button>
+        <button class="btn-mork-borg" onclick="window.app.showCityOverlayAscii('${overlayName}', '${hexCode}')">📜 ASCII VIEW</button>
       </div>
       <div class="ascii-modal">
         <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
@@ -135,38 +137,47 @@ function generateCityOverlayGridHTML(overlay: any, hexCode: string): string {
         </div>
       </div>
     </div>
-  `;
+  `
 }
 
 /**
  * Generate city grid HTML
  */
-function generateCityGrid(hexGrid: any): string {
-  let gridHTML = '';
-  
+function generateCityGrid(hexGrid: any, overlayName: string): string {
+  let gridHTML = ""
+
   for (let row = 0; row < 5; row++) {
+    gridHTML += '<div class="city-overlay-row">'
+    
     for (let col = 0; col < 5; col++) {
-      const hexId = `${row}_${col}`;
-      const hexData = hexGrid[hexId];
-      
+      const hexId = `${row}_${col}`
+      const hexData = hexGrid[hexId]
+
       if (hexData) {
-        const content = hexData.content;
-        const symbol = getCityOverlaySymbol(content.type);
-        const cssClass = getCityOverlayCSSClass(content.type);
-        
+        const content = hexData.content
+        const symbol = getCityOverlaySymbol(content.type)
+        const cssClass = getCityOverlayCSSClass(content.type)
+
+                        gridHTML += `
+                  <div class="city-hex-cell ${cssClass}" 
+                       onclick="window.app.showCityHexDetails('${overlayName}', '${hexId}')"
+                       title="${content.name}">
+                    ${symbol}
+                  </div>
+                `
+      } else {
+        // Add empty hex placeholder
         gridHTML += `
-          <div class="city-hex-cell ${cssClass}" 
-               onclick="window.app.showCityHexDetails('${hexData.overlay_name}', '${hexId}')"
-               title="${content.name}">
-            <div class="city-hex-symbol">${symbol}</div>
-            <div class="city-hex-type">${content.type.toUpperCase()}</div>
-          </div>
-        `;
+                    <div class="city-hex-cell city-empty" style="opacity: 0.3;">
+                   </div>
+        `
       }
     }
+    
+    gridHTML += '</div>'
   }
-  
-  return gridHTML;
+
+  return gridHTML
 }
 
 /**
@@ -178,7 +189,7 @@ function generateCityOverlayAsciiHTML(asciiContent: string, overlayName: string,
       <div class="mb-4">
         <button class="btn-mork-borg btn-warning me-2" onclick="window.app.restoreMap()">RETURN TO MAP</button>
         <button class="btn-mork-borg me-2" onclick="window.app.showCityOverlayGrid('${hexCode}')">← BACK TO GRID</button>
-        <button class="btn-mork-borg" onclick="window.app.showCityDetailsInMap('${hexCode}')">🏰 RETURN TO CITY</button>
+        <button class="btn-mork-borg" onclick="window.app.showHexDetails('${hexCode}')">🏰 RETURN TO HEX</button>
       </div>
       <div class="ascii-modal">
         <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
@@ -189,7 +200,7 @@ ${asciiContent}
         </pre>
       </div>
     </div>
-  `;
+  `
 }
 
 /**
@@ -224,7 +235,7 @@ function generateCityHexDetailsHTML(content: any): string {
         </div>
       </div>
     </div>
-  `;
+  `
 }
 
 /**
@@ -232,19 +243,19 @@ function generateCityHexDetailsHTML(content: any): string {
  */
 function getCityOverlaySymbol(type: string): string {
   const symbols: { [key: string]: string } = {
-    'district': 'D',
-    'building': 'B', 
-    'street': 'S',
-    'landmark': 'L',
-    'market': 'M',
-    'temple': 'T',
-    'tavern': 'V',
-    'guild': 'G',
-    'residence': 'R',
-    'ruins': 'U'
-  };
-  
-  return symbols[type.toLowerCase()] || '?';
+    district: "D",
+    building: "B",
+    street: "S",
+    landmark: "L",
+    market: "M",
+    temple: "T",
+    tavern: "V",
+    guild: "G",
+    residence: "R",
+    ruins: "U",
+  }
+
+  return symbols[type.toLowerCase()] || "?"
 }
 
 /**
@@ -252,17 +263,17 @@ function getCityOverlaySymbol(type: string): string {
  */
 function getCityOverlayCSSClass(type: string): string {
   const classes: { [key: string]: string } = {
-    'district': 'city-district',
-    'building': 'city-building',
-    'street': 'city-street', 
-    'landmark': 'city-landmark',
-    'market': 'city-market',
-    'temple': 'city-temple',
-    'tavern': 'city-tavern',
-    'guild': 'city-guild',
-    'residence': 'city-residence',
-    'ruins': 'city-ruins'
-  };
-  
-  return classes[type.toLowerCase()] || 'city-unknown';
-} 
+    district: "city-district",
+    building: "city-building",
+    street: "city-street",
+    landmark: "city-landmark",
+    market: "city-market",
+    temple: "city-temple",
+    tavern: "city-tavern",
+    guild: "city-guild",
+    residence: "city-residence",
+    ruins: "city-ruins",
+  }
+
+  return classes[type.toLowerCase()] || "city-unknown"
+}
