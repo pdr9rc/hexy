@@ -5,16 +5,14 @@
   "theme": "urban_decay_necropolis",
   
   "districts": [
-    "The Corpse Quarter",
-    "Schleswig District", 
-    "Ministry of Wealth District",
-    "The Hanging Gardens",
-    "Noble's Decay",
-    "The Bone Mill Ward",
-    "Catacombs Entrance",
-    "Sewers District",
-    "Heptalith Square",
-    "The Condemned Quarter"
+    "New Kurk",
+    "Rattingen", 
+    "Chalk",
+    "Downwind",
+    "Riverside",
+    "Larchengrund",
+    "Altmarkt",
+    "Ehrenfeld"
   ],
   
   "buildings": [

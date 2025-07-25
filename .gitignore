@@ -2,89 +2,22 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.so
-*.egg-info/
-*.egg
-MANIFEST
 
-# Build/Packaging
-build/
-dist/
-.eggs/
-lib/
-lib64/
-parts/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# PyInstaller
-*.spec
-
-# Logs
-*.log
-logs/
-
-# Test/coverage
-.coverage
-.coverage.*
-.cache
-.pytest_cache/
-.mypy_cache/
-htmlcov/
-.tox/
-.nox/
-
-# Jupyter
-.ipynb_checkpoints
-
-# Environments
-.env
-.env.*
-.venv/
-venv/
-ENV/
-
-# IDEs/Editors
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Node.js
+# Node/JS/TS
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# TypeScript
+*.js
+*.js.map
 *.tsbuildinfo
+dist/
+build/
 
 # Output
-coverage/
 dying_lands_output/
 
-# Parcel/Next/Gatsby/Storybook
-.cache/
-.parcel-cache/
-.next/
-.nuxt/
-public/
-.out/
-.storybook-out/
+# OS/Editor
+.DS_Store
+.vscode/
+.idea/
 
 # Misc
 *.tmp
@@ -95,11 +28,28 @@ public/
 .#*
 \#*#
 .local/
+# dependencies
+/node_modules
 
-# Ignore compiled JavaScript from TypeScript
-*.js
-*.js.map
+# next.js
+/.next/
+/out/
 
-# Ignore build output
-/dist/
-/build/
+# production
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts

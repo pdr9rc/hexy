@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "build:web": "npx tsc --project src/web/tsconfig.json",
-    "build:web:watch": "npx tsc --project src/web/tsconfig.json --watch",
-    "start:backend": "python3 run.py",
+    "build:web": "npx tsc --project backend/web/static/tsconfig.json",
+    "build:web:watch": "npx tsc --project backend/web/static/tsconfig.json --watch",
+    "start:backend": "python3 -m backend.run",
     "start:all": "npm-run-all --parallel build:web:watch start:backend"
   },
   "devDependencies": {
