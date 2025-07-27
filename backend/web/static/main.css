@@ -430,9 +430,54 @@ h6 {
 }
 
 /* Horizontal spacing between hexes in all rows */
-.hex-row:nth-child(odd) .hex-cell,
-.hex-row:nth-child(even) .hex-cell {
+.hex-row:nth-child(odd) .hex-container,
+.hex-row:nth-child(even) .hex-container {
   margin-right: calc(var(--hex-width-base) * 0.85);
+}
+
+/* ===== HEX CONTAINER STYLING ===== */
+
+.hex-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+/* ===== FLOATING CITY NAME LABELS ===== */
+
+.city-name-label {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #daa520;
+  font-family: "Jacquard 12", monospace;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border: 1px solid #daa520;
+  border-radius: 3px;
+  white-space: nowrap;
+  z-index: 100;
+  text-shadow: 0 0 3px rgba(218, 165, 32, 0.5);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none; /* Don't interfere with hex clicking */
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.city-name-label:hover {
+  opacity: 1;
+}
+
+/* Show city names more prominently when hovering over hex containers */
+.hex-container:hover .city-name-label {
+  opacity: 1;
+  transform: translateX(-50%) scale(1.1);
+  z-index: 200;
 }
 
 /* ===== UNIFIED HEX CELL STYLING ===== */
@@ -457,7 +502,7 @@ h6 {
   /* Interaction */
   cursor: pointer;
   position: relative;
-  transition: all 0.2s ease;
+  /* No transition for max performance */
 }
 
 /* ===== UNIFIED HEX DIMENSIONS ===== */
@@ -834,9 +879,16 @@ h6 {
     margin-top: calc(var(--hex-height-tablet) * -0.33);
   }
 
-  .hex-row:nth-child(odd) .hex-cell,
-  .hex-row:nth-child(even) .hex-cell {
+  .hex-row:nth-child(odd) .hex-container,
+  .hex-row:nth-child(even) .hex-container {
     margin-right: calc(var(--hex-width-tablet) * 0.86);
+  }
+
+  /* Tablet city name adjustments */
+  .city-name-label {
+    font-size: 8px;
+    top: -20px;
+    padding: 1px 4px;
   }
 
   .map-controls {
@@ -875,9 +927,17 @@ h6 {
     margin-top: calc(var(--hex-height-mobile) * -0.31);
   }
 
-  .hex-row:nth-child(odd) .hex-cell,
-  .hex-row:nth-child(even) .hex-cell {
+  .hex-row:nth-child(odd) .hex-container,
+  .hex-row:nth-child(even) .hex-container {
     margin-right: calc(var(--hex-width-mobile) * 0.8);
+  }
+
+  /* Mobile city name adjustments */
+  .city-name-label {
+    font-size: 6px;
+    top: -15px;
+    padding: 1px 3px;
+    opacity: 0.8;
   }
 }
 
