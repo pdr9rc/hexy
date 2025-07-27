@@ -4,15 +4,332 @@
   "description": "A sprawling metropolis built atop the bones of countless civilizations",
   "theme": "urban_decay_necropolis",
   
+  "district_matrix": [
+    [ "",           "",           "",           "",           "Altmarkt",     "Altmarkt",     "",           "",           "",           "" ],
+    [ "",           "",           "",        "Chalk",      "Ehrenfeld",   "Downwind",    "Riverside",   "",           "",           "" ],
+    [ "",           "",        "Chalk",   "Ehrenfeld",   "New Kurk",    "New Kurk",    "Riverside",   "Chalk",      "",           "" ],
+    [ "",        "Chalk",   "Ehrenfeld",   "New Kurk",    "New Kurk",    "New Kurk",    "Riverside",   "Chalk",      "",      "" ],
+    [ "", "Rattingen", "New Kurk", "New Kurk",    "New Kurk",    "New Kurk",    "Riverside",   "Chalk",      "",      "" ],
+    [ "", "Rattingen", "New Kurk", "New Kurk",    "New Kurk",    "New Kurk",    "Riverside",   "Riverside",  "",      "" ],
+    [ "", "Rattingen", "Rattingen", "New Kurk",    "New Kurk",    "Riverside",   "Riverside",  "Riverside",  "",      "" ],
+    [ "", "Rattingen", "Rattingen", "Rattingen",   "Downwind",    "Downwind",    "Riverside",  "Riverside",  "",           "" ],
+    [ "",        "", "Rattingen", "Rattingen",   "Downwind",    "Downwind",    "Downwind",   "",           "",           "" ],
+    [ "",           "",        "", "Larchengrund", "Downwind",    "Downwind",    "",           "",           "",           "" ]
+  ],
+  
   "districts": [
-    "New Kurk",
-    "Rattingen", 
-    "Chalk",
-    "Downwind",
-    "Riverside",
-    "Larchengrund",
-    "Altmarkt",
-    "Ehrenfeld"
+    {
+      "name": "New Kurk",
+      "description": "The newest district, built on the freshest corpses and most recent dead",
+      "theme": "recent_death",
+      "buildings": [
+        "Ministry of Wealth & Taxes",
+        "The Corpse Warehouse",
+        "Soul Collection Center",
+        "The Hanging Courthouse",
+        "The Rotting Mansion"
+      ],
+      "streets": [
+        "Corpse Alley",
+        "Soul Tax Avenue",
+        "Ministry Street",
+        "The Bleeding Path"
+      ],
+      "landmarks": [
+        "The Great Gallows",
+        "Council's Throne",
+        "The Soul Well",
+        "The Corpse Clock"
+      ],
+      "encounters": [
+        "Soul tax collectors demanding payment in memories",
+        "Ministry officials checking identification papers",
+        "Council spies gathering information",
+        "Heptalith cultists performing dark rituals"
+      ],
+      "random_tables": [
+        "1-2: Ministry officials demand soul tax payment from all inhabitants",
+        "3-4: Corpse collection day - bodies are systematically gathered",
+        "5-6: Council enforcers search for dissidents and heretics"
+      ],
+      "atmosphere_modifiers": [
+        "The air tastes of bone dust and old blood",
+        "Soul extraction machines hum in the distance",
+        "Ministry tax collectors patrol constantly"
+      ]
+    },
+    {
+      "name": "Rattingen",
+      "description": "The rat-infested slums where the poorest souls struggle to survive",
+      "theme": "poverty_decay",
+      "buildings": [
+        "The Corpse Warehouse",
+        "The Rotting Mansion",
+        "The Mourning Mansion",
+        "Corpse Handler's Quarters"
+      ],
+      "streets": [
+        "Corpse Alley",
+        "Sewer Entrance Lane",
+        "The Bleeding Path",
+        "The Condemned Walk"
+      ],
+      "landmarks": [
+        "The Weeping Fountain",
+        "Ancient Catacombs Entrance",
+        "The Corpse Clock",
+        "The Soul Well"
+      ],
+      "encounters": [
+        "Pack of starving dogs",
+        "Corrupt city guards demanding bribes",
+        "Mad prophet screaming prophecies",
+        "Lost soul wandering aimlessly"
+      ],
+      "random_tables": [
+        "1-2: Plague-ridden beggars seeking alms",
+        "3-4: Rats emerge from corpse piles in waves",
+        "5-6: Street gangs fight over corpse rights"
+      ],
+      "atmosphere_modifiers": [
+        "The stench of the corpse processing industry",
+        "Whispers of the condemned echo everywhere",
+        "The grinding of bones provides background noise"]
+    },
+    {
+      "name": "Chalk",
+      "description": "The industrial district where bones are ground into powder",
+      "theme": "industrial_death",
+      "buildings": [
+        "The City (Bone) Mill",
+        "Bone Mill Tower",
+        "Bone Miller's Home",
+        "The Corpse Warehouse"
+      ],
+      "streets": [
+        "The Bone Road",
+        "Ministry Street",
+        "Council's Road",
+        "Sewer Entrance Lane"
+      ],
+      "landmarks": [
+        "Bone Mill Tower",
+        "The Corpse Clock",
+        "Ancient Catacombs Entrance",
+        "The Soul Well"
+      ],
+      "encounters": [
+        "Bone mill workers covered in bone dust",
+        "Corpse collectors hauling fresh bodies",
+        "Ministry officials checking identification papers",
+        "The grinding of bones provides background noise"
+      ],
+      "random_tables": [
+        "1-2: Bone mill workers protest working conditions",
+        "3-4: Bone grinding operations malfunction spectacularly",
+        "5-6: Corpse parts shortage affects bone mill"
+      ],
+      "atmosphere_modifiers": [
+        "The grinding of bones provides background noise",
+        "Bone dust fills the air, making breathing difficult",
+        "The stench of the corpse processing industry"
+      ]
+    },
+    {
+      "name": "Downwind",
+      "description": "Where the stench of death is carried by the wind",
+      "theme": "stench_decay",
+      "buildings": [
+        "The Corpse Warehouse",
+        "The Rotting Mansion",
+        "Corpse Handler's Quarters",
+        "The Mourning Mansion"
+      ],
+      "streets": [
+        "The Bleeding Path",
+        "Sewer Entrance Lane",
+        "The Condemned Walk",
+        "Corpse Alley"
+      ],
+      "landmarks": [
+        "The Weeping Fountain",
+        "Ancient Catacombs Entrance",
+        "The Corpse Clock",
+        "The Soul Well"
+      ],
+      "encounters": [
+        "Mysterious figures in black robes",
+        "Lost soul wandering aimlessly",
+        "Pack of starving dogs",
+        "Mad prophet screaming prophecies"
+      ],
+      "random_tables": [
+        "1-2: The stench becomes unbearable, causing vomiting",
+        "3-4: Corpse cart procession blocks all traffic",
+        "5-6: Street stones weep from Heptalith magic"
+      ],
+      "atmosphere_modifiers": [
+        "The stench of the corpse processing industry",
+        "Gallows creaking in the perpetual wind",
+        "Whispers of the condemned echo everywhere"
+      ]
+    },
+    {
+      "name": "Riverside",
+      "description": "Where the river carries away the city's waste and corpses",
+      "theme": "watery_decay",
+      "buildings": [
+        "The Corpse Warehouse",
+        "Corpse Handler's Quarters",
+        "The Mourning Mansion",
+        "The Rotting Mansion"
+      ],
+      "streets": [
+        "The Bleeding Path",
+        "Sewer Entrance Lane",
+        "The Condemned Walk",
+        "Corpse Alley"
+      ],
+      "landmarks": [
+        "The Weeping Fountain",
+        "Ancient Catacombs Entrance",
+        "The Soul Well",
+        "The Corpse Clock"
+      ],
+      "encounters": [
+        "Corpse collectors hauling fresh bodies",
+        "Lost soul wandering aimlessly",
+        "Mysterious figures in black robes",
+        "Pack of starving dogs"
+      ],
+      "random_tables": [
+        "1-2: River floods, washing corpses into the streets",
+        "3-4: Corpse cart procession blocks all traffic",
+        "5-6: Ancient catacomb entrance discovered beneath district"
+      ],
+      "atmosphere_modifiers": [
+        "The stench of the corpse processing industry",
+        "Ancient catacombs exhale cold air",
+        "Heptalith magic makes the air shimmer"
+      ]
+    },
+    {
+      "name": "Larchengrund",
+      "description": "The thieves' district where stolen souls are traded",
+      "theme": "criminal_underground",
+      "buildings": [
+        "The Rotting Mansion",
+        "The Mourning Mansion",
+        "Corpse Handler's Quarters",
+        "The Corpse Warehouse"
+      ],
+      "streets": [
+        "The Condemned Walk",
+        "Corpse Alley",
+        "The Bleeding Path",
+        "Sewer Entrance Lane"
+      ],
+      "landmarks": [
+        "Ancient Catacombs Entrance",
+        "The Weeping Fountain",
+        "The Corpse Clock",
+        "The Soul Well"
+      ],
+      "encounters": [
+        "Catacomb explorers selling forbidden artifacts",
+        "Mysterious figures in black robes",
+        "Corrupt city guards demanding bribes",
+        "Mad prophet screaming prophecies"
+      ],
+      "random_tables": [
+        "1-2: Catacomb artifacts appear mysteriously",
+        "3-4: Information about the city's secrets for sale",
+        "5-6: Guild explores forbidden catacomb sections"
+      ],
+      "atmosphere_modifiers": [
+        "Ancient catacombs exhale cold air",
+        "Whispers of the condemned echo everywhere",
+        "Heptalith magic makes the air shimmer"
+      ]
+    },
+    {
+      "name": "Altmarkt",
+      "description": "The old market district where the original city began",
+      "theme": "ancient_commerce",
+      "buildings": [
+        "Council Chambers",
+        "The Hanging Courthouse",
+        "The Rotting Mansion",
+        "The Mourning Mansion"
+      ],
+      "streets": [
+        "Council's Road",
+        "Ministry Street",
+        "The Hanging Gardens Path",
+        "Gallows Way"
+      ],
+      "landmarks": [
+        "Council's Throne",
+        "The Great Gallows",
+        "Central Heptalith",
+        "The Corpse Clock"
+      ],
+      "encounters": [
+        "Council spies gathering information",
+        "Ministry officials checking identification papers",
+        "Heptalith cultists performing dark rituals",
+        "Council enforcers questioning citizens"
+      ],
+      "random_tables": [
+        "1-2: Council enforcers search for dissidents and heretics",
+        "3-4: Council members hold secret meetings here",
+        "5-6: Council-approved merchants get exclusive rights"
+      ],
+      "atmosphere_modifiers": [
+        "Ministry tax collectors patrol constantly",
+        "Heptalith magic makes the air shimmer",
+        "The grinding of bones provides background noise"
+      ]
+    },
+    {
+      "name": "Ehrenfeld",
+      "description": "The honorable district where the city's elite pretend to maintain dignity",
+      "theme": "false_honor",
+      "buildings": [
+        "Council Chambers",
+        "The Hanging Courthouse",
+        "Council Member's Manor",
+        "Tax Collector's House"
+      ],
+      "streets": [
+        "Council's Road",
+        "Ministry Street",
+        "The Hanging Gardens Path",
+        "Gallows Way"
+      ],
+      "landmarks": [
+        "Council's Throne",
+        "The Great Gallows",
+        "Central Heptalith",
+        "The Hanging Gardens of Corpses"
+      ],
+      "encounters": [
+        "Council spies gathering information",
+        "Ministry officials checking identification papers",
+        "Council enforcers questioning citizens",
+        "Heptalith cultists performing dark rituals"
+      ],
+      "random_tables": [
+        "1-2: Council enforcers search for dissidents and heretics",
+        "3-4: Council members hold secret meetings here",
+        "5-6: Council-approved merchants get exclusive rights"
+      ],
+      "atmosphere_modifiers": [
+        "Ministry tax collectors patrol constantly",
+        "Heptalith magic makes the air shimmer",
+        "The grinding of bones provides background noise"
+      ]
+    }
   ],
   
   "buildings": [
@@ -33,7 +350,7 @@
     "The Bone Road",
     "Gallows Way",
     "Soul Tax Avenue",
-    "Hanging Gardens Path",
+    "The Hanging Gardens Path",
     "The Condemned Walk",
     "Ministry Street",
     "Council's Road",

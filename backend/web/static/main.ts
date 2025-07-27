@@ -24,10 +24,18 @@ interface CityOverlayData {
   name: string
   display_name: string
   filename: string
-  grid_size: number
+  grid_type: string
+  radius: number
   hex_grid: { [key: string]: any }
   total_hexes: number
   hexCode?: string
+  districts?: Array<{
+    name: string
+    description: string
+    theme: string
+    buildings: string[]
+    streets: string[]
+  }>
 }
 
 export type { HexData };
@@ -38,6 +46,7 @@ class DyingLandsApp {
   public mapHeight = 25
   private currentView: "world" | "city" = "world"
   private currentCityOverlay: CityOverlayData | null = null
+  private selectedCityHex: string | null = null
 
   constructor() {
     this.initializeApp()
@@ -73,6 +82,7 @@ class DyingLandsApp {
     // Initialize components
     this.initializeEventListeners()
     this.renderWorldMap()
+    this.updateWorldMapControlsVisibility()
     initializeControls(this)
 
     console.log("✅ The Dying Lands initialized successfully")
@@ -115,8 +125,8 @@ class DyingLandsApp {
             this.showHexDetails()
             break
           case "return-to-map":
-            console.log("Calling showWorldMap")
-            this.showWorldMap()
+            console.log("Calling restoreMap")
+            this.restoreMap()
             break
         }
       }
@@ -159,7 +169,15 @@ class DyingLandsApp {
     try {
       const response = await getCityOverlayHex(overlayName, hexId)
       if (response.success) {
-        this.displayCityHexDetails(response.hex)
+        // Update selected hex
+        this.selectedCityHex = hexId;
+        
+        // Refresh the city grid to show selection
+        if (this.currentCityOverlay) {
+          this.renderCityOverlay(this.currentCityOverlay.hexCode);
+        }
+        
+        this.displayCityHexDetails(response.hex, overlayName)
       } else {
         showError("Failed to load city hex details")
       }
@@ -169,7 +187,7 @@ class DyingLandsApp {
     }
   }
 
-  private displayCityHexDetails(hexData: any): void {
+  private displayCityHexDetails(hexData: any, overlayName?: string): void {
     const detailsPanel = document.getElementById("details-panel")
     if (!detailsPanel) return
 
@@ -185,6 +203,11 @@ class DyingLandsApp {
     const randomEvents = (content.random_table && content.random_table.length > 0) ? content.random_table.join("\n") : ""
     const position = hexData.position || "?"
     const positionType = content.position_type || "?"
+
+    // Update district details in city overlay if we're in city view
+    if (this.currentView === "city") {
+      this.updateDistrictDetails(hexData)
+    }
 
     let html = `
       <div class="city-hex-details-box">
@@ -223,6 +246,9 @@ class DyingLandsApp {
             <div class="ascii-section ascii-position">
               <span>POSITION: ${position} (${positionType})</span>
         </div>
+            <div class="ascii-section ascii-actions">
+              <button class="btn-mork-borg" onclick="window.app.regenerateHex('${hexId}', '${overlayName || ''}')">REGENERATE HEX</button>
+        </div>
         </div>
         </div>
       </div>
@@ -230,32 +256,109 @@ class DyingLandsApp {
     detailsPanel.innerHTML = html
   }
 
-  public async showCityOverlayInMap(hexCode: string): Promise<void> {
-    try {
-      showNotification("Loading city overlay...")
+  private updateDistrictDetails(hexData: any): void {
+    const districtDetailsSection = document.querySelector('.city-overlay-ascii-section pre')
+    if (!districtDetailsSection || !hexData) return
 
-      // Get city name from hex data
-      const hexData = this.mapData[hexCode]
-      if (!hexData || !hexData.is_city) {
-        showError("Not a major city")
-        return
+    const content = hexData.content || {}
+    const district = hexData.district || "Unknown"
+    const description = content.description || "No description available."
+    
+    // Get district description from the city overlay data
+    let districtDescription = description
+    if (this.currentCityOverlay && this.currentCityOverlay.districts) {
+      const districtData = this.currentCityOverlay.districts.find((d: any) => 
+        d.name.toLowerCase() === district.toLowerCase()
+      )
+      if (districtData && districtData.description) {
+        districtDescription = districtData.description
       }
+    }
 
-      // Map hex codes to overlay names (you might need to adjust this mapping)
-      const overlayName = this.getOverlayNameFromHexCode(hexCode)
+    districtDetailsSection.textContent = `${district.toUpperCase()}\n\n${districtDescription}`
+  }
 
-      const response = await getCityOverlay(overlayName)
-      if (response.success) {
-        this.currentCityOverlay = response.overlay
-        this.renderCityOverlay(hexCode)
-        this.currentView = "city"
-        showNotification(`Viewing ${response.overlay.display_name}`)
+  public async regenerateHex(hexId: string, overlayName?: string): Promise<void> {
+    console.log("regenerateHex called with", hexId, "overlayName:", overlayName);
+    
+    // Use provided overlay name or fall back to currentCityOverlay
+    const targetOverlayName = overlayName || (this.currentCityOverlay ? this.currentCityOverlay.name : null);
+    
+    if (!targetOverlayName) {
+      console.error("No overlay name provided and no current city overlay to regenerate hex");
+      showNotification("Error: No city overlay context found", "error");
+      return;
+    }
+    
+    try {
+      // Call the backend to regenerate the hex
+      const response = await fetch(`/api/regenerate-hex/${targetOverlayName}/${hexId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
+          // Update the current overlay with new hex data if it exists
+          if (this.currentCityOverlay) {
+            this.currentCityOverlay.hex_grid[hexId] = result.hex_data;
+            
+            // Refresh the display by re-rendering the city overlay
+            this.renderCityOverlay();
+          }
+          
+          // Show success notification
+          console.log("Hex regenerated successfully");
+          showNotification("Hex regenerated successfully", "info");
+        } else {
+          console.error("Failed to regenerate hex:", result.error);
+          showNotification("Failed to regenerate hex: " + result.error, "error");
+        }
       } else {
-        showError("Failed to load city overlay")
+        console.error("Failed to regenerate hex:", response.statusText);
+        showNotification("Failed to regenerate hex: " + response.statusText, "error");
       }
     } catch (error) {
-      console.error("Error loading city overlay:", error)
-      showError("Failed to load city overlay")
+      console.error("Error regenerating hex:", error);
+      showNotification("Error regenerating hex: " + error, "error");
+    }
+  }
+
+  private async loadCityOverlay(overlayName: string): Promise<CityOverlayData | null> {
+    try {
+      const response = await getCityOverlay(overlayName);
+      if (response.success) {
+        return response.overlay;
+      } else {
+        console.error("Failed to load city overlay:", response.error);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error loading city overlay:", error);
+      return null;
+    }
+  }
+
+  public async showCityOverlayInMap(hexCode: string): Promise<void> {
+    console.log("showCityOverlayInMap called with", hexCode)
+    
+    // Immediately disable zoom when entering city view
+    if ((window as any).disableZoom) {
+      (window as any).disableZoom();
+    }
+    
+    this.currentView = "city"
+    this.selectedCityHex = null // Clear selected hex when entering new city overlay
+    this.updateWorldMapControlsVisibility()
+    const overlayName = this.getOverlayNameFromHexCode(hexCode)
+    
+    if (overlayName) {
+      this.currentCityOverlay = await this.loadCityOverlay(overlayName)
+      if (this.currentCityOverlay) {
+        this.currentCityOverlay.hexCode = hexCode
+        this.renderCityOverlay(hexCode)
+      }
     }
   }
 
@@ -270,8 +373,17 @@ class DyingLandsApp {
   }
 
   public renderCityOverlay(hexCode?: string): void {
-    console.log("renderCityOverlay called with hexCode:", hexCode)
-    if (!this.currentCityOverlay) return
+    console.log("renderCityOverlay called")
+    
+    // Ensure zoom is disabled when rendering city overlay
+    if ((window as any).disableZoom) {
+      (window as any).disableZoom();
+    }
+    
+    if (!this.currentCityOverlay) {
+      console.error("No current city overlay to render")
+      return
+    }
     
     // Store the hex code for the RETURN TO HEX button
     if (hexCode) {
@@ -279,103 +391,206 @@ class DyingLandsApp {
     }
 
     const mapContainer = document.querySelector(".map-container")
-    if (!mapContainer) return
+    const mapZoomContainer = document.getElementById("map-zoom-container")
+    if (!mapContainer || !mapZoomContainer) return
 
     // Save original map content if not already saved
     if (!mapContainer.hasAttribute("data-original-content")) {
-      mapContainer.setAttribute("data-original-content", mapContainer.innerHTML);
+      const hexGrid = mapZoomContainer.querySelector('#hexGrid');
+      if (hexGrid) {
+        const contentToSave = hexGrid.innerHTML;
+        console.log("Saving original content, length:", contentToSave.length);
+        console.log("Content preview:", contentToSave.substring(0, 100));
+        mapContainer.setAttribute("data-original-content", contentToSave);
+      } else {
+        console.warn("No hex grid found when trying to save original content");
+      }
     }
+
+    // Determine grid size from hex data and collect districts
+    let gridSize = 10; // Changed from 5 to 10 for 10 vertical hexes
+    const districts = new Set<string>();
+    if (this.currentCityOverlay.hex_grid) {
+      const rows = new Set<number>();
+      const cols = new Set<number>();
+      for (const hexId of Object.keys(this.currentCityOverlay.hex_grid)) {
+        if (hexId.includes('_')) {
+          const [row, col] = hexId.split('_').map(Number);
+          const hexData = this.currentCityOverlay.hex_grid[hexId];
+          const content = hexData?.content || {};
+          // Only include hexes that have actual content
+          if (hexData && content.name && content.name !== "Unknown") {
+            rows.add(row);
+            cols.add(col);
+            // Collect district information
+            if (hexData.district) {
+              districts.add(hexData.district);
+            }
+          }
+        }
+      }
+      // Ensure we have at least 10 rows for vertical hexes, but allow more if data requires it
+      if (rows.size > 0 && cols.size > 0) {
+        const maxRow = Math.max(...rows);
+        const maxCol = Math.max(...cols);
+        gridSize = Math.max(10, Math.max(maxRow, maxCol) + 1);
+      }
+    }
+
+    // Convert districts set to array, filter out empty/unknown, and sort for consistent display
+    const districtArray = Array.from(districts)
+      .filter(district => district !== 'empty' && district !== 'unknown' && district !== 'Empty')
+      .sort();
 
     // Create city overlay HTML using .city-overlay-grid and .city-overlay-row
     let html = `
-      <div class="city-overlay-container">
-        <div class="city-overlay-header">
-          <h2>🏰 ${this.currentCityOverlay.display_name}</h2>
-          <div class="city-overlay-controls">
-            <button class="btn btn-mork-borg" onclick="window.app.renderCityOverlay()">MAP GRID</button>
-            <button class="btn btn-mork-borg" onclick="window.app.showHexDetails('${this.currentCityOverlay.hexCode || ''}')">RETURN TO HEX</button>
-            <button class="btn btn-mork-borg" onclick="window.app.restoreMap()">RETURN TO MAP</button>
-          </div>
-        </div>
-        <div class="city-overlay-grid">
+      <div class="city-overlay-wrapper">
+        <div class="city-overlay-content">
+          <div class="city-overlay-container">
+            <div class="city-overlay-header">
+              <h2>⌂ ${this.currentCityOverlay.display_name}</h2>
+              <div class="city-overlay-controls">
+                <button class="btn-mork-borg" onclick="window.app.renderCityOverlay()">MAP GRID</button>
+                <button class="btn-mork-borg" onclick="window.app.showHexDetails('${this.currentCityOverlay.hexCode || ''}')">RETURN TO HEX</button>
+                <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">RETURN TO MAP</button>
+              </div>
+            </div>
+            <div class="city-overlay-grid">
     `
 
-    // Generate 5x5 honeycomb grid
-    for (let row = 0; row < this.currentCityOverlay.grid_size; row++) {
+    // Generate grid based on determined size - always generate 10 rows
+    for (let row = 0; row < gridSize; row++) {
       html += '<div class="city-overlay-row">'
       
-      // Add offset for even rows to create honeycomb effect
-      if (row % 2 === 1) {
-        html += '<div class="city-hex-spacer"></div>'
-      }
-      
-      for (let col = 0; col < this.currentCityOverlay.grid_size; col++) {
+      for (let col = 0; col < gridSize; col++) {
         const hexId = `${row}_${col}`
         const hexData = this.currentCityOverlay.hex_grid[hexId]
         const content = hexData?.content || {}
 
+        // Show all hexes but make empty ones invisible
         const symbol = this.getCityHexSymbol(content.type)
-        const cssClass = `city-hex-cell city-${content.type || "unknown"}`
+        const district = hexData.district || 'unknown'
+        const isVisible = hexData && content.name && content.name !== "Unknown" && content.type !== "empty"
+        const isSelected = this.selectedCityHex === hexId
+        const cssClass = `city-hex-cell city-${content.type || "unknown"} district-${district.toLowerCase().replace(/\s+/g, '-')} ${isVisible ? '' : 'city-hex-invisible'} ${isSelected ? 'city-hex-selected' : ''}`
+        const districtColor = this.generateDistrictColor(district)
 
         html += `
           <div class="${cssClass}" 
                data-hex-id="${hexId}" 
                data-overlay="${this.currentCityOverlay.name}"
-               title="${content.name || "Unknown"} (${content.type || "unknown"})"
+               data-district="${district}"
+               style="background: ${districtColor} !important;"
+               title="${content.name || "Unknown"} (${content.type || "unknown"}) - ${district}"
                onclick="window.app.showCityHexDetails && window.app.showCityHexDetails('${this.currentCityOverlay.name}', '${hexId}')">
             <span class="city-hex-symbol">${symbol}</span>
-            <span class="city-hex-coords">${row + 1},${col + 1}</span>
           </div>
         `
       }
-      html += "</div>"
+      html += '</div>'
     }
 
     html += `
         </div>
-        <div class="city-legend">
-          <h4>Legend</h4>
-          <div class="legend-items">
-            <span class="legend-item"><span class="symbol">D</span> District</span>
-            <span class="legend-item"><span class="symbol">B</span> Building</span>
-            <span class="legend-item"><span class="symbol">S</span> Street</span>
-            <span class="legend-item"><span class="symbol">L</span> Landmark</span>
-            <span class="legend-item"><span class="symbol">M</span> Market</span>
-            <span class="legend-item"><span class="symbol">T</span> Temple</span>
-            <span class="legend-item"><span class="symbol">V</span> Tavern</span>
-            <span class="legend-item"><span class="symbol">G</span> Guild</span>
-            <span class="legend-item"><span class="symbol">R</span> Residence</span>
-            <span class="legend-item"><span class="symbol">U</span> Ruins</span>
+        <div class="city-overlay-ascii-box">
+          <div class="city-overlay-ascii-inner-box">
+            <div class="city-overlay-ascii-section">
+              <span>SELECTED DISTRICT</span>
+              <pre>Click on a hex to view district details and information.</pre>
+            </div>
           </div>
         </div>
       </div>
     `
 
-    mapContainer.innerHTML = html
+    if (mapZoomContainer) {
+      mapZoomContainer.innerHTML = html
+    }
+
+    this.currentView = "city"
+    this.updateWorldMapControlsVisibility()
+    this.updateDistrictButtonsVisibility()
+    this.initializeEventListeners()
+    if (this.currentCityOverlay.hexCode && this.currentCityOverlay.hex_grid[this.currentCityOverlay.hexCode]) {
+      this.updateDistrictDetails(this.currentCityOverlay.hex_grid[this.currentCityOverlay.hexCode])
+    }
+    if ((window as any).disableZoom) { (window as any).disableZoom(); }
+
+    // Add district buttons inside the city overlay wrapper
+    console.log("DEBUG: districtArray:", districtArray);
+    console.log("DEBUG: districtArray length:", districtArray.length);
+    
+    const districtButtonsHTML = `
+      <div class="district-buttons-container">
+        <div class="district-buttons-row">
+          ${districtArray.map(district => `
+            <button class="district-button" 
+                    style="background: ${this.generateDistrictColor(district)} !important;"
+                    title="${district}">
+              ${district}
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `
+
+    console.log("DEBUG: districtButtonsHTML:", districtButtonsHTML);
+
+    // Remove existing buttons before adding new ones
+    const existingDistrictButtons = document.querySelector('.district-buttons-container');
+    if (existingDistrictButtons) {
+      existingDistrictButtons.remove();
+    }
+    
+    // Add district buttons inside the city overlay wrapper
+    const cityOverlayWrapper = document.querySelector('.city-overlay-wrapper');
+    if (cityOverlayWrapper) {
+      cityOverlayWrapper.insertAdjacentHTML('beforeend', districtButtonsHTML);
+    }
+    
+    console.log("DEBUG: District buttons added to DOM");
+    console.log("DEBUG: Current view:", this.currentView);
+    console.log("DEBUG: District buttons container in DOM:", document.querySelector('.district-buttons-container'));
   }
 
   private getCityHexSymbol(contentType: string): string {
-    const symbolMap: { [key: string]: string } = {
-      district: "D",
-      building: "B",
-      street: "S",
-      landmark: "L",
-      market: "M",
-      temple: "T",
-      tavern: "V",
-      guild: "G",
-      residence: "R",
-      ruins: "U",
+    switch (contentType.toLowerCase()) {
+      case 'district':
+        return '◆' // Diamond for districts
+      case 'building':
+        return '⌂' // House symbol for buildings
+      case 'street':
+        return '═' // Double line for streets
+      case 'landmark':
+        return '▲' // Triangle for landmarks
+      case 'market':
+        return '◊' // Lozenge for markets
+      case 'temple':
+        return '†' // Cross for temples
+      case 'tavern':
+        return '☺' // Smiley for taverns
+      case 'guild':
+        return '⚔' // Crossed swords for guilds
+      case 'residence':
+        return '⌂' // House symbol for residences
+      case 'ruins':
+        return '☒' // X mark for ruins
+      default:
+        return '?' // Question mark for unknown
     }
-
-    return symbolMap[contentType] || "?"
   }
 
   public showWorldMap(): void {
     console.log("showWorldMap called")
     this.currentView = "world"
     this.currentCityOverlay = null
+    this.selectedCityHex = null // Clear selected hex when returning to world map
     this.renderWorldMap()
+    
+    // Re-enable zoom functionality for world view
+    if ((window as any).enableZoom) {
+      (window as any).enableZoom();
+    }
     
     // Reset zoom when returning to world map
     if ((window as any).resetZoom) {
@@ -459,14 +674,64 @@ The world is dying, but adventure lives on.
 
   public restoreMap(): void {
     console.log("restoreMap called");
+    
+    // Get the map container and zoom container
     const mapContainer = document.querySelector(".map-container");
+    const mapZoomContainer = document.getElementById("map-zoom-container");
+    
+    console.log("Map container found:", !!mapContainer);
+    console.log("Map zoom container found:", !!mapZoomContainer);
+    console.log("Has original content:", mapContainer?.hasAttribute("data-original-content"));
+    
     if (mapContainer && mapContainer.hasAttribute("data-original-content")) {
-      mapContainer.innerHTML = mapContainer.getAttribute("data-original-content")!;
+      // Restore the original content to the zoom container
+      if (mapZoomContainer) {
+        const savedContent = mapContainer.getAttribute("data-original-content")!;
+        console.log("Saved content length:", savedContent.length);
+        console.log("Saved content preview:", savedContent.substring(0, 100));
+        
+        // Check if the saved content is just hex grid content or full zoom container content
+        if (savedContent.includes('<div class="hex-row">')) {
+          console.log("Detected hex grid content");
+          // It's hex grid content, so we need to wrap it properly
+          const hexGrid = mapZoomContainer.querySelector('#hexGrid');
+          if (hexGrid) {
+            console.log("Found existing hex grid, restoring content");
+            hexGrid.innerHTML = savedContent;
+          } else {
+            console.log("No hex grid found, recreating structure");
+            // If hex grid doesn't exist, recreate the proper structure
+            mapZoomContainer.innerHTML = `<div class="hex-grid" id="hexGrid" aria-label="Hex Map Grid">${savedContent}</div>`;
+          }
+        } else {
+          console.log("Detected full zoom container content");
+          // It's full zoom container content
+          mapZoomContainer.innerHTML = savedContent;
+        }
+      }
       mapContainer.removeAttribute("data-original-content");
+    } else {
+      console.log("No original content saved, re-rendering world map");
+      // If no original content was saved, re-render the world map
+      this.renderWorldMap();
     }
+    
     this.currentView = "world";
     this.currentCityOverlay = null;
+    this.updateWorldMapControlsVisibility();
+    this.updateDistrictButtonsVisibility(); // Set initial visibility for district buttons
     this.initializeEventListeners();
+
+    // Clean up district buttons when returning to world map
+    const existingDistrictButtons = document.querySelector('.district-buttons-container');
+    if (existingDistrictButtons) {
+      existingDistrictButtons.remove();
+    }
+    
+    // Re-enable zoom functionality for world view
+    if ((window as any).enableZoom) {
+      (window as any).enableZoom();
+    }
     
     // Reset zoom when returning to world map
     if ((window as any).resetZoom) {
@@ -479,6 +744,33 @@ The world is dying, but adventure lives on.
   // Public methods for external access
   public getCurrentView(): "world" | "city" {
     return this.currentView
+  }
+
+  private updateWorldMapControlsVisibility(): void {
+    const worldMapControls = document.querySelector('.world-map-controls');
+    if (worldMapControls) {
+      if (this.currentView === "city") {
+        worldMapControls.classList.add('city-view');
+      } else {
+        worldMapControls.classList.remove('city-view');
+      }
+    }
+  }
+
+  private updateDistrictButtonsVisibility(): void {
+    const districtButtons = document.querySelector('.district-buttons-container');
+    console.log("DEBUG: updateDistrictButtonsVisibility called");
+    console.log("DEBUG: currentView:", this.currentView);
+    console.log("DEBUG: districtButtons found:", !!districtButtons);
+    if (districtButtons) {
+      if (this.currentView === "city") {
+        districtButtons.classList.remove('world-view');
+        console.log("DEBUG: Removed world-view class");
+      } else {
+        districtButtons.classList.add('world-view');
+        console.log("DEBUG: Added world-view class");
+      }
+    }
   }
 
   public getMapData(): { [key: string]: HexData } {
@@ -503,6 +795,71 @@ The world is dying, but adventure lives on.
     (window as any).showCityOverlayGrid(this, hexCode);
   }
 
+  private generateDistrictColor(districtName: string): string {
+    // Authentic Mörk Borg color palette (12 colors for 12 districts max)
+    const morkBorgColors = [
+      '#FF00FF', // Magenta - Primary Mörk Borg color
+      '#FFFF00', // Yellow - Primary Mörk Borg color
+      '#00FFFF', // Cyan - Primary Mörk Borg color
+      '#FF0000', // Red - Classic Mörk Borg accent
+      '#00FF00', // Green - Classic Mörk Borg accent
+      '#0000FF', // Blue - Classic Mörk Borg accent
+      '#FF8000', // Orange - Mörk Borg warm tone
+      '#8000FF', // Purple - Mörk Borg dark accent
+      '#FF0080', // Hot Pink - Mörk Borg vibrant
+      '#00FF80', // Spring Green - Mörk Borg bright
+      '#FF4000', // Red-Orange - Mörk Borg fiery
+      '#800080'  // Purple-Magenta - Mörk Borg deep
+    ];
+    
+    // Use district name to get consistent index (0-11 for 12 districts)
+    const districtIndex = this.getDistrictIndex(districtName);
+    return morkBorgColors[districtIndex % morkBorgColors.length];
+  }
+
+  private getDistrictIndex(districtName: string): number {
+    // Create a simple mapping for consistent district colors
+    const districtMap: { [key: string]: number } = {};
+    let currentIndex = 0;
+    
+    // Get all unique districts from the current city overlay
+    if (this.currentCityOverlay) {
+      const uniqueDistricts = new Set<string>();
+      for (const hexId of Object.keys(this.currentCityOverlay.hex_grid)) {
+        const hexData = this.currentCityOverlay.hex_grid[hexId];
+        if (hexData?.district && hexData.district !== 'unknown' && hexData.district !== 'empty') {
+          uniqueDistricts.add(hexData.district);
+        }
+      }
+      
+      // Create mapping for unique districts only
+      const sortedDistricts = Array.from(uniqueDistricts).sort();
+      sortedDistricts.forEach(district => {
+        if (!districtMap[district]) {
+          districtMap[district] = currentIndex++;
+        }
+      });
+    }
+    
+    // Return mapped index or 0 for unknown districts
+    return districtMap[districtName] || 0;
+  }
+
+  private generateDistrictLegendRows(districts: string[]): string {
+    const itemsPerRow = 3; // Show 3 districts per row for better readability
+    const rows: string[] = [];
+    
+    for (let i = 0; i < districts.length; i += itemsPerRow) {
+      const rowDistricts = districts.slice(i, i + itemsPerRow);
+      const rowHtml = rowDistricts.map(district => {
+        const color = this.generateDistrictColor(district);
+        return `<span class="district-legend-item" style="background: ${color} !important;">${district}</span>`;
+      }).join('');
+      rows.push(`<div class="legend-row">${rowHtml}</div>`);
+    }
+    
+    return rows.join('');
+  }
 
 }
 
@@ -665,11 +1022,12 @@ document.addEventListener('DOMContentLoaded', () => {
   (window as any).app.showHexDetails = appInstance.showHexDetails.bind(appInstance);
   (window as any).showHexDetails = appInstance.showHexDetails.bind(appInstance);
   const mapPanel = document.querySelector('.map-container') as HTMLElement;
+  const mapZoomContainer = document.getElementById('map-zoom-container') as HTMLElement;
   const detailsPanel = document.querySelector('.modal-content-container') as HTMLElement;
   
   // Enable middle mouse drag scrolling for both panels
-  if (mapPanel) {
-    enableMiddleMouseDragScroll(mapPanel);
+  if (mapZoomContainer) {
+    enableMiddleMouseDragScroll(mapZoomContainer);
   }
   if (detailsPanel) {
     enableMiddleMouseDragScroll(detailsPanel);
@@ -677,14 +1035,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Improved zoom functionality with touch support
   let currentZoom = 1;
-  const ZOOM_MIN = 0.5;
-  const ZOOM_MAX = 2.0;
-  const ZOOM_STEP = 0.1;
-
+  const ZOOM_MIN = 1.0; // Prevent zooming out beyond initial size
+const ZOOM_MAX = 2.0;
+const ZOOM_STEP = 0.1;
+  
   // Make zoom state globally accessible
   (window as any).currentZoom = currentZoom;
+  
+  // Store event listener references for proper cleanup
+  let zoomEventListeners: {
+    wheel: (e: WheelEvent) => void;
+    touchstart: (e: TouchEvent) => void;
+    touchmove: (e: TouchEvent) => void;
+    touchend: (e: TouchEvent) => void;
+    touchcancel: (e: TouchEvent) => void;
+  } | null = null;
 
   function handleMapZoom(e: WheelEvent) {
+    // Disable zooming in city view
+    if ((window as any).app && (window as any).app.getCurrentView() === "city") {
+      return;
+    }
+    
     if (e.ctrlKey) return; // Allow browser zoom when Ctrl is pressed
     
     e.preventDefault();
@@ -699,16 +1071,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function applyZoom() {
-    if (mapPanel) {
+    // Don't apply zoom in city view
+    if ((window as any).app && (window as any).app.getCurrentView() === "city") {
+      return;
+    }
+    
+    if (mapZoomContainer) {
       // Use transform3d for hardware acceleration
-      mapPanel.style.transform = `scale3d(${currentZoom}, ${currentZoom}, 1)`;
-      mapPanel.style.transformOrigin = 'top left';
+      mapZoomContainer.style.transform = `scale3d(${currentZoom}, ${currentZoom}, 1)`;
+      mapZoomContainer.style.transformOrigin = 'top left';
     }
     // Update global zoom state
     (window as any).currentZoom = currentZoom;
   }
 
   function resetZoom() {
+    // Don't reset zoom in city view
+    if ((window as any).app && (window as any).app.getCurrentView() === "city") {
+      return;
+    }
+    
     currentZoom = 1;
     applyZoom();
   }
@@ -721,6 +1103,11 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function handleTouchStart(e: TouchEvent) {
+    // Disable touch zooming in city view
+    if ((window as any).app && (window as any).app.getCurrentView() === "city") {
+      return;
+    }
+    
     if (e.touches.length === 2) {
       pinchState.active = true;
       pinchState.initialDistance = Math.hypot(
@@ -733,6 +1120,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleTouchMove(e: TouchEvent) {
+    // Disable touch zooming in city view
+    if ((window as any).app && (window as any).app.getCurrentView() === "city") {
+      return;
+    }
+    
     if (pinchState.active && e.touches.length === 2) {
       e.preventDefault();
       
@@ -761,18 +1153,52 @@ document.addEventListener('DOMContentLoaded', () => {
     pinchState.active = false;
   }
 
-  // Apply zoom and touch handlers to the map container
-  if (mapPanel) {
-    mapPanel.addEventListener('wheel', handleMapZoom, { passive: false });
-    mapPanel.addEventListener('touchstart', handleTouchStart, { passive: false });
-    mapPanel.addEventListener('touchmove', handleTouchMove, { passive: false });
-    mapPanel.addEventListener('touchend', handleTouchEnd, { passive: false });
-    mapPanel.addEventListener('touchcancel', handleTouchCancel, { passive: false });
+  // Function to enable zoom functionality
+  function enableZoom() {
+    if (!mapZoomContainer || zoomEventListeners) return; // Already enabled or no zoom container
+    
+    zoomEventListeners = {
+      wheel: handleMapZoom,
+      touchstart: handleTouchStart,
+      touchmove: handleTouchMove,
+      touchend: handleTouchEnd,
+      touchcancel: handleTouchCancel
+    };
+    
+    mapZoomContainer.addEventListener('wheel', zoomEventListeners.wheel, { passive: false });
+    mapZoomContainer.addEventListener('touchstart', zoomEventListeners.touchstart, { passive: false });
+    mapZoomContainer.addEventListener('touchmove', zoomEventListeners.touchmove, { passive: false });
+    mapZoomContainer.addEventListener('touchend', zoomEventListeners.touchend, { passive: false });
+    mapZoomContainer.addEventListener('touchcancel', zoomEventListeners.touchcancel, { passive: false });
     
     // Enable hardware acceleration
-    mapPanel.style.willChange = 'transform';
-    mapPanel.style.backfaceVisibility = 'hidden';
+    mapZoomContainer.style.willChange = 'transform';
+    mapZoomContainer.style.backfaceVisibility = 'hidden';
   }
+
+  // Function to disable zoom functionality
+  function disableZoom() {
+    if (!mapZoomContainer || !zoomEventListeners) return; // Not enabled or no zoom container
+    
+    mapZoomContainer.removeEventListener('wheel', zoomEventListeners.wheel);
+    mapZoomContainer.removeEventListener('touchstart', zoomEventListeners.touchstart);
+    mapZoomContainer.removeEventListener('touchmove', zoomEventListeners.touchmove);
+    mapZoomContainer.removeEventListener('touchend', zoomEventListeners.touchend);
+    mapZoomContainer.removeEventListener('touchcancel', zoomEventListeners.touchcancel);
+    
+    // Reset zoom to 1 when disabling
+    currentZoom = 1;
+    if (mapZoomContainer) {
+      mapZoomContainer.style.transform = 'scale3d(1, 1, 1)';
+      mapZoomContainer.style.willChange = 'auto';
+      mapZoomContainer.style.backfaceVisibility = 'visible';
+    }
+    
+    zoomEventListeners = null;
+  }
+
+  // Initialize zoom functionality for world view
+  enableZoom();
 
   // Add keyboard shortcut for resetting zoom (R key)
   document.addEventListener('keydown', (e) => {
@@ -784,6 +1210,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Make zoom functions globally accessible
   (window as any).resetZoom = resetZoom;
   (window as any).applyZoom = applyZoom;
+  (window as any).enableZoom = enableZoom;
+  (window as any).disableZoom = disableZoom;
 
   // Function to select and center a hex cell
   function selectHexCell(hexCode: string) {
@@ -805,13 +1233,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cell) {
       cell.classList.add('selected');
       
-      // Get the map container
-      const mapContainer = document.querySelector('.map-container') as HTMLElement;
+      // Get the map zoom container
+      const mapZoomContainer = document.getElementById('map-zoom-container') as HTMLElement;
       
-      if (mapContainer) {
-        // Calculate the position of the cell relative to the map container, accounting for zoom
+      if (mapZoomContainer) {
+        // Calculate the position of the cell relative to the zoom container, accounting for zoom
         const cellRect = cell.getBoundingClientRect();
-        const containerRect = mapContainer.getBoundingClientRect();
+        const containerRect = mapZoomContainer.getBoundingClientRect();
         
         // Calculate the center position of the cell within the container
         const cellCenterX = cellRect.left + cellRect.width / 2;
@@ -820,11 +1248,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const containerCenterY = containerRect.top + containerRect.height / 2;
         
         // Calculate the scroll position needed to center the cell, accounting for zoom
-        const scrollLeft = mapContainer.scrollLeft + (cellCenterX - containerCenterX) / currentZoom;
-        const scrollTop = mapContainer.scrollTop + (cellCenterY - containerCenterY) / currentZoom;
+        const scrollLeft = mapZoomContainer.scrollLeft + (cellCenterX - containerCenterX) / currentZoom;
+        const scrollTop = mapZoomContainer.scrollTop + (cellCenterY - containerCenterY) / currentZoom;
         
         // Smooth scroll to center the cell
-        mapContainer.scrollTo({
+        mapZoomContainer.scrollTo({
           left: scrollLeft,
           top: scrollTop,
           behavior: 'smooth'

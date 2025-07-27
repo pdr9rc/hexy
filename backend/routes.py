@@ -334,34 +334,54 @@ def get_city_overlays():
 @api_bp.route('/city-overlay/<overlay_name>')
 def get_city_overlay(overlay_name):
     try:
+        print(f"DEBUG: Requested overlay: '{overlay_name}'")
         overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
         if not overlay_data:
+            print(f"DEBUG: No cached overlay data, generating new overlay for '{overlay_name}'")
             overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
         if not overlay_data:
             return jsonify({'success': False, 'error': 'Failed to generate overlay data'}), 404
+
+        print(f"DEBUG: Overlay data keys: {list(overlay_data.keys())}")
+        print(f"DEBUG: Hex grid has {len(overlay_data.get('hex_grid', {}))} hexes")
+        print(f"DEBUG: Hex grid keys: {list(overlay_data.get('hex_grid', {}).keys())}")
 
         compact_overlay = {
             'name': overlay_data['name'],
             'display_name': overlay_data['display_name'],
             'filename': overlay_data['filename'],
-            'grid_size': overlay_data['grid_size'],
+            'grid_type': overlay_data.get('grid_type', 'round'),
+            'radius': overlay_data.get('radius', 3),
             'hex_grid': {},
             'total_hexes': overlay_data['total_hexes']
         }
         for hex_id, hex_data in overlay_data['hex_grid'].items():
+            content = hex_data.get('content', {})
             compact_overlay['hex_grid'][hex_id] = {
-                'id': hex_data['id'],
-                'row': hex_data['row'],
-                'col': hex_data['col'],
+                'id': hex_data.get('id', hex_id),
+                'row': hex_data.get('row', 0),
+                'col': hex_data.get('col', 0),
+                'district': hex_data.get('district', 'unknown'),  # Include district information
                 'content': {
-                    'name': hex_data['content']['name'],
-                    'type': hex_data['content']['type'],
-                    'description': hex_data['content']['description'][:200] + '...' if len(hex_data['content']['description']) > 200 else hex_data['content']['description'],
-                    'encounter': hex_data['content']['encounter'][:150] + '...' if len(hex_data['content']['encounter']) > 150 else hex_data['content']['encounter'],
-                    'atmosphere': hex_data['content']['atmosphere'][:100] + '...' if len(hex_data['content']['atmosphere']) > 100 else hex_data['content']['atmosphere'],
-                    'position_type': hex_data['content']['position_type']
+                    'name': content.get('name', 'Unknown'),
+                    'type': content.get('type', 'unknown'),
+                    'description': content.get('description', 'No description available'),
+                    'encounter': content.get('encounter', 'No encounter available'),
+                    'atmosphere': content.get('atmosphere', 'No atmosphere available'),
+                    'position_type': content.get('position_type', 'unknown')
                 }
             }
+            # Truncate long text fields
+            if len(compact_overlay['hex_grid'][hex_id]['content']['description']) > 200:
+                compact_overlay['hex_grid'][hex_id]['content']['description'] = compact_overlay['hex_grid'][hex_id]['content']['description'][:200] + '...'
+            if len(compact_overlay['hex_grid'][hex_id]['content']['encounter']) > 150:
+                compact_overlay['hex_grid'][hex_id]['content']['encounter'] = compact_overlay['hex_grid'][hex_id]['content']['encounter'][:150] + '...'
+            if len(compact_overlay['hex_grid'][hex_id]['content']['atmosphere']) > 100:
+                compact_overlay['hex_grid'][hex_id]['content']['atmosphere'] = compact_overlay['hex_grid'][hex_id]['content']['atmosphere'][:100] + '...'
+        
+        print(f"DEBUG: Compact overlay hex grid has {len(compact_overlay['hex_grid'])} hexes")
+        print(f"DEBUG: Compact overlay hex grid keys: {list(compact_overlay['hex_grid'].keys())}")
+        
         response = jsonify({'success': True, 'overlay': compact_overlay})
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
         response.headers['Pragma'] = 'no-cache'
@@ -400,6 +420,64 @@ def get_city_overlay_hex(overlay_name, hex_id):
         response.headers['Pragma'] = 'no-cache'
         response.headers['Expires'] = '0'
         return response
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/regenerate-hex/<overlay_name>/<hex_id>', methods=['POST'])
+def regenerate_hex(overlay_name, hex_id):
+    """Regenerate a specific hex in a city overlay."""
+    try:
+        # Load or generate the city overlay
+        overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
+        if not overlay_data:
+            overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
+        
+        # Parse hex_id to get row and column
+        try:
+            # hex_id format is typically "row_col" (e.g., "0_0", "1_2")
+            row, col = map(int, hex_id.split('_'))
+        except ValueError:
+            return jsonify({'success': False, 'error': 'Invalid hex ID format'}), 400
+        
+        # Load city data for context
+        city_data = city_overlay_analyzer.load_city_database(overlay_name.lower())
+        
+        # Generate new content for the hex
+        # First, determine if this is a district hex or position-based hex
+        district_name = None
+        if 'district_matrix' in overlay_data:
+            # Check if this position has a district
+            matrix = overlay_data['district_matrix']
+            if 0 <= row < len(matrix) and 0 <= col < len(matrix[0]):
+                district_name = matrix[row][col]
+        
+        if district_name and district_name.lower() not in ['empty', 'unknown']:
+            # Generate district-based content
+            new_hex_data = city_overlay_analyzer.generate_district_based_content(
+                district_name, row, col, overlay_name, city_data
+            )
+        else:
+            # Generate position-based content
+            radius = overlay_data.get('radius', 3)
+            distance = city_overlay_analyzer.hex_distance(row, col, radius, radius)
+            new_hex_data = city_overlay_analyzer.generate_position_based_content(
+                row, col, distance, radius, overlay_name, city_data
+            )
+        
+        # Update the overlay data with the new hex
+        overlay_data['hex_grid'][hex_id] = new_hex_data
+        
+        # Save the updated overlay data
+        city_overlay_analyzer.save_overlay_data(overlay_name, overlay_data)
+        
+        return jsonify({
+            'success': True,
+            'hex_data': new_hex_data,
+            'message': f'Hex {hex_id} regenerated successfully'
+        })
+        
     except Exception as e:
         import traceback
         traceback.print_exc()

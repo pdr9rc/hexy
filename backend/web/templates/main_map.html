@@ -9,72 +9,50 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
 <body>
-  <!-- Header Section -->
+  <!-- Header Section with Overlaid Controls -->
   <header class="main-header">
     <div class="header-ascii" style="text-align: center;" aria-hidden="true">
       <pre>
-        @@@@@@@ @@@  @@@ @@@@@@@@      @@@@@@@  @@@ @@@ @@@ @@@  @@@  @@@@@@@       @@@       @@@@@@  @@@  @@@ @@@@@@@   @@@@@@
-        @@!   @@!  @@@ @@!           @@!  @@@ @@! !@@ @@! @@!@!@@@ !@@            @@!      @@!  @@@ @@!@!@@@ @@!  @@@ !@@    
-        @!!   @!@!@!@! @!!!:!        @!@  !@!  !@!@!  !!@ @!@@!!@! !@! @!@!@      @!!      @!@!@!@! @!@@!!@! @!@  !@!  !@@!! 
-        !!:   !!:  !!! !!:           !!:  !!!   !!:   !!: !!:  !!! :!!   !!:      !!:      !!:  !!! !!:  !!! !!:  !!!     !:!
-         :     :   : : : :: :::      :: :  :    .:    :   ::    :   :: :: :       : ::.: :  :   : : ::    :  :: :  :  ::.: :
+        @        @   @@   @@                     @     @  @       @@  @     @@@     @        @                @             @@    @@@     @   @@                    
+     @@ @@    @  @@   @@@@ @@  @            @@@@@@@@    @@@       @ @@@     @@@@    @@     @@@@               @@@           @@@    @@@   @@@@@@@@          @@@     
+@@@@   @@@@@@@   @@@ @@@@ @@@@@@@@@               @@@@@   @@@@   @@@@  @@@   @@@    @@@     @@@@               @@@           @@@   @@@     @@  @@@@@   @@@ @@@@     
+       @@@      @@@ @@@  @@@@     @@            @@@   @@@@ @@  @@@  @@@     @@@@@  @@@    @@@@@              @@@           @@@    @@@@@  @@@ @@@   @@@@ @@@@@      
+        @@      @@@  @@   @@ @  @                @@    @   @@ @@    @@@      @@@@  @@    @@   @               @@           @@@@    @@@@   @   @@    @   @@  @@     
+        @@ @@@   @@@@@@  @@@                     @@  @@     @@@@     @@      @@@@  @@@@@@@@                   @@          @@ @@    @@@@   @   @@   @@  @@          
+        @@       @   @@   @@    @                @@ @@@      @@      @@     @@  @@ @@ @@@@@@@@@@              @    @@     @ @@@    @@ @@ @@   @@ @@@    @@@@@      
+        @@       @@  @@@  @@@   @@ @@            @@@@        @@      @@      @@ @@ @@@   @@ @@@@              @@    @@ @@@@   @@   @@ @@ @@@  @@@@ @        @@@    
+       @@@@     @@@  @@@  @@ @ @@@@            @@@@          @@@     @@@    @@    @@@@   @@@@@@@             @@  @@@@@ @@@    @@@@@@    @@@@@@@@@     @@@ @@@@     
+      @@@      @@@ @@@  @@@@@@@@@@             @@@          @@@   @@@@@@@@@@@    @@@     @@@@@            @@@@@@@@@@@@@@      @@ @@@   @@@  @@@@        @@@@       
+       @        @@   @ @@@@                     @           @       @@@     @     @@       @@@            @@@@        @        @@ @     @@   @@          @@        
         </pre>
     </div>
 
+
   </header>
-
-  <!-- Control Panel -->
-  <nav class="control-panel" aria-label="Map controls">
-    <div class="controls-row">
-      <!-- Action Controls -->
-      <div class="controls-group">
-        <button class="btn-mork-borg" id="lore-btn" aria-label="Show Lore">
-          📜 Lore
-        </button>
-        <button class="btn-mork-borg btn-warning" id="reset-btn" aria-label="Reset Continent">
-          🔄 Reset
-        </button>
-      </div>
-
-      <!-- Language Selector -->
-      <div class="controls-group">
-        <label for="language-selector" class="lang-label">Language:</label>
-        <select id="language-selector" class="lang-select" aria-label="Select language">
-          <option value="en">English</option>
-          <option value="pt">Português</option>
-        </select>
-      </div>
-
-      <!-- Map Legend -->
-      <div class="legend-group">
-        <div class="legend-terrain">
-          <strong>Terrain:</strong>
-          <span class="terrain-mountain">^</span> Mountain
-          <span class="terrain-forest">♠</span> Forest
-          <span class="terrain-coast">~</span> Coast
-          <span class="terrain-plains">.</span> Plains
-          <span class="terrain-swamp">#</span> Swamp
-          <span class="terrain-sea">≈</span> Sea
-        </div>
-        <div class="legend-locations">
-          <strong>Locations:</strong>
-          <span class="major-city">◆</span> Major Cities
-          <span class="settlement">⌂</span> Settlements
-          <strong>BOLD</strong> = Has Content
-        </div>
-      </div>
-    </div>
-  </nav>
 
   <!-- Main Application Content -->
   <main class="main-content">
     <!-- Map Panel (Left) -->
     <section class="map-side" aria-label="Hex Map">
       <div class="map-container" id="map-container">
+        <div class="map-zoom-container" id="map-zoom-container">
         <div class="hex-grid" id="hexGrid" aria-label="Hex Map Grid">
           <!-- Map content will be rendered here by JavaScript -->
+          </div>
         </div>
       </div>
+      
+      <!-- World Map Controls - Bottom Left -->
+      <nav class="world-map-controls" aria-label="World map controls">
+        <div class="controls-group">
+          <button class="btn-mork-borg" id="lore-btn" aria-label="Show Lore">
+            📜 Lore
+          </button>
+          <button class="btn-mork-borg btn-warning" id="reset-btn" aria-label="Reset Continent">
+            🔄 Reset
+          </button>
+        </div>
+      </nav>
     </section>
 
     <!-- Details Panel (Right) -->

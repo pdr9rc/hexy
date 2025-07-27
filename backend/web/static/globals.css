@@ -22,24 +22,67 @@ body {
 }
 
 :root {
+  /* Mörk Borg Official Color Palette */
   --mork-black: #000000;
-  --mork-cyan: #00FFFF;
+  --mork-pink: #FF00FF;
   --mork-yellow: #FFFF00;
+  --mork-white: #FFFFFF;
+  
+  /* Extended palette for UI elements */
+  --mork-cyan: #00FFFF;
   --mork-green: #00FF00;
   --mork-magenta: #FF00FF;
-  --mork-white: #FFFFFF;
   --mork-gray: #222222;
+  
+  /* Text colors following Mörk Borg aesthetic */
+  --text-primary: var(--mork-white);
+  --text-secondary: var(--mork-yellow);
+  --text-accent: var(--mork-pink);
+  --text-muted: #888888;
+  
+  /* Background colors */
+  --bg-primary: var(--mork-black);
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --bg-accent: #222222;
+  
+  /* Border colors */
+  --border-primary: var(--mork-pink);
+  --border-secondary: var(--mork-yellow);
+  --border-muted: #444444;
+  
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Border Radius - Mörk Borg uses sharp edges */
+  --border-radius: 0;
+  --border-radius-sm: 0;
+
+  /* Shadows - Mörk Borg style glows */
+  --shadow-pink: 0 0 15px var(--mork-pink);
+  --shadow-yellow: 0 0 15px var(--mork-yellow);
+  --shadow-cyan: 0 0 15px var(--mork-cyan);
+  --shadow-dark: 0 4px 8px rgba(0, 0, 0, 0.8);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
 .split-screen {
   display: flex;
   min-height: 100vh;
   background: var(--mork-black);
-  color: var(--mork-cyan);
+  color: var(--mork-yellow);
 }
 .map-panel {
   flex: 1 1 50%;
-  border-right: 2px solid var(--mork-cyan);
+  border-right: 2px solid var(--mork-pink);
   background: var(--mork-black);
   overflow: auto;
 }
@@ -57,30 +100,32 @@ body {
     flex: none;
     min-height: 40vh;
     border-right: none;
-    border-bottom: 2px solid var(--mork-cyan);
+    border-bottom: 2px solid var(--mork-pink);
   }
 }
 
 .btn-mork-borg {
-  background: var(--mork-black);
-  border: 2px solid var(--mork-cyan);
-  color: var(--mork-cyan);
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid var(--mork-pink);
+  color: var(--mork-pink);
   font-family: 'Adhesive NR Seven', serif;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
   padding: 0.5em 1.5em;
   cursor: pointer;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
 }
 .btn-mork-borg:hover {
-  background: var(--mork-cyan);
+  background: var(--mork-pink);
   color: var(--mork-black);
-  box-shadow: 0 0 10px var(--mork-cyan);
+  box-shadow: var(--shadow-pink);
 }
 
 .main-header {
   text-align: center;
-
+  position: relative;
 }
 
 .header-ascii pre{
@@ -88,18 +133,19 @@ body {
   font-family: 'Pixelify Sans', monospace;
   font-size: 3.3rem;
   margin: 0;
-  text-shadow: 0 0 8px var(--mork-yellow);
+  text-shadow: var(--shadow-yellow);
 }
 
 .control-panel {
   background: var(--mork-gray);
   color: var(--mork-yellow);
-  border-bottom: 2px solid var(--mork-cyan);
+  border-bottom: 2px solid var(--mork-pink);
   padding: 1rem 0.5rem;
-  box-shadow: 0 2px 12px 0 rgba(0,255,255,0.08);
+  box-shadow: 0 2px 12px 0 rgba(255, 0, 255, 0.08);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 }
 
 .controls-group, .legend-group {
@@ -109,12 +155,12 @@ body {
 }
 
 .legend-group strong {
-  color: var(--mork-magenta);
+  color: var(--mork-pink);
 }
 
 .legend-terrain span, .legend-locations span {
   margin-right: 0.5em;
-  color: var(--mork-cyan);
+  color: var(--mork-yellow);
   font-weight: bold;
 }
 

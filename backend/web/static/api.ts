@@ -147,3 +147,56 @@ export async function getCityOverlayHex(overlayName: string, hexId: string): Pro
     throw error;
   }
 }
+
+// Enhanced District API Functions
+export async function getCityDistricts(overlayName: string): Promise<any> {
+    try {
+        const response = await fetch(`/api/city-overlay/${overlayName}/districts`);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching city districts:', error);
+        throw error;
+    }
+}
+
+export async function getCityDistrictDetails(overlayName: string, districtName: string): Promise<any> {
+    try {
+        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}`);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching district details:', error);
+        throw error;
+    }
+}
+
+export async function getDistrictRandomTable(overlayName: string, districtName: string): Promise<any> {
+    try {
+        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table`);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching district random table:', error);
+        throw error;
+    }
+}
+
+export async function getDistrictSpecificRandomTable(overlayName: string, districtName: string, tableType: string): Promise<any> {
+    try {
+        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table/${tableType}`);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching district specific random table:', error);
+        throw error;
+    }
+}

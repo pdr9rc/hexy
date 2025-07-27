@@ -28,20 +28,35 @@ export async function showCityOverlayGrid(app: any, hexCode: string) {
 
     const overlay = overlayResponse.overlay
     const mapContainer = document.querySelector(".map-container")
+    const mapZoomContainer = document.getElementById("map-zoom-container")
 
-    if (!mapContainer) {
-      throw new Error("Map container not found")
+    if (!mapContainer || !mapZoomContainer) {
+      throw new Error("Map container or zoom container not found")
     }
 
     // Save original content if not already saved
     if (!mapContainer.hasAttribute("data-original-content")) {
-      mapContainer.setAttribute("data-original-content", mapContainer.innerHTML)
+      const hexGrid = mapZoomContainer.querySelector('#hexGrid');
+      if (hexGrid) {
+        mapContainer.setAttribute("data-original-content", hexGrid.innerHTML);
+      }
     }
 
     const html = generateCityOverlayGridHTML(overlay, hexCode, overlayName)
     console.log("DEBUG: Generated overlay grid HTML:", html);
-    mapContainer.innerHTML = html
+    if (mapZoomContainer) {
+      mapZoomContainer.innerHTML = html
+    }
     console.log("DEBUG: .city-overlay-grid in DOM after injection:", document.querySelector('.city-overlay-grid'));
+
+    // Set the app state to city view and update visibility
+    if (app) {
+      app.currentView = "city";
+      app.currentCityOverlay = overlay;
+      app.updateWorldMapControlsVisibility();
+      app.updateDistrictButtonsVisibility();
+      app.initializeEventListeners();
+    }
 
     ui.hideLoading()
   } catch (error) {
@@ -58,6 +73,11 @@ export async function showCityOverlayAscii(app: any, overlayName: string, hexCod
   try {
     ui.showLoading("Loading ASCII view...")
 
+    // Disable zoom when entering ASCII view
+    if ((window as any).disableZoom) {
+      (window as any).disableZoom();
+    }
+
     const response = await api.getCityOverlayAscii(overlayName)
 
     if (!response.success) {
@@ -65,12 +85,21 @@ export async function showCityOverlayAscii(app: any, overlayName: string, hexCod
     }
 
     const mapContainer = document.querySelector(".map-container")
-    if (!mapContainer) {
-      throw new Error("Map container not found")
+    const mapZoomContainer = document.getElementById("map-zoom-container")
+    if (!mapContainer || !mapZoomContainer) {
+      throw new Error("Map container or zoom container not found")
     }
 
     const html = generateCityOverlayAsciiHTML(response.ascii, overlayName, hexCode)
-    mapContainer.innerHTML = html
+    mapZoomContainer.innerHTML = html
+
+    // Set the app state to city view and update visibility
+    if (app) {
+      app.currentView = "city";
+      app.updateWorldMapControlsVisibility();
+      app.updateDistrictButtonsVisibility();
+      app.initializeEventListeners();
+    }
 
     ui.hideLoading()
   } catch (error) {
@@ -127,7 +156,7 @@ function generateCityOverlayGridHTML(overlay: any, hexCode: string, overlayName:
       </div>
       <div class="ascii-modal">
         <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
-          🏰 ${overlay.display_name.toUpperCase()} - INTERACTIVE GRID
+          ⌂ ${overlay.display_name.toUpperCase()} - INTERACTIVE GRID
         </h4>
         <div style="margin-bottom: 15px; font-size: 12px; color: var(--mork-gray);">
           <strong>LEGEND:</strong> D=District, B=Building, S=Street, L=Landmark, M=Market, T=Temple, V=Tavern, G=Guild, R=Residence, U=Ruins
@@ -189,11 +218,11 @@ function generateCityOverlayAsciiHTML(asciiContent: string, overlayName: string,
       <div class="mb-4">
         <button class="btn-mork-borg btn-warning me-2" onclick="window.app.restoreMap()">RETURN TO MAP</button>
         <button class="btn-mork-borg me-2" onclick="window.app.showCityOverlayGrid('${hexCode}')">← BACK TO GRID</button>
-        <button class="btn-mork-borg" onclick="window.app.showHexDetails('${hexCode}')">🏰 RETURN TO HEX</button>
+        <button class="btn-mork-borg" onclick="window.app.showHexDetails('${hexCode}')">⌂ RETURN TO HEX</button>
       </div>
       <div class="ascii-modal">
         <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
-          🏰 CITY OVERLAY - ASCII VIEW
+          ⌂ CITY OVERLAY - ASCII VIEW
         </h4>
         <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word; text-align: left;">
 ${asciiContent}

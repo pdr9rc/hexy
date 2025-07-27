@@ -12,7 +12,7 @@ export async function showCityDetailsInMap(app: any, hexCode: string): Promise<v
             if (container) {
                 container.innerHTML = `
           <div class="ascii-modal">
-            <h2>🏰 ${city.name}</h2>
+            <h2>⌂ ${city.name}</h2>
             <p><strong>Population:</strong> ${city.population}</p>
             <p><strong>Region:</strong> ${city.region}</p>
             <p><strong>Atmosphere:</strong> ${city.atmosphere}</p>
@@ -20,7 +20,7 @@ export async function showCityDetailsInMap(app: any, hexCode: string): Promise<v
             <p><strong>Notable Features:</strong> ${city.notable_features}</p>
             <p><strong>Key NPCs:</strong> ${city.key_npcs}</p>
             <div class="mt-3">
-              <button class="btn" onclick="app.showCityOverlayInMap('${hexCode}')">View City Overlay</button>
+              <button class="btn-mork-borg" onclick="app.showCityOverlayInMap('${hexCode}')">View City Overlay</button>
             </div>
           </div>
         `;
@@ -101,23 +101,32 @@ export async function showCityOverlayGridInMap(app: any, overlayName: string, he
     try {
         const response = await fetch(`/api/city-overlay/${overlayName}`);
         const data = await response.json();
+        console.log('DEBUG: Received overlay data:', data);
         if (data.success) {
             const overlay = data.overlay;
+            console.log('DEBUG: Overlay object:', overlay);
+            console.log('DEBUG: Hex grid keys:', Object.keys(overlay.hex_grid || {}));
+            console.log('DEBUG: Sample hex data:', overlay.hex_grid ? Object.values(overlay.hex_grid)[0] : 'No hex grid');
+            
             const mapContainer = document.querySelector('.map-container');
-            if (mapContainer) {
+            const mapZoomContainer = document.getElementById('map-zoom-container');
+            if (mapContainer && mapZoomContainer) {
                 if (!mapContainer.getAttribute('data-original-content')) {
-                    mapContainer.setAttribute('data-original-content', mapContainer.innerHTML);
+                    const hexGrid = mapZoomContainer.querySelector('#hexGrid');
+                    if (hexGrid) {
+                        mapContainer.setAttribute('data-original-content', hexGrid.innerHTML);
+                    }
                 }
                 let html = `
           <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
             <div class="mb-4">
-              <button class="btn" onclick="app.restoreMap()">RETURN TO MAP</button>
-              <button class="btn" onclick="app.showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
-              <button class="btn" onclick="app.showCityOverlayAsciiInMap('${overlayName}', '${hexCode}')">📜 ASCII VIEW</button>
+              <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
+              <button class="btn-mork-borg" onclick="app.showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
+              <button class="btn-mork-borg" onclick="app.showCityOverlayAsciiInMap('${overlayName}', '${hexCode}')">📜 ASCII VIEW</button>
             </div>
             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
               <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
-                🏰 ${overlay.display_name.toUpperCase()} - INTERACTIVE GRID
+                ⌂ ${overlay.display_name.toUpperCase()} - INTERACTIVE GRID
               </h4>
               <div style="margin-bottom: 15px; font-size: 12px; color: var(--mork-gray);">
                 <strong>LEGEND:</strong> D=District, B=Building, S=Street, L=Landmark, M=Market, T=Temple, V=Tavern, G=Guild, R=Residence, U=Ruins
@@ -129,6 +138,7 @@ export async function showCityOverlayGridInMap(app: any, overlayName: string, he
                     for (let col = 0; col < 5; col++) {
                         const hexId = `${row}_${col}`;
                         const hexData = overlay.hex_grid[hexId];
+                        console.log(`DEBUG: Looking for hex ${hexId}:`, hexData);
                         if (hexData) {
                             const content = hexData.content;
                             const symbol = getCityOverlaySymbol(content.type);
@@ -153,7 +163,9 @@ export async function showCityOverlayGridInMap(app: any, overlayName: string, he
             </div>
           </div>
         `;
-                mapContainer.innerHTML = html;
+                if (mapZoomContainer) {
+                    mapZoomContainer.innerHTML = html;
+                }
             }
         }
         else {
@@ -172,21 +184,27 @@ export async function showCityOverlayGridInMap(app: any, overlayName: string, he
 export async function showCityOverlayAsciiInMap(app: any, overlayName: string, hexCode: string): Promise<void> {
     ui.showLoading('Loading ASCII view...');
     try {
+        // Disable zoom when entering ASCII view
+        if ((window as any).disableZoom) {
+            (window as any).disableZoom();
+        }
+        
         const response = await fetch(`/api/city-overlay/${overlayName}/ascii`);
         const data = await response.json();
         if (data.success) {
             const mapContainer = document.querySelector('.map-container');
-            if (mapContainer) {
+            const mapZoomContainer = document.getElementById('map-zoom-container');
+            if (mapContainer && mapZoomContainer) {
                 let html = `
           <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
             <div class="mb-4">
-              <button class="btn" onclick="app.restoreMap()">RETURN TO MAP</button>
-              <button class="btn" onclick="app.showCityOverlayGridInMap('${overlayName}', '${hexCode}')">← BACK TO GRID</button>
-              <button class="btn" onclick="app.showCityDetailsInMap('${hexCode}')">🏰 RETURN TO CITY</button>
+              <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
+              <button class="btn-mork-borg" onclick="app.showCityOverlayGridInMap('${overlayName}', '${hexCode}')">← BACK TO GRID</button>
+              <button class="btn-mork-borg" onclick="app.showCityDetailsInMap('${hexCode}')">⌂ RETURN TO CITY</button>
             </div>
             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
               <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
-                🏰 CITY OVERLAY - ASCII VIEW
+                ⌂ CITY OVERLAY - ASCII VIEW
               </h4>
               <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word; text-align: left;">
 ${data.ascii}
@@ -194,7 +212,9 @@ ${data.ascii}
             </div>
           </div>
         `;
-                mapContainer.innerHTML = html;
+                if (mapZoomContainer) {
+                    mapZoomContainer.innerHTML = html;
+                }
             }
         }
         else {
@@ -213,18 +233,24 @@ ${data.ascii}
 export async function showCityHexDetailsInMap(app: any, overlayName: string, hexId: string): Promise<void> {
     ui.showLoading('Loading hex details...');
     try {
+        // Disable zoom when entering hex details view
+        if ((window as any).disableZoom) {
+            (window as any).disableZoom();
+        }
+        
         const response = await fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`);
         const data = await response.json();
         if (data.success) {
             const hex = data.hex;
             const content = hex.content;
             const mapContainer = document.querySelector('.map-container');
-            if (mapContainer) {
+            const mapZoomContainer = document.getElementById('map-zoom-container');
+            if (mapContainer && mapZoomContainer) {
                 let html = `
           <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
             <div class="mb-4">
-              <button class="btn" onclick="app.restoreMap()">RETURN TO MAP</button>
-              <button class="btn" onclick="app.showCityOverlayGridInMap('${overlayName}', '${hexId}')">← BACK TO GRID</button>
+              <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
+              <button class="btn-mork-borg" onclick="app.showCityOverlayGridInMap('${overlayName}', '${hexId}')">← BACK TO GRID</button>
             </div>
             <div style="background: var(--mork-black); border: 2px solid var(--mork-cyan); padding: 20px; box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);">
               <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
@@ -238,7 +264,9 @@ export async function showCityHexDetailsInMap(app: any, overlayName: string, hex
             </div>
           </div>
         `;
-                mapContainer.innerHTML = html;
+                if (mapZoomContainer) {
+                    mapZoomContainer.innerHTML = html;
+                }
             }
         }
         else {
@@ -296,7 +324,7 @@ function showMapErrorState(app: any, message: string): void {
             </div>
           </div>
         </div>
-        <button class="btn" onclick="app.restoreMap()">RETURN TO MAP</button>
+        <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
       </div>
     `;
     }

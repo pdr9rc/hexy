@@ -1,4 +1,4 @@
-/* City Overlay Styles */
+/* City Overlay Styles - Authentic Mörk Borg Design */
 .city-overlay-container {
   padding: 20px;
   max-width: 1200px;
@@ -11,11 +11,11 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #8b4513;
+  border-bottom: 2px solid var(--border-primary);
 }
 
 .city-overlay-header h2 {
-  color: #8b4513;
+  color: var(--text-accent);
   margin: 0;
   font-family: "Jacquard 12", monospace;
 }
@@ -30,10 +30,10 @@
   flex-direction: column;
   gap: 2px;
   margin-bottom: 20px;
-  background: #2a1810;
+  background: var(--bg-secondary);
   padding: 10px;
-  border-radius: 8px;
-  border: 2px solid #8b4513;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-primary);
 }
 
 .city-row {
@@ -56,64 +56,66 @@
 
 .city-hex-cell:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
+  box-shadow: var(--shadow-pink);
 }
 
 .city-hex-symbol {
   font-size: 24px;
   font-weight: bold;
-  color: #daa520;
+  color: var(--text-accent);
 }
 
-.city-hex-coords {
-  font-size: 10px;
-  color: #8b4513;
-  position: absolute;
-  bottom: 2px;
-  right: 4px;
-}
-
-/* City hex type colors */
+/* City hex type colors - Mörk Borg palette */
 .city-district {
-  background: #4a3728;
+  background: var(--mork-yellow);
+  color: var(--mork-black);
 }
 .city-building {
-  background: #5a4a3a;
+  background: var(--mork-pink);
+  color: var(--mork-black);
 }
 .city-street {
-  background: #3a3a3a;
+  background: var(--mork-gray);
+  color: var(--mork-white);
 }
 .city-landmark {
-  background: #6a4a2a;
+  background: var(--mork-cyan);
+  color: var(--mork-black);
 }
 .city-market {
-  background: #4a5a3a;
+  background: var(--mork-green);
+  color: var(--mork-black);
 }
 .city-temple {
-  background: #5a3a4a;
+  background: var(--mork-yellow);
+  color: var(--mork-black);
 }
 .city-tavern {
-  background: #5a4a2a;
+  background: var(--mork-pink);
+  color: var(--mork-black);
 }
 .city-guild {
-  background: #3a4a5a;
+  background: var(--mork-cyan);
+  color: var(--mork-black);
 }
 .city-residence {
-  background: #4a4a4a;
+  background: var(--mork-green);
+  color: var(--mork-black);
 }
 .city-ruins {
-  background: #2a2a2a;
+  background: var(--mork-gray);
+  color: var(--mork-white);
 }
 
 .city-legend {
-  background: #2a1810;
+  background: var(--bg-secondary);
   padding: 15px;
-  border-radius: 8px;
-  border: 2px solid #8b4513;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-primary);
 }
 
 .city-legend h4 {
-  color: #daa520;
+  color: var(--text-accent);
   margin: 0 0 10px 0;
   font-family: "Jacquard 12", monospace;
 }
@@ -128,7 +130,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #d2b48c;
+  color: var(--text-secondary);
   font-size: 14px;
 }
 
@@ -136,12 +138,13 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: #8b4513;
-  color: #daa520;
+  background: var(--bg-tertiary);
+  color: var(--text-accent);
   text-align: center;
   line-height: 20px;
   font-weight: bold;
-  border-radius: 3px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-primary);
 }
 
 /* City hex details */
@@ -150,7 +153,7 @@
 }
 
 .city-hex-details h3 {
-  color: #daa520;
+  color: var(--text-accent);
   margin: 0 0 10px 0;
   font-family: "Jacquard 12", monospace;
 }
@@ -158,51 +161,52 @@
 .hex-type-badge {
   display: inline-block;
   padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 12px;
   font-weight: bold;
   margin-bottom: 15px;
+  border: 1px solid var(--border-primary);
 }
 
 .hex-type-badge.city-district {
-  background: #4a3728;
-  color: #daa520;
+  background: var(--mork-yellow);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-building {
-  background: #5a4a3a;
-  color: #daa520;
+  background: var(--mork-pink);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-street {
-  background: #3a3a3a;
-  color: #daa520;
+  background: var(--mork-gray);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-landmark {
-  background: #6a4a2a;
-  color: #daa520;
+  background: var(--mork-cyan);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-market {
-  background: #4a5a3a;
-  color: #daa520;
+  background: var(--mork-green);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-temple {
-  background: #5a3a4a;
-  color: #daa520;
+  background: var(--mork-yellow);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-tavern {
-  background: #5a4a2a;
-  color: #daa520;
+  background: var(--mork-pink);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-guild {
-  background: #3a4a5a;
-  color: #daa520;
+  background: var(--mork-cyan);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-residence {
-  background: #4a4a4a;
-  color: #daa520;
+  background: var(--mork-green);
+  color: var(--mork-black);
 }
 .hex-type-badge.city-ruins {
-  background: #2a2a2a;
-  color: #daa520;
+  background: var(--mork-gray);
+  color: var(--mork-white);
 }
 
 .detail-section {
@@ -210,36 +214,36 @@
 }
 
 .detail-section h4 {
-  color: #8b4513;
+  color: var(--text-accent);
   margin: 0 0 5px 0;
   font-size: 14px;
   text-transform: uppercase;
 }
 
 .detail-section p {
-  color: #d2b48c;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.4;
 }
 
 .detail-section ul {
-  color: #d2b48c;
+  color: var(--text-secondary);
   margin: 5px 0;
   padding-left: 20px;
 }
 
 .random-table {
-  background: #2a1810;
+  background: var(--bg-secondary);
   padding: 10px;
-  border-radius: 4px;
-  border-left: 3px solid #8b4513;
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--border-primary);
 }
 
 .position-info {
   margin-top: 15px;
   padding-top: 10px;
-  border-top: 1px solid #8b4513;
-  color: #8b4513;
+  border-top: 1px solid var(--border-primary);
+  color: var(--text-accent);
 }
 
 /* Responsive design */
