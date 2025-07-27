@@ -376,6 +376,12 @@ class DyingLandsApp {
     this.currentView = "world"
     this.currentCityOverlay = null
     this.renderWorldMap()
+    
+    // Reset zoom when returning to world map
+    if ((window as any).resetZoom) {
+      (window as any).resetZoom();
+    }
+    
     showNotification("Returned to world map")
   }
 
@@ -462,8 +468,10 @@ The world is dying, but adventure lives on.
     this.currentCityOverlay = null;
     this.initializeEventListeners();
     
-    // Re-initialize zoom functionality after restoring map content
-    this.initializeZoomFunctionality();
+    // Reset zoom when returning to world map
+    if ((window as any).resetZoom) {
+      (window as any).resetZoom();
+    }
     
     showNotification("Returned to world map");
   }
@@ -495,87 +503,7 @@ The world is dying, but adventure lives on.
     (window as any).showCityOverlayGrid(this, hexCode);
   }
 
-  // Initialize zoom functionality for the hex grid
-  private initializeZoomFunctionality(): void {
-    const hexGrid = document.getElementById('hexGrid');
-    if (hexGrid) {
-      // Remove any existing event listeners by cloning and replacing the element
-      const newHexGrid = hexGrid.cloneNode(true) as HTMLElement;
-      hexGrid.parentNode?.replaceChild(newHexGrid, hexGrid);
-      
-      // Re-attach zoom event listeners
-      newHexGrid.addEventListener('wheel', (e) => {
-        if (!e.ctrlKey && Math.abs(e.deltaY) > 0) {
-          e.preventDefault();
-          const state = (window as any).panelZooms?.['hexGrid'];
-          if (state) {
-            const zoomDelta = e.deltaY > 0 ? -0.1 : 0.1;
-            state.target = Math.max(0.5, Math.min(2.0, state.target + zoomDelta));
-            newHexGrid.style.transform = `scale(${state.target})`;
-            state.current = state.target;
-          }
-        }
-      }, { passive: false });
-      
-      newHexGrid.style.transformOrigin = 'center center';
-      
-      // Re-setup pinch zoom
-      this.setupPinchZoomForElement(newHexGrid);
-      
-      // Ensure hex click events are working by re-initializing event listeners
-      // Note: This is safe because initializeEventListeners uses document.addEventListener
-      // which doesn't duplicate listeners when called multiple times
-      this.initializeEventListeners();
-    }
-  }
 
-  // Setup pinch zoom for a specific element
-  private setupPinchZoomForElement(element: HTMLElement): void {
-    let pinch = { initialDistance: 0, initialZoom: 1, active: false };
-    
-    element.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 2) {
-        pinch.active = true;
-        pinch.initialDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        const state = (window as any).panelZooms?.['hexGrid'];
-        pinch.initialZoom = state ? state.target : 1;
-        e.preventDefault();
-      }
-    }, { passive: false });
-    
-    element.addEventListener('touchmove', (e) => {
-      if (pinch.active && e.touches.length === 2) {
-        e.preventDefault();
-        const newDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        const scaleDelta = newDistance / pinch.initialDistance;
-        const state = (window as any).panelZooms?.['hexGrid'];
-        if (state) {
-          let newTarget = Math.max(0.5, Math.min(2.0, pinch.initialZoom * scaleDelta));
-          state.target = newTarget;
-          state.current = newTarget;
-          element.style.transform = `scale(${newTarget})`;
-        }
-      }
-    }, { passive: false });
-    
-    element.addEventListener('touchend', (e) => {
-      if (e.touches.length < 2 && pinch.active) {
-        pinch.active = false;
-      }
-    });
-    
-    element.addEventListener('touchcancel', () => {
-      if (pinch.active) {
-        pinch.active = false;
-      }
-    });
-  }
 }
 
 // Add middle mouse drag scrolling to map and details panels
@@ -739,155 +667,123 @@ document.addEventListener('DOMContentLoaded', () => {
   const mapPanel = document.querySelector('.map-container') as HTMLElement;
   const detailsPanel = document.querySelector('.modal-content-container') as HTMLElement;
   
-  // Optimize panels for smooth scrolling
+  // Enable middle mouse drag scrolling for both panels
   if (mapPanel) {
-    mapPanel.style.willChange = 'scroll-position';
-    mapPanel.style.overscrollBehavior = 'none';
-    mapPanel.style.touchAction = 'pan-x pan-y'; // Enable touch scrolling
-    (mapPanel.style as any).webkitOverflowScrolling = 'touch'; // iOS momentum scrolling
     enableMiddleMouseDragScroll(mapPanel);
   }
   if (detailsPanel) {
-    detailsPanel.style.willChange = 'scroll-position';
-    detailsPanel.style.overscrollBehavior = 'none';
-    detailsPanel.style.touchAction = 'pan-x pan-y'; // Enable touch scrolling
-    (detailsPanel.style as any).webkitOverflowScrolling = 'touch'; // iOS momentum scrolling
     enableMiddleMouseDragScroll(detailsPanel);
   }
 
-  // --- Zoom Implementation ---
-  type ZoomState = { current: number; target: number; animating: boolean };
-  const clamp = (val: number, min: number, max: number) => Math.max(min, Math.min(max, val));
+  // Improved zoom functionality with touch support
+  let currentZoom = 1;
   const ZOOM_MIN = 0.5;
   const ZOOM_MAX = 2.0;
   const ZOOM_STEP = 0.1;
-  const ZOOM_ANIMATION_SPEED = 0.3; // Higher is faster
 
-  const panelZooms: Record<string, ZoomState> = {
-    'hexGrid': { current: 1, target: 1, animating: false },
-  };
-  
-  // Make panelZooms globally accessible for the DyingLandsApp class
-  (window as any).panelZooms = panelZooms;
+  // Make zoom state globally accessible
+  (window as any).currentZoom = currentZoom;
 
-  function animateZoom(panel: HTMLElement, key: 'hexGrid') {
-    const state = panelZooms[key];
-    if (!state.animating) return;
+  function handleMapZoom(e: WheelEvent) {
+    if (e.ctrlKey) return; // Allow browser zoom when Ctrl is pressed
     
-    // Remove CSS transition to prevent conflicts
-    panel.style.transition = 'none';
+    e.preventDefault();
     
-    state.current += (state.target - state.current) * ZOOM_ANIMATION_SPEED;
-    if (Math.abs(state.target - state.current) < 0.005) {
-      state.current = state.target;
-      state.animating = false;
-    } else {
-      requestAnimationFrame(() => animateZoom(panel, key));
+    const delta = e.deltaY > 0 ? -1 : 1;
+    const newZoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, currentZoom + (delta * ZOOM_STEP)));
+    
+    if (newZoom !== currentZoom) {
+      currentZoom = newZoom;
+      applyZoom();
     }
-    
-    panel.style.transform = `scale(${state.current})`;
   }
 
-  function handlePanelWheel(panel: HTMLElement, key: 'hexGrid', e: WheelEvent) {
-    if (!e.ctrlKey && Math.abs(e.deltaY) > 0) { // Only zoom if not ctrl+scroll (browser zoom)
+  function applyZoom() {
+    if (mapPanel) {
+      // Use transform3d for hardware acceleration
+      mapPanel.style.transform = `scale3d(${currentZoom}, ${currentZoom}, 1)`;
+      mapPanel.style.transformOrigin = 'top left';
+    }
+    // Update global zoom state
+    (window as any).currentZoom = currentZoom;
+  }
+
+  function resetZoom() {
+    currentZoom = 1;
+    applyZoom();
+  }
+
+  // Touch/pinch-to-zoom functionality
+  let pinchState = {
+    initialDistance: 0,
+    initialZoom: 1,
+    active: false
+  };
+
+  function handleTouchStart(e: TouchEvent) {
+    if (e.touches.length === 2) {
+      pinchState.active = true;
+      pinchState.initialDistance = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      pinchState.initialZoom = currentZoom;
       e.preventDefault();
-      const state = panelZooms[key];
-      
-      // Calculate zoom step based on delta for more responsive zooming
-      const zoomDelta = e.deltaY > 0 ? -0.1 : 0.1;
-      state.target = clamp(state.target + zoomDelta, ZOOM_MIN, ZOOM_MAX);
-      
-      // Instant zoom for better performance
-      panel.style.transform = `scale(${state.target})`;
-      state.current = state.target;
-      
-      // Uncomment below for smooth zoom animation (slower but smoother)
-      // if (!state.animating) {
-      //   state.animating = true;
-      //   animateZoom(panel, key);
-      // }
     }
   }
 
-  // --- Pinch-to-zoom for touch devices ---
-  type PinchState = {
-    initialDistance: number;
-    initialZoom: number;
-    active: boolean;
-  };
-  function setupPinchZoom(panel: HTMLElement, key: 'hexGrid') {
-    let pinch: PinchState = { initialDistance: 0, initialZoom: 1, active: false };
-    panel.addEventListener('touchstart', (e) => {
-      if (e.touches.length === 2) {
-        pinch.active = true;
-        pinch.initialDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        pinch.initialZoom = panelZooms[key].target;
-        e.preventDefault(); // Prevent browser pinch-zoom
+  function handleTouchMove(e: TouchEvent) {
+    if (pinchState.active && e.touches.length === 2) {
+      e.preventDefault();
+      
+      const newDistance = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      
+      const scaleDelta = newDistance / pinchState.initialDistance;
+      const newZoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, pinchState.initialZoom * scaleDelta));
+      
+      if (newZoom !== currentZoom) {
+        currentZoom = newZoom;
+        applyZoom();
       }
-    }, { passive: false });
-    panel.addEventListener('touchmove', (e) => {
-      if (pinch.active && e.touches.length === 2) {
-        e.preventDefault(); // Prevent browser pinch-zoom
-        const newDistance = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY
-        );
-        const scaleDelta = newDistance / pinch.initialDistance;
-        let newTarget = clamp(pinch.initialZoom * scaleDelta, ZOOM_MIN, ZOOM_MAX);
-        panelZooms[key].target = newTarget;
-        panelZooms[key].current = newTarget;
-        
-        // Instant zoom for better performance
-        panel.style.transform = `scale(${newTarget})`;
-        
-        // Uncomment below for smooth zoom animation
-        // if (!panelZooms[key].animating) {
-        //   panelZooms[key].animating = true;
-        //   animateZoom(panel, key);
-        // }
-      }
-    }, { passive: false });
-    panel.addEventListener('touchend', (e) => {
-      if (e.touches.length < 2 && pinch.active) {
-        pinch.active = false;
-        // Stop any ongoing animation and set current to target
-        panelZooms[key].current = panelZooms[key].target;
-        panelZooms[key].animating = false;
-        panel.style.transform = `scale(${panelZooms[key].current})`;
-      }
-    });
-    panel.addEventListener('touchcancel', (e) => {
-      if (pinch.active) {
-        pinch.active = false;
-        // Stop any ongoing animation and set current to target
-        panelZooms[key].current = panelZooms[key].target;
-        panelZooms[key].animating = false;
-        panel.style.transform = `scale(${panelZooms[key].current})`;
-      }
-    });
+    }
   }
 
-  // Prevent browser pinch-zoom if gesture starts on a zoomable panel
-  function preventPagePinchZoomOnPanel(panel: HTMLElement) {
-    panel.addEventListener('touchmove', (e) => {
-      if (e.touches.length === 2) {
-        e.preventDefault();
-      }
-    }, { passive: false });
+  function handleTouchEnd(e: TouchEvent) {
+    if (e.touches.length < 2 && pinchState.active) {
+      pinchState.active = false;
+    }
   }
 
-  // Only apply zoom to the hex grid, not the entire map container
-  const hexGrid = document.getElementById('hexGrid');
-  if (hexGrid) {
-    hexGrid.addEventListener('wheel', (e) => handlePanelWheel(hexGrid as HTMLElement, 'hexGrid', e), { passive: false });
-    (hexGrid as HTMLElement).style.transformOrigin = 'center center';
-    setupPinchZoom(hexGrid as HTMLElement, 'hexGrid');
-    preventPagePinchZoomOnPanel(hexGrid as HTMLElement);
+  function handleTouchCancel() {
+    pinchState.active = false;
   }
-  // Details panel zoom functionality removed - only hex grid zooms now
+
+  // Apply zoom and touch handlers to the map container
+  if (mapPanel) {
+    mapPanel.addEventListener('wheel', handleMapZoom, { passive: false });
+    mapPanel.addEventListener('touchstart', handleTouchStart, { passive: false });
+    mapPanel.addEventListener('touchmove', handleTouchMove, { passive: false });
+    mapPanel.addEventListener('touchend', handleTouchEnd, { passive: false });
+    mapPanel.addEventListener('touchcancel', handleTouchCancel, { passive: false });
+    
+    // Enable hardware acceleration
+    mapPanel.style.willChange = 'transform';
+    mapPanel.style.backfaceVisibility = 'hidden';
+  }
+
+  // Add keyboard shortcut for resetting zoom (R key)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'r' || e.key === 'R') {
+      resetZoom();
+    }
+  });
+
+  // Make zoom functions globally accessible
+  (window as any).resetZoom = resetZoom;
+  (window as any).applyZoom = applyZoom;
 
   // Function to select and center a hex cell
   function selectHexCell(hexCode: string) {
@@ -909,30 +805,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cell) {
       cell.classList.add('selected');
       
-      // Get the map container and hex grid
+      // Get the map container
       const mapContainer = document.querySelector('.map-container') as HTMLElement;
-      const hexGrid = document.getElementById('hexGrid') as HTMLElement;
       
-      if (mapContainer && hexGrid) {
-        // Get current zoom state
-        const zoomState = (window as any).panelZooms?.['hexGrid'];
-        const currentZoom = zoomState ? zoomState.current : 1;
-        
-        // Calculate the position of the cell relative to the hex grid
+      if (mapContainer) {
+        // Calculate the position of the cell relative to the map container, accounting for zoom
         const cellRect = cell.getBoundingClientRect();
-        const gridRect = hexGrid.getBoundingClientRect();
         const containerRect = mapContainer.getBoundingClientRect();
         
-        // Calculate the center position of the cell within the grid, accounting for zoom
-        const cellCenterX = (cellRect.left + cellRect.width / 2 - gridRect.left) / currentZoom;
-        const cellCenterY = (cellRect.top + cellRect.height / 2 - gridRect.top) / currentZoom;
+        // Calculate the center position of the cell within the container
+        const cellCenterX = cellRect.left + cellRect.width / 2;
+        const cellCenterY = cellRect.top + cellRect.height / 2;
+        const containerCenterX = containerRect.left + containerRect.width / 2;
+        const containerCenterY = containerRect.top + containerRect.height / 2;
         
-        // Calculate the scroll position needed to center the cell in the container
-        const scrollLeft = hexGrid.scrollLeft + cellCenterX - containerRect.width / (2 * currentZoom);
-        const scrollTop = hexGrid.scrollTop + cellCenterY - containerRect.height / (2 * currentZoom);
+        // Calculate the scroll position needed to center the cell, accounting for zoom
+        const scrollLeft = mapContainer.scrollLeft + (cellCenterX - containerCenterX) / currentZoom;
+        const scrollTop = mapContainer.scrollTop + (cellCenterY - containerCenterY) / currentZoom;
         
         // Smooth scroll to center the cell
-        hexGrid.scrollTo({
+        mapContainer.scrollTo({
           left: scrollLeft,
           top: scrollTop,
           behavior: 'smooth'
