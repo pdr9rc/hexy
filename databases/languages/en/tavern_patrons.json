@@ -1,0 +1,34 @@
+{
+  "category": "tavern_patrons",
+  "tables": {
+    "patron_traits": [
+      "Filth",
+      "Boozehound",
+      "One Eye",
+      "Gum Rot",
+      "Fancy Boy (half-brother to Oily Boy)",
+      "Stinker",
+      "Braggard",
+      "Nosey",
+      "Hook Hand",
+      "Slurper",
+      "Aggro",
+      "Nags-a-lot",
+      "Archbishop of Mockery (smirking bully)",
+      "Catastrophic Cough",
+      "Hysterical Tears",
+      "No Nose",
+      "Tongueless",
+      "Oily Boy (Fancy Boy's half-brother)",
+      "Trauma Dreams",
+      "Acid Face"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg tavern patron traits and nicknames",
+    "usage": "Roll d20 to determine patron's trait or nickname"
+  }
+} 

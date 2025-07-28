@@ -135,6 +135,19 @@ export async function getCityOverlayAscii(overlayName: string): Promise<any> {
   }
 }
 
+export async function getCityContext(cityName: string): Promise<any> {
+  try {
+    const response = await fetch(`/api/city-context/${cityName}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching city context:', error);
+    throw error;
+  }
+}
+
 export async function getCityOverlayHex(overlayName: string, hexId: string): Promise<any> {
   try {
     const response = await fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`);

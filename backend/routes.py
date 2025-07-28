@@ -154,6 +154,10 @@ def get_hex_info(hex_code):
                 "local_tavern": parsed.get('local_tavern'),
                 "local_power": parsed.get('local_power'),
                 "settlement_art": parsed.get('settlement_art'),
+                # Mörk Borg settlement fields
+                "weather": parsed.get('weather'),
+                "city_event": parsed.get('city_event'),
+                "tavern_details": parsed.get('tavern_details'),
             })
         elif hex_type == 'beast':
             parsed = extract_beast_data(content)
@@ -173,6 +177,9 @@ def get_hex_info(hex_code):
                 "atmosphere": parsed.get('atmosphere'),
                 "loot": parsed.get('loot'),
                 "magical_effect": parsed.get('magical_effect'),
+                # Beast specific fields
+                "treasure_found": parsed.get('treasure_found'),
+                "beast_art": parsed.get('beast_art'),
             })
         elif hex_type == 'dungeon':
             parsed = extract_dungeon_data(content)
@@ -192,6 +199,8 @@ def get_hex_info(hex_code):
                 "loot": parsed.get('loot'),
                 "magical_effect": parsed.get('magical_effect'),
                 "description": parsed.get('description'),
+                # Mörk Borg trap information
+                "trap_section": parsed.get('trap_section'),
             })
         elif hex_type == 'npc':
             parsed = extract_npc_data(content)
@@ -203,37 +212,32 @@ def get_hex_info(hex_code):
                 "encounter": parsed.get('encounter'),
                 "name": parsed.get('name'),
                 "denizen_type": parsed.get('denizen_type'),
+                # Mörk Borg NPC fields
+                "trait": parsed.get('trait'),
+                "concern": parsed.get('concern'),
+                "want": parsed.get('want'),
+                "apocalypse_attitude": parsed.get('apocalypse_attitude'),
+                "secret": parsed.get('secret'),
+                # Fallback fields
                 "motivation": parsed.get('motivation'),
                 "feature": parsed.get('feature'),
                 "demeanor": parsed.get('demeanor'),
-                "location": parsed.get('location'),
                 "key_npcs": parsed.get('key_npcs'),
                 "notable_feature": parsed.get('notable_feature'),
                 "atmosphere": parsed.get('atmosphere'),
                 "description": parsed.get('description'),
                 "denizen": parsed.get('denizen'),
+                # Additional NPC fields
+                "carries": parsed.get('carries'),
+                "location": parsed.get('location'),
             })
         elif hex_type == 'sea_encounter':
-            parsed = extract_sea_encounter_data(content)
-            return jsonify({
-                "hex_code": hex_code,
-                "hex_type": "sea_encounter",
-                "is_sea_encounter": True,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "encounter": parsed.get('encounter'),
-                "encounter_type": parsed.get('encounter_type'),
-                "origin": parsed.get('origin'),
-                "behavior": parsed.get('behavior'),
-                "denizen": parsed.get('denizen'),
-                "territory": parsed.get('territory'),
-                "threat_level": parsed.get('threat_level'),
-                "notable_feature": parsed.get('notable_feature'),
-                "atmosphere": parsed.get('atmosphere'),
-                "sunken_treasure": parsed.get('sunken_treasure'),
-                "loot": parsed.get('loot'),
-                "magical_effect": parsed.get('magical_effect'),
-                "description": parsed.get('description'),
-            })
+            # Use hex_service for consistent parsing
+            hex_data = hex_service.get_hex_dict(hex_code)
+            if hex_data:
+                return jsonify(hex_data)
+            else:
+                return jsonify({'error': 'Sea encounter not found'}), 404
         elif hex_type == 'ruins':
             parsed = extract_ruins_data(content)
             return jsonify({
@@ -403,6 +407,24 @@ def get_city_overlay_ascii(overlay_name):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@api_bp.route('/city-context/<city_name>')
+def get_city_context(city_name):
+    """Get city context information for the left panel."""
+    try:
+        context = city_overlay_analyzer.get_city_context(city_name)
+        response = jsonify({
+            'success': True,
+            'context': context
+        })
+        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response.headers['Pragma'] = 'no-cache'
+        response.headers['Expires'] = '0'
+        return response
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @api_bp.route('/city-overlay/<overlay_name>/hex/<hex_id>')
 def get_city_overlay_hex(overlay_name, hex_id):
     try:
@@ -412,9 +434,44 @@ def get_city_overlay_hex(overlay_name, hex_id):
         hex_data = overlay_data['hex_grid'].get(hex_id)
         if not hex_data:
             return jsonify({'success': False, 'error': 'Hex not found'})
+        
+        # Return only hex-specific content (remove city context)
+        hex_content = hex_data.get('content', {})
+        hex_specific_data = {
+            'id': hex_data.get('id', hex_id),
+            'row': hex_data.get('row', 0),
+            'col': hex_data.get('col', 0),
+            'district': hex_data.get('district', 'unknown'),
+            'content': {
+                'name': hex_content.get('name', 'Unknown'),
+                'type': hex_content.get('type', 'unknown'),
+                'description': hex_content.get('description', 'No description available'),
+                'encounter': hex_content.get('encounter', 'No encounter available'),
+                'atmosphere': hex_content.get('atmosphere', 'No atmosphere available'),
+                'position_type': hex_content.get('position_type', 'unknown'),
+                # Hex-specific enriched content
+                'weather': hex_content.get('weather'),
+                'city_event': hex_content.get('city_event'),
+                                            'npc_name': hex_content.get('npc_name'),
+                            'npc_trade': hex_content.get('npc_trade'),
+                            'npc_trait': hex_content.get('npc_trait'),
+                            'npc_concern': hex_content.get('npc_concern'),
+                            'npc_want': hex_content.get('npc_want'),
+                            'npc_secret': hex_content.get('npc_secret'),
+                            'npc_affiliation': hex_content.get('npc_affiliation'),
+                            'npc_attitude': hex_content.get('npc_attitude'),
+                'tavern_menu': hex_content.get('tavern_menu'),
+                'tavern_innkeeper': hex_content.get('tavern_innkeeper'),
+                'tavern_patron': hex_content.get('tavern_patron'),
+                'related_hexes': hex_content.get('related_hexes'),
+                'random_table': hex_content.get('random_table'),
+                'notable_features': hex_content.get('notable_features')
+            }
+        }
+        
         response = jsonify({
             'success': True,
-            'hex': hex_data
+            'hex': hex_specific_data
         })
         response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
         response.headers['Pragma'] = 'no-cache'
@@ -693,16 +750,10 @@ def extract_settlement_data(content):
     """Extract settlement-specific data from content."""
     if not content:
         return {}
-    data = {}
-    def extract_field(field):
-        pattern = rf'(?:\*\*)?{field}:(?:\*\*)?\s*([^\n]+)'
-        match = re.search(pattern, content, re.IGNORECASE)
-        return match.group(1).strip() if match else None
-    data['population'] = extract_field('Population')
-    data['ruler'] = extract_field('Ruler|Leader')
-    data['locations'] = extract_field('Notable Locations?')
-    data['trade'] = extract_field('Trade Goods?')
-    return data
+    
+    # Use the hex_service method for consistent extraction
+    from backend.hex_service import hex_service
+    return hex_service._extract_settlement_data(content, "temp")
 
 def _determine_hex_type(content: str) -> str:
     if '⌂ **' in content:
@@ -815,6 +866,16 @@ def extract_dungeon_data(content):
     treasure_match = re.search(r'## Dungeon Details\n.*\*\*Treasure:\*\*\s*([^\n]+)', content)
     if treasure_match:
         data['treasure'] = treasure_match.group(1).strip()
+    
+    # Mörk Borg trap information
+    trap_section_match = re.search(r'## Trap\n\*\*Description:\*\*\s*([^\n]+).*\*\*Effect:\*\*\s*([^\n]+).*\*\*Builder:\*\*\s*([^\n]+)', content, re.DOTALL)
+    if trap_section_match:
+        data['trap_section'] = {
+            'description': trap_section_match.group(1).strip(),
+            'effect': trap_section_match.group(2).strip(),
+            'builder': trap_section_match.group(3).strip()
+        }
+    
     # Ancient Knowledge
     ancient_knowledge_match = re.search(r'## Ancient Knowledge\n\*\*Type:\*\*\s*([^\n]+).*\*\*Content:\*\*\s*([^\n]+).*\*\*Effect:\*\*\s*([^\n]+).*\*\*Description:\*\*\s*([^\n]+)', content, re.DOTALL)
     if ancient_knowledge_match:
@@ -862,6 +923,25 @@ def extract_npc_data(content):
     type_match = re.search(r'\*\*Type:\*\*\s*([^\n]+)', content)
     if type_match:
         data['denizen_type'] = type_match.group(1).strip()
+    
+    # Mörk Borg NPC fields
+    trait_match = re.search(r'\*\*Trait:\*\*\s*([^\n]+)', content)
+    if trait_match:
+        data['trait'] = trait_match.group(1).strip()
+    concern_match = re.search(r'\*\*Concern:\*\*\s*([^\n]+)', content)
+    if concern_match:
+        data['concern'] = concern_match.group(1).strip()
+    want_match = re.search(r'\*\*Want:\*\*\s*([^\n]+)', content)
+    if want_match:
+        data['want'] = want_match.group(1).strip()
+    apocalypse_attitude_match = re.search(r'\*\*Apocalypse Attitude:\*\*\s*([^\n]+)', content)
+    if apocalypse_attitude_match:
+        data['apocalypse_attitude'] = apocalypse_attitude_match.group(1).strip()
+    secret_match = re.search(r'\*\*Secret:\*\*\s*([^\n]+)', content)
+    if secret_match:
+        data['secret'] = secret_match.group(1).strip()
+    
+    # Fallback to old fields if new ones not available
     motivation_match = re.search(r'\*\*Motivation:\*\*\s*([^\n]+)', content)
     if motivation_match:
         data['motivation'] = motivation_match.group(1).strip()
@@ -871,12 +951,14 @@ def extract_npc_data(content):
     demeanor_match = re.search(r'\*\*Demeanor:\*\*\s*([^\n]+)', content)
     if demeanor_match:
         data['demeanor'] = demeanor_match.group(1).strip()
+    
     location_match = re.search(r'\*\*Location:\*\*\s*([^\n]+)', content)
     if location_match:
         data['location'] = location_match.group(1).strip()
     key_npcs_match = re.search(r'\*\*Key NPCs:\*\*\s*([^\n]+)', content)
     if key_npcs_match:
         data['key_npcs'] = [npc.strip() for npc in key_npcs_match.group(1).split(',')]
+    
     # Fallbacks for common fields
     encounter_match = re.search(r'## Encounter\n(.+?)(?:\n##|$)', content, re.DOTALL)
     if encounter_match:
@@ -895,55 +977,7 @@ def extract_npc_data(content):
         data['description'] = description_match.group(1).strip()
     return data
 
-def extract_sea_encounter_data(content):
-    data = {}
-    type_match = re.search(r'## Sea Encounter Details\n\*\*Type:\*\*\s*([^\n]+)', content)
-    if type_match:
-        data['encounter_type'] = type_match.group(1).strip()
-    origin_match = re.search(r'\*\*Origin:\*\*\s*([^\n]+)', content)
-    if origin_match:
-        data['origin'] = origin_match.group(1).strip()
-    behavior_match = re.search(r'\*\*Behavior:\*\*\s*([^\n]+)', content)
-    if behavior_match:
-        data['behavior'] = behavior_match.group(1).strip()
-    threat_level_match = re.search(r'## Threat Level\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if threat_level_match:
-        data['threat_level'] = threat_level_match.group(1).strip()
-    territory_match = re.search(r'## Territory\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if territory_match:
-        data['territory'] = territory_match.group(1).strip()
-    sunken_treasure_match = re.search(r'\*\*Sunken Treasure:\*\*\s*([^\n]+)', content)
-    if sunken_treasure_match:
-        data['sunken_treasure'] = sunken_treasure_match.group(1).strip()
-    # Loot and magical effect
-    loot_match = re.search(r'## Loot Found\n\*\*Type:\*\*\s*([^\n]+).*\*\*Item:\*\*\s*([^\n]+).*\*\*Description:\*\*\s*([^\n]+).*\*\*Full Description:\*\*\s*([^\n]+)', content, re.DOTALL)
-    if loot_match:
-        data['loot'] = {
-            'type': loot_match.group(1).strip(),
-            'item': loot_match.group(2).strip(),
-            'description': loot_match.group(3).strip(),
-            'full_description': loot_match.group(4).strip()
-        }
-    magical_effect_match = re.search(r'\*\*Magical Effect:\*\*\s*([^\n]+)', content)
-    if magical_effect_match:
-        data['magical_effect'] = magical_effect_match.group(1).strip()
-    # Fallbacks for common fields
-    encounter_match = re.search(r'## Encounter\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if encounter_match:
-        data['encounter'] = encounter_match.group(1).strip()
-    denizen_match = re.search(r'## Denizen\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if denizen_match:
-        data['denizen'] = denizen_match.group(1).strip()
-    notable_feature_match = re.search(r'## Notable Feature\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if notable_feature_match:
-        data['notable_feature'] = notable_feature_match.group(1).strip()
-    atmosphere_match = re.search(r'## Atmosphere\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if atmosphere_match:
-        data['atmosphere'] = atmosphere_match.group(1).strip()
-    description_match = re.search(r'## Sea Encounter Details\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if description_match:
-        data['description'] = description_match.group(1).strip()
-    return data
+
 
 def extract_ruins_data(content):
     # TODO: Implement real parsing logic

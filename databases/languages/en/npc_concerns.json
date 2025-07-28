@@ -1,0 +1,45 @@
+{
+  "category": "npc_concerns",
+  "tables": {
+    "concerns": [
+      "Incredible debt",
+      "Stolen goods",
+      "Gang of ruffians",
+      "Kidnapped kin",
+      "A pool of blood",
+      "Possessed spouse",
+      "Family curse",
+      "Murdered friend",
+      "Weird wart",
+      "Corrupt priests",
+      "The world's end",
+      "Muffled promise",
+      "Holy Summons",
+      "The Harvester",
+      "Josilfa's scythe",
+      "The comet",
+      "Worm infestation",
+      "Rat war",
+      "Demon possession",
+      "Basilisk cult",
+      "Sacrifice",
+      "The Ordinance of Devotion",
+      "Memory loss",
+      "The Undercity",
+      "Cathedral secrets",
+      "Worm Sorcerer",
+      "The Old One",
+      "Blank worms",
+      "The Harvester's summons",
+      "Josilfa's rule",
+      "The end of the world"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg NPC concerns and problems",
+    "usage": "Roll d12 to determine what troubles the NPC"
+  }
+} 

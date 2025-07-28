@@ -92,6 +92,9 @@ class CityOverlayAnalyzer:
         # Generate round hex grid
         hex_grid = self._generate_round_hex_grid(overlay_name, city_data)
         
+        # Add cross-references between related hexes
+        hex_grid = self._add_cross_references(hex_grid, city_data)
+        
         # Calculate grid radius
         radius = self._calculate_grid_radius(hex_grid)
         
@@ -252,7 +255,7 @@ class CityOverlayAnalyzer:
         
         if district_data:
             # Generate content specific to this district
-            content_type = self._select_district_content_type(district_data)
+            content_type = self._select_district_content_type(district_data, city_data)
             content = self._generate_content_by_type(content_type, row, col, overlay_name, city_data, district_data)
             
             # Add fallback if content is None
@@ -323,21 +326,36 @@ class CityOverlayAnalyzer:
         print(f"DEBUG: District '{district_name}' not found")
         return None
     
-    def _select_district_content_type(self, district_data: Dict[str, Any]) -> str:
-        """Select content type based on district data."""
+    def _select_district_content_type(self, district_data: Dict[str, Any], city_data: Optional[Dict[str, Any]] = None) -> str:
+        """Select content type based on district data and city data."""
         # Weight content types based on what's available in the district
         content_weights = {}
         
         if 'buildings' in district_data and district_data['buildings']:
-            content_weights['building'] = 0.3
+            content_weights['building'] = 0.25
         if 'streets' in district_data and district_data['streets']:
-            content_weights['street'] = 0.2
+            content_weights['street'] = 0.15
         if 'landmarks' in district_data and district_data['landmarks']:
-            content_weights['landmark'] = 0.2
+            content_weights['landmark'] = 0.15
         if 'markets' in district_data and district_data['markets']:
             content_weights['market'] = 0.15
         if 'temples' in district_data and district_data['temples']:
             content_weights['temple'] = 0.15
+        if 'taverns' in district_data and district_data['taverns']:
+            content_weights['tavern'] = 0.1
+        if 'guilds' in district_data and district_data['guilds']:
+            content_weights['guild'] = 0.05
+        
+        # Also check city-level content if available
+        if city_data:
+            if 'markets' in city_data and city_data['markets'] and 'market' not in content_weights:
+                content_weights['market'] = 0.15
+            if 'temples' in city_data and city_data['temples'] and 'temple' not in content_weights:
+                content_weights['temple'] = 0.15
+            if 'taverns' in city_data and city_data['taverns'] and 'tavern' not in content_weights:
+                content_weights['tavern'] = 0.1
+            if 'guilds' in city_data and city_data['guilds'] and 'guild' not in content_weights:
+                content_weights['guild'] = 0.05
         
         # If no specific content types, default to district
         if not content_weights:
@@ -448,6 +466,20 @@ class CityOverlayAnalyzer:
         elif content_type == 'ruins':
             content.update(self._generate_ruins_content(city_data, district_data))
         
+        # Add position modifiers
+        content = self._add_position_modifiers(content, row, col)
+        
+        # Integrate city-specific content
+        content = self._integrate_city_specific_content(content, city_data)
+        
+        # Debug: Print enriched fields for tavern content
+        if content.get('type') == 'tavern':
+            print(f"DEBUG: Tavern content after integration: {list(content.keys())}")
+            if 'npc_trait' in content:
+                print(f"DEBUG: npc_trait: {content['npc_trait']}")
+            if 'weather' in content:
+                print(f"DEBUG: weather: {content['weather']}")
+        
         return content
     
     def _weighted_choice(self, weights: Dict[str, float]) -> str:
@@ -462,10 +494,252 @@ class CityOverlayAnalyzer:
         if os.path.exists(city_db_path):
             try:
                 with open(city_db_path, 'r', encoding='utf-8') as f:
-                    return json.load(f)
+                    city_data = json.load(f)
+                    
+                # Load additional city-specific content from language database
+                city_data.update(self._load_city_specific_content(city_name))
+                return city_data
             except Exception as e:
                 print(f"Warning: Could not load city database for {city_name}: {e}")
         return None
+    
+    def _load_city_specific_content(self, city_name: str) -> Dict[str, Any]:
+        """Load city-specific content from language database files."""
+        content = {}
+        
+        # Load city events
+        try:
+            events_path = 'databases/languages/en/city_events.json'
+            if os.path.exists(events_path):
+                with open(events_path, 'r', encoding='utf-8') as f:
+                    events_data = json.load(f)
+                    # Extract data from tables structure
+                    if 'tables' in events_data and 'city_events' in events_data['tables']:
+                        city_events_data = events_data['tables']['city_events']
+                        # Use all city events (no filtering for now)
+                        content['city_events'] = city_events_data
+        except Exception as e:
+            print(f"Warning: Could not load city events: {e}")
+        
+        # Load weather conditions
+        try:
+            weather_path = 'databases/languages/en/weather.json'
+            if os.path.exists(weather_path):
+                with open(weather_path, 'r', encoding='utf-8') as f:
+                    weather_data = json.load(f)
+                    # Extract data from tables structure
+                    if 'tables' in weather_data and 'weather_conditions' in weather_data['tables']:
+                        content['weather_conditions'] = weather_data['tables']['weather_conditions']
+                    else:
+                        content['weather_conditions'] = weather_data
+        except Exception as e:
+            print(f"Warning: Could not load weather data: {e}")
+        
+        # Load NPC traits, concerns, wants, secrets
+        for npc_type in ['npc_traits', 'npc_concerns', 'npc_wants', 'npc_secrets']:
+            try:
+                npc_path = f'databases/languages/en/{npc_type}.json'
+                if os.path.exists(npc_path):
+                    with open(npc_path, 'r', encoding='utf-8') as f:
+                        npc_data = json.load(f)
+                        # Extract data from tables structure
+                        if 'tables' in npc_data and 'traits' in npc_data['tables']:
+                            content[npc_type] = npc_data['tables']['traits']
+                        elif 'tables' in npc_data and 'concerns' in npc_data['tables']:
+                            content[npc_type] = npc_data['tables']['concerns']
+                        elif 'tables' in npc_data and 'wants' in npc_data['tables']:
+                            content[npc_type] = npc_data['tables']['wants']
+                        elif 'tables' in npc_data and 'secrets' in npc_data['tables']:
+                            content[npc_type] = npc_data['tables']['secrets']
+                        else:
+                            content[npc_type] = npc_data
+            except Exception as e:
+                print(f"Warning: Could not load {npc_type}: {e}")
+        
+        # Load tavern content
+        for tavern_type in ['tavern_menu', 'tavern_innkeeper', 'tavern_patrons']:
+            try:
+                tavern_path = f'databases/languages/en/{tavern_type}.json'
+                if os.path.exists(tavern_path):
+                    with open(tavern_path, 'r', encoding='utf-8') as f:
+                        tavern_data = json.load(f)
+                        # Extract data from tables structure
+                        if tavern_type == 'tavern_menu' and 'tables' in tavern_data:
+                            # For menu, combine select and budget menus
+                            menu_items = []
+                            if 'select_menu' in tavern_data['tables']:
+                                menu_items.extend([item['name'] for item in tavern_data['tables']['select_menu']])
+                            if 'budget_menu' in tavern_data['tables']:
+                                menu_items.extend([item['name'] for item in tavern_data['tables']['budget_menu']])
+                            content[tavern_type] = menu_items
+                        elif tavern_type == 'tavern_innkeeper' and 'tables' in tavern_data and 'innkeeper_quirks' in tavern_data['tables']:
+                            content[tavern_type] = tavern_data['tables']['innkeeper_quirks']
+                        elif tavern_type == 'tavern_patrons' and 'tables' in tavern_data and 'patron_traits' in tavern_data['tables']:
+                            content[tavern_type] = tavern_data['tables']['patron_traits']
+                        else:
+                            content[tavern_type] = tavern_data
+            except Exception as e:
+                print(f"Warning: Could not load {tavern_type}: {e}")
+        
+        # Load market content (items, beasts, services)
+        for market_type in ['items_prices', 'beasts_prices', 'services_prices']:
+            try:
+                market_path = f'databases/languages/en/{market_type}.json'
+                if os.path.exists(market_path):
+                    with open(market_path, 'r', encoding='utf-8') as f:
+                        market_data = json.load(f)
+                        # Extract data from tables structure
+                        if 'tables' in market_data:
+                            if market_type == 'items_prices' and 'items' in market_data['tables']:
+                                content['items_sold'] = market_data['tables']['items']
+                            elif market_type == 'beasts_prices' and 'beasts' in market_data['tables']:
+                                content['beast_prices'] = market_data['tables']['beasts']
+                            elif market_type == 'services_prices' and 'services' in market_data['tables']:
+                                content['services'] = market_data['tables']['services']
+                        else:
+                            content[market_type] = market_data
+            except Exception as e:
+                print(f"Warning: Could not load {market_type}: {e}")
+        
+        # Load NPC content (names, trades, affiliations)
+        for npc_type in ['npc_names', 'npc_trades', 'affiliation']:
+            try:
+                npc_path = f'databases/languages/en/{npc_type}.json'
+                if os.path.exists(npc_path):
+                    with open(npc_path, 'r', encoding='utf-8') as f:
+                        npc_data = json.load(f)
+                        # Extract data from tables structure
+                        if 'tables' in npc_data:
+                            if npc_type == 'npc_names':
+                                # Combine first and second names for full names
+                                first_names = npc_data['tables'].get('first_names', [])
+                                second_names = npc_data['tables'].get('second_names', [])
+                                full_names = []
+                                for first in first_names:
+                                    for second in second_names:
+                                        full_names.append(f"{first} {second}")
+                                content['npc_names'] = full_names
+                            elif npc_type == 'npc_trades' and 'trades' in npc_data['tables']:
+                                content['npc_trades'] = npc_data['tables']['trades']
+                            elif npc_type == 'affiliation':
+                                # Load all affiliation types
+                                content['affiliations'] = npc_data['tables']
+                        else:
+                            content[npc_type] = npc_data
+            except Exception as e:
+                print(f"Warning: Could not load {npc_type}: {e}")
+        
+        # Load faction content
+        try:
+            faction_path = 'databases/languages/en/factions.json'
+            if os.path.exists(faction_path):
+                with open(faction_path, 'r', encoding='utf-8') as f:
+                    faction_data = json.load(f)
+                    if 'tables' in faction_data:
+                        content['factions'] = faction_data['tables']
+            else:
+                print(f"Warning: Faction database not found at {faction_path}")
+        except Exception as e:
+            print(f"Warning: Could not load factions: {e}")
+        
+        print(f"DEBUG: Loaded enriched content keys: {list(content.keys())}")
+        print(f"DEBUG: tavern_menu content: {content.get('tavern_menu', 'NOT FOUND')}")
+        print(f"DEBUG: tavern_innkeeper content: {content.get('tavern_innkeeper', 'NOT FOUND')}")
+        print(f"DEBUG: tavern_patrons content: {content.get('tavern_patrons', 'NOT FOUND')}")
+        print(f"DEBUG: items_sold content: {content.get('items_sold', 'NOT FOUND')}")
+        print(f"DEBUG: beast_prices content: {content.get('beast_prices', 'NOT FOUND')}")
+        print(f"DEBUG: services content: {content.get('services', 'NOT FOUND')}")
+        print(f"DEBUG: npc_names content: {len(content.get('npc_names', [])) if content.get('npc_names') else 'NOT FOUND'} names")
+        print(f"DEBUG: npc_trades content: {len(content.get('npc_trades', [])) if content.get('npc_trades') else 'NOT FOUND'} trades")
+        print(f"DEBUG: affiliations content: {list(content.get('affiliations', {}).keys()) if content.get('affiliations') else 'NOT FOUND'}")
+        print(f"DEBUG: factions content: {list(content.get('factions', {}).keys()) if content.get('factions') else 'NOT FOUND'}")
+        return content
+    
+    def get_city_context(self, city_name: str) -> Dict[str, Any]:
+        """Get city context information for the left panel."""
+        city_data = self._load_city_database(city_name)
+        if not city_data:
+            return {}
+        
+        # Load city-specific content
+        enriched_content = self._load_city_specific_content(city_name)
+        
+        # Build city context
+        context = {
+            'name': city_data.get('name', city_name),
+            'description': city_data.get('description', ''),
+            'districts': {},
+            'major_landmarks': city_data.get('landmarks', []),
+            'city_events': enriched_content.get('city_events', []),
+            'weather_conditions': enriched_content.get('weather_conditions', []),
+            'regional_npcs': city_data.get('regional_npcs', []),
+            'factions': [],
+            'atmosphere_modifiers': city_data.get('atmosphere_modifiers', [])
+        }
+        
+        # Extract faction information from enriched content
+        if 'factions' in enriched_content and isinstance(enriched_content['factions'], dict):
+            factions_data = enriched_content['factions']
+            
+            # Select major factions for the city
+            major_factions = factions_data.get('major_factions', [])
+            if major_factions:
+                num_major = random.randint(2, 4)
+                selected_major = random.sample(major_factions, min(num_major, len(major_factions)))
+                context['major_factions'] = selected_major
+            
+            # Select local factions for the city
+            local_factions = factions_data.get('local_factions', [])
+            if local_factions:
+                num_local = random.randint(3, 6)
+                selected_local = random.sample(local_factions, min(num_local, len(local_factions)))
+                context['local_factions'] = selected_local
+            
+            # Select criminal factions for the city
+            criminal_factions = factions_data.get('criminal_factions', [])
+            if criminal_factions:
+                num_criminal = random.randint(2, 4)
+                selected_criminal = random.sample(criminal_factions, min(num_criminal, len(criminal_factions)))
+                context['criminal_factions'] = selected_criminal
+            
+            # Get faction relationships
+            faction_relationships = factions_data.get('faction_relationships', [])
+            if faction_relationships:
+                context['faction_relationships'] = faction_relationships[:5]  # Limit to 5 relationships
+        
+        # Legacy support - if no proper factions loaded, fall back to affiliations
+        if not context.get('major_factions') and 'affiliations' in enriched_content:
+            affiliations = enriched_content['affiliations']
+            if 'faction_affiliations' in affiliations and isinstance(affiliations['faction_affiliations'], list):
+                num_factions = random.randint(3, 6)
+                selected_factions = random.sample(affiliations['faction_affiliations'], 
+                                                min(num_factions, len(affiliations['faction_affiliations'])))
+                
+                faction_attitudes = affiliations.get('affiliation_attitudes', [])
+                context['legacy_factions'] = []
+                for faction in selected_factions:
+                    faction_info = {
+                        'name': faction,
+                        'attitude': random.choice(faction_attitudes) if faction_attitudes else 'Unknown'
+                    }
+                    context['legacy_factions'].append(faction_info)
+        
+        # Add district information
+        districts = city_data.get('districts', {})
+        if isinstance(districts, dict):
+            for district_name, district_data in districts.items():
+                context['districts'][district_name] = {
+                    'description': district_data.get('description', ''),
+                    'buildings': district_data.get('buildings', []),
+                    'streets': district_data.get('streets', []),
+                    'landmarks': district_data.get('landmarks', []),
+                    'markets': district_data.get('markets', []),
+                    'temples': district_data.get('temples', []),
+                    'taverns': district_data.get('taverns', []),
+                    'guilds': district_data.get('guilds', [])
+                }
+        
+        return context
     
 
     
@@ -590,18 +864,7 @@ class CityOverlayAnalyzer:
             buildings = city_data['buildings']
         
         if not buildings:
-            buildings = [
-                "The Moldering Manor",
-                "House of Broken Dreams",
-                "The Weeping Tower",
-                "Crimson Archives",
-                "The Bone Foundry",
-                "House of Whispers",
-                "The Iron Sanctuary",
-                "Tower of Screams",
-                "The Bloody Library",
-                "Chamber of Echoes"
-            ]
+            buildings = self._get_enhanced_fallback_content('buildings')
         
         purposes = [
             "abandoned residence of a fallen noble",
@@ -667,18 +930,7 @@ class CityOverlayAnalyzer:
             streets = city_data['streets']
         
         if not streets:
-            streets = [
-                "Corpse Alley",
-                "Bleeding Way", 
-                "The Bone Road",
-                "Sorrow Street",
-                "Plague Path",
-                "The Withered Walk",
-                "Death's Door Lane",
-                "The Screaming Steps",
-                "Tomb Street",
-                "The Cursed Crossing"
-            ]
+            streets = self._get_enhanced_fallback_content('streets')
         
         conditions = [
             "cracked cobblestones stained with old blood",
@@ -1288,6 +1540,232 @@ class CityOverlayAnalyzer:
             content['notable_features'].append("Within the city proper, well developed")
         
         return content
+    
+    def _integrate_city_specific_content(self, content: Dict[str, Any], city_data: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        """Integrate city-specific events, weather, and NPC content."""
+        if not city_data:
+            return content
+        
+        print(f"DEBUG: Integrating content for type: {content.get('type')}")
+        print(f"DEBUG: City data keys: {list(city_data.keys())}")
+        print(f"DEBUG: Available enriched fields: {[k for k in city_data.keys() if k in ['weather_conditions', 'city_events', 'npc_traits', 'npc_concerns', 'npc_wants', 'npc_secrets', 'tavern_menu', 'tavern_innkeeper', 'tavern_patrons', 'items_sold', 'beast_prices', 'services', 'npc_names', 'npc_trades', 'affiliations', 'factions']]}")
+        content['debug_marker'] = 'INTEGRATE_WAS_CALLED'
+        
+        # Add city events
+        if 'city_events' in city_data and city_data['city_events']:
+            content['city_event'] = random.choice(city_data['city_events'])
+        
+        # Add weather conditions
+        if 'weather_conditions' in city_data and isinstance(city_data['weather_conditions'], list) and len(city_data['weather_conditions']) > 0:
+            content['weather'] = random.choice(city_data['weather_conditions'])
+        
+        # Add NPC traits for relevant content types
+        if content.get('type') in ['tavern', 'guild', 'temple', 'market', 'service']:
+            if 'npc_traits' in city_data and isinstance(city_data['npc_traits'], list) and len(city_data['npc_traits']) > 0:
+                content['npc_trait'] = random.choice(city_data['npc_traits'])
+            if 'npc_concerns' in city_data and isinstance(city_data['npc_concerns'], list) and len(city_data['npc_concerns']) > 0:
+                content['npc_concern'] = random.choice(city_data['npc_concerns'])
+            if 'npc_wants' in city_data and isinstance(city_data['npc_wants'], list) and len(city_data['npc_wants']) > 0:
+                content['npc_want'] = random.choice(city_data['npc_wants'])
+            if 'npc_secrets' in city_data and isinstance(city_data['npc_secrets'], list) and len(city_data['npc_secrets']) > 0:
+                content['npc_secret'] = random.choice(city_data['npc_secrets'])
+            
+            # Add NPC name and trade
+            if 'npc_names' in city_data and isinstance(city_data['npc_names'], list) and len(city_data['npc_names']) > 0:
+                content['npc_name'] = random.choice(city_data['npc_names'])
+            if 'npc_trades' in city_data and isinstance(city_data['npc_trades'], list) and len(city_data['npc_trades']) > 0:
+                content['npc_trade'] = random.choice(city_data['npc_trades'])
+            
+            # Add affiliation
+            if 'affiliations' in city_data and isinstance(city_data['affiliations'], dict):
+                affiliations = city_data['affiliations']
+                if 'npc_affiliations' in affiliations and isinstance(affiliations['npc_affiliations'], list) and len(affiliations['npc_affiliations']) > 0:
+                    content['npc_affiliation'] = random.choice(affiliations['npc_affiliations'])
+                if 'affiliation_attitudes' in affiliations and isinstance(affiliations['affiliation_attitudes'], list) and len(affiliations['affiliation_attitudes']) > 0:
+                    content['npc_attitude'] = random.choice(affiliations['affiliation_attitudes'])
+        
+        # Add tavern-specific content
+        if content.get('type') == 'tavern':
+            if 'tavern_menu' in city_data and isinstance(city_data['tavern_menu'], list) and len(city_data['tavern_menu']) > 0:
+                content['tavern_menu'] = random.choice(city_data['tavern_menu'])
+            if 'tavern_innkeeper' in city_data and isinstance(city_data['tavern_innkeeper'], list) and len(city_data['tavern_innkeeper']) > 0:
+                content['tavern_innkeeper'] = random.choice(city_data['tavern_innkeeper'])
+            if 'tavern_patrons' in city_data and isinstance(city_data['tavern_patrons'], list) and len(city_data['tavern_patrons']) > 0:
+                content['tavern_patron'] = random.choice(city_data['tavern_patrons'])
+        
+        # Add market-specific content
+        if content.get('type') == 'market':
+            if 'items_sold' in city_data and isinstance(city_data['items_sold'], list) and len(city_data['items_sold']) > 0:
+                # Select 3-5 random items to sell
+                num_items = random.randint(3, 5)
+                selected_items = random.sample(city_data['items_sold'], min(num_items, len(city_data['items_sold'])))
+                content['items_sold'] = selected_items
+            if 'beast_prices' in city_data and isinstance(city_data['beast_prices'], list) and len(city_data['beast_prices']) > 0:
+                # Select 2-3 random beasts to sell
+                num_beasts = random.randint(2, 3)
+                selected_beasts = random.sample(city_data['beast_prices'], min(num_beasts, len(city_data['beast_prices'])))
+                content['beast_prices'] = selected_beasts
+            if 'services' in city_data and isinstance(city_data['services'], list) and len(city_data['services']) > 0:
+                # Select 2-4 random services to offer
+                num_services = random.randint(2, 4)
+                selected_services = random.sample(city_data['services'], min(num_services, len(city_data['services'])))
+                content['services'] = selected_services
+        
+        # Add service-specific content (for service locations)
+        if content.get('type') == 'service':
+            if 'services' in city_data and isinstance(city_data['services'], list) and len(city_data['services']) > 0:
+                # Select 3-6 random services to offer
+                num_services = random.randint(3, 6)
+                selected_services = random.sample(city_data['services'], min(num_services, len(city_data['services'])))
+                content['services'] = selected_services
+        
+        # Add patrons for businesses (taverns, markets, guilds)
+        if content.get('type') in ['tavern', 'market', 'guild']:
+            patrons = []
+            if 'npc_names' in city_data and isinstance(city_data['npc_names'], list) and len(city_data['npc_names']) > 0:
+                if 'npc_trades' in city_data and isinstance(city_data['npc_trades'], list) and len(city_data['npc_trades']) > 0:
+                    # Generate 2-4 patrons with names and trades
+                    num_patrons = random.randint(2, 4)
+                    for _ in range(num_patrons):
+                        name = random.choice(city_data['npc_names'])
+                        trade = random.choice(city_data['npc_trades'])
+                        patrons.append(f"{name} ({trade})")
+                else:
+                    # Just use names
+                    num_patrons = random.randint(2, 4)
+                    selected_names = random.sample(city_data['npc_names'], min(num_patrons, len(city_data['npc_names'])))
+                    patrons = selected_names
+            
+            if patrons:
+                content['patrons'] = patrons
+        
+        return content
+    
+    def _add_cross_references(self, hex_grid: Dict[str, Any], city_data: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        """Add cross-references between related hexes."""
+        for hex_id, hex_data in hex_grid.items():
+            content = hex_data.get('content', {})
+            content_type = content.get('type', '')
+            
+            # Find related hexes based on content type
+            related_hexes = []
+            
+            # Find nearby hexes of the same type
+            for other_id, other_data in hex_grid.items():
+                if other_id != hex_id:
+                    other_content = other_data.get('content', {})
+                    other_type = other_content.get('type', '')
+                    
+                    # Same type hexes are related
+                    if other_type == content_type:
+                        related_hexes.append({
+                            'hex_id': other_id,
+                            'name': other_content.get('name', 'Unknown'),
+                            'type': other_type,
+                            'relationship': 'same_type'
+                        })
+                    
+                    # Complementary types (e.g., tavern near market)
+                    elif self._are_complementary_types(content_type, other_type):
+                        related_hexes.append({
+                            'hex_id': other_id,
+                            'name': other_content.get('name', 'Unknown'),
+                            'type': other_type,
+                            'relationship': 'complementary'
+                        })
+            
+            # Add cross-references to content
+            if related_hexes:
+                content['related_hexes'] = related_hexes[:3]  # Limit to 3 related hexes
+                hex_data['content'] = content
+        
+        return hex_grid
+    
+    def _get_enhanced_fallback_content(self, content_type: str) -> List[str]:
+        """Get enhanced fallback content with more variety and thematic elements."""
+        enhanced_content = {
+            'buildings': [
+                "The Moldering Manor", "House of Broken Dreams", "The Weeping Tower", "Crimson Archives",
+                "The Bone Foundry", "House of Whispers", "The Iron Sanctuary", "Tower of Screams",
+                "The Bloody Library", "Chamber of Echoes", "The Cursed Observatory", "Temple of Forgotten Gods",
+                "The Soul Collector's Workshop", "The Memory Mill", "The Dreamer's Asylum", "The Time-Worn Keep",
+                "The Whispering Gallery", "The Bone Cathedral", "The Shadow Forge", "The Echo Chamber"
+            ],
+            'streets': [
+                "Corpse Alley", "Bleeding Way", "The Bone Road", "Sorrow Street", "Plague Path",
+                "The Withered Walk", "Death's Door Lane", "The Screaming Steps", "Tomb Street",
+                "The Cursed Crossing", "Memory Lane", "The Forgotten Path", "Whisper Street",
+                "The Echoing Way", "Shadow Road", "The Time-Lost Avenue", "Dreamer's Walk",
+                "The Soul Collector's Path", "The Bone Procession", "The Weeping Way"
+            ],
+            'landmarks': [
+                "The Central Heptalith", "The Weeping Fountain", "The Soul Well", "The Corpse Clock",
+                "The Memory Tree", "The Time-Worn Statue", "The Echoing Bell", "The Shadow Mirror",
+                "The Dreamer's Monument", "The Bone Throne", "The Whispering Stone", "The Cursed Obelisk",
+                "The Memory Pool", "The Time Portal", "The Soul Gate", "The Echo Chamber",
+                "The Shadow Tower", "The Dreamer's Circle", "The Bone Altar", "The Whispering Arch"
+            ],
+            'markets': [
+                "The Bone Market", "The Memory Exchange", "The Soul Bazaar", "The Dreamer's Market",
+                "The Time-Lost Bazaar", "The Echo Market", "The Shadow Exchange", "The Whispering Market",
+                "The Cursed Bazaar", "The Memory Square", "The Soul Market", "The Bone Exchange",
+                "The Dreamer's Bazaar", "The Time Market", "The Echo Exchange", "The Shadow Bazaar",
+                "The Whispering Exchange", "The Cursed Market", "The Memory Bazaar", "The Soul Exchange"
+            ],
+            'temples': [
+                "The Basilisk Shrine", "The Temple of Forgotten Gods", "The Soul Collector's Chapel",
+                "The Memory Temple", "The Dreamer's Sanctuary", "The Time-Worn Cathedral", "The Echo Temple",
+                "The Shadow Chapel", "The Whispering Shrine", "The Cursed Cathedral", "The Bone Temple",
+                "The Memory Chapel", "The Soul Temple", "The Dreamer's Cathedral", "The Time Shrine",
+                "The Echo Chapel", "The Shadow Temple", "The Whispering Cathedral", "The Cursed Shrine",
+                "The Bone Chapel"
+            ],
+            'taverns': [
+                "The Rotting Corpse", "The Memory Inn", "The Soul Collector's Rest", "The Dreamer's Tavern",
+                "The Time-Worn Inn", "The Echo Tavern", "The Shadow Rest", "The Whispering Inn",
+                "The Cursed Tavern", "The Bone Rest", "The Memory Tavern", "The Soul Inn",
+                "The Dreamer's Rest", "The Time Tavern", "The Echo Inn", "The Shadow Tavern",
+                "The Whispering Rest", "The Cursed Inn", "The Bone Tavern", "The Memory Rest"
+            ],
+            'guilds': [
+                "The Soul Collectors Guild", "The Memory Keepers", "The Dreamer's Guild", "The Time Weavers",
+                "The Echo Guild", "The Shadow Brotherhood", "The Whispering Guild", "The Cursed Order",
+                "The Bone Guild", "The Memory Brotherhood", "The Soul Order", "The Dreamer's Brotherhood",
+                "The Time Guild", "The Echo Order", "The Shadow Guild", "The Whispering Brotherhood",
+                "The Cursed Guild", "The Bone Order", "The Memory Guild", "The Soul Brotherhood"
+            ],
+            'residences': [
+                "The Memory House", "The Soul Collector's Home", "The Dreamer's Residence", "The Time-Worn House",
+                "The Echo Home", "The Shadow Residence", "The Whispering House", "The Cursed Home",
+                "The Bone Residence", "The Memory Home", "The Soul House", "The Dreamer's Home",
+                "The Time Residence", "The Echo House", "The Shadow Home", "The Whispering Residence",
+                "The Cursed House", "The Bone Home", "The Memory Residence", "The Soul Home"
+            ],
+            'ruins': [
+                "The Memory Ruins", "The Soul Collector's Ruins", "The Dreamer's Ruins", "The Time-Worn Ruins",
+                "The Echo Ruins", "The Shadow Ruins", "The Whispering Ruins", "The Cursed Ruins",
+                "The Bone Ruins", "The Memory Ruins", "The Soul Ruins", "The Dreamer's Ruins",
+                "The Time Ruins", "The Echo Ruins", "The Shadow Ruins", "The Whispering Ruins",
+                "The Cursed Ruins", "The Bone Ruins", "The Memory Ruins", "The Soul Ruins"
+            ]
+        }
+        
+        return enhanced_content.get(content_type, [])
+    
+    def _are_complementary_types(self, type1: str, type2: str) -> bool:
+        """Check if two content types are complementary."""
+        complementary_pairs = [
+            ('tavern', 'market'),
+            ('tavern', 'guild'),
+            ('temple', 'market'),
+            ('guild', 'market'),
+            ('building', 'street'),
+            ('landmark', 'temple'),
+            ('residence', 'market'),
+            ('tavern', 'temple')
+        ]
+        
+        return (type1, type2) in complementary_pairs or (type2, type1) in complementary_pairs
     
     def _generate_district_random_table(self) -> List[str]:
         """Generate random table for district encounters."""

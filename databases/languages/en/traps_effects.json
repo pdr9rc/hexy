@@ -1,0 +1,62 @@
+{
+  "category": "traps_effects",
+  "tables": {
+    "trap_effects": [
+      {
+        "description": "Shimmering, bile-yellow poisonous gas.",
+        "effect": "Test Toughness DR18 or die. Test every minute."
+      },
+      {
+        "description": "Poisonous darts shoot from wall-holes.",
+        "effect": "D2 damage. Test Toughness DR16 or die."
+      },
+      {
+        "description": "Giant marble falls from the ceiling or from a ramp in an adjacent room.",
+        "effect": "Test Agility DR14 or die."
+      },
+      {
+        "description": "Cruel creature is released from a hidden chamber.",
+        "effect": "Varying."
+      },
+      {
+        "description": "Sharpened pole hits you from the side.",
+        "effect": "Fate decides. Roll a die: an odd result is d20 damage."
+      },
+      {
+        "description": "Falling net. Something approaches.",
+        "effect": "Presence DR16 to escape."
+      },
+      {
+        "description": "A Power affects you.",
+        "effect": "Varying."
+      },
+      {
+        "description": "A pit opens under your feet.",
+        "effect": "1-in-6 chance of impalement (instant death). Otherwise, d6 damage per 10'."
+      },
+      {
+        "description": "Doors lock and water fills the room.",
+        "effect": "Better find a way out."
+      },
+      {
+        "description": "Alarm goes off; something awakens.",
+        "effect": "Varying."
+      },
+      {
+        "description": "The walls are closing in.",
+        "effect": "Better find a way out. 1-in-6 chance that the walls get stuck ... if you're lucky."
+      },
+      {
+        "description": "Burning oil pouring from a ceiling cauldron.",
+        "effect": "Fate decides. Roll a die: an odd result is d12 damage."
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg trap effects and consequences",
+    "usage": "Roll d12 to determine trap type and effect"
+  }
+} 

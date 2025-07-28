@@ -48,7 +48,7 @@ class AppConfig:
     """Main application configuration."""
     language: str = 'en'
     supported_languages: Tuple[str, ...] = ('en', 'pt')
-    debug: bool = False
+    debug: bool = True
     host: str = '127.0.0.1'
     port: int = 6660
     

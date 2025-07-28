@@ -55,6 +55,15 @@ A {population} settlement in the {terrain}.
 **Local Power:** {local_power}
 **Atmosphere:** {atmosphere}
 **Notable Feature:** {notable_feature}
+
+**Weather:** {weather}
+**City Event:** {city_event}
+
+**Tavern Details:**
+- Select Menu (4s): {select_dish}
+- Budget Menu (2s): {budget_dish}
+- Innkeeper: {innkeeper_quirk}
+- Notable Patron: {patron_trait}
             """.strip(),
             
             'dungeon': """
@@ -64,6 +73,7 @@ A {population} settlement in the {terrain}.
 **Atmosphere:** {atmosphere}
 {treasure_section}
 {scroll_section}
+{trap_section}
             """.strip(),
             
             'beast': """
@@ -76,9 +86,11 @@ A {beast_type} with {feature} that {behavior}.
             'npc': """
 **{name}** - {denizen_type}
 
-**Motivation:** {motivation}
-**Feature:** {feature}
-**Demeanor:** {demeanor}
+**Trait:** {trait}
+**Concern:** {concern}
+**Want:** {want}
+**Apocalypse Attitude:** {apocalypse_attitude}
+**Secret:** {secret}
 **Location:** Wandering the {terrain}
             """.strip(),
             
@@ -153,7 +165,7 @@ A {beast_type} with {feature} that {behavior}.
             return 'npc'
     
     def _generate_settlement_content(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """Generate settlement content."""
+        """Generate settlement content with Mörk Borg tavern details."""
         terrain = context.get('terrain', 'unknown')
         language = context.get('language', 'en')
         
@@ -167,6 +179,11 @@ A {beast_type} with {feature} that {behavior}.
         atmosphere = self._generate_settlement_atmosphere(terrain)
         notable_feature = self._generate_settlement_feature(terrain)
         
+        # Generate Mörk Borg tavern details
+        tavern_details = self._generate_tavern_details(language)
+        weather = self._generate_weather(language)
+        city_event = self._generate_city_event(language)
+        
         return {
             'name': name,
             'population': population,
@@ -174,13 +191,19 @@ A {beast_type} with {feature} that {behavior}.
             'local_power': local_power,
             'atmosphere': atmosphere,
             'notable_feature': notable_feature,
+            'select_dish': tavern_details['select_dish']['name'],
+            'budget_dish': tavern_details['budget_dish']['name'],
+            'innkeeper_quirk': tavern_details['innkeeper_quirk'],
+            'patron_trait': tavern_details['patron_trait'],
+            'weather': weather,
+            'city_event': city_event,
             'terrain': terrain,
             'type': 'settlement',
             'encounter': f"⌂ **{name}** - A {population} settlement"
         }
     
     def _generate_dungeon_content(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """Generate dungeon content."""
+        """Generate dungeon content with Mörk Borg traps."""
         language = context.get('language', 'en')
         rules = context.get('rules', self.default_rules)
         
@@ -199,6 +222,7 @@ A {beast_type} with {feature} that {behavior}.
         # Generate optional treasure and scroll
         treasure_section = ""
         scroll_section = ""
+        trap_section = ""
         
         if random.random() <= rules.get('loot_chance', 0.3):
             loot = self._generate_loot(language)
@@ -210,6 +234,12 @@ A {beast_type} with {feature} that {behavior}.
             if scroll:
                 scroll_section = f"\n**Ancient Knowledge:** {scroll['description']}"
         
+        # Generate trap (30% chance)
+        if random.random() <= 0.3:
+            trap = self._generate_trap(language)
+            if trap:
+                trap_section = f"\n**Trap:** {trap['description']}\n**Effect:** {trap['effect']}\n**Builder:** {trap['builder']}"
+        
         return {
             'dungeon_type': dungeon_type,
             'feature': feature,
@@ -217,6 +247,7 @@ A {beast_type} with {feature} that {behavior}.
             'atmosphere': atmosphere,
             'treasure_section': treasure_section,
             'scroll_section': scroll_section,
+            'trap_section': trap_section,
             'type': 'dungeon',
             'encounter': "▲ **Ancient Ruins**"
         }
@@ -246,7 +277,7 @@ A {beast_type} with {feature} that {behavior}.
         }
     
     def _generate_npc_content(self, context: Dict[str, Any]) -> Dict[str, Any]:
-        """Generate NPC content."""
+        """Generate NPC content using Mörk Borg tables."""
         terrain = context.get('terrain', 'unknown')
         language = context.get('language', 'en')
         hex_code = context.get('hex_code', '0000')
@@ -260,14 +291,25 @@ A {beast_type} with {feature} that {behavior}.
         terrain_data = terrain_tables.get(terrain, {})
         denizen_types = terrain_data.get('denizen_types', [])
         
-        # Generate NPC elements
-        name_prefixes = core_tables.get('denizen_names_prefix', [])
-        name_suffixes = core_tables.get('denizen_names_suffix', [])
-        motivations = core_tables.get('denizen_motivations', [])
-        features = core_tables.get('denizen_features', [])
-        demeanors = core_tables.get('denizen_demeanors', [])
+        # Get Mörk Borg NPC tables
+        npc_names = self.db_manager.get_table('npc_names', 'first_names', language) or []
+        npc_surnames = self.db_manager.get_table('npc_names', 'second_names', language) or []
+        npc_traits = self.db_manager.get_table('npc_traits', 'traits', language) or []
+        npc_trades = self.db_manager.get_table('npc_trades', 'trades', language) or []
+        npc_concerns = self.db_manager.get_table('npc_concerns', 'concerns', language) or []
+        npc_wants = self.db_manager.get_table('npc_wants', 'wants', language) or []
+        npc_apocalypse = self.db_manager.get_table('npc_apocalypse', 'apocalypse_attitudes', language) or []
+        npc_secrets = self.db_manager.get_table('npc_secrets', 'secrets', language) or []
         
-        # Generate name
+        # Generate Mörk Borg name
+        if npc_names and npc_surnames:
+            first_name = random.choice(npc_names)
+            second_name = random.choice(npc_surnames)
+            name = f"{first_name} {second_name}"
+        else:
+            # Fallback to old system
+            name_prefixes = core_tables.get('denizen_names_prefix', [])
+            name_suffixes = core_tables.get('denizen_names_suffix', [])
         if name_prefixes and name_suffixes:
             prefix = random.choice(name_prefixes)
             suffix = random.choice(name_suffixes)
@@ -275,21 +317,46 @@ A {beast_type} with {feature} that {behavior}.
         else:
             name = f"Unknown Denizen of {hex_code}"
         
-        # Generate other elements
-        denizen_type = random.choice(denizen_types) if denizen_types else f"{terrain.title()} dweller"
-        motivation = random.choice(motivations) if motivations else "seeks something unknown"
-        feature = random.choice(features) if features else "Has an unsettling presence"
-        demeanor = random.choice(demeanors) if demeanors else "Cryptic"
+        # Generate Mörk Borg elements
+        trait = random.choice(npc_traits) if npc_traits else "Mysterious"
+        trade = random.choice(npc_trades) if npc_trades else f"{terrain.title()} dweller"
+        concern = random.choice(npc_concerns) if npc_concerns else "seeks something unknown"
+        want = random.choice(npc_wants) if npc_wants else "knowledge"
+        apocalypse_attitude = random.choice(npc_apocalypse) if npc_apocalypse else "We're doomed!"
+        secret = random.choice(npc_secrets) if npc_secrets else "Just a regular person"
+        
+        # Fallback to old system if Mörk Borg tables not available
+        if not npc_trades:
+            denizen_type = random.choice(denizen_types) if denizen_types else f"{terrain.title()} dweller"
+        else:
+            denizen_type = trade
+        if not npc_wants:
+            demeanors = core_tables.get('denizen_demeanors', [])
+            want = random.choice(demeanors) if demeanors else "Cryptic"
+            
+        if not npc_concerns:
+            motivations = core_tables.get('denizen_motivations', [])
+            concern = random.choice(motivations) if motivations else "seeks something unknown"
+            
+        if not npc_traits:
+            features = core_tables.get('denizen_features', [])
+            trait = random.choice(features) if features else "Has an unsettling presence"
+            
+        if not npc_wants:
+            demeanors = core_tables.get('denizen_demeanors', [])
+            want = random.choice(demeanors) if demeanors else "Cryptic"
         
         return {
             'name': name,
             'denizen_type': denizen_type,
-            'motivation': motivation,
-            'feature': feature,
-            'demeanor': demeanor,
+            'trait': trait,
+            'concern': concern,
+            'want': want,
+            'apocalypse_attitude': apocalypse_attitude,
+            'secret': secret,
             'terrain': terrain,
             'type': 'npc',
-            'encounter': f"☉ **Wandering {denizen_type}**"
+            'encounter': f"☉ **{name} - {denizen_type}**"
         }
     
     def _generate_lore_content(self, context: Dict[str, Any]) -> Dict[str, Any]:
@@ -381,27 +448,49 @@ A {beast_type} with {feature} that {behavior}.
         return features.get(terrain, 'Mysterious landmark')
     
     def _generate_loot(self, language: str) -> Optional[Dict[str, Any]]:
-        """Generate treasure/loot."""
+        """Generate treasure/loot using Mörk Borg tables."""
+        # Try Mörk Borg items and trinkets first
+        trinkets = self.db_manager.get_table('items_trinkets', 'trinkets', language)
+        items_prices = self.db_manager.get_table('items_prices', 'items', language)
+        weapons_prices = self.db_manager.get_table('weapons_prices', 'weapons', language)
+        
+        # 50% chance for trinket, 30% chance for regular item, 20% chance for weapon
         loot_roll = random.randint(1, 100)
         
-        if loot_roll <= 30:  # 30% weapons
-            items = self.db_manager.get_table('enhanced_loot', 'weapon_loot', language) or ["Rusty sword"]
-            loot_type = 'weapon'
-        elif loot_roll <= 50:  # 20% armor
-            items = self.db_manager.get_table('enhanced_loot', 'armor_loot', language) or ["Leather armor"]
-            loot_type = 'armor'
-        elif loot_roll <= 80:  # 30% valuable items
-            items = self.db_manager.get_table('enhanced_loot', 'valuable_loot', language) or ["Silver coins"]
-            loot_type = 'valuable'
-        else:  # 20% utility items
-            items = self.db_manager.get_table('enhanced_loot', 'utility_loot', language) or ["Rope"]
-            loot_type = 'utility'
+        if loot_roll <= 50 and trinkets:
+            # Mörk Borg trinket
+            loot_item = random.choice(trinkets)
+            loot_type = "trinket"
+            effect = "Mysterious properties"
+        elif loot_roll <= 80 and items_prices:
+            # Mörk Borg item
+            item_data = random.choice(items_prices)
+            loot_item = item_data.get('name', 'Unknown item')
+            loot_type = "item"
+            effect = item_data.get('notes', 'Mysterious properties')
+        elif weapons_prices:
+            # Mörk Borg weapon
+            weapon_data = random.choice(weapons_prices)
+            loot_item = f"{weapon_data.get('name', 'Unknown weapon')} ({weapon_data.get('damage', 'd4')})"
+            loot_type = "weapon"
+            effect = f"Damage: {weapon_data.get('damage', 'd4')}"
+        else:
+                # Fallback to old system
+            if loot_roll <= 30:  # 30% weapons
+                items = self.db_manager.get_table('enhanced_loot', 'weapon_loot', language) or ["Rusty sword"]
+                loot_type = 'weapon'
+            elif loot_roll <= 50:  # 20% armor
+                items = self.db_manager.get_table('enhanced_loot', 'armor_loot', language) or ["Leather armor"]
+                loot_type = 'armor'
+            elif loot_roll <= 80:  # 30% valuable items
+                items = self.db_manager.get_table('enhanced_loot', 'valuable_loot', language) or ["Silver coins"]
+                loot_type = 'valuable'
+            else:  # 20% utility items
+                items = self.db_manager.get_table('enhanced_loot', 'utility_loot', language) or ["Rope"]
+                loot_type = 'utility'
         
         loot_item = random.choice(items)
-        
-        # Generate magical effect
-        effects = ["Glimmers with dark energy", "Whispers ancient secrets", "Pulses with unholy power", "Radiates cold"]
-        effect = random.choice(effects)
+        effect = "Mysterious properties"
         
         return {
             'type': loot_type,
@@ -427,6 +516,58 @@ A {beast_type} with {feature} that {behavior}.
             'content': content,
             'effect': effect,
             'description': description
+        }
+    
+    def _generate_tavern_details(self, language: str) -> Dict[str, Any]:
+        """Generate Mörk Borg tavern details."""
+        # Get tavern tables
+        select_menu = self.db_manager.get_table('tavern_menu', 'select_menu', language) or []
+        budget_menu = self.db_manager.get_table('tavern_menu', 'budget_menu', language) or []
+        innkeeper_quirks = self.db_manager.get_table('tavern_innkeeper', 'innkeeper_quirks', language) or []
+        patron_traits = self.db_manager.get_table('tavern_patrons', 'patron_traits', language) or []
+        
+        # Generate tavern elements
+        select_dish = random.choice(select_menu) if select_menu else {"name": "Mysterious stew", "price": 4, "currency": "silver"}
+        budget_dish = random.choice(budget_menu) if budget_menu else {"name": "Watery soup", "price": 2, "currency": "silver"}
+        innkeeper_quirk = random.choice(innkeeper_quirks) if innkeeper_quirks else "Seems nervous about something"
+        patron_trait = random.choice(patron_traits) if patron_traits else "Mysterious"
+        
+        return {
+            'select_dish': select_dish,
+            'budget_dish': budget_dish,
+            'innkeeper_quirk': innkeeper_quirk,
+            'patron_trait': patron_trait
+        }
+    
+    def _generate_weather(self, language: str) -> str:
+        """Generate Mörk Borg weather conditions."""
+        weather_conditions = self.db_manager.get_table('weather', 'weather_conditions', language) or []
+        return random.choice(weather_conditions) if weather_conditions else "Lifeless grey"
+    
+    def _generate_city_event(self, language: str) -> str:
+        """Generate Mörk Borg city events."""
+        city_events = self.db_manager.get_table('city_events', 'city_events', language) or []
+        return random.choice(city_events) if city_events else "Something mysterious happens in the streets"
+    
+    def _generate_trap(self, language: str) -> Optional[Dict[str, Any]]:
+        """Generate Mörk Borg trap."""
+        # Get trap tables
+        trap_triggers = self.db_manager.get_table('traps_triggers', 'trap_triggers', language) or []
+        trap_builders = self.db_manager.get_table('traps_builders', 'trap_builders', language) or []
+        trap_effects = self.db_manager.get_table('traps_effects', 'trap_effects', language) or []
+        
+        if not trap_triggers or not trap_builders or not trap_effects:
+            return None
+        
+        trigger = random.choice(trap_triggers)
+        builder = random.choice(trap_builders)
+        effect_data = random.choice(trap_effects)
+        
+        return {
+            'trigger': trigger,
+            'builder': builder,
+            'description': effect_data.get('description', 'Unknown trap'),
+            'effect': effect_data.get('effect', 'Unknown effect')
         }
     
     def apply_custom_rules(self, rules: Dict[str, Any]):

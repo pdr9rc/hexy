@@ -120,6 +120,10 @@ class SettlementHex:
     local_tavern: str
     local_power: str
     settlement_art: str
+    # Mörk Borg settlement fields
+    weather: str = ""
+    city_event: str = ""
+    tavern_details: Optional[Dict[str, Any]] = None
     exists: bool = True
     is_major_city: bool = False  # NEW FIELD
     
@@ -142,6 +146,10 @@ class SettlementHex:
             "local_tavern": self.local_tavern,
             "local_power": self.local_power,
             "settlement_art": self.settlement_art,
+            # Mörk Borg settlement fields
+            "weather": self.weather,
+            "city_event": self.city_event,
+            "tavern_details": self.tavern_details,
             "redirect_to": "settlement"
         }
 
@@ -160,6 +168,8 @@ class DungeonHex:
     treasure: str
     loot: Optional[LootItem] = None
     scroll: Optional[AncientKnowledge] = None
+    # Mörk Borg dungeon fields
+    trap_section: Optional[Dict[str, Any]] = None
     exists: bool = True
     
     def get_hex_type(self) -> HexType:
@@ -180,7 +190,9 @@ class DungeonHex:
             "notable_feature": self.notable_feature,
             "treasure": self.treasure,
             "loot": self.loot.to_dict() if self.loot else None,
-            "scroll": self.scroll.to_dict() if self.scroll else None
+            "scroll": self.scroll.to_dict() if self.scroll else None,
+            # Mörk Borg dungeon fields
+            "trap_section": self.trap_section
         }
 
 
@@ -199,6 +211,9 @@ class BeastHex:
     notable_feature: str
     atmosphere: str
     loot: Optional[LootItem] = None
+    # Beast specific fields
+    treasure_found: str = ""
+    beast_art: str = ""
     exists: bool = True
     
     def get_hex_type(self) -> HexType:
@@ -220,7 +235,10 @@ class BeastHex:
             "threat_level": self.threat_level,
             "notable_feature": self.notable_feature,
             "atmosphere": self.atmosphere,
-            "loot": self.loot.to_dict() if self.loot else None
+            "loot": self.loot.to_dict() if self.loot else None,
+            # Beast specific fields
+            "treasure_found": self.treasure_found,
+            "beast_art": self.beast_art
         }
 
 
@@ -232,11 +250,21 @@ class NPCHex:
     encounter: str
     name: str
     denizen_type: str
-    motivation: str
-    feature: str
-    demeanor: str
-    notable_feature: str
-    atmosphere: str
+    # Mörk Borg NPC fields
+    trait: str = ""
+    concern: str = ""
+    want: str = ""
+    apocalypse_attitude: str = ""
+    secret: str = ""
+    # Additional NPC fields
+    carries: str = ""
+    location: str = ""
+    # Fallback fields
+    motivation: str = ""
+    feature: str = ""
+    demeanor: str = ""
+    notable_feature: str = ""
+    atmosphere: str = ""
     loot: Optional[LootItem] = None
     exists: bool = True
     
@@ -253,12 +281,22 @@ class NPCHex:
             "encounter": self.encounter,
             "name": self.name,
             "denizen_type": self.denizen_type,
+            # Mörk Borg NPC fields
+            "trait": self.trait,
+            "concern": self.concern,
+            "want": self.want,
+            "apocalypse_attitude": self.apocalypse_attitude,
+            "secret": self.secret,
+            # Fallback fields
             "motivation": self.motivation,
             "feature": self.feature,
             "demeanor": self.demeanor,
             "notable_feature": self.notable_feature,
             "atmosphere": self.atmosphere,
-            "loot": self.loot.to_dict() if self.loot else None
+            "loot": self.loot.to_dict() if self.loot else None,
+            # Additional NPC fields
+            "carries": self.carries,
+            "location": self.location
         }
 
 
@@ -275,6 +313,9 @@ class SeaEncounterHex:
     notable_feature: str
     atmosphere: str
     loot: Optional[LootItem] = None
+    # Sea encounter specific fields
+    origin: str = ""
+    sunken_treasure: str = ""
     exists: bool = True
     
     def get_hex_type(self) -> HexType:
@@ -294,7 +335,10 @@ class SeaEncounterHex:
             "threat_level": self.threat_level,
             "notable_feature": self.notable_feature,
             "atmosphere": self.atmosphere,
-            "loot": self.loot.to_dict() if self.loot else None
+            "loot": self.loot.to_dict() if self.loot else None,
+            # Sea encounter specific fields
+            "origin": self.origin,
+            "sunken_treasure": self.sunken_treasure
         }
 
 
@@ -321,6 +365,10 @@ class HexModelManager:
                 local_tavern=data.get('local_tavern', 'A local tavern'),
                 local_power=data.get('local_power', 'A local authority'),
                 settlement_art=data.get('settlement_art', 'ASCII art placeholder'),
+                # Mörk Borg settlement fields
+                weather=data.get('weather', ''),
+                city_event=data.get('city_event', ''),
+                tavern_details=data.get('tavern_details'),
                 is_major_city=data.get('is_major_city', False) # NEW FIELD
             )
         elif data.get('is_dungeon'):
@@ -335,7 +383,9 @@ class HexModelManager:
                 notable_feature=data.get('notable_feature', 'No notable features'),
                 treasure=data.get('treasure', 'No treasure'),
                 loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None,
-                scroll=self._create_ancient_knowledge(data.get('scroll')) if data.get('scroll') else None
+                scroll=self._create_ancient_knowledge(data.get('scroll')) if data.get('scroll') else None,
+                # Mörk Borg dungeon fields
+                trap_section=data.get('trap_section')
             )
         elif data.get('is_beast'):
             return BeastHex(
@@ -350,7 +400,10 @@ class HexModelManager:
                 threat_level=data.get('threat_level', 'Unknown'),
                 notable_feature=data.get('notable_feature', 'No notable features'),
                 atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
-                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None
+                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None,
+                # Beast specific fields
+                treasure_found=data.get('treasure_found', ''),
+                beast_art=data.get('beast_art', '')
             )
         elif data.get('is_npc'):
             return NPCHex(
@@ -359,9 +412,19 @@ class HexModelManager:
                 encounter=data.get('encounter', 'Unknown NPC'),
                 name=data.get('name', 'Unknown'),
                 denizen_type=data.get('denizen_type', 'Unknown'),
-                motivation=data.get('motivation', 'Unknown'),
-                feature=data.get('feature', 'Unknown'),
-                demeanor=data.get('demeanor', 'Unknown'),
+                # Mörk Borg NPC fields
+                trait=data.get('trait', ''),
+                concern=data.get('concern', ''),
+                want=data.get('want', ''),
+                apocalypse_attitude=data.get('apocalypse_attitude', ''),
+                secret=data.get('secret', ''),
+                # Additional NPC fields
+                carries=data.get('carries', ''),
+                location=data.get('location', ''),
+                # Fallback fields
+                motivation=data.get('motivation', ''),
+                feature=data.get('feature', ''),
+                demeanor=data.get('demeanor', ''),
                 notable_feature=data.get('notable_feature', 'No notable features'),
                 atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
                 loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None
@@ -377,7 +440,10 @@ class HexModelManager:
                 threat_level=data.get('threat_level', 'Unknown'),
                 notable_feature=data.get('notable_feature', 'No notable features'),
                 atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
-                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None
+                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None,
+                # Sea encounter specific fields
+                origin=data.get('origin', ''),
+                sunken_treasure=data.get('sunken_treasure', '')
             )
         else:
             return WildernessHex(hex_code=hex_code, terrain=terrain)
@@ -385,11 +451,22 @@ class HexModelManager:
     def _create_loot_item(self, loot_data: Dict[str, Any]) -> Optional[LootItem]:
         if not isinstance(loot_data, dict):
             return None
+        
+        # Convert string type to LootType enum
+        loot_type_str = loot_data.get('type', '')
+        loot_type = None
+        if loot_type_str:
+            try:
+                loot_type = LootType(loot_type_str)
+            except ValueError:
+                # If the string doesn't match any enum value, default to UTILITY
+                loot_type = LootType.UTILITY
+        
         return LootItem(
             description=loot_data.get('description', ''),
             full_description=loot_data.get('full_description', ''),
             item=loot_data.get('item', ''),
-            type=loot_data.get('type', None),
+            type=loot_type or LootType.UTILITY,
             magical_effect=loot_data.get('magical_effect', None)
         )
     

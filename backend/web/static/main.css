@@ -1808,3 +1808,431 @@ h6 {
   transform: translateY(-2px);
   box-shadow: var(--shadow-pink);
 }
+
+/* ===== MÖRK BORG CONTENT STYLING ===== */
+
+/* NPC Mörk Borg fields */
+.ascii-hex-npc-trait,
+.ascii-hex-npc-concern,
+.ascii-hex-npc-want,
+.ascii-hex-npc-apocalypse,
+.ascii-hex-npc-secret {
+  border-left: 3px solid var(--mork-pink);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.ascii-hex-npc-trait span,
+.ascii-hex-npc-concern span,
+.ascii-hex-npc-want span,
+.ascii-hex-npc-apocalypse span,
+.ascii-hex-npc-secret span {
+  color: var(--mork-pink);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-pink);
+}
+
+/* Settlement Mörk Borg fields */
+.ascii-hex-weather,
+.ascii-hex-city-event {
+  border-left: 3px solid var(--mork-yellow);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.ascii-hex-weather span,
+.ascii-hex-city-event span {
+  color: var(--mork-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-yellow);
+}
+
+/* Tavern details */
+.ascii-hex-tavern-details {
+  border-left: 3px solid var(--mork-cyan);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.ascii-hex-tavern-details span {
+  color: var(--mork-cyan);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-cyan);
+}
+
+.ascii-hex-tavern-details pre {
+  color: var(--mork-cyan);
+  text-shadow: 0 0 3px var(--mork-cyan);
+}
+
+/* Trap information */
+.ascii-hex-trap {
+  border-left: 3px solid var(--mork-magenta);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(255, 0, 255, 0.05);
+}
+
+.ascii-hex-trap span {
+  color: var(--mork-magenta);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-magenta);
+}
+
+.ascii-hex-trap pre {
+  color: var(--mork-magenta);
+  text-shadow: 0 0 3px var(--mork-magenta);
+}
+
+/* Enhanced styling for Mörk Borg content */
+.ascii-hex-npc-trait pre,
+.ascii-hex-npc-concern pre,
+.ascii-hex-npc-want pre,
+.ascii-hex-npc-apocalypse pre,
+.ascii-hex-npc-secret pre,
+.ascii-hex-weather pre,
+.ascii-hex-city-event pre {
+  font-style: italic;
+  color: var(--text-primary);
+  text-shadow: none;
+}
+
+/* Hover effects for Mörk Borg sections */
+.ascii-hex-npc-trait:hover,
+.ascii-hex-npc-concern:hover,
+.ascii-hex-npc-want:hover,
+.ascii-hex-npc-apocalypse:hover,
+.ascii-hex-npc-secret:hover {
+  background: rgba(255, 0, 255, 0.1);
+  transition: var(--transition-fast);
+}
+
+.ascii-hex-weather:hover,
+.ascii-hex-city-event:hover {
+  background: rgba(255, 255, 0, 0.1);
+  transition: var(--transition-fast);
+}
+
+.ascii-hex-tavern-details:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transition: var(--transition-fast);
+}
+
+.ascii-hex-trap:hover {
+  background: rgba(255, 0, 255, 0.1);
+  transition: var(--transition-fast);
+}
+
+/* Settlement layout */
+.ascii-settlement-layout {
+  border-left: 3px solid var(--mork-cyan);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(0, 255, 255, 0.05);
+}
+
+.ascii-settlement-layout span {
+  color: var(--mork-cyan);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-cyan);
+}
+
+.ascii-settlement-layout pre {
+  color: var(--mork-cyan);
+  text-shadow: 0 0 3px var(--mork-cyan);
+  font-family: "Courier New", monospace;
+}
+
+.ascii-settlement-layout:hover {
+  background: rgba(0, 255, 255, 0.1);
+  transition: var(--transition-fast);
+}
+
+/* Additional NPC fields */
+.ascii-hex-npc-carries,
+.ascii-hex-npc-location {
+  border-left: 3px solid var(--mork-pink);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(255, 0, 255, 0.05);
+}
+
+.ascii-hex-npc-carries span,
+.ascii-hex-npc-location span {
+  color: var(--mork-pink);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-pink);
+}
+
+.ascii-hex-npc-carries pre,
+.ascii-hex-npc-location pre {
+  color: var(--mork-pink);
+  text-shadow: 0 0 3px var(--mork-pink);
+  font-family: "Courier New", monospace;
+}
+
+.ascii-hex-npc-carries:hover,
+.ascii-hex-npc-location:hover {
+  background: rgba(255, 0, 255, 0.1);
+  transition: var(--transition-fast);
+}
+
+/* Beast specific fields */
+.ascii-hex-treasure-found,
+.ascii-hex-beast-art {
+  border-left: 3px solid var(--mork-yellow);
+  padding-left: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background: rgba(255, 255, 0, 0.05);
+}
+
+.ascii-hex-treasure-found span,
+.ascii-hex-beast-art span {
+  color: var(--mork-yellow);
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--mork-yellow);
+}
+
+.ascii-hex-treasure-found pre,
+.ascii-hex-beast-art pre {
+  color: var(--mork-yellow);
+  text-shadow: 0 0 3px var(--mork-yellow);
+  font-family: "Courier New", monospace;
+}
+
+.ascii-hex-treasure-found:hover,
+.ascii-hex-beast-art:hover {
+  background: rgba(255, 255, 0, 0.1);
+  transition: var(--transition-fast);
+}
+
+/* ===== ENHANCED CITY CONTROLS PANEL ===== */
+
+.city-controls-panel {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-primary);
+  padding: var(--spacing-md);
+  margin: var(--spacing-md) 0;
+  box-shadow: var(--shadow-pink);
+}
+
+.city-controls-panel h4 {
+  color: var(--mork-pink);
+  font-size: 14px;
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* District Legend */
+.district-legend {
+  margin-bottom: var(--spacing-lg);
+}
+
+.district-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.district-button {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-muted);
+  color: var(--text-primary);
+  padding: var(--spacing-sm);
+  font-size: 12px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.district-button:hover {
+  border-color: var(--mork-pink);
+  box-shadow: var(--shadow-pink);
+  transform: translateY(-1px);
+}
+
+/* Hex Type Legend */
+.hex-type-legend {
+  margin-bottom: var(--spacing-lg);
+}
+
+.hex-type-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.hex-type-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-muted);
+  font-size: 11px;
+}
+
+.hex-symbol {
+  font-size: 16px;
+  color: var(--mork-yellow);
+}
+
+/* Quick Navigation */
+.quick-navigation {
+  margin-bottom: var(--spacing-md);
+}
+
+.nav-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+}
+
+.btn-small {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Enhanced section styling for enriched content */
+.ascii-hex-enriched {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-cyan);
+}
+
+.ascii-hex-npcs {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-green);
+}
+
+.ascii-hex-tavern {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-yellow);
+}
+
+.ascii-hex-related {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-magenta);
+}
+
+.ascii-hex-random {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-pink);
+}
+
+/* Hover effects for enriched sections */
+.ascii-hex-enriched:hover,
+.ascii-hex-npcs:hover,
+.ascii-hex-tavern:hover,
+.ascii-hex-related:hover,
+.ascii-hex-random:hover {
+  background: var(--bg-accent);
+  box-shadow: var(--shadow-dark);
+}
+
+/* Clickable related hex links */
+.related-hex-link {
+  color: var(--mork-magenta);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: var(--transition-fast);
+}
+
+.related-hex-link:hover {
+  color: var(--mork-pink);
+  text-shadow: 0 0 5px var(--mork-pink);
+}
+
+/* City Context Panel */
+.city-context-panel {
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ASCII Section Text Color Override */
+.ascii-section span {
+  color: var(--mork-yellow) !important;
+}
+
+.city-overlay-ascii-section span {
+  color: var(--mork-yellow) !important;
+}
+
+.city-context-panel .ascii-section {
+  border-bottom: 1px solid var(--border-muted);
+  padding: var(--spacing-sm);
+}
+
+.city-context-panel .ascii-section:last-child {
+  border-bottom: none;
+}
+
+.ascii-city-title {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-pink);
+}
+
+.ascii-city-description {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-yellow);
+}
+
+.ascii-city-events {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-cyan);
+}
+
+.ascii-city-weather {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-green);
+}
+
+.ascii-city-npcs {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-magenta);
+}
+
+.ascii-city-factions {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-pink);
+}
+
+.ascii-city-landmarks {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-yellow);
+}
+
+.ascii-city-districts {
+  background: var(--bg-tertiary);
+  border-left: 3px solid var(--mork-cyan);
+}
+
+/* Responsive improvements for mobile */
+@media (max-width: 768px) {
+  .city-controls-panel {
+    padding: var(--spacing-sm);
+    margin: var(--spacing-sm) 0;
+  }
+  
+  .district-buttons-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  
+  .hex-type-grid {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+  }
+  
+  .nav-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .btn-small {
+    font-size: 9px;
+    padding: var(--spacing-xs);
+  }
+}

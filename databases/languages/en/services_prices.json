@@ -1,0 +1,70 @@
+{
+  "category": "services_prices",
+  "tables": {
+    "services": [
+      {
+        "name": "Night in hospice",
+        "price": 3,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Drink",
+        "price": 1,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Steady meal",
+        "price": 2,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Hot meal",
+        "price": 3,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Bribe, clerk",
+        "price": "20-40",
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Bribe, rabble",
+        "price": "5-15",
+        "currency": "silver",
+        "notes": ""
+      }
+    ],
+    "armor_repair": [
+      {
+        "tier": "1 to 2",
+        "cost": 25,
+        "currency": "silver",
+        "notes": "Armor cannot be repaired to a tier higher than its original"
+      },
+      {
+        "tier": "2 to 3",
+        "cost": 40,
+        "currency": "silver",
+        "notes": "Armor cannot be repaired to a tier higher than its original"
+      },
+      {
+        "tier": "3 to 4",
+        "cost": 50,
+        "currency": "silver",
+        "notes": "Armor cannot be repaired to a tier higher than its original"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg service prices and armor repair costs",
+    "usage": "Reference for service costs and repair pricing"
+  }
+} 

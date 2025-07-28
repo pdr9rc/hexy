@@ -3,6 +3,222 @@ import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
 
+// Function to load city context in the left panel
+function loadCityContext(contextData: any) {
+  const detailsPanel = document.getElementById('details-panel');
+  if (!detailsPanel) return;
+  
+  const context = contextData.context;
+  
+  let html = `
+    <div class="city-context-panel">
+      <div class="ascii-box">
+        <div class="ascii-inner-box">
+          <!-- City Information -->
+          <div class="ascii-section ascii-city-title">
+            <span>${context.name}</span>
+          </div>
+          <div class="ascii-section ascii-city-description">
+            <span>CITY DESCRIPTION:</span>
+            <pre>${context.description}</pre>
+          </div>
+  `;
+  
+  // City Events
+  if (context.city_events && context.city_events.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-events">
+        <span>CITY EVENTS:</span>
+        <pre>${context.city_events.slice(0, 3).join('\n')}</pre>
+      </div>
+    `;
+  }
+  
+  // Weather Conditions
+  if (context.weather_conditions && context.weather_conditions.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-weather">
+        <span>WEATHER:</span>
+        <pre>${context.weather_conditions.slice(0, 2).join('\n')}</pre>
+      </div>
+    `;
+  }
+  
+  // Regional NPCs
+  if (context.regional_npcs && context.regional_npcs.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-npcs">
+        <span>REGIONAL NPCS:</span>
+        <pre>${context.regional_npcs.slice(0, 3).join('\n')}</pre>
+      </div>
+    `;
+  }
+  
+  // Major Factions
+  if (context.major_factions && context.major_factions.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-factions">
+        <span>MAJOR FACTIONS:</span>
+        <pre>
+    `;
+    
+    for (const faction of context.major_factions.slice(0, 3)) {
+      html += `• ${faction.name}\n`;
+      html += `  Leader: ${faction.leader}\n`;
+      html += `  HQ: ${faction.headquarters}\n`;
+      html += `  Influence: ${faction.influence}\n`;
+      html += `  Attitude: ${faction.attitude}\n`;
+      if (faction.activities && faction.activities.length > 0) {
+        html += `  Activities: ${faction.activities.slice(0, 2).join(', ')}\n`;
+      }
+      html += '\n';
+    }
+    
+    html += `
+        </pre>
+      </div>
+    `;
+  }
+  
+  // Local Factions
+  if (context.local_factions && context.local_factions.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-factions">
+        <span>LOCAL FACTIONS:</span>
+        <pre>
+    `;
+    
+    for (const faction of context.local_factions.slice(0, 3)) {
+      html += `• ${faction.name}\n`;
+      html += `  Leader: ${faction.leader}\n`;
+      html += `  HQ: ${faction.headquarters}\n`;
+      html += `  Influence: ${faction.influence}\n`;
+      html += `  Attitude: ${faction.attitude}\n`;
+      if (faction.activities && faction.activities.length > 0) {
+        html += `  Activities: ${faction.activities.slice(0, 2).join(', ')}\n`;
+      }
+      html += '\n';
+    }
+    
+    html += `
+        </pre>
+      </div>
+    `;
+  }
+  
+  // Criminal Factions
+  if (context.criminal_factions && context.criminal_factions.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-factions">
+        <span>CRIMINAL FACTIONS:</span>
+        <pre>
+    `;
+    
+    for (const faction of context.criminal_factions.slice(0, 2)) {
+      html += `• ${faction.name}\n`;
+      html += `  Leader: ${faction.leader}\n`;
+      html += `  HQ: ${faction.headquarters}\n`;
+      html += `  Influence: ${faction.influence}\n`;
+      html += `  Attitude: ${faction.attitude}\n`;
+      if (faction.activities && faction.activities.length > 0) {
+        html += `  Activities: ${faction.activities.slice(0, 2).join(', ')}\n`;
+      }
+      html += '\n';
+    }
+    
+    html += `
+        </pre>
+      </div>
+    `;
+  }
+  
+  // Faction Relationships
+  if (context.faction_relationships && context.faction_relationships.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-factions">
+        <span>FACTION RELATIONSHIPS:</span>
+        <pre>
+    `;
+    
+    for (const relationship of context.faction_relationships.slice(0, 3)) {
+      html += `• ${relationship.faction1} ↔ ${relationship.faction2}\n`;
+      html += `  ${relationship.relationship}: ${relationship.description}\n`;
+      html += '\n';
+    }
+    
+    html += `
+        </pre>
+      </div>
+    `;
+  }
+  
+  // Legacy Factions (fallback)
+  if (context.legacy_factions && context.legacy_factions.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-factions">
+        <span>OTHER FACTIONS:</span>
+        <pre>
+    `;
+    
+    for (const faction of context.legacy_factions.slice(0, 3)) {
+      if (typeof faction === 'string') {
+        html += `• ${faction}\n`;
+      } else if (faction.name && faction.attitude) {
+        html += `• ${faction.name} (${faction.attitude})\n`;
+      } else if (faction.name) {
+        html += `• ${faction.name}\n`;
+      }
+    }
+    
+    html += `
+        </pre>
+      </div>
+    `;
+  }
+  
+  // Major Landmarks
+  if (context.major_landmarks && context.major_landmarks.length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-landmarks">
+        <span>MAJOR LANDMARKS:</span>
+        <pre>${context.major_landmarks.slice(0, 3).join('\n')}</pre>
+      </div>
+    `;
+  }
+  
+  // District Information
+  if (context.districts && Object.keys(context.districts).length > 0) {
+    html += `
+      <div class="ascii-section ascii-city-districts">
+        <span>DISTRICTS:</span>
+        <pre>
+    `;
+    
+    for (const [districtName, districtData] of Object.entries(context.districts)) {
+      const district = districtData as any;
+      html += `${districtName.toUpperCase()}:\n`;
+      html += `  ${district.description}\n`;
+      if (district.landmarks && district.landmarks.length > 0) {
+        html += `  Landmarks: ${district.landmarks.slice(0, 2).join(', ')}\n`;
+      }
+      html += '\n';
+    }
+    
+    html += `
+        </pre>
+      </div>
+    `;
+  }
+  
+  html += `
+        </div>
+      </div>
+    </div>
+  `;
+  
+  detailsPanel.innerHTML = html;
+}
+
 // Helper functions for city grid generation
 function getCityHexSymbol(contentType: string): string {
   switch (contentType?.toLowerCase()) {
@@ -95,6 +311,12 @@ export { showCityDetailsInMap as showCityDetails, showSettlementDetailsInMap as 
 
 async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
   try {
+    // Load city context data for left panel
+    const contextData = await api.getCityContext('galgenbeck');
+    if (contextData && contextData.success) {
+      loadCityContext(contextData);
+    }
+    
       const cityData = await api.getCity(hexCode);
     if (!cityData || !cityData.success) {
       showErrorState('City not found');
@@ -183,7 +405,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
                  data-district="${district}"
                  style="background: ${districtColor} !important;"
                  title="${content.name || "Unknown"} (${content.type || "unknown"}) - ${district}"
-                 onclick="handleCityHexClick('${hexId}', '${district}', '${content.name || 'Unknown'}', '${content.description || ''}', '${hexCode}')">
+                 >
               <span class="city-hex-symbol">${symbol}</span>
             </div>
           `;
@@ -192,17 +414,297 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
       }
       cityGridHTML += '</div>';
       
-      // Generate district buttons
+          // Add click handler function to window BEFORE generating HTML
+    (window as any).handleCityHexClick = async function(hexId: string, district: string, name: string, description: string, cityHexCode: string) {
+      console.log('🔍 handleCityHexClick called with:', { hexId, district, name, description, cityHexCode });
+      try {
+        // Fetch detailed hex data from API
+        console.log('📡 Fetching hex data from API...');
+        const response = await fetch(`/api/city-overlay/galgenbeck/hex/${hexId}`);
+        const data = await response.json();
+        console.log('📦 API response:', data);
+        
+        if (data.success && data.hex) {
+          const hexData = data.hex;
+          const content = hexData.content || {};
+          console.log('🎯 Processing hex content:', content);
+          
+          // Get the details panel container
+          const detailsPanel = document.getElementById('details-panel');
+          if (!detailsPanel) return;
+          
+          // Build comprehensive HTML with all enriched fields
+          let html = `
+            <div class="city-hex-details-box">
+              <div class="ascii-box">
+                <div class="ascii-inner-box">
+                  <div class="mb-4" style="text-align:center;">
+                    <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${cityHexCode}')">RETURN TO HEX</button>
+                    <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">RETURN TO MAP</button>
+                  </div>
+                  
+                  <!-- Basic Information Section -->
+                  <div class="ascii-section ascii-hex-title">
+                    <span>${content.name || name}</span>
+                  </div>
+                  <div class="ascii-section ascii-hex-type">
+                    <span>TYPE: ${content.type || 'unknown'}</span>
+                  </div>
+                  <div class="ascii-section ascii-hex-district">
+                    <span>DISTRICT: ${district}</span>
+                  </div>
+                  <div class="ascii-section ascii-hex-position">
+                    <span>POSITION: ${content.position_type || 'unknown'}</span>
+                  </div>
+                  
+                  <!-- Description Section -->
+                  <div class="ascii-section ascii-hex-description">
+                    <span>DESCRIPTION:</span>
+                    <pre>${content.description || description || 'No description available.'}</pre>
+                  </div>
+                  
+                  <!-- Atmosphere & Encounter Section -->
+                  <div class="ascii-section ascii-hex-atmosphere">
+                    <span>ATMOSPHERE:</span>
+                    <pre>${content.atmosphere || 'No atmosphere available.'}</pre>
+                  </div>
+                  <div class="ascii-section ascii-hex-encounter">
+                    <span>ENCOUNTER:</span>
+                    <pre>${content.encounter || 'No encounter available.'}</pre>
+                  </div>
+          `;
+          
+          // Enriched Content Section
+          if (content.weather || content.city_event || content.notable_features) {
+            html += `
+              <div class="ascii-section ascii-hex-enriched">
+                <span>ENRICHED CONTENT:</span>
+                <pre>
+            `;
+            
+            if (content.weather) {
+              html += `WEATHER: ${content.weather}\n`;
+            }
+            if (content.city_event) {
+              html += `CITY EVENT: ${content.city_event}\n`;
+            }
+            if (content.notable_features && content.notable_features.length > 0) {
+              html += `NOTABLE FEATURES:\n${content.notable_features.join('\n')}\n`;
+            }
+            
+            html += `
+                </pre>
+              </div>
+            `;
+          }
+          
+          // NPC Information Section (for relevant types)
+          if (content.npc_trait || content.npc_concern || content.npc_want || content.npc_secret || content.npcs) {
+            html += `
+              <div class="ascii-section ascii-hex-npcs">
+                <span>NPC INFORMATION:</span>
+                <pre>
+            `;
+            
+            if (content.npc_trait) {
+              html += `TRAIT: ${content.npc_trait}\n`;
+            }
+            if (content.npc_concern) {
+              html += `CONCERN: ${content.npc_concern}\n`;
+            }
+            if (content.npc_want) {
+              html += `WANT: ${content.npc_want}\n`;
+            }
+            if (content.npc_secret) {
+              html += `SECRET: ${content.npc_secret}\n`;
+            }
+            if (content.npcs && content.npcs.length > 0) {
+              html += `NPCS: ${content.npcs.join(', ')}\n`;
+            }
+            
+            html += `
+                </pre>
+              </div>
+            `;
+          }
+          
+          // Tavern Details Section (for taverns only)
+          if (content.type === 'tavern' && (content.tavern_menu || content.tavern_innkeeper || content.tavern_patron)) {
+            html += `
+              <div class="ascii-section ascii-hex-tavern">
+                <span>TAVERN DETAILS:</span>
+                <pre>
+            `;
+            
+            if (content.tavern_menu) {
+              html += `MENU: ${content.tavern_menu}\n`;
+            }
+            if (content.tavern_innkeeper) {
+              html += `INNKEEPER: ${content.tavern_innkeeper}\n`;
+            }
+            if (content.tavern_patron) {
+              html += `NOTABLE PATRON: ${content.tavern_patron}\n`;
+            }
+            
+            html += `
+                </pre>
+              </div>
+            `;
+          }
+          
+          // Cross-References Section
+          if (content.related_hexes && content.related_hexes.length > 0) {
+            html += `
+              <div class="ascii-section ascii-hex-related">
+                <span>RELATED HEXES:</span>
+                <pre>
+            `;
+            
+            content.related_hexes.forEach((related: any) => {
+              html += `<span class="related-hex-link" onclick="navigateToRelatedHex('${related.hex_id}')">${related.hex_id}: ${related.name} (${related.type}) - ${related.relationship}</span>\n`;
+            });
+            
+            html += `
+                </pre>
+              </div>
+            `;
+          }
+          
+          // Random Tables Section
+          if (content.random_table && content.random_table.length > 0) {
+            html += `
+              <div class="ascii-section ascii-hex-random">
+                <span>RANDOM ENCOUNTERS:</span>
+                <pre>
+            `;
+            
+            content.random_table.forEach((entry: string) => {
+              html += `${entry}\n`;
+            });
+            
+            html += `
+                </pre>
+              </div>
+            `;
+          }
+          
+          // Close the HTML structure
+          html += `
+                </div>
+              </div>
+            </div>
+          `;
+          
+          // Update the details panel
+          detailsPanel.innerHTML = html;
+          
+        } else {
+          // Fallback to basic display
+          const descriptionSection = document.querySelector('.ascii-city-description pre');
+          const featuresSection = document.querySelector('.ascii-city-features pre');
+          
+          if (district && district !== 'unknown' && district !== 'empty') {
+            if (descriptionSection) {
+              descriptionSection.textContent = `${district.toUpperCase()}\n\n${description || 'No district description available.'}`;
+            }
+            if (featuresSection) {
+              featuresSection.textContent = `District: ${district}\nLocation: ${name}`;
+            }
+          } else {
+            if (descriptionSection) {
+              descriptionSection.textContent = description;
+            }
+            if (featuresSection) {
+              featuresSection.textContent = features;
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching hex details:', error);
+        // Fallback to basic display
+        const descriptionSection = document.querySelector('.ascii-city-description pre');
+        const featuresSection = document.querySelector('.ascii-city-features pre');
+        
+        if (district && district !== 'unknown' && district !== 'empty') {
+          if (descriptionSection) {
+            descriptionSection.textContent = `${district.toUpperCase()}\n\n${description || 'No district description available.'}`;
+          }
+          if (featuresSection) {
+            featuresSection.textContent = `District: ${district}\nLocation: ${name}`;
+          }
+        } else {
+          if (descriptionSection) {
+            descriptionSection.textContent = description;
+          }
+          if (featuresSection) {
+            featuresSection.textContent = features;
+          }
+        }
+      }
+    };
+    
+    // Generate enhanced district legend and controls
       districtButtonsHTML = `
-        <div class="district-buttons-container">
-          <div class="district-buttons-row">
+        <div class="city-controls-panel">
+          <!-- District Legend -->
+          <div class="district-legend">
+            <h4>DISTRICTS</h4>
+            <div class="district-buttons-grid">
             ${districtArray.map(district => `
               <button class="district-button" 
                       style="background: ${generateDistrictColor(district, districtArray)} !important;"
-                      title="${district}">
+                        title="${district}"
+                        onclick="filterByDistrict('${district}')">
                 ${district}
               </button>
             `).join('')}
+            </div>
+          </div>
+          
+          <!-- Hex Type Legend -->
+          <div class="hex-type-legend">
+            <h4>HEX TYPES</h4>
+            <div class="hex-type-grid">
+              <div class="hex-type-item">
+                <span class="hex-symbol">☺</span>
+                <span>Tavern</span>
+              </div>
+              <div class="hex-type-item">
+                <span class="hex-symbol">◊</span>
+                <span>Market</span>
+              </div>
+              <div class="hex-type-item">
+                <span class="hex-symbol">†</span>
+                <span>Temple</span>
+              </div>
+              <div class="hex-type-item">
+                <span class="hex-symbol">⚔</span>
+                <span>Guild</span>
+              </div>
+              <div class="hex-type-item">
+                <span class="hex-symbol">▲</span>
+                <span>Landmark</span>
+              </div>
+              <div class="hex-type-item">
+                <span class="hex-symbol">⌂</span>
+                <span>Building</span>
+              </div>
+              <div class="hex-type-item">
+                <span class="hex-symbol">═</span>
+                <span>Street</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Quick Navigation -->
+          <div class="quick-navigation">
+            <h4>QUICK NAV</h4>
+            <div class="nav-buttons">
+              <button class="btn-mork-borg btn-small" onclick="showAllDistricts()">SHOW ALL</button>
+              <button class="btn-mork-borg btn-small" onclick="showTaverns()">TAVERNS</button>
+              <button class="btn-mork-borg btn-small" onclick="showMarkets()">MARKETS</button>
+              <button class="btn-mork-borg btn-small" onclick="showTemples()">TEMPLES</button>
+            </div>
           </div>
         </div>
       `;
@@ -280,27 +782,81 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
       mapZoomContainer.innerHTML = html;
     }
     
-    // Add click handler function to window
-    (window as any).handleCityHexClick = function(hexId: string, district: string, name: string, description: string, cityHexCode: string) {
-      const descriptionSection = document.querySelector('.ascii-city-description pre');
-      const featuresSection = document.querySelector('.ascii-city-features pre');
-      
-      if (district && district !== 'unknown' && district !== 'empty') {
-        // Show district details
-        if (descriptionSection) {
-          descriptionSection.textContent = `${district.toUpperCase()}\n\n${description || 'No district description available.'}`;
+
+    
+    // Add filtering and navigation functions to window
+    (window as any).filterByDistrict = function(districtName: string) {
+      const hexCells = document.querySelectorAll('.city-hex-cell');
+      hexCells.forEach((cell: any) => {
+        const cellDistrict = cell.getAttribute('data-district');
+        if (cellDistrict === districtName) {
+          cell.style.opacity = '1';
+          cell.style.filter = 'none';
+        } else {
+          cell.style.opacity = '0.3';
+          cell.style.filter = 'grayscale(80%)';
         }
-        if (featuresSection) {
-          featuresSection.textContent = `District: ${district}\nLocation: ${name}`;
+      });
+    };
+    
+    (window as any).showAllDistricts = function() {
+      const hexCells = document.querySelectorAll('.city-hex-cell');
+      hexCells.forEach((cell: any) => {
+        cell.style.opacity = '1';
+        cell.style.filter = 'none';
+      });
+    };
+    
+    (window as any).showTaverns = function() {
+      const hexCells = document.querySelectorAll('.city-hex-cell');
+      hexCells.forEach((cell: any) => {
+        const symbol = cell.querySelector('.city-hex-symbol');
+        if (symbol && symbol.textContent === '☺') {
+          cell.style.opacity = '1';
+          cell.style.filter = 'none';
+        } else {
+          cell.style.opacity = '0.3';
+          cell.style.filter = 'grayscale(80%)';
         }
+      });
+    };
+    
+    (window as any).showMarkets = function() {
+      const hexCells = document.querySelectorAll('.city-hex-cell');
+      hexCells.forEach((cell: any) => {
+        const symbol = cell.querySelector('.city-hex-symbol');
+        if (symbol && symbol.textContent === '◊') {
+          cell.style.opacity = '1';
+          cell.style.filter = 'none';
       } else {
-        // Show city details
-        if (descriptionSection) {
-          descriptionSection.textContent = description;
+          cell.style.opacity = '0.3';
+          cell.style.filter = 'grayscale(80%)';
         }
-        if (featuresSection) {
-          featuresSection.textContent = features;
+      });
+    };
+    
+    (window as any).showTemples = function() {
+      const hexCells = document.querySelectorAll('.city-hex-cell');
+      hexCells.forEach((cell: any) => {
+        const symbol = cell.querySelector('.city-hex-symbol');
+        if (symbol && symbol.textContent === '†') {
+          cell.style.opacity = '1';
+          cell.style.filter = 'none';
+        } else {
+          cell.style.opacity = '0.3';
+          cell.style.filter = 'grayscale(80%)';
         }
+      });
+    };
+    
+    // Navigation function for related hexes
+    (window as any).navigateToRelatedHex = function(hexId: string) {
+      // Find the hex cell and trigger a click
+      const hexCell = document.querySelector(`[data-hex-id="${hexId}"]`) as HTMLElement;
+      if (hexCell) {
+        hexCell.click();
+        // Scroll the hex into view
+        hexCell.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     };
   } catch (error) {
@@ -342,6 +898,11 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
     const features = (settlement.notable_features && settlement.notable_features.length > 0) ? settlement.notable_features.join("\n") : '';
     const tavern = settlement.local_tavern || '';
     const power = settlement.local_power || '';
+    // Mörk Borg settlement fields
+    const weather = settlement.weather || '';
+    const cityEvent = settlement.city_event || '';
+    const tavernDetails = settlement.tavern_details || null;
+    const settlementArt = settlement.settlement_art || '';
     // Build HTML
     let html = `
       <div class="city-hex-details-box">
@@ -378,6 +939,33 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
               <span>LOCAL POWER:</span>
               <pre>${power}</pre>
             </div>
+            ${weather ? `
+            <div class="ascii-section ascii-hex-weather">
+              <span>WEATHER:</span>
+              <pre>${weather}</pre>
+          </div>
+            ` : ''}
+            ${cityEvent ? `
+            <div class="ascii-section ascii-hex-city-event">
+              <span>CITY EVENT:</span>
+              <pre>${cityEvent}</pre>
+            </div>
+            ` : ''}
+            ${tavernDetails ? `
+            <div class="ascii-section ascii-hex-tavern-details">
+              <span>TAVERN DETAILS:</span>
+              <pre>${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
+${tavernDetails.budget_menu ? `Budget Menu: ${tavernDetails.budget_menu}` : ''}
+${tavernDetails.innkeeper ? `Innkeeper: ${tavernDetails.innkeeper}` : ''}
+${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</pre>
+            </div>
+            ` : ''}
+            ${settlementArt ? `
+            <div class="ascii-section ascii-settlement-layout">
+              <span>SETTLEMENT LAYOUT:</span>
+              <pre>${settlementArt}</pre>
+            </div>
+            ` : ''}
           </div>
         </div>
       </div>
@@ -434,6 +1022,17 @@ function displayHexContent(hexData: any) {
   const npcDenizenType = hexData.denizen_type || '';
   const npcMotivation = hexData.motivation || '';
   const npcFeature = hexData.feature || '';
+  
+  // Mörk Borg NPC fields
+  const npcTrait = hexData.trait || '';
+  const npcConcern = hexData.concern || '';
+  const npcWant = hexData.want || '';
+  const npcApocalypseAttitude = hexData.apocalypse_attitude || '';
+  const npcSecret = hexData.secret || '';
+  
+  // Additional NPC fields
+  const npcCarries = hexData.carries || '';
+  const npcLocation = hexData.location || '';
 
   // Beast-specific fields
   const beastType = hexData.beast_type || '';
@@ -441,11 +1040,19 @@ function displayHexContent(hexData: any) {
   const beastBehavior = hexData.beast_behavior || '';
   const threatLevel = hexData.threat_level || '';
   const territory = hexData.territory || '';
+  const treasureFound = hexData.treasure_found || '';
+  const beastArt = hexData.beast_art || '';
 
   // Dungeon-specific fields
   const dungeonType = hexData.dungeon_type || '';
   const danger = hexData.danger || '';
   const ancientKnowledge = hexData.ancient_knowledge || '';
+  const trapSection = hexData.trap_section || null;
+  
+  // Settlement-specific fields
+  const weather = hexData.weather || '';
+  const cityEvent = hexData.city_event || '';
+  const tavernDetails = hexData.tavern_details || null;
 
   // Sea encounter-specific fields
   const encounterType = hexData.encounter_type || '';
@@ -490,16 +1097,54 @@ function displayHexContent(hexData: any) {
       `;
     }
 
-    if (npcDemeanor) {
+    // Mörk Borg NPC fields
+    if (npcTrait) {
       html += `
-        <div class="ascii-section ascii-hex-npc-demeanor">
-          <span>DEMEANOR:</span>
-          <pre>${npcDemeanor}</pre>
+        <div class="ascii-section ascii-hex-npc-trait">
+          <span>TRAIT:</span>
+          <pre>${npcTrait}</pre>
         </div>
       `;
     }
 
-    if (npcMotivation) {
+    if (npcConcern) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-concern">
+          <span>CONCERN:</span>
+          <pre>${npcConcern}</pre>
+        </div>
+      `;
+    }
+
+    if (npcWant) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-want">
+          <span>WANT:</span>
+          <pre>${npcWant}</pre>
+        </div>
+      `;
+    }
+
+    if (npcApocalypseAttitude) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-apocalypse">
+          <span>APOCALYPSE ATTITUDE:</span>
+          <pre>${npcApocalypseAttitude}</pre>
+        </div>
+      `;
+    }
+
+    if (npcSecret) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-secret">
+          <span>SECRET:</span>
+          <pre>${npcSecret}</pre>
+        </div>
+      `;
+    }
+
+    // Fallback to old fields if new ones not available
+    if (!npcTrait && npcMotivation) {
       html += `
         <div class="ascii-section ascii-hex-npc-motivation">
           <span>MOTIVATION:</span>
@@ -508,11 +1153,39 @@ function displayHexContent(hexData: any) {
       `;
     }
 
-    if (npcFeature) {
+    if (!npcConcern && npcFeature) {
       html += `
         <div class="ascii-section ascii-hex-npc-feature">
           <span>FEATURE:</span>
           <pre>${npcFeature}</pre>
+        </div>
+      `;
+    }
+
+    if (!npcWant && npcDemeanor) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-demeanor">
+          <span>DEMEANOR:</span>
+          <pre>${npcDemeanor}</pre>
+        </div>
+      `;
+    }
+
+    // Additional NPC fields
+    if (npcCarries) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-carries">
+          <span>CARRIES:</span>
+          <pre>${npcCarries}</pre>
+        </div>
+      `;
+    }
+
+    if (npcLocation) {
+      html += `
+        <div class="ascii-section ascii-hex-npc-location">
+          <span>LOCATION:</span>
+          <pre>${npcLocation}</pre>
         </div>
       `;
     }
@@ -564,6 +1237,24 @@ function displayHexContent(hexData: any) {
         </div>
       `;
     }
+
+    if (treasureFound) {
+      html += `
+        <div class="ascii-section ascii-hex-treasure-found">
+          <span>TREASURE FOUND:</span>
+          <pre>${treasureFound}</pre>
+        </div>
+      `;
+    }
+
+    if (beastArt) {
+      html += `
+        <div class="ascii-section ascii-hex-beast-art">
+          <span>BEAST ART:</span>
+          <pre>${beastArt}</pre>
+        </div>
+      `;
+    }
   }
 
   // Display Dungeon-specific information
@@ -591,6 +1282,52 @@ function displayHexContent(hexData: any) {
         <div class="ascii-section ascii-hex-ancient-knowledge">
           <span>ANCIENT KNOWLEDGE:</span>
           <pre>${formatLoot(ancientKnowledge)}</pre>
+        </div>
+      `;
+    }
+
+    // Mörk Borg trap information
+    if (trapSection) {
+      html += `
+        <div class="ascii-section ascii-hex-trap">
+          <span>TRAP:</span>
+          <pre>Description: ${trapSection.description || 'Unknown'}
+Effect: ${trapSection.effect || 'Unknown'}
+Builder: ${trapSection.builder || 'Unknown'}</pre>
+        </div>
+      `;
+    }
+  }
+
+  // Display Settlement-specific information
+  if (hexData.is_settlement || hexType === 'settlement') {
+    if (weather) {
+      html += `
+        <div class="ascii-section ascii-hex-weather">
+          <span>WEATHER:</span>
+          <pre>${weather}</pre>
+        </div>
+      `;
+    }
+
+    if (cityEvent) {
+      html += `
+        <div class="ascii-section ascii-hex-city-event">
+          <span>CITY EVENT:</span>
+          <pre>${cityEvent}</pre>
+        </div>
+      `;
+    }
+
+    // Tavern details
+    if (tavernDetails) {
+      html += `
+        <div class="ascii-section ascii-hex-tavern-details">
+          <span>TAVERN DETAILS:</span>
+          <pre>${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
+${tavernDetails.budget_menu ? `Budget Menu: ${tavernDetails.budget_menu}` : ''}
+${tavernDetails.innkeeper ? `Innkeeper: ${tavernDetails.innkeeper}` : ''}
+${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</pre>
         </div>
       `;
     }
@@ -624,6 +1361,8 @@ function displayHexContent(hexData: any) {
         </div>
       `;
     }
+
+
   }
 
   if (encounter) {
@@ -712,8 +1451,10 @@ function displayHexContent(hexData: any) {
   const hasContent = encounter || denizen || notableFeature || atmosphere || description || 
                     formattedLoot || formattedTreasure || formattedSunkenTreasure || magicalEffect ||
                     npcName || npcDemeanor || npcDenizenType || npcMotivation || npcFeature ||
+                    npcTrait || npcConcern || npcWant || npcApocalypseAttitude || npcSecret ||
                     beastType || beastFeature || beastBehavior || threatLevel || territory ||
-                    dungeonType || danger || ancientKnowledge ||
+                    dungeonType || danger || ancientKnowledge || trapSection ||
+                    weather || cityEvent || tavernDetails ||
                     encounterType || origin || behavior;
 
   if (!hasContent) {

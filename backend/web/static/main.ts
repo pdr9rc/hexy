@@ -167,8 +167,14 @@ class DyingLandsApp {
 
   public async showCityHexDetails(overlayName: string, hexId: string): Promise<void> {
     try {
-      const response = await getCityOverlayHex(overlayName, hexId)
-      if (response.success) {
+      console.log('🔍 showCityHexDetails called with:', { overlayName, hexId });
+      
+      // Call the API directly to get enriched hex data
+      const response = await fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`);
+      const data = await response.json();
+      console.log('📦 API response:', data);
+      
+      if (data.success && data.hex) {
         // Update selected hex
         this.selectedCityHex = hexId;
         
@@ -177,7 +183,8 @@ class DyingLandsApp {
           this.renderCityOverlay(this.currentCityOverlay.hexCode);
         }
         
-        this.displayCityHexDetails(response.hex, overlayName)
+        // Build the view directly from the API data
+        this.buildHexDetailsView(data.hex, overlayName);
       } else {
         showError("Failed to load city hex details")
       }
@@ -187,22 +194,26 @@ class DyingLandsApp {
     }
   }
 
-  private displayCityHexDetails(hexData: any, overlayName?: string): void {
+  private buildHexDetailsView(hexData: any, overlayName?: string): void {
+    console.log('🎯 buildHexDetailsView called with:', { hexData, overlayName });
     const detailsPanel = document.getElementById("details-panel")
     if (!detailsPanel) return
 
-    const content = hexData.content
-    const hexId = hexData.hex_id || "?"
+    const content = hexData.content || {}
+    console.log('📦 Content data:', content);
+    const hexId = hexData.id || hexData.hex_id || "?"
     const terrain = content.terrain || "?"
     const type = content.type || "?"
     const name = content.name || "?"
     const description = content.description || ""
     const encounter = content.encounter || ""
+    const atmosphere = content.atmosphere || ""
     const features = (content.notable_features && content.notable_features.length > 0) ? content.notable_features.join("\n") : ""
     const npcs = (content.npcs && content.npcs.length > 0) ? content.npcs.join("\n") : ""
     const randomEvents = (content.random_table && content.random_table.length > 0) ? content.random_table.join("\n") : ""
     const position = hexData.position || "?"
     const positionType = content.position_type || "?"
+    const district = hexData.district || "?"
 
     // Update district details in city overlay if we're in city view
     if (this.currentView === "city") {
@@ -213,46 +224,176 @@ class DyingLandsApp {
       <div class="city-hex-details-box">
         <div class="ascii-box">
           <div class="ascii-inner-box">
-            <div class="ascii-section ascii-hex-id">
-              <span>HEX ${hexId}</span>
+            <div class="mb-4" style="text-align:center;">
+              <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${overlayName || ''}')">RETURN TO HEX</button>
+              <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">RETURN TO MAP</button>
             </div>
-            <div class="ascii-section ascii-terrain">
-              <span>TERRAIN: ${terrain}</span>
+            
+            <!-- Basic Information Section -->
+            <div class="ascii-section ascii-hex-title">
+              <span>${content.name || name}</span>
             </div>
-            <div class="ascii-section ascii-content">
-              <span>TYPE: ${type}</span><br/>
-              <span>NAME: ${name}</span>
+            <div class="ascii-section ascii-hex-type">
+              <span>TYPE: ${content.type || type}</span>
             </div>
-            <div class="ascii-section ascii-description">
+            <div class="ascii-section ascii-hex-district">
+              <span>DISTRICT: ${hexData.district || district}</span>
+            </div>
+            <div class="ascii-section ascii-hex-position">
+              <span>POSITION: ${content.position_type || positionType}</span>
+            </div>
+            
+            <!-- Description Section -->
+            <div class="ascii-section ascii-hex-description">
               <span>DESCRIPTION:</span>
-              <pre>${description}</pre>
+              <pre>${content.description || description}</pre>
             </div>
-            <div class="ascii-section ascii-encounter">
+            
+            <!-- Atmosphere & Encounter Section -->
+            <div class="ascii-section ascii-hex-atmosphere">
+              <span>ATMOSPHERE:</span>
+              <pre>${content.atmosphere || atmosphere || 'No atmosphere available.'}</pre>
+            </div>
+            <div class="ascii-section ascii-hex-encounter">
               <span>ENCOUNTER:</span>
-              <pre>${encounter}</pre>
+              <pre>${content.encounter || encounter}</pre>
+            </div>
+    `
+
+    // Notable Features Section (hex-specific)
+    if (content.notable_features && content.notable_features.length > 0) {
+      html += `
+        <div class="ascii-section ascii-hex-features">
+          <span>NOTABLE FEATURES:</span>
+          <pre>${content.notable_features.join('\n')}</pre>
         </div>
-            <div class="ascii-section ascii-features">
-              <span>NOTABLE FEATURES:</span>
-              <pre>${features}</pre>
+      `;
+    }
+
+                  // NPC Information Section
+              if (content.npc_trait || content.npc_concern || content.npc_want || content.npc_secret || content.npc_name || content.npc_trade || content.npc_affiliation || content.npc_attitude) {
+                html += `
+                  <div class="ascii-section ascii-hex-npcs">
+                    <span>NPC INFORMATION:</span>
+                    <pre>
+                `;
+                
+                if (content.npc_name) {
+                  html += `NAME: ${content.npc_name}\n`;
+                }
+                if (content.npc_trade) {
+                  html += `TRADE: ${content.npc_trade}\n`;
+                }
+                if (content.npc_trait) {
+                  html += `TRAIT: ${content.npc_trait}\n`;
+                }
+                if (content.npc_concern) {
+                  html += `CONCERN: ${content.npc_concern}\n`;
+                }
+                if (content.npc_want) {
+                  html += `WANT: ${content.npc_want}\n`;
+                }
+                if (content.npc_secret) {
+                  html += `SECRET: ${content.npc_secret}\n`;
+                }
+                if (content.npc_affiliation) {
+                  html += `AFFILIATION: ${content.npc_affiliation}\n`;
+                }
+                if (content.npc_attitude) {
+                  html += `ATTITUDE: ${content.npc_attitude}\n`;
+                }
+                
+                html += `
+                    </pre>
+                  </div>
+                `;
+              }
+
+    // Tavern Details Section (for taverns only)
+    if (content.type === 'tavern' && (content.tavern_menu || content.tavern_innkeeper || content.tavern_patron)) {
+      html += `
+        <div class="ascii-section ascii-hex-tavern">
+          <span>TAVERN DETAILS:</span>
+          <pre>
+      `;
+      
+      if (content.tavern_menu) {
+        html += `MENU: ${content.tavern_menu}\n`;
+      }
+      if (content.tavern_innkeeper) {
+        html += `INNKEEPER: ${content.tavern_innkeeper}\n`;
+      }
+      if (content.tavern_patron) {
+        html += `NOTABLE PATRON: ${content.tavern_patron}\n`;
+      }
+      
+      html += `
+          </pre>
         </div>
-            <div class="ascii-section ascii-npcs">
-              <span>NPCS:</span>
-              <pre>${npcs}</pre>
+      `;
+    }
+
+    // Market Items Section (for markets)
+    if (content.type === 'market' && (content.items_sold || content.beast_prices || content.services)) {
+      html += `
+        <div class="ascii-section ascii-hex-market">
+          <span>MARKET DETAILS:</span>
+          <pre>
+      `;
+      
+      if (content.items_sold) {
+        html += `ITEMS SOLD: ${content.items_sold}\n`;
+      }
+      if (content.beast_prices) {
+        html += `BEAST PRICES: ${content.beast_prices}\n`;
+      }
+      if (content.services) {
+        html += `SERVICES: ${content.services}\n`;
+      }
+      
+      html += `
+          </pre>
         </div>
-            <div class="ascii-section ascii-random-table">
-              <span>RANDOM EVENTS:</span>
-              <pre>${randomEvents}</pre>
+      `;
+    }
+
+    // Services Section (for service locations)
+    if (content.type === 'service' && content.services) {
+      html += `
+        <div class="ascii-section ascii-hex-services">
+          <span>SERVICES:</span>
+          <pre>${content.services}</pre>
         </div>
-            <div class="ascii-section ascii-position">
-              <span>POSITION: ${position} (${positionType})</span>
+      `;
+    }
+
+    // Patrons Section (for businesses with patrons)
+    if (content.patrons) {
+      html += `
+        <div class="ascii-section ascii-hex-patrons">
+          <span>PATRONS:</span>
+          <pre>${content.patrons}</pre>
         </div>
-            <div class="ascii-section ascii-actions">
-              <button class="btn-mork-borg" onclick="window.app.regenerateHex('${hexId}', '${overlayName || ''}')">REGENERATE HEX</button>
+      `;
+    }
+
+    // Random Tables Section
+    if (content.random_table && content.random_table.length > 0) {
+      html += `
+        <div class="ascii-section ascii-hex-random">
+          <span>RANDOM ENCOUNTERS:</span>
+          <pre>${content.random_table.join('\n')}</pre>
         </div>
-        </div>
+      `;
+    }
+
+    // Close the HTML structure
+    html += `
+          </div>
         </div>
       </div>
-    `
+    `;
+    
     detailsPanel.innerHTML = html
   }
 

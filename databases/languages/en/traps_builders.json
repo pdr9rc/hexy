@@ -1,0 +1,35 @@
+{
+  "category": "traps_builders",
+  "tables": {
+    "trap_builders": [
+      "A slow, calculating grotesque.",
+      "An death-sentenced Uguth† mine-thrall.",
+      "A simple goblin.",
+      "A forgotten berserker king.",
+      "A deranged shadow being.",
+      "A bitter necromancer.",
+      "A dying troll mourning its mother.",
+      "A spiteful child from a torched village.",
+      "A slumbering, nebulous daemon.",
+      "A catacomb creatorʼs executioner.",
+      "An inveterate nail collector.",
+      "A cunning, crafty skeleton.",
+      "A bewildered wickhead.",
+      "A sickly, blind demigod.",
+      "A group of terrified goons.",
+      "A mindless death-cultist.",
+      "A witch lost in Labyrinth Lecht.‡",
+      "A bored, teeth-counting hermit.",
+      "A sadistic graveyard architect.",
+      "An anxious undead doll."
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg trap builders and creators",
+    "usage": "Roll d20 to determine who or what built the trap",
+    "notes": "† A huge, no ... ho-ha-MEGA -catacomb in Bergen Chrypt. ‡ A mental labyrinth occasionally brought to semi-physical form by a creature's prolonged pondering or mourning."
+  }
+} 

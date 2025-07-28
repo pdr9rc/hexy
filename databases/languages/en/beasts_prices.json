@@ -1,0 +1,34 @@
+{
+  "category": "beasts_prices",
+  "tables": {
+    "beasts": [
+      {
+        "name": "Dog (trained)",
+        "price": 25,
+        "currency": "silver"
+      },
+      {
+        "name": "Horse",
+        "price": 80,
+        "currency": "silver"
+      },
+      {
+        "name": "Mule",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Rat (tame)",
+        "price": 8,
+        "currency": "silver"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg beast prices",
+    "usage": "Reference for beast costs"
+  }
+} 

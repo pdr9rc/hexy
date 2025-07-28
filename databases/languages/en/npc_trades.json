@@ -1,0 +1,48 @@
+{
+  "category": "npc_trades",
+  "tables": {
+    "trades": [
+      "Baker / Butcher",
+      "Gravedigger",
+      "Peddler / Drifter",
+      "Soothsayer",
+      "Snake breeder",
+      "Blacksmith",
+      "Innkeeper",
+      "Murdered friend",
+      "Corrupt priest",
+      "Peasant",
+      "Brigand / Thief",
+      "Herbalist",
+      "Lawless scum",
+      "Former hermit",
+      "Priest / Priestess",
+      "Drudge / Dreg",
+      "Struggling artisan",
+      "Monkey tamer",
+      "Bell ringer",
+      "Shitshoveller",
+      "Ditch digger",
+      "Rat-catcher",
+      "Mercenary",
+      "Witch hunter",
+      "Bookbinder / Bookburner",
+      "Tax collector",
+      "Full-time gambler",
+      "Seafarer",
+      "Corpse collector",
+      "Barber-surgeon",
+      "Miner / Bomb chemist",
+      "Vagabond / Hunter",
+      "Cruel captain",
+      "Corrupt clerk"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-27T10:00:00.000000",
+    "description": "Mörk Borg NPC trades and professions",
+    "usage": "Roll d12 to determine NPC's trade or profession"
+  }
+} 

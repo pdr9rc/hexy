@@ -61,14 +61,7 @@ class HexService:
                     "hex_code": hex_code,
                     "terrain": terrain,
                     "is_settlement": True,
-                    "name": settlement_data['name'],
-                    "description": settlement_data['description'],
-                    "population": settlement_data['population'],
-                    "atmosphere": settlement_data['atmosphere'],
-                    "notable_feature": settlement_data['notable_feature'],
-                    "local_tavern": settlement_data['local_tavern'],
-                    "local_power": settlement_data['local_power'],
-                    "settlement_art": settlement_data['settlement_art']
+                    **settlement_data
                 }
             # Check if it's a beast
             elif '※ **' in content:
@@ -81,7 +74,7 @@ class HexService:
                 }
             # Check if it's a dungeon
             elif '▲ **' in content:
-                dungeon_data = self._extract_hex_data(content, hex_code)
+                dungeon_data = self._extract_dungeon_data(content, hex_code)
                 dungeon_data["hex_code"] = hex_code
                 dungeon_data["terrain"] = terrain
                 dungeon_data["is_dungeon"] = True
@@ -218,55 +211,70 @@ class HexService:
             'notable_feature': '',
             'local_tavern': '',
             'local_power': '',
-            'settlement_art': ''
+            'settlement_art': '',
+            # Mörk Borg settlement fields
+            'weather': '',
+            'city_event': '',
+            'tavern_details': None
         }
-        
         current_section = None
         section_content = []
-        
+        in_ascii = False
+        ascii_lines = []
         for i, line in enumerate(lines):
             line = line.strip()
             if not line:
                 continue
-            
-            # Check for section headers
+            # ASCII art block detection
+            if line == '```':
+                in_ascii = not in_ascii
+                if not in_ascii:
+                    # End of ASCII art block
+                    if ascii_lines:
+                        settlement_data['settlement_art'] = '\n'.join(ascii_lines).strip()
+                        ascii_lines = []
+                continue
+            if in_ascii:
+                ascii_lines.append(line)
+                continue
+            # Section headers
             if line == '## Encounter':
-                # Save previous section content
                 if current_section and section_content:
                     settlement_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'encounter'
                 section_content = []
             elif line == '## Denizen':
-                # Save previous section content
                 if current_section and section_content:
                     settlement_data[current_section] = ' '.join(section_content).strip()
-                
-                current_section = 'denizen'
+                current_section = 'description'  # Map denizen section to description field
                 section_content = []
             elif line == '## Notable Feature':
-                # Save previous section content
                 if current_section and section_content:
                     settlement_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'notable_feature'
                 section_content = []
             elif line == '## Atmosphere':
-                # Save previous section content
                 if current_section and section_content:
                     settlement_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'atmosphere'
                 section_content = []
             elif line == '## Settlement Layout':
-                # Save previous section content
                 if current_section and section_content:
                     settlement_data[current_section] = ' '.join(section_content).strip()
-                
-                current_section = 'settlement_layout'
+                current_section = 'settlement_art'  # Map settlement layout section to settlement_art field
                 section_content = []
+            elif line == '## Tavern Details':
+                if current_section and section_content:
+                    settlement_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'tavern_details'
+                section_content = []
+            elif line == '## Loot Found':
+                if current_section and section_content:
+                    settlement_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'loot_found'
+                section_content = []
+            # Named fields
             elif line.startswith('⌂ **'):
-                # Extract settlement name from encounter line
                 encounter_line = line
                 if ' - ' in encounter_line:
                     name_part = encounter_line.split(' - ')[0]
@@ -279,13 +287,67 @@ class HexService:
                 settlement_data['local_tavern'] = line.replace('**Local Tavern:**', '').strip()
             elif line.startswith('**Local Power:**'):
                 settlement_data['local_power'] = line.replace('**Local Power:**', '').strip()
-            elif current_section and not line.startswith('**') and not line.startswith('##'):
-                # Add content to current section
+            # Mörk Borg fields (scan every line for these)
+            if '**Weather:**' in line:
+                settlement_data['weather'] = line.split('**Weather:**')[1].strip()
+            elif '**City Event:**' in line:
+                settlement_data['city_event'] = line.split('**City Event:**')[1].strip()
+            # Loot Found fields (scan every line for these, but only in loot_found section)
+            elif '**Type:**' in line and current_section == 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            elif '**Item:**' in line and current_section == 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            elif '**Description:**' in line and current_section == 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            elif '**Magical Effect:**' in line and current_section == 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            # Filter out loot-related content from other sections
+            elif '**Type:**' in line and current_section != 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            elif '**Item:**' in line and current_section != 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            elif '**Description:**' in line and current_section != 'loot_found' and '**Full Description:**' not in line:
+                # This is loot information, don't add to section content
+                pass
+            elif '**Magical Effect:**' in line and current_section != 'loot_found':
+                # This is loot information, don't add to section content
+                pass
+            elif '**Select Menu:**' in line:
+                if settlement_data['tavern_details'] is None:
+                    settlement_data['tavern_details'] = {}
+                settlement_data['tavern_details']['select_menu'] = line.split('**Select Menu:**')[1].strip()
+            elif '**Budget Menu:**' in line:
+                if settlement_data['tavern_details'] is None:
+                    settlement_data['tavern_details'] = {}
+                settlement_data['tavern_details']['budget_menu'] = line.split('**Budget Menu:**')[1].strip()
+            elif '**Innkeeper:**' in line:
+                if settlement_data['tavern_details'] is None:
+                    settlement_data['tavern_details'] = {}
+                settlement_data['tavern_details']['innkeeper'] = line.split('**Innkeeper:**')[1].strip()
+            elif '**Notable Patron:**' in line:
+                if settlement_data['tavern_details'] is None:
+                    settlement_data['tavern_details'] = {}
+                settlement_data['tavern_details']['notable_patron'] = line.split('**Notable Patron:**')[1].strip()
+            # Section content
+            elif current_section and not line.startswith('##'):
                 section_content.append(line)
-        
-        # Save final section content
+        # Save last section
         if current_section and section_content:
             settlement_data[current_section] = ' '.join(section_content).strip()
+        
+        # Clean up duplicate content by removing embedded fields from atmosphere section
+        if settlement_data.get('atmosphere'):
+            atmosphere_text = settlement_data['atmosphere']
+            # Remove embedded fields that are already extracted
+            for field in ['**Local Tavern:**', '**Local Power:**']:
+                atmosphere_text = re.sub(rf'{re.escape(field)}[^\n]*\n?', '', atmosphere_text)
+            settlement_data['atmosphere'] = atmosphere_text.strip()
         
         return settlement_data
     
@@ -302,67 +364,77 @@ class HexService:
             'threat_level': '',
             'notable_feature': '',
             'atmosphere': '',
-            'loot': None
+            'loot': None,
+            # Beast specific fields
+            'treasure_found': '',
+            'beast_art': ''
         }
         
         current_section = None
         section_content = []
+        in_ascii = False
+        ascii_lines = []
         
         for i, line in enumerate(lines):
             line = line.strip()
             if not line:
                 continue
             
-            # Check for section headers
+            # ASCII art block detection
+            if line == '```':
+                in_ascii = not in_ascii
+                if not in_ascii:
+                    # End of ASCII art block
+                    if ascii_lines:
+                        beast_data['beast_art'] = '\n'.join(ascii_lines).strip()
+                        ascii_lines = []
+                continue
+            if in_ascii:
+                ascii_lines.append(line)
+                continue
+            
+            # Section headers
             if line == '## Encounter':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'encounter'
                 section_content = []
             elif line == '## Denizen':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'denizen'
                 section_content = []
             elif line == '## Notable Feature':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'notable_feature'
                 section_content = []
             elif line == '## Atmosphere':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'atmosphere'
                 section_content = []
             elif line == '## Beast Details':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'beast_details'
                 section_content = []
             elif line == '## Threat Level':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'threat_level'
                 section_content = []
             elif line == '## Territory':
-                # Save previous section content
                 if current_section and section_content:
                     beast_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'territory'
                 section_content = []
+            elif line == '## Loot Found':
+                if current_section and section_content:
+                    beast_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'loot_found'
+                section_content = []
+            # Named fields (scan every line)
             elif line.startswith('**Type:**'):
                 beast_data['beast_type'] = line.replace('**Type:**', '').strip()
             elif line.startswith('**Feature:**'):
@@ -373,13 +445,36 @@ class HexService:
                 beast_data['territory'] = line.replace('**Territory:**', '').strip()
             elif line.startswith('**Threat Level:**'):
                 beast_data['threat_level'] = line.replace('**Threat Level:**', '').strip()
-            elif current_section and not line.startswith('**') and not line.startswith('##'):
-                # Add content to current section
+            # Beast specific fields (scan every line for these)
+            if '**Treasure Found:**' in line:
+                beast_data['treasure_found'] = line.split('**Treasure Found:**')[1].strip()
+            # Section content
+            elif current_section and not line.startswith('##'):
                 section_content.append(line)
         
-        # Save final section content
+        # Save last section
         if current_section and section_content:
             beast_data[current_section] = ' '.join(section_content).strip()
+        
+        # Parse loot if present
+        if 'loot_found' in beast_data and beast_data['loot_found']:
+            # Split by sections to get the first loot_found section
+            sections = content.split('## ')
+            for section in sections:
+                if section.startswith('Loot Found'):
+                    loot_content = section.replace('Loot Found', '').strip()
+                    loot_data = self._parse_loot_section(loot_content)
+                    if loot_data:
+                        beast_data['loot'] = loot_data
+                    break
+        
+        # Clean up duplicate content by removing embedded fields from denizen section
+        if beast_data.get('denizen'):
+            denizen_text = beast_data['denizen']
+            # Remove embedded fields that are already extracted
+            for field in ['**Territory:**', '**Threat Level:**', '**Treasure Found:**']:
+                denizen_text = re.sub(rf'{re.escape(field)}[^\n]*\n?', '', denizen_text)
+            beast_data['denizen'] = denizen_text.strip()
         
         return beast_data
     
@@ -390,6 +485,16 @@ class HexService:
             'encounter': '',
             'name': '',
             'denizen_type': '',
+            # Mörk Borg NPC fields
+            'trait': '',
+            'concern': '',
+            'want': '',
+            'apocalypse_attitude': '',
+            'secret': '',
+            # Additional NPC fields
+            'carries': '',
+            'location': '',
+            # Fallback fields
             'motivation': '',
             'feature': '',
             'demeanor': '',
@@ -399,43 +504,100 @@ class HexService:
         }
         
         current_section = None
+        section_content = []
+        in_ascii = False
+        ascii_lines = []
         
         for i, line in enumerate(lines):
             line = line.strip()
             if not line:
                 continue
             
-            # Check for section headers
-            if line.startswith('☉ **') and 'Encounter' in line:
+            # ASCII art block detection
+            if line == '```':
+                in_ascii = not in_ascii
+                if not in_ascii:
+                    # End of ASCII art block
+                    if ascii_lines:
+                        # ASCII art found but not stored for NPCs
+                        ascii_lines = []
+                continue
+            if in_ascii:
+                ascii_lines.append(line)
+                continue
+            
+            # Section headers
+            if line == '## Encounter':
+                if current_section and section_content:
+                    npc_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'encounter'
+                section_content = []
+            elif line == '## Denizen':
+                if current_section and section_content:
+                    npc_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'denizen'
+                section_content = []
+            elif line == '## Notable Feature':
+                if current_section and section_content:
+                    npc_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'notable_feature'
+                section_content = []
+            elif line == '## Atmosphere':
+                if current_section and section_content:
+                    npc_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'atmosphere'
+                section_content = []
+            elif line == '## NPC Details':
+                if current_section and section_content:
+                    npc_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'npc_details'
+                section_content = []
+            elif line == '## Loot Found':
+                if current_section and section_content:
+                    npc_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'loot_found'
+                section_content = []
+            # Named fields (scan every line)
+            elif line.startswith('☉ **') and 'Encounter' in line:
                 npc_data['encounter'] = line
             elif line.startswith('**Name:**'):
-                current_section = 'name'
                 npc_data['name'] = line.replace('**Name:**', '').strip()
             elif line.startswith('**Type:**'):
-                current_section = 'denizen_type'
                 npc_data['denizen_type'] = line.replace('**Type:**', '').strip()
+            # Mörk Borg NPC fields
+            elif line.startswith('**Trait:**'):
+                npc_data['trait'] = line.replace('**Trait:**', '').strip()
+            elif line.startswith('**Concern:**'):
+                npc_data['concern'] = line.replace('**Concern:**', '').strip()
+            elif line.startswith('**Want:**'):
+                npc_data['want'] = line.replace('**Want:**', '').strip()
+            elif line.startswith('**Apocalypse Attitude:**'):
+                npc_data['apocalypse_attitude'] = line.replace('**Apocalypse Attitude:**', '').strip()
+            elif line.startswith('**Secret:**'):
+                npc_data['secret'] = line.replace('**Secret:**', '').strip()
+            # Additional NPC fields
+            elif line.startswith('**Carries:**'):
+                npc_data['carries'] = line.replace('**Carries:**', '').strip()
+            elif line.startswith('**Location:**'):
+                npc_data['location'] = line.replace('**Location:**', '').strip()
+            # Fallback fields
             elif line.startswith('**Motivation:**'):
-                current_section = 'motivation'
                 npc_data['motivation'] = line.replace('**Motivation:**', '').strip()
             elif line.startswith('**Feature:**'):
-                current_section = 'feature'
                 npc_data['feature'] = line.replace('**Feature:**', '').strip()
             elif line.startswith('**Demeanor:**'):
-                current_section = 'demeanor'
                 npc_data['demeanor'] = line.replace('**Demeanor:**', '').strip()
             elif line.startswith('**Notable Feature:**'):
-                current_section = 'notable_feature'
                 npc_data['notable_feature'] = line.replace('**Notable Feature:**', '').strip()
             elif line.startswith('**Atmosphere:**'):
-                current_section = 'atmosphere'
                 npc_data['atmosphere'] = line.replace('**Atmosphere:**', '').strip()
-            elif current_section and not line.startswith('**'):
-                # Add content to current section
-                if npc_data[current_section] and isinstance(npc_data[current_section], str):
-                    npc_data[current_section] += ' ' + line
-                elif not npc_data[current_section]:
-                    npc_data[current_section] = line
+            # Section content
+            elif current_section and not line.startswith('##'):
+                section_content.append(line)
+        
+        # Save last section
+        if current_section and section_content:
+            npc_data[current_section] = ' '.join(section_content).strip()
         
         return npc_data
     
@@ -450,7 +612,10 @@ class HexService:
             'threat_level': '',
             'notable_feature': '',
             'atmosphere': '',
-            'loot': None
+            'loot': None,
+            # Sea encounter specific fields
+            'origin': '',
+            'sunken_treasure': ''
         }
         
         current_section = None
@@ -461,39 +626,50 @@ class HexService:
             if not line:
                 continue
             
-            # Check for section headers
+            # Section headers
             if line == '## Encounter':
-                # Save previous section content
                 if current_section and section_content:
                     sea_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'encounter'
                 section_content = []
             elif line == '## Denizen':
-                # Save previous section content
                 if current_section and section_content:
                     sea_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'denizen'
                 section_content = []
             elif line == '## Notable Feature':
-                # Save previous section content
                 if current_section and section_content:
                     sea_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'notable_feature'
                 section_content = []
             elif line == '## Atmosphere':
-                # Save previous section content
                 if current_section and section_content:
                     sea_data[current_section] = ' '.join(section_content).strip()
-                
                 current_section = 'atmosphere'
                 section_content = []
+            elif line == '## Sea Encounter Details':
+                if current_section and section_content:
+                    sea_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'sea_encounter_details'
+                section_content = []
+            elif line == '## Threat Level':
+                if current_section and section_content:
+                    sea_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'threat_level'
+                section_content = []
+            elif line == '## Territory':
+                if current_section and section_content:
+                    sea_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'territory'
+                section_content = []
+            elif line == '## Loot Found':
+                if current_section and section_content:
+                    sea_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'loot_found'
+                section_content = []
+            # Named fields (scan every line)
             elif line.startswith('≈ **'):
-                # Extract encounter name
-                encounter_line = line
-                sea_data['encounter'] = encounter_line
+                sea_data['encounter'] = line
             elif line.startswith('**Type:**'):
                 sea_data['encounter_type'] = line.replace('**Type:**', '').strip()
             elif line.startswith('**Denizen:**'):
@@ -502,15 +678,228 @@ class HexService:
                 sea_data['territory'] = line.replace('**Territory:**', '').strip()
             elif line.startswith('**Threat Level:**'):
                 sea_data['threat_level'] = line.replace('**Threat Level:**', '').strip()
-            elif current_section and not line.startswith('**') and not line.startswith('##'):
-                # Add content to current section
+            # Sea encounter specific fields
+            elif line.startswith('**Origin:**'):
+                sea_data['origin'] = line.replace('**Origin:**', '').strip()
+            elif line.startswith('**Behavior:**'):
+                # Extract behavior from embedded field
+                behavior_text = line.replace('**Behavior:**', '').strip()
+                if behavior_text:
+                    sea_data['behavior'] = behavior_text
+            elif line.startswith('**Sunken Treasure:**'):
+                sea_data['sunken_treasure'] = line.replace('**Sunken Treasure:**', '').strip()
+            # Section content
+            elif current_section and not line.startswith('##'):
                 section_content.append(line)
         
-        # Save final section content
+        # Save last section
         if current_section and section_content:
             sea_data[current_section] = ' '.join(section_content).strip()
         
+        # Parse loot if present - use the first loot_found section
+        if 'loot_found' in sea_data and sea_data['loot_found']:
+            # Split by sections to get the first loot_found section
+            sections = content.split('## ')
+            for section in sections:
+                if section.startswith('Loot Found'):
+                    loot_content = section.replace('Loot Found', '').strip()
+                    loot_data = self._parse_loot_section(loot_content)
+                    if loot_data:
+                        sea_data['loot'] = loot_data
+                    break
+        
+        # Clean up duplicate content by removing embedded fields from denizen section
+        if sea_data.get('denizen'):
+            denizen_text = sea_data['denizen']
+            # Remove embedded fields that are already extracted
+            for field in ['**Origin:**', '**Behavior:**', '**Threat Level:**', '**Territory:**', '**Sunken Treasure:**']:
+                denizen_text = re.sub(rf'{re.escape(field)}[^\n]*\n?', '', denizen_text)
+            sea_data['denizen'] = denizen_text.strip()
+        
         return sea_data
+    
+    def _extract_dungeon_data(self, content: str, hex_code: str) -> Dict[str, Any]:
+        """Extract dungeon data from markdown content."""
+        lines = content.split('\n')
+        dungeon_data = {
+            'encounter': '',
+            'dungeon_type': '',
+            'denizen': '',
+            'danger': '',
+            'atmosphere': '',
+            'notable_feature': '',
+            'treasure': '',
+            'loot': None,
+            'scroll': None,
+            # Mörk Borg dungeon fields
+            'trap_section': None,
+            'dungeon_art': ''
+        }
+        current_section = None
+        section_content = []
+        in_ascii = False
+        ascii_lines = []
+        trap_section = {}
+        for i, line in enumerate(lines):
+            line = line.strip()
+            if not line:
+                continue
+            # ASCII art block detection
+            if line == '```':
+                in_ascii = not in_ascii
+                if not in_ascii:
+                    # End of ASCII art block
+                    if ascii_lines:
+                        dungeon_data['dungeon_art'] = '\n'.join(ascii_lines).strip()
+                        ascii_lines = []
+                continue
+            if in_ascii:
+                ascii_lines.append(line)
+                continue
+            # Section headers
+            if line == '## Encounter':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'encounter'
+                section_content = []
+            elif line == '## Dungeon Type':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'dungeon_type'
+                section_content = []
+            elif line == '## Denizen':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'denizen'
+                section_content = []
+            elif line == '## Danger':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'danger'
+                section_content = []
+            elif line == '## Notable Feature':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'notable_feature'
+                section_content = []
+            elif line == '## Atmosphere':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'atmosphere'
+                section_content = []
+            elif line == '## Treasure':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'treasure'
+                section_content = []
+            elif line == '## Trap':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'trap_section'
+                section_content = []
+            elif line == '## Dungeon Details':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'dungeon_details'
+                section_content = []
+            elif line == '## Loot Found':
+                if current_section and section_content:
+                    dungeon_data[current_section] = ' '.join(section_content).strip()
+                current_section = 'loot_found'
+                section_content = []
+            # Mörk Borg trap fields (scan every line for these)
+            if '**Trap Description:**' in line:
+                trap_section['description'] = line.split('**Trap Description:**')[1].strip()
+            elif '**Trap Effect:**' in line:
+                trap_section['effect'] = line.split('**Trap Effect:**')[1].strip()
+            elif '**Trap Builder:**' in line:
+                trap_section['builder'] = line.split('**Trap Builder:**')[1].strip()
+            # Dungeon Details fields (scan every line for these)
+            elif '**Type:**' in line and current_section == 'dungeon_details':
+                dungeon_data['dungeon_type'] = line.split('**Type:**')[1].strip()
+            elif '**Danger:**' in line and current_section == 'dungeon_details':
+                dungeon_data['danger'] = line.split('**Danger:**')[1].strip()
+            elif '**Treasure:**' in line and current_section == 'dungeon_details':
+                dungeon_data['treasure'] = line.split('**Treasure:**')[1].strip()
+            # Denizen section fields (scan every line for these)
+            elif '**Danger:**' in line and current_section == 'denizen':
+                dungeon_data['danger'] = line.split('**Danger:**')[1].strip()
+            elif '**Atmosphere:**' in line and current_section == 'denizen':
+                dungeon_data['atmosphere'] = line.split('**Atmosphere:**')[1].strip()
+            elif '**Treasure Found:**' in line and current_section == 'denizen':
+                # This is loot, not treasure
+                pass
+            # Loot Found fields (scan every line for these)
+            elif '**Type:**' in line and current_section == 'loot_found':
+                if dungeon_data['loot'] is None:
+                    dungeon_data['loot'] = {}
+                dungeon_data['loot']['type'] = line.split('**Type:**')[1].strip()
+            elif '**Item:**' in line and current_section == 'loot_found':
+                if dungeon_data['loot'] is None:
+                    dungeon_data['loot'] = {}
+                dungeon_data['loot']['item'] = line.split('**Item:**')[1].strip()
+            elif '**Description:**' in line and current_section == 'loot_found':
+                if dungeon_data['loot'] is None:
+                    dungeon_data['loot'] = {}
+                dungeon_data['loot']['description'] = line.split('**Description:**')[1].strip()
+            elif '**Magical Effect:**' in line and current_section == 'loot_found':
+                if dungeon_data['loot'] is None:
+                    dungeon_data['loot'] = {}
+                dungeon_data['loot']['magical_effect'] = line.split('**Magical Effect:**')[1].strip()
+            # Section content
+            elif current_section and not line.startswith('##'):
+                section_content.append(line)
+        # Save last section
+        if current_section and section_content:
+            dungeon_data[current_section] = ' '.join(section_content).strip()
+        if trap_section:
+            dungeon_data['trap_section'] = trap_section
+        return dungeon_data
+
+    def _parse_loot_section(self, loot_content: str) -> Optional[Dict[str, Any]]:
+        """Parse loot section content and extract structured loot data."""
+        if not loot_content:
+            return None
+        
+        loot_data = {
+            'type': '',
+            'item': '',
+            'description': '',
+            'full_description': '',
+            'magical_effect': ''
+        }
+        
+        lines = loot_content.split('\n')
+        
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
+                
+            # Check for field headers
+            if line.startswith('**Type:**'):
+                loot_data['type'] = line.replace('**Type:**', '').strip()
+            elif line.startswith('**Item:**'):
+                loot_data['item'] = line.replace('**Item:**', '').strip()
+            elif line.startswith('**Description:**'):
+                loot_data['description'] = line.replace('**Description:**', '').strip()
+            elif line.startswith('**Full Description:**'):
+                loot_data['full_description'] = line.replace('**Full Description:**', '').strip()
+            elif line.startswith('**Magical Effect:**'):
+                loot_data['magical_effect'] = line.replace('**Magical Effect:**', '').strip()
+            # Handle bold item names (like "**Blanket**")
+            elif line.startswith('**') and line.endswith('**') and not line.startswith('**Type:**') and not line.startswith('**Item:**') and not line.startswith('**Description:**') and not line.startswith('**Full Description:**') and not line.startswith('**Magical Effect:**'):
+                # This is a bold item name, treat as item if we don't have one
+                if not loot_data['item']:
+                    loot_data['item'] = line.strip('*')
+        
+        # Only return if we have at least some loot data
+        if any(loot_data.values()):
+            return loot_data
+        return None
+    
+    # Similar improvements can be made for beast, sea encounter, and wilderness hexes if they have special fields or ASCII art.
+    # For brevity, only dungeon is shown here, but the same pattern applies: scan every line for special fields, handle ASCII art blocks, and cleanly extract section content.
     
     def _extract_terrain(self, content: str) -> str:
         """Extract terrain from hex content, robust to leading spaces and markdown variations."""
@@ -597,7 +986,12 @@ class HexService:
                 "notable_feature": hex_model.notable_feature,
                 "local_tavern": hex_model.local_tavern,
                 "local_power": hex_model.local_power,
-                "terrain": hex_model.terrain.value
+                "settlement_art": hex_model.settlement_art,
+                "terrain": hex_model.terrain.value,
+                # Mörk Borg settlement fields
+                "weather": hex_model.weather,
+                "city_event": hex_model.city_event,
+                "tavern_details": hex_model.tavern_details
             }
         }
     
@@ -610,6 +1004,11 @@ class HexService:
         city_key = hardcoded['city_key']
         city_data = self.lore_db.major_cities[city_key]
         
+        # Get regional NPCs and factions based on city region
+        region = city_data.get('region', 'central')
+        regional_npcs = self.lore_db.get_regional_npcs(region)
+        regional_factions = self.lore_db.get_regional_factions(region)
+        
         return {
             "success": True,
             "city": {
@@ -621,8 +1020,8 @@ class HexService:
                 "notable_features": city_data['notable_features'],
                 "key_npcs": city_data['key_npcs']
             },
-            "regional_npcs": city_data.get('regional_npcs', []),
-            "factions": city_data.get('factions', [])
+            "regional_npcs": regional_npcs,
+            "factions": regional_factions
         }
     
     def get_all_hexes(self) -> Dict[str, BaseHex]:
