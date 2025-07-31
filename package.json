@@ -3,7 +3,11 @@
     "build:web": "npx tsc --project backend/web/static/tsconfig.json",
     "build:web:watch": "npx tsc --project backend/web/static/tsconfig.json --watch",
     "start:backend": "python3 -m backend.run",
-    "start:all": "npm-run-all --parallel build:web:watch start:backend"
+    "start:all": "npm-run-all --parallel webv2:dev start:backend",
+    "start:all:legacy": "npm-run-all --parallel build:web:watch start:backend",
+    "webv2:dev": "cd backend/webv2 && npm run dev",
+    "webv2:build": "cd backend/webv2 && npm run build",
+    "start:all:v2": "npm-run-all --parallel webv2:dev start:backend"
   },
   "devDependencies": {
     "typescript": "^5.8.3",

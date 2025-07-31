@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hexy - World Generator</title>
+  <link rel="stylesheet" href="/src/styles/globals.css">
+  <link rel="stylesheet" href="/src/styles/fonts.css">
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="/src/styles/city-overlay.css">
+  <link rel="stylesheet" href="/src/styles/ascii-ui.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>Hexy</h1>
+      <nav class="main-nav">
+        <button id="world-view-btn" class="nav-btn active">World</button>
+        <button id="city-view-btn" class="nav-btn">Cities</button>
+        <button id="lore-btn" class="btn btn-secondary">Lore</button>
+        <button id="reset-btn" class="btn btn-secondary">Reset</button>
+        <select id="language-selector" class="btn btn-secondary" aria-label="Select language">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
+      </nav>
+    </header>
+    
+    <main class="app-main">
+      <div class="left-panel">
+        <div id="world-grid-container" class="grid-container">
+          <!-- World grid will be rendered here -->
+        </div>
+        <div id="cities-container" class="cities-container hidden">
+          <!-- Cities will be rendered here -->
+        </div>
+      </div>
+      
+      <div class="right-panel">
+        <div id="hex-content-container" class="hex-content">
+          <!-- Hex content will be displayed here -->
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html> 

@@ -1,0 +1,441 @@
+/* Main CSS for Hexy WebV2 - Critical Hex Styling */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  /* Mork Borg Official Color Palette */
+  --mork-black: #000000;
+  --mork-pink: #FF00FF;
+  --mork-yellow: #FFFF00;
+  --mork-white: #ffffff;
+  
+  /* Extended palette for UI elements */
+  --mork-cyan: #00ffff;
+  --mork-green: #00ff00;
+  --mork-magenta: #ff00ff;
+  --mork-gray: #222222;
+  --mork-dark-gray: #111111;
+  --mork-light-gray: #333333;
+  
+  /* Mork Borg Text Colors - Very Dark Purple */
+  --text-primary: #1a0033;
+  --text-secondary: #1a0033;
+  --text-accent: #1a0033;
+  --text-muted: #330066;
+  
+  /* Mork Borg Background Colors */
+  --bg-primary: var(--mork-black);
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --bg-accent: #222222;
+  
+  /* Mork Borg Border Colors */
+  --border-primary: var(--mork-pink);
+  --border-secondary: var(--mork-yellow);
+  --border-muted: #444444;
+  
+  /* Spacing Scale */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Border Radius - Mörk Borg uses sharp edges */
+  --border-radius: 0;
+  --border-radius-sm: 0;
+
+  /* Shadows - Mörk Borg style glows */
+  --shadow-pink: 0 0 15px var(--mork-pink);
+  --shadow-yellow: 0 0 15px var(--mork-yellow);
+  --shadow-cyan: 0 0 15px var(--mork-cyan);
+  --shadow-dark: 0 4px 8px rgba(0, 0, 0, 0.8);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Hex dimensions - using CSS custom properties for consistency */
+  --hex-width-base: 40px;
+  --hex-height-base: 35px;
+  --hex-width-city: 40px;
+  --hex-height-city: 35px;
+  
+  /* Responsive breakpoints */
+  --hex-width-tablet: 35px;
+  --hex-height-tablet: 30px;
+  --hex-width-mobile: 30px;
+  --hex-height-mobile: 26px;
+  
+  /* Honeycomb spacing multipliers */
+  --hex-offset-x: 0.7;
+  --hex-offset-y: 0.63;
+  --hex-spacing: 0.85;
+}
+
+/* ===== HONEYCOMB GRID SYSTEM ===== */
+/*
+ * Honeycomb Pattern Implementation:
+ * - Even rows: offset right by 28px, up by 22px
+ * - Odd rows: offset up by 12px only
+ * - Horizontal spacing: 34px between hexes
+ * - Hex dimensions: 40x35px (world), 48x42px (city)
+ * - Responsive scaling maintains proportions
+ */
+
+.hex-grid {
+  width: max-content;
+  height: max-content;
+  position: relative;
+  transform-origin: center center;
+  display: block;
+  flex-shrink: 0;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-primary);
+  transition: transform 0.1s ease-out;
+}
+
+/* Container for zoom and pan */
+#world-grid-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-primary);
+  border-radius: var(--border-radius);
+}
+
+.hex-row {
+  display: flex;
+  margin-bottom: 0;
+  justify-content: center;
+}
+
+/* Even rows: offset to the right and up for honeycomb interlocking */
+.hex-row:nth-child(even) {
+  transform: translateX(calc(var(--hex-width-base) * 0.9));
+  margin-top: calc(var(--hex-height-base) * -0.45);
+}
+
+/* Odd rows: just move up to interlock with even rows */
+.hex-row:nth-child(odd) {
+  margin-top: calc(var(--hex-height-base) * -0.34);
+}
+
+/* Horizontal spacing between hexes in all rows */
+.hex-row:nth-child(odd) .hex-container,
+.hex-row:nth-child(even) .hex-container {
+  margin-right: calc(var(--hex-width-base) * 0.85);
+}
+
+/* ===== HEX CONTAINER STYLING ===== */
+
+.hex-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.city-name-label {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--mork-black);
+  color: var(--mork-yellow);
+  padding: 2px 6px;
+  font-size: 0.7em;
+  white-space: nowrap;
+  border: 1px solid var(--mork-yellow);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.city-name-label:hover {
+  opacity: 1;
+}
+
+.hex-container:hover .city-name-label {
+  opacity: 1;
+}
+
+/* ===== HEX CELL STYLING ===== */
+
+/* Base hex cell styles - applied to all hex types */
+.hex-cell,
+.city-hex-cell {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Jacquard 12", monospace;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  position: relative;
+}
+
+/* World map hex dimensions */
+.hex-cell {
+  width: var(--hex-width-base);
+  height: var(--hex-height-base);
+  min-width: var(--hex-width-base);
+  min-height: var(--hex-height-base);
+  max-width: var(--hex-width-base);
+  max-height: var(--hex-height-base);
+  background: var(--mork-gray);
+  color: var(--mork-white);
+}
+
+/* City overlay hex dimensions */
+.city-hex-cell {
+  width: var(--hex-width-city);
+  height: var(--hex-height-city);
+  min-width: var(--hex-width-city);
+  min-height: var(--hex-height-city);
+  max-width: var(--hex-width-city);
+  max-height: var(--hex-height-city);
+  border: 1px solid var(--mork-pink);
+  background: var(--mork-pink);
+  color: var(--mork-black);
+}
+
+/* ===== HEX INTERACTIONS ===== */
+
+.hex-cell:hover,
+.city-hex-cell:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-pink);
+  z-index: 10;
+}
+
+.hex-cell.selected {
+  transform: scale(1.2);
+  box-shadow: var(--shadow-yellow);
+  z-index: 20;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { box-shadow: var(--shadow-yellow); }
+  51%, 100% { box-shadow: var(--shadow-pink); }
+}
+
+.hex-cell.has-content,
+.city-hex-cell.has-content {
+  border: 2px solid var(--mork-cyan);
+}
+
+.hex-cell.no-content,
+.city-hex-cell.no-content {
+  opacity: 0.5;
+}
+
+/* ===== TERRAIN STYLES ===== */
+
+.terrain-plains {
+  background: #8fbc8f;
+}
+
+.terrain-forest {
+  background: #2d5016;
+}
+
+.terrain-mountain {
+  background: #6b6b6b;
+}
+
+.terrain-coast {
+  background: #4682b4;
+}
+
+.terrain-swamp {
+  background: #556b2f;
+}
+
+.terrain-desert {
+  background: #f4a460;
+}
+
+.terrain-sea {
+  background: #4682b4;
+}
+
+.terrain-snow {
+  background: #f0f8ff;
+}
+
+.terrain-unknown {
+  background: #696969;
+  color: var(--mork-white);
+}
+
+.major-city {
+  background: #8b4513;
+  color: var(--mork-yellow);
+}
+
+.settlement {
+  background: #556b2f;
+  color: var(--mork-white);
+}
+
+.has-content {
+  /*border: 2px solid var(--mork-cyan);*/
+}
+
+/* ===== LOADING AND NOTIFICATION STYLES ===== */
+
+.loading-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--mork-black);
+  color: var(--mork-yellow);
+  padding: 2rem;
+  border: 2px solid var(--mork-yellow);
+  z-index: 10000;
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--mork-gray);
+  border-top: 4px solid var(--mork-yellow);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--mork-black);
+  color: var(--mork-yellow);
+  padding: 1rem;
+  border: 2px solid var(--mork-yellow);
+  border-radius: var(--border-radius);
+  z-index: 10000;
+  max-width: 300px;
+  box-shadow: var(--shadow-dark);
+}
+
+/* ===== LORE MODAL STYLES ===== */
+
+.lore-modal {
+  background: var(--mork-black);
+  color: var(--mork-yellow);
+  border: 2px solid var(--mork-yellow);
+  padding: 1rem;
+}
+
+.lore-header {
+  border-bottom: 1px solid var(--mork-yellow);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.lore-header h2 {
+  color: var(--mork-yellow);
+  margin: 0;
+  font-family: "Jacquard 12", monospace;
+}
+
+.lore-content {
+  display: grid;
+  gap: 1rem;
+}
+
+.lore-section h3 {
+  color: var(--mork-pink);
+  margin-bottom: 0.5rem;
+  font-family: "adhesive-nr-seven", serif;
+  text-transform: uppercase;
+}
+
+.lore-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.lore-section li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--mork-gray);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+@media (max-width: 1200px) {
+  .hex-cell,
+  .city-hex-cell {
+    width: 50px;
+    height: 43px;
+    font-size: 1em;
+  }
+  
+  .hex-container {
+    width: 50px;
+    height: 43px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hex-cell,
+  .city-hex-cell {
+    width: 40px;
+    height: 35px;
+    font-size: 0.8em;
+  }
+  
+  .hex-container {
+    width: 40px;
+    height: 35px;
+  }
+  
+  .city-name-label {
+    font-size: 0.6em;
+    top: -15px;
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hex-cell,
+  .city-hex-cell {
+    transition: none;
+  }
+  
+  .loading-spinner {
+    animation: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+} 

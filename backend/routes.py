@@ -109,6 +109,107 @@ def main_map():
 
 # ===== API ROUTES =====
 
+@api_bp.route('/world/grid')
+def get_world_grid():
+    """Get the world grid data for the frontend."""
+    try:
+        # Get map dimensions
+        map_width, map_height = terrain_system.get_map_dimensions()
+        
+        # Generate ASCII map data
+        ascii_map_data = generate_ascii_map_data()
+        
+        # If map is empty, regenerate and reload
+        if not ascii_map_data:
+            print("[AUTO] Map data empty, regenerating full map...")
+            main_map_generator.generate_full_map()
+            ascii_map_data = generate_ascii_map_data()
+        
+        # Convert to the format expected by the frontend
+        hexes = []
+        for hex_code, hex_info in ascii_map_data.items():
+            hexes.append({
+                'id': hex_code,
+                'coordinate': {
+                    'q': int(hex_code[:2]),
+                    'r': int(hex_code[2:4]),
+                    's': -(int(hex_code[:2]) + int(hex_code[2:4]))
+                },
+                'terrain': hex_info.get('terrain', 'unknown'),
+                'symbol': hex_info.get('symbol', '?'),
+                'css_class': f"terrain-{hex_info.get('terrain', 'unknown')}",
+                'is_city': hex_info.get('is_city', False),
+                'has_content': hex_info.get('has_content', False),
+                'content_type': hex_info.get('content_type'),
+                'city_name': hex_info.get('city_name'),
+                'population': hex_info.get('population'),
+                'type': 'world',
+                'isSelected': False
+            })
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'hexes': hexes,
+                'width': map_width,
+                'height': map_height
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error getting world grid: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/world/generate', methods=['POST'])
+def generate_world_grid():
+    """Generate a new world grid with specified dimensions."""
+    try:
+        data = request.get_json()
+        width = data.get('width', 30)
+        height = data.get('height', 60)
+        
+        # Update map dimensions
+        terrain_system.set_map_dimensions(width, height)
+        
+        # Generate new map
+        main_map_generator.generate_full_map()
+        
+        # Get the new grid data
+        ascii_map_data = generate_ascii_map_data()
+        
+        # Convert to frontend format
+        hexes = []
+        for hex_code, hex_info in ascii_map_data.items():
+            hexes.append({
+                'id': hex_code,
+                'coordinate': {
+                    'q': int(hex_code[:2]),
+                    'r': int(hex_code[2:4]),
+                    's': -(int(hex_code[:2]) + int(hex_code[2:4]))
+                },
+                'terrain': hex_info.get('terrain', 'unknown'),
+                'symbol': hex_info.get('symbol', '?'),
+                'css_class': f"terrain-{hex_info.get('terrain', 'unknown')}",
+                'is_city': hex_info.get('is_city', False),
+                'has_content': hex_info.get('has_content', False),
+                'content_type': hex_info.get('content_type'),
+                'city_name': hex_info.get('city_name'),
+                'population': hex_info.get('population'),
+                'type': 'world',
+                'isSelected': False
+            })
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'hexes': hexes,
+                'width': width,
+                'height': height
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error generating world grid: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @api_bp.route('/reset-continent', methods=['POST'])
 def reset_continent():
     """Reset the entire continent and regenerate all content."""
@@ -122,6 +223,81 @@ def reset_continent():
     except Exception as e:
         logging.error(f"Error resetting continent: {e}\n{traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/hex/<q>/<r>/<s>')
+def get_hex_content(q, r, s):
+    """Get hex content by coordinates."""
+    try:
+        # Convert coordinates to hex code
+        hex_code = f"{int(q):02d}{int(r):02d}"
+        
+        # Get hex data
+        hex_data = hex_service.get_hex_dict(hex_code)
+        if hex_data:
+            return jsonify({
+                'success': True,
+                'data': {
+                    'hex': hex_data,
+                    'details': hex_data
+                }
+            })
+        
+        # If not in cache, check for a hex file
+        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+        if hex_file_path.exists():
+            from backend.utils import safe_file_read
+            content = safe_file_read(hex_file_path)
+            hex_type = _determine_hex_type(content)
+            
+            if hex_type == 'settlement':
+                parsed = extract_settlement_data(content)
+                hex_data = {
+                    "id": hex_code,
+                    "coordinate": {"q": int(q), "r": int(r), "s": int(s)},
+                    "terrain": parsed.get('terrain', 'unknown'),
+                    "type": "settlement",
+                    "is_city": False,
+                    "has_content": True,
+                    "content_type": "settlement",
+                    "city_name": parsed.get('name'),
+                    "population": parsed.get('population')
+                }
+            else:
+                hex_data = {
+                    "id": hex_code,
+                    "coordinate": {"q": int(q), "r": int(r), "s": int(s)},
+                    "terrain": "unknown",
+                    "type": "world",
+                    "is_city": False,
+                    "has_content": False
+                }
+            
+            return jsonify({
+                'success': True,
+                'data': {
+                    'hex': hex_data,
+                    'details': hex_data
+                }
+            })
+        
+        # Return empty hex if not found
+        return jsonify({
+            'success': True,
+            'data': {
+                'hex': {
+                    "id": hex_code,
+                    "coordinate": {"q": int(q), "r": int(r), "s": int(s)},
+                    "terrain": "unknown",
+                    "type": "world",
+                    "is_city": False,
+                    "has_content": False
+                },
+                'details': {}
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error getting hex content: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 @api_bp.route('/hex/<hex_code>')
 def get_hex_info(hex_code):
@@ -279,6 +455,90 @@ def get_hex_info(hex_code):
         "atmosphere": None,
     })
 
+@api_bp.route('/hex/<hex_code>/markdown')
+def get_hex_markdown(hex_code):
+    """Get raw markdown content for a hex."""
+    if not validate_hex_code(hex_code):
+        return jsonify({'error': 'Invalid hex code format'}), 400
+
+    try:
+        # Check for a hex file first
+        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+        if hex_file_path.exists():
+            from backend.utils import safe_file_read
+            content = safe_file_read(hex_file_path)
+            return jsonify({
+                'success': True,
+                'data': {
+                    'hex_code': hex_code,
+                    'markdown': content,
+                    'has_content': True
+                }
+            })
+        
+        # If no file exists, check if we have cached data
+        hex_data = hex_service.get_hex_dict(hex_code)
+        if hex_data:
+            # Convert structured data back to markdown format
+            markdown_content = _convert_hex_data_to_markdown(hex_data)
+            return jsonify({
+                'success': True,
+                'data': {
+                    'hex_code': hex_code,
+                    'markdown': markdown_content,
+                    'has_content': True
+                }
+            })
+        
+        # Return empty content
+        return jsonify({
+            'success': True,
+            'data': {
+                'hex_code': hex_code,
+                'markdown': f"# Hex {hex_code}\n\nNo content available for this hex.",
+                'has_content': False
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error getting hex markdown: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/hex/<hex_code>/markdown', methods=['PUT'])
+def update_hex_markdown(hex_code):
+    """Update raw markdown content for a hex."""
+    if not validate_hex_code(hex_code):
+        return jsonify({'error': 'Invalid hex code format'}), 400
+
+    try:
+        data = request.get_json()
+        if not data or 'markdown' not in data:
+            return jsonify({'error': 'Missing markdown content'}), 400
+
+        markdown_content = data['markdown']
+        
+        # Ensure the hexes directory exists
+        hexes_dir = config.paths.output_path / "hexes"
+        hexes_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Write the markdown content to file
+        hex_file_path = hexes_dir / f"hex_{hex_code}.md"
+        with open(hex_file_path, 'w', encoding='utf-8') as f:
+            f.write(markdown_content)
+        
+        # Clear any cached data for this hex
+        hex_service.clear_hex_cache(hex_code)
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'hex_code': hex_code,
+                'message': 'Hex content updated successfully'
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error updating hex markdown: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
 @api_bp.route('/city/<hex_code>')
 def get_city_details(hex_code):
     """Get detailed information for a major city."""
@@ -298,6 +558,35 @@ def get_settlement_details(hex_code):
         return jsonify(settlement_data)
     else:
         return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
+
+@api_bp.route('/set-language', methods=['POST'])
+def set_language():
+    """Set the application language."""
+    try:
+        data = request.get_json()
+        language = data.get('language', 'en')
+        
+        # Update global language
+        global current_language
+        current_language = language
+        
+        # Update config
+        config.language = language
+        
+        # Reinitialize main map generator with new language
+        global main_map_generator
+        main_map_generator = get_main_map_generator()
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'language': language,
+                'message': f'Language set to {language}'
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error setting language: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 @api_bp.route('/lore-overview')
 def get_lore_overview():
@@ -396,6 +685,11 @@ def get_city_overlay(overlay_name):
         traceback.print_exc()
         return jsonify({'success': False, 'error': str(e)}), 500
 
+@api_bp.route('/city-overlay-ascii/<overlay_name>')
+def get_city_overlay_ascii_legacy(overlay_name):
+    """Legacy endpoint for city overlay ASCII."""
+    return get_city_overlay_ascii(overlay_name)
+
 @api_bp.route('/city-overlay/<overlay_name>/ascii')
 def get_city_overlay_ascii(overlay_name):
     try:
@@ -409,6 +703,37 @@ def get_city_overlay_ascii(overlay_name):
 
 @api_bp.route('/city-context/<city_name>')
 def get_city_context(city_name):
+    """Get city context information."""
+    try:
+        # This would need to be implemented based on the city data
+        # For now, return a basic structure
+        context = {
+            'name': city_name,
+            'description': f'Context information for {city_name}',
+            'city_events': ['Event 1', 'Event 2'],
+            'weather_conditions': ['Sunny', 'Cloudy'],
+            'regional_npcs': ['NPC 1', 'NPC 2'],
+            'major_factions': [
+                {
+                    'name': 'Faction 1',
+                    'leader': 'Leader 1',
+                    'headquarters': 'HQ 1',
+                    'influence': 'High',
+                    'attitude': 'Friendly',
+                    'activities': ['Activity 1', 'Activity 2']
+                }
+            ]
+        }
+        
+        return jsonify({
+            'success': True,
+            'data': {
+                'context': context
+            }
+        })
+    except Exception as e:
+        logging.error(f"Error getting city context: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
     """Get city context information for the left panel."""
     try:
         context = city_overlay_analyzer.get_city_context(city_name)
@@ -424,6 +749,11 @@ def get_city_context(city_name):
         import traceback
         traceback.print_exc()
         return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/city-overlay-hex/<overlay_name>/<hex_id>')
+def get_city_overlay_hex_legacy(overlay_name, hex_id):
+    """Legacy endpoint for city overlay hex."""
+    return get_city_overlay_hex(overlay_name, hex_id)
 
 @api_bp.route('/city-overlay/<overlay_name>/hex/<hex_id>')
 def get_city_overlay_hex(overlay_name, hex_id):
@@ -480,6 +810,90 @@ def get_city_overlay_hex(overlay_name, hex_id):
     except Exception as e:
         import traceback
         traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/city-districts/<overlay_name>')
+def get_city_districts(overlay_name):
+    """Get city districts for an overlay."""
+    try:
+        # This would need to be implemented based on the city overlay data
+        # For now, return a basic structure
+        districts = [
+            {
+                'name': 'Central District',
+                'description': 'The heart of the city',
+                'theme': 'urban',
+                'buildings': ['Town Hall', 'Market Square', 'Temple'],
+                'streets': ['Main Street', 'Market Street']
+            }
+        ]
+        
+        return jsonify({
+            'success': True,
+            'data': districts
+        })
+    except Exception as e:
+        logging.error(f"Error getting city districts: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/city-district-details/<overlay_name>/<district_name>')
+def get_city_district_details(overlay_name, district_name):
+    """Get details for a specific district."""
+    try:
+        # This would need to be implemented based on the city overlay data
+        # For now, return a basic structure
+        district_details = {
+            'name': district_name,
+            'description': f'Details for {district_name}',
+            'theme': 'urban',
+            'buildings': ['Building 1', 'Building 2'],
+            'streets': ['Street 1', 'Street 2']
+        }
+        
+        return jsonify({
+            'success': True,
+            'data': district_details
+        })
+    except Exception as e:
+        logging.error(f"Error getting district details: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/district-random-table/<overlay_name>/<district_name>')
+def get_district_random_table(overlay_name, district_name):
+    """Get random table for a district."""
+    try:
+        # This would need to be implemented based on the city overlay data
+        # For now, return a basic structure
+        random_table = {
+            'name': f'{district_name} Random Table',
+            'entries': ['Entry 1', 'Entry 2', 'Entry 3']
+        }
+        
+        return jsonify({
+            'success': True,
+            'data': random_table
+        })
+    except Exception as e:
+        logging.error(f"Error getting district random table: {e}\n{traceback.format_exc()}")
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/district-specific-random-table/<overlay_name>/<district_name>/<table_type>')
+def get_district_specific_random_table(overlay_name, district_name, table_type):
+    """Get specific random table for a district."""
+    try:
+        # This would need to be implemented based on the city overlay data
+        # For now, return a basic structure
+        random_table = {
+            'name': f'{district_name} {table_type} Table',
+            'entries': ['Entry 1', 'Entry 2', 'Entry 3']
+        }
+        
+        return jsonify({
+            'success': True,
+            'data': random_table
+        })
+    except Exception as e:
+        logging.error(f"Error getting district specific random table: {e}\n{traceback.format_exc()}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @api_bp.route('/regenerate-hex/<overlay_name>/<hex_id>', methods=['POST'])
@@ -981,4 +1395,189 @@ def extract_npc_data(content):
 
 def extract_ruins_data(content):
     # TODO: Implement real parsing logic
-    return extract_hex_data(content) 
+    return extract_hex_data(content)
+
+def _convert_hex_data_to_markdown(hex_data):
+    """Convert structured hex data back to markdown format."""
+    lines = []
+    
+    # Add title
+    hex_code = hex_data.get('hex_code', 'Unknown')
+    lines.append(f"# Hex {hex_code}")
+    lines.append("")
+    
+    # Add hex type
+    hex_type = hex_data.get('hex_type', 'unknown')
+    lines.append(f"**Type:** {hex_type}")
+    lines.append("")
+    
+    # Add terrain
+    terrain = hex_data.get('terrain', 'unknown')
+    lines.append(f"**Terrain:** {terrain}")
+    lines.append("")
+    
+    # Add specific content based on hex type
+    if hex_type == 'settlement':
+        name = hex_data.get('name', 'Unknown Settlement')
+        lines.append(f"**Name:** {name}")
+        lines.append("")
+        
+        population = hex_data.get('population', 'Unknown')
+        lines.append(f"**Population:** {population}")
+        lines.append("")
+        
+        description = hex_data.get('description')
+        if description:
+            lines.append("## Description")
+            lines.append(description)
+            lines.append("")
+        
+        atmosphere = hex_data.get('atmosphere')
+        if atmosphere:
+            lines.append("## Atmosphere")
+            lines.append(atmosphere)
+            lines.append("")
+        
+        notable_feature = hex_data.get('notable_feature')
+        if notable_feature:
+            lines.append("## Notable Feature")
+            lines.append(notable_feature)
+            lines.append("")
+        
+        local_tavern = hex_data.get('local_tavern')
+        if local_tavern:
+            lines.append("## Local Tavern")
+            lines.append(local_tavern)
+            lines.append("")
+        
+        local_power = hex_data.get('local_power')
+        if local_power:
+            lines.append("## Local Power")
+            lines.append(local_power)
+            lines.append("")
+    
+    elif hex_type == 'beast':
+        encounter = hex_data.get('encounter')
+        if encounter:
+            lines.append("## Encounter")
+            lines.append(encounter)
+            lines.append("")
+        
+        denizen = hex_data.get('denizen')
+        if denizen:
+            lines.append("## Denizen")
+            lines.append(denizen)
+            lines.append("")
+        
+        territory = hex_data.get('territory')
+        if territory:
+            lines.append("## Territory")
+            lines.append(territory)
+            lines.append("")
+        
+        threat_level = hex_data.get('threat_level')
+        if threat_level:
+            lines.append("## Threat Level")
+            lines.append(threat_level)
+            lines.append("")
+        
+        notable_feature = hex_data.get('notable_feature')
+        if notable_feature:
+            lines.append("## Notable Feature")
+            lines.append(notable_feature)
+            lines.append("")
+        
+        atmosphere = hex_data.get('atmosphere')
+        if atmosphere:
+            lines.append("## Atmosphere")
+            lines.append(atmosphere)
+            lines.append("")
+        
+        loot = hex_data.get('loot')
+        if loot:
+            lines.append("## Loot")
+            lines.append(str(loot))
+            lines.append("")
+    
+    elif hex_type == 'dungeon':
+        encounter = hex_data.get('encounter')
+        if encounter:
+            lines.append("## Encounter")
+            lines.append(encounter)
+            lines.append("")
+        
+        denizen = hex_data.get('denizen')
+        if denizen:
+            lines.append("## Denizen")
+            lines.append(denizen)
+            lines.append("")
+        
+        danger = hex_data.get('danger')
+        if danger:
+            lines.append("## Danger")
+            lines.append(danger)
+            lines.append("")
+        
+        atmosphere = hex_data.get('atmosphere')
+        if atmosphere:
+            lines.append("## Atmosphere")
+            lines.append(atmosphere)
+            lines.append("")
+        
+        notable_feature = hex_data.get('notable_feature')
+        if notable_feature:
+            lines.append("## Notable Feature")
+            lines.append(notable_feature)
+            lines.append("")
+        
+        treasure = hex_data.get('treasure')
+        if treasure:
+            lines.append("## Treasure")
+            lines.append(treasure)
+            lines.append("")
+        
+        ancient_knowledge = hex_data.get('ancient_knowledge')
+        if ancient_knowledge:
+            lines.append("## Ancient Knowledge")
+            lines.append(ancient_knowledge)
+            lines.append("")
+        
+        loot = hex_data.get('loot')
+        if loot:
+            lines.append("## Loot")
+            lines.append(str(loot))
+            lines.append("")
+    
+    else:
+        # Generic hex content
+        encounter = hex_data.get('encounter')
+        if encounter:
+            lines.append("## Encounter")
+            lines.append(encounter)
+            lines.append("")
+        
+        denizen = hex_data.get('denizen')
+        if denizen:
+            lines.append("## Denizen")
+            lines.append(denizen)
+            lines.append("")
+        
+        notable_feature = hex_data.get('notable_feature')
+        if notable_feature:
+            lines.append("## Notable Feature")
+            lines.append(notable_feature)
+            lines.append("")
+        
+        atmosphere = hex_data.get('atmosphere')
+        if atmosphere:
+            lines.append("## Atmosphere")
+            lines.append(atmosphere)
+            lines.append("")
+        
+        loot = hex_data.get('loot')
+        if loot:
+            lines.append("## Loot")
+            lines.append(str(loot))
+            lines.append("")
+    
+    return "\n".join(lines) 

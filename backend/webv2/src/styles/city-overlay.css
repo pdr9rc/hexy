@@ -1,0 +1,446 @@
+/* City Overlay Additional Styles - Authentic Mörk Borg Design */
+
+/* City hex type colors - Mörk Borg palette */
+.city-district {
+  background: var(--mork-yellow) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-building {
+  background: var(--mork-pink) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-street {
+  background: var(--mork-gray) !important;
+  color: var(--mork-white) !important;
+}
+
+.city-landmark {
+  background: var(--mork-cyan) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-market {
+  background: var(--mork-green) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-temple {
+  background: var(--mork-yellow) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-tavern {
+  background: var(--mork-pink) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-guild {
+  background: var(--mork-cyan) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-residence {
+  background: var(--mork-green) !important;
+  color: var(--mork-black) !important;
+}
+
+.city-ruins {
+  background: var(--mork-gray) !important;
+  color: var(--mork-white) !important;
+}
+
+.city-unknown {
+  background: var(--mork-dark-gray) !important;
+  color: var(--mork-white) !important;
+}
+
+.city-empty {
+  background: var(--mork-black) !important;
+  color: var(--mork-gray) !important;
+  border: 1px dashed var(--mork-gray) !important;
+}
+
+.city-empty .city-hex-symbol {
+  opacity: 0.3;
+}
+
+/* District-specific styling */
+.city-hex-cell[class*="district-"] {
+  border: 2px solid var(--mork-yellow);
+}
+
+.city-hex-cell[class*="district-"]:hover {
+  border-color: var(--mork-pink);
+}
+
+.city-hex-symbol {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.25rem;
+}
+
+/* City overlay grid layout */
+.city-overlay-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2px;
+}
+
+.city-hex-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mork-cyan);
+  margin: 1px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.city-hex-cell:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  z-index: 10;
+}
+
+.city-hex-cell.city-empty {
+  background: var(--mork-black) !important;
+  color: var(--mork-gray) !important;
+  border: 1px dashed var(--mork-gray) !important;
+  cursor: default;
+}
+
+.city-hex-cell.city-empty:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* City legend styles */
+.city-legend {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.city-legend h4 {
+  color: var(--mork-yellow);
+  margin-bottom: 0.5rem;
+  font-family: "adhesive-nr-seven", serif;
+  text-transform: uppercase;
+}
+
+.legend-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.legend-item .symbol {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  border: 1px solid var(--border-muted);
+}
+
+/* City hex details */
+.city-hex-details {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-primary);
+}
+
+.city-hex-details h3 {
+  color: var(--mork-yellow);
+  margin-bottom: 0.5rem;
+  font-family: "adhesive-nr-seven", serif;
+  text-transform: uppercase;
+}
+
+.hex-type-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.hex-type-badge.city-district {
+  background: var(--mork-yellow);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-building {
+  background: var(--mork-pink);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-street {
+  background: var(--mork-gray);
+  color: var(--mork-white);
+}
+
+.hex-type-badge.city-landmark {
+  background: var(--mork-cyan);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-market {
+  background: var(--mork-green);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-temple {
+  background: var(--mork-yellow);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-tavern {
+  background: var(--mork-pink);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-guild {
+  background: var(--mork-cyan);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-residence {
+  background: var(--mork-green);
+  color: var(--mork-black);
+}
+
+.hex-type-badge.city-ruins {
+  background: var(--mork-gray);
+  color: var(--mork-white);
+}
+
+/* Detail sections */
+.detail-section {
+  margin-bottom: 1rem;
+}
+
+.detail-section h4 {
+  color: var(--mork-pink);
+  margin-bottom: 0.5rem;
+  font-family: "adhesive-nr-seven", serif;
+  text-transform: uppercase;
+}
+
+.detail-section p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.detail-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.detail-section li {
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--mork-gray);
+}
+
+/* Random table styling */
+.random-table {
+  background: var(--bg-tertiary);
+  padding: 1rem;
+  border: 1px solid var(--border-secondary);
+  margin-top: 1rem;
+}
+
+/* Position info */
+.position-info {
+  background: var(--bg-secondary);
+  padding: 0.5rem;
+  border: 1px solid var(--border-muted);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+/* City View Styles */
+.city-view-loading,
+.city-view-error,
+.city-view-empty,
+.city-view-details,
+.city-view-overlay,
+.city-view-ascii,
+.city-hex-details {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.city-details-header,
+.city-overlay-header,
+.city-ascii-header,
+.hex-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-primary);
+}
+
+.city-details-title,
+.city-overlay-title,
+.city-ascii-title,
+.hex-details-title {
+  color: var(--text-accent);
+  margin: 0;
+  font-family: "Jacquard 12", monospace;
+}
+
+.city-details-controls,
+.city-overlay-controls,
+.city-ascii-controls,
+.hex-details-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.city-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.city-info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-primary);
+}
+
+.city-info-label {
+  font-weight: bold;
+  color: var(--text-accent);
+}
+
+.city-info-value {
+  color: var(--text-secondary);
+}
+
+.city-description,
+.city-features,
+.city-npcs {
+  margin-bottom: 20px;
+}
+
+.city-description h3,
+.city-features h3,
+.city-npcs h3 {
+  color: var(--text-accent);
+  margin: 0 0 10px 0;
+  font-family: "Jacquard 12", monospace;
+}
+
+.city-description p,
+.city-features p,
+.city-npcs p {
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.city-overlay-legend {
+  background: var(--bg-secondary);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-primary);
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.city-overlay-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--bg-secondary);
+  padding: 10px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-primary);
+}
+
+.city-overlay-row {
+  display: flex;
+  gap: 2px;
+}
+
+.city-ascii-content {
+  background: var(--bg-secondary);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-primary);
+}
+
+.city-ascii-content pre {
+  margin: 0;
+  color: var(--text-accent);
+  font-family: "Courier New", monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Responsive design for city overlays */
+@media (max-width: 768px) {
+  .city-overlay-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .city-hex-cell {
+    width: 60px;
+    height: 52px;
+  }
+  
+  .city-hex-symbol {
+    font-size: 1.2rem;
+  }
+  
+  .legend-items {
+    grid-template-columns: 1fr;
+  }
+
+  .city-details-header,
+  .city-overlay-header,
+  .city-ascii-header,
+  .hex-details-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .city-info-grid {
+    grid-template-columns: 1fr;
+  }
+} 

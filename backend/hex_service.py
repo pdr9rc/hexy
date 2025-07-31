@@ -1097,6 +1097,11 @@ class HexService:
         
         return stats
 
+    def clear_hex_cache(self, hex_code: str) -> None:
+        """Clear cached data for a specific hex."""
+        if hex_code in self.hex_data_cache:
+            del self.hex_data_cache[hex_code]
+
 
 # Global instance
 hex_service = HexService() 

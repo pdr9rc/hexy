@@ -1,0 +1,19 @@
+{
+  "name": "hexy-webv2",
+  "version": "1.0.0",
+  "description": "Clean architecture web interface for Hexy",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "@types/node": "^20.0.0"
+  }
+} 

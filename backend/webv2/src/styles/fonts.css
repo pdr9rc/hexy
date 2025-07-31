@@ -1,0 +1,28 @@
+/* Font imports and styles for Hexy WebV2 */
+
+@font-face {
+  font-family: 'BLACH';
+  src: url('/src/assets/fonts/BLACH___.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Jacquard';
+  src: url('/src/assets/fonts/Jacquard12-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Font utility classes */
+.font-blach {
+  font-family: 'BLACH', 'Courier New', monospace;
+}
+
+.font-jacquard {
+  font-family: 'Jacquard', serif;
+}
+
+.font-mono {
+  font-family: 'Courier New', monospace;
+} 
