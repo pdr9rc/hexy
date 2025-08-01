@@ -1,0 +1,27 @@
+{
+  "category": "npc_wants",
+  "tables": {
+    "wants": [
+      "Morte gloriosa",
+      "Viajar pelos reinos sombrios",
+      "Derramamento de sangue",
+      "Perdão pelos seus pecados",
+      "Vingança cruel",
+      "Retirar-se para as trevas",
+      "Amor maldito",
+      "Uma bebida forte",
+      "Ser deixado em paz",
+      "Conhecimento proibido",
+      "Sentir que há algum significado ou propósito nesta perdição",
+      "Apostar a alma"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Desejos e motivações dos NPCs de Mörk Borg",
+    "usage": "Rola d12 para determinar o que o NPC mais deseja",
+    "migrated_from": "databases/languages/en/npc_wants.json"
+  }
+}

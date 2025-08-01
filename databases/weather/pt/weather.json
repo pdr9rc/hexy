@@ -1,0 +1,38 @@
+{
+  "category": "weather",
+  "tables": {
+    "weather_conditions": [
+      "Cinzento sem vida",
+      "Chuva martelante",
+      "Vento penetrante",
+      "Tempestade ensurdecedora",
+      "Negro como a noite",
+      "Silêncio mortal",
+      "Aguaceiro torrencial",
+      "Névoa espessa como sopa",
+      "Geada crepitante",
+      "Chuvisco irritante",
+      "Trovoada rugente",
+      "Frio sepulcral",
+      "Frio sobrenatural",
+      "Sons arranhantes",
+      "Névoa púrpura",
+      "Nevoeiro sombrio",
+      "Vapor de suor",
+      "Luz débil",
+      "Bruma espessa",
+      "Maré de esgoto",
+      "Nuvem de metano",
+      "Tocha cuspideira",
+      "Esporos de cogumelos"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Condições meteorológicas de Mörk Borg",
+    "usage": "Rola d12 para determinar o tempo actual",
+    "migrated_from": "databases/languages/en/weather.json"
+  }
+}

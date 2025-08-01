@@ -3,58 +3,58 @@
   "tables": {
     "denizen_names_prefix": [
       "Irmão",
-      "Irmã",
-      "Pai",
-      "Mãe",
+      "Irmã", 
+      "Padre",
+      "Madre",
       "Velho",
       "Jovem",
       "Louco",
       "Santo",
-      "Herege",
+      "Herético",
       "Perdido"
     ],
     "denizen_names_suffix": [
-      "Ossos",
-      "Cinza",
+      "Ossada",
+      "Cinzas",
       "Corvo",
       "Espinho",
       "Ferrugem",
-      "Mofo",
-      "Sujeira",
-      "Podridão",
+      "Bolor",
+      "Imundície",
+      "Putrefacção",
       "Perdição",
-      "Praga"
+      "Pestilência"
     ],
     "denizen_motivations": [
-      "busca redenção pelos pecados passados",
-      "caça conhecimento proibido",
-      "foge de perseguidores terríveis",
-      "procura família perdida",
-      "guarda segredos antigos",
-      "comercia com miséria humana"
+      "procura redenção pelos pecados que o atormentam",
+      "busca conhecimentos proibidos nas trevas",
+      "foge de perseguidores das profundezas infernais",
+      "procura familiares perdidos nas brumas da morte",
+      "guarda segredos ancestrais que não devem ser revelados",
+      "mercadeja com a miséria e desespero dos mortais"
     ],
     "denizen_features": [
-      "Coberto de cicatrizes rituais",
-      "Perdeu vários dedos",
-      "Olhos turvos com cataratas",
-      "Murmura orações constantemente",
-      "Cheira a decomposição",
-      "Usa robes esfarrapados"
+      "Coberto de cicatrizes rituais sanguinolentas",
+      "Perdeu vários dedos em sacrifícios ancestrais",
+      "Olhos nublados pelas cataratas da maldição",
+      "Murmura orações blasfemas incessantemente",
+      "Exala o fétido aroma da decomposição",
+      "Veste trapos esfarrapados de túnicas profanas"
     ],
     "denizen_demeanors": [
       "Hostil",
-      "Suspeito",
+      "Desconfiado",
       "Desesperado",
-      "Prestativo",
+      "Prestimoso",
       "Indiferente",
       "Enigmático"
     ],
     "atmospheres": [
-      "Silêncio opressivo",
-      "Sons ecoantes",
-      "Frio sobrenatural",
-      "Névoa espessa",
-      "Luzes estranhas"
+      "Silêncio opressivo que esmaga a alma",
+      "Ecos sombrios que reverberam do além",
+      "Frio sobrenatural que penetra os ossos",
+      "Névoa espessa que oculta horrores",
+      "Luzes espectrais que dançam nas trevas"
     ]
   },
   "metadata": {

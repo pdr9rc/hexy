@@ -1,0 +1,21 @@
+{
+  "category": "npc_apocalypse",
+  "tables": {
+    "apocalypse_attitudes": [
+      "Melhor aceitar o fim",
+      "Alguém há de remediar isto",
+      "Já era tempo, maldição",
+      "Estamos condenados!",
+      "Tabela opcional, para uma reviravolta",
+      "Um amaldiçoado"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Atitudes dos NPCs de Mörk Borg em relação ao apocalipse",
+    "usage": "Rola d6 para determinar a visão do NPC sobre o fim do mundo",
+    "migrated_from": "databases/languages/en/npc_apocalypse.json"
+  }
+}

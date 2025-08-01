@@ -1,0 +1,35 @@
+{
+  "category": "tavern_patrons",
+  "tables": {
+    "patron_traits": [
+      "Imundície",
+      "Bebedor Inveterado",
+      "Olho Único",
+      "Gengivas Podres",
+      "Rapaz Fino (meio-irmão do Rapaz Oleoso)",
+      "Fédido",
+      "Fanfarrão",
+      "Bisbilhoteiro",
+      "Mão de Gancho",
+      "Sorvedor",
+      "Agressivo",
+      "Lamurioso",
+      "Arcebispo da Zombaria (bully sorridente)",
+      "Tosse Catastrófica",
+      "Lágrimas Histéricas",
+      "Sem Nariz",
+      "Sem Língua",
+      "Rapaz Oleoso (meio-irmão do Rapaz Fino)",
+      "Sonhos Traumáticos",
+      "Cara Corroída"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Traços e alcunhas dos fregueses de taverna de Mörk Borg",
+    "usage": "Rola d20 para determinar o traço ou alcunha do freguês",
+    "migrated_from": "databases/languages/en/tavern_patrons.json"
+  }
+}

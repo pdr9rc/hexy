@@ -1,0 +1,101 @@
+{
+  "category": "tavern_menu",
+  "tables": {
+    "select_menu": [
+      {
+        "name": "Frango estufado com maçãs encharcadas em vinho perigosamente alcoólico",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Nabo temperado do solo sombrio de Sarkash, uma iguaria",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Ensopado de Galgenbeck com javalis embrionários inteiros. Delicioso!",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Refogado de inhame de Tveland com fatias de trufa-tumular pungente",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Empada de Migol (veado enegrecido e gelatina de caldo de ossos de galinha)",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Sopa negra com cara de porco assada",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      }
+    ],
+    "budget_menu": [
+      {
+        "name": "Sopa aguada de fémur. O fémur é grande. Está lá há um tempo.",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Sopa de lodo espesso! Pelo menos um pedaço. O lodo é puro, asseguro-vos!",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Pudim azedo de aipo com acompanhamento de carne-da-semana-passada comprimida",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Mistura de baga-sombria (Resistência TR12 para evitar diarreia explosiva)",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "\"Fel de goblin\", famoso caldo de lama-pântano. Provém de pântanos locais!",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Cabeça-de-porco-olhante assada com lábios-sussurrantes recheados. A maioria não lhe toca.",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Ensopado cremoso e cerveja robusta (especialidade da Lotta Gravy)",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Galgenburger (carne misteriosa, pode transformar-vos em zumbi)",
+        "price": 3,
+        "currency": "silver",
+        "quality": "budget"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Opções de menu de taverna de Mörk Borg",
+    "usage": "Menu selecto (4 pratas) ou menu económico (2 pratas) para refeições de taverna",
+    "migrated_from": "databases/languages/en/tavern_menu.json"
+  }
+}
