@@ -1,0 +1,33 @@
+{
+  "category": "basic",
+  "tables": {
+    "populations": [
+      "20-50",
+      "51-100",
+      "101-500",
+      "501-1000"
+    ],
+    "buildings": [
+      "Palha",
+      "Adobe",
+      "Pedra",
+      "Troncos",
+      "Tijolo de barro",
+      "Argamassa de cal"
+    ],
+    "sounds": [
+      "Silêncio",
+      "Agitação",
+      "Luta",
+      "Risadas",
+      "Gritos",
+      "Cânticos"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/pt/basic.json"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "category": "tavern_menu",
+  "tables": {
+    "select_menu": [
+      {
+        "name": "Braised chicken with dangerously alcoholic wine-drenched apples",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Spiced rutabaga/swede from dark Sarkash soil, a delicacy",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Galgenbeckian stew with whole embryonic boars. Delicious!",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Tveland yam hash with sliced pungent tomb-truffle",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Migol's pie (blackened venison and chicken bone broth jelly)",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      },
+      {
+        "name": "Black soup with baked hog face",
+        "price": 4,
+        "currency": "silver",
+        "quality": "select"
+      }
+    ],
+    "budget_menu": [
+      {
+        "name": "Watery femur soup. The femur is large. It's been there a while.",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Thick ooze soup! At least one chunk. The ooze is pure, I assure you!",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Sour celery pudding with a side of compressed last-week's-meat",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Gloomberry mix (Toughness DR12 to avoid explosive diarrhea)",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "\"Goblin's gall\", famous swamp-mud broth. Sourced from local swamps!",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Baked staring-pig-head with filled whispering-lips. Most won't touch it.",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Chunky stew and hearty ale (Lotta Gravy's specialty)",
+        "price": 2,
+        "currency": "silver",
+        "quality": "budget"
+      },
+      {
+        "name": "Galgenburger (mystery meat, may turn you into a zombie)",
+        "price": 3,
+        "currency": "silver",
+        "quality": "budget"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg tavern menu options",
+    "usage": "Select menu (4s) or budget menu (2s) for tavern meals",
+    "migrated_from": "databases/languages/en/tavern_menu.json"
+  }
+}

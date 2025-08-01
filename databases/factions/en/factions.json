@@ -1,0 +1,275 @@
+{
+  "category": "factions",
+  "tables": {
+    "major_factions": [
+      {
+        "name": "The Dying Church",
+        "description": "The dominant religious institution that enforces the Ordinance of Devotion",
+        "leader": "Arch-Priestess Josilfa Migol",
+        "headquarters": "The Cathedral",
+        "influence": "High",
+        "attitude": "Fanatically devoted",
+        "activities": [
+          "Sacrifice ceremonies",
+          "Heretic hunting",
+          "Soul collection",
+          "Religious enforcement"
+        ]
+      },
+      {
+        "name": "House of Broken Nobles",
+        "description": "Fallen aristocracy clinging to remnants of power and privilege",
+        "leader": "Various disgraced nobles",
+        "headquarters": "The Rotting Mansion",
+        "influence": "Medium",
+        "attitude": "Openly contemptuous",
+        "activities": [
+          "Political intrigue",
+          "Wealth hoarding",
+          "Status preservation",
+          "Corruption"
+        ]
+      },
+      {
+        "name": "Merchants of Misery",
+        "description": "Guild controlling trade in forbidden goods and human suffering",
+        "leader": "Koopman Achim Igelfreund",
+        "headquarters": "The Corpse Warehouse",
+        "influence": "High",
+        "attitude": "Opportunistically friendly",
+        "activities": [
+          "Forbidden trade",
+          "Soul brokering",
+          "Corpse commerce",
+          "Black market"
+        ]
+      },
+      {
+        "name": "The Bone Throne",
+        "description": "Secretive order of necromancers and death cultists",
+        "leader": "Unknown",
+        "headquarters": "Hidden catacombs",
+        "influence": "Medium",
+        "attitude": "Secretly plotting",
+        "activities": [
+          "Necromancy",
+          "Death rituals",
+          "Corpse manipulation",
+          "Dark magic"
+        ]
+      },
+      {
+        "name": "Plague Wardens",
+        "description": "Organization dedicated to managing and exploiting disease",
+        "leader": "Archhealer René Elwes",
+        "headquarters": "The Sooty Hospital",
+        "influence": "Medium",
+        "attitude": "Cautiously neutral",
+        "activities": [
+          "Disease management",
+          "Medical experiments",
+          "Plague control",
+          "Healing services"
+        ]
+      },
+      {
+        "name": "Shadow Parliament",
+        "description": "Secretive council of powerful individuals manipulating city politics",
+        "leader": "Council of Worms",
+        "headquarters": "Hidden chambers",
+        "influence": "Very High",
+        "attitude": "Secretly plotting",
+        "activities": [
+          "Political manipulation",
+          "Information gathering",
+          "Assassination",
+          "Power brokering"
+        ]
+      }
+    ],
+    "local_factions": [
+      {
+        "name": "Basilisk Knights Order",
+        "description": "Elite warriors dedicated to hunting heretics and protecting the church",
+        "leader": "Cardinal Benjamin von Swerdenö",
+        "headquarters": "The Cathedral's Shadow",
+        "influence": "Medium",
+        "attitude": "Violently hostile",
+        "activities": [
+          "Heretic hunting",
+          "Religious enforcement",
+          "Combat training",
+          "Patrol duties"
+        ]
+      },
+      {
+        "name": "Worm Sorcerer's Disciples",
+        "description": "Cult following the teachings of the mysterious Worm Sorcerer",
+        "leader": "Worm Sorcerer",
+        "headquarters": "The Worm Sorcerer's Hideout",
+        "influence": "Low",
+        "attitude": "Fanatically devoted",
+        "activities": [
+          "Dark magic",
+          "Worm breeding",
+          "Corruption",
+          "Secret rituals"
+        ]
+      },
+      {
+        "name": "Dunglander Collective",
+        "description": "Group specializing in harvesting and cultivating mushrooms",
+        "leader": "Maggot Marl",
+        "headquarters": "Klum's Big Shroom",
+        "influence": "Low",
+        "attitude": "Grudgingly helpful",
+        "activities": [
+          "Mushroom farming",
+          "Dung harvesting",
+          "Food production",
+          "Trade"
+        ]
+      },
+      {
+        "name": "The Vultures",
+        "description": "Scavengers who collect spoils from the city's waste and corpses",
+        "leader": "Various scavenger chiefs",
+        "headquarters": "Sewer entrances",
+        "influence": "Low",
+        "attitude": "Deeply suspicious",
+        "activities": [
+          "Scavenging",
+          "Corpse collection",
+          "Waste processing",
+          "Information gathering"
+        ]
+      },
+      {
+        "name": "Mushroom Farmers Guild",
+        "description": "Professional organization controlling mushroom cultivation and trade",
+        "leader": "Guild Master",
+        "headquarters": "The Guild Hall",
+        "influence": "Medium",
+        "attitude": "Cautiously neutral",
+        "activities": [
+          "Mushroom cultivation",
+          "Trade regulation",
+          "Quality control",
+          "Market control"
+        ]
+      },
+      {
+        "name": "Flutter Breeders",
+        "description": "Specialists in breeding and training the dangerous Flutter creatures",
+        "leader": "Master Breeder",
+        "headquarters": "The Breeding Pits",
+        "influence": "Low",
+        "attitude": "Fearfully obedient",
+        "activities": [
+          "Creature breeding",
+          "Training",
+          "Sale",
+          "Research"
+        ]
+      }
+    ],
+    "criminal_factions": [
+      {
+        "name": "Grave Robber Crews",
+        "description": "Organized groups that raid tombs and collect valuable corpses",
+        "leader": "Various crew leaders",
+        "headquarters": "Hidden tunnels",
+        "influence": "Low",
+        "attitude": "Deeply suspicious",
+        "activities": [
+          "Tomb raiding",
+          "Corpse collection",
+          "Grave robbing",
+          "Underground trade"
+        ]
+      },
+      {
+        "name": "Mercenary Companies",
+        "description": "Professional fighters for hire, often working for the highest bidder",
+        "leader": "Various captains",
+        "headquarters": "Taverns and barracks",
+        "influence": "Medium",
+        "attitude": "Opportunistically friendly",
+        "activities": [
+          "Combat",
+          "Protection",
+          "Escort",
+          "Assassination"
+        ]
+      },
+      {
+        "name": "Cultist Cells",
+        "description": "Secretive groups worshipping forbidden entities and practicing dark magic",
+        "leader": "Various cult leaders",
+        "headquarters": "Hidden locations",
+        "influence": "Low",
+        "attitude": "Secretly plotting",
+        "activities": [
+          "Dark rituals",
+          "Worship",
+          "Recruitment",
+          "Sacrifice"
+        ]
+      },
+      {
+        "name": "Death Merchant Cartels",
+        "description": "Organizations specializing in the trade of death-related goods and services",
+        "leader": "Various cartel bosses",
+        "headquarters": "The Corpse Market",
+        "influence": "Medium",
+        "attitude": "Opportunistically friendly",
+        "activities": [
+          "Death trade",
+          "Corpse commerce",
+          "Funeral services",
+          "Necromantic supplies"
+        ]
+      }
+    ],
+    "faction_relationships": [
+      {
+        "faction1": "The Dying Church",
+        "faction2": "Basilisk Knights Order",
+        "relationship": "Allied",
+        "description": "The church provides authority and the knights provide enforcement"
+      },
+      {
+        "faction1": "The Dying Church",
+        "faction2": "Cultist Cells",
+        "relationship": "Hostile",
+        "description": "The church actively hunts and destroys cultist groups"
+      },
+      {
+        "faction1": "Merchants of Misery",
+        "faction2": "Death Merchant Cartels",
+        "relationship": "Competitive",
+        "description": "Both groups compete for control of death-related commerce"
+      },
+      {
+        "faction1": "House of Broken Nobles",
+        "faction2": "Shadow Parliament",
+        "relationship": "Manipulated",
+        "description": "The parliament manipulates the nobles for political gain"
+      },
+      {
+        "faction1": "The Vultures",
+        "faction2": "Grave Robber Crews",
+        "relationship": "Cooperative",
+        "description": "Both groups work together in corpse collection and processing"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg faction database for cities",
+    "usage": "Reference for faction generation and relationships",
+    "migrated_from": "databases/languages/en/factions.json"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "category": "enhanced_loot",
+  "tables": {
+    "weapon_loot": [
+      "Rusted sword (+1 damage, breaks on 1)",
+      "Bone dagger (1d4, +1 vs undead)",
+      "Plague doctor's cane (1d6, causes disease)",
+      "Executioner's axe (1d8, intimidating)",
+      "Witch hunter's crossbow (1d6, +2 vs magic users)",
+      "Grave robber's crowbar (1d4, useful tool)",
+      "Cursed blade (1d8, hurts wielder on 1)",
+      "Holy symbol mace (1d6, +1 vs undead)",
+      "Poisoned stiletto (1d4, save or paralyzed)",
+      "Broken knight's sword (1d6, once noble)"
+    ],
+    "armor_loot": [
+      "Tattered leather armor (AC 12, smells awful)",
+      "Plague doctor's robes (AC 11, disease immunity)",
+      "Rusty chainmail (AC 14, noisy)",
+      "Bone plate armor (AC 15, intimidating)",
+      "Witch's cloak (AC 11, +1 vs magic)",
+      "Grave dirt coating (AC 10, undead ignore you)",
+      "Cursed helmet (AC +1, constant whispers)",
+      "Holy vestments (AC 12, +1 vs evil)",
+      "Thieves' leathers (AC 13, +1 stealth)",
+      "Broken shield (AC +1, once magnificent)"
+    ],
+    "valuable_loot": [
+      "Bag of silver teeth (50 coins)",
+      "Cursed jewelry (100 coins, bad luck)",
+      "Rare plague mask (200 coins to collectors)",
+      "Ancient tome (300 coins, forbidden knowledge)",
+      "Soul gem (500 coins, whispers constantly)",
+      "Golden skull chalice (150 coins, unholy)",
+      "Witch's grimoire (400 coins, dangerous spells)",
+      "Noble's signet ring (80 coins, political value)",
+      "Demon bottle (600 coins, contains something)",
+      "Relic bone (250 coins, holy/unholy power)"
+    ],
+    "utility_loot": [
+      "Thieves' tools (lockpicking kit)",
+      "Healing potion (restore 1d6 HP)",
+      "Rope (50 feet, sturdy)",
+      "Lantern with oil (6 hours light)",
+      "Grappling hook (climbing aid)",
+      "Poison vial (coat weapon)",
+      "Holy water (1d4 damage to undead)",
+      "Smoke bomb (escape aid)",
+      "Crowbar (useful tool)",
+      "Manacles (restraint device)"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/enhanced_loot.json"
+  }
+}

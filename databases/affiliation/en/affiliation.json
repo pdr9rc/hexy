@@ -1,0 +1,67 @@
+{
+  "category": "affiliation",
+  "tables": {
+    "monster_affiliations": [
+      "Dry-Witches (Water Abductors)",
+      "Slatehead Termites (Hive Swarms)",
+      "Shit Monsters (Fortress Denizens)",
+      "Flesh Puppets (Absorbing Constructs)",
+      "Terrifying TreeSpiders (Human-Handed Arachnids)",
+      "Boargod Skewered (Frenzied Blood-Beast)",
+      "Salamanders (Arsonist's Living Coals)",
+      "Lighthead Stalkers (Blinding Terrors)",
+      "Nodh (Plague-Spreading Reanimated)",
+      "Wingwalker Bats (Ash-Dwelling Flyers)",
+      "Tentacled Mole Whales (Ash-Sea Leviathans)",
+      "Grotesques (Stalking Stone-Beasts)"
+    ],
+    "npc_affiliations": [
+      "Ashmouth Raider Personalities (Deathless Elder, Sack-of-Heads)",
+      "Bloodhunter Ritualists (Half-Blooded, Full-Blooded)",
+      "Burnt Offerings Necromancers (Vessel Controllers)",
+      "Cannibal Count's Servants (Lardermen, Chef, Clerks)",
+      "Pneumatic Regretful Templars (Masked Zealots)",
+      "Urniversity Field-Researchers (Artifact Wielders)",
+      "Courtyard Dregs (Disinterested Survivors)",
+      "Pale Ones (Shrine Experimenters)",
+      "King Fathmu's Loyalists (Disgraced Royal Guard)",
+      "Memory Thieves (Identity Stealers)",
+      "Dunglander Collective (Sewer Foragers)",
+      "Scavenger Gangs (Wilderness Scroungers)"
+    ],
+    "faction_affiliations": [
+      "Ashmouth Raiders (Screaming Hordes of the Ash)",
+      "Bloodhunters (God-Draining Cultists)",
+      "Burnt Offerings (Burning-Afflicted Healers)",
+      "The Cannibal Count's Estate (Mansion of Flesh-Eaters)",
+      "The Pneumatic Order (Ascetics of Transcendence)",
+      "The Urniversity (Apocalypse Catalogers)",
+      "The Two-Headed Basilisks (The One True Faith Inquisition)",
+      "The Shadow King's Palace (Crumbling Gothic Rule)",
+      "Blood-Countess Anthelia's Court (Kergüs Aristocracy)",
+      "The Scions of Schleswig (Reanimated Ghoul-Lords)",
+      "The Mud Cult (Flesh-Shapers of Tveländ)",
+      "The Immortal Algae-Rots (Undying Swamp Denizens)"
+    ],
+    "affiliation_attitudes": [
+      "Violently Hostile (to all outsiders)",
+      "Deeply Suspicious (of new arrivals)",
+      "Cautiously Neutral (observing from afar)",
+      "Grudgingly Helpful (for a price or shared enemy)",
+      "Desperately Seeking Aid (against a greater threat)",
+      "Fanatically Devoted (to their twisted cause)",
+      "Secretly Plotting (against rivals or former allies)",
+      "Openly Contemptuous (of weakness or ignorance)",
+      "Fearfully Obedient (under constant threat)",
+      "Obsessed (with a dark purpose or desire)",
+      "Fickle and Unreliable (prone to betrayal)",
+      "Corpse-Bound (driven by undeath)"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/affiliation.json"
+  }
+}

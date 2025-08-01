@@ -1,0 +1,27 @@
+{
+  "category": "npc_wants",
+  "tables": {
+    "wants": [
+      "Glorious death",
+      "To travel",
+      "Bloodshed",
+      "Forgiveness",
+      "Revenge",
+      "To retire",
+      "Love",
+      "A drink",
+      "To be left alone",
+      "Knowledge",
+      "To feel that there is some kind of meaning or purpose to it all",
+      "Gambling"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg NPC desires and motivations",
+    "usage": "Roll d12 to determine what the NPC wants most",
+    "migrated_from": "databases/languages/en/npc_wants.json"
+  }
+}

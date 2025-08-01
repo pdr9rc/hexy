@@ -1,0 +1,62 @@
+{
+  "category": "bestiary",
+  "tables": {
+    "beast_types": [
+      "Rato da peste",
+      "Corvo cadavérico",
+      "Aranha óssea",
+      "Sanguessuga sangrenta",
+      "Lobo sombrio",
+      "Cão carniceiro",
+      "Serpente do esgoto",
+      "Besouro enferrujado",
+      "Mariposa da perdição",
+      "Sapo ácido",
+      "Rastejante espinhoso",
+      "Vespa da carne",
+      "Verme sepulcral",
+      "Morcego da praga",
+      "Aranha do vazio",
+      "Víbora da morte",
+      "Pássaro do grito",
+      "Toupeira do terror"
+    ],
+    "beast_features": [
+      "olhos vermelhos brilhantes",
+      "costelas expostas",
+      "carne apodrecida",
+      "mordida venenosa",
+      "saliva ácida",
+      "garras afiadas como navalhas",
+      "pelo doente",
+      "múltiplas cabeças",
+      "asas de osso",
+      "escamas metálicas",
+      "constantemente sangrando",
+      "emite vapores tóxicos",
+      "pele translúcida",
+      "articulações invertidas"
+    ],
+    "beast_behaviors": [
+      "caça em matilhas",
+      "alimenta-se de cadáveres",
+      "escava no subsolo",
+      "pende do teto",
+      "espreita silenciosamente",
+      "embosca das sombras",
+      "grita antes de atacar",
+      "finge-se de morto",
+      "cospe ácido",
+      "drena sangue",
+      "espalha doenças",
+      "imita vozes",
+      "atravessa paredes"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/pt/bestiary.json"
+  }
+}

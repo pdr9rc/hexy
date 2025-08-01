@@ -1,0 +1,38 @@
+{
+  "category": "weather",
+  "tables": {
+    "weather_conditions": [
+      "Lifeless grey",
+      "Hammering rain",
+      "Piercing wind",
+      "Deafening storm",
+      "Black as night",
+      "Dead quiet",
+      "Cloudburst",
+      "Soup-thick mist",
+      "Crackling frost",
+      "Irritating drizzle",
+      "Roaring thunder",
+      "Gravelike cold",
+      "Unnatural cold",
+      "Scratching sounds",
+      "Purple mist",
+      "Dark fog",
+      "Sweat vapor",
+      "Feeble light",
+      "Thick mist",
+      "Sewage tide",
+      "Methane cloud",
+      "Spitting torch",
+      "Mushroom spores"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg weather conditions",
+    "usage": "Roll d12 to determine current weather",
+    "migrated_from": "databases/languages/en/weather.json"
+  }
+}

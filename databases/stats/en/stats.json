@@ -1,0 +1,106 @@
+{
+  "category": "stats",
+  "tables": {
+    "creature_stats": {
+      "weak": {
+        "hp": "1d4",
+        "armor": "10",
+        "morale": "6",
+        "damage": "1d4"
+      },
+      "normal": {
+        "hp": "1d6",
+        "armor": "12",
+        "morale": "7",
+        "damage": "1d6"
+      },
+      "strong": {
+        "hp": "2d6",
+        "armor": "14",
+        "morale": "8",
+        "damage": "1d8"
+      },
+      "elite": {
+        "hp": "3d6",
+        "armor": "16",
+        "morale": "9",
+        "damage": "1d10"
+      },
+      "boss": {
+        "hp": "4d6+4",
+        "armor": "18",
+        "morale": "10",
+        "damage": "2d6"
+      }
+    },
+    "npc_stats": {
+      "peasant": {
+        "hp": "1d4",
+        "armor": "10",
+        "morale": "5",
+        "damage": "1d3"
+      },
+      "soldier": {
+        "hp": "1d6+1",
+        "armor": "14",
+        "morale": "7",
+        "damage": "1d6"
+      },
+      "veteran": {
+        "hp": "2d6",
+        "armor": "16",
+        "morale": "8",
+        "damage": "1d8"
+      },
+      "leader": {
+        "hp": "3d6",
+        "armor": "18",
+        "morale": "9",
+        "damage": "1d10"
+      },
+      "champion": {
+        "hp": "4d6+2",
+        "armor": "20",
+        "morale": "10",
+        "damage": "2d6"
+      }
+    },
+    "special_abilities": [
+      "Regenerates 1 HP per round",
+      "Immune to normal weapons",
+      "Causes fear (morale -2)",
+      "Poisonous attack (save or die)",
+      "Invisible until attacks",
+      "Flies at will",
+      "Breathes fire (2d6 damage)",
+      "Drains life force",
+      "Splits when killed",
+      "Phases through walls",
+      "Summons reinforcements",
+      "Reflects magic",
+      "Berserker rage (+2 damage)",
+      "Death curse on killer",
+      "Explodes when killed"
+    ],
+    "weaknesses": [
+      "Vulnerable to silver",
+      "Harmed by holy symbols",
+      "Fears bright light",
+      "Cannot cross running water",
+      "Repelled by garlic",
+      "Weakened by iron",
+      "Affected by salt circles",
+      "Damaged by holy water",
+      "Bound by true names",
+      "Confused by mirrors",
+      "Paralyzed by music",
+      "Slowed by cold iron"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/stats.json"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "category": "tavern_innkeeper",
+  "tables": {
+    "innkeeper_quirks": [
+      "Katleen \"the Castrator\" Keen, the bandit queen, is hiding in the loft.",
+      "Thinks you are the Lokr cult who promised to come in disguise and bury them alive. (The cult is already here.)",
+      "Three different children from three different guest families vanished in the night without a sound or trace.",
+      "They say the Two-Headed Basilisks are at large and searching for heathens.",
+      "Judging by the droppings, something has gotten into ... well, everything. (Toughness DR12 or lose d4 HP vomiting.)",
+      "Jorat-Tug's rowdy gang were recently reanimated by ... something. He's too scared to tell them they are dead.",
+      "Old Man Agar is exhibiting his infectious ulcers. Soon he'll start popping them to a jaunty beat.",
+      "One patron is clearly a disguised necromancer. (Nearly all are; that one is just bad at disguises.)",
+      "Clear and audible scratching from the cellar hatch. Everyone else ignores it.",
+      "Their caged bird has stopped singing and started speaking prophecy."
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg tavern innkeeper quirks and problems",
+    "usage": "Roll d10 to determine why the innkeeper is twitching",
+    "migrated_from": "databases/languages/en/tavern_innkeeper.json"
+  }
+}

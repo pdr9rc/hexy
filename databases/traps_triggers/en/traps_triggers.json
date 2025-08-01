@@ -1,0 +1,29 @@
+{
+  "category": "traps_triggers",
+  "tables": {
+    "trap_triggers": [
+      "... not leaving the room in time.",
+      "... stepping on the wrong floor tile.",
+      "... touching a damned doorknob.",
+      "... pushing an alluring button.",
+      "... turning the key.",
+      "... discussing a foul inscription.",
+      "... stealing a prized item.",
+      "... talking too loudly.",
+      "... taking a torch.",
+      "... opening a box/sarcophagus.",
+      "... treading on the trip wire.",
+      "... rattling your weapons.",
+      "... drinking Elixir Vitalis in a cursed room.",
+      "... lighting a lantern where gloom reigns."
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg trap trigger conditions",
+    "usage": "Roll to determine how the trap was triggered",
+    "migrated_from": "databases/languages/en/traps_triggers.json"
+  }
+}

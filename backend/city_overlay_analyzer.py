@@ -53,7 +53,7 @@ class CityOverlayAnalyzer:
             return city_data['name']
         
         # Try to load city-specific database
-        city_db_path = f'databases/cities/{city_key}.json'
+        city_db_path = f'databases/cities/en/{city_key}.json'
         if os.path.exists(city_db_path):
             try:
                 with open(city_db_path, 'r', encoding='utf-8') as f:
@@ -494,7 +494,7 @@ class CityOverlayAnalyzer:
     
     def _load_city_database(self, city_name: str) -> Optional[Dict[str, Any]]:
         """Load city-specific database if available."""
-        city_db_path = f'databases/cities/{city_name}.json'
+        city_db_path = f'databases/cities/en/{city_name}.json'
         print(f"DEBUG: Looking for city database at: {city_db_path}")
         if os.path.exists(city_db_path):
             try:
@@ -523,7 +523,7 @@ class CityOverlayAnalyzer:
         
         # Load city events
         try:
-            events_path = 'databases/languages/en/city_events.json'
+            events_path = 'databases/city_events/en/city_events.json'
             if os.path.exists(events_path):
                 with open(events_path, 'r', encoding='utf-8') as f:
                     events_data = json.load(f)
@@ -537,7 +537,7 @@ class CityOverlayAnalyzer:
         
         # Load weather conditions
         try:
-            weather_path = 'databases/languages/en/weather.json'
+            weather_path = 'databases/weather/en/weather.json'
             if os.path.exists(weather_path):
                 with open(weather_path, 'r', encoding='utf-8') as f:
                     weather_data = json.load(f)
@@ -552,7 +552,7 @@ class CityOverlayAnalyzer:
         # Load NPC traits, concerns, wants, secrets
         for npc_type in ['npc_traits', 'npc_concerns', 'npc_wants', 'npc_secrets']:
             try:
-                npc_path = f'databases/languages/en/{npc_type}.json'
+                npc_path = f'databases/{npc_type}/en/{npc_type}.json'
                 if os.path.exists(npc_path):
                     with open(npc_path, 'r', encoding='utf-8') as f:
                         npc_data = json.load(f)
@@ -573,7 +573,7 @@ class CityOverlayAnalyzer:
         # Load tavern content
         for tavern_type in ['tavern_menu', 'tavern_innkeeper', 'tavern_patrons']:
             try:
-                tavern_path = f'databases/languages/en/{tavern_type}.json'
+                tavern_path = f'databases/{tavern_type}/en/{tavern_type}.json'
                 if os.path.exists(tavern_path):
                     with open(tavern_path, 'r', encoding='utf-8') as f:
                         tavern_data = json.load(f)
@@ -598,7 +598,7 @@ class CityOverlayAnalyzer:
         # Load market content (items, beasts, services)
         for market_type in ['items_prices', 'beasts_prices', 'services_prices']:
             try:
-                market_path = f'databases/languages/en/{market_type}.json'
+                market_path = f'databases/{market_type}/en/{market_type}.json'
                 if os.path.exists(market_path):
                     with open(market_path, 'r', encoding='utf-8') as f:
                         market_data = json.load(f)
@@ -618,7 +618,7 @@ class CityOverlayAnalyzer:
         # Load NPC content (names, trades, affiliations)
         for npc_type in ['npc_names', 'npc_trades', 'affiliation']:
             try:
-                npc_path = f'databases/languages/en/{npc_type}.json'
+                npc_path = f'databases/{npc_type}/en/{npc_type}.json'
                 if os.path.exists(npc_path):
                     with open(npc_path, 'r', encoding='utf-8') as f:
                         npc_data = json.load(f)
@@ -645,7 +645,7 @@ class CityOverlayAnalyzer:
         
         # Load faction content
         try:
-            faction_path = 'databases/languages/en/factions.json'
+            faction_path = 'databases/factions/en/factions.json'
             if os.path.exists(faction_path):
                 with open(faction_path, 'r', encoding='utf-8') as f:
                     faction_data = json.load(f)

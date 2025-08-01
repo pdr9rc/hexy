@@ -1,0 +1,218 @@
+{
+  "category": "terrain",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/core/terrain.json"
+  },
+  "tables": {
+    "snow": {
+      "encounters": [
+        "Antiga entrada de caverna de gelo",
+        "Cachoeira congelada escondendo uma passagem",
+        "Acúmulo de neve escondendo algo",
+        "Cadáveres cobertos de gelo de viajantes",
+        "Matilha de feras adaptadas à neve",
+        "Acampamento abandonado soterrado na neve",
+        "Formas de gelo frágeis e cintilantes que anseiam por calor"
+      ],
+      "denizen_types": [
+        "Frio Carnívoro",
+        "Gigante de Gelo",
+        "Espírito do Gelo",
+        "Besta da Neve",
+        "Eremita Endurecido pelo Frio",
+        "Coruja-da-Neve"
+      ],
+      "features": [
+        "Campos de gelo traiçoeiros",
+        "Montes de neve profundos",
+        "Picos congelados",
+        "Ventos gélidos",
+        "Ventos de Sal Negro",
+        "Área sempre nevada"
+      ]
+    },
+    "river": {
+      "encounters": [
+        "Barco fluvial abandonado na margem",
+        "Emboscada de bandidos fluviais",
+        "Objeto estranho flutuando rio abaixo",
+        "Corredeiras ou redemoinhos perigosos",
+        "Criatura à espreita nas águas profundas",
+        "Ponte desabada bloqueando o caminho",
+        "Corpo arrastado para a margem, vítima da corrente",
+        "Desafio de travessia do rio",
+        "Fac-símile misterioso de rio de vidro-azul"
+      ],
+      "denizen_types": [
+        "Pirata fluvial",
+        "Espírito da água",
+        "Bruxa do rio",
+        "Pescadores",
+        "Troll do rio",
+        "Besta aquática"
+      ],
+      "features": [
+        "Correntes fortes",
+        "Margens rochosas",
+        "Enseadas escondidas",
+        "Vegetação luxuriante à beira do rio",
+        "Desfiladeiros estreitos",
+        "Delta do rio",
+        "Rio Sem Alma"
+      ]
+    },
+    "mountain": {
+      "encounters": [
+        "Círculo de pedras antigas no pico",
+        "Entrada de mina desabada",
+        "Ninho de águia com ovos estranhos",
+        "Cachoeira congelada escondendo caverna",
+        "Ruínas de mosteiro no penhasco",
+        "Esqueleto gigante incrustado na rocha",
+        "Passagem bloqueada por avalanche",
+        "Caverna habitada por eremita",
+        "Ossos de dragão espalhados",
+        "Cairns sagrados de sepultura",
+        "Faces esculpidas pelo vento na pedra",
+        "Vale escondido abaixo"
+      ],
+      "denizen_types": [
+        "Eremita da montanha",
+        "Gigante de pedra",
+        "Bandido das terras altas",
+        "Troll das cavernas",
+        "Espírito do vento"
+      ],
+      "features": [
+        "Penhascos traiçoeiros",
+        "Passagens escondidas",
+        "Degraus antigos esculpidos",
+        "Picos sagrados",
+        "Abismos profundos"
+      ]
+    },
+    "forest": {
+      "encounters": [
+        "Círculo de árvores retorcidas",
+        "Acampamento abandonado de lenhador",
+        "Santuário coberto por vinhas",
+        "Matilha de lobos terríveis",
+        "Círculo de fadas com cogumelos",
+        "Cadáveres pendurados em árvores",
+        "Bosque sagrado do druida",
+        "Cabana de caça em ruínas",
+        "Árvore antiga com tronco oco",
+        "Riacho de água negra",
+        "Teias de aranha por toda parte",
+        "Fogos-fátuos dançando"
+      ],
+      "denizen_types": [
+        "Druida selvagem",
+        "Bruxa da floresta",
+        "Chefe de bandidos",
+        "Pastor de árvores",
+        "Caçador de feras"
+      ],
+      "features": [
+        "Vegetação densa",
+        "Carvalhos antigos",
+        "Clareiras escondidas",
+        "Trilhas cobertas",
+        "Riachos murmurantes"
+      ]
+    },
+    "coast": {
+      "encounters": [
+        "Naufrágio na costa rochosa",
+        "Poças de maré com criaturas estranhas",
+        "Farol abandonado",
+        "Caverna marinha com profundezas ecoantes",
+        "Santuário de madeira flutuante",
+        "Carcaça de baleia encalhada",
+        "Ruínas de vila de pescadores",
+        "Enseada escondida de contrabandistas",
+        "Poleiro rochoso da sereia",
+        "Mensagem na garrafa",
+        "Ossos envoltos em algas",
+        "Tempestade se aproximando rapidamente"
+      ],
+      "denizen_types": [
+        "Sobrevivente de naufrágio",
+        "Bruxa do mar",
+        "Contrabandista",
+        "Faroleiro",
+        "Sereia"
+      ],
+      "features": [
+        "Penhascos rochosos",
+        "Praias arenosas",
+        "Enseadas escondidas",
+        "Cavernas de maré",
+        "Pântanos salgados"
+      ]
+    },
+    "plains": {
+      "encounters": [
+        "Caravana de mercadores sob ataque",
+        "Círculo de pedras eretas",
+        "Fazenda abandonada",
+        "Manada de cavalos selvagens",
+        "Campo de batalha com ossos velhos",
+        "Moinho com velas quebradas",
+        "Encruzilhada com patíbulo",
+        "Acampamento de circo viajante",
+        "Círculo de tendas nômades",
+        "Marco antigo da estrada",
+        "Terra de pastagem azedada",
+        "Redemoinho de poeira se aproximando"
+      ],
+      "denizen_types": [
+        "Mercador andarilho",
+        "Cavaleiro das planícies",
+        "Pastor",
+        "Guarda da estrada",
+        "Chefe nômade"
+      ],
+      "features": [
+        "Colinas ondulantes",
+        "Grama alta",
+        "Estradas antigas",
+        "Fazendas espalhadas",
+        "Céu aberto"
+      ]
+    },
+    "swamp": {
+      "encounters": [
+        "Cabana de bruxa sobre palafitas",
+        "Gás do pântano borbulhando",
+        "Cadáver pendurado em árvore",
+        "Lama com corpos flutuando",
+        "Vaga-lumes desviando o caminho",
+        "Ninho de jacaré",
+        "Ruínas de templo submerso",
+        "Trilha de fogo-fátuo",
+        "Acampamento de vítimas da peste",
+        "Poço de areia movediça escondido",
+        "Coro de sapos ensurdecedor",
+        "Névoa obscurecendo a visão"
+      ],
+      "denizen_types": [
+        "Bruxa do pântano",
+        "Espreitador do brejo",
+        "Portador de doença",
+        "Caçador do charco",
+        "Alma perdida"
+      ],
+      "features": [
+        "Poças estagnadas",
+        "Ciprestes retorcidos",
+        "Ilhas flutuantes",
+        "Névoa espessa",
+        "Lama sugadora"
+      ]
+    }
+  }
+}
