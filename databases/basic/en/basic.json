@@ -1,0 +1,33 @@
+{
+  "category": "basic",
+  "tables": {
+    "populations": [
+      "20-50",
+      "51-100",
+      "101-500",
+      "501-1000"
+    ],
+    "buildings": [
+      "Straw",
+      "Cob",
+      "Stone",
+      "Logs",
+      "Clay brick",
+      "Lime mortar"
+    ],
+    "sounds": [
+      "Silence",
+      "Bustle",
+      "Fighting",
+      "Laughter",
+      "Screaming",
+      "Chanting"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/basic.json"
+  }
+}

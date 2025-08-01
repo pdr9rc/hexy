@@ -1,0 +1,58 @@
+{
+  "category": "loot",
+  "tables": {
+    "treasure_types": [
+      "Cursed jewelry",
+      "Tainted coins",
+      "Bone ornaments",
+      "Blood gems",
+      "Skull chalices",
+      "Ritual daggers",
+      "Plague masks",
+      "Death totems",
+      "Forbidden books",
+      "Soul stones",
+      "Corpse candles",
+      "Grave dirt",
+      "Unholy relics",
+      "Demon bottles",
+      "Witch tools"
+    ],
+    "treasure_values": [
+      "Worthless but cursed",
+      "Few copper pieces",
+      "Handful of silver",
+      "Small fortune in gold",
+      "Priceless but dangerous",
+      "Valuable to cultists",
+      "Sought by collectors",
+      "Worth a life",
+      "Magically valuable",
+      "Historically significant",
+      "Religiously important",
+      "Extremely rare"
+    ],
+    "treasure_effects": [
+      "brings bad luck",
+      "attracts undead",
+      "causes nightmares",
+      "grants dark visions",
+      "whispers constantly",
+      "feels unnaturally cold",
+      "pulses with evil energy",
+      "corrupts nearby items",
+      "reveals hidden passages",
+      "allows communion with dead",
+      "protects from holy symbols",
+      "enhances dark magic",
+      "marks bearer for death",
+      "slowly drains life force"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/loot.json"
+  }
+}

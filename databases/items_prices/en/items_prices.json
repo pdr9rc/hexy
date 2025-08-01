@@ -1,0 +1,237 @@
+{
+  "category": "items_prices",
+  "tables": {
+    "items": [
+      {
+        "name": "Backpack",
+        "price": 6,
+        "currency": "silver",
+        "notes": "Holds 7 normal-sized items"
+      },
+      {
+        "name": "Bear trap",
+        "price": 20,
+        "currency": "silver",
+        "notes": "Presence DR14 to spot, d8 damage"
+      },
+      {
+        "name": "Blanket",
+        "price": 4,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Caltrops",
+        "price": 7,
+        "currency": "silver",
+        "notes": "d4 damage + infection on 1 in 6"
+      },
+      {
+        "name": "Chalk",
+        "price": 1,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Chewing tobacco",
+        "price": 1,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Crowbar",
+        "price": 8,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Crucifix, silver",
+        "price": 60,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Dried food",
+        "price": 1,
+        "currency": "silver",
+        "notes": "1 day"
+      },
+      {
+        "name": "Exquisite perfume",
+        "price": 25,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Firesteel",
+        "price": 4,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Grappling hook",
+        "price": 12,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Hammer",
+        "price": 8,
+        "currency": "silver",
+        "notes": "Heavy chain"
+      },
+      {
+        "name": "Iron nails",
+        "price": 7,
+        "currency": "silver",
+        "notes": "10 nails"
+      },
+      {
+        "name": "Ladder",
+        "price": 10,
+        "currency": "silver",
+        "notes": "15 feet"
+      },
+      {
+        "name": "Lantern oil",
+        "price": 5,
+        "currency": "silver",
+        "notes": "Presence +4 hours"
+      },
+      {
+        "name": "Lockpicks",
+        "price": 9,
+        "currency": "silver",
+        "notes": "May function as 5 meals"
+      },
+      {
+        "name": "Magnesium strip",
+        "price": 4,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Manacles",
+        "price": 10,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Mattress",
+        "price": 3,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Meat cleaver",
+        "price": 10,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Medicine box",
+        "price": 15,
+        "currency": "silver",
+        "notes": "Stops bleeding/infection and +d6 HP. Presence + 4 uses"
+      },
+      {
+        "name": "Metal file",
+        "price": 10,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Mirror",
+        "price": 6,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Muzzle",
+        "price": 10,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Opiate",
+        "price": 20,
+        "currency": "silver",
+        "notes": "DR14 or d6 damage + blind for one hour. 3 doses"
+      },
+      {
+        "name": "Poison (black)",
+        "price": 20,
+        "currency": "silver",
+        "notes": "DR12 or d6 damage. 3 doses"
+      },
+      {
+        "name": "Poison (red)",
+        "price": "60+d6",
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Rope",
+        "price": 4,
+        "currency": "silver",
+        "notes": "30 feet"
+      },
+      {
+        "name": "Salt",
+        "price": 3,
+        "currency": "silver",
+        "notes": "Holds 10 normal-size items"
+      },
+      {
+        "name": "Sack",
+        "price": 4,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Scissors",
+        "price": 9,
+        "currency": "silver",
+        "notes": "-50s to sell. Can't be bought."
+      },
+      {
+        "name": "Sharp needle",
+        "price": 3,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Small wagon",
+        "price": 25,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Tent",
+        "price": 12,
+        "currency": "silver",
+        "notes": ""
+      },
+      {
+        "name": "Toolbox",
+        "price": 20,
+        "currency": "silver",
+        "notes": "10 nails, hammer, small saw, tongs"
+      },
+      {
+        "name": "Waterskin",
+        "price": 4,
+        "currency": "silver",
+        "notes": "4 days of water"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg item prices and descriptions",
+    "usage": "Reference for item costs and properties",
+    "migrated_from": "databases/languages/en/items_prices.json"
+  }
+}

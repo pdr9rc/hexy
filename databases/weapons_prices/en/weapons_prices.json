@@ -1,0 +1,117 @@
+{
+  "category": "weapons_prices",
+  "tables": {
+    "weapons": [
+      {
+        "name": "Battle axe",
+        "damage": "d8",
+        "price": 35,
+        "currency": "silver"
+      },
+      {
+        "name": "Club",
+        "damage": "d6",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Crossbow",
+        "damage": "d8",
+        "price": 40,
+        "currency": "silver"
+      },
+      {
+        "name": "Dagger",
+        "damage": "d4",
+        "price": 5,
+        "currency": "silver"
+      },
+      {
+        "name": "Falchion",
+        "damage": "d6",
+        "price": 15,
+        "currency": "silver"
+      },
+      {
+        "name": "Handaxe",
+        "damage": "d6",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Knife",
+        "damage": "d4",
+        "price": 5,
+        "currency": "silver"
+      },
+      {
+        "name": "Shortbow",
+        "damage": "d6",
+        "price": 15,
+        "currency": "silver"
+      },
+      {
+        "name": "Shortsword",
+        "damage": "d6",
+        "price": 20,
+        "currency": "silver"
+      },
+      {
+        "name": "Sling",
+        "damage": "d4",
+        "price": 8,
+        "currency": "silver"
+      },
+      {
+        "name": "Spear",
+        "damage": "d6",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Sword",
+        "damage": "d8",
+        "price": 30,
+        "currency": "silver"
+      },
+      {
+        "name": "Warhammer",
+        "damage": "d8",
+        "price": 60,
+        "currency": "silver"
+      },
+      {
+        "name": "Whip",
+        "damage": "d4",
+        "price": 8,
+        "currency": "silver"
+      },
+      {
+        "name": "Tinderbox",
+        "damage": "d0",
+        "price": 20,
+        "currency": "silver"
+      },
+      {
+        "name": "10 bolts",
+        "damage": "",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "20 arrows",
+        "damage": "",
+        "price": 10,
+        "currency": "silver"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg weapon prices and damage",
+    "usage": "Reference for weapon costs and damage values",
+    "migrated_from": "databases/languages/en/weapons_prices.json"
+  }
+}

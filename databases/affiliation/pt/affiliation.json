@@ -1,0 +1,67 @@
+{
+  "category": "affiliation",
+  "tables": {
+    "monster_affiliations": [
+      "Culto do Deus Moribundo",
+      "Irmandade dos Ossos",
+      "Círculo da Carniça",
+      "Ordem do Sol Negro",
+      "Servos do Vazio",
+      "Filhos da Pestilência",
+      "Seguidores do Último Profeta",
+      "Legião dos Danados",
+      "Pacto das Sombras",
+      "Discípulos da Decomposição",
+      "Arautos do Fim",
+      "Apóstolos da Agonia"
+    ],
+    "npc_affiliations": [
+      "Remanescentes da Guarda Real",
+      "Rejeitados da Guilda Mercante",
+      "Clero herético",
+      "Sobreviventes da peste",
+      "Confederações de bandidos",
+      "Covens de bruxas",
+      "Equipes de saqueadores",
+      "Companhias mercenárias",
+      "Células cultistas",
+      "Comunidades refugiadas",
+      "Gangues de catadores",
+      "Cartéis de mercadores da morte"
+    ],
+    "faction_affiliations": [
+      "A Igreja Moribunda",
+      "Casa dos Nobres Quebrados",
+      "Mercadores da Miséria",
+      "O Trono de Ossos",
+      "Guardiões da Peste",
+      "Parlamento das Sombras",
+      "Corte da Carniça",
+      "O Último Reino",
+      "Irmandade da Sepultura",
+      "Ordem dos Sinos Silenciosos",
+      "Conselho dos Vermes",
+      "Trono de Caveiras"
+    ],
+    "affiliation_attitudes": [
+      "Violentamente hostil",
+      "Profundamente suspeito",
+      "Cautelosamente neutro",
+      "Relutantemente prestativo",
+      "Oportunisticamente amigável",
+      "Desesperadamente buscando ajuda",
+      "Fanaticamente devotado",
+      "Secretamente conspiração",
+      "Abertamente desdenhoso",
+      "Medrosamente obediente",
+      "Relutantemente cooperativo",
+      "Cegamente leal"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/pt/affiliation.json"
+  }
+}

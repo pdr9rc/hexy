@@ -1,0 +1,55 @@
+{
+  "category": "wilderness",
+  "tables": {
+    "wilderness_encounters": [
+      "A circle of standing stones humming with power",
+      "Abandoned cart with scattered belongings",
+      "Fresh graves with disturbed earth",
+      "Gallows tree with old rope",
+      "Ruined watchtower on a hill",
+      "Stream running red with unknown substance",
+      "Crossroads with weathered signpost",
+      "Burned farmhouse with blackened timbers",
+      "Ancient cairn marking forgotten dead",
+      "Ritual circle drawn in ash and bone",
+      "Well with rope cut and bucket missing",
+      "Trail of blood leading into darkness",
+      "Shepherd's hut with door hanging open",
+      "Stone bridge over rushing water",
+      "Grove of dead trees in perfect circle",
+      "Merchant's bones picked clean by crows",
+      "Cave mouth sealed with heavy stones",
+      "Battlefield littered with old weapons",
+      "Shrine to forgotten deity",
+      "Gibbet cage swaying empty"
+    ],
+    "random_events": [
+      "A murder of crows follows the party ominously",
+      "Strange lights dance in the distance",
+      "The air grows thick and hard to breathe",
+      "Distant screaming echoes across the land",
+      "An unnatural fog rolls in quickly",
+      "The ground trembles with unknown cause",
+      "Dead animals litter the path ahead",
+      "A cold wind brings whispers of the past",
+      "The sky darkens despite the hour",
+      "Flowers wilt as the party approaches",
+      "A terrible stench fills the air",
+      "Shadows move independently of their casters",
+      "The temperature drops suddenly",
+      "Strange symbols appear carved in trees",
+      "A blood-red moon rises despite daylight",
+      "The party feels watched by unseen eyes",
+      "Time seems to slow and distort",
+      "A child's laughter echoes from nowhere",
+      "The dead rise from unmarked graves",
+      "Holy symbols crack and tarnish"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/wilderness.json"
+  }
+}

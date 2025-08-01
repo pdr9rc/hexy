@@ -70,9 +70,10 @@
   },
   "metadata": {
     "version": "1.0",
-    "language": "pt",
-    "last_updated": "2025-01-27T10:00:00.000000",
-    "description": "Geração de nomes de NPCs Mörk Borg usando sistema d6+d6",
-    "usage": "Role d6 para primeiro nome, d6 para segundo nome, combine-os"
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg NPC name generation using d6+d6 system",
+    "usage": "Roll d6 for first name, d6 for second name, combine them",
+    "migrated_from": "databases/languages/en/npc_names.json"
   }
 }

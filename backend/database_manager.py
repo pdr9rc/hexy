@@ -27,7 +27,8 @@ class DatabaseManager:
     
     def _ensure_directory_structure(self):
         """Ensure the normalized directory structure exists."""
-        subdirs = [
+        # Keep old structure for backward compatibility during migration
+        old_subdirs = [
             "core",
             "lore", 
             "content",
@@ -35,8 +36,28 @@ class DatabaseManager:
             "languages/pt"
         ]
         
-        for subdir in subdirs:
+        # New unified structure - each category gets its own directory with language subdirs
+        new_categories = [
+            "terrain", "encounters", "denizens", "settlements",  # core categories
+            "cities", "factions", "regions",  # lore categories  
+            "names", "descriptions", "features",  # content categories
+            "affiliation", "basic", "beasts_prices", "bestiary", "city_events", 
+            "core", "denizen", "dungeon", "enhanced_loot", "items_prices", 
+            "items_trinkets", "loot", "npc_apocalypse", "npc_concerns", 
+            "npc_names", "npc_secrets", "npc_trades", "npc_traits", "npc_wants",
+            "scroll", "services_prices", "stats", "tavern", "tavern_innkeeper",
+            "tavern_menu", "tavern_patrons", "traps_builders", "traps_effects", 
+            "traps_triggers", "weapons_prices", "weather", "wilderness"
+        ]
+        
+        # Create old structure directories
+        for subdir in old_subdirs:
             os.makedirs(os.path.join(self.database_path, subdir), exist_ok=True)
+            
+        # Create new unified structure directories
+        for category in new_categories:
+            for lang in ['en', 'pt']:
+                os.makedirs(os.path.join(self.database_path, category, lang), exist_ok=True)
     
     def load_tables(self, language: str = 'en') -> Dict[str, Any]:
         """Load all tables for a specific language."""
@@ -45,19 +66,23 @@ class DatabaseManager:
         
         tables = {}
         
-        # Load core tables (language-independent structure)
+        # Try new unified structure first
+        unified_tables = self._load_unified_tables(language)
+        tables.update(unified_tables)
+        
+        # Load legacy core tables (language-independent structure)
         core_tables = self._load_core_tables()
         tables.update(core_tables)
         
-        # Load language-specific tables
+        # Load legacy language-specific tables
         lang_tables = self._load_language_tables(language)
         tables.update(lang_tables)
         
-        # Load lore tables
+        # Load legacy lore tables
         lore_tables = self._load_lore_tables()
         tables.update(lore_tables)
         
-        # Load content tables
+        # Load legacy content tables
         content_tables = self._load_content_tables(language)
         tables.update(content_tables)
         
@@ -143,6 +168,28 @@ class DatabaseManager:
         
         return tables
     
+    def _load_unified_tables(self, language: str) -> Dict[str, Any]:
+        """Load tables from the new unified structure."""
+        tables = {}
+        
+        # Scan for category directories with language subdirectories
+        for item in os.listdir(self.database_path):
+            category_path = os.path.join(self.database_path, item)
+            if os.path.isdir(category_path):
+                lang_path = os.path.join(category_path, language)
+                if os.path.exists(lang_path) and os.path.isdir(lang_path):
+                    # Look for the JSON file in the language directory
+                    json_file = os.path.join(lang_path, f"{item}.json")
+                    if os.path.exists(json_file):
+                        try:
+                            with open(json_file, 'r', encoding='utf-8') as f:
+                                data = json.load(f)
+                                tables[f"{item}_tables"] = data.get('tables', {})
+                        except (json.JSONDecodeError, FileNotFoundError):
+                            continue
+        
+        return tables
+    
     def get_table(self, category: str, table_name: str, language: str = 'en') -> List[Any]:
         """Get a specific table from a category."""
         tables = self.load_tables(language)
@@ -161,16 +208,20 @@ class DatabaseManager:
     
     def add_custom_table(self, category: str, table_name: str, data: List[Any], language: str = 'en'):
         """Add or update a custom table."""
-        # Determine the appropriate file path
-        if category in ['terrain', 'encounters', 'denizens', 'settlements']:
-            filepath = os.path.join(self.database_path, "core", f"{category}.json")
-        elif category in ['cities', 'factions', 'regions']:
-            filepath = os.path.join(self.database_path, "lore", f"{category}.json")
-        elif category in ['names', 'descriptions', 'features']:
-            filepath = os.path.join(self.database_path, "content", f"{category}.json")
-        else:
-            # Create in language-specific directory
-            filepath = os.path.join(self.database_path, "languages", language, f"{category}.json")
+        # Use new unified structure by default
+        filepath = os.path.join(self.database_path, category, language, f"{category}.json")
+        
+        # Fallback to legacy structure for specific categories if new structure doesn't exist
+        if not os.path.exists(os.path.dirname(filepath)):
+            if category in ['terrain', 'encounters', 'denizens', 'settlements']:
+                filepath = os.path.join(self.database_path, "core", f"{category}.json")
+            elif category in ['cities', 'factions', 'regions']:
+                filepath = os.path.join(self.database_path, "lore", f"{category}.json")
+            elif category in ['names', 'descriptions', 'features']:
+                filepath = os.path.join(self.database_path, "content", f"{category}.json")
+            else:
+                # Create in language-specific directory (legacy)
+                filepath = os.path.join(self.database_path, "languages", language, f"{category}.json")
         
         # Load existing data or create new
         if os.path.exists(filepath):
@@ -186,16 +237,21 @@ class DatabaseManager:
                 }
             }
         
-        # Update the table
-        if category in ['names', 'descriptions', 'features']:
-            # Content tables are language-specific
+        # Update the table - for new unified structure, we use simple tables structure
+        if filepath.count(os.sep) >= 2 and language in filepath:
+            # New unified structure - simple tables structure
+            if 'tables' not in file_data:
+                file_data['tables'] = {}
+            file_data['tables'][table_name] = data
+        elif category in ['names', 'descriptions', 'features']:
+            # Legacy content tables are language-specific
             if 'languages' not in file_data:
                 file_data['languages'] = {}
             if language not in file_data['languages']:
                 file_data['languages'][language] = {'tables': {}}
             file_data['languages'][language]['tables'][table_name] = data
         else:
-            # Core and lore tables
+            # Legacy core and lore tables
             if 'tables' not in file_data:
                 file_data['tables'] = {}
             file_data['tables'][table_name] = data

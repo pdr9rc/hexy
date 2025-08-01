@@ -1,0 +1,79 @@
+{
+  "category": "dungeon",
+  "tables": {
+    "dungeon_types": [
+      "Tumba antiga",
+      "Templo em ruínas",
+      "Mina desabada",
+      "Cripta esquecida",
+      "Torre abandonada",
+      "Toca subterrânea",
+      "Catedral submersa",
+      "Labirinto retorcido",
+      "Poço de ossos",
+      "Casa da peste",
+      "Porão amaldiçoado",
+      "Câmara sacrificial"
+    ],
+    "dungeon_features": [
+      "inundada com água negra",
+      "cheia de gás venenoso",
+      "assombrada por espíritos inquietos",
+      "infestada de pragas",
+      "decorada com murais blasfemos",
+      "coberta de ossos antigos",
+      "escavada na rocha viva",
+      "construída em solo profano",
+      "retorcida por magia sombria",
+      "marcada por batalhas antigas",
+      "abandonada às pressas",
+      "selada por boa razão"
+    ],
+    "dungeon_dangers": [
+      "Teto desabando",
+      "Armadilha com espinhos",
+      "Vazamento de gás venenoso",
+      "Piso instável",
+      "Artefatos amaldiçoados",
+      "Mortos-vivos territoriais",
+      "Carniceiros agressivos",
+      "Armadilhas de lâminas",
+      "Proteções mágicas",
+      "Cadáveres doentes",
+      "Câmaras inundadas",
+      "Deterioração estrutural",
+      "Maldições antigas",
+      "Mofo tóxico",
+      "Criaturas predadoras"
+    ],
+    "dungeon_treasures": [
+      "Moedas de prata espalhadas",
+      "Uma arma enferrujada mas valiosa",
+      "Pergaminhos antigos",
+      "Pedras preciosas",
+      "Artefatos religiosos",
+      "Mapas e documentos antigos",
+      "Joias dos mortos",
+      "Ervas e componentes raros",
+      "Ferramentas esquecidas",
+      "Recipientes ornamentados",
+      "Poções misteriosas",
+      "Ídolos esculpidos",
+      "Metais raros",
+      "Livros perdidos"
+    ],
+    "dungeon_atmospheres": [
+      "Silêncio opressivo",
+      "Pingar ecoante",
+      "Sons de arranhar",
+      "Gemidos distantes",
+      "Frio sobrenatural"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/pt/dungeon.json"
+  }
+}

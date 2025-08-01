@@ -1,0 +1,66 @@
+{
+  "category": "core",
+  "tables": {
+    "denizen_names_prefix": [
+      "Brother",
+      "Sister",
+      "Father",
+      "Mother",
+      "Old",
+      "Young",
+      "Mad",
+      "Saint",
+      "Heretic",
+      "Lost"
+    ],
+    "denizen_names_suffix": [
+      "Bones",
+      "Ash",
+      "Crow",
+      "Thorn",
+      "Rust",
+      "Mold",
+      "Grime",
+      "Rot",
+      "Doom",
+      "Blight"
+    ],
+    "denizen_motivations": [
+      "seeks redemption for past sins",
+      "hunts for forbidden knowledge",
+      "flees from terrible pursuers",
+      "searches for lost family",
+      "guards ancient secrets",
+      "trades in human misery"
+    ],
+    "denizen_features": [
+      "Covered in ritual scars",
+      "Missing several fingers",
+      "Eyes clouded with cataracts",
+      "Constantly muttering prayers",
+      "Smells of decay",
+      "Wears tattered robes"
+    ],
+    "denizen_demeanors": [
+      "Hostile",
+      "Suspicious",
+      "Desperate",
+      "Helpful",
+      "Indifferent",
+      "Cryptic"
+    ],
+    "atmospheres": [
+      "Oppressive silence",
+      "Echoing sounds",
+      "Unnatural cold",
+      "Thick mist",
+      "Strange lights"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "migrated_from": "databases/languages/en/core.json"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "category": "npc_apocalypse",
+  "tables": {
+    "apocalypse_attitudes": [
+      "Best to accept it",
+      "Someone will fix it",
+      "About damn time",
+      "We're doomed!",
+      "Optional table, for a twist",
+      "A cursed"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Mörk Borg NPC attitudes toward the apocalypse",
+    "usage": "Roll d6 to determine NPC's view of the world's end",
+    "migrated_from": "databases/languages/en/npc_apocalypse.json"
+  }
+}
