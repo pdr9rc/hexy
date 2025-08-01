@@ -1,0 +1,25 @@
+{
+  "category": "tavern_innkeeper",
+  "tables": {
+    "innkeeper_quirks": [
+      "Catarina \"a Castradora\" Keen, a rainha dos bandidos, esconde-se no sótão.",
+      "Pensa que sois do culto Lokr que prometeu vir disfarçado para os enterrar vivos. (O culto já cá está.)",
+      "Três crianças diferentes de três famílias de hóspedes diferentes desapareceram na noite sem som ou rastro.",
+      "Dizem que os Basiliscos Bicéfalos andam à solta e procuram hereges.",
+      "Pelos excrementos, algo se infiltrou em... bem, tudo. (Resistência TR12 ou perder d4 PV vomitando.)",
+      "A malta turbulenta do Jorat-Tug foi recentemente reanimada por... algo. Tem muito medo para lhes dizer que estão mortos.",
+      "O Velho Agar está a exibir as suas úlceras infecciosas. Em breve começará a rebentá-las num ritmo alegre.",
+      "Um freguês é claramente um necromante disfarçado. (Quase todos o são; esse é apenas mau nos disfarces.)",
+      "Arranhaduras claras e audíveis do alçapão da adega. Todos os outros ignoram-nas.",
+      "O seu pássaro enjaulado parou de cantar e começou a falar profecias."
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Peculiaridades e problemas dos taverneiros de Mörk Borg",
+    "usage": "Rola d10 para determinar porque o taverneiro está a tremer",
+    "migrated_from": "databases/languages/en/tavern_innkeeper.json"
+  }
+}

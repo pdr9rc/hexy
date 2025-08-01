@@ -2,28 +2,28 @@
   "category": "tavern",
   "tables": {
     "tavern_descriptions": [
-      "Fumacenta",
-      "Silenciosa",
-      "Imunda",
-      "Escura",
-      "Barulhenta",
-      "Fedorenta"
+      "Fumacenta e Maldita",
+      "Silenciosa como Sepulcro",
+      "Imunda e Pestilenta",
+      "Sombria como o Inferno",
+      "Estrondosa e Blasfema",
+      "Fétida como Cadáver"
     ],
     "tavern_special_1": [
-      "Larva",
-      "Bife de troll",
-      "Cérebro de macaco",
-      "Dedo de goblin",
-      "Carne longa",
-      "Fígado de morcego"
+      "Larvas Putrefactas",
+      "Lombo de Troll Ensanguentado", 
+      "Miolos de Macaco Podre",
+      "Dedos de Goblin Marinados",
+      "Carne Humana Defumada",
+      "Fígado de Morcego Cru"
     ],
     "tavern_special_2": [
-      "Cogumelo",
-      "Alga",
-      "Barata",
-      "Aranha",
-      "Globo ocular",
-      "Gafanhoto"
+      "Cogumelos Venenosos",
+      "Algas Pantanosas",
+      "Baratas Torradas",
+      "Aranhas Cozidas",
+      "Globos Oculares Frescos",
+      "Gafanhotos Secos"
     ]
   },
   "metadata": {

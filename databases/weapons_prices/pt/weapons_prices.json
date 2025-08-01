@@ -1,0 +1,117 @@
+{
+  "category": "weapons_prices",
+  "tables": {
+    "weapons": [
+      {
+        "name": "Machado de Batalha",
+        "damage": "d8",
+        "price": 35,
+        "currency": "silver"
+      },
+      {
+        "name": "Clava",
+        "damage": "d6",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Besta",
+        "damage": "d8",
+        "price": 40,
+        "currency": "silver"
+      },
+      {
+        "name": "Adaga",
+        "damage": "d4",
+        "price": 5,
+        "currency": "silver"
+      },
+      {
+        "name": "Falcião",
+        "damage": "d6",
+        "price": 15,
+        "currency": "silver"
+      },
+      {
+        "name": "Machadinha",
+        "damage": "d6",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Faca",
+        "damage": "d4",
+        "price": 5,
+        "currency": "silver"
+      },
+      {
+        "name": "Arco Curto",
+        "damage": "d6",
+        "price": 15,
+        "currency": "silver"
+      },
+      {
+        "name": "Espada Curta",
+        "damage": "d6",
+        "price": 20,
+        "currency": "silver"
+      },
+      {
+        "name": "Funda",
+        "damage": "d4",
+        "price": 8,
+        "currency": "silver"
+      },
+      {
+        "name": "Lança",
+        "damage": "d6",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Espada",
+        "damage": "d8",
+        "price": 30,
+        "currency": "silver"
+      },
+      {
+        "name": "Martelo de Guerra",
+        "damage": "d8",
+        "price": 60,
+        "currency": "silver"
+      },
+      {
+        "name": "Chicote",
+        "damage": "d4",
+        "price": 8,
+        "currency": "silver"
+      },
+      {
+        "name": "Caixa de Fósforos",
+        "damage": "d0",
+        "price": 20,
+        "currency": "silver"
+      },
+      {
+        "name": "10 virotes",
+        "damage": "",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "20 setas",
+        "damage": "",
+        "price": 10,
+        "currency": "silver"
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Preços e dano das armas de Mörk Borg",
+    "usage": "Referência para custos de armas e valores de dano",
+    "migrated_from": "databases/languages/en/weapons_prices.json"
+  }
+}

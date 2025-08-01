@@ -1,0 +1,46 @@
+{
+  "category": "npc_concerns",
+  "tables": {
+    "concerns": [
+      "Dívida incrível",
+      "Bens roubados",
+      "Bando de rufiões",
+      "Parentes sequestrados",
+      "Uma poça de sangue",
+      "Cônjuge possuído",
+      "Maldição familiar",
+      "Amigo assassinado",
+      "Verruga estranha",
+      "Sacerdotes corruptos",
+      "O fim do mundo",
+      "Promessa abafada",
+      "Convocação Sagrada",
+      "O Ceifeiro",
+      "A foice de Josilfa",
+      "O cometa",
+      "Infestação de vermes",
+      "Guerra dos ratos",
+      "Possessão demoníaca",
+      "Culto do Basilisco",
+      "Sacrifício",
+      "A Ordenança da Devoção",
+      "Perda de memória",
+      "A Cidade Subterrânea",
+      "Segredos da catedral",
+      "Feiticeiro dos Vermes",
+      "O Antigo",
+      "Vermes brancos",
+      "A convocação do Ceifeiro",
+      "O domínio de Josilfa",
+      "O fim do mundo"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Preocupações e problemas dos NPCs de Mörk Borg",
+    "usage": "Rola d12 para determinar o que atormenta o NPC",
+    "migrated_from": "databases/languages/en/npc_concerns.json"
+  }
+}

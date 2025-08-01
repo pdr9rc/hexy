@@ -1,0 +1,49 @@
+{
+  "category": "npc_trades",
+  "tables": {
+    "trades": [
+      "Padeiro / Carniceiro",
+      "Coveiro",
+      "Mascate / Errante",
+      "Adivinho",
+      "Criador de serpentes",
+      "Ferreiro",
+      "Taverneiro",
+      "Amigo assassinado",
+      "Sacerdote corrupto",
+      "Camponês",
+      "Bandido / Ladrão",
+      "Herborista",
+      "Escumalha sem lei",
+      "Ex-eremita",
+      "Sacerdote / Sacerdotisa",
+      "Servo / Maltrapilho",
+      "Artesão em dificuldades",
+      "Domador de macacos",
+      "Sineiro",
+      "Revolvedor de merda",
+      "Cavador de valas",
+      "Apanhador de ratos",
+      "Mercenário",
+      "Caçador de bruxas",
+      "Encadernador / Queimador de livros",
+      "Cobrador de impostos",
+      "Jogador profissional",
+      "Marinheiro",
+      "Recolhedor de cadáveres",
+      "Barbeiro-cirurgião",
+      "Mineiro / Químico de bombas",
+      "Vagabundo / Caçador",
+      "Capitão cruel",
+      "Escrivão corrupto"
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000",
+    "description": "Ofícios e profissões dos NPCs de Mörk Borg",
+    "usage": "Rola d12 para determinar o ofício ou profissão do NPC",
+    "migrated_from": "databases/languages/en/npc_trades.json"
+  }
+}
