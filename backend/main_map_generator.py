@@ -31,7 +31,15 @@ class MainMapGenerator:
         
         # Load content tables
         self.content_tables = database_manager.load_tables(self.language)
-        self.terrain_tables = self.content_tables.get('terrain_tables', {})
+        # Fix terrain tables access for new unified structure
+        terrain_tables_raw = self.content_tables.get('terrain_tables', {})
+        self.terrain_tables = {}
+        
+        # Extract language-specific terrain data
+        for terrain_type, terrain_data in terrain_tables_raw.items():
+            if isinstance(terrain_data, dict) and self.language in terrain_data:
+                self.terrain_tables[terrain_type] = terrain_data[self.language]
+        
         self.core_tables = self.content_tables.get('core_tables', {})
         
         # Map configuration
@@ -555,8 +563,8 @@ class MainMapGenerator:
             name = f"{first_name} {second_name}"
         else:
             # Fallback to old system
-            name_prefixes = database_manager.get_table('content', 'denizen_names_prefix', self.language)
-            name_suffixes = database_manager.get_table('content', 'denizen_names_suffix', self.language)
+            name_prefixes = database_manager.get_table('names', 'denizen_names_prefix', self.language)
+            name_suffixes = database_manager.get_table('names', 'denizen_names_suffix', self.language)
             if name_prefixes and name_suffixes:
                 prefix = random.choice(name_prefixes)
                 suffix = random.choice(name_suffixes)
