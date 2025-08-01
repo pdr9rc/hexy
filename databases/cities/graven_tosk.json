@@ -1,0 +1,329 @@
+{
+    "city_name": "Graven-Tosk",
+    "display_name": "Graven-Tosk - The Ancient Cemetery",
+    "description": "Graven-Tosk is a truly ancient cemetery located deep within the forest of Sarkash, where paths tangle and wind in overgrown gloom. It is filled with mausoleums, blank-eyed cherubs, stagnant fountains, plague pits, and ordinary graves. The air here is heavy, stale, and difficult to breathe, often accompanied by the sound of frantic scratching. Rising above this mournful landscape is the gothic black castle known as the Palace of the Shadow King.",
+    "theme": "necropolis_decay_hidden",
+    "district_matrix": [
+      ["", "", "Fringe", "Fringe", "Fringe", "", ""],
+      ["", "Upper Graves", "Upper Graves", "Royal Ruins", "Upper Graves", "Upper Graves", ""],
+      ["Fringe", "Royal Ruins", "Palace Quarter", "Palace Quarter", "Royal Ruins", "Royal Ruins", "Fringe"],
+      ["", "Royal Ruins", "Palace Quarter", "Palace Quarter", "Royal Ruins", "Upper Graves", ""],
+      ["", "Upper Graves", "Lower Catacombs", "Upper Graves", "Lower Catacombs", "Upper Graves", ""],
+      ["", "", "Lower Catacombs", "Lower Catacombs", "Lower Catacombs", "", ""],
+      ["", "", "", "", "", "", ""]
+    ],
+    "districts": [
+      {
+        "name": "Palace Quarter",
+        "description": "The relatively intact inner wing of the Palace of the Shadow King, serving as the home for the Shadow King, his courtiers, servants, and slaves. This gothic black castle looms over Graven-Tosk, mirroring the Cathedral of the Two-Headed Basilisk in Galgenbeck.",
+        "theme": "royal_decay",
+        "buildings": [
+          "The Inner Wing of the Palace",
+          "The Royal Stables",
+          "Servants' Quarters",
+          "The Courtiers' Chambers"
+        ],
+        "streets": [
+          "Shadow King's Path",
+          "Loyalty Lane",
+          "Sorrow's Walk"
+        ],
+        "landmarks": [
+          "The Throne Room",
+          "The Black Spire (Palace Tower)",
+          "The Royal Menagerie (Ruined)",
+          "The Council's Crypt"
+        ],
+        "encounters": [
+          "Servants of the King doing his will",
+          "Princes disguised as ordinary men, wandering the ruins and tricking travelers",
+          "Courtiers engaged in ritualistic practices"
+        ],
+        "random_tables": [
+          "1-2: A prince of the line attempting to trick PCs",
+          "3-4: A panicked slave fleeing the inner wing",
+          "5-6: A courtier seeking favors or gossiping about rivals"
+        ],
+        "atmosphere_modifiers": [
+          "The air hangs heavy with ancient rituals and faded opulence",
+          "Whispers of loyalty and betrayal echo through the halls",
+          "A sense of ancient power and lingering dread pervades the area"
+        ]
+      },
+      {
+        "name": "Royal Ruins",
+        "description": "The crumbling remains of the Palace of the Shadow King, providing shelter for unfortunate souls. The structures here are heavily decayed, suggesting centuries of neglect and ruin.",
+        "theme": "structural_collapse_habitation",
+        "buildings": [
+          "Collapsed Halls",
+          "Shattered Towers",
+          "Makeshift Shelters (within ruins)"
+        ],
+        "streets": [
+          "Rubble Paths",
+          "Crumbling Corridors",
+          "Broken Battlements"
+        ],
+        "landmarks": [
+          "The Great Fall (a large collapsed section)",
+          "The Whispering Walls",
+          "The Shadowed Courtyard"
+        ],
+        "encounters": [
+          "Unfortunate souls seeking shelter",
+          "Packs of feral Ash-mink",
+          "Zombies rising from the debris [5-8]",
+          "Grotesques lurking in the shadows"
+        ],
+        "random_tables": [
+          "1-2: A section of the ruins collapses, requiring an Agility test to avoid damage",
+          "3-4: Scavengers fighting over meager resources",
+          "5-6: A sudden, inexplicable silence falls over the area, unnerving all"
+        ],
+        "atmosphere_modifiers": [
+          "The constant sound of creaking stone and shifting rubble",
+          "A pervasive smell of damp earth and decay",
+          "Cold pockets of air despite the general warmth"
+        ]
+      },
+      {
+        "name": "Upper Graves",
+        "description": "The main cemetery area of Graven-Tosk, characterized by mausoleums, blank-eyed cherubs, stagnant fountains, plague pits, and countless ordinary graves. The land here is riddled with hidden burrows and disturbing signs of life within death.",
+        "theme": "ancient_cemetery_pestilence",
+        "buildings": [
+          "Mausoleums",
+          "Graves (general)"
+        ],
+        "streets": [
+          "Grave Paths",
+          "Cherub's Walk",
+          "Plague Pit Lane"
+        ],
+        "landmarks": [
+          "The Great Plague Pit",
+          "The Stagnant Fountain",
+          "The Weeping Angel Mausoleum",
+          "Crypts (general, potentially like those in the Valley of Unfortunate Undead, which Nagl wandered)"
+        ],
+        "encounters": [
+          "Undead creatures (e.g., Zombies [5-8])",
+          "Grotesques stalking graveyards",
+          "Ghouls feasting on remains (implied by necropolis theme, not explicitly stated in sources for Graven-Tosk)",
+          "Rabid animals scavenging among graves"
+        ],
+        "random_tables": [
+          "1-2: A freshly opened grave, its contents disturbed",
+          "3-4: The ground trembles, and a section of graves sinks slightly",
+          "5-6: A strange, sweet scent emanates from a mausoleum, attracting insects"
+        ],
+        "atmosphere_modifiers": [
+          "The overwhelming stench of decay and damp earth",
+          "The unsettling silence broken only by distant scratching sounds",
+          "A faint, ghostly luminescence on gravestones at night"
+        ]
+      },
+      {
+        "name": "Lower Catacombs",
+        "description": "A vast network of tunnels, catacombs, and cellars that sprawl beneath the Palace and the cemetery like writhing roots, digging deeper into the cold earth like cancerous veins. These dark passages are often knee-deep in muck and water. This area may contain features reminiscent of larger map locations like the Sunken Temple or Quarry-Grave [12-15].",
+        "theme": "subterranean_horror_imprisonment",
+        "buildings": [
+          "Underground Chambers",
+          "Hidden Crypts",
+          "Forgotten Cellars"
+        ],
+        "streets": [
+          "Twisting Tunnels",
+          "Root-choked Passages",
+          "The Deep Paths"
+        ],
+        "landmarks": [
+          "The Sunken Temple (a set of three ash-buried towers from which crawling animals emerge)",
+          "The Quarry-Grave (a rough-hewn wedge into a mountain, containing injured and dying people in a cage, and Undying Miners)",
+          "Thief-Tunnels (as one possible origin for a Heretical Priest)"
+        ],
+        "encounters": [
+          "Undying Miners, emaciated and withered, clutching pickaxes",
+          "Crawling animals (as seen at the Sunken Temple)",
+          "Prisoners or other beings trapped in pits or cages (similar to Quarry-Grave)",
+          "Corporeal manifestations of nightmare, from the kind of undeath that results from wandering the Valley of the Unfortunate Undead"
+        ],
+        "random_tables": [
+          "1-2: The sounds of frantic scratching echoing from the walls",
+          "3-4: A section of tunnel unexpectedly floods or collapses",
+          "5-6: Strange, glowing fungi illuminate a passage, revealing skeletal remains"
+        ],
+        "atmosphere_modifiers": [
+          "The constant echo of water dripping and distant, unsettling sounds",
+          "The pervasive smell of damp earth, rot, and sulfur (similar to other dungeon/cave descriptions)",
+          "An oppressive sense of being watched from the dark"
+        ]
+      },
+      {
+        "name": "Fringe (Sarkash Edge)",
+        "description": "The transitional area where the ancient cemetery of Graven-Tosk meets the gloomy, overgrown forest of Sarkash. Paths here tangle and wind, leading wanderers astray. This is an 'untamed wild' of Tveland.",
+        "theme": "wilderness_encroachment",
+        "buildings": [
+          "Overgrown Ruins",
+          "Forgotten Shrines"
+        ],
+        "streets": [
+          "Tangled Paths",
+          "Sarkash Road (leading away to Tveland)"
+        ],
+        "landmarks": [
+          "The Petrified Grove",
+          "The Silent Stream",
+          "Hidden Burial Mounds"
+        ],
+        "encounters": [
+          "Goblins shooting with twanging bows, carrying a curse",
+          "Sarkash scum with poisoned knives",
+          "Aland, wickhead knife-wielders skulking",
+          "Pale ones, destructive and detached, as if fallen from the stars",
+          "Nagl, the Wretched Royal, or other necromancers, having wandered here"
+        ],
+        "random_tables": [
+          "1-2: The forest seems to spread unnaturally fast",
+          "3-4: A disturbing stillness falls over the area, amplifying distant sounds",
+          "5-6: Strange, glowing insects flit through the undergrowth, leading nowhere"
+        ],
+        "atmosphere_modifiers": [
+          "The oppressive gloom and tangling paths of the forest",
+          "The air grows heavy, stale, and hard to breathe",
+          "A constant, faint scratching sound from within the undergrowth"
+        ]
+      }
+    ],
+    "buildings": [
+      "The Inner Wing of the Palace",
+      "Mausoleums",
+      "Collapsed Palace Halls",
+      "Forgotten Crypts (thematically fitting, as Nagl wandered the Valley of Unfortunate Undead which has crypts)",
+      "Makeshift Shelters (within Palace ruins)",
+      "Underground Chambers (Catacombs beneath the Palace)",
+      "Sunken Temple (a distinct location on the Ashen Sea map, but thematically relevant to underground ruins)",
+      "Quarry-Grave (a distinct location on the Ashen Sea map, relevant to underground excavations and imprisonment)"
+    ],
+    "streets": [
+      "Shadow King's Path",
+      "Rubble Paths",
+      "Grave Paths",
+      "Twisting Tunnels (under the palace)",
+      "Sarkash Road (leading into the forest)",
+      "Plague Pit Lane ",
+      "Cherub's Walk ",
+      "Thief-Tunnels"
+    ],
+    "landmarks": [
+      "The Palace of the Shadow King",
+      "The Great Plague Pit",
+      "The Stagnant Fountain",
+      "The Sunken Temple",
+      "The Quarry-Grave"
+    ],
+    "temples": [
+      "Shrine of Bone Collection (a type of shrine found in Galgenbeck, thematically fitting for a necropolis, but not explicitly stated for Graven-Tosk)"
+    ],
+    "taverns":[],
+    "guilds": [
+      "The Death Certificate Society (a guild found in Galgenbeck, thematically fitting for a necropolis, but not explicitly stated for Graven-Tosk)"
+    ],
+    "residences": [
+      "The Shadow King's Residence (within the Palace Quarter)",
+      "Mausoleums (as a form of eternal residence)",
+      "Burrows (for Undying Miners)",
+      "Shelters of Unfortunate Souls (within the Royal Ruins)"
+    ],
+    "ruins": [
+      "Ruins of the Shadow King's Palace",
+      "Sunken Temple",
+      "Quarry-Grave (an excavated ruin)",
+      "Towers (collapsed)"
+    ],
+    "encounters": {
+      "district": [
+        "Undead (Zombies [5-8], Grotesques stalking graveyards)",
+        "Goblins with bows, carrying a curse",
+        "Pale ones",
+        "Undying Miners",
+        "Crawling animals (as seen at the Sunken Temple)",
+        "Princes of the Shadow King's line in disguise",
+        "Corpse-things (relevant to the Valley of the Unfortunate Undead, which Nagl wandered, and where undeath mutates into mournful despair)"
+      ],
+      "street": [
+        "Feral Ash-mink",
+        "Sarkash scum with poisoned knives",
+        "Aland, wickhead knife-wielders skulking"
+      ],
+      "building": [
+        "Skeletons patrolling the grounds (a general MÖRK BORG encounter, fitting for a necropolis)",
+        "Trapped corpses reanimating as Flesh Puppets (a general MÖRK BORG encounter, fitting for a grotesque fort)",
+        "Wretched souls sheltering in crumbling parts"
+      ],
+      "landmark": [
+        "Flocks of crows following something (like a Dustlion)",
+        "Dry-Witches (who dwell near the Glassthrone, a distinct map location, but mentioned in rumors of the world)",
+        "Monsters (general) present around a landmark"
+      ],
+      "temple": [
+        "Ritualistic practices (as Nagl developed a taste for necromancy, implying such activities)"
+      ],
+      "tavern":[],
+      "guild":[],
+      "residence": [
+        "A miserable face of an Undying Miner in a burrow"
+      ],
+      "ruins": [
+        "Unfortunate souls sheltering",
+        "Crawling animals",
+        "Zombies [5-8]",
+        "The faint, disembodied cries of children echoing from the rubble (a general MÖRK BORG theme of suffering and lost children, fitting for the bleakness)"
+      ]
+    },
+    "random_tables": {
+      "district": [
+        "1-2: The forest of Sarkash seems to spread unnaturally fast, encroaching further into the cemetery",
+        "3-4: The air grows heavy, stale, and hard to breathe, accompanied by frantic scratching sounds",
+        "5-6: A previously hidden plague pit opens, releasing foul odors and d4 zombies [1, 5-8]"
+      ],
+      "building": [
+        "1-2: A collapsing section of the Palace reveals old bones and debris",
+        "3-4: A ghostly whisper or vision related to Nagl or the Valley of the Unfortunate Undead",
+        "5-6: Signs of recent passage by 'crawling animals' near the Sunken Temple"
+      ],
+      "street": [
+        "1-2: A flock of crows follows a massive Dustlion in the distance",
+        "3-4: An encounter with a disguised Prince of the Shadow King's line",
+        "5-6: A sudden, inexplicable chill or feeling of despair passes over the area (similar to cursed effects in sources)"
+      ],
+      "landmark": [
+        "1-2: A skeletal jester appears, seeking a new liege",
+        "3-4: The Quarry-Grave's cage contains injured and dying people",
+        "5-6: A hidden cache of gems (like Nagl's bribe) is discovered in a mausoleum"
+      ],
+      "temple": [
+        "1-2: Ritualistic markings appear on ancient stones, suggesting a dark ceremony (Nagl's necromancy)",
+        "3-4: The sound of faint, pained moans from beneath the ground",
+        "5-6: An ancient mausoleum door creaks open, revealing undisturbed darkness"
+      ],
+      "tavern":[],
+      "guild":[],
+      "residence": [
+        "1-2: An Undying Miner can be seen peeking from a burrow, jaws slack",
+        "3-4: A small, hidden stash of bone fragments and grim trinkets is found"
+      ],
+      "ruins": [
+        "1-2: A section of the ruins collapses, trapping d3 unfortunate souls",
+        "3-4: A rustling sound from within the debris suggests 'crawling animals'",
+        "5-6: The faint, disembodied cries of children echo from the rubble (a general MÖRK BORG theme of suffering and lost children, fitting for the bleakness)"
+      ]
+    },
+    "atmosphere_modifiers": [
+      "The oppressive gloom and tangling paths of Sarkash",
+      "The heavy, stale, and hard-to-breathe air",
+      "The constant, frantic scratching sound",
+      "The pervasive stench of decay and damp earth",
+      "A chilling sense of sorrow and hopelessness (from descriptions of undead and general setting)"
+    ]
+  }
+  

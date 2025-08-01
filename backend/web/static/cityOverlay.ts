@@ -208,7 +208,7 @@ export async function showCityOverlayAsciiInMap(app: any, overlayName: string, h
               </h4>
               <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word; text-align: left;">
 ${data.ascii}
-              </pre>
+              </div>
             </div>
           </div>
         `;
@@ -315,11 +315,11 @@ function showMapErrorState(app: any, message: string): void {
               </div>
               <div class="ascii-section ascii-error-message">
                 <span>ERROR DETAILS</span>
-                <pre>${message}</pre>
+                <div class="ascii-content">${message}</div>
               </div>
               <div class="ascii-section ascii-error-description">
                 <span>STATUS</span>
-                <pre>The darkness has consumed this knowledge...</pre>
+                <div class="ascii-content">The darkness has consumed this knowledge...</div>
               </div>
             </div>
           </div>

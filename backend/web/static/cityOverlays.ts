@@ -14,9 +14,8 @@ export async function showCityOverlayGrid(app: any, hexCode: string) {
     console.log("DEBUG: showCityOverlayGrid called with app, hexCode:", app, hexCode);
     ui.showLoading("Loading city overlays...")
 
-    // For now, use 'galgenbeck' as default overlay name
-    // In the future, this could be determined by the hex code
-    const overlayName = "galgenbeck"
+    // Get the city overlay name from the hex code
+    const overlayName = app.getOverlayNameFromHexCode(hexCode)
 
     const overlayResponse = await api.getCityOverlay(overlayName)
 

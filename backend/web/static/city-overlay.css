@@ -68,11 +68,11 @@
 /* City hex type colors - Mörk Borg palette */
 .city-district {
   background: var(--mork-yellow);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-building {
   background: var(--mork-pink);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-street {
   background: var(--mork-gray);
@@ -80,27 +80,27 @@
 }
 .city-landmark {
   background: var(--mork-cyan);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-market {
   background: var(--mork-green);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-temple {
   background: var(--mork-yellow);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-tavern {
   background: var(--mork-pink);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-guild {
   background: var(--mork-cyan);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-residence {
   background: var(--mork-green);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .city-ruins {
   background: var(--mork-gray);
@@ -170,11 +170,11 @@
 
 .hex-type-badge.city-district {
   background: var(--mork-yellow);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-building {
   background: var(--mork-pink);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-street {
   background: var(--mork-gray);
@@ -182,27 +182,27 @@
 }
 .hex-type-badge.city-landmark {
   background: var(--mork-cyan);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-market {
   background: var(--mork-green);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-temple {
   background: var(--mork-yellow);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-tavern {
   background: var(--mork-pink);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-guild {
   background: var(--mork-cyan);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-residence {
   background: var(--mork-green);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 .hex-type-badge.city-ruins {
   background: var(--mork-gray);

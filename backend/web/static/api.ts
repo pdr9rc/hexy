@@ -13,6 +13,23 @@ export async function getHex(hexCode: string): Promise<any> {
   }
 }
 
+export async function updateHex(hexCode: string, content: string): Promise<any> {
+  try {
+    const response = await fetch(`/api/hex/${hexCode}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content })
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error updating hex:', error);
+    throw error;
+  }
+}
+
 export async function getCity(hexCode: string): Promise<any> {
   try {
     const response = await fetch(`/api/city/${hexCode}`);
@@ -212,4 +229,44 @@ export async function getDistrictSpecificRandomTable(overlayName: string, distri
         console.error('Error fetching district specific random table:', error);
         throw error;
     }
+}
+
+export async function regenerateHex(overlayName: string, hexId: string): Promise<any> {
+  try {
+    const response = await fetch(`/api/regenerate-hex/${overlayName}/${hexId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error regenerating hex:', error);
+    throw error;
+  }
+}
+
+export async function regenerateOverlay(overlayName: string): Promise<any> {
+  try {
+    const response = await fetch(`/api/regenerate-overlay/${overlayName}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return response.json();
+  } catch (error) {
+    console.error('Error regenerating overlay:', error);
+    throw error;
+  }
 }

@@ -41,7 +41,7 @@ export function showLoreModal(lore: any) {
     html += `
           <div class="ascii-section ascii-lore-cities">
             <span>MAJOR CITIES</span>
-            <pre>${(lore.major_cities as string[]).join('\n')}</pre>
+            <div class="ascii-content">${(lore.major_cities as string[]).join('\n')}</div>
           </div>`;
   }
   
@@ -49,7 +49,7 @@ export function showLoreModal(lore: any) {
     html += `
           <div class="ascii-section ascii-lore-factions">
             <span>FACTIONS</span>
-            <pre>${(lore.factions as string[]).join('\n')}</pre>
+            <div class="ascii-content">${(lore.factions as string[]).join('\n')}</div>
           </div>`;
   }
   
@@ -57,7 +57,7 @@ export function showLoreModal(lore: any) {
     html += `
           <div class="ascii-section ascii-lore-npcs">
             <span>NOTABLE NPCS</span>
-            <pre>${(lore.notable_npcs as string[]).join('\n')}</pre>
+            <div class="ascii-content">${(lore.notable_npcs as string[]).join('\n')}</div>
           </div>`;
   }
   
@@ -65,7 +65,7 @@ export function showLoreModal(lore: any) {
     html += `
           <div class="ascii-section ascii-lore-regions">
             <span>REGIONAL LORE</span>
-            <pre>${(lore.regional_lore as string[]).join('\n')}</pre>
+            <div class="ascii-content">${(lore.regional_lore as string[]).join('\n')}</div>
           </div>`;
   }
   

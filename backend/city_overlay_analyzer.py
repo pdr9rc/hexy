@@ -145,7 +145,8 @@ class CityOverlayAnalyzer:
             print(f"DEBUG: City data keys: {list(city_data.keys())}")
             if 'district_matrix' in city_data:
                 matrix = city_data['district_matrix']
-                print(f"DEBUG: Found district matrix: {matrix}")
+                print(f"DEBUG: Found district matrix with {len(matrix)} rows")
+                print(f"DEBUG: First row: {matrix[0] if matrix else 'None'}")
                 return matrix
             else:
                 print(f"DEBUG: No district_matrix found in city data")
@@ -159,6 +160,9 @@ class CityOverlayAnalyzer:
         
         print(f"DEBUG: Applying district matrix for {overlay_name}")
         print(f"DEBUG: Matrix dimensions: {len(matrix)}x{len(matrix[0]) if matrix else 0}")
+        print(f"DEBUG: Matrix content:")
+        for i, row in enumerate(matrix):
+            print(f"DEBUG: Row {i}: {row}")
         
         # Fill the entire matrix with hexes (visible or invisible)
         for row_idx, row in enumerate(matrix):
@@ -491,16 +495,26 @@ class CityOverlayAnalyzer:
     def _load_city_database(self, city_name: str) -> Optional[Dict[str, Any]]:
         """Load city-specific database if available."""
         city_db_path = f'databases/cities/{city_name}.json'
+        print(f"DEBUG: Looking for city database at: {city_db_path}")
         if os.path.exists(city_db_path):
             try:
                 with open(city_db_path, 'r', encoding='utf-8') as f:
                     city_data = json.load(f)
+                    
+                print(f"DEBUG: Successfully loaded city database for {city_name}")
+                print(f"DEBUG: City data keys: {list(city_data.keys())}")
+                if 'district_matrix' in city_data:
+                    print(f"DEBUG: Found district_matrix with {len(city_data['district_matrix'])} rows")
+                else:
+                    print(f"DEBUG: No district_matrix found in city data")
                     
                 # Load additional city-specific content from language database
                 city_data.update(self._load_city_specific_content(city_name))
                 return city_data
             except Exception as e:
                 print(f"Warning: Could not load city database for {city_name}: {e}")
+        else:
+            print(f"DEBUG: City database file not found: {city_db_path}")
         return None
     
     def _load_city_specific_content(self, city_name: str) -> Dict[str, Any]:
@@ -2009,6 +2023,23 @@ class CityOverlayAnalyzer:
     def save_overlay_data(self, overlay_name: str, overlay_data: Dict[str, Any]):
         """Public wrapper for _save_overlay_data."""
         return self._save_overlay_data(overlay_name, overlay_data)
+    
+    def clear_overlay_cache(self, overlay_name: str):
+        """Clear the cache for a specific overlay."""
+        if overlay_name in self.overlays_cache:
+            del self.overlays_cache[overlay_name]
+            print(f"Cleared cache for overlay: {overlay_name}")
+        
+        # Also delete the file if it exists
+        filename = os.path.join(self.output_directory, f"{overlay_name}_overlay.json")
+        if os.path.exists(filename):
+            os.remove(filename)
+            print(f"Deleted overlay file: {filename}")
+    
+    def regenerate_overlay(self, overlay_name: str) -> Dict[str, Any]:
+        """Clear cache and regenerate overlay data."""
+        self.clear_overlay_cache(overlay_name)
+        return self.generate_city_overlay(overlay_name)
 
 # Global instance
 city_overlay_analyzer = CityOverlayAnalyzer()

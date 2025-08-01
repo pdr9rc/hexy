@@ -4,6 +4,19 @@
   "description": "Carved into the heart of a glacier, where the living and dead walk side by side",
   "theme": "frozen_undead_fortress",
   
+  "district_matrix": [
+    ["The Upper Crypts", "The Upper Crypts", "Noble Undead Quarter", "Noble Undead Quarter", "Frozen Battlements", "Frozen Battlements", "The Glacier Heart", "The Glacier Heart", "Servant's Tunnels", "Servant's Tunnels"],
+    ["The Upper Crypts", "The Upper Crypts", "Noble Undead Quarter", "Noble Undead Quarter", "Frozen Battlements", "Frozen Battlements", "The Glacier Heart", "The Glacier Heart", "Servant's Tunnels", "Servant's Tunnels"],
+    ["The Ancient Vaults", "The Ancient Vaults", "Ice Palace District", "Ice Palace District", "The Eternal Watch", "The Eternal Watch", "Crypt Lord's Domain", "Crypt Lord's Domain", "The Frozen Gates", "The Frozen Gates"],
+    ["The Ancient Vaults", "The Ancient Vaults", "Ice Palace District", "Ice Palace District", "The Eternal Watch", "The Eternal Watch", "Crypt Lord's Domain", "Crypt Lord's Domain", "The Frozen Gates", "The Frozen Gates"],
+    ["The Upper Crypts", "The Upper Crypts", "Noble Undead Quarter", "Noble Undead Quarter", "Frozen Battlements", "Frozen Battlements", "The Glacier Heart", "The Glacier Heart", "Servant's Tunnels", "Servant's Tunnels"],
+    ["The Upper Crypts", "The Upper Crypts", "Noble Undead Quarter", "Noble Undead Quarter", "Frozen Battlements", "Frozen Battlements", "The Glacier Heart", "The Glacier Heart", "Servant's Tunnels", "Servant's Tunnels"],
+    ["The Ancient Vaults", "The Ancient Vaults", "Ice Palace District", "Ice Palace District", "The Eternal Watch", "The Eternal Watch", "Crypt Lord's Domain", "Crypt Lord's Domain", "The Frozen Gates", "The Frozen Gates"],
+    ["The Ancient Vaults", "The Ancient Vaults", "Ice Palace District", "Ice Palace District", "The Eternal Watch", "The Eternal Watch", "Crypt Lord's Domain", "Crypt Lord's Domain", "The Frozen Gates", "The Frozen Gates"],
+    ["The Upper Crypts", "The Upper Crypts", "Noble Undead Quarter", "Noble Undead Quarter", "Frozen Battlements", "Frozen Battlements", "The Glacier Heart", "The Glacier Heart", "Servant's Tunnels", "Servant's Tunnels"],
+    ["The Upper Crypts", "The Upper Crypts", "Noble Undead Quarter", "Noble Undead Quarter", "Frozen Battlements", "Frozen Battlements", "The Glacier Heart", "The Glacier Heart", "Servant's Tunnels", "Servant's Tunnels"]
+  ],
+  
   "districts": [
     {
       "name": "The Upper Crypts",

@@ -1,10 +1,14 @@
 // web/static/main.ts
-import { getCityOverlay, getCityOverlayHex } from "./api.js"
+import { getCityOverlay, getCityOverlayHex, updateHex } from "./api.js"
 import { showHexDetails as renderHexDetails, showCityDetails, showSettlementDetails } from "./hexViewer.js"
 import { renderMap } from "./mapRenderer.js"
 import { initializeControls } from "./controls.js"
 import { showNotification, showError } from "./uiUtils.js"
 import { showCityOverlayGrid } from './cityOverlays.js';
+
+// Global state for hex editing
+let currentEditingHex: string | null = null;
+let originalHexContent: string | null = null;
 
 interface HexData {
   x: number
@@ -246,17 +250,17 @@ class DyingLandsApp {
             <!-- Description Section -->
             <div class="ascii-section ascii-hex-description">
               <span>DESCRIPTION:</span>
-              <pre>${content.description || description}</pre>
+              <div class="ascii-content">${content.description || description}</div>
             </div>
             
             <!-- Atmosphere & Encounter Section -->
             <div class="ascii-section ascii-hex-atmosphere">
               <span>ATMOSPHERE:</span>
-              <pre>${content.atmosphere || atmosphere || 'No atmosphere available.'}</pre>
+              <div class="ascii-content">${content.atmosphere || atmosphere || 'No atmosphere available.'}</div>
             </div>
             <div class="ascii-section ascii-hex-encounter">
               <span>ENCOUNTER:</span>
-              <pre>${content.encounter || encounter}</pre>
+              <div class="ascii-content">${content.encounter || encounter}</div>
             </div>
     `
 
@@ -265,7 +269,7 @@ class DyingLandsApp {
       html += `
         <div class="ascii-section ascii-hex-features">
           <span>NOTABLE FEATURES:</span>
-          <pre>${content.notable_features.join('\n')}</pre>
+          <div class="ascii-content">${content.notable_features.join('\n')}</div>
         </div>
       `;
     }
@@ -275,7 +279,7 @@ class DyingLandsApp {
                 html += `
                   <div class="ascii-section ascii-hex-npcs">
                     <span>NPC INFORMATION:</span>
-                    <pre>
+                    <div class="ascii-content">
                 `;
                 
                 if (content.npc_name) {
@@ -304,7 +308,7 @@ class DyingLandsApp {
                 }
                 
                 html += `
-                    </pre>
+                    </div>
                   </div>
                 `;
               }
@@ -314,7 +318,7 @@ class DyingLandsApp {
       html += `
         <div class="ascii-section ascii-hex-tavern">
           <span>TAVERN DETAILS:</span>
-          <pre>
+          <div class="ascii-content">
       `;
       
       if (content.tavern_menu) {
@@ -328,7 +332,7 @@ class DyingLandsApp {
       }
       
       html += `
-          </pre>
+          </div>
         </div>
       `;
     }
@@ -338,7 +342,7 @@ class DyingLandsApp {
       html += `
         <div class="ascii-section ascii-hex-market">
           <span>MARKET DETAILS:</span>
-          <pre>
+          <div class="ascii-content">
       `;
       
       if (content.items_sold) {
@@ -352,7 +356,7 @@ class DyingLandsApp {
       }
       
       html += `
-          </pre>
+          </div>
         </div>
       `;
     }
@@ -362,7 +366,7 @@ class DyingLandsApp {
       html += `
         <div class="ascii-section ascii-hex-services">
           <span>SERVICES:</span>
-          <pre>${content.services}</pre>
+          <div class="ascii-content">${content.services}</div>
         </div>
       `;
     }
@@ -372,7 +376,7 @@ class DyingLandsApp {
       html += `
         <div class="ascii-section ascii-hex-patrons">
           <span>PATRONS:</span>
-          <pre>${content.patrons}</pre>
+          <div class="ascii-content">${content.patrons}</div>
         </div>
       `;
     }
@@ -382,7 +386,7 @@ class DyingLandsApp {
       html += `
         <div class="ascii-section ascii-hex-random">
           <span>RANDOM ENCOUNTERS:</span>
-          <pre>${content.random_table.join('\n')}</pre>
+          <div class="ascii-content">${content.random_table.join('\n')}</div>
         </div>
       `;
     }
@@ -503,14 +507,61 @@ class DyingLandsApp {
     }
   }
 
-  private getOverlayNameFromHexCode(hexCode: string): string {
-    // This is a simple mapping - you might want to make this more sophisticated
-    // based on your actual city data structure
-    const hexData = this.mapData[hexCode]
-    if (hexData && hexData.city_name) {
-      return hexData.city_name.toLowerCase().replace(/\s+/g, "_")
+  public getOverlayNameFromHexCode(hexCode: string): string {
+    console.log('🔍 getOverlayNameFromHexCode called with hexCode:', hexCode);
+    
+    // Map hex codes to actual overlay names (based on existing overlay files)
+    const cityMap: { [key: string]: string } = {
+      '1427': 'galgenbeck',                    // Galgenbeck (14,27)
+      '0507': 'allians',                       // Allians (5,7)
+      '1017': 'schleswig',                     // Schleswig (10,17)
+      '1507': 'bergen_chrypt',                 // Bergen Chrypt (15,7)
+      '0814': 'valley_of_unfortunate_undead',  // Valley of Unfortunate Undead (8,14)
+      '1513': 'graven_tosk',                   // Graven-Tosk (15,13)
+      '2313': 'grift'                          // Grift (23,13)
     }
-    return "galgenbeck" // Default fallback
+    
+    // Check if we have a direct mapping for this hex code
+    if (cityMap[hexCode]) {
+      console.log('✅ Found direct mapping for hex', hexCode, '->', cityMap[hexCode]);
+      return cityMap[hexCode]
+    }
+    
+    // Fallback: check if hex data has city information
+    const hexData = this.mapData[hexCode]
+    console.log('📊 Hex data for', hexCode, ':', hexData);
+    
+    if (hexData && hexData.city_name) {
+      const cityName = hexData.city_name.toLowerCase().replace(/\s+/g, "_")
+      console.log('🏙️ City name from hex data:', cityName);
+      
+      // Map common city names to actual overlay names
+      const nameMap: { [key: string]: string } = {
+        'galgenbeck': 'galgenbeck',
+        'allians': 'allians',
+        'alliáns': 'allians',
+        'schleswig': 'schleswig',
+        'bergen_chrypt': 'bergen_chrypt',
+        'bergen chrypt': 'bergen_chrypt',
+        'valley_of_unfortunate_undead': 'valley_of_unfortunate_undead',
+        'valley of unfortunate undead': 'valley_of_unfortunate_undead',
+        'graven_tosk': 'graven_tosk',
+        'graven-tosk': 'graven_tosk',
+        'graven tosk': 'graven_tosk',
+        'grift': 'grift'
+      }
+      
+      if (nameMap[cityName]) {
+        console.log('✅ Found name mapping for', cityName, '->', nameMap[cityName]);
+        return nameMap[cityName]
+      } else {
+        console.log('❌ No name mapping found for', cityName);
+        return cityName // Return the city name as-is instead of defaulting to galgenbeck
+      }
+    }
+    
+    console.log('❌ No hex data or city name found for', hexCode);
+    return hexCode // Return the hex code as the overlay name instead of defaulting to galgenbeck
   }
 
   public renderCityOverlay(hexCode?: string): void {
@@ -637,7 +688,7 @@ class DyingLandsApp {
           <div class="city-overlay-ascii-inner-box">
             <div class="city-overlay-ascii-section">
               <span>SELECTED DISTRICT</span>
-              <pre>Click on a hex to view district details and information.</pre>
+              <div class="ascii-content">Click on a hex to view district details and information.</div>
             </div>
           </div>
         </div>
@@ -774,23 +825,23 @@ class DyingLandsApp {
                 </div>
                 <div class="ascii-section ascii-hex-description">
                   <span>WELCOME TO THE HEXCRAWL</span>
-                  <pre>
+                  <div class="ascii-content">
 Click a hex to explore its mysteries...
 
 Each hex contains unique encounters, denizens,
 and secrets waiting to be discovered.
 
 The world is dying, but adventure lives on.
-                  </pre>
+                  </div>
                 </div>
                 <div class="ascii-section ascii-hex-instructions">
                   <span>INSTRUCTIONS</span>
-                  <pre>
+                  <div class="ascii-content">
 • Click any hex on the map to view its details
 • Major cities (◆) have additional overlay views
 • Settlements (⌂) provide local information
 • Bold hexes contain special content
-                  </pre>
+                  </div>
                 </div>
               </div>
             </div>
@@ -885,6 +936,106 @@ The world is dying, but adventure lives on.
   // Public methods for external access
   public getCurrentView(): "world" | "city" {
     return this.currentView
+  }
+
+  // Hex editing methods
+  public editHexContent(hexCode: string): void {
+    console.log('🔧 Starting edit for hex:', hexCode);
+    
+    const container = document.getElementById('details-panel');
+    if (!container) return;
+
+    // Find the markdown content
+    const markdownContent = container.querySelector('.markdown-content pre');
+    if (!markdownContent) {
+      showError('No editable content found');
+      return;
+    }
+
+    const content = markdownContent.textContent || '';
+    originalHexContent = content;
+    currentEditingHex = hexCode;
+
+    // Replace the content with a textarea
+    const textarea = document.createElement('textarea');
+    textarea.value = content;
+    textarea.style.width = '100%';
+    textarea.style.minHeight = '300px';
+    textarea.style.fontFamily = 'monospace';
+    textarea.style.backgroundColor = '#1a1a1a';
+    textarea.style.color = '#ffffff';
+    textarea.style.border = '1px solid #333';
+    textarea.style.padding = '10px';
+    textarea.style.resize = 'vertical';
+
+    markdownContent.parentNode?.replaceChild(textarea, markdownContent);
+
+    // Show save/cancel buttons
+    const saveBtn = document.getElementById('save-hex-btn') as HTMLElement;
+    const cancelBtn = document.getElementById('cancel-hex-btn') as HTMLElement;
+    const editBtn = container.querySelector('button[onclick*="editHexContent"]') as HTMLElement;
+    
+    if (saveBtn) saveBtn.style.display = 'inline-block';
+    if (cancelBtn) cancelBtn.style.display = 'inline-block';
+    if (editBtn) editBtn.style.display = 'none';
+  }
+
+  public async saveHexContent(hexCode: string): Promise<void> {
+    console.log('💾 Saving hex content:', hexCode);
+    
+    const container = document.getElementById('details-panel');
+    if (!container) return;
+
+    const textarea = container.querySelector('textarea');
+    if (!textarea) {
+      showError('No textarea found for editing');
+      return;
+    }
+
+    const newContent = (textarea as HTMLTextAreaElement).value;
+
+    try {
+      await updateHex(hexCode, newContent);
+      showNotification('Hex content saved successfully');
+      
+      // Refresh the hex details
+      this.showHexDetails(hexCode);
+      
+      // Reset editing state
+      currentEditingHex = null;
+      originalHexContent = null;
+    } catch (error) {
+      console.error('Error saving hex content:', error);
+      showError('Failed to save hex content');
+    }
+  }
+
+  public cancelHexEdit(): void {
+    console.log('❌ Canceling hex edit');
+    
+    const container = document.getElementById('details-panel');
+    if (!container) return;
+
+    const textarea = container.querySelector('textarea');
+    if (!textarea) return;
+
+    // Restore original content
+    const pre = document.createElement('pre');
+    pre.textContent = originalHexContent || '';
+    textarea.parentNode?.replaceChild(pre, textarea);
+
+    // Hide save/cancel buttons, show edit button
+    const saveBtn = document.getElementById('save-hex-btn') as HTMLElement;
+    const cancelBtn = document.getElementById('cancel-hex-btn') as HTMLElement;
+    const editBtn = container.querySelector('button[onclick*="editHexContent"]') as HTMLElement;
+    
+    if (saveBtn) saveBtn.style.display = 'none';
+    if (cancelBtn) cancelBtn.style.display = 'none';
+    if (editBtn) editBtn.style.display = 'inline-block';
+
+    // Reset editing state
+    currentEditingHex = null;
+    originalHexContent = null;
   }
 
   private updateWorldMapControlsVisibility(): void {
@@ -1162,6 +1313,9 @@ document.addEventListener('DOMContentLoaded', () => {
   (window as any).renderCityOverlay = appInstance.renderCityOverlay.bind(appInstance);
   (window as any).app.showHexDetails = appInstance.showHexDetails.bind(appInstance);
   (window as any).showHexDetails = appInstance.showHexDetails.bind(appInstance);
+  (window as any).app.editHexContent = appInstance.editHexContent.bind(appInstance);
+  (window as any).app.saveHexContent = appInstance.saveHexContent.bind(appInstance);
+  (window as any).app.cancelHexEdit = appInstance.cancelHexEdit.bind(appInstance);
   const mapPanel = document.querySelector('.map-container') as HTMLElement;
   const mapZoomContainer = document.getElementById('map-zoom-container') as HTMLElement;
   const detailsPanel = document.querySelector('.modal-content-container') as HTMLElement;

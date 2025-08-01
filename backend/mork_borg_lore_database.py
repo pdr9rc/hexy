@@ -27,7 +27,7 @@ class MorkBorgLoreDatabase:
                 'population': '1000+',
                 'terrain': 'plains',
                 'region': 'central',
-                'coordinates': (15, 13),
+                'coordinates': (14, 27),
                 'notable_features': [
                     'Hanging Gardens of Corpses',
                     'Secretive ruling council',
@@ -79,56 +79,6 @@ class MorkBorgLoreDatabase:
                 'atmosphere': 'Scholarly, secretive, and haunted by knowledge.',
                 'atmosphere_pt': 'Erudito, secreto e assombrado pelo conhecimento.'
             },
-            'kergus': {
-                'name': 'Kergus',
-                'name_pt': 'Kergus',
-                'description': 'A farming community plagued by unnatural weather and stranger livestock. Stone circles dot the fields, and the locals speak of things that move beneath the earth.',
-                'description_pt': 'Uma comunidade agrícola atormentada por tempo e animais estranhos. Círculos de pedra adornam os campos, e os locais falam de coisas que se movem sob a terra.',
-                'population': '800',
-                'terrain': 'plains',
-                'region': 'south',
-                'coordinates': (7, 8),
-                'notable_features': [
-                    'Twisted livestock',
-                    'Stone circles',
-                    'Weather-warped fields',
-                    'Subterranean rumblings'
-                ],
-                'notable_features_pt': [
-                    'Livestock torto',
-                    'Círculos de pedra',
-                    'Campos distorcidos pelo tempo',
-                    'Rumores subterrâneos'
-                ],
-                'key_npcs': ['Cattle Baron', 'Weather Seer'],
-                'atmosphere': 'Bleak, windswept, and tinged with dread.',
-                'atmosphere_pt': 'Desolado, ventoso e tingido com medo.'
-            },
-            'sarkash': {
-                'name': 'Sarkash Forest Settlement',
-                'name_pt': 'Sarkash Assentamento Florestal',
-                'description': 'Hidden high in the ancient trees, this settlement is protected by powerful ward stones and the enigmatic Forest Witches. The woods below are thick with curses, and the wind carries whispers of old magic.',
-                'description_pt': 'Oculto em cima das árvores antigas, este assentamento é protegido por pedras de guarda poderosas e as Bruxas da Floresta enigmáticas. Os bosques abaixo estão cheios de maldições, e o vento carrega susurros de antigas magias.',
-                'population': '120',
-                'terrain': 'forest',
-                'region': 'northwest',
-                'coordinates': (9, 8),
-                'notable_features': [
-                    'Ward stones',
-                    'Forest Witch coven',
-                    'Cursed glades',
-                    'Living trees'
-                ],
-                'notable_features_pt': [
-                    'Pedras de guarda',
-                    'Covens de Bruxa da Floresta',
-                    'Glades amaldiçoadas',
-                    'Árvores vivas'
-                ],
-                'key_npcs': ['Forest Witch', 'Tree Warden'],
-                'atmosphere': 'Gloomy, tangled, and alive with secrets.',
-                'atmosphere_pt': 'Sombrio, confuso e repleto de segredos.'
-            },
             'graven_tosk': {
                 'name': 'Graven-Tosk',
                 'name_pt': 'Graven-Tosk',
@@ -137,7 +87,7 @@ class MorkBorgLoreDatabase:
                 'population': '300',
                 'terrain': 'swamp',
                 'region': 'west',
-                'coordinates': (19, 8),
+                'coordinates': (15,13),
                 'notable_features': [
                     'Endless graveyards',
                     'Necromancer guilds',
@@ -154,31 +104,6 @@ class MorkBorgLoreDatabase:
                 'atmosphere': 'Somber, funereal, and thick with the presence of the dead.',
                 'atmosphere_pt': 'Sombrio, funerário e repleto da presença dos mortos.'
             },
-            'tveland': {
-                'name': 'Tveland Outpost',
-                'name_pt': 'Faro de Tveland',
-                'description': 'A battered outpost on the edge of the known world, Tveland is a haven for exiles, traders, and those fleeing darker things. Its watchtowers are always manned, and the horizon is a line of perpetual storms.',
-                'description_pt': 'Um farol abandonado na beira do mundo conhecido, Tveland é um refúgio para exilados, comerciantes e aqueles que fogem coisas mais sombrias. Suas torres de vigia estão sempre patrulhadas, e o horizonte é uma linha de tempestades eternas.',
-                'population': '200',
-                'terrain': 'plains',
-                'region': 'east',
-                'coordinates': (21, 7),
-                'notable_features': [
-                    'Storm-wracked horizon',
-                    'Nomad trading post',
-                    'Exile camps',
-                    'Perpetual watchtowers'
-                ],
-                'notable_features_pt': [
-                    'Horizonte furibundo',
-                    'Posto de comércio de nômades',
-                    'Acampamentos de exilados',
-                    'Torres de vigia perpétuas'
-                ],
-                'key_npcs': ['Captain of the Watch', 'Nomad Trader'],
-                'atmosphere': 'Windswept, tense, and haunted by the unknown.',
-                'atmosphere_pt': 'Ventoso, tenso e assombrado pelo desconhecido.'
-            },
             'grift': {
                 'name': 'Grift',
                 'name_pt': 'Grift',
@@ -187,7 +112,7 @@ class MorkBorgLoreDatabase:
                 'population': '600',
                 'terrain': 'plains',
                 'region': 'south',
-                'coordinates': (23, 13),
+                'coordinates': (23, 27),
                 'notable_features': [
                     'Crumbling temples',
                     'Pilgrim camps',
@@ -212,7 +137,7 @@ class MorkBorgLoreDatabase:
                 'population': '350',
                 'terrain': 'coast',
                 'region': 'west',
-                'coordinates': (10, 17),
+                'coordinates': (11, 38),
                 'notable_features': [
                     'Storm-battered docks',
                     'Salt-stained houses',
@@ -229,31 +154,6 @@ class MorkBorgLoreDatabase:
                 'atmosphere': 'Salt-stained, ruined, and desperate.',
                 'atmosphere_pt': 'Manchado de sal, ruído e desesperado.'
             },
-            'wastland': {
-                'name': 'Wästland',
-                'name_pt': 'Wästland',
-                'description': 'A ruined city in the endless desert, Wästland is a place of scavengers and lost secrets. Sand-choked streets hide treasures and dangers in equal measure.',
-                'description_pt': 'Uma cidade ruína no deserto interminável, Wästland é um lugar de esmagadores e segredos perdidos. Ruas encharcadas de areia escondem tesouros e perigos em igual medida.',
-                'population': '100',
-                'terrain': 'desert',
-                'region': 'east',
-                'coordinates': (12, 21),
-                'notable_features': [
-                    'Sand-choked ruins',
-                    'Scavenger camps',
-                    'Ancient obelisks',
-                    'Mirage-haunted streets'
-                ],
-                'notable_features_pt': [
-                    'Ruas encharcadas de areia',
-                    'Acampamentos de esmagadores',
-                    'Obeliscos antigos',
-                    'Ruas fantasmadas pelo mirage'
-                ],
-                'key_npcs': ['Sand Prophet', 'Scavenger King'],
-                'atmosphere': 'Harsh, windswept, and mysterious.',
-                'atmosphere_pt': 'Severo, ventoso e misterioso.'
-            },
             'bergen_chrypt': {
                 'name': 'Bergen Chrypt',
                 'name_pt': 'Bergen Chrypt',
@@ -262,7 +162,7 @@ class MorkBorgLoreDatabase:
                 'population': '400',
                 'terrain': 'mountain',
                 'region': 'north',
-                'coordinates': (15, 7),
+                'coordinates': (6, 30),
                 'notable_features': [
                     'Glacier-carved fortress',
                     'Endless crypts',
@@ -287,7 +187,7 @@ class MorkBorgLoreDatabase:
                 'population': '0',
                 'terrain': 'plains',
                 'region': 'central',
-                'coordinates': (8, 14),
+                'coordinates': (6, 29),
                 'notable_features': [
                     'Mass graves',
                     'Restless spirits',
@@ -304,7 +204,12 @@ class MorkBorgLoreDatabase:
                 'atmosphere': 'Sorrowful, mist-shrouded, and haunted.',
                 'atmosphere_pt': 'Sorroso, nublado e assombrado.'
             },
-            'ucalegon': {
+            # TODO: Add more cities from the lore
+            
+        }
+    
+    '''
+    'ucalegon': {
                 'name': 'Ucalegon',
                 'name_pt': 'Ucalegon',
                 'description': 'The Lost Kingdom of Ucalegon. Placeholder description.',
@@ -393,21 +298,6 @@ class MorkBorgLoreDatabase:
                 'key_npcs': [],
                 'atmosphere': 'Ruined and ancient.',
                 'atmosphere_pt': 'Ruína e antiga.'
-            },
-            'jericho_asylum': {
-                'name': 'Jericho Asylum',
-                'name_pt': 'Asilo de Jericho',
-                'description': 'Jericho Asylum. Placeholder description.',
-                'description_pt': 'Asilo de Jericho. Descrição de placeholder.',
-                'population': 'unknown',
-                'terrain': 'asylum',
-                'region': 'east',
-                'coordinates': (25, 10),
-                'notable_features': [],
-                'notable_features_pt': [],
-                'key_npcs': [],
-                'atmosphere': 'Madness and isolation.',
-                'atmosphere_pt': 'Loucura e isolamento.'
             },
             'verisaille': {
                 'name': 'Verisaille',
@@ -514,37 +404,8 @@ class MorkBorgLoreDatabase:
                 'atmosphere': 'Unknown.',
                 'atmosphere_pt': 'Desconhecido.'
             },
-            'borrow_hills': {
-                'name': 'Borrow Hills',
-                'name_pt': 'Colinas de Empréstimo',
-                'description': 'Borrow Hills. Placeholder description.',
-                'description_pt': 'Colinas de Empréstimo. Descrição de placeholder.',
-                'population': 'unknown',
-                'terrain': 'hills',
-                'region': 'east',
-                'coordinates': (22, 16),
-                'notable_features': [],
-                'notable_features_pt': [],
-                'key_npcs': [],
-                'atmosphere': 'Unknown.',
-                'atmosphere_pt': 'Desconhecido.'
-            },
-            'dalmore_mountains': {
-                'name': 'Dalmore Mountains',
-                'name_pt': 'Montanhas de Dalmore',
-                'description': 'Dalmore Mountains. Placeholder description.',
-                'description_pt': 'Montanhas de Dalmore. Descrição de placeholder.',
-                'population': 'unknown',
-                'terrain': 'mountain',
-                'region': 'east',
-                'coordinates': (24, 13),
-                'notable_features': [],
-                'notable_features_pt': [],
-                'key_npcs': [],
-                'atmosphere': 'Unknown.',
-                'atmosphere_pt': 'Desconhecido.'
-            }
-        }
+
+    '''
     
     def _init_factions(self) -> Dict:
         """Initialize major factions from Mörk Borg lore."""

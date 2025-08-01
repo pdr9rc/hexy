@@ -318,7 +318,7 @@ h6 {
   flex: 0 0 30%;
   width: 30%;
   min-width: 300px;
-  max-width: 500px;
+  max-width: 800px;
   min-height: 0;
   height: 100%;
   overflow-y: auto;
@@ -488,7 +488,9 @@ h6 {
 
 /* Modal Side (Right Panel) */
 .details-section {
-  width: 400px;
+  width: 100%;
+  min-width: 400px;
+  max-width: 800px;
   background: var(--bg-secondary);
   border: 3px solid var(--border-primary);
   border-radius: var(--border-radius);
@@ -1030,7 +1032,9 @@ h6 {
   }
 
   .details-section {
-    width: 350px;
+    width: 100%;
+    min-width: 350px;
+    max-width: 800px;
   }
 
   .hex-cell {
@@ -1360,12 +1364,12 @@ h6 {
 /* City hex cell types - unified styling with world map */
 .city-hex-cell.city-district {
   background: linear-gradient(135deg, var(--mork-yellow) 0%, #ffcc00 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-building {
   background: linear-gradient(135deg, var(--mork-pink) 0%, #ff66ff 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-street {
@@ -1376,32 +1380,32 @@ h6 {
 
 .city-hex-cell.city-landmark {
   background: linear-gradient(135deg, var(--mork-cyan) 0%, #00cccc 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-market {
   background: linear-gradient(135deg, var(--mork-green) 0%, #00cc00 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-temple {
   background: linear-gradient(135deg, var(--mork-yellow) 0%, #ffcc00 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-tavern {
   background: linear-gradient(135deg, var(--mork-pink) 0%, #ff66ff 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-guild {
   background: linear-gradient(135deg, var(--mork-yellow) 0%, #ffcc00 100%);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-residence {
   background: var(--mork-green);
-  color: var(--mork-black);
+  color: var(--mork-white);
 }
 
 .city-hex-cell.city-ruins {
@@ -1476,7 +1480,7 @@ h6 {
   color: var(--text-secondary);
   padding: 8px 12px;
   width: 100%;
-  max-width: 800px; /* Expanded from 600px to 800px */
+  max-width: 100%;
   max-height: 80vh;
   overflow-y: auto;
   margin: 0 auto;
@@ -1514,12 +1518,20 @@ h6 {
   color: var(--text-secondary);
   padding: 8px 10px;
   margin: 8px 0;
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .ascii-section {
   border-bottom: 1px dashed var(--border-primary);
   padding: 6px 0 4px 0;
   margin-bottom: 4px;
-  color: var(--text-secondary);
+  color: var(--mork-yellow);
+  font-size: 1.1em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 .ascii-section:last-child {
   border-bottom: none;
@@ -1529,16 +1541,19 @@ h6 {
   color: var(--mork-yellow);
   letter-spacing: 1px;
 }
-.city-hex-details-box .ascii-section pre {
+.city-hex-details-box .ascii-section .ascii-content {
   font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace !important;
-  font-size: 1em;
+  font-size: 1.1em;
   color: var(--mork-yellow) !important;
   background: none !important;
   border: none;
   margin: 0;
   padding: 0 0 0 8px;
   white-space: pre-wrap;
-  line-height: 1.2;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
 }
 
 /* ===== INTEGRATED CITY VIEW STYLES ===== */
@@ -1641,7 +1656,7 @@ h6 {
   color: var(--text-secondary);
   padding: 8px 12px;
   width: 100%;
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto; /* Remove margin since we're using gap */
   box-shadow: var(--shadow-dark);
   flex-shrink: 0; /* Prevent box from shrinking */
@@ -1651,16 +1666,24 @@ h6 {
   border: 1.5px solid var(--border-primary);
   border-radius: var(--border-radius);
   background: var(--bg-tertiary);
-  color: var(--text-secondary);
+  color: var(--mork-white);
   padding: 8px 10px;
   margin: 8px 0;
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .city-overlay-ascii-section {
   border-bottom: 1px dashed var(--border-primary);
   padding: 6px 0 4px 0;
   margin-bottom: 4px;
-  color: var(--text-secondary);
+  color: var(--mork-yellow);
+  font-size: 1.1em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .city-overlay-ascii-section:last-child {
@@ -1673,16 +1696,19 @@ h6 {
   letter-spacing: 1px;
 }
 
-.city-overlay-ascii-section pre {
+.city-overlay-ascii-section .ascii-content {
   font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace !important;
-  font-size: 1em;
+  font-size: 1.1em;
   color: var(--mork-yellow) !important;
   background: none !important;
   border: none;
   margin: 0;
   padding: 0 0 0 8px;
   white-space: pre-wrap;
-  line-height: 1.2;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  display: block;
 }
 
 /* ===== DISTRICT DETAILS AREA ===== */
@@ -1693,7 +1719,7 @@ h6 {
   position: relative;
   width: 100%;
   height: calc(100vh - 200px); /* Account for header height */
-  overflow: hidden;
+  overflow: visible;
   margin-top: 0;
   display: flex;
   flex-direction: column;
@@ -1713,7 +1739,7 @@ h6 {
   width: 100%;
   height: 100%;
   overflow-y: auto; /* Enable vertical scrolling on left side */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-x: auto; /* Allow horizontal scrolling for long text */
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -1894,7 +1920,7 @@ h6 {
 .ascii-hex-weather pre,
 .ascii-hex-city-event pre {
   font-style: italic;
-  color: var(--text-primary);
+  color: var(--mork-white);
   text-shadow: none;
 }
 
@@ -2005,6 +2031,53 @@ h6 {
 .ascii-hex-beast-art:hover {
   background: rgba(255, 255, 0, 0.1);
   transition: var(--transition-fast);
+}
+
+/* Markdown content styling */
+.markdown-content {
+  margin-top: 10px;
+}
+
+.markdown-content pre {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.markdown-content textarea {
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 5px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #ffffff;
+  resize: vertical;
+  min-height: 300px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Hex editing buttons */
+.ascii-hex-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.ascii-hex-actions button {
+  flex: 1;
+  min-width: 80px;
 }
 
 /* ===== ENHANCED CITY CONTROLS PANEL ===== */
@@ -2152,6 +2225,8 @@ h6 {
   background: var(--bg-secondary);
   border: 2px solid var(--border-primary);
   margin-bottom: var(--spacing-md);
+  overflow-x: auto;
+  max-width: 100%;
 }
 
 /* ASCII Section Text Color Override */
@@ -2166,6 +2241,9 @@ h6 {
 .city-context-panel .ascii-section {
   border-bottom: 1px solid var(--border-muted);
   padding: var(--spacing-sm);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .city-context-panel .ascii-section:last-child {

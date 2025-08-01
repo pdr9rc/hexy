@@ -20,7 +20,7 @@ function loadCityContext(contextData: any) {
           </div>
           <div class="ascii-section ascii-city-description">
             <span>CITY DESCRIPTION:</span>
-            <pre>${context.description}</pre>
+            <div class="ascii-content">${context.description}</div>
           </div>
   `;
   
@@ -29,7 +29,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-events">
         <span>CITY EVENTS:</span>
-        <pre>${context.city_events.slice(0, 3).join('\n')}</pre>
+        <div class="ascii-content">${context.city_events.slice(0, 3).join('\n')}</div>
       </div>
     `;
   }
@@ -39,7 +39,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-weather">
         <span>WEATHER:</span>
-        <pre>${context.weather_conditions.slice(0, 2).join('\n')}</pre>
+        <div class="ascii-content">${context.weather_conditions.slice(0, 2).join('\n')}</div>
       </div>
     `;
   }
@@ -49,7 +49,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-npcs">
         <span>REGIONAL NPCS:</span>
-        <pre>${context.regional_npcs.slice(0, 3).join('\n')}</pre>
+        <div class="ascii-content">${context.regional_npcs.slice(0, 3).join('\n')}</div>
       </div>
     `;
   }
@@ -59,7 +59,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-factions">
         <span>MAJOR FACTIONS:</span>
-        <pre>
+        <div class="ascii-content">
     `;
     
     for (const faction of context.major_factions.slice(0, 3)) {
@@ -75,7 +75,7 @@ function loadCityContext(contextData: any) {
     }
     
     html += `
-        </pre>
+        </div>
       </div>
     `;
   }
@@ -85,7 +85,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-factions">
         <span>LOCAL FACTIONS:</span>
-        <pre>
+        <div class="ascii-content">
     `;
     
     for (const faction of context.local_factions.slice(0, 3)) {
@@ -101,7 +101,7 @@ function loadCityContext(contextData: any) {
     }
     
     html += `
-        </pre>
+        </div>
       </div>
     `;
   }
@@ -111,7 +111,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-factions">
         <span>CRIMINAL FACTIONS:</span>
-        <pre>
+        <div class="ascii-content">
     `;
     
     for (const faction of context.criminal_factions.slice(0, 2)) {
@@ -127,7 +127,7 @@ function loadCityContext(contextData: any) {
     }
     
     html += `
-        </pre>
+        </div>
       </div>
     `;
   }
@@ -137,7 +137,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-factions">
         <span>FACTION RELATIONSHIPS:</span>
-        <pre>
+        <div class="ascii-content">
     `;
     
     for (const relationship of context.faction_relationships.slice(0, 3)) {
@@ -147,7 +147,7 @@ function loadCityContext(contextData: any) {
     }
     
     html += `
-        </pre>
+        </div>
       </div>
     `;
   }
@@ -157,7 +157,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-factions">
         <span>OTHER FACTIONS:</span>
-        <pre>
+        <div class="ascii-content">
     `;
     
     for (const faction of context.legacy_factions.slice(0, 3)) {
@@ -171,7 +171,7 @@ function loadCityContext(contextData: any) {
     }
     
     html += `
-        </pre>
+        </div>
       </div>
     `;
   }
@@ -181,7 +181,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-landmarks">
         <span>MAJOR LANDMARKS:</span>
-        <pre>${context.major_landmarks.slice(0, 3).join('\n')}</pre>
+        <div class="ascii-content">${context.major_landmarks.slice(0, 3).join('\n')}</div>
       </div>
     `;
   }
@@ -191,7 +191,7 @@ function loadCityContext(contextData: any) {
     html += `
       <div class="ascii-section ascii-city-districts">
         <span>DISTRICTS:</span>
-        <pre>
+        <div class="ascii-content">
     `;
     
     for (const [districtName, districtData] of Object.entries(context.districts)) {
@@ -205,7 +205,7 @@ function loadCityContext(contextData: any) {
     }
     
     html += `
-        </pre>
+        </div>
       </div>
     `;
   }
@@ -311,8 +311,11 @@ export { showCityDetailsInMap as showCityDetails, showSettlementDetailsInMap as 
 
 async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
   try {
+    // Get the city overlay name from the hex code
+    const cityOverlayName = app.getOverlayNameFromHexCode(hexCode);
+    
     // Load city context data for left panel
-    const contextData = await api.getCityContext('galgenbeck');
+    const contextData = await api.getCityContext(cityOverlayName);
     if (contextData && contextData.success) {
       loadCityContext(contextData);
     }
@@ -342,10 +345,9 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
     }
     
     // Load city overlay data for grid and districts
-    const overlayName = 'galgenbeck'; // Default to galgenbeck for now
     let cityOverlayData = null;
     try {
-      const overlayResponse = await api.getCityOverlay(overlayName);
+      const overlayResponse = await api.getCityOverlay(cityOverlayName);
       if (overlayResponse.success) {
         cityOverlayData = overlayResponse.overlay;
       }
@@ -420,7 +422,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
       try {
         // Fetch detailed hex data from API
         console.log('📡 Fetching hex data from API...');
-        const response = await fetch(`/api/city-overlay/galgenbeck/hex/${hexId}`);
+        const response = await fetch(`/api/city-overlay/${cityOverlayName}/hex/${hexId}`);
         const data = await response.json();
         console.log('📦 API response:', data);
         
@@ -460,17 +462,17 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
                   <!-- Description Section -->
                   <div class="ascii-section ascii-hex-description">
                     <span>DESCRIPTION:</span>
-                    <pre>${content.description || description || 'No description available.'}</pre>
+                    <div class="ascii-content">${content.description || description || 'No description available.'}</div>
                   </div>
                   
                   <!-- Atmosphere & Encounter Section -->
                   <div class="ascii-section ascii-hex-atmosphere">
                     <span>ATMOSPHERE:</span>
-                    <pre>${content.atmosphere || 'No atmosphere available.'}</pre>
+                    <div class="ascii-content">${content.atmosphere || 'No atmosphere available.'}</div>
                   </div>
                   <div class="ascii-section ascii-hex-encounter">
                     <span>ENCOUNTER:</span>
-                    <pre>${content.encounter || 'No encounter available.'}</pre>
+                    <div class="ascii-content">${content.encounter || 'No encounter available.'}</div>
                   </div>
           `;
           
@@ -479,7 +481,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             html += `
               <div class="ascii-section ascii-hex-enriched">
                 <span>ENRICHED CONTENT:</span>
-                <pre>
+                <div class="ascii-content">
             `;
             
             if (content.weather) {
@@ -493,7 +495,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             }
             
             html += `
-                </pre>
+                </div>
               </div>
             `;
           }
@@ -503,7 +505,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             html += `
               <div class="ascii-section ascii-hex-npcs">
                 <span>NPC INFORMATION:</span>
-                <pre>
+                <div class="ascii-content">
             `;
             
             if (content.npc_trait) {
@@ -523,7 +525,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             }
             
             html += `
-                </pre>
+                </div>
               </div>
             `;
           }
@@ -533,7 +535,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             html += `
               <div class="ascii-section ascii-hex-tavern">
                 <span>TAVERN DETAILS:</span>
-                <pre>
+                <div class="ascii-content">
             `;
             
             if (content.tavern_menu) {
@@ -547,7 +549,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             }
             
             html += `
-                </pre>
+                </div>
               </div>
             `;
           }
@@ -557,7 +559,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             html += `
               <div class="ascii-section ascii-hex-related">
                 <span>RELATED HEXES:</span>
-                <pre>
+                <div class="ascii-content">
             `;
             
             content.related_hexes.forEach((related: any) => {
@@ -565,7 +567,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             });
             
             html += `
-                </pre>
+                </div>
               </div>
             `;
           }
@@ -575,7 +577,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             html += `
               <div class="ascii-section ascii-hex-random">
                 <span>RANDOM ENCOUNTERS:</span>
-                <pre>
+                <div class="ascii-content">
             `;
             
             content.random_table.forEach((entry: string) => {
@@ -583,7 +585,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             });
             
             html += `
-                </pre>
+                </div>
               </div>
             `;
           }
@@ -741,23 +743,23 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
             ` : ''}
             <div class="ascii-section ascii-city-description">
               <span>DESCRIPTION:</span>
-              <pre>${description}</pre>
+              <div class="ascii-content">${description}</div>
             </div>
             <div class="ascii-section ascii-city-features">
               <span>NOTABLE FEATURES:</span>
-              <pre>${features}</pre>
+              <div class="ascii-content">${features}</div>
             </div>
             <div class="ascii-section ascii-city-key-npcs">
               <span>KEY NPCS:</span>
-              <pre>${keyNpcs}</pre>
+              <div class="ascii-content">${keyNpcs}</div>
             </div>
             <div class="ascii-section ascii-city-regional-npcs">
               <span>REGIONAL NPCS:</span>
-              <pre>${regionalNpcs}</pre>
+              <div class="ascii-content">${regionalNpcs}</div>
             </div>
             <div class="ascii-section ascii-city-factions">
               <span>ACTIVE FACTIONS:</span>
-              <pre>${factions}</pre>
+              <div class="ascii-content">${factions}</div>
             </div>
             ${districtButtonsHTML ? `
             <div class="ascii-section ascii-district-buttons">
@@ -925,45 +927,45 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
             </div>
             <div class="ascii-section ascii-settlement-description">
               <span>DESCRIPTION:</span>
-              <pre>${description}</pre>
+              <div class="ascii-content">${description}</div>
             </div>
             <div class="ascii-section ascii-settlement-features">
               <span>NOTABLE FEATURES:</span>
-              <pre>${features}</pre>
+              <div class="ascii-content">${features}</div>
             </div>
             <div class="ascii-section ascii-settlement-tavern">
               <span>LOCAL TAVERN:</span>
-              <pre>${tavern}</pre>
+              <div class="ascii-content">${tavern}</div>
             </div>
             <div class="ascii-section ascii-settlement-power">
               <span>LOCAL POWER:</span>
-              <pre>${power}</pre>
+              <div class="ascii-content">${power}</div>
             </div>
             ${weather ? `
             <div class="ascii-section ascii-hex-weather">
               <span>WEATHER:</span>
-              <pre>${weather}</pre>
+              <div class="ascii-content">${weather}</div>
           </div>
             ` : ''}
             ${cityEvent ? `
             <div class="ascii-section ascii-hex-city-event">
               <span>CITY EVENT:</span>
-              <pre>${cityEvent}</pre>
+              <div class="ascii-content">${cityEvent}</div>
             </div>
             ` : ''}
             ${tavernDetails ? `
             <div class="ascii-section ascii-hex-tavern-details">
               <span>TAVERN DETAILS:</span>
-              <pre>${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
+              <div class="ascii-content">${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
 ${tavernDetails.budget_menu ? `Budget Menu: ${tavernDetails.budget_menu}` : ''}
 ${tavernDetails.innkeeper ? `Innkeeper: ${tavernDetails.innkeeper}` : ''}
-${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</pre>
+${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</div>
             </div>
             ` : ''}
             ${settlementArt ? `
             <div class="ascii-section ascii-settlement-layout">
               <span>SETTLEMENT LAYOUT:</span>
-              <pre>${settlementArt}</pre>
+              <div class="ascii-content">${settlementArt}</div>
             </div>
             ` : ''}
           </div>
@@ -980,6 +982,62 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
 }
 
 function displayHexContent(hexData: any) {
+  const container = document.getElementById('details-panel');
+  if (!container) return;
+
+  console.log('🔍 Hex data for display:', hexData);
+
+  // Check if we have raw markdown - if so, show simplified view
+  if (hexData.raw_markdown) {
+    displaySimplifiedHexView(hexData);
+    return;
+  }
+
+  // Fallback to original complex view for hexes without raw markdown
+  displayComplexHexView(hexData);
+}
+
+function displaySimplifiedHexView(hexData: any) {
+  const container = document.getElementById('details-panel');
+  if (!container) return;
+
+  const title = hexData.title || `HEX ${hexData.hex_code}`;
+  const terrain = hexData.terrain_name || hexData.terrain || 'Unknown';
+  const hexType = hexData.hex_type || 'Unknown';
+
+  let html = `
+    <div class="city-hex-details-box">
+      <div class="ascii-box">
+        <div class="ascii-inner-box">
+          <div class="ascii-section ascii-hex-title">
+            <span>${title}</span>
+          </div>
+          <div class="ascii-section ascii-hex-terrain">
+            <span>TERRAIN: ${terrain}</span>
+          </div>
+          <div class="ascii-section ascii-hex-type">
+            <span>TYPE: ${hexType}</span>
+          </div>
+          <div class="ascii-section ascii-hex-content">
+            <span>CONTENT:</span>
+            <div class="markdown-content">
+              <div class="ascii-content">${hexData.raw_markdown}</div>
+            </div>
+          </div>
+          <div class="ascii-section ascii-hex-actions">
+            <button class="btn-mork-borg" onclick="window.app.editHexContent('${hexData.hex_code}')">EDIT</button>
+            <button class="btn-mork-borg" onclick="window.app.saveHexContent('${hexData.hex_code}')" id="save-hex-btn" style="display: none;">SAVE</button>
+            <button class="btn-mork-borg" onclick="window.app.cancelHexEdit()" id="cancel-hex-btn" style="display: none;">CANCEL</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  container.innerHTML = html;
+}
+
+function displayComplexHexView(hexData: any) {
   const container = document.getElementById('details-panel');
   if (!container) return;
 
@@ -1083,7 +1141,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-name">
           <span>NAME:</span>
-          <pre>${npcName}</pre>
+          <div class="ascii-content">${npcName}</div>
         </div>
       `;
     }
@@ -1092,7 +1150,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-type">
           <span>DENIZEN TYPE:</span>
-          <pre>${npcDenizenType}</pre>
+          <div class="ascii-content">${npcDenizenType}</div>
         </div>
       `;
     }
@@ -1102,7 +1160,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-trait">
           <span>TRAIT:</span>
-          <pre>${npcTrait}</pre>
+          <div class="ascii-content">${npcTrait}</div>
         </div>
       `;
     }
@@ -1111,7 +1169,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-concern">
           <span>CONCERN:</span>
-          <pre>${npcConcern}</pre>
+          <div class="ascii-content">${npcConcern}</div>
         </div>
       `;
     }
@@ -1120,7 +1178,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-want">
           <span>WANT:</span>
-          <pre>${npcWant}</pre>
+          <div class="ascii-content">${npcWant}</div>
         </div>
       `;
     }
@@ -1129,7 +1187,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-apocalypse">
           <span>APOCALYPSE ATTITUDE:</span>
-          <pre>${npcApocalypseAttitude}</pre>
+          <div class="ascii-content">${npcApocalypseAttitude}</div>
         </div>
       `;
     }
@@ -1138,7 +1196,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-secret">
           <span>SECRET:</span>
-          <pre>${npcSecret}</pre>
+          <div class="ascii-content">${npcSecret}</div>
         </div>
       `;
     }
@@ -1148,7 +1206,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-motivation">
           <span>MOTIVATION:</span>
-          <pre>${npcMotivation}</pre>
+          <div class="ascii-content">${npcMotivation}</div>
         </div>
       `;
     }
@@ -1157,7 +1215,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-feature">
           <span>FEATURE:</span>
-          <pre>${npcFeature}</pre>
+          <div class="ascii-content">${npcFeature}</div>
         </div>
       `;
     }
@@ -1166,7 +1224,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-demeanor">
           <span>DEMEANOR:</span>
-          <pre>${npcDemeanor}</pre>
+          <div class="ascii-content">${npcDemeanor}</div>
         </div>
       `;
     }
@@ -1176,7 +1234,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-carries">
           <span>CARRIES:</span>
-          <pre>${npcCarries}</pre>
+          <div class="ascii-content">${npcCarries}</div>
         </div>
       `;
     }
@@ -1185,7 +1243,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-npc-location">
           <span>LOCATION:</span>
-          <pre>${npcLocation}</pre>
+          <div class="ascii-content">${npcLocation}</div>
         </div>
       `;
     }
@@ -1197,7 +1255,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-beast-type">
           <span>BEAST TYPE:</span>
-          <pre>${beastType}</pre>
+          <div class="ascii-content">${beastType}</div>
         </div>
       `;
     }
@@ -1206,7 +1264,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-beast-feature">
           <span>BEAST FEATURE:</span>
-          <pre>${beastFeature}</pre>
+          <div class="ascii-content">${beastFeature}</div>
         </div>
       `;
     }
@@ -1215,7 +1273,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-beast-behavior">
           <span>BEAST BEHAVIOR:</span>
-          <pre>${beastBehavior}</pre>
+          <div class="ascii-content">${beastBehavior}</div>
         </div>
       `;
     }
@@ -1224,7 +1282,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-threat-level">
           <span>THREAT LEVEL:</span>
-          <pre>${threatLevel}</pre>
+          <div class="ascii-content">${threatLevel}</div>
         </div>
       `;
     }
@@ -1233,7 +1291,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-territory">
           <span>TERRITORY:</span>
-          <pre>${territory}</pre>
+          <div class="ascii-content">${territory}</div>
         </div>
       `;
     }
@@ -1242,7 +1300,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-treasure-found">
           <span>TREASURE FOUND:</span>
-          <pre>${treasureFound}</pre>
+          <div class="ascii-content">${treasureFound}</div>
         </div>
       `;
     }
@@ -1251,7 +1309,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-beast-art">
           <span>BEAST ART:</span>
-          <pre>${beastArt}</pre>
+          <div class="ascii-content">${beastArt}</div>
         </div>
       `;
     }
@@ -1263,7 +1321,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-dungeon-type">
           <span>DUNGEON TYPE:</span>
-          <pre>${dungeonType}</pre>
+          <div class="ascii-content">${dungeonType}</div>
         </div>
       `;
     }
@@ -1272,7 +1330,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-danger">
           <span>DANGER:</span>
-          <pre>${danger}</pre>
+          <div class="ascii-content">${danger}</div>
         </div>
       `;
     }
@@ -1281,7 +1339,7 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-ancient-knowledge">
           <span>ANCIENT KNOWLEDGE:</span>
-          <pre>${formatLoot(ancientKnowledge)}</pre>
+          <div class="ascii-content">${formatLoot(ancientKnowledge)}</div>
         </div>
       `;
     }
@@ -1291,9 +1349,9 @@ function displayHexContent(hexData: any) {
       html += `
         <div class="ascii-section ascii-hex-trap">
           <span>TRAP:</span>
-          <pre>Description: ${trapSection.description || 'Unknown'}
+          <div class="ascii-content">Description: ${trapSection.description || 'Unknown'}
 Effect: ${trapSection.effect || 'Unknown'}
-Builder: ${trapSection.builder || 'Unknown'}</pre>
+Builder: ${trapSection.builder || 'Unknown'}</div>
         </div>
       `;
     }
@@ -1305,7 +1363,7 @@ Builder: ${trapSection.builder || 'Unknown'}</pre>
       html += `
         <div class="ascii-section ascii-hex-weather">
           <span>WEATHER:</span>
-          <pre>${weather}</pre>
+          <div class="ascii-content">${weather}</div>
         </div>
       `;
     }
@@ -1314,7 +1372,7 @@ Builder: ${trapSection.builder || 'Unknown'}</pre>
       html += `
         <div class="ascii-section ascii-hex-city-event">
           <span>CITY EVENT:</span>
-          <pre>${cityEvent}</pre>
+          <div class="ascii-content">${cityEvent}</div>
         </div>
       `;
     }
@@ -1324,10 +1382,10 @@ Builder: ${trapSection.builder || 'Unknown'}</pre>
       html += `
         <div class="ascii-section ascii-hex-tavern-details">
           <span>TAVERN DETAILS:</span>
-          <pre>${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
+          <div class="ascii-content">${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
 ${tavernDetails.budget_menu ? `Budget Menu: ${tavernDetails.budget_menu}` : ''}
 ${tavernDetails.innkeeper ? `Innkeeper: ${tavernDetails.innkeeper}` : ''}
-${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</pre>
+${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</div>
         </div>
       `;
     }
@@ -1339,7 +1397,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
         <div class="ascii-section ascii-hex-encounter-type">
           <span>ENCOUNTER TYPE:</span>
-          <pre>${encounterType}</pre>
+          <div class="ascii-content">${encounterType}</div>
         </div>
       `;
     }
@@ -1348,7 +1406,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
         <div class="ascii-section ascii-hex-origin">
           <span>ORIGIN:</span>
-          <pre>${origin}</pre>
+          <div class="ascii-content">${origin}</div>
         </div>
       `;
     }
@@ -1357,7 +1415,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
         <div class="ascii-section ascii-hex-behavior">
           <span>BEHAVIOR:</span>
-          <pre>${behavior}</pre>
+          <div class="ascii-content">${behavior}</div>
         </div>
       `;
     }
@@ -1369,7 +1427,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
         html += `
           <div class="ascii-section ascii-hex-encounter">
             <span>ENCOUNTER:</span>
-            <pre>${encounter}</pre>
+            <div class="ascii-content">${encounter}</div>
           </div>
     `;
   }
@@ -1378,7 +1436,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
           <div class="ascii-section ascii-hex-denizen">
             <span>DENIZEN:</span>
-            <pre>${denizen}</pre>
+            <div class="ascii-content">${denizen}</div>
           </div>
     `;
   }
@@ -1387,7 +1445,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
           <div class="ascii-section ascii-hex-feature">
             <span>NOTABLE FEATURE:</span>
-            <pre>${notableFeature}</pre>
+            <div class="ascii-content">${notableFeature}</div>
           </div>
     `;
   }
@@ -1396,7 +1454,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
           <div class="ascii-section ascii-hex-atmosphere">
             <span>ATMOSPHERE:</span>
-            <pre>${atmosphere}</pre>
+            <div class="ascii-content">${atmosphere}</div>
           </div>
     `;
   }
@@ -1405,7 +1463,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
       html += `
           <div class="ascii-section ascii-hex-description">
             <span>DESCRIPTION:</span>
-            <pre>${description}</pre>
+            <div class="ascii-content">${description}</div>
           </div>
     `;
   }
@@ -1415,7 +1473,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
     html += `
           <div class="ascii-section ascii-hex-loot">
             <span>LOOT:</span>
-            <pre>${formattedLoot}</pre>
+            <div class="ascii-content">${formattedLoot}</div>
           </div>
     `;
   }
@@ -1424,7 +1482,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
     html += `
           <div class="ascii-section ascii-hex-treasure">
             <span>TREASURE:</span>
-            <pre>${formattedTreasure}</pre>
+            <div class="ascii-content">${formattedTreasure}</div>
           </div>
     `;
   }
@@ -1433,7 +1491,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
     html += `
           <div class="ascii-section ascii-hex-sunken-treasure">
             <span>SUNKEN TREASURE:</span>
-            <pre>${formattedSunkenTreasure}</pre>
+            <div class="ascii-content">${formattedSunkenTreasure}</div>
           </div>
     `;
   }
@@ -1442,7 +1500,7 @@ ${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron
     html += `
           <div class="ascii-section ascii-hex-magical-effect">
             <span>MAGICAL EFFECT:</span>
-            <pre>${magicalEffect}</pre>
+            <div class="ascii-content">${magicalEffect}</div>
           </div>
     `;
   }
@@ -1488,23 +1546,23 @@ function showEmptyState(app: DyingLandsApp) {
           </div>
           <div class="ascii-section ascii-hex-description">
             <span>WELCOME TO THE HEXCRAWL</span>
-            <pre>
+            <div class="ascii-content">
 Click a hex to explore its mysteries...
 
 Each hex contains unique encounters, denizens,
 and secrets waiting to be discovered.
 
 The world is dying, but adventure lives on.
-            </pre>
+            </div>
           </div>
           <div class="ascii-section ascii-hex-instructions">
             <span>INSTRUCTIONS</span>
-            <pre>
+            <div class="ascii-content">
 • Click any hex on the map to view its details
 • Major cities (◆) have additional overlay views
 • Settlements (⌂) provide local information
 • Bold hexes contain special content
-            </pre>
+            </div>
           </div>
         </div>
       </div>
@@ -1524,7 +1582,7 @@ function showErrorState(message: string) {
             <span>ERROR</span>
           </div>
           <div class="ascii-section">
-            <pre>${message}</pre>
+            <div class="ascii-content">${message}</div>
           </div>
         </div>
       </div>

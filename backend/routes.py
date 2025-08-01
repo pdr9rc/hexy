@@ -130,6 +130,11 @@ def get_hex_info(hex_code):
 
     hex_data = hex_service.get_hex_dict(hex_code)
     if hex_data:
+        # Add raw markdown if available
+        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+        if hex_file_path.exists():
+            from backend.utils import safe_file_read
+            hex_data['raw_markdown'] = safe_file_read(hex_file_path)
         return jsonify(hex_data)
 
     # If not in cache, check for a hex file and parse it for content
@@ -138,10 +143,18 @@ def get_hex_info(hex_code):
         from backend.utils import safe_file_read
         content = safe_file_read(hex_file_path)
         hex_type = _determine_hex_type(content)
+        
+        # Base response with raw markdown
+        base_response = {
+            "hex_code": hex_code,
+            "raw_markdown": content,
+            "exists": True
+        }
+        
         if hex_type == 'settlement':
             parsed = extract_settlement_data(content)
             return jsonify({
-                "hex_code": hex_code,
+                **base_response,
                 "hex_type": "settlement",
                 "is_settlement": True,
                 "is_major_city": False,
@@ -162,7 +175,7 @@ def get_hex_info(hex_code):
         elif hex_type == 'beast':
             parsed = extract_beast_data(content)
             return jsonify({
-                "hex_code": hex_code,
+                **base_response,
                 "hex_type": "beast",
                 "is_beast": True,
                 "terrain": parsed.get('terrain', 'unknown'),
@@ -184,7 +197,7 @@ def get_hex_info(hex_code):
         elif hex_type == 'dungeon':
             parsed = extract_dungeon_data(content)
             return jsonify({
-                "hex_code": hex_code,
+                **base_response,
                 "hex_type": "dungeon",
                 "is_dungeon": True,
                 "terrain": parsed.get('terrain', 'unknown'),
@@ -205,7 +218,7 @@ def get_hex_info(hex_code):
         elif hex_type == 'npc':
             parsed = extract_npc_data(content)
             return jsonify({
-                "hex_code": hex_code,
+                **base_response,
                 "hex_type": "npc",
                 "is_npc": True,
                 "terrain": parsed.get('terrain', 'unknown'),
@@ -235,13 +248,14 @@ def get_hex_info(hex_code):
             # Use hex_service for consistent parsing
             hex_data = hex_service.get_hex_dict(hex_code)
             if hex_data:
+                hex_data['raw_markdown'] = content
                 return jsonify(hex_data)
             else:
                 return jsonify({'error': 'Sea encounter not found'}), 404
         elif hex_type == 'ruins':
             parsed = extract_ruins_data(content)
             return jsonify({
-                "hex_code": hex_code,
+                **base_response,
                 "hex_type": "ruins",
                 "is_ruins": True,
                 "terrain": parsed.get('terrain', 'unknown'),
@@ -253,9 +267,8 @@ def get_hex_info(hex_code):
         else:
             parsed = extract_hex_data(content)
             return jsonify({
-                "hex_code": hex_code,
+                **base_response,
                 "terrain": parsed.get('terrain', 'unknown'),
-                "exists": True,
                 "hex_type": "wilderness",
                 "is_settlement": False,
                 "is_major_city": False,
@@ -277,6 +290,7 @@ def get_hex_info(hex_code):
         "encounter": None,
         "notable_feature": None,
         "atmosphere": None,
+        "raw_markdown": None,
     })
 
 @api_bp.route('/city/<hex_code>')
@@ -298,6 +312,37 @@ def get_settlement_details(hex_code):
         return jsonify(settlement_data)
     else:
         return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
+
+@api_bp.route('/hex/<hex_code>', methods=['PUT'])
+def update_hex_content(hex_code):
+    """Update hex content with new markdown."""
+    if not validate_hex_code(hex_code):
+        return jsonify({'error': 'Invalid hex code format'}), 400
+    
+    try:
+        data = request.get_json()
+        if not data or 'content' not in data:
+            return jsonify({'error': 'Missing content field'}), 400
+        
+        content = data['content']
+        
+        # Write the content to the hex file
+        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+        hex_file_path.parent.mkdir(parents=True, exist_ok=True)
+        
+        with open(hex_file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        
+        # Clear the cache for this hex
+        hex_service.clear_hex_cache(hex_code)
+        
+        return jsonify({
+            'success': True,
+            'message': f'Hex {hex_code} updated successfully'
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Failed to update hex: {str(e)}'}), 500
 
 @api_bp.route('/lore-overview')
 def get_lore_overview():
@@ -538,6 +583,29 @@ def regenerate_hex(overlay_name, hex_id):
     except Exception as e:
         import traceback
         traceback.print_exc()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@api_bp.route('/regenerate-overlay/<overlay_name>', methods=['POST'])
+def regenerate_overlay(overlay_name):
+    """Regenerate an entire city overlay."""
+    try:
+        print(f"DEBUG: Regenerating entire overlay for {overlay_name}")
+        
+        # Regenerate the entire overlay
+        overlay_data = city_overlay_analyzer.regenerate_overlay(overlay_name)
+        
+        return jsonify({
+            'success': True,
+            'message': f'Overlay {overlay_name} regenerated successfully',
+            'overlay_data': {
+                'name': overlay_data['name'],
+                'display_name': overlay_data['display_name'],
+                'total_hexes': overlay_data['total_hexes']
+            }
+        })
+        
+    except Exception as e:
+        print(f"Error regenerating overlay: {e}")
         return jsonify({'success': False, 'error': str(e)}), 500
 
 # ===== HELPER FUNCTIONS =====
