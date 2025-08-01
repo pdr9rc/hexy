@@ -652,6 +652,21 @@ class MainMapGenerator:
     
     def _get_settlement_names(self, terrain: str) -> List[str]:
         """Get settlement names based on terrain."""
+        # Try to get names from database first
+        try:
+            city_name_1 = database_manager.get_table('names', 'city_name_1', self.language) or []
+            city_name_2 = database_manager.get_table('names', 'city_name_2', self.language) or []
+            
+            if city_name_1 and city_name_2:
+                names = []
+                for base in city_name_1[:10]:  # Limit for performance
+                    for suffix in city_name_2[:10]:
+                        names.append(f"{base} {suffix}")
+                return names
+        except Exception as e:
+            print(f"Warning: Could not load settlement names from database: {e}")
+        
+        # Fallback to hardcoded names
         base_names = ["Shadow", "Grave", "Mournful", "Bloody", "Omen", "Beggar", "Boar", "Verhu", "Trollblood", "Resurrection", "Witch", "Weeping", "Arkh"]
         suffixes = ["Hill", "Grove", "Creek", "End", "Cove", "Alley", "Hollow", "Henge", "Lot", "Ford", "Harbour", "Lake", "Plain", "Moor", "Pass", "Horn"]
         
@@ -664,6 +679,14 @@ class MainMapGenerator:
     
     def _generate_population(self) -> str:
         """Generate a population range."""
+        try:
+            populations = database_manager.get_table('basic', 'populations', self.language) or []
+            if populations:
+                return random.choice(populations)
+        except Exception as e:
+            print(f"Warning: Could not load populations from database: {e}")
+        
+        # Fallback to hardcoded populations
         populations = ["20-50", "51-100", "101-500", "501-1000"]
         return random.choice(populations)
     
@@ -693,6 +716,16 @@ class MainMapGenerator:
     
     def _generate_local_tavern(self) -> str:
         """Generate a local tavern description."""
+        try:
+            tavern_1 = database_manager.get_table('names', 'tavern_name_1', self.language) or []
+            tavern_2 = database_manager.get_table('names', 'tavern_name_2', self.language) or []
+            
+            if tavern_1 and tavern_2:
+                return f"{random.choice(tavern_1)} {random.choice(tavern_2)}"
+        except Exception as e:
+            print(f"Warning: Could not load tavern names from database: {e}")
+        
+        # Fallback to hardcoded names
         taverns = ["The Rusty Blade", "The Crow's Nest", "The Moldy Barrel", "The Rotting Corpse", "The Doomed Traveler", "The Blighted Inn", "The Ash and Bone", "The Thorn and Rust"]
         return random.choice(taverns)
     
