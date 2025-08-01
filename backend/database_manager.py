@@ -38,7 +38,7 @@ class DatabaseManager:
         
         # New unified structure - each category gets its own directory with language subdirs
         new_categories = [
-            "terrain", "encounters", "denizens", "settlements",  # core categories
+            "terrain", "encounters", "denizens",  # core categories
             "cities", "factions", "regions",  # lore categories  
             "names", "descriptions", "features",  # content categories
             "affiliation", "basic", "beasts_prices", "bestiary", "city_events", 
@@ -96,8 +96,7 @@ class DatabaseManager:
         core_files = [
             "terrain.json",
             "encounters.json", 
-            "denizens.json",
-            "settlements.json"
+            "denizens.json"
         ]
         
         tables = {}
@@ -131,9 +130,7 @@ class DatabaseManager:
     def _load_lore_tables(self) -> Dict[str, Any]:
         """Load lore tables."""
         lore_files = [
-            "cities.json",
-            "factions.json",
-            "regions.json"
+            # Legacy lore files - now handled by unified structure
         ]
         
         tables = {}
@@ -213,7 +210,7 @@ class DatabaseManager:
         
         # Fallback to legacy structure for specific categories if new structure doesn't exist
         if not os.path.exists(os.path.dirname(filepath)):
-            if category in ['terrain', 'encounters', 'denizens', 'settlements']:
+            if category in ['terrain', 'encounters', 'denizens']:
                 filepath = os.path.join(self.database_path, "core", f"{category}.json")
             elif category in ['cities', 'factions', 'regions']:
                 filepath = os.path.join(self.database_path, "lore", f"{category}.json")
