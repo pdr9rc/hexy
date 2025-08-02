@@ -262,10 +262,18 @@ A {beast_type} with {feature} that {behavior}.
         beast_features = self.db_manager.get_table('bestiary', 'beast_features', language)
         beast_behaviors = self.db_manager.get_table('bestiary', 'beast_behaviors', language)
         
-        # Generate elements
-        beast_type = random.choice(beast_types) if beast_types else "Wild beast"
-        feature = random.choice(beast_features) if beast_features else "unnatural appearance"
-        behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
+        # Generate elements - use same index for all tables to get matching beast
+        if beast_types and beast_features and beast_behaviors:
+            # Select random index to get matching beast across all tables
+            beast_index = random.randint(0, len(beast_types) - 1)
+            beast_type = beast_types[beast_index]
+            feature = beast_features[beast_index] if beast_index < len(beast_features) else "unnatural appearance"
+            behavior = beast_behaviors[beast_index] if beast_index < len(beast_behaviors) else "hunts in the area"
+        else:
+            # Fallback to random selection if tables are missing
+            beast_type = random.choice(beast_types) if beast_types else "Wild beast"
+            feature = random.choice(beast_features) if beast_features else "unnatural appearance"
+            behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
         
         return {
             'beast_type': beast_type,
