@@ -322,6 +322,74 @@
         "Mildew and rot in knee-deep swamp water",
         "The Isle of Flesh"
       ]
+    },
+    "desert": {
+      "encounters": [
+        "Mirage oasis vanishing as you approach",
+        "Ancient ruins half-buried in sand",
+        "Approaching sandstorm",
+        "Skeletons of lost travelers",
+        "Cactus with poisoned water",
+        "Desert bandits ambushing",
+        "Hidden cave in the dunes",
+        "Nocturnal creatures hiding from sun",
+        "Lost merchant with dying camels",
+        "Ghost town swallowed by sands"
+      ],
+      "denizen_types": [
+        "Desert nomad",
+        "Dune bandit",
+        "Sun-scorched hermit",
+        "Lost merchant",
+        "Tribal shaman",
+        "Treasure hunter",
+        "Thirst survivor",
+        "Oasis guardian"
+      ],
+      "features": [
+        "Endless dunes",
+        "Scorching rocks",
+        "Hidden oasis",
+        "Buried ruins",
+        "Sandstorms",
+        "Suffocating heat",
+        "Deceptive mirages",
+        "Desiccated carcasses"
+      ]
+    },
+    "sea": {
+      "encounters": [
+        "Sea creature emerging from depths",
+        "Drifting ship wreckage",
+        "Violent storm forming",
+        "Mysterious island rising from mist",
+        "Pirates attacking by surprise",
+        "Leviathan of the depths",
+        "Sirens singing deadly melodies",
+        "Ghosts of drowned sailors",
+        "Whirlpool sucking everything down",
+        "Kraken rising from the abyss"
+      ],
+      "denizen_types": [
+        "Sea pirate",
+        "Lost sailor",
+        "Abyssal creature",
+        "Marine ghost",
+        "Killer siren",
+        "Undead captain",
+        "Ancient leviathan",
+        "Deep cultist"
+      ],
+      "features": [
+        "Turbulent waters",
+        "Abyssal depths",
+        "Deadly currents",
+        "Sharp submerged rocks",
+        "Thick fog",
+        "Giant waves",
+        "Deceptive calm",
+        "Bloody waters"
+      ]
     }
   }
 }

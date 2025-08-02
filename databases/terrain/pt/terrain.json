@@ -213,6 +213,74 @@
         "Névoa espessa",
         "Lama sugadora"
       ]
+    },
+    "desert": {
+      "encounters": [
+        "Oásis miragem que desaparece ao se aproximar",
+        "Ruínas antigas meio enterradas na areia",
+        "Tempestade de areia se aproximando",
+        "Esqueletos de viajantes perdidos",
+        "Cacto com água envenenada",
+        "Bandidos do deserto emboscando",
+        "Caverna escondida nas dunas",
+        "Criaturas noturnas se escondendo do sol",
+        "Mercador perdido com camelos moribundos",
+        "Cidade fantasma engolida pelas areias"
+      ],
+      "denizen_types": [
+        "Nômade do deserto",
+        "Bandido das dunas",
+        "Eremita queimado pelo sol",
+        "Mercador perdido",
+        "Xamã tribal",
+        "Caçador de tesouros",
+        "Sobrevivente da sede",
+        "Guardião de oásis"
+      ],
+      "features": [
+        "Dunas intermináveis",
+        "Rochas escaldantes",
+        "Oásis escondido",
+        "Ruínas soterradas",
+        "Tempestades de areia",
+        "Calor sufocante",
+        "Miragens enganosas",
+        "Carcaças ressecadas"
+      ]
+    },
+    "sea": {
+      "encounters": [
+        "Criatura marinha emergindo das profundezas",
+        "Destroços de navio à deriva",
+        "Tempestade violenta se formando",
+        "Ilha misteriosa surgindo da névoa",
+        "Piratas atacando de surpresa",
+        "Leviatã das profundezas",
+        "Sirenes cantando melodias mortais",
+        "Fantasmas de marinheiros afogados",
+        "Redemoinho sugando tudo para baixo",
+        "Kraken emergindo do abismo"
+      ],
+      "denizen_types": [
+        "Pirata dos mares",
+        "Marinheiro perdido",
+        "Criatura abissal",
+        "Fantasma marinho",
+        "Sereia assassina",
+        "Capitão morto-vivo",
+        "Leviatã ancestral",
+        "Cultista das profundezas"
+      ],
+      "features": [
+        "Águas turbulentas",
+        "Profundezas abissais",
+        "Correntes mortais",
+        "Rochas afiadas submersas",
+        "Névoa espessa",
+        "Ondas gigantescas",
+        "Calmaria enganosa",
+        "Águas sangrentas"
+      ]
     }
   }
 }
