@@ -2,6 +2,7 @@
 import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
+import { translationService } from './translation.js';
 
 // Function to load city context in the left panel
 function loadCityContext(contextData: any) {
@@ -291,7 +292,7 @@ function getCityHexTerrainClass(contentType: string): string {
 }
 
 export async function renderHexDetails(app: DyingLandsApp, hexCode: string) {
-  ui.showLoading('Loading hex details...');
+      ui.showLoading(translationService.t('loading_hex_details'));
   try {
     const hexData = await api.getHex(hexCode);
     
@@ -450,7 +451,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
                     <span>${content.name || name}</span>
                   </div>
                   <div class="ascii-section ascii-hex-type">
-                    <span>TYPE: ${content.type || 'unknown'}</span>
+                    <span>${translationService.t('type_label')}: ${content.type || translationService.t('unknown')}</span>
                   </div>
                   <div class="ascii-section ascii-hex-district">
                     <span>DISTRICT: ${district}</span>
@@ -1013,13 +1014,13 @@ function displaySimplifiedHexView(hexData: any) {
             <span>${title}</span>
           </div>
           <div class="ascii-section ascii-hex-terrain">
-            <span>TERRAIN: ${terrain}</span>
+            <span>${translationService.t('terrain_label')}: ${terrain}</span>
           </div>
           <div class="ascii-section ascii-hex-type">
-            <span>TYPE: ${hexType}</span>
+            <span>${translationService.t('type_label')}: ${hexType}</span>
           </div>
           <div class="ascii-section ascii-hex-content">
-            <span>CONTENT:</span>
+            <span>${translationService.t('content_label')}:</span>
             <div class="markdown-content">
               <div class="ascii-content">${hexData.raw_markdown}</div>
             </div>
@@ -1128,10 +1129,10 @@ function displayComplexHexView(hexData: any) {
             <span>${title}</span>
           </div>
           <div class="ascii-section ascii-hex-terrain">
-            <span>TERRAIN: ${terrain}</span>
+            <span>${translationService.t('terrain_label')}: ${terrain}</span>
           </div>
           <div class="ascii-section ascii-hex-type">
-            <span>TYPE: ${hexType}</span>
+            <span>${translationService.t('type_label')}: ${hexType}</span>
           </div>
   `;
 

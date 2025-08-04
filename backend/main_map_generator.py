@@ -371,8 +371,10 @@ class MainMapGenerator:
         encounter_desc += f"It is said to be one of the Tephrotic nightmares that plague the dying lands.\n\n"
         encounter_desc += f"**Behavior:** The creature {random.choice(['stalks', 'hunts', 'haunts', 'terrorizes'])} "
         encounter_desc += f"this area of the sea, {random.choice(['seeking prey', 'spreading corruption', 'gathering power', 'performing ancient rituals'])}.\n\n"
-        encounter_desc += f"**Threat Level:** Catastrophic - this entity represents an existential threat to all who encounter it.\n\n"
-        encounter_desc += f"**Territory:** This section of the sea has been claimed by the nightmare, "
+        threat_level_label = self.translation_system.t('threat_level_label')
+        territory_label = self.translation_system.t('territory_label')
+        encounter_desc += f"**{threat_level_label}:** Catastrophic - this entity represents an existential threat to all who encounter it.\n\n"
+        encounter_desc += f"**{territory_label}:** This section of the sea has been claimed by the nightmare, "
         encounter_desc += f"its influence corrupting the very waters themselves."
         # Add loot if present
         if loot:
@@ -466,7 +468,8 @@ class MainMapGenerator:
         # Build description
         description = f"{dungeon_type.capitalize()}, {feature}.\n\n"
         description += f"**Danger:** {danger}\n"
-        description += f"**Atmosphere:** {atmosphere}\n\n"
+        atmosphere_label = self.translation_system.t('atmosphere_label')
+        description += f"**{atmosphere_label}:** {atmosphere}\n\n"
         
         # Add loot and scroll if present
         if loot:
@@ -526,8 +529,10 @@ class MainMapGenerator:
         
         # Build description
         description = f"A {beast_type} with {feature} that {behavior}.\n\n"
-        description += f"**Territory:** This creature has claimed this area of {terrain} as its hunting ground.\n"
-        description += f"**Threat Level:** High - approach with extreme caution.\n"
+        territory_label = self.translation_system.t('territory_label')
+        threat_level_label = self.translation_system.t('threat_level_label')
+        description += f"**{territory_label}:** This creature has claimed this area of {terrain} as its hunting ground.\n"
+        description += f"**{threat_level_label}:** High - approach with extreme caution.\n"
         
         # Add loot if present
         if loot:
@@ -928,21 +933,25 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         lines = []
         
         # Title
-        lines.append(f"# Hex {hex_data['hex_code']}")
+        hex_label = self.translation_system.t('hex_number')
+        lines.append(f"# {hex_label} {hex_data['hex_code']}")
         lines.append("")
         
-        # Terrain - use translated name
+        # Terrain - use translated name and label
         terrain_name = self._get_translated_terrain_name(hex_data['terrain'])
-        lines.append(f"**Terrain:** {terrain_name}")
+        terrain_label = self.translation_system.t('terrain_label')
+        lines.append(f"**{terrain_label}:** {terrain_name}")
         lines.append("")
         
         # Encounter
-        lines.append("## Encounter")
+        encounter_label = self.translation_system.t('encounter_label')
+        lines.append(f"## {encounter_label}")
         encounter = hex_data['encounter']['raw'] if isinstance(hex_data.get('encounter'), dict) and 'raw' in hex_data['encounter'] else hex_data.get('encounter', '')
         lines.append(encounter)
         lines.append("")
         # Denizen
-        lines.append("## Denizen")
+        denizen_label = self.translation_system.t('denizen')
+        lines.append(f"## {denizen_label}")
         if isinstance(hex_data.get('denizen'), dict):
             lines.append(hex_data['denizen'].get('raw', ''))
             # Print subfields
@@ -1058,7 +1067,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         # Dungeon-specific content
         if hex_data.get('is_dungeon'):
             lines.append("## Dungeon Details")
-            lines.append(f"**Type:** {hex_data.get('dungeon_type', 'Unknown')}")
+            type_label = self.translation_system.t('type_label')
+        lines.append(f"**{type_label}:** {hex_data.get('dungeon_type', 'Unknown')}")
             lines.append(f"**Danger:** {hex_data.get('danger', 'Unknown')}")
             lines.append(f"**Treasure:** {hex_data.get('treasure', 'Unknown')}")
             lines.append("")
@@ -1088,7 +1098,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         # Beast-specific content
         if hex_data.get('is_beast'):
             lines.append("## Beast Details")
-            lines.append(f"**Type:** {hex_data.get('beast_type', 'Unknown')}")
+            type_label = self.translation_system.t('type_label')
+        lines.append(f"**{type_label}:** {hex_data.get('beast_type', 'Unknown')}")
             lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
             lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
             lines.append("")
@@ -1112,7 +1123,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         # Sea-specific content
         if hex_data.get('is_sea_encounter'):
             lines.append("## Sea Encounter Details")
-            lines.append(f"**Type:** {hex_data.get('encounter_type', 'Unknown')}")
+            type_label = self.translation_system.t('type_label')
+        lines.append(f"**{type_label}:** {hex_data.get('encounter_type', 'Unknown')}")
             lines.append("")
             
             # Add threat level and territory as separate sections
@@ -1135,7 +1147,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         if hex_data.get('is_npc'):
             lines.append("## NPC Details")
             lines.append(f"**Name:** {hex_data.get('name', 'Unknown')}")
-            lines.append(f"**Type:** {hex_data.get('denizen_type', 'Unknown')}")
+            type_label = self.translation_system.t('type_label')
+        lines.append(f"**{type_label}:** {hex_data.get('denizen_type', 'Unknown')}")
             
             # Mörk Borg NPC details
             if hex_data.get('trait'):

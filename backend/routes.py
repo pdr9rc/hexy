@@ -328,7 +328,25 @@ def set_language():
         return jsonify({
             'success': True,
             'language': current_language,
-            'message': f'Language set to {current_language}'
+            'message': f'Language set to {current_language}',
+            'labels': {
+                'hex_number': translation_system.t('hex_number'),
+                'terrain_label': translation_system.t('terrain_label'),
+                'type_label': translation_system.t('type_label'),
+                'content_label': translation_system.t('content_label'),
+                'district_label': translation_system.t('district_label'),
+                'position_label': translation_system.t('position_label'),
+                'description_label': translation_system.t('description_label'),
+                'atmosphere_label': translation_system.t('atmosphere_label'),
+                'encounter_label': translation_system.t('encounter_label'),
+                'notable_features_label': translation_system.t('notable_features_label'),
+                'loading_hex_details': translation_system.t('loading_hex_details'),
+                'return_to_hex': translation_system.t('return_to_hex'),
+                'return_to_map': translation_system.t('return_to_map'),
+                'edit': translation_system.t('edit'),
+                'no_atmosphere_available': translation_system.t('no_atmosphere_available'),
+                'unknown': translation_system.t('unknown')
+            }
         })
     else:
         return jsonify({
