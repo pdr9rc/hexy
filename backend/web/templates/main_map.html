@@ -51,6 +51,10 @@
           <button class="btn-mork-borg btn-warning" id="reset-btn" aria-label="Reset Continent">
             🔄 Reset
           </button>
+          <select class="btn-mork-borg" id="language-selector" aria-label="Select Language">
+            <option value="en" {% if current_language == 'en' %}selected{% endif %}>🇺🇸 English</option>
+            <option value="pt" {% if current_language == 'pt' %}selected{% endif %}>🇧🇷 Português</option>
+          </select>
         </div>
       </nav>
     </section>
