@@ -151,7 +151,44 @@ class TranslationSystem:
                 'plains': 'Plains',
                 'swamp': 'Swamp',
                 'desert': 'Desert',
-                'unknown': 'Unknown'
+                'unknown': 'Unknown',
+                
+                # Content Section Headers
+                'loot_found_header': 'Loot Found',
+                'ancient_knowledge_header': 'Ancient Knowledge',
+                'beast_details_header': 'Beast Details',
+                'dungeon_details_header': 'Dungeon Details',
+                'sea_encounter_details_header': 'Sea Encounter Details',
+                'npc_details_header': 'NPC Details',
+                'threat_level_header': 'Threat Level',
+                'territory_header': 'Territory',
+                'trap_header': 'Trap',
+                
+                # Default/Fallback Content
+                'unknown_treasure': 'Unknown treasure',
+                'unknown_knowledge': 'Unknown knowledge',
+                'unknown_threat_level': 'Unknown threat level',
+                'no_treasure_found': 'No treasure found',
+                'no_ancient_knowledge': 'No ancient knowledge',
+                'no_territory_claimed': 'No territory claimed',
+                
+                # Dynamic Content Templates
+                'creature_claimed_area': 'This creature has claimed this area of {terrain} as its hunting ground.',
+                'remains_of_victims': 'remains of previous victims',
+                'beast_territory': 'Beast territory',
+                'npc_territory': 'NPC territory',
+                'sea_corruption': 'its influence corrupting the very waters themselves.',
+                'sea_claimed_by_nightmare': 'This section of the sea has been claimed by the nightmare, {sea_corruption}',
+                
+                # Field Labels for NPC content
+                'trait_label': 'Trait',
+                'concern_label_npc': 'Concern',
+                'want_label_npc': 'Want',
+                'apocalypse_attitude_label': 'Apocalypse Attitude',
+                'secret_label_npc': 'Secret',
+                'feature_label': 'Feature',
+                'danger_label': 'Danger',
+                'treasure_label': 'Treasure'
             },
             'pt': {
                 # UI Elements
@@ -288,7 +325,44 @@ class TranslationSystem:
                 'plains': 'Planície',
                 'swamp': 'Pântano',
                 'desert': 'Deserto',
-                'unknown': 'Desconhecido'
+                'unknown': 'Desconhecido',
+                
+                # Content Section Headers
+                'loot_found_header': 'Tesouro Encontrado',
+                'ancient_knowledge_header': 'Conhecimento Ancestral',
+                'beast_details_header': 'Detalhes da Fera',
+                'dungeon_details_header': 'Detalhes da Masmorra',
+                'sea_encounter_details_header': 'Detalhes do Encontro Marítimo',
+                'npc_details_header': 'Detalhes do NPC',
+                'threat_level_header': 'Nível de Ameaça',
+                'territory_header': 'Território',
+                'trap_header': 'Armadilha',
+                
+                # Default/Fallback Content
+                'unknown_treasure': 'Tesouro desconhecido',
+                'unknown_knowledge': 'Conhecimento desconhecido',
+                'unknown_threat_level': 'Nível de ameaça desconhecido',
+                'no_treasure_found': 'Nenhum tesouro encontrado',
+                'no_ancient_knowledge': 'Nenhum conhecimento ancestral',
+                'no_territory_claimed': 'Nenhum território reivindicado',
+                
+                # Dynamic Content Templates
+                'creature_claimed_area': 'Esta criatura reivindicou esta área de {terrain} como seu território de caça.',
+                'remains_of_victims': 'restos de vítimas anteriores',
+                'beast_territory': 'Território da fera',
+                'npc_territory': 'Território do NPC',
+                'sea_corruption': 'sua influência corrompendo as próprias águas.',
+                'sea_claimed_by_nightmare': 'Esta seção do mar foi reivindicada pelo pesadelo, {sea_corruption}',
+                
+                # Field Labels for NPC content
+                'trait_label': 'Característica',
+                'concern_label_npc': 'Preocupação',
+                'want_label_npc': 'Desejo',
+                'apocalypse_attitude_label': 'Atitude Apocalíptica',
+                'secret_label_npc': 'Segredo',
+                'feature_label': 'Característica',
+                'danger_label': 'Perigo',
+                'treasure_label': 'Tesouro'
             }
         }
     

@@ -374,8 +374,9 @@ class MainMapGenerator:
         threat_level_label = self.translation_system.t('threat_level_label')
         territory_label = self.translation_system.t('territory_label')
         encounter_desc += f"**{threat_level_label}:** Catastrophic - this entity represents an existential threat to all who encounter it.\n\n"
-        encounter_desc += f"**{territory_label}:** This section of the sea has been claimed by the nightmare, "
-        encounter_desc += f"its influence corrupting the very waters themselves."
+        sea_corruption = self.translation_system.t('sea_corruption')
+        sea_territory_text = self.translation_system.t('sea_claimed_by_nightmare', sea_corruption=sea_corruption)
+        encounter_desc += f"**{territory_label}:** {sea_territory_text}"
         # Add loot if present
         if loot:
             encounter_desc += f"\n\n**Sunken Treasure:** {loot['description']} (lost to the depths)"
@@ -387,7 +388,7 @@ class MainMapGenerator:
             'notable_feature': feature,
             'atmosphere': atmosphere,
             'threat_level': "Catastrophic - this entity represents an existential threat to all who encounter it.",
-            'territory': f"This section of the sea has been claimed by the nightmare, its influence corrupting the very waters themselves.",
+            'territory': self.translation_system.t('sea_claimed_by_nightmare', sea_corruption=self.translation_system.t('sea_corruption')),
             'loot': loot,
             'is_sea_encounter': True,
             'encounter_type': encounter_type,
@@ -531,25 +532,29 @@ class MainMapGenerator:
         description = f"A {beast_type} with {feature} that {behavior}.\n\n"
         territory_label = self.translation_system.t('territory_label')
         threat_level_label = self.translation_system.t('threat_level_label')
-        description += f"**{territory_label}:** This creature has claimed this area of {terrain} as its hunting ground.\n"
+        terrain_name = self._get_translated_terrain_name(terrain)
+        territory_text = self.translation_system.t('creature_claimed_area', terrain=terrain_name)
+        description += f"**{territory_label}:** {territory_text}\n"
         description += f"**{threat_level_label}:** High - approach with extreme caution.\n"
         
         # Add loot if present
         if loot:
-            description += f"\n**Treasure Found:** {loot['description']} (remains of previous victims)\n"
+            treasure_found_label = self.translation_system.t('treasure_found_label')
+        remains_text = self.translation_system.t('remains_of_victims')
+        description += f"\n**{treasure_found_label}:** {loot['description']} ({remains_text})\n"
         
         return {
             'hex_code': hex_code,
             'terrain': terrain,
             'encounter': f"※ **{beast_type.title()} Encounter**",
             'denizen': description,
-            'notable_feature': f"Beast territory",
+            'notable_feature': self.translation_system.t('beast_territory'),
             'atmosphere': "Tense and dangerous",
             'beast_type': beast_type,
             'beast_feature': feature,
             'beast_behavior': behavior,
             'threat_level': "High - approach with extreme caution.",
-            'territory': f"This creature has claimed this area of {terrain} as its hunting ground.",
+            'territory': self.translation_system.t('creature_claimed_area', terrain=self._get_translated_terrain_name(terrain)),
             'loot': loot,
             'is_beast': True
         }
@@ -633,7 +638,7 @@ class MainMapGenerator:
             'terrain': terrain,
             'encounter': f"☉ **{name} - {trade}**",
             'denizen': description,
-            'notable_feature': f"NPC territory",
+            'notable_feature': self.translation_system.t('npc_territory'),
             'atmosphere': "Mysterious and unpredictable",
             'name': name,
             'denizen_type': trade,
@@ -999,7 +1004,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         lines.append("")
         # Loot
         if hex_data.get('loot'):
-            lines.append("## Loot Found")
+            loot_found_header = self.translation_system.t('loot_found_header')
+            lines.append(f"## {loot_found_header}")
             loot = hex_data['loot']
             if isinstance(loot, list):
                 for item in loot:
@@ -1016,7 +1022,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             lines.append("")
         # Scroll/Ancient Knowledge
         if hex_data.get('scroll'):
-            lines.append("## Ancient Knowledge")
+            ancient_knowledge_header = self.translation_system.t('ancient_knowledge_header')
+            lines.append(f"## {ancient_knowledge_header}")
             scroll = hex_data['scroll']
             if isinstance(scroll, dict):
                 for k, v in scroll.items():
@@ -1066,16 +1073,21 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         
         # Dungeon-specific content
         if hex_data.get('is_dungeon'):
-            lines.append("## Dungeon Details")
+            dungeon_details_header = self.translation_system.t('dungeon_details_header')
+            lines.append(f"## {dungeon_details_header}")
             type_label = self.translation_system.t('type_label')
-        lines.append(f"**{type_label}:** {hex_data.get('dungeon_type', 'Unknown')}")
-            lines.append(f"**Danger:** {hex_data.get('danger', 'Unknown')}")
-            lines.append(f"**Treasure:** {hex_data.get('treasure', 'Unknown')}")
+            unknown = self.translation_system.t('unknown')
+            lines.append(f"**{type_label}:** {hex_data.get('dungeon_type', unknown)}")
+            danger_label = self.translation_system.t('danger_label')
+            treasure_label = self.translation_system.t('treasure_label')
+            lines.append(f"**{danger_label}:** {hex_data.get('danger', unknown)}")
+            lines.append(f"**{treasure_label}:** {hex_data.get('treasure', unknown)}")
             lines.append("")
             
             # Mörk Borg trap details
             if hex_data.get('trap_section'):
-                lines.append("## Trap")
+                trap_header = self.translation_system.t('trap_header')
+                lines.append(f"## {trap_header}")
                 trap = hex_data['trap_section']
                 if trap.get('description'):
                     lines.append(f"**Description:** {trap['description']}")
@@ -1097,11 +1109,15 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         
         # Beast-specific content
         if hex_data.get('is_beast'):
-            lines.append("## Beast Details")
+            beast_details_header = self.translation_system.t('beast_details_header')
+            lines.append(f"## {beast_details_header}")
             type_label = self.translation_system.t('type_label')
-        lines.append(f"**{type_label}:** {hex_data.get('beast_type', 'Unknown')}")
-            lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
-            lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
+            unknown = self.translation_system.t('unknown')
+            lines.append(f"**{type_label}:** {hex_data.get('beast_type', unknown)}")
+            feature_label = self.translation_system.t('feature_label')
+            behavior_label = self.translation_system.t('behavior_label')
+            lines.append(f"**{feature_label}:** {hex_data.get('beast_feature', unknown)}")
+            lines.append(f"**{behavior_label}:** {hex_data.get('beast_behavior', unknown)}")
             lines.append("")
             
             # Add threat level and territory as separate sections
@@ -1122,9 +1138,11 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         
         # Sea-specific content
         if hex_data.get('is_sea_encounter'):
-            lines.append("## Sea Encounter Details")
+            sea_encounter_details_header = self.translation_system.t('sea_encounter_details_header')
+            lines.append(f"## {sea_encounter_details_header}")
             type_label = self.translation_system.t('type_label')
-        lines.append(f"**{type_label}:** {hex_data.get('encounter_type', 'Unknown')}")
+            unknown = self.translation_system.t('unknown')
+            lines.append(f"**{type_label}:** {hex_data.get('encounter_type', unknown)}")
             lines.append("")
             
             # Add threat level and territory as separate sections
@@ -1145,22 +1163,30 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         
         # NPC-specific content
         if hex_data.get('is_npc'):
-            lines.append("## NPC Details")
-            lines.append(f"**Name:** {hex_data.get('name', 'Unknown')}")
+            npc_details_header = self.translation_system.t('npc_details_header')
+            lines.append(f"## {npc_details_header}")
+            name_label = self.translation_system.t('name_label')
+            unknown = self.translation_system.t('unknown')
+            lines.append(f"**{name_label}:** {hex_data.get('name', unknown)}")
             type_label = self.translation_system.t('type_label')
-        lines.append(f"**{type_label}:** {hex_data.get('denizen_type', 'Unknown')}")
+            lines.append(f"**{type_label}:** {hex_data.get('denizen_type', unknown)}")
             
             # Mörk Borg NPC details
             if hex_data.get('trait'):
-                lines.append(f"**Trait:** {hex_data.get('trait')}")
+                trait_label = self.translation_system.t('trait_label')
+                lines.append(f"**{trait_label}:** {hex_data.get('trait')}")
             if hex_data.get('concern'):
-                lines.append(f"**Concern:** {hex_data.get('concern')}")
+                concern_label = self.translation_system.t('concern_label_npc')
+                lines.append(f"**{concern_label}:** {hex_data.get('concern')}")
             if hex_data.get('want'):
-                lines.append(f"**Want:** {hex_data.get('want')}")
+                want_label = self.translation_system.t('want_label_npc')
+                lines.append(f"**{want_label}:** {hex_data.get('want')}")
             if hex_data.get('apocalypse_attitude'):
-                lines.append(f"**Apocalypse Attitude:** {hex_data.get('apocalypse_attitude')}")
+                apocalypse_attitude_label = self.translation_system.t('apocalypse_attitude_label')
+                lines.append(f"**{apocalypse_attitude_label}:** {hex_data.get('apocalypse_attitude')}")
             if hex_data.get('secret'):
-                lines.append(f"**Secret:** {hex_data.get('secret')}")
+                secret_label = self.translation_system.t('secret_label_npc')
+                lines.append(f"**{secret_label}:** {hex_data.get('secret')}")
             
             # Fallback to old fields if new ones not available
             if not hex_data.get('trait') and hex_data.get('motivation'):
