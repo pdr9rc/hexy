@@ -128,18 +128,26 @@ class DatabaseManager:
         return tables
     
     def get_table(self, category: str, table_name: str, language: str = 'en') -> List[Any]:
-        """Get a specific table from a category."""
+        """Get a specific table from a category with fallback to English."""
         tables = self.load_tables(language)
         
         # Look in the appropriate category
         category_key = f"{category}_tables"
         if category_key in tables:
-            return tables[category_key].get(table_name, [])
+            result = tables[category_key].get(table_name, [])
+            if result:  # If we found content, return it
+                return result
         
-        # Fallback: search all tables
+        # Fallback: search all tables for the requested language
         for key, table_data in tables.items():
             if isinstance(table_data, dict) and table_name in table_data:
-                return table_data[table_name]
+                result = table_data[table_name]
+                if result:  # If we found content, return it
+                    return result
+        
+        # Final fallback: try English if we're not already using English
+        if language != 'en':
+            return self.get_table(category, table_name, 'en')
         
         return []
     
