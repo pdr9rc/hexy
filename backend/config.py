@@ -46,7 +46,7 @@ class PathConfig:
 @dataclass
 class AppConfig:
     """Main application configuration."""
-    language: str = 'en'
+    language: str = 'pt'
     supported_languages: Tuple[str, ...] = ('en', 'pt')
     debug: bool = True
     host: str = '127.0.0.1'

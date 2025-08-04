@@ -44,6 +44,7 @@ main_map_generator = get_main_map_generator()
 def normalize_terrain_name(name: str) -> str:
     name = name.strip().lower()
     mapping = {
+        # English terrain names
         "plain": "plains",
         "plains": "plains",
         "forest": "forest",
@@ -57,6 +58,21 @@ def normalize_terrain_name(name: str) -> str:
         "snow": "snow",
         "tundra": "snow",
         "unknown": "unknown",
+        # Portuguese terrain names
+        "planície": "plains",
+        "planicies": "plains",
+        "floresta": "forest",
+        "montanha": "mountain",
+        "montanhas": "mountain",
+        "costa": "coast",
+        "pântano": "swamp",
+        "pantano": "swamp",
+        "deserto": "desert",
+        "mar": "sea",
+        "oceano": "sea",
+        "neve": "snow",
+        "tundra": "snow",
+        "desconhecido": "unknown",
     }
     return mapping.get(name, "unknown")
 
@@ -105,7 +121,8 @@ def main_map():
                          map_width=map_width,
                          map_height=map_height,
                          major_cities=get_major_cities_data(),
-                         total_hexes=map_width * map_height)
+                         total_hexes=map_width * map_height,
+                         current_language=current_language)
 
 # ===== API ROUTES =====
 
@@ -292,6 +309,32 @@ def get_hex_info(hex_code):
         "atmosphere": None,
         "raw_markdown": None,
     })
+
+@api_bp.route('/set-language', methods=['POST'])
+def set_language():
+    """Set the current language for content generation."""
+    global current_language, main_map_generator
+    
+    data = request.get_json()
+    new_language = data.get('language', 'en')
+    
+    if new_language in ['en', 'pt']:
+        current_language = new_language
+        # Update translation system
+        translation_system.set_language(new_language)
+        # Re-initialize main map generator with new language
+        main_map_generator = get_main_map_generator()
+        
+        return jsonify({
+            'success': True,
+            'language': current_language,
+            'message': f'Language set to {current_language}'
+        })
+    else:
+        return jsonify({
+            'success': False,
+            'error': 'Invalid language. Use "en" or "pt"'
+        }), 400
 
 @api_bp.route('/city/<hex_code>')
 def get_city_details(hex_code):
@@ -808,7 +851,12 @@ def extract_hex_data(content):
         pattern = rf'(?:\*\*)?{field}:(?:\*\*)?\s*([^\n]+)'
         match = re.search(pattern, content, re.IGNORECASE)
         return match.group(1).strip() if match else None
-    data['terrain'] = extract_field('Terrain')
+    
+    # Extract terrain in both English and Portuguese
+    terrain = extract_field('Terrain')
+    if not terrain:
+        terrain = extract_field('Terreno')
+    data['terrain'] = terrain
     data['features'] = extract_field('Notable Features?')
     data['encounters'] = extract_field('Encounters?')
     data['resources'] = extract_field('Resources?')
