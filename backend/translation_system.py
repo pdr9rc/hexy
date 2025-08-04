@@ -36,6 +36,52 @@ class TranslationSystem:
                 'motivation': 'Motivation',
                 'demeanor': 'Demeanor',
                 
+                # Content Labels (for hex content formatting)
+                'hex_number': 'HEX',
+                'terrain_label': 'TERRAIN',
+                'type_label': 'TYPE',
+                'content_label': 'CONTENT',
+                'district_label': 'DISTRICT',
+                'position_label': 'POSITION',
+                'description_label': 'DESCRIPTION',
+                'atmosphere_label': 'ATMOSPHERE',
+                'encounter_label': 'ENCOUNTER',
+                'notable_features_label': 'NOTABLE FEATURES',
+                'npc_information_label': 'NPC INFORMATION',
+                'leadership_label': 'LEADERSHIP',
+                'trade_opportunities_label': 'TRADE OPPORTUNITIES',
+                'loot_found_label': 'LOOT FOUND',
+                'denizen_type_label': 'DENIZEN TYPE',
+                'beast_type_label': 'BEAST TYPE',
+                'dungeon_type_label': 'DUNGEON TYPE',
+                'encounter_type_label': 'ENCOUNTER TYPE',
+                'behavior_label': 'BEHAVIOR',
+                'danger_label': 'DANGER',
+                'territory_label': 'TERRITORY',
+                'threat_level_label': 'THREAT LEVEL',
+                'treasure_found_label': 'TREASURE FOUND',
+                'ancient_knowledge_label': 'ANCIENT KNOWLEDGE',
+                'carries_label': 'CARRIES',
+                'motivation_label': 'MOTIVATION',
+                'demeanor_label': 'DEMEANOR',
+                'name_label': 'NAME',
+                'affiliation_label': 'AFFILIATION',
+                'attitude_label': 'ATTITUDE',
+                'trade_label': 'TRADE',
+                'concern_label': 'CONCERN',
+                'want_label': 'WANT',
+                'secret_label': 'SECRET',
+                'trait_label': 'TRAIT',
+                
+                # UI Action Labels
+                'loading': 'Loading...',
+                'loading_hex_details': 'Loading hex details...',
+                'return_to_hex': 'RETURN TO HEX',
+                'return_to_map': 'RETURN TO MAP',
+                'edit': 'EDIT',
+                'generate_all_content': 'GENERATE ALL CONTENT',
+                'no_atmosphere_available': 'No atmosphere available.',
+                
                 # Generation Messages
                 'generating_full_map': 'Generating Full Map',
                 'map_size': 'Map Size',
@@ -105,7 +151,44 @@ class TranslationSystem:
                 'plains': 'Plains',
                 'swamp': 'Swamp',
                 'desert': 'Desert',
-                'unknown': 'Unknown'
+                'unknown': 'Unknown',
+                
+                # Content Section Headers
+                'loot_found_header': 'Loot Found',
+                'ancient_knowledge_header': 'Ancient Knowledge',
+                'beast_details_header': 'Beast Details',
+                'dungeon_details_header': 'Dungeon Details',
+                'sea_encounter_details_header': 'Sea Encounter Details',
+                'npc_details_header': 'NPC Details',
+                'threat_level_header': 'Threat Level',
+                'territory_header': 'Territory',
+                'trap_header': 'Trap',
+                
+                # Default/Fallback Content
+                'unknown_treasure': 'Unknown treasure',
+                'unknown_knowledge': 'Unknown knowledge',
+                'unknown_threat_level': 'Unknown threat level',
+                'no_treasure_found': 'No treasure found',
+                'no_ancient_knowledge': 'No ancient knowledge',
+                'no_territory_claimed': 'No territory claimed',
+                
+                # Dynamic Content Templates
+                'creature_claimed_area': 'This creature has claimed this area of {terrain} as its hunting ground.',
+                'remains_of_victims': 'remains of previous victims',
+                'beast_territory': 'Beast territory',
+                'npc_territory': 'NPC territory',
+                'sea_corruption': 'its influence corrupting the very waters themselves.',
+                'sea_claimed_by_nightmare': 'This section of the sea has been claimed by the nightmare, {sea_corruption}',
+                
+                # Field Labels for NPC content
+                'trait_label': 'Trait',
+                'concern_label_npc': 'Concern',
+                'want_label_npc': 'Want',
+                'apocalypse_attitude_label': 'Apocalypse Attitude',
+                'secret_label_npc': 'Secret',
+                'feature_label': 'Feature',
+                'danger_label': 'Danger',
+                'treasure_label': 'Treasure'
             },
             'pt': {
                 # UI Elements
@@ -126,6 +209,52 @@ class TranslationSystem:
                 'atmosphere': 'Atmosfera',
                 'motivation': 'Motivação',
                 'demeanor': 'Comportamento',
+                
+                # Content Labels (for hex content formatting)
+                'hex_number': 'HEX',
+                'terrain_label': 'TERRENO',
+                'type_label': 'TIPO',
+                'content_label': 'CONTEÚDO',
+                'district_label': 'DISTRITO',
+                'position_label': 'POSIÇÃO',
+                'description_label': 'DESCRIÇÃO',
+                'atmosphere_label': 'ATMOSFERA',
+                'encounter_label': 'ENCONTRO',
+                'notable_features_label': 'CARACTERÍSTICAS NOTÁVEIS',
+                'npc_information_label': 'INFORMAÇÕES DO NPC',
+                'leadership_label': 'LIDERANÇA',
+                'trade_opportunities_label': 'OPORTUNIDADES DE COMÉRCIO',
+                'loot_found_label': 'TESOURO ENCONTRADO',
+                'denizen_type_label': 'TIPO DE HABITANTE',
+                'beast_type_label': 'TIPO DE FERA',
+                'dungeon_type_label': 'TIPO DE MASMORRA',
+                'encounter_type_label': 'TIPO DE ENCONTRO',
+                'behavior_label': 'COMPORTAMENTO',
+                'danger_label': 'PERIGO',
+                'territory_label': 'TERRITÓRIO',
+                'threat_level_label': 'NÍVEL DE AMEAÇA',
+                'treasure_found_label': 'TESOURO ENCONTRADO',
+                'ancient_knowledge_label': 'CONHECIMENTO ANCESTRAL',
+                'carries_label': 'CARREGA',
+                'motivation_label': 'MOTIVAÇÃO',
+                'demeanor_label': 'ATITUDE',
+                'name_label': 'NOME',
+                'affiliation_label': 'AFILIAÇÃO',
+                'attitude_label': 'ATITUDE',
+                'trade_label': 'COMÉRCIO',
+                'concern_label': 'PREOCUPAÇÃO',
+                'want_label': 'DESEJO',
+                'secret_label': 'SEGREDO',
+                'trait_label': 'CARACTERÍSTICA',
+                
+                # UI Action Labels
+                'loading': 'Carregando...',
+                'loading_hex_details': 'Carregando detalhes do hex...',
+                'return_to_hex': 'VOLTAR AO HEX',
+                'return_to_map': 'VOLTAR AO MAPA',
+                'edit': 'EDITAR',
+                'generate_all_content': 'GERAR TODO CONTEÚDO',
+                'no_atmosphere_available': 'Nenhuma atmosfera disponível.',
                 
                 # Generation Messages
                 'generating_full_map': 'Gerando Mapa Completo',
@@ -196,7 +325,44 @@ class TranslationSystem:
                 'plains': 'Planície',
                 'swamp': 'Pântano',
                 'desert': 'Deserto',
-                'unknown': 'Desconhecido'
+                'unknown': 'Desconhecido',
+                
+                # Content Section Headers
+                'loot_found_header': 'Tesouro Encontrado',
+                'ancient_knowledge_header': 'Conhecimento Ancestral',
+                'beast_details_header': 'Detalhes da Fera',
+                'dungeon_details_header': 'Detalhes da Masmorra',
+                'sea_encounter_details_header': 'Detalhes do Encontro Marítimo',
+                'npc_details_header': 'Detalhes do NPC',
+                'threat_level_header': 'Nível de Ameaça',
+                'territory_header': 'Território',
+                'trap_header': 'Armadilha',
+                
+                # Default/Fallback Content
+                'unknown_treasure': 'Tesouro desconhecido',
+                'unknown_knowledge': 'Conhecimento desconhecido',
+                'unknown_threat_level': 'Nível de ameaça desconhecido',
+                'no_treasure_found': 'Nenhum tesouro encontrado',
+                'no_ancient_knowledge': 'Nenhum conhecimento ancestral',
+                'no_territory_claimed': 'Nenhum território reivindicado',
+                
+                # Dynamic Content Templates
+                'creature_claimed_area': 'Esta criatura reivindicou esta área de {terrain} como seu território de caça.',
+                'remains_of_victims': 'restos de vítimas anteriores',
+                'beast_territory': 'Território da fera',
+                'npc_territory': 'Território do NPC',
+                'sea_corruption': 'sua influência corrompendo as próprias águas.',
+                'sea_claimed_by_nightmare': 'Esta seção do mar foi reivindicada pelo pesadelo, {sea_corruption}',
+                
+                # Field Labels for NPC content
+                'trait_label': 'Característica',
+                'concern_label_npc': 'Preocupação',
+                'want_label_npc': 'Desejo',
+                'apocalypse_attitude_label': 'Atitude Apocalíptica',
+                'secret_label_npc': 'Segredo',
+                'feature_label': 'Característica',
+                'danger_label': 'Perigo',
+                'treasure_label': 'Tesouro'
             }
         }
     

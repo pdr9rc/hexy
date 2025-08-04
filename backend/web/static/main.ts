@@ -3,8 +3,9 @@ import { getCityOverlay, getCityOverlayHex, updateHex } from "./api.js"
 import { showHexDetails as renderHexDetails, showCityDetails, showSettlementDetails } from "./hexViewer.js"
 import { renderMap } from "./mapRenderer.js"
 import { initializeControls } from "./controls.js"
-import { showNotification, showError } from "./uiUtils.js"
+import { showNotification, showError, showLoading, hideLoading } from "./uiUtils.js"
 import { showCityOverlayGrid } from './cityOverlays.js';
+import { translationService } from './translation.js';
 
 // Global state for hex editing
 let currentEditingHex: string | null = null;
@@ -229,8 +230,8 @@ class DyingLandsApp {
         <div class="ascii-box">
           <div class="ascii-inner-box">
             <div class="mb-4" style="text-align:center;">
-              <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${overlayName || ''}')">RETURN TO HEX</button>
-              <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">RETURN TO MAP</button>
+              <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${overlayName || ''}')">${translationService.t('return_to_hex')}</button>
+              <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">${translationService.t('return_to_map')}</button>
             </div>
             
             <!-- Basic Information Section -->
@@ -238,28 +239,28 @@ class DyingLandsApp {
               <span>${content.name || name}</span>
             </div>
             <div class="ascii-section ascii-hex-type">
-              <span>TYPE: ${content.type || type}</span>
+              <span>${translationService.t('type_label')}: ${content.type || type}</span>
             </div>
             <div class="ascii-section ascii-hex-district">
-              <span>DISTRICT: ${hexData.district || district}</span>
+              <span>${translationService.t('district_label')}: ${hexData.district || district}</span>
             </div>
             <div class="ascii-section ascii-hex-position">
-              <span>POSITION: ${content.position_type || positionType}</span>
+              <span>${translationService.t('position_label')}: ${content.position_type || positionType}</span>
             </div>
             
             <!-- Description Section -->
             <div class="ascii-section ascii-hex-description">
-              <span>DESCRIPTION:</span>
+              <span>${translationService.t('description_label')}:</span>
               <div class="ascii-content">${content.description || description}</div>
             </div>
             
             <!-- Atmosphere & Encounter Section -->
             <div class="ascii-section ascii-hex-atmosphere">
-              <span>ATMOSPHERE:</span>
-              <div class="ascii-content">${content.atmosphere || atmosphere || 'No atmosphere available.'}</div>
+              <span>${translationService.t('atmosphere_label')}:</span>
+                              <div class="ascii-content">${content.atmosphere || atmosphere || translationService.t('no_atmosphere_available')}</div>
             </div>
             <div class="ascii-section ascii-hex-encounter">
-              <span>ENCOUNTER:</span>
+              <span>${translationService.t('encounter_label')}:</span>
               <div class="ascii-content">${content.encounter || encounter}</div>
             </div>
     `
@@ -268,7 +269,7 @@ class DyingLandsApp {
     if (content.notable_features && content.notable_features.length > 0) {
       html += `
         <div class="ascii-section ascii-hex-features">
-          <span>NOTABLE FEATURES:</span>
+          <span>${translationService.t('notable_features_label')}:</span>
           <div class="ascii-content">${content.notable_features.join('\n')}</div>
         </div>
       `;
@@ -1312,6 +1313,58 @@ document.addEventListener('DOMContentLoaded', () => {
   (window as any).app.renderCityOverlay = appInstance.renderCityOverlay.bind(appInstance);
   (window as any).renderCityOverlay = appInstance.renderCityOverlay.bind(appInstance);
   (window as any).app.showHexDetails = appInstance.showHexDetails.bind(appInstance);
+
+  // Initialize language selector
+  const languageSelector = document.getElementById('language-selector') as HTMLSelectElement;
+  if (languageSelector) {
+    // Set initial language based on current selection
+    const currentLanguage = languageSelector.value || 'en';
+    translationService.setLanguage(currentLanguage);
+    
+    // Handle language changes
+    languageSelector.addEventListener('change', async (e) => {
+      const target = e.target as HTMLSelectElement;
+      const newLanguage = target.value;
+      
+      try {
+        showLoading(translationService.t('generating_map'));
+        
+        // Call backend to set language
+        const response = await fetch('/api/set-language', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ language: newLanguage })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Update frontend translation service
+          translationService.setLanguage(newLanguage);
+          
+          // Show success notification
+          showNotification(result.message, 'info');
+          
+          // Refresh the current view to apply translations
+          window.location.reload(); // Simple reload for now
+        } else {
+          showNotification(result.error || 'Failed to set language', 'error');
+          // Revert selector to previous value
+          languageSelector.value = translationService.getCurrentLanguage();
+        }
+        
+      } catch (error) {
+        console.error('Error setting language:', error);
+        showNotification('Failed to set language', 'error');
+        // Revert selector to previous value
+        languageSelector.value = translationService.getCurrentLanguage();
+      } finally {
+        hideLoading();
+      }
+    });
+  }
   (window as any).showHexDetails = appInstance.showHexDetails.bind(appInstance);
   (window as any).app.editHexContent = appInstance.editHexContent.bind(appInstance);
   (window as any).app.saveHexContent = appInstance.saveHexContent.bind(appInstance);
