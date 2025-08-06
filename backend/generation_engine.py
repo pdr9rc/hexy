@@ -77,7 +77,7 @@ A {population} settlement in the {terrain}.
             """.strip(),
             
             'beast': """
-A {beast_type} with {feature} that {behavior}.
+{beast_type}, {feature}, {behavior}.
 
 **Territory:** This creature has claimed this area of {terrain} as its hunting ground.
 **Threat Level:** High - approach with extreme caution.

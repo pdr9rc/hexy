@@ -173,6 +173,7 @@ def get_hex_info(hex_code):
             return jsonify({
                 **base_response,
                 "hex_type": "settlement",
+                "content_type": "settlement",
                 "is_settlement": True,
                 "is_major_city": False,
                 "terrain": parsed.get('terrain', 'unknown'),
@@ -194,6 +195,7 @@ def get_hex_info(hex_code):
             return jsonify({
                 **base_response,
                 "hex_type": "beast",
+                "content_type": "beast",
                 "is_beast": True,
                 "terrain": parsed.get('terrain', 'unknown'),
                 "encounter": parsed.get('encounter'),
@@ -216,6 +218,7 @@ def get_hex_info(hex_code):
             return jsonify({
                 **base_response,
                 "hex_type": "dungeon",
+                "content_type": "dungeon",
                 "is_dungeon": True,
                 "terrain": parsed.get('terrain', 'unknown'),
                 "encounter": parsed.get('encounter'),
@@ -324,6 +327,11 @@ def set_language():
         translation_system.set_language(new_language)
         # Re-initialize main map generator with new language
         main_map_generator = get_main_map_generator()
+        # Update city overlay analyzer with new language
+        from backend.city_overlay_analyzer import city_overlay_analyzer
+        from backend.database_manager import database_manager
+        city_overlay_analyzer.language = new_language
+        city_overlay_analyzer.content_tables = database_manager.load_tables(new_language)
         
         return jsonify({
             'success': True,

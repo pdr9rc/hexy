@@ -27,9 +27,7 @@ class HexService:
     def _load_hex_data(self):
         """Load all hex data from the generated JSON files."""
         hexes_dir = self.config.paths.output_path / "hexes"
-        print(f"DEBUG: Loading hex data from {hexes_dir}")
         if not hexes_dir.exists():
-            print(f"DEBUG: Hexes directory does not exist: {hexes_dir}")
             return
         
         hex_count = 0
@@ -45,9 +43,6 @@ class HexService:
                     hex_count += 1
             except Exception as e:
                 print(f"Error loading hex {hex_code}: {e}")
-        
-        print(f"DEBUG: Loaded {hex_count} hexes into cache")
-        print(f"DEBUG: Cache keys: {list(self.hex_data_cache.keys())[:5]}...")
     
     def _parse_hex_markdown(self, hex_file: Path) -> Optional[Dict[str, Any]]:
         """Parse markdown hex file and convert to structured data."""

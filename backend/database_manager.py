@@ -163,9 +163,9 @@ class DatabaseManager:
             }
         
         # Update the table - unified structure uses simple tables structure
-        if 'tables' not in file_data:
-            file_data['tables'] = {}
-        file_data['tables'][table_name] = data
+            if 'tables' not in file_data:
+                file_data['tables'] = {}
+            file_data['tables'][table_name] = data
         
         # Update metadata
         file_data['metadata']['last_updated'] = datetime.now().isoformat()
@@ -318,8 +318,8 @@ class DatabaseManager:
         for category in categories:
             for lang in ['en', 'pt']:
                 dir_path = f"{category}/{lang}"
-                full_path = os.path.join(self.database_path, dir_path)
-                if not os.path.exists(full_path):
+            full_path = os.path.join(self.database_path, dir_path)
+            if not os.path.exists(full_path):
                     report['warnings'].append(f"Missing directory: {dir_path}")
                     # Don't mark as invalid since some categories might not exist
         

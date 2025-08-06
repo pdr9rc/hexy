@@ -525,7 +525,7 @@ class MainMapGenerator:
         loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.7 else None
         
         # Build description
-        description = f"A {beast_type} with {feature} that {behavior}.\n\n"
+        description = f"{beast_type},{feature}, {behavior}.\n\n"
         description += f"**Territory:** This creature has claimed this area of {terrain} as its hunting ground.\n"
         description += f"**Threat Level:** High - approach with extreme caution.\n"
         

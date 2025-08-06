@@ -118,7 +118,7 @@ export async function showCityOverlayGridInMap(app: any, overlayName: string, he
                     }
                 }
                 let html = `
-          <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+          <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
             <div class="mb-4">
               <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
               <button class="btn-mork-borg" onclick="app.showCityDetailsInMap('${hexCode}')">← RETURN TO CITY</button>
@@ -196,7 +196,7 @@ export async function showCityOverlayAsciiInMap(app: any, overlayName: string, h
             const mapZoomContainer = document.getElementById('map-zoom-container');
             if (mapContainer && mapZoomContainer) {
                 let html = `
-          <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+          <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
             <div class="mb-4">
               <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
               <button class="btn-mork-borg" onclick="app.showCityOverlayGridInMap('${overlayName}', '${hexCode}')">← BACK TO GRID</button>
@@ -247,7 +247,7 @@ export async function showCityHexDetailsInMap(app: any, overlayName: string, hex
             const mapZoomContainer = document.getElementById('map-zoom-container');
             if (mapContainer && mapZoomContainer) {
                 let html = `
-          <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+          <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
             <div class="mb-4">
               <button class="btn-mork-borg btn-warning" onclick="app.restoreMap()">RETURN TO MAP</button>
               <button class="btn-mork-borg" onclick="app.showCityOverlayGridInMap('${overlayName}', '${hexId}')">← BACK TO GRID</button>

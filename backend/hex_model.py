@@ -91,7 +91,8 @@ class BaseHex:
             "hex_code": self.hex_code,
             "terrain": self.terrain.value,
             "exists": self.exists,
-            "hex_type": self.get_hex_type().value
+            "hex_type": self.get_hex_type().value,
+            "content_type": self.get_hex_type().value
         }
     
     def get_hex_type(self) -> HexType:

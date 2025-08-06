@@ -147,7 +147,7 @@ function generateCityOverlayGridHTML(overlay: any, hexCode: string, overlayName:
   const gridHTML = generateCityGrid(overlay.hex_grid, overlayName)
 
   return `
-    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
       <div class="mb-4">
         <button class="btn-mork-borg btn-warning me-2" onclick="window.app.restoreMap()">RETURN TO MAP</button>
         <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${hexCode}')">← RETURN TO HEX</button>
@@ -213,7 +213,7 @@ function generateCityGrid(hexGrid: any, overlayName: string): string {
  */
 function generateCityOverlayAsciiHTML(asciiContent: string, overlayName: string, hexCode: string): string {
   return `
-    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
       <div class="mb-4">
         <button class="btn-mork-borg btn-warning me-2" onclick="window.app.restoreMap()">RETURN TO MAP</button>
         <button class="btn-mork-borg me-2" onclick="window.app.showCityOverlayGrid('${hexCode}')">← BACK TO GRID</button>
@@ -236,7 +236,7 @@ ${asciiContent}
  */
 function generateCityHexDetailsHTML(content: any): string {
   return `
-    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto;">
+    <div style="text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;">
       <div class="ascii-modal">
         <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
           ${content.name.toUpperCase()}

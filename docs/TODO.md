@@ -1,0 +1,3 @@
+- scale should start at 60%
+- languages like portuguese must invert tavern and city order of names and adjectives
+- faction stuff missing

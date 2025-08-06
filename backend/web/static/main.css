@@ -292,6 +292,7 @@ h6 {
   height: calc(100vh - 120px);
   min-height: 0;
   min-width: 0;
+  overflow: hidden;
 }
 
 .map-side,
@@ -300,6 +301,7 @@ h6 {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .map-side {
@@ -322,6 +324,7 @@ h6 {
   min-height: 0;
   height: 100%;
   overflow-y: auto;
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
   background: var(--bg-secondary);
@@ -329,10 +332,13 @@ h6 {
   border-radius: var(--border-radius);
   padding: 16px;
   
+  /* Enable touch scrolling */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pan-x;
+  
   /* Custom scrollbar styling to match other scrollbars */
   scrollbar-width: thin;
   scrollbar-color: var(--mork-pink) var(--bg-tertiary);
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Webkit scrollbar styling for modal-side */
@@ -360,14 +366,20 @@ h6 {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: auto;
   background: none;
   border: none;
   padding: 0;
+  min-height: 0;
+  max-height: 100%;
+  
+  /* Enable touch scrolling */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pan-x;
   
   /* Custom scrollbar styling to match other scrollbars */
   scrollbar-width: thin;
   scrollbar-color: var(--mork-pink) var(--bg-tertiary);
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Webkit scrollbar styling for modal-content-container */
@@ -422,11 +434,58 @@ h6 {
   background: var(--bg-secondary);
   border: 3px solid var(--border-primary);
   border-radius: var(--border-radius);
-  overflow: hidden;
+  overflow: hidden; /* Keep hidden for world map */
   position: relative;
   min-height: 400px;
   max-height: 90vh;
   max-width: 100vw;
+}
+
+/* Enable scrolling for all containers except world map */
+.modal-side,
+.details-section,
+.city-overlay-content,
+.ascii-box,
+.city-overlay-ascii-box,
+.modal-content-container,
+#hex-details,
+.hex-content,
+.hex-details,
+.ascii-modal,
+.city-overlay-wrapper {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* Additional touch scrolling for specific containers */
+.modal-side {
+  touch-action: pan-y pan-x;
+}
+
+.modal-content-container {
+  touch-action: pan-y pan-x;
+}
+
+#hex-details {
+  touch-action: pan-y;
+}
+
+.details-section {
+  touch-action: pan-y;
+}
+
+.hex-content {
+  touch-action: pan-y;
+}
+
+.ascii-modal {
+  touch-action: pan-y;
+}
+
+.city-overlay-wrapper {
+  touch-action: pan-y;
 }
 
 .map-zoom-container {
@@ -1474,22 +1533,26 @@ h6 {
   color: var(--text-secondary);
 }
 .ascii-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: auto;
+  background: var(--bg-tertiary);
   border: 2px solid var(--border-primary);
   border-radius: var(--border-radius);
-  background: var(--bg-secondary);
-  color: var(--text-secondary);
-  padding: 8px 12px;
-  width: 100%;
-  max-width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  margin: 0 auto;
-  box-shadow: var(--shadow-dark);
+  padding: 15px;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  
+  /* Enable touch scrolling */
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pan-x;
   
   /* Custom scrollbar styling to match other scrollbars */
   scrollbar-width: thin;
   scrollbar-color: var(--mork-pink) var(--bg-tertiary);
-  -webkit-overflow-scrolling: touch;
 }
 
 /* Webkit scrollbar styling for ASCII box */
@@ -2222,11 +2285,12 @@ h6 {
 
 /* City Context Panel */
 .city-context-panel {
-  background: var(--bg-secondary);
-  border: 2px solid var(--border-primary);
-  margin-bottom: var(--spacing-md);
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
   overflow-x: auto;
-  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y pan-x;
 }
 
 /* ASCII Section Text Color Override */
