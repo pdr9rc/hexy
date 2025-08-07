@@ -105,7 +105,56 @@ class TranslationSystem:
                 'plains': 'Plains',
                 'swamp': 'Swamp',
                 'desert': 'Desert',
-                'unknown': 'Unknown'
+                'unknown': 'Unknown',
+                
+                # NPC Field Labels
+                'npc_trait': 'Trait',
+                'npc_concern': 'Concern',
+                'npc_want': 'Want',
+                'npc_apocalypse_attitude': 'Apocalypse Attitude',
+                'npc_secret': 'Secret',
+                'npc_location': 'Location',
+                'npc_carries': 'Carries',
+                
+                # Content Field Labels
+                'territory': 'Territory',
+                'threat_level': 'Threat Level',
+                'treasure_found': 'Treasure Found',
+                'loot_found': 'Loot Found',
+                'type': 'Type',
+                'item': 'Item',
+                'description': 'Description',
+                'full_description': 'Full Description',
+                'name': 'Name',
+                'behavior': 'Behavior',
+                'feature': 'Feature',
+                'danger': 'Danger',
+                'atmosphere': 'Atmosphere',
+                'motivation': 'Motivation',
+                'demeanor': 'Demeanor',
+                'origin': 'Origin',
+                'weather': 'Weather',
+                'innkeeper': 'Innkeeper',
+                'effect': 'Effect',
+                'builder': 'Builder',
+                'age': 'Age',
+                'population': 'Population',
+                'trend': 'Trend',
+                'government': 'Government',
+                
+                # Settlement Field Labels
+                'local_tavern': 'Local Tavern',
+                'local_power': 'Local Power',
+                'city_event': 'City Event',
+                'settlement_layout': 'Settlement Layout',
+                'key_npcs': 'Key NPCs',
+                
+                # City Overlay Field Labels
+                'district': 'District',
+                'position': 'Position',
+                'random_encounters': 'Random Encounters',
+                'notable_features': 'Notable Features',
+                'encounter': 'Encounter'
             },
             'pt': {
                 # UI Elements
@@ -196,7 +245,56 @@ class TranslationSystem:
                 'plains': 'Planície',
                 'swamp': 'Pântano',
                 'desert': 'Deserto',
-                'unknown': 'Desconhecido'
+                'unknown': 'Desconhecido',
+                
+                # NPC Field Labels
+                'npc_trait': 'Característica',
+                'npc_concern': 'Preocupação',
+                'npc_want': 'Desejo',
+                'npc_apocalypse_attitude': 'Atitude do Apocalipse',
+                'npc_secret': 'Segredo',
+                'npc_location': 'Localização',
+                'npc_carries': 'Carrega',
+                
+                # Content Field Labels
+                'territory': 'Território',
+                'threat_level': 'Nível de Ameaça',
+                'treasure_found': 'Tesouro Encontrado',
+                'loot_found': 'Saque Encontrado',
+                'type': 'Tipo',
+                'item': 'Item',
+                'description': 'Descrição',
+                'full_description': 'Descrição Completa',
+                'name': 'Nome',
+                'behavior': 'Comportamento',
+                'feature': 'Característica',
+                'danger': 'Perigo',
+                'atmosphere': 'Atmosfera',
+                'motivation': 'Motivação',
+                'demeanor': 'Comportamento',
+                'origin': 'Origem',
+                'weather': 'Clima',
+                'innkeeper': 'Taverneiro',
+                'effect': 'Efeito',
+                'builder': 'Construtor',
+                'age': 'Idade',
+                'population': 'População',
+                'trend': 'Tendência',
+                'government': 'Governo',
+                
+                # Settlement Field Labels
+                'local_tavern': 'Taberna Local',
+                'local_power': 'Poder Local',
+                'city_event': 'Evento da Cidade',
+                'settlement_layout': 'Layout do Assentamento',
+                'key_npcs': 'NPCs Principais',
+                
+                # City Overlay Field Labels
+                'district': 'Distrito',
+                'position': 'Posição',
+                'random_encounters': 'Encontros Aleatórios',
+                'notable_features': 'Características Notáveis',
+                'encounter': 'Encontro'
             }
         }
     

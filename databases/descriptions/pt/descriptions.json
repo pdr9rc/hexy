@@ -1,0 +1,94 @@
+{
+  "category": "descriptions",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "district_descriptions": [
+      "Um distrito cheio de prédios antigos e segredos esquecidos",
+      "Um distrito onde os ricos e poderosos fazem suas casas",
+      "Um distrito de mercadores e comerciantes de terras distantes",
+      "Um distrito onde os pobres e desesperados lutam para sobreviver",
+      "Um distrito de instituições religiosas e buscadores espirituais",
+      "Um distrito onde artesãos e artífices exercem seus ofícios",
+      "Um distrito de entretenimento e vício, onde tudo pode ser comprado",
+      "Um distrito onde militares e guardas mantêm a ordem",
+      "Um distrito de estudiosos e estudantes buscando conhecimento",
+      "Um distrito onde os mortos são honrados e lembrados"
+    ],
+    "market_specialties": [
+      "Especiarias exóticas e ervas raras",
+      "Metais preciosos e pedras preciosas",
+      "Artefatos estranhos de terras distantes",
+      "Itens mágicos e mercadorias encantadas",
+      "Livros raros e pergaminhos antigos",
+      "Animais exóticos e criaturas",
+      "Tecidos finos e tecidos luxuosos",
+      "Vinhos raros e espíritos",
+      "Ingredientes místicos e componentes",
+      "Armas e armaduras antigas"
+    ],
+    "temple_deities": [
+      "Deuses antigos da morte e renascimento",
+      "Deidades esquecidas da guerra e conquista",
+      "Espíritos misteriosos da natureza e crescimento",
+      "Senhores sombrios do caos e destruição",
+      "Guardadores benevolentes da luz e esperança",
+      "Deuses trapaceiros da travessura e mudança",
+      "Sábios sábios de conhecimento e sabedoria",
+      "Protetores ferozes da justiça e ordem",
+      "Seres místicos de magia e mistério",
+      "Antepassados antigos e mortos honrados"
+    ],
+    "tavern_descriptions": [
+      "Um estabelecimento mal iluminado onde segredos são compartilhados",
+      "Uma taverna barulhenta onde brigas acontecem regularmente",
+      "Uma pousada elegante onde os ricos se reúnem",
+      "Um antro sórdido onde tudo pode ser comprado",
+      "Um pub tranquilo onde locais compartilham notícias",
+      "Uma taverna misteriosa que aparece e desaparece",
+      "Uma pousada assombrada onde fantasmas são patronos regulares",
+      "Uma taverna mágica onde a realidade muda",
+      "Um bar perigoso onde a sobrevivência não é garantida",
+      "Uma pousada acolhedora onde viajantes encontram descanso"
+    ],
+    "guild_purposes": [
+      "Protegendo rotas comerciais e mercadores",
+      "Mantendo padrões de qualidade e artesanato",
+      "Controlando acesso a materiais raros e conhecimento",
+      "Fornecendo treinamento e aprendizado",
+      "Regulando preços e condições de mercado",
+      "Resolvendo disputas entre membros",
+      "Representando membros perante autoridades locais",
+      "Coletando taxas e gerenciando recursos",
+      "Organizando festivais e celebrações",
+      "Mantendo tradições antigas e segredos"
+    ],
+    "residence_inhabitants": [
+      "Uma família nobre reclusa",
+      "Um grupo de estudiosos e pesquisadores",
+      "Uma seita ou ordem religiosa misteriosa",
+      "Uma família de mercadores ricos",
+      "Um oficial militar aposentado",
+      "Um mago ou feiticeiro poderoso",
+      "Uma família de artesãos ou artífices",
+      "Um grupo de aventureiros ou mercenários",
+      "Uma família de fazendeiros ou trabalhadores",
+      "Um eremita ou recluso misterioso"
+    ],
+    "ruins_histories": [
+      "Antes um grande templo para deuses esquecidos",
+      "Anteriormente uma poderosa fortaleza ou castelo",
+      "Os restos de um antigo mosteiro",
+      "Um palácio arruinado de uma dinastia caída",
+      "Os destroços de uma academia mágica",
+      "As ruínas de um posto comercial próspero",
+      "Os restos de um posto militar",
+      "Um santuário ou local sagrado destruído",
+      "As ruínas da casa de um mercador rico",
+      "Os restos de uma biblioteca antiga"
+    ]
+  }
+}

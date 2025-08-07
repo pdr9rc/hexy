@@ -1,0 +1,75 @@
+{
+  "category": "beasts",
+  "tables": {
+    "sea_behaviors": [
+      "stalks",
+      "hunts", 
+      "haunts",
+      "terrorizes",
+      "lurks",
+      "prowls",
+      "watches",
+      "waits",
+      "circles",
+      "patrols",
+      "guards",
+      "claims",
+      "dominates",
+      "corrupts",
+      "consumes",
+      "devours"
+    ],
+    "sea_purposes": [
+      "seeking prey",
+      "spreading corruption",
+      "gathering power",
+      "performing ancient rituals",
+      "guarding territory",
+      "feeding on fear",
+      "spawning offspring",
+      "collecting souls",
+      "spreading disease",
+      "corrupting the waters",
+      "building its lair",
+      "preparing for the end times",
+      "serving dark masters",
+      "fulfilling ancient prophecies",
+      "seeking vengeance",
+      "spreading madness"
+    ],
+    "sea_encounters": [
+      "Tephrotic Nightmare",
+      "Sea Horror",
+      "Oceanic Terror", 
+      "Abyssal Entity",
+      "Drowned Horror",
+      "Sea Wraith",
+      "Oceanic Nightmare",
+      "Abyssal Nightmare"
+    ],
+    "sea_descriptions": [
+      "A writhing mass of tentacles and eyes that defies mortal comprehension",
+      "A being of pure nightmare that swims through the depths of the dying world",
+      "An entity that exists between dreams and reality, haunting the ocean's edge",
+      "A horror from beyond the stars that has made the sea its domain",
+      "A creature of pure malevolence that feeds on the fear of those who gaze upon it",
+      "An ancient terror that has slumbered beneath the waves for eons"
+    ],
+    "sea_atmospheres": [
+      "The air is thick with the stench of decay and salt",
+      "A cold wind carries whispers of ancient horrors",
+      "The water seems to pulse with an unnatural rhythm",
+      "Shadows dance beneath the surface, hinting at things best left unseen",
+      "The sea itself seems to breathe with malevolent intent",
+      "An oppressive silence broken only by distant, unearthly sounds"
+    ],
+    "sea_features": [
+      "Waters that whisper of forgotten terrors",
+      "A place where reality and nightmare blur",
+      "Ancient ruins visible beneath the waves",
+      "A spot where the sea seems to bleed darkness",
+      "Waters that reflect impossible geometries",
+      "A location where time itself seems to flow differently"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "category": "denizens",
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "denizen_names": [
+      "The Ancient One",
+      "The Forgotten King",
+      "The Shadow Walker",
+      "The Bone Collector",
+      "The Whisperer",
+      "The Dark Prophet",
+      "The Cursed Child",
+      "The Last Guardian",
+      "The Mad Sage",
+      "The Eternal Watcher"
+    ],
+    "denizen_descriptions": [
+      "A being of immense age and power",
+      "A ruler who has been forgotten by time",
+      "One who walks between light and shadow",
+      "A collector of bones and memories",
+      "One who speaks in whispers and secrets",
+      "A prophet who sees only darkness",
+      "A child touched by ancient curses",
+      "The last of an ancient order",
+      "A sage driven mad by forbidden knowledge",
+      "One who watches from beyond time"
+    ],
+    "denizen_powers": [
+      "Can command the dead",
+      "Sees through all illusions",
+      "Cannot be harmed by mortal weapons",
+      "Knows all secrets of the past",
+      "Can bend reality to their will",
+      "Speaks with the voices of the dead",
+      "Cannot be killed by conventional means",
+      "Can travel between dimensions",
+      "Possesses ancient forbidden knowledge",
+      "Exists outside the flow of time"
+    ]
+  }
+}

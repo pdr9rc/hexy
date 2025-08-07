@@ -1,0 +1,34 @@
+{
+  "category": "traps_effects",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "trap_effects": [
+      "O alvo é perfurado por flechas envenenadas",
+      "O alvo é esmagado por uma pedra pesada",
+      "O alvo é queimado por chamas mágicas",
+      "O alvo é congelado em gelo eterno",
+      "O alvo é eletrocutado por energia mágica",
+      "O alvo é envenenado por gás tóxico",
+      "O alvo é cortado por lâminas afiadas",
+      "O alvo é afogado em ácido corrosivo",
+      "O alvo é transformado em pedra",
+      "O alvo é enviado para outra dimensão"
+    ],
+    "trap_descriptions": [
+      "Uma armadilha mortal escondida nas sombras",
+      "Um mecanismo antigo que ainda funciona",
+      "Uma armadilha mágica de poder devastador",
+      "Uma armadilha que não pode ser detectada",
+      "Uma armadilha que se ativa automaticamente",
+      "Uma armadilha que responde ao movimento",
+      "Uma armadilha que detecta presença",
+      "Uma armadilha que é ativada por som",
+      "Uma armadilha que responde ao toque",
+      "Uma armadilha que é ativada por magia"
+    ]
+  }
+}

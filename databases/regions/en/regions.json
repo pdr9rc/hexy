@@ -1,0 +1,46 @@
+{
+  "category": "regions",
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "region_names": [
+      "The Valley of the Unfortunate Undead",
+      "The Cursed Plains",
+      "The Shadowed Hills",
+      "The Blood Marsh",
+      "The Bone Forest",
+      "The Ashen Wastes",
+      "The Twisted Mountains",
+      "The Dark Waters",
+      "The Forgotten Ruins",
+      "The Haunted Hollows"
+    ],
+    "region_descriptions": [
+      "A desolate valley where the dead walk freely",
+      "A cursed land where nothing grows",
+      "Hills shrouded in perpetual darkness",
+      "A marsh filled with blood-red waters",
+      "A forest where the trees are made of bone",
+      "Wastes covered in gray ash and despair",
+      "Mountains twisted by dark magic",
+      "Waters that swallow light and hope",
+      "Ruins of a civilization long forgotten",
+      "Hollows where spirits whisper secrets"
+    ],
+    "region_threats": [
+      "Undead hordes roam freely",
+      "Cursed creatures lurk in shadows",
+      "Dark magic corrupts all who enter",
+      "Poisonous vapors kill slowly",
+      "Ancient traps claim the unwary",
+      "Supernatural storms rage constantly",
+      "Reality itself is twisted and warped",
+      "Time flows differently here",
+      "The dead refuse to stay buried",
+      "Madness spreads like a disease"
+    ]
+  }
+}

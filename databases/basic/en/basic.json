@@ -22,6 +22,24 @@
       "Laughter",
       "Screaming",
       "Chanting"
+    ],
+    "local_powers": [
+      "A corrupt mayor",
+      "A powerful merchant",
+      "A local gang",
+      "A religious leader",
+      "A wealthy noble",
+      "A criminal syndicate",
+      "A military commander",
+      "A secret society",
+      "A cult leader",
+      "A powerful wizard",
+      "A local militia",
+      "A trade guild",
+      "A bandit chief",
+      "A corrupt official",
+      "A local hero",
+      "A mysterious figure"
     ]
   },
   "metadata": {

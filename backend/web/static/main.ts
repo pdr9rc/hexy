@@ -5,6 +5,8 @@ import { renderMap } from "./mapRenderer.js"
 import { initializeControls } from "./controls.js"
 import { showNotification, showError } from "./uiUtils.js"
 import { showCityOverlayGrid } from './cityOverlays.js';
+import { generateDistrictColor } from './utils/colorUtils.js';
+import { t } from './translations.js';
 
 // Global state for hex editing
 let currentEditingHex: string | null = null;
@@ -238,28 +240,28 @@ class DyingLandsApp {
               <span>${content.name || name}</span>
             </div>
             <div class="ascii-section ascii-hex-type">
-              <span>TYPE: ${content.type || type}</span>
+              <span>${t('TYPE')} ${content.type || type}</span>
             </div>
             <div class="ascii-section ascii-hex-district">
-              <span>DISTRICT: ${hexData.district || district}</span>
+              <span>${t('DISTRICT')} ${hexData.district || district}</span>
             </div>
             <div class="ascii-section ascii-hex-position">
-              <span>POSITION: ${content.position_type || positionType}</span>
+              <span>${t('POSITION')} ${content.position_type || positionType}</span>
             </div>
             
             <!-- Description Section -->
             <div class="ascii-section ascii-hex-description">
-              <span>DESCRIPTION:</span>
+              <span>${t('DESCRIPTION')}</span>
               <div class="ascii-content">${content.description || description}</div>
             </div>
             
             <!-- Atmosphere & Encounter Section -->
             <div class="ascii-section ascii-hex-atmosphere">
-              <span>ATMOSPHERE:</span>
+              <span>${t('ATMOSPHERE')}</span>
               <div class="ascii-content">${content.atmosphere || atmosphere || 'No atmosphere available.'}</div>
             </div>
             <div class="ascii-section ascii-hex-encounter">
-              <span>ENCOUNTER:</span>
+              <span>${t('ENCOUNTER')}</span>
               <div class="ascii-content">${content.encounter || encounter}</div>
             </div>
     `
@@ -341,18 +343,36 @@ class DyingLandsApp {
     if (content.type === 'market' && (content.items_sold || content.beast_prices || content.services)) {
       html += `
         <div class="ascii-section ascii-hex-market">
-          <span>MARKET DETAILS:</span>
+          <span>${t('MARKET DETAILS')}</span>
           <div class="ascii-content">
       `;
       
-      if (content.items_sold) {
-        html += `ITEMS SOLD: ${content.items_sold}\n`;
+      // Helper to format arrays of strings or objects
+      const formatEntries = (arr: any[]): string => {
+        if (!Array.isArray(arr)) return '';
+        return arr.map((item: any) => {
+          if (typeof item === 'string') return item;
+          if (item && typeof item === 'object') {
+            const name = item.name ?? '';
+            const price = item.price ?? '';
+            const currency = item.currency ?? '';
+            const notes = item.notes ?? '';
+            const pricePart = [price, currency].filter(Boolean).join(' ');
+            const main = [name, pricePart].filter(Boolean).join(' - ');
+            return notes ? `${main} (${notes})` : main || JSON.stringify(item);
+          }
+          return String(item);
+        }).join('\n');
+      };
+
+      if (content.items_sold && Array.isArray(content.items_sold) && content.items_sold.length) {
+        html += `${t('ITEMS SOLD')}\n${formatEntries(content.items_sold)}\n`;
       }
-      if (content.beast_prices) {
-        html += `BEAST PRICES: ${content.beast_prices}\n`;
+      if (content.beast_prices && Array.isArray(content.beast_prices) && content.beast_prices.length) {
+        html += `${t('BEAST PRICES')}\n${formatEntries(content.beast_prices)}\n`;
       }
-      if (content.services) {
-        html += `SERVICES: ${content.services}\n`;
+      if (content.services && Array.isArray(content.services) && content.services.length) {
+        html += `${t('SERVICES')}\n${formatEntries(content.services)}\n`;
       }
       
       html += `
@@ -365,8 +385,24 @@ class DyingLandsApp {
     if (content.type === 'service' && content.services) {
       html += `
         <div class="ascii-section ascii-hex-services">
-          <span>SERVICES:</span>
-          <div class="ascii-content">${content.services}</div>
+          <span>${t('SERVICES')}</span>
+          <div class="ascii-content">${(() => {
+            const arr = Array.isArray(content.services) ? content.services : [];
+            const format = (a: any[]) => a.map((item: any) => {
+              if (typeof item === 'string') return item;
+              if (item && typeof item === 'object') {
+                const name = item.name ?? '';
+                const price = item.price ?? '';
+                const currency = item.currency ?? '';
+                const notes = item.notes ?? '';
+                const pricePart = [price, currency].filter(Boolean).join(' ');
+                const main = [name, pricePart].filter(Boolean).join(' - ');
+                return notes ? `${main} (${notes})` : main || JSON.stringify(item);
+              }
+              return String(item);
+            }).join('\n');
+            return format(arr);
+          })()}</div>
         </div>
       `;
     }
@@ -375,7 +411,7 @@ class DyingLandsApp {
     if (content.patrons) {
       html += `
         <div class="ascii-section ascii-hex-patrons">
-          <span>PATRONS:</span>
+          <span>${t('PATRONS')}</span>
           <div class="ascii-content">${content.patrons}</div>
         </div>
       `;
@@ -1088,54 +1124,25 @@ The world is dying, but adventure lives on.
   }
 
   private generateDistrictColor(districtName: string): string {
-    // Authentic Mörk Borg color palette (12 colors for 12 districts max)
-    const morkBorgColors = [
-      '#FF00FF', // Magenta - Primary Mörk Borg color
-      '#FFFF00', // Yellow - Primary Mörk Borg color
-      '#00FFFF', // Cyan - Primary Mörk Borg color
-      '#FF0000', // Red - Classic Mörk Borg accent
-      '#00FF00', // Green - Classic Mörk Borg accent
-      '#0000FF', // Blue - Classic Mörk Borg accent
-      '#FF8000', // Orange - Mörk Borg warm tone
-      '#8000FF', // Purple - Mörk Borg dark accent
-      '#FF0080', // Hot Pink - Mörk Borg vibrant
-      '#00FF80', // Spring Green - Mörk Borg bright
-      '#FF4000', // Red-Orange - Mörk Borg fiery
-      '#800080'  // Purple-Magenta - Mörk Borg deep
-    ];
-    
-    // Use district name to get consistent index (0-11 for 12 districts)
-    const districtIndex = this.getDistrictIndex(districtName);
-    return morkBorgColors[districtIndex % morkBorgColors.length];
+    // Use centralized color utility
+    const allDistricts = this.getCurrentDistricts();
+    return generateDistrictColor(districtName, allDistricts);
   }
 
-  private getDistrictIndex(districtName: string): number {
-    // Create a simple mapping for consistent district colors
-    const districtMap: { [key: string]: number } = {};
-    let currentIndex = 0;
-    
-    // Get all unique districts from the current city overlay
+  private getCurrentDistricts(): string[] {
+    const districts: string[] = [];
     if (this.currentCityOverlay) {
-      const uniqueDistricts = new Set<string>();
       for (const hexId of Object.keys(this.currentCityOverlay.hex_grid)) {
         const hexData = this.currentCityOverlay.hex_grid[hexId];
         if (hexData?.district && hexData.district !== 'unknown' && hexData.district !== 'empty') {
-          uniqueDistricts.add(hexData.district);
+          districts.push(hexData.district);
         }
       }
-      
-      // Create mapping for unique districts only
-      const sortedDistricts = Array.from(uniqueDistricts).sort();
-      sortedDistricts.forEach(district => {
-        if (!districtMap[district]) {
-          districtMap[district] = currentIndex++;
-        }
-      });
     }
-    
-    // Return mapped index or 0 for unknown districts
-    return districtMap[districtName] || 0;
+    return [...new Set(districts)]; // Remove duplicates
   }
+
+  // getDistrictIndex method removed - now using centralized color utility
 
   private generateDistrictLegendRows(districts: string[]): string {
     const itemsPerRow = 3; // Show 3 districts per row for better readability

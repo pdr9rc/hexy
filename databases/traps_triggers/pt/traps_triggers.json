@@ -1,0 +1,46 @@
+{
+  "category": "traps_triggers",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "trap_triggers": [
+      "Quando alguém pisa na pedra",
+      "Quando alguém toca a corda",
+      "Quando alguém abre a porta",
+      "Quando alguém passa pelo sensor",
+      "Quando alguém faz barulho",
+      "Quando alguém se aproxima",
+      "Quando alguém toca o objeto",
+      "Quando alguém remove o item",
+      "Quando alguém ativa o mecanismo",
+      "Quando alguém passa pelo portal"
+    ],
+    "trigger_types": [
+      "Pressão",
+      "Corda",
+      "Porta",
+      "Movimento",
+      "Som",
+      "Presença",
+      "Toque",
+      "Remoção",
+      "Mecanismo",
+      "Portal"
+    ],
+    "trigger_sensitivity": [
+      "Muito sensível",
+      "Sensível",
+      "Normal",
+      "Menos sensível",
+      "Pouco sensível",
+      "Insensível",
+      "Mágico",
+      "Automático",
+      "Temporizado",
+      "Condicional"
+    ]
+  }
+}

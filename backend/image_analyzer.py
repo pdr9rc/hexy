@@ -136,7 +136,7 @@ class ImageAnalyzer:
         else:
             raise ValueError(f"Unknown mapping mode: {self.mapping_mode}")
         if self.debug and self._debug_counter < 20:
-            print(f"DEBUG: HEX ({hex_x},{hex_y}) maps to pixel=({pixel_x},{pixel_y}), in_image={in_image}")
+            
             self._debug_counter += 1
         return pixel_x, pixel_y, in_image
         
@@ -205,7 +205,7 @@ class ImageAnalyzer:
                     if terrain not in palette_distances or dist < palette_distances[terrain]:
                         palette_distances[terrain] = dist
             if hex_code == "0503":
-                print(f"DEBUG HEX 0503: sampled color={color}")
+                
                 for t, d in palette_distances.items():
                     print(f"  {t}: distance={d}")
                 print(f"  -> chosen terrain: {best_terrain} (distance={best_dist})")
@@ -223,8 +223,7 @@ class ImageAnalyzer:
         if terrain_scores:
             best_terrain = max(terrain_scores, key=terrain_scores.get)
             if self.debug and self._debug_counter < 40:
-                print(f"DEBUG: HEX {hex_code} sampled color(s): {colors[:3]} ... Matched terrain: {best_terrain}")
-                print(f"DEBUG: Most common color for {best_terrain}: {self._most_common_color(color_matches[best_terrain])}")
+                        
                 self._debug_counter += 1
             return best_terrain
         return 'unknown'

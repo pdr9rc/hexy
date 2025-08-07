@@ -1,0 +1,68 @@
+{
+  "category": "cities",
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2024-01-01T00:00:00"
+  },
+  "tables": {
+    "major_cities": [
+      {
+        "key": "galgenbeck",
+        "name": "Galgenbeck",
+        "description": "A sprawling metropolis built atop the bones of countless civilizations. Its infamous Hanging Gardens sway with the corpses of the condemned, and the air is thick with the scent of rot and incense. The city is ruled by a secretive council, and its labyrinthine sewers are said to house ancient, unspeakable horrors.",
+        "population": "1000+",
+        "terrain": "plains",
+        "region": "central",
+        "coordinates": [14, 27],
+        "notable_features": [
+          "Hanging Gardens of Corpses",
+          "Secretive ruling council",
+          "Labyrinthine sewers",
+          "Ancient, forbidden catacombs",
+          "Schleswig district with demon infestation",
+          "Ministry of Wealth & Taxes extracting souls as currency",
+          "Office of the Holy Inquisition (ruined)",
+          "Cursed Heptaliths throughout the city",
+          "City (Bone) Mill grinding bones to flour"
+        ],
+        "key_npcs": ["Josilfa Migol", "The Galgenbeck Council"],
+        "atmosphere": "Urban decay, perpetual twilight, and the ever-present threat of betrayal."
+      },
+      {
+        "key": "allians",
+        "name": "Allians",
+        "description": "An isolated city of scholars and mystics, Allians is built around a crumbling library said to contain the last true histories of the world. The city is shrouded in secrecy, and its towers are lit by ghostly blue flames.",
+        "population": "500",
+        "terrain": "plains",
+        "region": "east",
+        "coordinates": [5, 7],
+        "notable_features": [
+          "Crumbling library of forbidden knowledge",
+          "Blue-flamed towers",
+          "Secretive scholar-council",
+          "Occult rituals at midnight"
+        ],
+        "key_npcs": ["The Archivist", "Mistress of Tomes"],
+        "atmosphere": "Scholarly, secretive, and haunted by knowledge."
+      },
+      {
+        "key": "graven_tosk",
+        "name": "Graven-Tosk",
+        "description": "A city of graveyards and necromancers, Graven-Tosk is a place where the living and the dead intermingle. Bone fields stretch to the horizon, and the air is thick with the scent of incense and decay.",
+        "population": "300",
+        "terrain": "swamp",
+        "region": "west",
+        "coordinates": [15, 13],
+        "notable_features": [
+          "Endless graveyards",
+          "Necromancer guilds",
+          "Bone fields",
+          "Funeral processions at all hours"
+        ],
+        "key_npcs": ["The Master of the Dead", "The Bone Guardian"],
+        "atmosphere": "Dark, funerary, and filled with the presence of the dead."
+      }
+    ]
+  }
+}

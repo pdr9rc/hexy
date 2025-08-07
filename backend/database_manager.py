@@ -9,6 +9,7 @@ import os
 from typing import Dict, List, Optional, Any
 from datetime import datetime
 import shutil
+from backend.utils.database_categories import get_all_categories, get_core_categories, get_lore_categories
 
 class DatabaseManager:
     """Centralized database management for normalized content tables."""
@@ -27,19 +28,8 @@ class DatabaseManager:
     
     def _ensure_directory_structure(self):
         """Ensure the unified directory structure exists."""
-        # Unified structure - each category gets its own directory with language subdirs
-        categories = [
-            "terrain", "encounters", "denizens",  # core categories
-            "cities", "factions", "regions",  # lore categories  
-            "names", "descriptions", "features",  # content categories
-            "affiliation", "basic", "beasts_prices", "bestiary", "city_events", 
-            "core", "denizen", "dungeon", "enhanced_loot", "items_prices", 
-            "items_trinkets", "loot", "npc_apocalypse", "npc_concerns", 
-            "npc_names", "npc_secrets", "npc_trades", "npc_traits", "npc_wants",
-            "scroll", "services_prices", "stats", "tavern", "tavern_innkeeper",
-            "tavern_menu", "tavern_patrons", "traps_builders", "traps_effects", 
-            "traps_triggers", "weapons_prices", "weather", "wilderness"
-        ]
+        # Use centralized category definitions
+        categories = get_all_categories()
         
         # Create unified structure directories
         for category in categories:
@@ -303,17 +293,8 @@ class DatabaseManager:
         }
         
         # Check directory structure
-        # Validate that all categories have language subdirectories
-        categories = [
-            "terrain", "encounters", "denizens", "cities", "factions", "regions",
-            "names", "descriptions", "features", "affiliation", "basic", "beasts_prices", 
-            "bestiary", "city_events", "core", "denizen", "dungeon", "enhanced_loot", 
-            "items_prices", "items_trinkets", "loot", "npc_apocalypse", "npc_concerns", 
-            "npc_names", "npc_secrets", "npc_trades", "npc_traits", "npc_wants",
-            "scroll", "services_prices", "stats", "tavern", "tavern_innkeeper",
-            "tavern_menu", "tavern_patrons", "traps_builders", "traps_effects", 
-            "traps_triggers", "weapons_prices", "weather", "wilderness"
-        ]
+        # Use centralized category definitions for validation
+        categories = get_all_categories()
         
         for category in categories:
             for lang in ['en', 'pt']:

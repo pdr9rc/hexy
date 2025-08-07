@@ -12,6 +12,7 @@ from backend.hex_model import hex_manager, BaseHex, TerrainType, SettlementHex
 from backend.config import get_config
 from backend.terrain_system import terrain_system
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
+from backend.utils.ascii_processor import process_ascii_blocks, parse_loot_section_from_ascii
 import re
 
 
@@ -106,7 +107,10 @@ class HexService:
                 hex_data["terrain"] = terrain
                 return hex_data
         except Exception as e:
+            import traceback
             print(f"Error parsing hex file {hex_file}: {e}")
+            print("Traceback:")
+            traceback.print_exc()
             return None
     
     def _extract_hex_data(self, content: str, hex_code: str) -> Dict[str, Any]:
@@ -190,13 +194,16 @@ class HexService:
             hex_data[section] = {'raw': raw_text, 'fields': subfields, 'ascii_art': code_blocks}
         # For backward compatibility, set top-level fields for most common sections
         for key in ['encounter', 'denizen', 'danger', 'atmosphere', 'notable_feature', 'treasure']:
-            hex_data[key] = hex_data[key]['raw']
+            if key in hex_data and isinstance(hex_data[key], dict) and 'raw' in hex_data[key]:
+                hex_data[key] = hex_data[key]['raw']
+            else:
+                hex_data[key] = ''
         # Loot and scroll/ancient knowledge special handling
         if loot_collected:
             hex_data['loot'] = loot_collected if len(loot_collected) > 1 else loot_collected[0]
         else:
             hex_data['loot'] = None
-        if hex_data['ancient_knowledge']['fields']:
+        if 'ancient_knowledge' in hex_data and isinstance(hex_data['ancient_knowledge'], dict) and 'fields' in hex_data['ancient_knowledge'] and hex_data['ancient_knowledge']['fields']:
             hex_data['scroll'] = hex_data['ancient_knowledge']['fields']
         else:
             hex_data['scroll'] = None
@@ -219,25 +226,16 @@ class HexService:
             'city_event': '',
             'tavern_details': None
         }
+        # Use centralized ASCII processor
+        processed_data = process_ascii_blocks(content)
+        settlement_data.update(processed_data)
+        
+        # Process sections manually for settlement-specific logic
         current_section = None
         section_content = []
-        in_ascii = False
-        ascii_lines = []
         for i, line in enumerate(lines):
             line = line.strip()
             if not line:
-                continue
-            # ASCII art block detection
-            if line == '```':
-                in_ascii = not in_ascii
-                if not in_ascii:
-                    # End of ASCII art block
-                    if ascii_lines:
-                        settlement_data['settlement_art'] = '\n'.join(ascii_lines).strip()
-                        ascii_lines = []
-                continue
-            if in_ascii:
-                ascii_lines.append(line)
                 continue
             # Section headers
             if line == '## Encounter':
@@ -267,7 +265,11 @@ class HexService:
                 section_content = []
             elif line == '## Tavern Details':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section == 'tavern_details':
+                        # Don't overwrite tavern_details with string content
+                        pass
+                    else:
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'tavern_details'
                 section_content = []
             elif line == '## Loot Found':
@@ -341,7 +343,11 @@ class HexService:
                 section_content.append(line)
         # Save last section
         if current_section and section_content:
-            settlement_data[current_section] = ' '.join(section_content).strip()
+            if current_section == 'tavern_details':
+                # Don't overwrite tavern_details with string content
+                pass
+            else:
+                settlement_data[current_section] = ' '.join(section_content).strip()
         
         # Clean up duplicate content by removing embedded fields from atmosphere section
         if settlement_data.get('atmosphere'):
@@ -459,16 +465,10 @@ class HexService:
             beast_data[current_section] = ' '.join(section_content).strip()
         
         # Parse loot if present
-        if 'loot_found' in beast_data and beast_data['loot_found']:
-            # Split by sections to get the first loot_found section
-            sections = content.split('## ')
-            for section in sections:
-                if section.startswith('Loot Found'):
-                    loot_content = section.replace('Loot Found', '').strip()
-                    loot_data = self._parse_loot_section(loot_content)
-                    if loot_data:
-                        beast_data['loot'] = loot_data
-                    break
+                # Use centralized loot parser
+        loot_data = parse_loot_section_from_ascii(content)
+        if loot_data:
+            beast_data['loot'] = loot_data
         
         # Clean up duplicate content by removing embedded fields from denizen section
         if beast_data.get('denizen'):
@@ -505,27 +505,17 @@ class HexService:
             'loot': None
         }
         
+        # Use centralized ASCII processor for basic processing
+        processed_data = process_ascii_blocks(content)
+        npc_data.update(processed_data)
+        
+        # Process sections manually for NPC-specific logic
         current_section = None
         section_content = []
-        in_ascii = False
-        ascii_lines = []
         
         for i, line in enumerate(lines):
             line = line.strip()
             if not line:
-                continue
-            
-            # ASCII art block detection
-            if line == '```':
-                in_ascii = not in_ascii
-                if not in_ascii:
-                    # End of ASCII art block
-                    if ascii_lines:
-                        # ASCII art found but not stored for NPCs
-                        ascii_lines = []
-                continue
-            if in_ascii:
-                ascii_lines.append(line)
                 continue
             
             # Section headers
@@ -737,26 +727,18 @@ class HexService:
             'trap_section': None,
             'dungeon_art': ''
         }
+        # Use centralized ASCII processor for basic processing
+        processed_data = process_ascii_blocks(content)
+        dungeon_data.update(processed_data)
+        
+        # Process sections manually for dungeon-specific logic
         current_section = None
         section_content = []
-        in_ascii = False
-        ascii_lines = []
         trap_section = {}
+        
         for i, line in enumerate(lines):
             line = line.strip()
             if not line:
-                continue
-            # ASCII art block detection
-            if line == '```':
-                in_ascii = not in_ascii
-                if not in_ascii:
-                    # End of ASCII art block
-                    if ascii_lines:
-                        dungeon_data['dungeon_art'] = '\n'.join(ascii_lines).strip()
-                        ascii_lines = []
-                continue
-            if in_ascii:
-                ascii_lines.append(line)
                 continue
             # Section headers
             if line == '## Encounter':
@@ -908,8 +890,9 @@ class HexService:
         match = re.search(r'^\s*\*\*Terrain:\*\*\s*(.+)$', content, re.MULTILINE | re.IGNORECASE)
         if match:
             terrain = match.group(1).strip().lower()
-            # Normalize common variants
+            # Normalize common variants (English and Portuguese)
             terrain_map = {
+                # English
                 'plains': 'plains',
                 'plain': 'plains',
                 'mountain': 'mountain',
@@ -918,6 +901,21 @@ class HexService:
                 'coast': 'coast',
                 'swamp': 'swamp',
                 'sea': 'sea',
+                # Portuguese
+                'planicie': 'plains',
+                'planície': 'plains',
+                'montanha': 'mountain',
+                'montanhas': 'mountain',
+                'floresta': 'forest',
+                'costa': 'coast',
+                'pantano': 'swamp',
+                'pântano': 'swamp',
+                'mar': 'sea',
+                'oceano': 'sea',
+                'deserto': 'desert',
+                'desert': 'desert',
+                'unknown': 'unknown',
+                'desconhecido': 'unknown',
             }
             return terrain_map.get(terrain, 'plains')
         return 'plains'  # Default
@@ -947,18 +945,38 @@ class HexService:
     def _create_major_city_hex(self, hex_code: str, hardcoded: Dict[str, Any]) -> BaseHex:
         """Create a major city hex model."""
         city_key = hardcoded['city_key']
-        city_data = self.lore_db.major_cities[city_key]
+        
+        # Load city data directly from database manager with current language
+        from backend.database_manager import database_manager
+        from backend.routes import current_language
+        
+        # Load city data from the appropriate language directory
+        cities_table = database_manager.get_table('cities', 'major_cities', current_language)
+        
+        # Find the city data in the table
+        city_data = {}
+        for city in cities_table:
+            if isinstance(city, dict) and city.get('key') == city_key:
+                city_data = city
+                break
+        
+        # Use the data directly without language-specific suffixes
+        name = city_data.get('name', city_key.title())
+        description = city_data.get('description', '')
+        atmosphere = city_data.get('atmosphere', '')
+        notable_features = city_data.get('notable_features', [])
+        population = city_data.get('population', 'Unknown')
         
         terrain = TerrainType(terrain_system.get_terrain_for_hex(hex_code, self.lore_db))
         
         return SettlementHex(
             hex_code=hex_code,
             terrain=terrain,
-            name=city_data['name'],
-            description=city_data['description'],
-            population=city_data['population'],
-            atmosphere=city_data['atmosphere'],
-            notable_feature=city_data['notable_features'],
+            name=name,
+            description=description,
+            population=population,
+            atmosphere=atmosphere,
+            notable_feature=notable_features,
             local_tavern="Major city establishment",
             local_power="City authority",
             settlement_art="Major city layout",
@@ -1004,23 +1022,44 @@ class HexService:
             return None
         
         city_key = hardcoded['city_key']
-        city_data = self.lore_db.major_cities[city_key]
+        
+        # Load city data directly from database manager with current language
+        from backend.database_manager import database_manager
+        from backend.routes import current_language
+        
+        # Load city data from the appropriate language directory
+        cities_table = database_manager.get_table('cities', 'major_cities', current_language)
+        
+        # Find the city data in the table
+        city_data = {}
+        for city in cities_table:
+            if isinstance(city, dict) and city.get('key') == city_key:
+                city_data = city
+                break
+        
+        # Use the data directly without language-specific suffixes
+        name = city_data.get('name', city_key.title())
+        description = city_data.get('description', '')
+        atmosphere = city_data.get('atmosphere', '')
+        notable_features = city_data.get('notable_features', [])
+        population = city_data.get('population', 'Unknown')
+        region = city_data.get('region', 'central')
+        key_npcs = city_data.get('key_npcs', [])
         
         # Get regional NPCs and factions based on city region
-        region = city_data.get('region', 'central')
         regional_npcs = self.lore_db.get_regional_npcs(region)
         regional_factions = self.lore_db.get_regional_factions(region)
         
         return {
             "success": True,
             "city": {
-                "name": city_data['name'],
-                "description": city_data['description'],
-                "population": city_data['population'],
-                "region": city_data['region'],
-                "atmosphere": city_data['atmosphere'],
-                "notable_features": city_data['notable_features'],
-                "key_npcs": city_data['key_npcs']
+                "name": name,
+                "description": description,
+                "population": population,
+                "region": region,
+                "atmosphere": atmosphere,
+                "notable_features": notable_features,
+                "key_npcs": key_npcs
             },
             "regional_npcs": regional_npcs,
             "factions": regional_factions

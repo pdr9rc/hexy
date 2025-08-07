@@ -1,0 +1,34 @@
+{
+  "category": "beasts_prices",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "beast_prices": [
+      "10 moedas de prata",
+      "25 moedas de prata",
+      "50 moedas de prata",
+      "1 moeda de ouro",
+      "5 moedas de ouro",
+      "10 moedas de ouro",
+      "25 moedas de ouro",
+      "50 moedas de ouro",
+      "100 moedas de ouro",
+      "500 moedas de ouro"
+    ],
+    "beast_rarity": [
+      "Comum",
+      "Incomum",
+      "Raro",
+      "Muito raro",
+      "Lendário",
+      "Mítico",
+      "Único",
+      "Artefato",
+      "Divino",
+      "Primordial"
+    ]
+  }
+}

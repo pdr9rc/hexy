@@ -23,6 +23,10 @@ from backend.terrain_system import TerrainSystem
 from main_map_generator import MainMapGenerator
 from translation_system import translation_system
 from city_overlay_analyzer import city_overlay_analyzer
+from backend.utils.city_processor import create_major_city_response
+from backend.utils.content_detector import get_hex_content_type, check_hex_has_loot, extract_title
+from backend.utils.grid_generator import generate_hex_grid, get_terrain_for_hex, determine_content_symbol, determine_css_class
+from backend.utils.settlement_data_creator import create_settlement_response_data, create_major_city_response_data
 
 app = Flask(__name__, template_folder='../web/templates', static_folder='../web/static')
 
@@ -105,31 +109,7 @@ def get_hex_info(hex_code):
     if hardcoded and hardcoded.get('type') == 'major_city':
         city_key = hardcoded['city_key']
         city_data = lore_db.major_cities[city_key]
-        
-        # Use Portuguese fields if available and language is Portuguese
-        if current_language == 'pt':
-            title = city_data.get('name_pt', city_data['name'])
-            description = city_data.get('description_pt', city_data['description'])
-            atmosphere = city_data.get('atmosphere_pt', city_data['atmosphere'])
-            notable_features = city_data.get('notable_features_pt', city_data['notable_features'])
-        else:
-            title = city_data['name']
-            description = city_data['description']
-            atmosphere = city_data['atmosphere']
-            notable_features = city_data['notable_features']
-        
-        return jsonify({
-            'exists': True,
-            'is_major_city': True,
-            'title': title,
-            'description': description,
-            'population': city_data['population'],
-            'region': city_data['region'],
-            'atmosphere': atmosphere,
-            'notable_features': notable_features,
-            'key_npcs': city_data['key_npcs'],
-            'hex_code': hex_code,
-        })
+        return create_major_city_response(city_data, hex_code, current_language)
     
     # Check if it's a settlement
     if os.path.exists(hex_file):
@@ -252,23 +232,9 @@ def get_hex_info(hex_code):
             
             # Check if it's a settlement
             if hex_data.get('is_settlement'):
-                return jsonify({
-                    'exists': True,
-                    'is_settlement': True,
-                    'hex_type': 'settlement',
-                    'terrain': hex_data.get('terrain', terrain),
-                    'title': hex_data.get('name', f'Settlement {hex_code}'),
-                    'description': hex_data.get('denizen', 'A settlement'),
-                    'population': hex_data.get('population', 'Unknown'),
-                    'atmosphere': hex_data.get('atmosphere', 'Unknown'),
-                    'notable_feature': hex_data.get('notable_feature', 'Unknown'),
-                    'local_tavern': hex_data.get('local_tavern', 'Unknown'),
-                    'local_power': hex_data.get('local_power', 'Unknown'),
-                    'settlement_art': hex_data.get('settlement_art', ''),
-                    'name': hex_data.get('name', f'Settlement {hex_code}'),
-                    'hex_code': hex_code,
-                    'redirect_to': 'settlement'
-                })
+                # Use centralized settlement data creator
+                settlement_data = create_settlement_response_data(hex_data, hex_code, terrain)
+                return jsonify(settlement_data)
             
             # Generate markdown content
             markdown_content = main_map_generator._generate_markdown_content(hex_data)
@@ -410,17 +376,8 @@ def get_settlement_details(hex_code):
         hex_data = main_map_generator.generate_hex_content(hex_code, terrain)
         
         if hex_data.get('is_settlement'):
-            # Create settlement data structure expected by frontend
-            settlement_data = {
-                'name': hex_data.get('name', f'Settlement {hex_code}'),
-                'description': hex_data.get('denizen', 'A settlement'),
-                'population': hex_data.get('population', 'Unknown'),
-                'atmosphere': hex_data.get('atmosphere', 'Unknown'),
-                'notable_feature': hex_data.get('notable_feature', 'Unknown'),
-                'local_tavern': hex_data.get('local_tavern', 'Unknown'),
-                'local_power': hex_data.get('local_power', 'Unknown'),
-                'hex_code': hex_code
-            }
+            # Use centralized settlement data creator
+            settlement_data = create_settlement_response_data(hex_data, hex_code, terrain)
             
             # Generate settlement ASCII map
             settlement_map = generate_settlement_ascii_map(settlement_data, hex_code)
@@ -574,12 +531,12 @@ def get_city_overlay(overlay_name):
                 'row': hex_data['row'],
                 'col': hex_data['col'],
                 'content': {
-                    'name': hex_data['content']['name'],
-                    'type': hex_data['content']['type'],
-                    'description': hex_data['content']['description'][:200] + '...' if len(hex_data['content']['description']) > 200 else hex_data['content']['description'],
-                    'encounter': hex_data['content']['encounter'][:150] + '...' if len(hex_data['content']['encounter']) > 150 else hex_data['content']['encounter'],
-                    'atmosphere': hex_data['content']['atmosphere'][:100] + '...' if len(hex_data['content']['atmosphere']) > 100 else hex_data['content']['atmosphere'],
-                    'position_type': hex_data['content']['position_type']
+                    'name': hex_data['content'].get('name', 'Unknown') if isinstance(hex_data.get('content'), dict) else 'Unknown',
+                    'type': hex_data['content'].get('type', 'Unknown') if isinstance(hex_data.get('content'), dict) else 'Unknown',
+                    'description': (hex_data['content'].get('description', '')[:200] + '...' if len(hex_data['content'].get('description', '')) > 200 else hex_data['content'].get('description', '')) if isinstance(hex_data.get('content'), dict) else 'No description available',
+                    'encounter': (hex_data['content'].get('encounter', '')[:150] + '...' if len(hex_data['content'].get('encounter', '')) > 150 else hex_data['content'].get('encounter', '')) if isinstance(hex_data.get('content'), dict) else 'No encounter available',
+                    'atmosphere': (hex_data['content'].get('atmosphere', '')[:100] + '...' if len(hex_data['content'].get('atmosphere', '')) > 100 else hex_data['content'].get('atmosphere', '')) if isinstance(hex_data.get('content'), dict) else 'No atmosphere available',
+                    'position_type': hex_data['content'].get('position_type', 'Unknown') if isinstance(hex_data.get('content'), dict) else 'Unknown'
                 }
             }
         
@@ -646,80 +603,52 @@ def get_city_overlay_hex(overlay_name, hex_id):
 
 def generate_ascii_map_data():
     """Generate ASCII map data with city markers."""
-    map_width, map_height = get_map_dimensions()
+    # Use centralized grid generator for base grid
+    base_grid = generate_hex_grid(lore_db)
     
-    grid = {}
-    
-    # Initialize grid - match template's x,y system
-    for x in range(1, map_width + 1):
-        for y in range(1, map_height + 1):
-            hex_code = f"{x:02d}{y:02d}"
+    # Process each hex to add content-specific information
+    for hex_code, hex_data in base_grid.items():
+        if hex_data.get('is_city'):
+            # Major city - add city-specific data
+            city_data = hex_data['city_data']
+            hex_data.update({
+                'symbol': '◆',
+                'city_name': city_data['name'],
+                'population': city_data['population'],
+                'region': city_data['region'],
+                'has_content': True,
+                'css_class': 'major-city'
+            })
+        else:
+            # Regular terrain - check for generated content to add visual indicators
+            terrain = get_terrain_for_hex(hex_code)
+            hex_file_exists = os.path.exists(f"dying_lands_output/hexes/hex_{hex_code}.md")
             
-            # Check for major cities
-            hardcoded = lore_db.get_hardcoded_hex(hex_code)
-            if hardcoded and hardcoded.get('type') == 'major_city':
-                city_key = hardcoded['city_key']
-                city_data = lore_db.major_cities[city_key]
-                grid[hex_code] = {
-                    'x': x, 'y': y,
-                    'terrain': hardcoded['terrain'],
-                    'symbol': '◆',
-                    'is_city': True,
-                    'city_name': city_data['name'],
-                    'population': city_data['population'],
-                    'region': city_data['region'],
-                    'has_content': True,
-                    'css_class': 'major-city'
-                }
-            else:
-                # Regular terrain - check for generated content to add visual indicators
-                terrain = get_terrain_for_hex(hex_code)
-                hex_file_exists = os.path.exists(f"dying_lands_output/hexes/hex_{hex_code}.md")
-                
-                # Check if hex has loot (this determines bold styling)
-                has_loot = False
-                content_type = None
-                
-                if hex_file_exists:
-                    # Check what type of content exists to add visual indicators
-                    content_type = get_hex_content_type(hex_code)
-                    # Check if hex has loot by reading the file
-                    has_loot = check_hex_has_loot(hex_code)
-                
-                # Determine symbol based on content and terrain
-                symbol = get_terrain_symbol(terrain)
-                
-                if hex_file_exists:
-                    if content_type == 'settlement':
-                        symbol = '⌂'  # Settlement marker
-                    elif content_type == 'ruins':
-                        symbol = '▲'  # Ruins marker  
-                    elif content_type == 'beast':
-                        symbol = '※'  # Beast marker
-                    elif content_type == 'npc':
-                        symbol = '☉'  # NPC marker
-                    elif content_type == 'sea_encounter':
-                        symbol = '≈'  # Sea encounter marker
-                    # Otherwise keep terrain symbol for basic content
-                
-                # Determine CSS class based on content type
-                css_class = f'terrain-{terrain}'
-                if content_type == 'settlement':
-                    css_class = 'settlement'
-                elif has_loot:
-                    css_class += ' has-content'
-                
-                grid[hex_code] = {
-                    'x': x, 'y': y,
-                    'terrain': terrain,
-                    'symbol': symbol,
-                    'is_city': False,
-                    'has_content': has_loot,  # Now based on loot presence
-                    'content_type': content_type,
-                    'css_class': css_class
-                }
+            # Check if hex has loot (this determines bold styling)
+            has_loot = False
+            content_type = None
+            
+            if hex_file_exists:
+                # Check what type of content exists to add visual indicators
+                content_type = get_hex_content_type(hex_code)
+                # Check if hex has loot by reading the file
+                has_loot = check_hex_has_loot(hex_code)
+            
+            # Use centralized symbol and CSS class determination
+            symbol = determine_content_symbol(content_type, terrain) if hex_file_exists else get_terrain_symbol(terrain)
+            css_class = determine_css_class(content_type, terrain)
+            if has_loot:
+                css_class += ' has-content'
+            
+            hex_data.update({
+                'terrain': terrain,
+                'symbol': symbol,
+                'has_content': has_loot,
+                'content_type': content_type,
+                'css_class': css_class
+            })
     
-    return grid
+    return base_grid
 
 def get_major_cities_data():
     """Get major cities data for the template."""
@@ -740,63 +669,8 @@ def get_terrain_symbol(terrain):
     """Get symbol for terrain type."""
     return terrain_system.get_terrain_symbol(terrain)
 
-def check_hex_has_loot(hex_code):
-    """Check if a hex file contains loot/treasure."""
-    try:
-        hex_file_path = f"dying_lands_output/hexes/hex_{hex_code}.md"
-        if not os.path.exists(hex_file_path):
-            return False
-            
-        with open(hex_file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            
-        # Check for loot indicators in the content
-        loot_indicators = [
-            '## Loot Found',
-            '**Treasure Found:**',
-            '**Loot:**',
-            '**Treasure:**'
-        ]
-        
-        return any(indicator in content for indicator in loot_indicators)
-            
-    except Exception:
-        return False
-
-def get_hex_content_type(hex_code):
-    """Determine content type from hex file for visual indicators."""
-    try:
-        hex_file_path = f"dying_lands_output/hexes/hex_{hex_code}.md"
-        if not os.path.exists(hex_file_path):
-            return None
-            
-        with open(hex_file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-            
-        # Check for content type markers in the encounter section
-        if '⌂ **' in content:  # Settlement marker
-            return 'settlement'
-        elif '▲ **Ancient Ruins**' in content:  # Ruins marker
-            return 'ruins'
-        elif '※ **' in content:  # Beast marker (any beast)
-            return 'beast'
-        elif '☉ **Wandering' in content:  # NPC marker
-            return 'npc'
-        elif '≈ **' in content:  # Sea encounter marker
-            return 'sea_encounter'
-        else:
-            return 'basic'  # Basic terrain content
-            
-    except Exception:
-        return None
-
-def extract_title(content):
-    """Extract title from markdown content."""
-    lines = content.split('\n')
-    for line in lines:
-        if line.startswith('# '):
-            return line[2:].strip()
-    return "Untitled"
+# Use centralized content detector utilities
+# check_hex_has_loot, get_hex_content_type, and extract_title are now imported from utils.content_detector
 
 def extract_hex_data(content, hex_code):
     """Extract structured data from hex content for the new modal system."""
@@ -954,7 +828,7 @@ def extract_hex_data(content, hex_code):
         elif '**Loot Found:**' in line:
             current_section = 'loot'
         elif current_section == 'loot' and line and not line.startswith('#') and not line.startswith('**'):
-            if not hex_data['loot']:
+            if not hex_data.get('loot') or not isinstance(hex_data['loot'], dict):
                 hex_data['loot'] = {}
             hex_data['loot']['description'] = line.strip()
             current_section = None
@@ -962,14 +836,14 @@ def extract_hex_data(content, hex_code):
         # Extract magical effect from loot
         elif '**Magical Effect:**' in line:
             magical_effect = line.replace('**Magical Effect:**', '').strip()
-            if hex_data['loot']:
+            if hex_data.get('loot') and isinstance(hex_data['loot'], dict):
                 hex_data['loot']['magical_effect'] = magical_effect
         
         # Extract ancient knowledge details
         elif '**Ancient Knowledge:**' in line:
             current_section = 'ancient_knowledge'
         elif current_section == 'ancient_knowledge' and line and not line.startswith('#') and not line.startswith('**'):
-            if not hex_data['scroll']:
+            if not hex_data.get('scroll') or not isinstance(hex_data['scroll'], dict):
                 hex_data['scroll'] = {}
             hex_data['scroll']['description'] = line.strip()
             current_section = None

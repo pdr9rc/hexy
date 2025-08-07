@@ -1,0 +1,75 @@
+{
+  "category": "beasts",
+  "tables": {
+    "sea_behaviors": [
+      "persegue",
+      "caça",
+      "assombra",
+      "aterroriza",
+      "espreita",
+      "patrulha",
+      "observa",
+      "aguarda",
+      "circunda",
+      "vigia",
+      "protege",
+      "reivindica",
+      "domina",
+      "corrompe",
+      "consome",
+      "devora"
+    ],
+    "sea_purposes": [
+      "procurando presas",
+      "espalhando corrupção",
+      "reunindo poder",
+      "realizando rituais antigos",
+      "guardando território",
+      "alimentando-se do medo",
+      "gerando descendentes",
+      "coletando almas",
+      "espalhando doença",
+      "corrompendo as águas",
+      "construindo sua toca",
+      "preparando-se para o fim dos tempos",
+      "servindo mestres sombrios",
+      "cumprindo profecias antigas",
+      "buscando vingança",
+      "espalhando loucura"
+    ],
+    "sea_encounters": [
+      "Pesadelo Tefrótico",
+      "Horror Marinho",
+      "Terror Oceânico",
+      "Entidade Abissal",
+      "Horror Afogado",
+      "Espectro Marinho",
+      "Pesadelo Oceânico",
+      "Pesadelo Abissal"
+    ],
+    "sea_descriptions": [
+      "Uma massa contorcida de tentáculos e olhos que desafia a compreensão mortal",
+      "Um ser de pesadelo puro que nada pelas profundezas do mundo moribundo",
+      "Uma entidade que existe entre sonhos e realidade, assombrando a beira do oceano",
+      "Um horror de além das estrelas que fez do mar seu domínio",
+      "Uma criatura de pura malevolência que se alimenta do medo daqueles que a contemplam",
+      "Um terror antigo que dormiu sob as ondas por eras"
+    ],
+    "sea_atmospheres": [
+      "O ar está espesso com o fedor de decadência e sal",
+      "Um vento frio carrega sussurros de horrores antigos",
+      "A água parece pulsar com um ritmo não natural",
+      "Sombras dançam sob a superfície, sugerindo coisas melhor deixadas invisíveis",
+      "O próprio mar parece respirar com intenção malevolente",
+      "Um silêncio opressivo quebrado apenas por sons distantes e sobrenaturais"
+    ],
+    "sea_features": [
+      "Águas que sussurram terrores esquecidos",
+      "Um lugar onde realidade e pesadelo se confundem",
+      "Ruínas antigas visíveis sob as ondas",
+      "Um local onde o mar parece sangrar escuridão",
+      "Águas que refletem geometrias impossíveis",
+      "Um local onde o próprio tempo parece fluir diferentemente"
+    ]
+  }
+}

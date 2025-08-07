@@ -2,6 +2,7 @@
 import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
+import { setLanguage } from './translations.js';
 
 export { setupControls as initializeControls };
 
@@ -44,6 +45,7 @@ export function setupControls(app: DyingLandsApp) {
       ui.showLoading('Changing language...');
       try {
         await api.setLanguage(langSel.value);
+        setLanguage(langSel.value);
         ui.hideLoading();
         window.location.reload();
       } catch (e: any) {

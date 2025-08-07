@@ -1,0 +1,46 @@
+{
+  "category": "lore",
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "ancient_knowledge": [
+      "The secrets of the First Age",
+      "The lost knowledge of the ancients",
+      "The forbidden wisdom of the old ones",
+      "The hidden truths of creation",
+      "The mysteries of the void",
+      "The forgotten lore of the gods",
+      "The ancient prophecies",
+      "The secrets of death and rebirth",
+      "The knowledge of the beyond",
+      "The wisdom of the eternal"
+    ],
+    "historical_events": [
+      "The Great Cataclysm",
+      "The Fall of the First Kingdom",
+      "The Rise of the Dark Lords",
+      "The Time of Madness",
+      "The Age of Shadows",
+      "The War of the Ancients",
+      "The Plague of the Dead",
+      "The Curse of the Land",
+      "The Coming of the Void",
+      "The End of All Things"
+    ],
+    "prophecies": [
+      "The dead shall walk again",
+      "The sun shall never rise",
+      "The land shall be consumed by darkness",
+      "The ancient ones shall return",
+      "The world shall end in fire",
+      "The void shall consume all",
+      "The last light shall fade",
+      "The final battle shall begin",
+      "The truth shall be revealed",
+      "The cycle shall begin anew"
+    ]
+  }
+}

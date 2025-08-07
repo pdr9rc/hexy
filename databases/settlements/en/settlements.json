@@ -1,0 +1,90 @@
+{
+  "category": "settlements",
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "settlement_base_names": [
+      "Sheep's Head",
+      "Beggar's",
+      "Schleger's",
+      "Arkh's",
+      "Shadow",
+      "Damnation",
+      "Trollblood",
+      "Verhu's",
+      "Mournful",
+      "Weeping",
+      "Grave",
+      "Boar's",
+      "Broken",
+      "Black Moon's",
+      "Shattered Stone",
+      "Bloody Blade",
+      "Omen's",
+      "Resurrection",
+      "Witch's",
+      "Serpent's"
+    ],
+    "settlement_suffixes": [
+      "Crossing",
+      "Creek",
+      "Grove",
+      "Hollow",
+      "Cove",
+      "Alley",
+      "Henge",
+      "Common",
+      "Hill",
+      "Forge",
+      "Moor",
+      "Plain",
+      "Ford",
+      "Pass",
+      "End",
+      "Horn",
+      "Lake",
+      "Harbour",
+      "Heart",
+      "Lot"
+    ],
+    "settlement_populations": [
+      "A few dozen desperate souls",
+      "A hundred or so survivors",
+      "Several hundred inhabitants",
+      "A thousand or more people",
+      "A few thousand residents",
+      "Several thousand souls",
+      "A large settlement of thousands",
+      "A bustling town of many thousands",
+      "A major settlement with tens of thousands",
+      "A vast city with countless inhabitants"
+    ],
+    "settlement_governments": [
+      "Ruled by a council of elders",
+      "Governed by a mysterious figure",
+      "Controlled by a powerful guild",
+      "Led by a charismatic leader",
+      "Managed by a religious order",
+      "Overseen by a military commander",
+      "Directed by a council of merchants",
+      "Ruled by a hereditary noble",
+      "Controlled by a secret society",
+      "Governed by a council of the wise"
+    ],
+    "settlement_trends": [
+      "Slowly dying as resources dwindle",
+      "Growing steadily as refugees arrive",
+      "Stable but tense with internal conflicts",
+      "Prospering through trade and commerce",
+      "Declining due to external threats",
+      "Expanding through conquest and force",
+      "Stagnant but secure behind walls",
+      "Thriving despite the apocalypse",
+      "Struggling to maintain order",
+      "Flourishing as a center of culture"
+    ]
+  }
+}

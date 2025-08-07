@@ -1,0 +1,46 @@
+{
+  "category": "denizens",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "denizen_names": [
+      "O Antigo",
+      "O Rei Esquecido",
+      "O Andarilho das Sombras",
+      "O Coletor de Ossos",
+      "O Sussurrador",
+      "O Profeta Sombrio",
+      "A Criança Amaldiçoada",
+      "O Último Guardião",
+      "O Sábio Louco",
+      "O Observador Eterno"
+    ],
+    "denizen_descriptions": [
+      "Um ser de imensa idade e poder",
+      "Um governante que foi esquecido pelo tempo",
+      "Aquele que anda entre luz e sombra",
+      "Um coletor de ossos e memórias",
+      "Aquele que fala em sussurros e segredos",
+      "Um profeta que vê apenas escuridão",
+      "Uma criança tocada por maldições antigas",
+      "O último de uma ordem antiga",
+      "Um sábio enlouquecido por conhecimento proibido",
+      "Aquele que observa além do tempo"
+    ],
+    "denizen_powers": [
+      "Pode comandar os mortos",
+      "Vê através de todas as ilusões",
+      "Não pode ser ferido por armas mortais",
+      "Conhece todos os segredos do passado",
+      "Pode dobrar a realidade à sua vontade",
+      "Fala com as vozes dos mortos",
+      "Não pode ser morto por meios convencionais",
+      "Pode viajar entre dimensões",
+      "Possui conhecimento antigo proibido",
+      "Existe fora do fluxo do tempo"
+    ]
+  }
+}

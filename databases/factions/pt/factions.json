@@ -1,0 +1,46 @@
+{
+  "category": "factions",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "faction_names": [
+      "Os Guardiões das Sombras",
+      "A Ordem dos Mortos",
+      "Os Coletores de Ossos",
+      "A Irmandade da Escuridão",
+      "Os Servos do Abismo",
+      "A Aliança dos Perdidos",
+      "Os Guardiões do Segredo",
+      "A Ordem da Morte",
+      "Os Filhos da Noite",
+      "A Fraternidade Sombria"
+    ],
+    "faction_descriptions": [
+      "Uma ordem que protege os segredos mais sombrios",
+      "Uma organização dedicada aos mortos",
+      "Um grupo que coleta ossos para rituais",
+      "Uma irmandade que serve a escuridão",
+      "Servos de uma entidade do abismo",
+      "Uma aliança de almas perdidas",
+      "Guardadores de conhecimento proibido",
+      "Uma ordem que venera a morte",
+      "Filhos da noite eterna",
+      "Uma fraternidade de sombras"
+    ],
+    "faction_goals": [
+      "Preservar os segredos antigos",
+      "Honrar os mortos esquecidos",
+      "Coletar ossos para rituais",
+      "Espalhar a escuridão",
+      "Servir ao abismo",
+      "Encontrar almas perdidas",
+      "Proteger conhecimento proibido",
+      "Venerar a morte",
+      "Viver na noite eterna",
+      "Operar nas sombras"
+    ]
+  }
+}

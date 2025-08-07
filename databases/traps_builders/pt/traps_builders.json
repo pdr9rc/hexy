@@ -1,0 +1,46 @@
+{
+  "category": "traps_builders",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "trap_builders": [
+      "Um artesão antigo",
+      "Um engenheiro louco",
+      "Um mago sombrio",
+      "Um construtor esquecido",
+      "Um inventor genial",
+      "Um arquiteto maldito",
+      "Um ferreiro habilidoso",
+      "Um alquimista misterioso",
+      "Um mecânico obsessivo",
+      "Um artífice sombrio"
+    ],
+    "trap_materials": [
+      "Pedra antiga",
+      "Metal corrompido",
+      "Madeira envenenada",
+      "Cristal mágico",
+      "Osso humano",
+      "Ferro forjado",
+      "Prata sagrada",
+      "Ouro amaldiçoado",
+      "Bronze antigo",
+      "Aço sombrio"
+    ],
+    "trap_mechanisms": [
+      "Mecanismo de pressão",
+      "Disparador de corda",
+      "Ativador mágico",
+      "Sensor de movimento",
+      "Detector de presença",
+      "Ativador de som",
+      "Mecanismo de tempo",
+      "Disparador de toque",
+      "Ativador de peso",
+      "Mecanismo de calor"
+    ]
+  }
+}

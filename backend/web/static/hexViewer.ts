@@ -2,6 +2,8 @@
 import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
+import { generateDistrictColor } from './utils/colorUtils.js';
+import { t } from './translations.js';
 
 // Function to load city context in the left panel
 function loadCityContext(contextData: any) {
@@ -19,7 +21,7 @@ function loadCityContext(contextData: any) {
             <span>${context.name}</span>
           </div>
           <div class="ascii-section ascii-city-description">
-            <span>CITY DESCRIPTION:</span>
+            <span>${t('CITY DESCRIPTION')}</span>
             <div class="ascii-content">${context.description}</div>
           </div>
   `;
@@ -28,7 +30,7 @@ function loadCityContext(contextData: any) {
   if (context.city_events && context.city_events.length > 0) {
     html += `
       <div class="ascii-section ascii-city-events">
-        <span>CITY EVENTS:</span>
+        <span>${t('CITY EVENTS')}</span>
         <div class="ascii-content">${context.city_events.slice(0, 3).join('\n')}</div>
       </div>
     `;
@@ -38,7 +40,7 @@ function loadCityContext(contextData: any) {
   if (context.weather_conditions && context.weather_conditions.length > 0) {
     html += `
       <div class="ascii-section ascii-city-weather">
-        <span>WEATHER:</span>
+        <span>${t('WEATHER')}</span>
         <div class="ascii-content">${context.weather_conditions.slice(0, 2).join('\n')}</div>
       </div>
     `;
@@ -48,7 +50,7 @@ function loadCityContext(contextData: any) {
   if (context.regional_npcs && context.regional_npcs.length > 0) {
     html += `
       <div class="ascii-section ascii-city-npcs">
-        <span>REGIONAL NPCS:</span>
+        <span>${t('REGIONAL NPCS')}</span>
         <div class="ascii-content">${context.regional_npcs.slice(0, 3).join('\n')}</div>
       </div>
     `;
@@ -58,7 +60,7 @@ function loadCityContext(contextData: any) {
   if (context.major_factions && context.major_factions.length > 0) {
     html += `
       <div class="ascii-section ascii-city-factions">
-        <span>MAJOR FACTIONS:</span>
+        <span>${t('MAJOR FACTIONS')}</span>
         <div class="ascii-content">
     `;
     
@@ -84,7 +86,7 @@ function loadCityContext(contextData: any) {
   if (context.local_factions && context.local_factions.length > 0) {
     html += `
       <div class="ascii-section ascii-city-factions">
-        <span>LOCAL FACTIONS:</span>
+        <span>${t('LOCAL FACTIONS')}</span>
         <div class="ascii-content">
     `;
     
@@ -180,7 +182,7 @@ function loadCityContext(contextData: any) {
   if (context.major_landmarks && context.major_landmarks.length > 0) {
     html += `
       <div class="ascii-section ascii-city-landmarks">
-        <span>MAJOR LANDMARKS:</span>
+        <span>${t('MAJOR LANDMARKS')}</span>
         <div class="ascii-content">${context.major_landmarks.slice(0, 3).join('\n')}</div>
       </div>
     `;
@@ -190,7 +192,7 @@ function loadCityContext(contextData: any) {
   if (context.districts && Object.keys(context.districts).length > 0) {
     html += `
       <div class="ascii-section ascii-city-districts">
-        <span>DISTRICTS:</span>
+        <span>${t('DISTRICTS')}</span>
         <div class="ascii-content">
     `;
     
@@ -247,28 +249,7 @@ function getCityHexSymbol(contentType: string): string {
   }
 }
 
-function generateDistrictColor(districtName: string, allDistricts: string[] = []): string {
-  // Authentic Mörk Borg color palette (12 colors for 12 districts max)
-  const morkBorgColors = [
-    '#FF00FF', // Magenta - Primary Mörk Borg color
-    '#FFFF00', // Yellow - Primary Mörk Borg color
-    '#00FFFF', // Cyan - Primary Mörk Borg color
-    '#FF0000', // Red - Classic Mörk Borg accent
-    '#00FF00', // Green - Classic Mörk Borg accent
-    '#0000FF', // Blue - Classic Mörk Borg accent
-    '#FF8000', // Orange - Mörk Borg warm tone
-    '#8000FF', // Purple - Mörk Borg dark accent
-    '#FF0080', // Hot Pink - Mörk Borg vibrant
-    '#00FF80', // Spring Green - Mörk Borg bright
-    '#FF4000', // Red-Orange - Mörk Borg fiery
-    '#800080'  // Purple-Magenta - Mörk Borg deep
-  ];
-  
-  // Use the old strategy: get district index from sorted array
-  const sortedDistricts = allDistricts.sort();
-  const districtIndex = sortedDistricts.indexOf(districtName);
-  return morkBorgColors[districtIndex % morkBorgColors.length];
-}
+// generateDistrictColor function is now imported from utils/colorUtils.js
 
 function getCityHexTerrainClass(contentType: string): string {
   // Map city content types to terrain classes for consistent coloring
@@ -450,28 +431,28 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
                     <span>${content.name || name}</span>
                   </div>
                   <div class="ascii-section ascii-hex-type">
-                    <span>TYPE: ${content.type || 'unknown'}</span>
+                    <span>${t('TYPE')} ${content.type || 'unknown'}</span>
                   </div>
                   <div class="ascii-section ascii-hex-district">
-                    <span>DISTRICT: ${district}</span>
+                    <span>${t('DISTRICT')} ${district}</span>
                   </div>
                   <div class="ascii-section ascii-hex-position">
-                    <span>POSITION: ${content.position_type || 'unknown'}</span>
+                    <span>${t('POSITION')} ${content.position_type || 'unknown'}</span>
                   </div>
                   
                   <!-- Description Section -->
                   <div class="ascii-section ascii-hex-description">
-                    <span>DESCRIPTION:</span>
+                    <span>${t('DESCRIPTION')}</span>
                     <div class="ascii-content">${content.description || description || 'No description available.'}</div>
                   </div>
                   
                   <!-- Atmosphere & Encounter Section -->
                   <div class="ascii-section ascii-hex-atmosphere">
-                    <span>ATMOSPHERE:</span>
+                    <span>${t('ATMOSPHERE')}</span>
                     <div class="ascii-content">${content.atmosphere || 'No atmosphere available.'}</div>
                   </div>
                   <div class="ascii-section ascii-hex-encounter">
-                    <span>ENCOUNTER:</span>
+                    <span>${t('ENCOUNTER')}</span>
                     <div class="ascii-content">${content.encounter || 'No encounter available.'}</div>
                   </div>
           `;
@@ -718,52 +699,52 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
         <div class="ascii-box">
           <div class="ascii-inner-box">
             <div class="mb-4" style="text-align:center;">
-              <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${hexCode}')">RETURN TO HEX</button>
-              <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">RETURN TO MAP</button>
+              <button class="btn-mork-borg me-2" onclick="window.app.showHexDetails('${hexCode}')">${t('RETURN TO HEX')}</button>
+              <button class="btn-mork-borg btn-warning" onclick="window.app.restoreMap()">${t('RETURN TO MAP')}</button>
         </div>
             <div class="ascii-section ascii-city-name">
               <span>${name}</span>
             </div>
             <div class="ascii-section ascii-city-location">
-              <span>LOCATION: ${location}</span>
+              <span>${t('LOCATION')} ${location}</span>
             </div>
             <div class="ascii-section ascii-city-population">
-              <span>POPULATION: ${population}</span>
+              <span>${t('POPULATION')} ${population}</span>
             </div>
             <div class="ascii-section ascii-city-atmosphere">
-              <span>ATMOSPHERE: ${atmosphere}</span>
+              <span>${t('ATMOSPHERE')} ${atmosphere}</span>
             </div>
             ${cityGridHTML ? `
             <div class="ascii-section ascii-city-grid">
-              <span>CITY DISTRICTS:</span>
+              <span>${t('CITY DISTRICTS')}</span>
               <div class="city-grid-container">
                 ${cityGridHTML}
               </div>
             </div>
             ` : ''}
             <div class="ascii-section ascii-city-description">
-              <span>DESCRIPTION:</span>
+              <span>${t('DESCRIPTION')}</span>
               <div class="ascii-content">${description}</div>
             </div>
             <div class="ascii-section ascii-city-features">
-              <span>NOTABLE FEATURES:</span>
+              <span>${t('NOTABLE FEATURES')}</span>
               <div class="ascii-content">${features}</div>
             </div>
             <div class="ascii-section ascii-city-key-npcs">
-              <span>KEY NPCS:</span>
+              <span>${t('KEY NPCS')}</span>
               <div class="ascii-content">${keyNpcs}</div>
             </div>
             <div class="ascii-section ascii-city-regional-npcs">
-              <span>REGIONAL NPCS:</span>
+              <span>${t('REGIONAL NPCS')}</span>
               <div class="ascii-content">${regionalNpcs}</div>
             </div>
             <div class="ascii-section ascii-city-factions">
-              <span>ACTIVE FACTIONS:</span>
+              <span>${t('ACTIVE FACTIONS')}</span>
               <div class="ascii-content">${factions}</div>
             </div>
             ${districtButtonsHTML ? `
             <div class="ascii-section ascii-district-buttons">
-              <span>DISTRICTS:</span>
+              <span>${t('DISTRICTS')}</span>
               <div class="district-buttons-inline">
                 ${districtArray.map(district => `
                   <button class="district-button-inline" 
@@ -917,54 +898,54 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
               <span>${name}</span>
             </div>
             <div class="ascii-section ascii-settlement-location">
-              <span>LOCATION: ${location}</span>
+              <span>${t('LOCATION')}: ${location}</span>
             </div>
             <div class="ascii-section ascii-settlement-population">
-              <span>POPULATION: ${population}</span>
+              <span>${t('POPULATION')}: ${population}</span>
             </div>
             <div class="ascii-section ascii-settlement-atmosphere">
-              <span>ATMOSPHERE: ${atmosphere}</span>
+              <span>${t('ATMOSPHERE')}: ${atmosphere}</span>
             </div>
             <div class="ascii-section ascii-settlement-description">
-              <span>DESCRIPTION:</span>
+              <span>${t('DESCRIPTION')}:</span>
               <div class="ascii-content">${description}</div>
             </div>
             <div class="ascii-section ascii-settlement-features">
-              <span>NOTABLE FEATURES:</span>
+              <span>${t('NOTABLE FEATURES')}:</span>
               <div class="ascii-content">${features}</div>
             </div>
             <div class="ascii-section ascii-settlement-tavern">
-              <span>LOCAL TAVERN:</span>
+              <span>${t('LOCAL TAVERN')}:</span>
               <div class="ascii-content">${tavern}</div>
             </div>
             <div class="ascii-section ascii-settlement-power">
-              <span>LOCAL POWER:</span>
+              <span>${t('LOCAL POWER')}:</span>
               <div class="ascii-content">${power}</div>
             </div>
             ${weather ? `
             <div class="ascii-section ascii-hex-weather">
-              <span>WEATHER:</span>
+              <span>${t('WEATHER')}:</span>
               <div class="ascii-content">${weather}</div>
           </div>
             ` : ''}
             ${cityEvent ? `
             <div class="ascii-section ascii-hex-city-event">
-              <span>CITY EVENT:</span>
+              <span>${t('CITY EVENT')}:</span>
               <div class="ascii-content">${cityEvent}</div>
             </div>
             ` : ''}
             ${tavernDetails ? `
             <div class="ascii-section ascii-hex-tavern-details">
-              <span>TAVERN DETAILS:</span>
-              <div class="ascii-content">${tavernDetails.select_menu ? `Select Menu: ${tavernDetails.select_menu}` : ''}
-${tavernDetails.budget_menu ? `Budget Menu: ${tavernDetails.budget_menu}` : ''}
-${tavernDetails.innkeeper ? `Innkeeper: ${tavernDetails.innkeeper}` : ''}
-${tavernDetails.notable_patron ? `Notable Patron: ${tavernDetails.notable_patron}` : ''}</div>
+              <span>${t('TAVERN DETAILS')}:</span>
+              <div class="ascii-content">${tavernDetails.select_menu ? `${t('SELECT MENU')}: ${tavernDetails.select_menu}` : ''}
+${tavernDetails.budget_menu ? `${t('BUDGET MENU')}: ${tavernDetails.budget_menu}` : ''}
+${tavernDetails.innkeeper ? `${t('INNKEEPER')}: ${tavernDetails.innkeeper}` : ''}
+${tavernDetails.notable_patron ? `${t('NOTABLE PATRON')}: ${tavernDetails.notable_patron}` : ''}</div>
             </div>
             ` : ''}
             ${settlementArt ? `
             <div class="ascii-section ascii-settlement-layout">
-              <span>SETTLEMENT LAYOUT:</span>
+              <span>${t('SETTLEMENT LAYOUT')}:</span>
               <div class="ascii-content">${settlementArt}</div>
             </div>
             ` : ''}

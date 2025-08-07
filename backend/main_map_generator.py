@@ -11,6 +11,12 @@ import shutil
 from typing import Dict, List, Tuple, Optional, Any
 
 from backend.database_manager import database_manager
+from backend.utils.loot_generator import LootGenerator
+from backend.utils.settlement_generator import generate_settlement_atmosphere, generate_settlement_feature
+from backend.utils.beast_generator import generate_beast_encounter
+from backend.utils.tavern_generator import generate_tavern_details, generate_weather, generate_city_event
+from backend.utils.npc_generator import generate_npc_encounter
+from backend.utils.markdown_formatter import format_beast_details, format_sea_encounter_details, format_npc_details
 from backend.terrain_system import TerrainSystem
 from backend.translation_system import translation_system
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
@@ -132,7 +138,7 @@ class MainMapGenerator:
                     skipped_count += 1
                     continue
                 
-                print(f"🎲 {self.translation_system.t('generating_hex')} {hex_code}...")
+                #print(f"🎲 {self.translation_system.t('generating_hex')} {hex_code}...")
                 
                 # Generate hex content
                 hex_data = self.generate_hex_content(hex_code)
@@ -276,8 +282,7 @@ class MainMapGenerator:
         # Special handling for sea terrain
         if terrain == 'sea':
             hex_data = self._generate_sea_content(hex_code, terrain)
-            if hex_code == "1606":
-                print(f"DEBUG 1606: terrain={hex_data.get('terrain')}, content_type={hex_data.get('content_type')}")
+            
             return hex_data
         # Get terrain-specific tables
         terrain_data = self.terrain_tables.get(terrain, {})
@@ -307,59 +312,36 @@ class MainMapGenerator:
                     hex_data = self._generate_beast_content(hex_code, terrain)
                 elif kind == 'npc':
                     hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
-                if hex_code == "1606":
-                    print(f"DEBUG 1606: terrain={hex_data.get('terrain')}, content_type={hex_data.get('content_type')}")
+                
                 return hex_data
             upto += weight
         # fallback (shouldn't happen)
         hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
-        if hex_code == "1606":
-            print(f"DEBUG 1606: terrain={hex_data.get('terrain')}, content_type={hex_data.get('content_type')}")
+        
         return hex_data
 
     def _generate_sea_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate sea encounter content with Tephrotic nightmares and oceanic horrors."""
-        # Sea encounter types
-        sea_encounters = [
-            "Tephrotic Nightmare",
-            "Sea Horror",
-            "Oceanic Terror", 
-            "Abyssal Entity",
-            "Drowned Horror",
-            "Sea Wraith",
-            "Oceanic Nightmare",
-            "Abyssal Nightmare"
-        ]
-        # Tephrotic nightmare descriptions
-        tephrotic_descriptions = [
-            "A writhing mass of tentacles and eyes that defies mortal comprehension",
-            "A being of pure nightmare that swims through the depths of the dying world",
-            "An entity that exists between dreams and reality, haunting the ocean's edge",
-            "A horror from beyond the stars that has made the sea its domain",
-            "A creature of pure malevolence that feeds on the fear of those who gaze upon it",
-            "An ancient terror that has slumbered beneath the waves for eons"
-        ]
-        # Sea atmosphere descriptions
-        sea_atmospheres = [
-            "The air is thick with the stench of decay and salt",
-            "A cold wind carries whispers of ancient horrors",
-            "The water seems to pulse with an unnatural rhythm",
-            "Shadows dance beneath the surface, hinting at things best left unseen",
-            "The sea itself seems to breathe with malevolent intent",
-            "An oppressive silence broken only by distant, unearthly sounds"
-        ]
-        # Notable sea features
-        sea_features = [
-            "Waters that whisper of forgotten terrors",
-            "A place where reality and nightmare blur",
-            "Ancient ruins visible beneath the waves",
-            "A spot where the sea seems to bleed darkness",
-            "Waters that reflect impossible geometries",
-            "A location where time itself seems to flow differently"
-        ]
+        # Get sea content from database
+        sea_encounters = database_manager.get_table('beasts', 'sea_encounters', self.language)
+        if not sea_encounters:
+            raise ValueError("No sea encounters available in database")
+        
+        sea_descriptions = database_manager.get_table('beasts', 'sea_descriptions', self.language)
+        if not sea_descriptions:
+            raise ValueError("No sea descriptions available in database")
+        
+        sea_atmospheres = database_manager.get_table('beasts', 'sea_atmospheres', self.language)
+        if not sea_atmospheres:
+            raise ValueError("No sea atmospheres available in database")
+        
+        sea_features = database_manager.get_table('beasts', 'sea_features', self.language)
+        if not sea_features:
+            raise ValueError("No sea features available in database")
+        
         # Generate encounter
         encounter_type = random.choice(sea_encounters)
-        description = random.choice(tephrotic_descriptions)
+        description = random.choice(sea_descriptions)
         atmosphere = random.choice(sea_atmospheres)
         feature = random.choice(sea_features)
         # Generate loot (sea encounters might have sunken treasure)
@@ -367,12 +349,20 @@ class MainMapGenerator:
         # Build the encounter description
         encounter_desc = f"**{encounter_type}**\n\n"
         encounter_desc += f"{description}.\n\n"
-        encounter_desc += f"**Origin:** This entity emerged from the depths when the world began to die. "
+        encounter_desc += f"**{self.translation_system.t('origin')}:** This entity emerged from the depths when the world began to die. "
         encounter_desc += f"It is said to be one of the Tephrotic nightmares that plague the dying lands.\n\n"
-        encounter_desc += f"**Behavior:** The creature {random.choice(['stalks', 'hunts', 'haunts', 'terrorizes'])} "
-        encounter_desc += f"this area of the sea, {random.choice(['seeking prey', 'spreading corruption', 'gathering power', 'performing ancient rituals'])}.\n\n"
+        # Get behaviors from database
+        behaviors = database_manager.get_table('beasts', 'sea_behaviors', self.language)
+        if not behaviors:
+            raise ValueError("No sea behaviors available in database")
+        purposes = database_manager.get_table('beasts', 'sea_purposes', self.language)
+        if not purposes:
+            raise ValueError("No sea purposes available in database")
+        
+        encounter_desc += f"**{self.translation_system.t('behavior')}:** The creature {random.choice(behaviors)} "
+        encounter_desc += f"this area of the sea, {random.choice(purposes)}.\n\n"
         encounter_desc += f"**Threat Level:** Catastrophic - this entity represents an existential threat to all who encounter it.\n\n"
-        encounter_desc += f"**Territory:** This section of the sea has been claimed by the nightmare, "
+        encounter_desc += f"**{self.translation_system.t('territory')}:** This section of the sea has been claimed by the nightmare, "
         encounter_desc += f"its influence corrupting the very waters themselves."
         # Add loot if present
         if loot:
@@ -465,8 +455,8 @@ class MainMapGenerator:
         
         # Build description
         description = f"{dungeon_type.capitalize()}, {feature}.\n\n"
-        description += f"**Danger:** {danger}\n"
-        description += f"**Atmosphere:** {atmosphere}\n\n"
+        description += f"**{self.translation_system.t('danger')}:** {danger}\n"
+        description += f"**{self.translation_system.t('atmosphere')}:** {atmosphere}\n\n"
         
         # Add loot and scroll if present
         if loot:
@@ -504,34 +494,23 @@ class MainMapGenerator:
     def _generate_beast_content(self, hex_code: str, terrain: str) -> Dict[str, Any]:
         """Generate beast encounter content."""
         # Get bestiary tables
-        beast_types = database_manager.get_table('bestiary', 'beast_types', self.language)
-        beast_features = database_manager.get_table('bestiary', 'beast_features', self.language)
-        beast_behaviors = database_manager.get_table('bestiary', 'beast_behaviors', self.language)
-        
-        # Generate beast elements - use same index for all tables to get matching beast
-        if beast_types and beast_features and beast_behaviors:
-            # Select random index to get matching beast across all tables
-            beast_index = random.randint(0, len(beast_types) - 1)
-            beast_type = beast_types[beast_index]
-            feature = beast_features[beast_index] if beast_index < len(beast_features) else "unnatural appearance"
-            behavior = beast_behaviors[beast_index] if beast_index < len(beast_behaviors) else "hunts in the area"
-        else:
-            # Fallback to random selection if tables are missing
-            beast_type = random.choice(beast_types) if beast_types else "Wild beast"
-            feature = random.choice(beast_features) if beast_features else "unnatural appearance"
-            behavior = random.choice(beast_behaviors) if beast_behaviors else "hunts in the area"
+        # Use centralized beast generator
+        beast_data = generate_beast_encounter(database_manager, self.language)
+        beast_type = beast_data['beast_type']
+        feature = beast_data['beast_feature']
+        behavior = beast_data['beast_behavior']
         
         # Generate loot (beasts might have treasure from their victims)
         loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.7 else None
         
         # Build description
         description = f"{beast_type},{feature}, {behavior}.\n\n"
-        description += f"**Territory:** This creature has claimed this area of {terrain} as its hunting ground.\n"
-        description += f"**Threat Level:** High - approach with extreme caution.\n"
+        description += f"**{self.translation_system.t('territory')}:** This creature has claimed this area of {terrain} as its hunting ground.\n"
+        description += f"**{self.translation_system.t('threat_level')}:** High - approach with extreme caution.\n"
         
         # Add loot if present
         if loot:
-            description += f"\n**Treasure Found:** {loot['description']} (remains of previous victims)\n"
+            description += f"\n**{self.translation_system.t('treasure_found')}:** {loot['description']} (remains of previous victims)\n"
         
         return {
             'hex_code': hex_code,
@@ -550,78 +529,36 @@ class MainMapGenerator:
         }
     
     def _generate_npc_content(self, hex_code: str, terrain: str, denizen_types: List[str]) -> Dict[str, Any]:
-        """Generate NPC/denizen content using Mörk Borg tables."""
-        # Get Mörk Borg NPC tables
-        npc_names = database_manager.get_table('npc_names', 'first_names', self.language)
-        npc_surnames = database_manager.get_table('npc_names', 'second_names', self.language)
-        npc_traits = database_manager.get_table('npc_traits', 'traits', self.language)
-        npc_trades = database_manager.get_table('npc_trades', 'trades', self.language)
-        npc_concerns = database_manager.get_table('npc_concerns', 'concerns', self.language)
-        npc_wants = database_manager.get_table('npc_wants', 'wants', self.language)
-        npc_apocalypse = database_manager.get_table('npc_apocalypse', 'apocalypse_attitudes', self.language)
-        npc_secrets = database_manager.get_table('npc_secrets', 'secrets', self.language)
+        """Generate NPC/denizen content using centralized utility."""
+        # Use centralized NPC generator
+        npc_data = generate_npc_encounter(database_manager, self.language)
+        name = npc_data['name']
+        trait = npc_data['trait']
+        trade = npc_data['trade']
+        concern = npc_data['concern']
+        want = npc_data['want']
+        apocalypse_attitude = npc_data['apocalypse_attitude']
+        secret = npc_data['secret']
         
-        # Generate Mörk Borg name
-        name_prefixes = None
-        name_suffixes = None
-        
-        if npc_names and npc_surnames:
-            first_name = random.choice(npc_names)
-            second_name = random.choice(npc_surnames)
-            name = f"{first_name} {second_name}"
-        else:
-            # Fallback to old system
-            name_prefixes = database_manager.get_table('names', 'denizen_names_prefix', self.language)
-            name_suffixes = database_manager.get_table('names', 'denizen_names_suffix', self.language)
-            if name_prefixes and name_suffixes:
-                prefix = random.choice(name_prefixes)
-                suffix = random.choice(name_suffixes)
-                name = f"{prefix} {suffix}"
-            else:
-                name = f"Unknown Denizen of {hex_code}"
-        
-        # Generate Mörk Borg elements
-        trait = random.choice(npc_traits) if npc_traits else "Mysterious"
-        trade = random.choice(npc_trades) if npc_trades else f"{terrain.title()} dweller"
-        concern = random.choice(npc_concerns) if npc_concerns else "seeks something unknown"
-        want = random.choice(npc_wants) if npc_wants else "knowledge"
-        apocalypse_attitude = random.choice(npc_apocalypse) if npc_apocalypse else "We're doomed!"
-        secret = random.choice(npc_secrets) if npc_secrets else "Just a regular person"
-        
-        # Fallback to old system if Mörk Borg tables not available
-        if not npc_trades:
-            if denizen_types:
-                trade = random.choice(denizen_types)
-        else:
+        # Use trade as denizen type, fallback to terrain dweller
+        if not trade or trade == "wanderer":
             trade = f"{terrain.title()} dweller"
-        
-        if not npc_concerns:
-            motivations = database_manager.get_table('denizen', 'denizen_motivations', self.language)
-            concern = random.choice(motivations) if motivations else "seeks something unknown"
-            
-        if not npc_traits:
-            features = database_manager.get_table('denizen', 'denizen_features', self.language)
-            trait = random.choice(features) if features else "Has an unsettling presence"
-            
-        if not npc_wants:
-            demeanors = database_manager.get_table('denizen', 'denizen_demeanors', self.language)
-            want = random.choice(demeanors) if demeanors else "Cryptic"
         
         # Generate loot (NPCs might carry valuable items)
         loot = self._generate_loot() if random.random() <= self.generation_rules['loot_chance'] * 0.6 else None
         
-        # Build description with Mörk Borg format
+        # Build description with Mörk Borg format using translated labels
         description = f"**{name}** - {trade}\n\n"
-        description += f"**Trait:** {trait}\n"
-        description += f"**Concern:** {concern}\n"
-        description += f"**Want:** {want}\n"
-        description += f"**Apocalypse Attitude:** {apocalypse_attitude}\n"
-        description += f"**Secret:** {secret}\n"
-        description += f"**Location:** Wandering the {terrain}\n"
+        description += f"**{self.translation_system.t('npc_trait')}:** {trait}\n"
+        description += f"**{self.translation_system.t('npc_concern')}:** {concern}\n"
+        description += f"**{self.translation_system.t('npc_want')}:** {want}\n"
+        description += f"**{self.translation_system.t('npc_apocalypse_attitude')}:** {apocalypse_attitude}\n"
+        description += f"**{self.translation_system.t('npc_secret')}:** {secret}\n"
+        description += f"**{self.translation_system.t('npc_location')}:** Wandering the {terrain}\n"
         
         # Add loot if present
         if loot:
-            description += f"\n**Carries:** {loot['description']}\n"
+            description += f"\n**{self.translation_system.t('npc_carries')}:** {loot['description']}\n"
         
         return {
             'hex_code': hex_code,
@@ -660,55 +597,30 @@ class MainMapGenerator:
     
     def _get_settlement_names(self, terrain: str) -> List[str]:
         """Get settlement names based on terrain."""
-        # Try to get names from database first
-        try:
-            city_name_1 = database_manager.get_table('names', 'city_name_1', self.language) or []
-            city_name_2 = database_manager.get_table('names', 'city_name_2', self.language) or []
-            
-            if city_name_1 and city_name_2:
-                names = []
-                for base in city_name_1[:10]:  # Limit for performance
-                    for suffix in city_name_2[:10]:
-                        names.append(f"{base} {suffix}")
-                return names
-        except Exception as e:
-            print(f"Warning: Could not load settlement names from database: {e}")
-        
-        # Fallback to hardcoded names
-        base_names = ["Shadow", "Grave", "Mournful", "Bloody", "Omen", "Beggar", "Boar", "Verhu", "Trollblood", "Resurrection", "Witch", "Weeping", "Arkh"]
-        suffixes = ["Hill", "Grove", "Creek", "End", "Cove", "Alley", "Hollow", "Henge", "Lot", "Ford", "Harbour", "Lake", "Plain", "Moor", "Pass", "Horn"]
+        # Get names from database
+        city_name_1 = database_manager.get_table('names', 'city_name_1', self.language)
+        if not city_name_1:
+            raise ValueError("No city name part 1 available in database")
+        city_name_2 = database_manager.get_table('names', 'city_name_2', self.language)
+        if not city_name_2:
+            raise ValueError("No city name part 2 available in database")
         
         names = []
-        for base in base_names:
-            for suffix in suffixes:
+        for base in city_name_1[:10]:  # Limit for performance
+            for suffix in city_name_2[:10]:
                 names.append(f"{base} {suffix}")
-        
         return names
     
     def _generate_population(self) -> str:
         """Generate a population range."""
-        try:
-            populations = database_manager.get_table('basic', 'populations', self.language) or []
-            if populations:
-                return random.choice(populations)
-        except Exception as e:
-            print(f"Warning: Could not load populations from database: {e}")
-        
-        # Fallback to hardcoded populations
-        populations = ["20-50", "51-100", "101-500", "501-1000"]
+        populations = database_manager.get_table('basic', 'populations', self.language)
+        if not populations:
+            raise ValueError("No populations available in database")
         return random.choice(populations)
     
     def _generate_settlement_atmosphere(self, terrain: str) -> str:
-        """Generate settlement atmosphere based on terrain."""
-        atmospheres = {
-            'mountain': 'Cold and windswept',
-            'forest': 'Dark and mysterious',
-            'coast': 'Salty and windswept',
-            'plains': 'Open and exposed',
-            'swamp': 'Misty and damp',
-            'desert': 'Hot and dry'
-        }
-        return atmospheres.get(terrain, 'Strange and unsettling')
+        """Generate settlement atmosphere using centralized utility."""
+        return generate_settlement_atmosphere(terrain)
     
     def _generate_settlement_feature(self, terrain: str) -> str:
         """Generate a notable feature for the settlement."""
@@ -724,54 +636,41 @@ class MainMapGenerator:
     
     def _generate_local_tavern(self) -> str:
         """Generate a local tavern description."""
-        try:
-            tavern_1 = database_manager.get_table('names', 'tavern_name_1', self.language) or []
-            tavern_2 = database_manager.get_table('names', 'tavern_name_2', self.language) or []
-            
-            if tavern_1 and tavern_2:
-                return f"{random.choice(tavern_1)} {random.choice(tavern_2)}"
-        except Exception as e:
-            print(f"Warning: Could not load tavern names from database: {e}")
+        tavern_1 = database_manager.get_table('names', 'tavern_name_1', self.language)
+        if not tavern_1:
+            raise ValueError("No tavern name part 1 available in database")
+        tavern_2 = database_manager.get_table('names', 'tavern_name_2', self.language)
+        if not tavern_2:
+            raise ValueError("No tavern name part 2 available in database")
         
-        # Fallback to hardcoded names
-        taverns = ["The Rusty Blade", "The Crow's Nest", "The Moldy Barrel", "The Rotting Corpse", "The Doomed Traveler", "The Blighted Inn", "The Ash and Bone", "The Thorn and Rust"]
-        return random.choice(taverns)
+        return f"{random.choice(tavern_1)} {random.choice(tavern_2)}"
     
     def _generate_local_power(self) -> str:
         """Generate a local power description."""
-        powers = ["Corrupt mayor", "Mysterious hermit", "Witch coven", "Bandit chief", "Religious fanatic", "Undead noble", "Cult leader", "Mad prophet"]
+        powers = database_manager.get_table('basic', 'local_powers', self.language)
+        if not powers:
+            raise ValueError("No local powers available in database")
         return random.choice(powers)
     
     def _generate_tavern_details(self) -> Dict[str, Any]:
         """Generate Mörk Borg tavern details."""
         # Get tavern tables
-        select_menu = database_manager.get_table('tavern_menu', 'select_menu', self.language) or []
-        budget_menu = database_manager.get_table('tavern_menu', 'budget_menu', self.language) or []
-        innkeeper_quirks = database_manager.get_table('tavern_innkeeper', 'innkeeper_quirks', self.language) or []
-        patron_traits = database_manager.get_table('tavern_patrons', 'patron_traits', self.language) or []
-        
-        # Generate tavern elements
-        select_dish = random.choice(select_menu) if select_menu else {"name": "Mysterious stew", "price": 4, "currency": "silver"}
-        budget_dish = random.choice(budget_menu) if budget_menu else {"name": "Watery soup", "price": 2, "currency": "silver"}
-        innkeeper_quirk = random.choice(innkeeper_quirks) if innkeeper_quirks else "Seems nervous about something"
-        patron_trait = random.choice(patron_traits) if patron_traits else "Mysterious"
-        
-        return {
-            'select_dish': select_dish,
-            'budget_dish': budget_dish,
-            'innkeeper_quirk': innkeeper_quirk,
-            'patron_trait': patron_trait
-        }
+        # Use centralized tavern generator
+        return generate_tavern_details(database_manager, self.language)
     
     def _generate_weather(self) -> str:
         """Generate Mörk Borg weather conditions."""
-        weather_conditions = database_manager.get_table('weather', 'weather_conditions', self.language) or []
-        return random.choice(weather_conditions) if weather_conditions else "Lifeless grey"
+        weather_conditions = database_manager.get_table('weather', 'weather_conditions', self.language)
+        if not weather_conditions:
+            raise ValueError("No weather conditions available in database")
+        return random.choice(weather_conditions)
     
     def _generate_city_event(self) -> str:
         """Generate Mörk Borg city events."""
-        city_events = database_manager.get_table('city_events', 'city_events', self.language) or []
-        return random.choice(city_events) if city_events else "Something mysterious happens in the streets"
+        city_events = database_manager.get_table('city_events', 'city_events', self.language)
+        if not city_events:
+            raise ValueError("No city events available in database")
+        return random.choice(city_events)
     
     def _generate_trap(self) -> Dict[str, Any]:
         """Generate a trap from Mörk Borg tables."""
@@ -779,13 +678,26 @@ class MainMapGenerator:
         trap_effects = database_manager.get_table('traps_effects', 'trap_effects', self.language)
         trap_builders = database_manager.get_table('traps_builders', 'trap_builders', self.language)
         
-        trigger = random.choice(trap_triggers) if trap_triggers else "A hidden mechanism"
-        effect_data = random.choice(trap_effects) if trap_effects else {"description": "Unknown effect", "effect": "Unknown damage"}
-        builder = random.choice(trap_builders) if trap_builders else "Unknown builder"
+        if not trap_triggers:
+            raise ValueError("No trap triggers available in database")
+        if not trap_effects:
+            raise ValueError("No trap effects available in database")
+        if not trap_builders:
+            raise ValueError("No trap builders available in database")
+        
+        trigger = random.choice(trap_triggers)
+        effect_data = random.choice(trap_effects)
+        builder = random.choice(trap_builders)
+        
+        # Handle case where effect_data is a string instead of a dictionary
+        if isinstance(effect_data, dict):
+            effect = effect_data.get('effect', 'Unknown damage')
+        else:
+            effect = effect_data
         
         return {
             'description': trigger,
-            'effect': effect_data.get('effect', 'Unknown damage'),
+            'effect': effect,
             'builder': builder
         }
     
@@ -806,75 +718,14 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         return layout
     
     def _generate_loot(self) -> Optional[Dict[str, Any]]:
-        """Generate treasure/loot using Mörk Borg tables."""
-        # Try Mörk Borg items and trinkets first
-        trinkets = database_manager.get_table('items_trinkets', 'trinkets', self.language)
-        items_prices = database_manager.get_table('items_prices', 'items', self.language)
-        weapons_prices = database_manager.get_table('weapons_prices', 'weapons', self.language)
-        
-        # 50% chance for trinket, 30% chance for regular item, 20% chance for weapon
-        loot_roll = random.randint(1, 100)
-        
-        if loot_roll <= 50 and trinkets:
-            # Mörk Borg trinket
-            loot_item = random.choice(trinkets)
-            loot_type = "trinket"
-            effect = "Mysterious properties"
-        elif loot_roll <= 80 and items_prices:
-            # Mörk Borg item
-            item_data = random.choice(items_prices)
-            loot_item = item_data.get('name', 'Unknown item')
-            loot_type = "item"
-            effect = item_data.get('notes', 'Mysterious properties')
-        elif weapons_prices:
-            # Mörk Borg weapon
-            weapon_data = random.choice(weapons_prices)
-            loot_item = f"{weapon_data.get('name', 'Unknown weapon')} ({weapon_data.get('damage', 'd4')})"
-            loot_type = "weapon"
-            effect = f"Damage: {weapon_data.get('damage', 'd4')}"
-        else:
-                # Fallback to old system
-            if loot_roll <= 30:  # 30% weapons
-                loot_item = random.choice(database_manager.get_table('enhanced_loot', 'weapon_loot', self.language) or ["Rusty sword"])
-                loot_type = 'weapon'
-            elif loot_roll <= 50:  # 20% armor
-                loot_item = random.choice(database_manager.get_table('enhanced_loot', 'armor_loot', self.language) or ["Leather armor"])
-                loot_type = 'armor'
-            elif loot_roll <= 80:  # 30% valuable items
-                loot_item = random.choice(database_manager.get_table('enhanced_loot', 'valuable_loot', self.language) or ["Silver coins"])
-                loot_type = 'valuable'
-            else:  # 20% utility items
-                loot_item = random.choice(database_manager.get_table('enhanced_loot', 'utility_loot', self.language) or ["Rope"])
-                loot_type = 'utility'
-                effect = "Mysterious properties"
-        
-        return {
-            'type': loot_type,
-            'item': loot_item,
-            'description': loot_item,
-            'full_description': f"**{loot_item}**\n\n**Magical Effect:** {effect}"
-        }
+        """Generate treasure/loot using centralized loot generator."""
+        loot_generator = LootGenerator(database_manager)
+        return loot_generator.generate_loot(self.language)
     
     def _generate_scroll(self) -> Optional[Dict[str, Any]]:
-        """Generate ancient scroll/knowledge."""
-        # Get scroll tables
-        scroll_types = database_manager.get_table('scroll', 'scroll_types', self.language) or ["Ancient parchment"]
-        scroll_content = database_manager.get_table('scroll', 'scroll_content', self.language) or ["forbidden knowledge"]
-        scroll_effects = database_manager.get_table('scroll', 'scroll_effects', self.language) or ["causes nightmares when read"]
-        
-        # Generate scroll elements
-        scroll_type = random.choice(scroll_types)
-        content = random.choice(scroll_content)
-        effect = random.choice(scroll_effects)
-        
-        description = f"**{scroll_type}** containing {content} that {effect}."
-        
-        return {
-            'type': scroll_type,
-            'content': content,
-            'effect': effect,
-            'description': description
-        }
+        """Generate ancient scroll/knowledge using centralized loot generator."""
+        loot_generator = LootGenerator(database_manager)
+        return loot_generator.generate_scroll(self.language)
     
     # ===== FILE I/O METHODS =====
     
@@ -1016,20 +867,20 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
                 lines.append(str(scroll))
             lines.append("")
         
-        # Settlement-specific content
+                # Settlement-specific content
         if hex_data.get('is_settlement'):
-            lines.append("**Local Tavern:** " + hex_data.get('local_tavern', 'Unknown'))
+            lines.append(f"**{self.translation_system.t('local_tavern')}:** " + hex_data.get('local_tavern', 'Unknown'))
             lines.append("")
-            lines.append("**Local Power:** " + hex_data.get('local_power', 'Unknown'))
+            lines.append(f"**{self.translation_system.t('local_power')}:** " + hex_data.get('local_power', 'Unknown'))
             lines.append("")
             
             # Mörk Borg settlement details
             if hex_data.get('weather'):
-                lines.append("**Weather:** " + hex_data.get('weather'))
+                lines.append(f"**{self.translation_system.t('weather')}:** " + hex_data.get('weather'))
                 lines.append("")
             
             if hex_data.get('city_event'):
-                lines.append("**City Event:** " + hex_data.get('city_event'))
+                lines.append(f"**{self.translation_system.t('city_event')}:** " + hex_data.get('city_event'))
                 lines.append("")
             
             # Tavern details
@@ -1041,12 +892,12 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
                 if tavern_details.get('budget_dish'):
                     lines.append(f"**Budget Menu:** {tavern_details['budget_dish']}")
                 if tavern_details.get('innkeeper_quirk'):
-                    lines.append(f"**Innkeeper:** {tavern_details['innkeeper_quirk']}")
+                    lines.append(f"**{self.translation_system.t('innkeeper')}:** {tavern_details['innkeeper_quirk']}")
                 if tavern_details.get('patron_trait'):
                     lines.append(f"**Notable Patron:** {tavern_details['patron_trait']}")
                 lines.append("")
             
-            lines.append("## Settlement Layout")
+            lines.append(f"## {self.translation_system.t('settlement_layout')}")
             lines.append(hex_data.get('settlement_art', ''))
             lines.append("")
             
@@ -1058,9 +909,9 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         # Dungeon-specific content
         if hex_data.get('is_dungeon'):
             lines.append("## Dungeon Details")
-            lines.append(f"**Type:** {hex_data.get('dungeon_type', 'Unknown')}")
-            lines.append(f"**Danger:** {hex_data.get('danger', 'Unknown')}")
-            lines.append(f"**Treasure:** {hex_data.get('treasure', 'Unknown')}")
+            lines.append(f"**{self.translation_system.t('type')}:** {hex_data.get('dungeon_type', 'Unknown')}")
+            lines.append(f"**{self.translation_system.t('danger')}:** {hex_data.get('danger', 'Unknown')}")
+            lines.append(f"**{self.translation_system.t('treasure_found')}:** {hex_data.get('treasure', 'Unknown')}")
             lines.append("")
             
             # Mörk Borg trap details
@@ -1068,11 +919,11 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
                 lines.append("## Trap")
                 trap = hex_data['trap_section']
                 if trap.get('description'):
-                    lines.append(f"**Description:** {trap['description']}")
+                    lines.append(f"**{self.translation_system.t('description')}:** {trap['description']}")
                 if trap.get('effect'):
-                    lines.append(f"**Effect:** {trap['effect']}")
+                    lines.append(f"**{self.translation_system.t('effect')}:** {trap['effect']}")
                 if trap.get('builder'):
-                    lines.append(f"**Builder:** {trap['builder']}")
+                    lines.append(f"**{self.translation_system.t('builder')}:** {trap['builder']}")
             lines.append("")
             
             if hex_data.get('loot'):
@@ -1087,82 +938,15 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         
         # Beast-specific content
         if hex_data.get('is_beast'):
-            lines.append("## Beast Details")
-            lines.append(f"**Type:** {hex_data.get('beast_type', 'Unknown')}")
-            lines.append(f"**Feature:** {hex_data.get('beast_feature', 'Unknown')}")
-            lines.append(f"**Behavior:** {hex_data.get('beast_behavior', 'Unknown')}")
-            lines.append("")
-            
-            # Add threat level and territory as separate sections
-            if hex_data.get('threat_level'):
-                lines.append("## Threat Level")
-                lines.append(hex_data['threat_level'])
-                lines.append("")
-            
-            if hex_data.get('territory'):
-                lines.append("## Territory")
-                lines.append(hex_data['territory'])
-                lines.append("")
-            
-            if hex_data.get('loot'):
-                lines.append("## Loot Found")
-                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                lines.append("")
+            lines.extend(format_beast_details(hex_data, self.translation_system))
         
         # Sea-specific content
         if hex_data.get('is_sea_encounter'):
-            lines.append("## Sea Encounter Details")
-            lines.append(f"**Type:** {hex_data.get('encounter_type', 'Unknown')}")
-            lines.append("")
-            
-            # Add threat level and territory as separate sections
-            if hex_data.get('threat_level'):
-                lines.append("## Threat Level")
-                lines.append(hex_data['threat_level'])
-                lines.append("")
-            
-            if hex_data.get('territory'):
-                lines.append("## Territory")
-                lines.append(hex_data['territory'])
-                lines.append("")
-            
-            if hex_data.get('loot'):
-                lines.append("## Loot Found")
-                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                lines.append("")
+            lines.extend(format_sea_encounter_details(hex_data, self.translation_system))
         
         # NPC-specific content
         if hex_data.get('is_npc'):
-            lines.append("## NPC Details")
-            lines.append(f"**Name:** {hex_data.get('name', 'Unknown')}")
-            lines.append(f"**Type:** {hex_data.get('denizen_type', 'Unknown')}")
-            
-            # Mörk Borg NPC details
-            if hex_data.get('trait'):
-                lines.append(f"**Trait:** {hex_data.get('trait')}")
-            if hex_data.get('concern'):
-                lines.append(f"**Concern:** {hex_data.get('concern')}")
-            if hex_data.get('want'):
-                lines.append(f"**Want:** {hex_data.get('want')}")
-            if hex_data.get('apocalypse_attitude'):
-                lines.append(f"**Apocalypse Attitude:** {hex_data.get('apocalypse_attitude')}")
-            if hex_data.get('secret'):
-                lines.append(f"**Secret:** {hex_data.get('secret')}")
-            
-            # Fallback to old fields if new ones not available
-            if not hex_data.get('trait') and hex_data.get('motivation'):
-                lines.append(f"**Motivation:** {hex_data.get('motivation')}")
-            if not hex_data.get('concern') and hex_data.get('feature'):
-                lines.append(f"**Feature:** {hex_data.get('feature')}")
-            if not hex_data.get('want') and hex_data.get('demeanor'):
-                lines.append(f"**Demeanor:** {hex_data.get('demeanor')}")
-            
-            lines.append("")
-            
-            if hex_data.get('loot'):
-                lines.append("## Loot Found")
-                lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
-                lines.append("")
+            lines.extend(format_npc_details(hex_data, self.translation_system))
         
         return '\n'.join(lines)
     

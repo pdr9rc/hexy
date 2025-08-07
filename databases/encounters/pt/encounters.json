@@ -1,0 +1,130 @@
+{
+  "category": "encounters",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "street_encounters": [
+      "A rua é assombrada por figuras espectrais",
+      "Ecos de eventos passados ressoam dos paralelepípedos",
+      "A rua parece mudar de direção quando não observada",
+      "Algo invisível patrulha a rua",
+      "A rua está cheia dos sons de gritos distantes",
+      "Sombras se movem independentemente pela rua",
+      "A rua está coberta de marcas estranhas",
+      "Uma névoa misteriosa rola pela rua",
+      "A rua está alinhada com posses abandonadas",
+      "Luzes estranhas piscam nas janelas da rua"
+    ],
+    "building_encounters": [
+      "O prédio parece abandonado mas sons vêm de dentro",
+      "O prédio é guardado por criaturas estranhas",
+      "O prédio pulsa com energia não natural",
+      "O prédio atrai visitantes como mariposas para a chama",
+      "O prédio está cheio de vozes sussurrantes",
+      "As janelas do prédio mostram cenas impossíveis",
+      "O prédio está coberto de símbolos misteriosos",
+      "O prédio parece respirar",
+      "O prédio está cercado por uma aura de pavor",
+      "As portas do prédio abrem para lugares diferentes"
+    ],
+    "landmark_encounters": [
+      "O marco atrai multidões de peregrinos e loucos",
+      "O marco é evitado por todos os habitantes sãos",
+      "O marco pulsa com poder sobrenatural",
+      "O marco parece observar aqueles que se aproximam",
+      "O marco está cercado por oferendas",
+      "O marco ecoa com vozes antigas",
+      "O marco é o local de rituais estranhos",
+      "O marco atrai entidades sobrenaturais",
+      "O marco está coberto de inscrições misteriosas",
+      "O marco existe em múltiplas dimensões"
+    ],
+    "market_encounters": [
+      "O mercado opera apenas durante certas horas",
+      "O mercado requer pagamento em moedas estranhas",
+      "O mercado atrai clientes de outros reinos",
+      "O mercado existe em múltiplas dimensões simultaneamente",
+      "O mercado está cheio de mercadorias proibidas",
+      "O mercado é patrulhado por guardas misteriosos",
+      "O mercado é o local de transações sombrias",
+      "O mercado está cercado por barreiras sobrenaturais",
+      "O mercado é frequentado por seres sobrenaturais",
+      "O mercado é o centro de atividades ilegais"
+    ],
+    "temple_encounters": [
+      "O templo realiza serviços à meia-noite",
+      "O templo requer oferendas de sangue",
+      "O templo concede bênçãos sombrias aos suplicantes",
+      "O templo ecoa com cantos sobrenaturais",
+      "O templo está cheio de adoradores desesperados",
+      "O templo é o local de rituais proibidos",
+      "O templo é guardado por sacerdotes fanáticos",
+      "O templo atrai os perdidos e desesperados",
+      "O templo está cercado por energia sobrenatural",
+      "O templo é o portal para outros reinos"
+    ],
+    "tavern_encounters": [
+      "A taverna serve bebidas que concedem visões",
+      "A taverna é uma fachada para atividades ilegais",
+      "A taverna hospeda lutas até a morte",
+      "A taverna acolhe tanto vivos quanto mortos",
+      "A taverna está cheia de patronos perigosos",
+      "A taverna é o local de negócios sombrios",
+      "A taverna é assombrada por tragédias passadas",
+      "A taverna é frequentada por seres sobrenaturais",
+      "A taverna é o centro de fofocas locais",
+      "A taverna é o local de reuniões secretas"
+    ],
+    "guild_encounters": [
+      "A guilda recruta apenas os desesperados",
+      "A guilda exige juramentos terríveis de lealdade",
+      "A guilda opera de câmaras escondidas",
+      "A guilda controla funções vitais da cidade",
+      "A guilda está cheia de membros perigosos",
+      "A guilda é o local de rituais sombrios",
+      "A guilda é guardada por executores fanáticos",
+      "A guilda atrai os ambiciosos e impiedosos",
+      "A guilda está cercada por barreiras sobrenaturais",
+      "A guilda é o portal para conhecimento proibido"
+    ],
+    "residence_encounters": [
+      "A residência parece normal por fora mas guarda segredos sombrios",
+      "A residência muda quando não observada",
+      "A residência existe em múltiplos períodos temporais simultaneamente",
+      "A residência atrai os solitários e desesperados",
+      "A residência está cheia de entidades sobrenaturais",
+      "A residência é o local de eventos trágicos",
+      "A residência é guardada por forças misteriosas",
+      "A residência atrai os perdidos e esquecidos",
+      "A residência está cercada por energia sobrenatural",
+      "A residência é o portal para outros reinos"
+    ],
+    "ruins_encounters": [
+      "As ruínas são assombradas por ecos do passado",
+      "As ruínas escondem segredos em suas profundezas",
+      "As ruínas atraem caçadores de tesouros e estudiosos",
+      "As ruínas servem como covis para criaturas perigosas",
+      "As ruínas estão cheias de entidades sobrenaturais",
+      "As ruínas são o local de tragédias antigas",
+      "As ruínas são guardadas por forças misteriosas",
+      "As ruínas atraem os perdidos e desesperados",
+      "As ruínas estão cercadas por energia sobrenatural",
+      "As ruínas são o portal para outros reinos"
+    ],
+    "street_threats": [
+      "Prédios instáveis",
+      "Gangues errantes",
+      "Manifestações sobrenaturais",
+      "Vapores venenosos",
+      "Estruturas em colapso",
+      "Habitantes hostis",
+      "Desaparecimentos misteriosos",
+      "Barreiras sobrenaturais",
+      "Criaturas perigosas",
+      "Solo amaldiçoado"
+    ]
+  }
+}

@@ -22,6 +22,11 @@ from backend.translation_system import translation_system
 from backend.city_overlay_analyzer import city_overlay_analyzer
 from backend.hex_service import hex_service
 from backend.hex_model import hex_manager
+from backend.utils.city_processor import create_major_city_response
+from backend.utils.markdown_parser import parse_content_sections, parse_loot_section, parse_magical_effect, extract_title_from_content, determine_hex_type
+from backend.utils.response_helpers import create_overlay_response, handle_exception_response
+from backend.utils.content_detector import get_hex_content_type, check_hex_has_loot
+from backend.utils.grid_generator import generate_hex_grid, determine_content_symbol, determine_css_class
 
 # Create blueprints
 main_bp = Blueprint('main', __name__)
@@ -108,13 +113,6 @@ def main_map():
     
     # Ensure all keys are strings
     ascii_map_data = {str(k): v for k, v in ascii_map_data.items()}
-    import json
-    print("DEBUG: ascii_map_data sample:", json.dumps(dict(list(ascii_map_data.items())[:2]), indent=2))
-    
-    # Debug output
-    print(f"DEBUG: Map dimensions: {map_width}x{map_height}")
-    print(f"DEBUG: ASCII map data keys: {len(ascii_map_data.keys())}")
-    print(f"DEBUG: Sample hex 0101: {ascii_map_data.get('0101', 'Not found')}")
     
     return render_template('main_map.html',
                          ascii_map=ascii_map_data,
@@ -434,17 +432,15 @@ def get_city_overlays():
 @api_bp.route('/city-overlay/<overlay_name>')
 def get_city_overlay(overlay_name):
     try:
-        print(f"DEBUG: Requested overlay: '{overlay_name}'")
+        
         overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
         if not overlay_data:
-            print(f"DEBUG: No cached overlay data, generating new overlay for '{overlay_name}'")
+            
             overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
         if not overlay_data:
             return jsonify({'success': False, 'error': 'Failed to generate overlay data'}), 404
 
-        print(f"DEBUG: Overlay data keys: {list(overlay_data.keys())}")
-        print(f"DEBUG: Hex grid has {len(overlay_data.get('hex_grid', {}))} hexes")
-        print(f"DEBUG: Hex grid keys: {list(overlay_data.get('hex_grid', {}).keys())}")
+        
 
         compact_overlay = {
             'name': overlay_data['name'],
@@ -479,18 +475,10 @@ def get_city_overlay(overlay_name):
             if len(compact_overlay['hex_grid'][hex_id]['content']['atmosphere']) > 100:
                 compact_overlay['hex_grid'][hex_id]['content']['atmosphere'] = compact_overlay['hex_grid'][hex_id]['content']['atmosphere'][:100] + '...'
         
-        print(f"DEBUG: Compact overlay hex grid has {len(compact_overlay['hex_grid'])} hexes")
-        print(f"DEBUG: Compact overlay hex grid keys: {list(compact_overlay['hex_grid'].keys())}")
-        
-        response = jsonify({'success': True, 'overlay': compact_overlay})
-        response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-        response.headers['Pragma'] = 'no-cache'
-        response.headers['Expires'] = '0'
-        return response
+           
+        return create_overlay_response(compact_overlay)
     except Exception as e:
-        import traceback
-        traceback.print_exc()
-        return jsonify({'success': False, 'error': str(e)}), 500
+        return handle_exception_response(e, "loading city overlay")
 
 @api_bp.route('/city-overlay/<overlay_name>/ascii')
 def get_city_overlay_ascii(overlay_name):
@@ -548,20 +536,28 @@ def get_city_overlay_hex(overlay_name, hex_id):
                 # Hex-specific enriched content
                 'weather': hex_content.get('weather'),
                 'city_event': hex_content.get('city_event'),
-                                            'npc_name': hex_content.get('npc_name'),
-                            'npc_trade': hex_content.get('npc_trade'),
-                            'npc_trait': hex_content.get('npc_trait'),
-                            'npc_concern': hex_content.get('npc_concern'),
-                            'npc_want': hex_content.get('npc_want'),
-                            'npc_secret': hex_content.get('npc_secret'),
-                            'npc_affiliation': hex_content.get('npc_affiliation'),
-                            'npc_attitude': hex_content.get('npc_attitude'),
+                'npc_name': hex_content.get('npc_name'),
+                'npc_trade': hex_content.get('npc_trade'),
+                'npc_trait': hex_content.get('npc_trait'),
+                'npc_concern': hex_content.get('npc_concern'),
+                'npc_want': hex_content.get('npc_want'),
+                'npc_secret': hex_content.get('npc_secret'),
+                'npc_affiliation': hex_content.get('npc_affiliation'),
+                'npc_attitude': hex_content.get('npc_attitude'),
                 'tavern_menu': hex_content.get('tavern_menu'),
                 'tavern_innkeeper': hex_content.get('tavern_innkeeper'),
                 'tavern_patron': hex_content.get('tavern_patron'),
                 'related_hexes': hex_content.get('related_hexes'),
                 'random_table': hex_content.get('random_table'),
-                'notable_features': hex_content.get('notable_features')
+                'notable_features': hex_content.get('notable_features'),
+                # Additional fields
+                'population': hex_content.get('population'),
+                'services': hex_content.get('services'),
+                'items_sold': hex_content.get('items_sold'),
+                'beast_prices': hex_content.get('beast_prices'),
+                'key_npcs': hex_content.get('key_npcs'),
+                'active_factions': hex_content.get('active_factions'),
+                'patrons': hex_content.get('patrons')
             }
         }
         
@@ -640,8 +636,7 @@ def regenerate_hex(overlay_name, hex_id):
 def regenerate_overlay(overlay_name):
     """Regenerate an entire city overlay."""
     try:
-        print(f"DEBUG: Regenerating entire overlay for {overlay_name}")
-        
+          
         # Regenerate the entire overlay
         overlay_data = city_overlay_analyzer.regenerate_overlay(overlay_name)
         
@@ -664,28 +659,7 @@ def regenerate_overlay(overlay_name):
 def _get_major_city_info(hex_code: str, hardcoded: dict) -> dict:
     city_key = hardcoded['city_key']
     city_data = lore_db.major_cities[city_key]
-    if current_language == 'pt':
-        title = city_data.get('name_pt', city_data['name'])
-        description = city_data.get('description_pt', city_data['description'])
-        atmosphere = city_data.get('atmosphere_pt', city_data['atmosphere'])
-        notable_features = city_data.get('notable_features_pt', city_data['notable_features'])
-    else:
-        title = city_data['name']
-        description = city_data['description']
-        atmosphere = city_data['atmosphere']
-        notable_features = city_data['notable_features']
-    return jsonify({
-        'exists': True,
-        'is_major_city': True,
-        'title': title,
-        'description': description,
-        'population': city_data['population'],
-        'region': city_data['region'],
-        'atmosphere': atmosphere,
-        'notable_features': notable_features,
-        'key_npcs': city_data['key_npcs'],
-        'hex_code': hex_code,
-    })
+    return create_major_city_response(city_data, hex_code, current_language)
 
 def _get_hex_file_info(hex_code: str, hex_file) -> dict:
     try:
@@ -764,89 +738,74 @@ def _get_hex_file_info(hex_code: str, hex_file) -> dict:
         return jsonify({'error': f'Failed to read hex file: {e}'}), 500
 
 def generate_ascii_map_data():
-    map_width, map_height = terrain_system.get_map_dimensions()
-    grid = {}
-    for x in range(1, map_width + 1):
-        for y in range(1, map_height + 1):
-            hex_code = f"{x:02d}{y:02d}"
-            hardcoded = lore_db.get_hardcoded_hex(hex_code)
-            if hardcoded and hardcoded.get('type') == 'major_city':
-                city_key = hardcoded['city_key']
-                city_data = lore_db.major_cities[city_key]
-                grid[hex_code] = {
-                    'x': x, 'y': y,
-                    'terrain': normalize_terrain_name(hardcoded['terrain']),
-                    'symbol': '◆',
-                    'is_city': True,
-                    'city_name': city_data['name'],
-                    'population': city_data['population'],
-                    'region': city_data['region'],
-                    'has_content': True,
-                    'css_class': 'major-city'
-                }
-            else:
-                terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
-                hex_file_exists = (config.paths.output_path / "hexes" / f"hex_{hex_code}.md").exists()
-                has_loot = False
-                content_type = None
-                if hex_file_exists:
-                    with open(config.paths.output_path / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
-                        content = f.read()
-                    hex_data = extract_hex_data(content)
-                    terrain = normalize_terrain_name(hex_data.get('terrain', 'unknown'))
-                    content_type = get_hex_content_type(hex_code)
-                    has_loot = check_hex_has_loot(hex_code)
-                symbol = get_terrain_symbol(terrain)
-                if hex_file_exists:
-                    if content_type == 'settlement':
-                        symbol = '⌂'
-                    elif content_type == 'ruins':
-                        symbol = '▲'
-                    elif content_type == 'beast':
-                        symbol = '※'
-                    elif content_type == 'npc':
-                        symbol = '☉'
-                    elif content_type == 'sea_encounter':
-                        symbol = '≈'
-                # Always set css_class from terrain
-                css_class = f'terrain-{terrain}'
-                if content_type == 'settlement':
-                    css_class = 'settlement'
-                if has_loot:
-                    css_class += ' has-content'
-                if hex_code == "1606":
-                    print(f"DEBUG 1606: terrain={terrain}, content_type={content_type}, css_class={css_class}")
-                grid[hex_code] = {
-                    'x': x, 'y': y,
-                    'terrain': terrain,
-                    'symbol': symbol,
-                    'is_city': False,
-                    'has_content': has_loot,
-                    'content_type': content_type,
-                    'css_class': css_class
-                }
-    if not isinstance(grid, dict):
+    # Use centralized grid generator for base grid
+    base_grid = generate_hex_grid(lore_db)
+    
+    # Process each hex to add content-specific information
+    for hex_code, hex_data in base_grid.items():
+        if hex_data.get('is_city'):
+            # Major city - add city-specific data
+            city_data = hex_data['city_data']
+            hex_data.update({
+                'terrain': normalize_terrain_name(hex_data['terrain']),
+                'symbol': '◆',
+                'city_name': city_data['name'],
+                'population': city_data['population'],
+                'region': city_data['region'],
+                'has_content': True,
+                'css_class': 'major-city'
+            })
+        else:
+            # Regular terrain - check for generated content
+            terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
+            hex_file_exists = (config.paths.output_path / "hexes" / f"hex_{hex_code}.md").exists()
+            has_loot = False
+            content_type = None
+            
+            if hex_file_exists:
+                with open(config.paths.output_path / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
+                    content = f.read()
+                hex_data_content = extract_hex_data(content)
+                terrain = normalize_terrain_name(hex_data_content.get('terrain', 'unknown'))
+                content_type = get_hex_content_type(hex_code)
+                has_loot = check_hex_has_loot(hex_code)
+            
+            # Use centralized symbol and CSS class determination
+            symbol = determine_content_symbol(content_type, terrain) if hex_file_exists else get_terrain_symbol(terrain)
+            css_class = determine_css_class(content_type, terrain)
+            if has_loot:
+                css_class += ' has-content'
+            
+            hex_data.update({
+                'terrain': terrain,
+                'symbol': symbol,
+                'has_content': has_loot,
+                'content_type': content_type,
+                'css_class': css_class
+            })
+    
+    if not isinstance(base_grid, dict):
         return {}
-    return grid
+    return base_grid
 
 def get_major_cities_data():
     cities = []
-    for city_key, city_data in lore_db.major_cities.items():
-        if current_language == 'pt':
-            name = city_data.get('name_pt', city_data['name'])
-        else:
-            name = city_data['name']
-        cities.append({
-            'key': city_key,
-            'name': name,
-            'coordinates': city_data['coordinates'],
-            'population': city_data['population'],
-            'region': city_data['region']
-        })
+    # Load cities from database manager with current language
+    from backend.database_manager import database_manager
+    cities_table = database_manager.get_table('cities', 'major_cities', current_language)
+    
+    for city in cities_table:
+        if isinstance(city, dict):
+            cities.append({
+                'key': city.get('key', ''),
+                'name': city.get('name', ''),
+                'coordinates': city.get('coordinates', [0, 0]),
+                'population': city.get('population', 'Unknown'),
+                'region': city.get('region', 'central')
+            })
     return cities
 
 def extract_title(content: str) -> str:
-    from backend.utils import extract_title_from_content
     return extract_title_from_content(content)
 
 def extract_hex_data(content):
@@ -880,58 +839,13 @@ def extract_settlement_data(content):
     return hex_service._extract_settlement_data(content, "temp")
 
 def _determine_hex_type(content: str) -> str:
-    if '⌂ **' in content:
-        return 'settlement'
-    elif '▲ **' in content:
-        return 'dungeon'
-    elif '※ **' in content:
-        return 'beast'
-    elif '☉ **' in content:
-        return 'npc'
-    else:
-        return 'wilderness'
+    return determine_hex_type(content)
 
 def get_terrain_symbol(terrain):
     return terrain_system.get_terrain_symbol(terrain)
 
-def check_hex_has_loot(hex_code):
-    try:
-        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
-        if not hex_file_path.exists():
-            return False
-        with open(hex_file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        loot_indicators = [
-            '## Loot Found',
-            '**Treasure Found:**',
-            '**Loot:**',
-            '**Treasure:**'
-        ]
-        return any(indicator in content for indicator in loot_indicators)
-    except Exception:
-        return False
-
-def get_hex_content_type(hex_code):
-    try:
-        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
-        if not hex_file_path.exists():
-            return None
-        with open(hex_file_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        if '⌂ **' in content:
-            return 'settlement'
-        elif '▲ **Ancient Ruins**' in content:
-            return 'ruins'
-        elif '※ **' in content:
-            return 'beast'
-        elif '☉ **Wandering' in content:
-            return 'npc'
-        elif '≈ **' in content:
-            return 'sea_encounter'
-        else:
-            return 'basic'
-    except Exception:
-        return None 
+# Use centralized content detector utilities
+# check_hex_has_loot and get_hex_content_type are now imported from utils.content_detector 
 
 # Extraction stubs for missing types
 
@@ -952,31 +866,18 @@ def extract_beast_data(content):
     territory_match = re.search(r'## Territory\n(.+?)(?:\n##|$)', content, re.DOTALL)
     if territory_match:
         data['territory'] = territory_match.group(1).strip()
-    # Fallbacks for common fields
-    encounter_match = re.search(r'## Encounter\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if encounter_match:
-        data['encounter'] = encounter_match.group(1).strip()
-    denizen_match = re.search(r'## Denizen\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if denizen_match:
-        data['denizen'] = denizen_match.group(1).strip()
-    notable_feature_match = re.search(r'## Notable Feature\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if notable_feature_match:
-        data['notable_feature'] = notable_feature_match.group(1).strip()
-    atmosphere_match = re.search(r'## Atmosphere\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if atmosphere_match:
-        data['atmosphere'] = atmosphere_match.group(1).strip()
-    # Loot and magical effect
-    loot_match = re.search(r'## Loot Found\n\*\*Type:\*\*\s*([^\n]+).*\*\*Item:\*\*\s*([^\n]+).*\*\*Description:\*\*\s*([^\n]+).*\*\*Full Description:\*\*\s*([^\n]+)', content, re.DOTALL)
-    if loot_match:
-        data['loot'] = {
-            'type': loot_match.group(1).strip(),
-            'item': loot_match.group(2).strip(),
-            'description': loot_match.group(3).strip(),
-            'full_description': loot_match.group(4).strip()
-        }
-    magical_effect_match = re.search(r'\*\*Magical Effect:\*\*\s*([^\n]+)', content)
-    if magical_effect_match:
-        data['magical_effect'] = magical_effect_match.group(1).strip()
+    # Use centralized content parser for common fields
+    parsed_sections = parse_content_sections(content)
+    data.update(parsed_sections)
+    
+    # Parse loot and magical effect
+    loot_data = parse_loot_section(content)
+    if loot_data:
+        data['loot'] = loot_data
+    
+    magical_effect = parse_magical_effect(content)
+    if magical_effect:
+        data['magical_effect'] = magical_effect
     return data
 
 def extract_dungeon_data(content):
@@ -1009,34 +910,18 @@ def extract_dungeon_data(content):
             'effect': ancient_knowledge_match.group(3).strip(),
             'description': ancient_knowledge_match.group(4).strip()
         }
-    # Loot and magical effect
-    loot_match = re.search(r'## Loot Found\n\*\*Type:\*\*\s*([^\n]+).*\*\*Item:\*\*\s*([^\n]+).*\*\*Description:\*\*\s*([^\n]+).*\*\*Full Description:\*\*\s*([^\n]+)', content, re.DOTALL)
-    if loot_match:
-        data['loot'] = {
-            'type': loot_match.group(1).strip(),
-            'item': loot_match.group(2).strip(),
-            'description': loot_match.group(3).strip(),
-            'full_description': loot_match.group(4).strip()
-        }
-    magical_effect_match = re.search(r'\*\*Magical Effect:\*\*\s*([^\n]+)', content)
-    if magical_effect_match:
-        data['magical_effect'] = magical_effect_match.group(1).strip()
-    # Fallbacks for common fields
-    encounter_match = re.search(r'## Encounter\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if encounter_match:
-        data['encounter'] = encounter_match.group(1).strip()
-    denizen_match = re.search(r'## Denizen\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if denizen_match:
-        data['denizen'] = denizen_match.group(1).strip()
-    notable_feature_match = re.search(r'## Notable Feature\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if notable_feature_match:
-        data['notable_feature'] = notable_feature_match.group(1).strip()
-    atmosphere_match = re.search(r'## Atmosphere\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if atmosphere_match:
-        data['atmosphere'] = atmosphere_match.group(1).strip()
-    description_match = re.search(r'## Dungeon Details\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if description_match:
-        data['description'] = description_match.group(1).strip()
+    # Use centralized content parser for common fields
+    parsed_sections = parse_content_sections(content)
+    data.update(parsed_sections)
+    
+    # Parse loot and magical effect
+    loot_data = parse_loot_section(content)
+    if loot_data:
+        data['loot'] = loot_data
+    
+    magical_effect = parse_magical_effect(content)
+    if magical_effect:
+        data['magical_effect'] = magical_effect
     return data
 
 def extract_npc_data(content):
@@ -1083,26 +968,41 @@ def extract_npc_data(content):
     if key_npcs_match:
         data['key_npcs'] = [npc.strip() for npc in key_npcs_match.group(1).split(',')]
     
-    # Fallbacks for common fields
-    encounter_match = re.search(r'## Encounter\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if encounter_match:
-        data['encounter'] = encounter_match.group(1).strip()
-    denizen_match = re.search(r'## Denizen\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if denizen_match:
-        data['denizen'] = denizen_match.group(1).strip()
-    notable_feature_match = re.search(r'## Notable Feature\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if notable_feature_match:
-        data['notable_feature'] = notable_feature_match.group(1).strip()
-    atmosphere_match = re.search(r'## Atmosphere\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if atmosphere_match:
-        data['atmosphere'] = atmosphere_match.group(1).strip()
-    description_match = re.search(r'## NPC Details\n(.+?)(?:\n##|$)', content, re.DOTALL)
-    if description_match:
-        data['description'] = description_match.group(1).strip()
+    # Use centralized content parser for common fields
+    parsed_sections = parse_content_sections(content)
+    data.update(parsed_sections)
     return data
 
 
 
 def extract_ruins_data(content):
-    # TODO: Implement real parsing logic
-    return extract_hex_data(content) 
+    """Extract ruins-specific data from content."""
+    data = {}
+    
+    # Parse ruins-specific fields
+    ruins_type_match = re.search(r'\*\*Type:\*\*\s*([^\n]+)', content)
+    if ruins_type_match:
+        data['ruins_type'] = ruins_type_match.group(1).strip()
+    
+    age_match = re.search(r'\*\*Age:\*\*\s*([^\n]+)', content)
+    if age_match:
+        data['age'] = age_match.group(1).strip()
+    
+    builder_match = re.search(r'\*\*Builder:\*\*\s*([^\n]+)', content)
+    if builder_match:
+        data['builder'] = builder_match.group(1).strip()
+    
+    # Use centralized content parser for common fields
+    parsed_sections = parse_content_sections(content)
+    data.update(parsed_sections)
+    
+    # Parse loot and magical effect
+    loot_data = parse_loot_section(content)
+    if loot_data:
+        data['loot'] = loot_data
+    
+    magical_effect = parse_magical_effect(content)
+    if magical_effect:
+        data['magical_effect'] = magical_effect
+    
+    return data 

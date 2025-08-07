@@ -1,0 +1,68 @@
+{
+  "category": "cities",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2024-01-01T00:00:00"
+  },
+  "tables": {
+    "major_cities": [
+      {
+        "key": "galgenbeck",
+        "name": "Galgenbeck",
+        "description": "Uma metrópole vasta construída sobre os ossos de civilizações esquecidas. Os infames Jardins dos Enforcados balançam com os corpos dos condenados, e o ar é denso com cheiro de podridão e incenso. A cidade é governada por um conselho secreto, e seus esgotos labirínticos abrigam horrores antigos e indizíveis.",
+        "population": "1000+",
+        "terrain": "plains",
+        "region": "central",
+        "coordinates": [14, 27],
+        "notable_features": [
+          "Jardins dos Enforcados",
+          "Conselho governante secreto",
+          "Esgotos labirínticos",
+          "Catacumbas antigas e proibidas",
+          "Distrito de Schleswig com infestação demoníaca",
+          "Ministério da Riqueza e Impostos extraindo almas como moeda",
+          "Escritório da Santa Inquisição (em ruínas)",
+          "Heptalitos Amaldiçoados por toda a cidade",
+          "Moinho da Cidade (de Ossos) moendo ossos em farinha"
+        ],
+        "key_npcs": ["Josilfa Migol", "O Conselho de Galgenbeck"],
+        "atmosphere": "Decadência urbana, crepúsculo perpétuo e a ameaça constante de traição."
+      },
+      {
+        "key": "allians",
+        "name": "Allians",
+        "description": "Uma cidade isolada de eruditos e místicos, Allians é construída em torno de uma biblioteca em ruínas que supostamente contém as últimas histórias verdadeiras do mundo. A cidade está envolta em segredo, e suas torres são iluminadas por chamas azuis fantasmagóricas.",
+        "population": "500",
+        "terrain": "plains",
+        "region": "east",
+        "coordinates": [5, 7],
+        "notable_features": [
+          "Biblioteca em ruínas de conhecimento proibido",
+          "Torres de chamas azuis",
+          "Conselho secreto de eruditos",
+          "Ritos ocultos à meia-noite"
+        ],
+        "key_npcs": ["O Arquivista", "A Senhora dos Tomos"],
+        "atmosphere": "Erudito, secreto e assombrado pelo conhecimento."
+      },
+      {
+        "key": "graven_tosk",
+        "name": "Graven-Tosk",
+        "description": "Uma cidade de cemitérios e necromantes, Graven-Tosk é um lugar onde os vivos e os mortos se misturam. Campos de ossos se estendem até o horizonte, e o ar é denso com cheiro de incenso e podridão.",
+        "population": "300",
+        "terrain": "swamp",
+        "region": "west",
+        "coordinates": [15, 13],
+        "notable_features": [
+          "Cemitérios infinitos",
+          "Guildas de Necromante",
+          "Campos de ossos",
+          "Procissões fúnebres a todas as horas"
+        ],
+        "key_npcs": ["O Mestre dos Mortos", "A Guardiã dos Ossos"],
+        "atmosphere": "Sombrio, funerário e repleto da presença dos mortos."
+      }
+    ]
+  }
+}

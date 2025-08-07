@@ -1,7 +1,7 @@
 {
   "city_name": "Graven-Tosk",
-  "display_name": "Graven-Tosk - The Ancient Cemetery",
-  "description": "Graven-Tosk is a truly ancient cemetery located deep within the forest of Sarkash, where paths tangle and wind in overgrown gloom. It is filled with mausoleums, blank-eyed cherubs, stagnant fountains, plague pits, and ordinary graves. The air here is heavy, stale, and difficult to breathe, often accompanied by the sound of frantic scratching. Rising above this mournful landscape is the gothic black castle known as the Palace of the Shadow King.",
+  "display_name": "Graven-Tosk - O Cemitério Antigo",
+  "description": "Graven-Tosk é um cemitério verdadeiramente antigo localizado no fundo da floresta de Sarkash, onde os caminhos se entrelaçam e serpenteiam na escuridão exuberante. É preenchido com mausoléus, querubins de olhos vazios, fontes estagnadas, covas de peste e túmulos comuns. O ar aqui é pesado, viciado e difícil de respirar, frequentemente acompanhado pelo som de arranhões frenéticos. Elevando-se acima desta paisagem melancólica está o castelo gótico negro conhecido como o Palácio do Rei das Sombras.",
   "theme": "necropolis_decay_hidden",
   "district_matrix": [
     [

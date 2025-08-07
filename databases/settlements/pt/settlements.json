@@ -1,0 +1,90 @@
+{
+  "category": "settlements",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "settlement_base_names": [
+      "Cabeça de Ovelha",
+      "Mendigo",
+      "Schleger",
+      "Arkh",
+      "Sombra",
+      "Condenação",
+      "Sangue de Troll",
+      "Verhu",
+      "Lúgubre",
+      "Chorão",
+      "Túmulo",
+      "Javali",
+      "Quebrado",
+      "Lua Negra",
+      "Pedra Estilhaçada",
+      "Lâmina Sangrenta",
+      "Presságio",
+      "Ressurreição",
+      "Bruxa",
+      "Serpente"
+    ],
+    "settlement_suffixes": [
+      "Cruzamento",
+      "Riacho",
+      "Bosque",
+      "Vale",
+      "Enseada",
+      "Beco",
+      "Círculo",
+      "Comum",
+      "Colina",
+      "Forja",
+      "Charneca",
+      "Planície",
+      "Vau",
+      "Passo",
+      "Fim",
+      "Chifre",
+      "Lago",
+      "Porto",
+      "Coração",
+      "Lote"
+    ],
+    "settlement_populations": [
+      "Algumas dezenas de almas desesperadas",
+      "Cerca de cem sobreviventes",
+      "Várias centenas de habitantes",
+      "Mil ou mais pessoas",
+      "Alguns milhares de residentes",
+      "Vários milhares de almas",
+      "Um grande assentamento de milhares",
+      "Uma cidade movimentada de muitos milhares",
+      "Um assentamento importante com dezenas de milhares",
+      "Uma vasta cidade com incontáveis habitantes"
+    ],
+    "settlement_governments": [
+      "Governado por um conselho de anciões",
+      "Governado por uma figura misteriosa",
+      "Controlado por uma guilda poderosa",
+      "Liderado por um líder carismático",
+      "Gerenciado por uma ordem religiosa",
+      "Supervisionado por um comandante militar",
+      "Dirigido por um conselho de mercadores",
+      "Governado por um nobre hereditário",
+      "Controlado por uma sociedade secreta",
+      "Governado por um conselho dos sábios"
+    ],
+    "settlement_trends": [
+      "Morrendo lentamente conforme os recursos diminuem",
+      "Crescendo constantemente conforme refugiados chegam",
+      "Estável mas tenso com conflitos internos",
+      "Prosperando através do comércio",
+      "Declinando devido a ameaças externas",
+      "Expandindo através de conquista e força",
+      "Estagnado mas seguro atrás de muros",
+      "Florescendo apesar do apocalipse",
+      "Lutando para manter a ordem",
+      "Florescendo como centro de cultura"
+    ]
+  }
+}

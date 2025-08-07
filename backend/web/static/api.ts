@@ -1,58 +1,35 @@
 // web/static/api.ts
+import { apiGet, apiPost, apiPut, handleApiError } from './utils/apiUtils.js';
 
 export async function getHex(hexCode: string): Promise<any> {
   try {
-    const response = await fetch(`/api/hex/${hexCode}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`/api/hex/${hexCode}`);
   } catch (error) {
-    console.error('Error fetching hex:', error);
-    throw error;
+    throw handleApiError(error, 'fetching hex');
   }
 }
 
 export async function updateHex(hexCode: string, content: string): Promise<any> {
   try {
-    const response = await fetch(`/api/hex/${hexCode}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content })
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiPut(`/api/hex/${hexCode}`, { content });
   } catch (error) {
-    console.error('Error updating hex:', error);
-    throw error;
+    throw handleApiError(error, 'updating hex');
   }
 }
 
 export async function getCity(hexCode: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city/${hexCode}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`/api/city/${hexCode}`);
   } catch (error) {
-    console.error('Error fetching city:', error);
-    throw error;
+    throw handleApiError(error, 'fetching city');
   }
 }
 
 export async function getSettlement(hexCode: string): Promise<any> {
   try {
-    const response = await fetch(`/api/settlement/${hexCode}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`/api/settlement/${hexCode}`);
   } catch (error) {
-    console.error('Error fetching settlement:', error);
-    throw error;
+    throw handleApiError(error, 'fetching settlement');
   }
 }
 
@@ -68,18 +45,9 @@ export async function generateHex(hexCode: string) {
 
 export async function setLanguage(language: string): Promise<any> {
   try {
-    const response = await fetch('/api/set-language', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ language })
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiPost('/api/set-language', { language });
   } catch (error) {
-    console.error('Error setting language:', error);
-    throw error;
+    throw handleApiError(error, 'setting language');
   }
 }
 

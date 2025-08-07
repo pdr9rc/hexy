@@ -1,7 +1,7 @@
 {
   "city_name": "Galgenbeck",
-  "display_name": "Galgenbeck - The Corpse City",
-  "description": "A sprawling metropolis built atop the bones of countless civilizations. The city is ruled by Arch-Priestess Josilfa Migol, who enforces the Ordinance of Devotion. The Harvester delivers summons for sacrifice, and the population shrinks daily as people are harvested to forestall the comet's destruction.",
+  "display_name": "Galgenbeck - A Cidade dos Cadáveres",
+  "description": "Uma metrópole vasta construída sobre os ossos de civilizações esquecidas. A cidade é governada pela Arqui-Sacerdotisa Josilfa Migol, que impõe a Ordenança da Devoção. O Ceifador entrega convocações para sacrifício, e a população diminui diariamente enquanto as pessoas são colhidas para evitar a destruição do cometa.",
   "theme": "urban_decay_necropolis",
   "district_matrix": [
     [

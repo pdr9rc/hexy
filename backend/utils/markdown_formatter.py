@@ -1,0 +1,167 @@
+"""
+Markdown formatting utilities for generating consistent hex content.
+"""
+
+from typing import Dict, Any, List
+
+
+def format_threat_level_and_territory(hex_data: Dict[str, Any], translation_system=None) -> List[str]:
+    """
+    Format threat level and territory sections for markdown.
+    
+    Args:
+        hex_data: Dictionary containing hex data
+        translation_system: Translation system instance
+        
+    Returns:
+        List of markdown lines
+    """
+    lines = []
+    
+    # Add threat level and territory as separate sections
+    if hex_data.get('threat_level'):
+        threat_label = translation_system.t('threat_level') if translation_system else 'Threat Level'
+        lines.append(f"## {threat_label}")
+        lines.append(hex_data['threat_level'])
+        lines.append("")
+    
+    if hex_data.get('territory'):
+        territory_label = translation_system.t('territory') if translation_system else 'Territory'
+        lines.append(f"## {territory_label}")
+        lines.append(hex_data['territory'])
+        lines.append("")
+    
+    return lines
+
+
+def format_loot_section(hex_data: Dict[str, Any], translation_system=None) -> List[str]:
+    """
+    Format loot section for markdown.
+    
+    Args:
+        hex_data: Dictionary containing hex data
+        translation_system: Translation system instance
+        
+    Returns:
+        List of markdown lines
+    """
+    lines = []
+    
+    if hex_data.get('loot'):
+        loot_label = translation_system.t('loot_found') if translation_system else 'Loot Found'
+        lines.append(f"## {loot_label}")
+        lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
+        lines.append("")
+    
+    return lines
+
+
+def format_beast_details(hex_data: Dict[str, Any], translation_system=None) -> List[str]:
+    """
+    Format beast details for markdown.
+    
+    Args:
+        hex_data: Dictionary containing hex data
+        translation_system: Translation system instance
+        
+    Returns:
+        List of markdown lines
+    """
+    lines = []
+    
+    lines.append("## Beast Details")
+    type_label = translation_system.t('type') if translation_system else 'Type'
+    feature_label = translation_system.t('feature') if translation_system else 'Feature'
+    behavior_label = translation_system.t('behavior') if translation_system else 'Behavior'
+    
+    lines.append(f"**{type_label}:** {hex_data.get('beast_type', 'Unknown')}")
+    lines.append(f"**{feature_label}:** {hex_data.get('beast_feature', 'Unknown')}")
+    lines.append(f"**{behavior_label}:** {hex_data.get('beast_behavior', 'Unknown')}")
+    lines.append("")
+    
+    # Add common sections
+    lines.extend(format_threat_level_and_territory(hex_data, translation_system))
+    lines.extend(format_loot_section(hex_data, translation_system))
+    
+    return lines
+
+
+def format_sea_encounter_details(hex_data: Dict[str, Any], translation_system=None) -> List[str]:
+    """
+    Format sea encounter details for markdown.
+    
+    Args:
+        hex_data: Dictionary containing hex data
+        translation_system: Translation system instance
+        
+    Returns:
+        List of markdown lines
+    """
+    lines = []
+    
+    lines.append("## Sea Encounter Details")
+    type_label = translation_system.t('type') if translation_system else 'Type'
+    lines.append(f"**{type_label}:** {hex_data.get('encounter_type', 'Unknown')}")
+    lines.append("")
+    
+    # Add common sections
+    lines.extend(format_threat_level_and_territory(hex_data, translation_system))
+    lines.extend(format_loot_section(hex_data, translation_system))
+    
+    return lines
+
+
+def format_npc_details(hex_data: Dict[str, Any], translation_system=None) -> List[str]:
+    """
+    Format NPC details for markdown.
+    
+    Args:
+        hex_data: Dictionary containing hex data
+        translation_system: Translation system instance
+        
+    Returns:
+        List of markdown lines
+    """
+    lines = []
+    
+    lines.append("## NPC Details")
+    name_label = translation_system.t('name') if translation_system else 'Name'
+    type_label = translation_system.t('type') if translation_system else 'Type'
+    
+    lines.append(f"**{name_label}:** {hex_data.get('name', 'Unknown')}")
+    lines.append(f"**{type_label}:** {hex_data.get('denizen_type', 'Unknown')}")
+    
+    # Mörk Borg NPC details
+    if hex_data.get('trait'):
+        trait_label = translation_system.t('npc_trait') if translation_system else 'Trait'
+        lines.append(f"**{trait_label}:** {hex_data.get('trait')}")
+    if hex_data.get('concern'):
+        concern_label = translation_system.t('npc_concern') if translation_system else 'Concern'
+        lines.append(f"**{concern_label}:** {hex_data.get('concern')}")
+    if hex_data.get('want'):
+        want_label = translation_system.t('npc_want') if translation_system else 'Want'
+        lines.append(f"**{want_label}:** {hex_data.get('want')}")
+    if hex_data.get('apocalypse_attitude'):
+        apocalypse_label = translation_system.t('npc_apocalypse_attitude') if translation_system else 'Apocalypse Attitude'
+        lines.append(f"**{apocalypse_label}:** {hex_data.get('apocalypse_attitude')}")
+    if hex_data.get('secret'):
+        secret_label = translation_system.t('npc_secret') if translation_system else 'Secret'
+        lines.append(f"**{secret_label}:** {hex_data.get('secret')}")
+    
+    # Fallback to old fields if new ones not available
+    if not hex_data.get('trait') and hex_data.get('motivation'):
+        motivation_label = translation_system.t('motivation') if translation_system else 'Motivation'
+        lines.append(f"**{motivation_label}:** {hex_data.get('motivation')}")
+    if not hex_data.get('concern') and hex_data.get('feature'):
+        feature_label = translation_system.t('feature') if translation_system else 'Feature'
+        lines.append(f"**{feature_label}:** {hex_data.get('feature')}")
+    if not hex_data.get('want') and hex_data.get('demeanor'):
+        demeanor_label = translation_system.t('demeanor') if translation_system else 'Demeanor'
+        lines.append(f"**{demeanor_label}:** {hex_data.get('demeanor')}")
+    
+    lines.append("")
+    
+    # Add loot section
+    lines.extend(format_loot_section(hex_data, translation_system))
+    
+    return lines 

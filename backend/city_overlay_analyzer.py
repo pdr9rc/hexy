@@ -16,6 +16,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
 from backend.database_manager import database_manager
+from backend.utils.city_helpers import create_fallback_district_data
 
 class CityOverlayAnalyzer:
     """Generates round hex grids for city overlays using matrix-based district placement and random content generation."""
@@ -68,102 +69,84 @@ class CityOverlayAnalyzer:
     
     def generate_city_overlay(self, overlay_name: str) -> Dict[str, Any]:
         """Generate a round hex grid overlay for a city image."""
-        overlays = self.get_available_overlays()
-        print(f"DEBUG: Requested overlay: '{overlay_name}'")
-        print(f"DEBUG: Available overlays: {[o['name'] for o in overlays]}")
-        
-        overlay_info = next((o for o in overlays if o['name'] == overlay_name), None)
-        
-        if not overlay_info:
-            print(f"DEBUG: No exact match found for '{overlay_name}'")
-            # Try case-insensitive match
-            overlay_info = next((o for o in overlays if o['name'].lower() == overlay_name.lower()), None)
-            if overlay_info:
-                print(f"DEBUG: Found case-insensitive match: {overlay_info['name']}")
-        
-        if not overlay_info:
-            print(f"DEBUG: Still no match found. Available overlay details:")
-            for overlay in overlays:
-                print(f"  - Name: '{overlay['name']}', Filename: '{overlay['filename']}'")
-            raise ValueError(f"City overlay '{overlay_name}' not found")
-        
-        # Load city data
-        city_data = self._load_city_database(overlay_name.lower())
-        
-        # Generate round hex grid
-        hex_grid = self._generate_round_hex_grid(overlay_name, city_data)
-        
-        # Add cross-references between related hexes
-        hex_grid = self._add_cross_references(hex_grid, city_data)
-        
-        # Calculate grid radius
-        radius = self._calculate_grid_radius(hex_grid)
-        
-        # Create overlay data structure
-        overlay_data = {
-            'name': overlay_name,
-            'display_name': self._format_overlay_name(overlay_name),
-            'filename': f"{overlay_name}_overlay.json",
-            'grid_type': 'round',
-            'radius': radius,
-            'hex_grid': hex_grid,
-            'total_hexes': len(hex_grid)
-        }
-        
-        print(f"DEBUG: Final hex grid has {len(hex_grid)} hexes")
-        print(f"DEBUG: Final hex grid keys: {list(hex_grid.keys())}")
-        
-        # Save overlay data
-        self._save_overlay_data(overlay_name, overlay_data)
-        
-        return overlay_data
+        try:
+            overlays = self.get_available_overlays()
+            
+            overlay_info = next((o for o in overlays if o['name'] == overlay_name), None)
+            
+            if not overlay_info:
+                # Try case-insensitive match
+                overlay_info = next((o for o in overlays if o['name'].lower() == overlay_name.lower()), None)
+            
+            if not overlay_info:
+                raise ValueError(f"City overlay '{overlay_name}' not found")
+            
+            # Load city data
+            city_data = self._load_city_database(overlay_name.lower())
+            
+            # Generate round hex grid
+            hex_grid = self._generate_round_hex_grid(overlay_name, city_data)
+            
+            # Add cross-references between related hexes
+            hex_grid = self._add_cross_references(hex_grid, city_data)
+            
+            # Calculate grid radius
+            radius = self._calculate_grid_radius(hex_grid)
+            
+            # Create overlay data structure
+            overlay_data = {
+                'name': overlay_name,
+                'display_name': self._format_overlay_name(overlay_name),
+                'filename': None,
+                'grid_type': 'round',
+                'radius': radius,
+                'hex_grid': hex_grid,
+                'total_hexes': len(hex_grid)
+            }
+            
+            # Save overlay data
+            self._save_overlay_data(overlay_name, overlay_data)
+            
+            return overlay_data
+            
+        except Exception as e:
+            import traceback
+            error_msg = f"Error during loading city overlay: {str(e)}\nTraceback:\n{traceback.format_exc()}"
+            print(error_msg)  # Log the full error
+            raise ValueError(error_msg)
     
     def _generate_round_hex_grid(self, overlay_name: str, city_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Generate a round hex grid with district matrix support."""
-        hex_grid = {}
-        
-        print(f"DEBUG: Generating round hex grid for {overlay_name}")
-        
-        # Check if city has a district matrix defined
-        district_matrix = self._get_district_matrix(city_data)
-        
-        if district_matrix:
-            print(f"DEBUG: Using predefined district matrix")
-            # Use the predefined district matrix
-            hex_grid = self._apply_district_matrix(district_matrix, overlay_name, city_data)
-        else:
-            print(f"DEBUG: No district matrix found, generating default round grid")
-            # Generate a default round grid
-            hex_grid = self._generate_default_round_grid(overlay_name, city_data)
-        
-        print(f"DEBUG: Final hex grid has {len(hex_grid)} hexes")
-        return hex_grid
+        """Generate a round hex grid for city overlay."""
+        try:
+            hex_grid = {}
+            
+            # Get district matrix if available
+            district_matrix = self._get_district_matrix(city_data)
+            
+            if district_matrix:
+                # Use district matrix for content generation
+                hex_grid = self._apply_district_matrix(district_matrix, overlay_name, city_data)
+            else:
+                # Generate default round grid
+                hex_grid = self._generate_default_round_grid(overlay_name, city_data)
+            
+            return hex_grid
+            
+        except Exception as e:
+            import traceback
+            error_msg = f"Error in _generate_round_hex_grid for {overlay_name}: {str(e)}\nTraceback:\n{traceback.format_exc()}"
+            print(error_msg)  # Log the full error
+            raise ValueError(error_msg)
     
     def _get_district_matrix(self, city_data: Optional[Dict[str, Any]]) -> Optional[List[List[str]]]:
         """Get the district matrix from city data if it exists."""
-        print(f"DEBUG: Checking for district matrix in city data")
-        if city_data:
-            print(f"DEBUG: City data keys: {list(city_data.keys())}")
-            if 'district_matrix' in city_data:
-                matrix = city_data['district_matrix']
-                print(f"DEBUG: Found district matrix with {len(matrix)} rows")
-                print(f"DEBUG: First row: {matrix[0] if matrix else 'None'}")
-                return matrix
-            else:
-                print(f"DEBUG: No district_matrix found in city data")
-        else:
-            print(f"DEBUG: No city data provided")
+        if city_data and 'district_matrix' in city_data:
+            return city_data['district_matrix']
         return None
     
     def _apply_district_matrix(self, matrix: List[List[str]], overlay_name: str, city_data: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         """Apply a predefined district matrix to generate hex content."""
         hex_grid = {}
-        
-        print(f"DEBUG: Applying district matrix for {overlay_name}")
-        print(f"DEBUG: Matrix dimensions: {len(matrix)}x{len(matrix[0]) if matrix else 0}")
-        print(f"DEBUG: Matrix content:")
-        for i, row in enumerate(matrix):
-            print(f"DEBUG: Row {i}: {row}")
         
         # Fill the entire matrix with hexes (visible or invisible)
         for row_idx, row in enumerate(matrix):
@@ -172,7 +155,7 @@ class CityOverlayAnalyzer:
                 hex_position = f"Row {row_idx+1}, Col {col_idx+1}"
                 
                 if district_name and district_name.strip():  # Has content
-                    print(f"DEBUG: Processing hex {hex_id} with district '{district_name}'")
+                    
                     
                     # Generate content based on the specified district
                     hex_content = self._generate_district_based_content(
@@ -188,7 +171,7 @@ class CityOverlayAnalyzer:
                         'content': hex_content
                     }
                     
-                    print(f"DEBUG: Generated content for {hex_id}: {hex_content.get('name', 'Unknown')}")
+                    
                 else:  # Empty cell - create invisible hex for proper formatting
                     hex_grid[hex_id] = {
                         'id': hex_id,
@@ -205,7 +188,7 @@ class CityOverlayAnalyzer:
                         }
                     }
         
-        print(f"DEBUG: Generated {len(hex_grid)} hexes total (including empty ones)")
+        
         return hex_grid
     
     def _generate_default_round_grid(self, overlay_name: str, city_data: Optional[Dict[str, Any]]) -> Dict[str, Any]:
@@ -273,62 +256,37 @@ class CityOverlayAnalyzer:
                     'atmosphere': 'Mysterious and foreboding'
                 }
             
+            # Integrate city-specific content
+            content = self._integrate_city_specific_content(content, city_data)
+            
             return content
         else:
-            # Fallback to generic district content
-            fallback_districts = [
-                "O Bairro dos Cadáveres", "Decadência dos Mercadores", "Os Mercados de Ossos", "Ala da Peste",
-                "Os Jardins dos Enforcados", "Ruína dos Eruditos", "Paraíso dos Ladrões", "As Ruas Sangrentas",
-                "Decadência dos Nobres", "Os Comuns Amaldiçoados"
-            ]
-            fallback_encounters = [
-                "Mendigos com peste pedindo esmolas", "Guardas corruptos exigindo subornos",
-                "Figuras misteriosas em vestes negras", "Profeta louco gritando profecias",
-                "Matilha de cães famintos", "Alma perdida vagando sem rumo"
-            ]
-            fallback_atmospheres = [
-                "Espesso com o fedor da decadência", "Crepúsculo perpétuo envolve as ruas",
-                "Sussurros ecoam de prédios vazios", "Sombras se movem onde ninguém anda",
-                "O ar tem gosto de cobre e medo", "Luzes estranhas piscam nas janelas"
-            ]
-            
-            districts = self._get_city_content_list(city_data, 'districts', fallback_districts)
-            encounters = self._get_city_encounters(city_data, 'district', fallback_encounters)
-            atmospheres = self._get_city_atmospheres(city_data, fallback_atmospheres)
-            random_table = self._get_city_random_table(city_data, 'district', self._generate_district_random_table)
-            
-            name = random.choice(districts)
-            encounter = random.choice(encounters) if encounters else "Atividades misteriosas no bairro"
-            atmosphere = random.choice(atmospheres) if atmospheres else "Sombrio e ameaçador"
-            
-            return {
-                'name': name,
-                'description': f"Um bairro onde {random.choice(['os ricos uma vez viveram', 'os mercadores uma vez prosperaram', 'os eruditos uma vez estudaram', 'os pobres lutam para sobreviver'])}.",
-                'encounter': encounter,
-                'atmosphere': atmosphere,
-                'random_table': random_table,
-                'notable_features': [
-                    random.choice(["Mansões em ruínas", "Becos estreitos", "Estatuas antigas", "Fontes quebradas"]),
-                    random.choice(["Lojas abandonadas", "Janelas tapadas", "Paredes com grafites", "Jardins abandonados"])
-                ]
-            }
+            # Use centralized fallback district data
+            return create_fallback_district_data(
+                city_data,
+                self._get_city_content_list,
+                self._get_city_encounters,
+                self._get_city_atmospheres,
+                self._get_city_random_table,
+                self._generate_district_random_table
+            )
     
     def _find_district_data(self, district_name: str, city_data: Optional[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
         """Find district data by name in city data."""
         if not city_data or 'districts' not in city_data:
-            print(f"DEBUG: No city data or districts found for '{district_name}'")
+            
             return None
         
-        print(f"DEBUG: Looking for district '{district_name}' in {len(city_data['districts'])} districts")
+        
         available_districts = [d.get('name', 'Unknown') for d in city_data['districts']]
-        print(f"DEBUG: Available districts: {available_districts}")
+        
         
         for district in city_data['districts']:
             if district.get('name', '').lower() == district_name.lower():
-                print(f"DEBUG: Found district '{district_name}'")
+                
                 return district
         
-        print(f"DEBUG: District '{district_name}' not found")
+        
         return None
     
     def _select_district_content_type(self, district_data: Dict[str, Any], city_data: Optional[Dict[str, Any]] = None) -> str:
@@ -415,6 +373,9 @@ class CityOverlayAnalyzer:
         # Generate content based on type
         content = self._generate_content_by_type(content_type, row, col, overlay_name, city_data)
         
+        # Integrate city-specific content
+        content = self._integrate_city_specific_content(content, city_data)
+        
         return content
     
     def _calculate_grid_radius(self, hex_grid: Dict[str, Any]) -> int:
@@ -434,83 +395,98 @@ class CityOverlayAnalyzer:
         return max_distance
     
     def _generate_content_by_type(self, content_type: str, row: int, col: int, overlay_name: str, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        """Generate specific content based on type."""
-        # Base content structure
-        content = {
-            'type': content_type,
-            'name': '',
-            'description': '',
-            'encounter': '',
-            'atmosphere': '',
-            'random_table': [],
-            'notable_features': [],
-            'threats': [],
-            'treasures': [],
-            'npcs': []
-        }
-        
-        # Generate content based on type
-        if content_type == 'district':
-            content.update(self._generate_district_content(city_data, district_data))
-        elif content_type == 'building':
-            content.update(self._generate_building_content(city_data, district_data))
-        elif content_type == 'street':
-            content.update(self._generate_street_content(city_data, district_data))
-        elif content_type == 'landmark':
-            content.update(self._generate_landmark_content(city_data, district_data))
-        elif content_type == 'market':
-            content.update(self._generate_market_content(city_data, district_data))
-        elif content_type == 'temple':
-            content.update(self._generate_temple_content(city_data, district_data))
-        elif content_type == 'tavern':
-            content.update(self._generate_tavern_content(city_data, district_data))
-        elif content_type == 'guild':
-            content.update(self._generate_guild_content(city_data, district_data))
-        elif content_type == 'residence':
-            content.update(self._generate_residence_content(city_data, district_data))
-        elif content_type == 'ruins':
-            content.update(self._generate_ruins_content(city_data, district_data))
-        
-        # Add position modifiers
-        content = self._add_position_modifiers(content, row, col)
-        
-        # Integrate city-specific content
-        content = self._integrate_city_specific_content(content, city_data)
-        
-        # Debug: Print enriched fields for tavern content
-        if content.get('type') == 'tavern':
-            print(f"DEBUG: Tavern content after integration: {list(content.keys())}")
-            if 'npc_trait' in content:
-                print(f"DEBUG: npc_trait: {content['npc_trait']}")
-            if 'weather' in content:
-                print(f"DEBUG: weather: {content['weather']}")
-        
-        return content
+        """Generate content based on type with detailed error reporting."""
+        try:
+            if content_type == 'district':
+                return self._generate_district_content(city_data, district_data)
+            elif content_type == 'building':
+                return self._generate_building_content(city_data, district_data)
+            elif content_type == 'street':
+                return self._generate_street_content(city_data, district_data)
+            elif content_type == 'landmark':
+                return self._generate_landmark_content(city_data, district_data)
+            elif content_type == 'market':
+                return self._generate_market_content(city_data, district_data)
+            elif content_type == 'temple':
+                return self._generate_temple_content(city_data, district_data)
+            elif content_type == 'tavern':
+                return self._generate_tavern_content(city_data, district_data)
+            elif content_type == 'guild':
+                return self._generate_guild_content(city_data, district_data)
+            elif content_type == 'residence':
+                return self._generate_residence_content(city_data, district_data)
+            elif content_type == 'ruins':
+                return self._generate_ruins_content(city_data, district_data)
+            else:
+                # Default to district content
+                return self._generate_district_content(city_data, district_data)
+                
+        except Exception as e:
+            import traceback
+            error_msg = f"Error in _generate_content_by_type for type '{content_type}' at position ({row}, {col}): {str(e)}\nTraceback:\n{traceback.format_exc()}"
+            print(error_msg)  # Log the full error
+            raise ValueError(error_msg)
     
     def _weighted_choice(self, weights: Dict[str, float]) -> str:
         """Choose an item based on weighted probabilities."""
+        if not weights:
+            raise ValueError("Cannot choose from empty weights dictionary")
+        
         items = list(weights.keys())
         weights_list = list(weights.values())
+        
+        # Additional safety check for empty items list
+        if not items:
+            raise ValueError("Cannot choose from empty items list")
+            
         return random.choices(items, weights=weights_list)[0]
+    
+    def _safe_random_choice(self, items: List[str], context: str = "unknown") -> str:
+        """Safely choose a random item from a list, with fallback for empty lists."""
+        if not items:
+            # Return a default value based on context instead of throwing an error
+            defaults = {
+                "building_treasures": "Ancient artifact",
+                "street_features": "Crumbling pavement",
+                "street_threats": "Unknown danger",
+                "landmark_features": "Strange markings",
+                "market_merchants": "Mysterious merchant",
+                "market_customers": "Desperate customer",
+                "temple_npcs": "Mad priest",
+                "temple_worshippers": "Faithful pilgrim",
+                "tavern_descriptions": "A dark and mysterious establishment",
+                "tavern_npcs": "Grizzled barkeep",
+                "tavern_customers": "Regular patron",
+                "guild_members": "Guild master",
+                "guild_visitors": "Client",
+                "residence_treasures": "Family heirloom",
+                "ruins_treasures": "Ancient artifact",
+                "ruins_artifacts": "Forgotten knowledge"
+            }
+            return defaults.get(context, "Unknown")
+        return random.choice(items)
     
     def _load_city_database(self, city_name: str) -> Optional[Dict[str, Any]]:
         """Load city-specific database if available."""
         city_db_path = f'databases/cities/{self.language}/{city_name}.json'
-        print(f"DEBUG: Looking for city database at: {city_db_path}")
+        
+        print(f"DEBUG: Loading city database from: {city_db_path}")
+        print(f"DEBUG: File exists: {os.path.exists(city_db_path)}")
+        
         if os.path.exists(city_db_path):
             try:
                 with open(city_db_path, 'r', encoding='utf-8') as f:
                     city_data = json.load(f)
                     
-                print(f"DEBUG: Successfully loaded city database for {city_name}")
                 print(f"DEBUG: City data keys: {list(city_data.keys())}")
-                if 'district_matrix' in city_data:
-                    print(f"DEBUG: Found district_matrix with {len(city_data['district_matrix'])} rows")
-                else:
-                    print(f"DEBUG: No district_matrix found in city data")
-                    
+                
                 # Load additional city-specific content from language database
-                city_data.update(self._load_city_specific_content(city_name))
+                enriched_content = self._load_city_specific_content(city_name)
+                print(f"DEBUG: Enriched content keys: {list(enriched_content.keys())}")
+                
+                city_data.update(enriched_content)
+                print(f"DEBUG: Final city data keys: {list(city_data.keys())}")
+                
                 return city_data
             except Exception as e:
                 print(f"Warning: Could not load city database for {city_name}: {e}")
@@ -590,7 +566,7 @@ class CityOverlayAnalyzer:
                         elif tavern_type == 'tavern_innkeeper' and 'tables' in tavern_data and 'innkeeper_quirks' in tavern_data['tables']:
                             content[tavern_type] = tavern_data['tables']['innkeeper_quirks']
                         elif tavern_type == 'tavern_patrons' and 'tables' in tavern_data and 'patron_traits' in tavern_data['tables']:
-                            content[tavern_type] = tavern_data['tables']['patron_traits']
+                            content['tavern_patrons'] = tavern_data['tables']['patron_traits']
                         else:
                             content[tavern_type] = tavern_data
             except Exception as e:
@@ -605,10 +581,10 @@ class CityOverlayAnalyzer:
                         market_data = json.load(f)
                         # Extract data from tables structure
                         if 'tables' in market_data:
-                            if market_type == 'items_prices' and 'items' in market_data['tables']:
-                                content['items_sold'] = market_data['tables']['items']
-                            elif market_type == 'beasts_prices' and 'beasts' in market_data['tables']:
-                                content['beast_prices'] = market_data['tables']['beasts']
+                            if market_type == 'items_prices' and 'item_prices' in market_data['tables']:
+                                content['items_sold'] = market_data['tables']['item_prices']
+                            elif market_type == 'beasts_prices' and 'beast_prices' in market_data['tables']:
+                                content['beast_prices'] = market_data['tables']['beast_prices']
                             elif market_type == 'services_prices' and 'services' in market_data['tables']:
                                 content['services'] = market_data['tables']['services']
                         else:
@@ -616,17 +592,34 @@ class CityOverlayAnalyzer:
             except Exception as e:
                 print(f"Warning: Could not load {market_type}: {e}")
         
+        # Load populations
+        try:
+            basic_path = f'databases/basic/{self.language}/basic.json'
+            if os.path.exists(basic_path):
+                with open(basic_path, 'r', encoding='utf-8') as f:
+                    basic_data = json.load(f)
+                    # Extract data from tables structure
+                    if 'tables' in basic_data and 'populations' in basic_data['tables']:
+                        content['populations'] = basic_data['tables']['populations']
+        except Exception as e:
+            print(f"Warning: Could not load populations: {e}")
+        
         # Load NPC content (names, trades, affiliations)
         for npc_content_type in ['npc_names', 'npc_trades', 'affiliation']:
             try:
                 npc_content_path = f'databases/{npc_content_type}/{self.language}/{npc_content_type}.json'
+                print(f"DEBUG: Loading {npc_content_type} from: {npc_content_path}")
+                print(f"DEBUG: File exists: {os.path.exists(npc_content_path)}")
+                
                 if os.path.exists(npc_content_path):
                     with open(npc_content_path, 'r', encoding='utf-8') as f:
                         npc_content_data = json.load(f)
                         # Extract data from tables structure
                         if 'tables' in npc_content_data:
-                            if npc_content_type == 'npc_names' and 'names' in npc_content_data['tables']:
-                                content['npc_names'] = npc_content_data['tables']['names']
+                            if npc_content_type == 'npc_names' and 'first_names' in npc_content_data['tables']:
+                                # Store the entire npc_names structure for tavern NPCs
+                                content['npc_names'] = npc_content_data['tables']
+                                print(f"DEBUG: Loaded npc_names with keys: {list(content['npc_names'].keys())}")
                             elif npc_content_type == 'npc_trades' and 'trades' in npc_content_data['tables']:
                                 content['npc_trades'] = npc_content_data['tables']['trades']
                             elif npc_content_type == 'affiliation' and 'affiliations' in npc_content_data['tables']:
@@ -635,6 +628,34 @@ class CityOverlayAnalyzer:
                             content[npc_content_type] = npc_content_data
             except Exception as e:
                 print(f"Warning: Could not load {npc_content_type}: {e}")
+        
+        # Load factions content
+        try:
+            factions_path = f'databases/factions/{self.language}/factions.json'
+            if os.path.exists(factions_path):
+                with open(factions_path, 'r', encoding='utf-8') as f:
+                    factions_data = json.load(f)
+                    # Extract data from tables structure
+                    if 'tables' in factions_data:
+                        content['factions'] = factions_data['tables']
+                    else:
+                        content['factions'] = factions_data
+        except Exception as e:
+            print(f"Warning: Could not load factions: {e}")
+        
+        # Load features content (buildings, landmarks, guilds, etc.)
+        try:
+            features_path = f'databases/features/{self.language}/features.json'
+            if os.path.exists(features_path):
+                with open(features_path, 'r', encoding='utf-8') as f:
+                    features_data = json.load(f)
+                    # Extract data from tables structure
+                    if 'tables' in features_data:
+                        content['features'] = features_data['tables']
+                    else:
+                        content['features'] = features_data
+        except Exception as e:
+            print(f"Warning: Could not load features: {e}")
         
         return content
     
@@ -650,21 +671,34 @@ class CityOverlayAnalyzer:
         # Get city name and description from major cities data (with Portuguese support)
         city_name_final = city_name
         city_description = city_data.get('description', '')
+        city_atmosphere = city_data.get('atmosphere', '')
+        city_notable_features = city_data.get('notable_features', [])
         
-        # Check if this is a major city and get Portuguese translations
+        # Check if this is a major city and get data from database manager
         if city_name.lower() in self.lore_db.major_cities:
-            major_city_data = self.lore_db.major_cities[city_name.lower()]
-            if self.language == 'pt':
-                city_name_final = major_city_data.get('name_pt', major_city_data['name'])
-                city_description = major_city_data.get('description_pt', major_city_data['description'])
-            else:
-                city_name_final = major_city_data['name']
-                city_description = major_city_data['description']
+            # Load city data from database manager with current language
+            from backend.database_manager import database_manager
+            cities_table = database_manager.get_table('cities', 'major_cities', self.language)
+            
+            # Find the city data in the table
+            major_city_data = {}
+            for city in cities_table:
+                if isinstance(city, dict) and city.get('key') == city_name.lower():
+                    major_city_data = city
+                    break
+            
+            if major_city_data:
+                city_name_final = major_city_data.get('name', city_name)
+                city_description = major_city_data.get('description', '')
+                city_atmosphere = major_city_data.get('atmosphere', '')
+                city_notable_features = major_city_data.get('notable_features', [])
         
         # Build city context
         context = {
             'name': city_name_final,
             'description': city_description,
+            'atmosphere': city_atmosphere,
+            'notable_features': city_notable_features,
             'districts': {},
             'major_landmarks': city_data.get('landmarks', []),
             'city_events': enriched_content.get('city_events', []),
@@ -769,6 +803,14 @@ class CityOverlayAnalyzer:
         if district_data:
             # Use specific district data
             name = district_data.get('name', 'Unknown District')
+            # Try to get district description from database
+        try:
+            district_descriptions = database_manager.get_table('descriptions', 'district_descriptions', self.language)
+            if district_descriptions:
+                description = random.choice(district_descriptions)
+            else:
+                description = district_data.get('description', f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}.")
+        except Exception:
             description = district_data.get('description', f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}.")
             
             # Get encounters from district data
@@ -813,43 +855,15 @@ class CityOverlayAnalyzer:
                 'notable_features': notable_features
             }
         else:
-            # Fallback to generic district content
-            fallback_districts = [
-                "O Bairro dos Cadáveres", "Decadência dos Mercadores", "Os Mercados de Ossos", "Ala da Peste",
-                "Os Jardins dos Enforcados", "Ruína dos Eruditos", "Paraíso dos Ladrões", "As Ruas Sangrentas",
-                "Decadência dos Nobres", "Os Comuns Amaldiçoados"
-            ]
-        fallback_encounters = [
-            "Mendigos com peste pedindo esmolas", "Guardas corruptos exigindo subornos",
-            "Figuras misteriosas em vestes negras", "Profeta louco gritando profecias",
-            "Matilha de cães famintos", "Alma perdida vagando sem rumo"
-        ]
-        fallback_atmospheres = [
-            "Espesso com o fedor da decadência", "Crepúsculo perpétuo envolve as ruas",
-            "Sussurros ecoam de prédios vazios", "Sombras se movem onde ninguém anda",
-            "O ar tem gosto de cobre e medo", "Luzes estranhas piscam nas janelas"
-        ]
-        
-        districts = self._get_city_content_list(city_data, 'districts', fallback_districts)
-        encounters = self._get_city_encounters(city_data, 'district', fallback_encounters)
-        atmospheres = self._get_city_atmospheres(city_data, fallback_atmospheres)
-        random_table = self._get_city_random_table(city_data, 'district', self._generate_district_random_table)
-        
-        name = random.choice(districts)
-        encounter = random.choice(encounters) if encounters else "Atividades misteriosas no bairro"
-        atmosphere = random.choice(atmospheres) if atmospheres else "Sombrio e ameaçador"
-        
-        return {
-            'name': name,
-            'description': f"Um bairro onde {random.choice(['os ricos uma vez viveram', 'os mercadores uma vez prosperaram', 'os eruditos uma vez estudaram', 'os pobres lutam para sobreviver'])}.",
-            'encounter': encounter,
-            'atmosphere': atmosphere,
-            'random_table': random_table,
-            'notable_features': [
-                random.choice(["Mansões em ruínas", "Becos estreitos", "Estatuas antigas", "Fontes quebradas"]),
-                random.choice(["Lojas abandonadas", "Janelas tapadas", "Paredes com grafites", "Jardins abandonados"])
-            ]
-        }
+            # Use centralized fallback district data
+            return create_fallback_district_data(
+                city_data,
+                self._get_city_content_list,
+                self._get_city_encounters,
+                self._get_city_atmospheres,
+                self._get_city_random_table,
+                self._generate_district_random_table
+            )
     
     def _generate_building_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate building content."""
@@ -863,14 +877,22 @@ class CityOverlayAnalyzer:
         if not buildings:
             buildings = self._get_enhanced_fallback_content('buildings')
         
-        purposes = [
-            "residência abandonada de um nobre caído",
-            "oficina misteriosa de propósito desconhecido",
-            "biblioteca esquecida com conhecimento proibido",
-            "templo antigo para um deus esquecido",
-            "sede de guilda para organização secreta",
-            "armazém cheio de artefatos estranhos"
-        ]
+        # Get building features from city data
+        purposes = []
+        if city_data and 'features' in city_data:
+            building_features = city_data['features'].get('building_features', [])
+            if building_features:
+                purposes = building_features
+        else:
+            # Fallback purposes
+            purposes = [
+                "residência abandonada de um nobre caído",
+                "oficina misteriosa de propósito desconhecido",
+                "biblioteca esquecida com conhecimento proibido",
+                "templo antigo para um deus esquecido",
+                "sede de guilda para organização secreta",
+                "armazém cheio de artefatos estranhos"
+            ]
         
         name = random.choice(buildings)
         purpose = random.choice(purposes)
@@ -885,7 +907,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"O prédio {random.choice(['parece abandonado mas sons vêm de dentro', 'é guardado por criaturas estranhas', 'pulsa com energia não natural', 'atrai visitantes como mariposas para a chama'])}."
+            # Try to get encounters from database
+            try:
+                building_encounters = database_manager.get_table('encounters', 'building_encounters', self.language)
+                if building_encounters:
+                    encounter = random.choice(building_encounters)
+                else:
+                    raise ValueError("No building encounters available in database")
+            except Exception:
+                raise ValueError("No building encounters available in database")
         
         # Get atmosphere from district data if available
         atmospheres = []
@@ -897,7 +927,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"O ar ao redor do prédio {random.choice(['crepita com energia escura', 'sente-se anormalmente frio', 'sussurra segredos esquecidos', 'fede de morte antiga'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
         # Get random table from district data if available
         random_table = []
@@ -910,11 +948,12 @@ class CityOverlayAnalyzer:
         
         return {
             'name': name,
+            'type': 'building',
             'description': f"Uma estrutura imponente que uma vez serviu como {purpose}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
-            'treasures': [random.choice(["Cofre escondido", "Passagem secreta", "Artefato amaldiçoado", "Tomo antigo"])]
+            'treasures': [self._safe_random_choice(database_manager.get_table('loot', 'building_treasures', self.language) or [], "building_treasures")]
         }
     
     def _generate_street_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -929,17 +968,8 @@ class CityOverlayAnalyzer:
         if not streets:
             streets = self._get_enhanced_fallback_content('streets')
         
-        conditions = [
-            "paralelepípedos rachados manchados com sangue antigo",
-            "lama até o tornozelo misturada com substâncias não identificáveis",
-            "vidro quebrado que range sob os pés",
-            "manchas de musgo estranho e brilhante",
-            "buracos profundos que parecem não levar a lugar nenhum",
-            "pedras escorregadias cobertas de limo misterioso"
-        ]
-        
         name = random.choice(streets)
-        condition = random.choice(conditions)
+        condition = self._safe_random_choice(database_manager.get_table('features', 'street_features', self.language) or [], "street_features")
         
         # Get encounters from district data if available
         encounters = []
@@ -951,7 +981,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"A rua {random.choice(['é assombrada por figuras espectrais', 'ecoam sons de eventos do passado distante', 'parece mudar de direção quando não observada', 'é patrulhada por algo invisível'])}."
+            # Try to get encounters from database
+            try:
+                street_encounters = database_manager.get_table('encounters', 'street_encounters', self.language)
+                if street_encounters:
+                    encounter = random.choice(street_encounters)
+                else:
+                    raise ValueError("No street encounters available in database")
+            except Exception:
+                raise ValueError("No street encounters available in database")
         
         # Get atmosphere from district data if available
         atmospheres = []
@@ -963,7 +1001,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"Andar aqui {random.choice(['sente-se como sendo observado por olhos invisíveis', 'como se as próprias pedras lembrassem da violência', 'pesado com o peso de tristezas esquecidas', 'carregado com energia malevolente'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
         # Get random table from district data if available
         random_table = []
@@ -976,11 +1022,12 @@ class CityOverlayAnalyzer:
         
         return {
             'name': name,
+            'type': 'street',
             'description': f"Uma via sinuosa com {condition}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
-            'threats': [random.choice(["Prédios instáveis", "Gangues errantes", "Manifestações sobrenaturais", "Vapores venenosos"])]
+            'threats': [self._safe_random_choice(database_manager.get_table('encounters', 'street_threats', self.language) or [], "street_threats")]
         }
     
     def _generate_landmark_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -992,31 +1039,18 @@ class CityOverlayAnalyzer:
         elif city_data and 'landmarks' in city_data:
             landmarks = city_data['landmarks']
         
-        if not landmarks:
-            landmarks = [
-                "The Weeping Obelisk",
-                "Fountain of Bones",
-                "The Iron Gallows",
-                "Cathedral of Screams",
-                "The Bleeding Monument",
-                "Tower of the Damned",
-                "The Corpse Clock",
-                "Throne of Skulls",
-                "The Wailing Gate",
-                "Pillar of Sorrows"
-            ]
-        
-        significances = [
-            "marks the site of an ancient atrocity",
-            "serves as a meeting place for cultists",
-            "is said to grant visions to those who touch it",
-            "bleeds real blood on certain nights",
-            "whispers the names of the dead",
-            "grows larger with each passing year"
-        ]
-        
         name = random.choice(landmarks)
-        significance = random.choice(significances)
+        
+        # Get landmark features from city data
+        significance = ""
+        if city_data and 'features' in city_data:
+            landmark_features = city_data['features'].get('landmark_features', [])
+            if landmark_features:
+                significance = random.choice(landmark_features)
+            else:
+                significance = self._safe_random_choice(database_manager.get_table('features', 'landmark_features', self.language) or [], "landmark_features")
+        else:
+            significance = self._safe_random_choice(database_manager.get_table('features', 'landmark_features', self.language) or [], "landmark_features")
         
         # Get encounters from district data if available
         encounters = []
@@ -1028,7 +1062,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The landmark {random.choice(['draws crowds of pilgrims and madmen', 'is avoided by all sane inhabitants', 'pulses with otherworldly power', 'seems to watch those who approach'])}."
+            # Try to get encounters from database
+            try:
+                landmark_encounters = database_manager.get_table('encounters', 'landmark_encounters', self.language)
+                if landmark_encounters:
+                    encounter = random.choice(landmark_encounters)
+                else:
+                    raise ValueError("No landmark encounters available in database")
+            except Exception:
+                raise ValueError("No landmark encounters available in database")
         
         # Get atmosphere from district data if available
         atmospheres = []
@@ -1040,7 +1082,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"The area around it {random.choice(['feels sacred and terrible', 'thrums with ancient power', 'whispers with voices of the past', 'radiates an aura of dread'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
         # Get random table from district data if available
         random_table = []
@@ -1053,13 +1103,14 @@ class CityOverlayAnalyzer:
         
         return {
             'name': name,
+            'type': 'landmark',
             'description': f"An imposing monument that {significance}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
             'notable_features': [
-                random.choice(["Strange inscriptions", "Supernatural phenomena", "Ritual markings", "Offerings from visitors"]),
-                random.choice(["Guardian spirits", "Temporal anomalies", "Prophetic visions", "Cursed ground"])
+                self._safe_random_choice(city_data.get('features', {}).get('landmark_features', []) if city_data and 'features' in city_data else database_manager.get_table('features', 'landmark_features', self.language) or ["Strange inscriptions", "Supernatural phenomena", "Ritual markings", "Offerings from visitors"], "landmark_features"),
+                self._safe_random_choice(city_data.get('features', {}).get('landmark_features', []) if city_data and 'features' in city_data else database_manager.get_table('features', 'landmark_features', self.language) or ["Guardian spirits", "Temporal anomalies", "Prophetic visions", "Cursed ground"], "landmark_features")
             ]
         }
     
@@ -1073,27 +1124,23 @@ class CityOverlayAnalyzer:
             markets = city_data['markets']
         
         if not markets:
-            markets = [
-                "The Bone Bazaar",
-                "Corpse Market",
-                "The Bleeding Stalls",
-                "Plague Merchant's Square",
-                "The Soul Exchange",
-                "Market of Whispers",
-                "The Cursed Commerce",
-                "Death's Trading Post",
-                "The Flesh Fair",
-                "Sorrow's Marketplace"
-            ]
+            # Try to get markets from database
+            markets = database_manager.get_table('names', 'market_names', self.language)
+            if not markets:
+                raise ValueError("No market names available in database")
         
-        specialties = [
-            "forbidden artifacts and cursed relics",
-            "body parts and alchemical ingredients", 
-            "souls and memories of the dead",
-            "weapons forged from unholy metals",
-            "maps to places that shouldn't exist",
-            "services that violate natural law"
-        ]
+        # Get market features from city data
+        specialties = []
+        if city_data and 'features' in city_data:
+            market_features = city_data['features'].get('market_features', [])
+            if market_features:
+                specialties = market_features
+        
+        if not specialties:
+            # Try to get specialties from database
+            specialties = database_manager.get_table('descriptions', 'market_specialties', self.language)
+            if not specialties:
+                raise ValueError("No market specialties available in database")
         
         name = random.choice(markets)
         specialty = random.choice(specialties)
@@ -1108,7 +1155,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The market {random.choice(['operates only during certain hours', 'requires payment in strange currencies', 'attracts customers from other realms', 'exists in multiple dimensions simultaneously'])}."
+            # Try to get encounters from database
+            try:
+                market_encounters = database_manager.get_table('encounters', 'market_encounters', self.language)
+                if market_encounters:
+                    encounter = random.choice(market_encounters)
+                else:
+                    raise ValueError("No market encounters available in database")
+            except Exception:
+                raise ValueError("No market encounters available in database")
         
         # Get atmosphere from district data if available
         atmospheres = []
@@ -1120,7 +1175,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"The air {random.choice(['shimmers with dark magic', 'carries whispers in unknown languages', 'feels heavy with desperate desires', 'crackles with forbidden transactions'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
         # Get random table from district data if available
         random_table = []
@@ -1133,13 +1196,14 @@ class CityOverlayAnalyzer:
         
         return {
             'name': name,
+            'type': 'market',
             'description': f"A bustling marketplace specializing in {specialty}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
             'npcs': [
-                random.choice(["Mysterious merchant", "Soul broker", "Flesh trader", "Curse dealer"]),
-                random.choice(["Desperate customer", "Pickpocket", "Market guard", "Information seller"])
+                self._safe_random_choice(database_manager.get_table('npc_names', 'market_merchants', self.language) or ["Mysterious merchant", "Soul broker", "Flesh trader", "Curse dealer"], "market_merchants"),
+                self._safe_random_choice(database_manager.get_table('npc_names', 'market_customers', self.language) or ["Desperate customer", "Pickpocket", "Market guard", "Information seller"], "market_customers")
             ]
         }
     
@@ -1153,27 +1217,13 @@ class CityOverlayAnalyzer:
             temples = city_data['temples']
         
         if not temples:
-            temples = [
-                "Temple of the Dying God",
-                "Shrine of Bones",
-                "The Blood Cathedral",
-                "Chapel of Screams",
-                "The Corpse Sanctuary",
-                "House of Final Prayers",
-                "The Weeping Altar",
-                "Cathedral of Endings",
-                "Shrine of Forgotten Names",
-                "The Last Church"
-            ]
+            temples = database_manager.get_table('names', 'temple_names', self.language)
+            if not temples:
+                raise ValueError("No temple names available in database")
         
-        deities = [
-            "a god of death and decay",
-            "the patron of lost souls",
-            "a forgotten deity of suffering",
-            "the lord of final moments",
-            "an ancient god of bones",
-            "the goddess of beautiful endings"
-        ]
+        deities = database_manager.get_table('descriptions', 'temple_deities', self.language)
+        if not deities:
+            raise ValueError("No temple deities available in database")
         
         name = random.choice(temples)
         deity = random.choice(deities)
@@ -1188,7 +1238,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The temple {random.choice(['holds services at midnight', 'requires blood offerings', 'grants dark blessings to supplicants', 'echoes with otherworldly chants'])}."
+            # Try to get encounters from database
+            try:
+                temple_encounters = database_manager.get_table('encounters', 'temple_encounters', self.language)
+                if temple_encounters:
+                    encounter = random.choice(temple_encounters)
+                else:
+                    raise ValueError("No temple encounters available in database")
+            except Exception:
+                raise ValueError("No temple encounters available in database")
         
         # Get atmosphere from district data if available
         atmospheres = []
@@ -1200,7 +1258,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"The sacred space {random.choice(['feels both holy and profane', 'pulses with divine corruption', 'whispers with the voice of god', 'radiates transcendent horror'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
         # Get random table from district data if available
         random_table = []
@@ -1213,19 +1279,20 @@ class CityOverlayAnalyzer:
         
         return {
             'name': name,
+            'type': 'temple',
             'description': f"A sacred place dedicated to {deity}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
             'npcs': [
-                random.choice(["Mad priest", "Death cultist", "Heretical cleric", "Divine prophet"]),
-                random.choice(["Faithful pilgrim", "Desperate supplicant", "Temple guard", "Sacred witness"])
+                self._safe_random_choice(database_manager.get_table('npc_names', 'temple_npcs', self.language) or [], "temple_npcs"),
+                self._safe_random_choice(database_manager.get_table('npc_names', 'temple_worshippers', self.language) or [], "temple_worshippers")
             ]
         }
     
     def _generate_tavern_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate tavern content."""
-        # Get taverns from district data first, then city data, then fallback
+        # Get tavern names from district data first, then city data, then fallback
         taverns = []
         if district_data and 'taverns' in district_data:
             taverns = district_data['taverns']
@@ -1233,30 +1300,11 @@ class CityOverlayAnalyzer:
             taverns = city_data['taverns']
         
         if not taverns:
-            taverns = [
-                "The Rotting Corpse",
-                "The Weeping Wound",
-                "The Last Call",
-                "The Bone and Barrel",
-                "The Screaming Goat",
-                "The Coffin Nail",
-                "The Dying Light",
-                "The Blood and Brew",
-                "The Final Hour",
-                "The Corpse's Rest"
-            ]
-        
-        atmospheres = [
-            "thick with smoke and despair",
-            "filled with the laughter of the damned", 
-            "heavy with the scent of cheap ale and cheaper lives",
-            "vibrant with dark energy and darker secrets",
-            "oppressive with the weight of broken dreams",
-            "alive with dangerous possibilities"
-        ]
+            taverns = database_manager.get_table('names', 'tavern_names', self.language)
+            if not taverns:
+                raise ValueError("No tavern names available in database")
         
         name = random.choice(taverns)
-        atmosphere = random.choice(atmospheres)
         
         # Get encounters from district data if available
         encounters = []
@@ -1268,39 +1316,70 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The tavern {random.choice(['serves drinks that grant visions', 'is a front for illegal activities', 'hosts fights to the death', 'welcomes both living and dead'])}."
+            # Try to get encounters from database
+            try:
+                tavern_encounters = database_manager.get_table('encounters', 'tavern_encounters', self.language)
+                if tavern_encounters:
+                    encounter = random.choice(tavern_encounters)
+                else:
+                    raise ValueError("No tavern encounters available in database")
+            except Exception:
+                raise ValueError("No tavern encounters available in database")
         
         # Get atmosphere from district data if available
-        district_atmospheres = []
+        atmospheres = []
         if district_data and 'atmosphere_modifiers' in district_data:
-            district_atmospheres = district_data['atmosphere_modifiers']
+            atmospheres = district_data['atmosphere_modifiers']
         elif city_data:
-            district_atmospheres = self._get_city_atmospheres(city_data, [])
+            atmospheres = self._get_city_atmospheres(city_data, [])
         
-        if district_atmospheres:
-            final_atmosphere = random.choice(district_atmospheres)
+        if atmospheres:
+            atmosphere = random.choice(atmospheres)
         else:
-            final_atmosphere = atmosphere
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
-        # Get random table from district data if available
-        random_table = []
-        if district_data and 'random_tables' in district_data and 'tavern' in district_data['random_tables']:
-            random_table = district_data['random_tables']['tavern']
-        elif city_data:
-            random_table = self._get_city_random_table(city_data, 'tavern', self._generate_tavern_random_table)
-        else:
-            random_table = self._generate_tavern_random_table()
+        # Get tavern descriptions from database
+        tavern_descriptions = database_manager.get_table('descriptions', 'tavern_descriptions', self.language)
+        if not tavern_descriptions:
+            raise ValueError("No tavern descriptions available in database")
+        description = random.choice(tavern_descriptions)
+        
+        # Get tavern NPCs from city data if available, otherwise from database
+        tavern_npcs = []
+        tavern_customers = []
+        
+        if city_data and 'npc_names' in city_data:
+            # Check if the city data has the specific tavern NPC tables
+            if isinstance(city_data['npc_names'], dict):
+                tavern_npcs = city_data['npc_names'].get('tavern_npcs', [])
+                tavern_customers = city_data['npc_names'].get('tavern_customers', [])
+        
+        # Fallback to database if not found in city data
+        if not tavern_npcs:
+            tavern_npcs = database_manager.get_table('npc_names', 'tavern_npcs', self.language)
+        if not tavern_customers:
+            tavern_customers = database_manager.get_table('npc_names', 'tavern_customers', self.language)
+            
+        if not tavern_npcs or not tavern_customers:
+            raise ValueError("No tavern NPCs available in database")
+        npcs = [random.choice(tavern_npcs), random.choice(tavern_customers)]
         
         return {
             'name': name,
-            'description': f"A drinking establishment where {random.choice(['the lost come to forget', 'deals are made in shadows', 'songs are sung for the dead', 'strangers become enemies'])}.",
+            'type': 'tavern',
+            'description': description,
             'encounter': encounter,
-            'atmosphere': final_atmosphere,
-            'random_table': random_table,
-            'npcs': [
-                random.choice(["Grizzled barkeep", "Mysterious stranger", "Drunk prophet", "Scarred mercenary"]),
-                random.choice(["Tavern wench", "Regular patron", "Traveling bard", "Local gossip"])
-            ]
+            'atmosphere': atmosphere,
+            'random_table': self._generate_tavern_random_table(),
+            'npcs': npcs
         }
     
     def _generate_guild_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -1313,27 +1392,21 @@ class CityOverlayAnalyzer:
             guilds = city_data['guilds']
         
         if not guilds:
-            guilds = [
-                "The Corpse Collectors",
-                "Brotherhood of the Final Cut",
-                "The Soul Merchants",
-                "Order of the Bleeding Hand",
-                "The Bone Workers Union",
-                "Guild of Sacred Executioners",
-                "The Death Dealers",
-                "Fraternity of Forgotten Names",
-                "The Last Rites Society",
-                "Order of Beautiful Endings"
-            ]
+            guilds = database_manager.get_table('names', 'guild_names', self.language)
+            if not guilds:
+                raise ValueError("No guild names available in database")
         
-        purposes = [
-            "maintains the city's dark secrets",
-            "controls trade in forbidden goods",
-            "performs services for the dead",
-            "enforces supernatural law",
-            "preserves ancient traditions",
-            "guards sacred knowledge"
-        ]
+        # Get guild features from city data
+        purposes = []
+        if city_data and 'features' in city_data:
+            guild_features = city_data['features'].get('guild_features', [])
+            if guild_features:
+                purposes = guild_features
+        
+        if not purposes:
+            purposes = database_manager.get_table('descriptions', 'guild_purposes', self.language)
+            if not purposes:
+                raise ValueError("No guild purposes available in database")
         
         name = random.choice(guilds)
         purpose = random.choice(purposes)
@@ -1348,7 +1421,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The guild {random.choice(['recruits only the desperate', 'demands terrible oaths of loyalty', 'operates from hidden chambers', 'controls vital city functions'])}."
+            # Try to get encounters from database
+            try:
+                guild_encounters = database_manager.get_table('encounters', 'guild_encounters', self.language)
+                if guild_encounters:
+                    encounter = random.choice(guild_encounters)
+                else:
+                    raise ValueError("No guild encounters available in database")
+            except Exception:
+                raise ValueError("No guild encounters available in database")
         
         # Get atmosphere from district data if available
         atmospheres = []
@@ -1360,7 +1441,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"The guild hall {random.choice(['feels like a tomb', 'hums with organized menace', 'whispers with professional secrets', 'radiates quiet authority'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         
         # Get random table from district data if available
         random_table = []
@@ -1373,13 +1462,14 @@ class CityOverlayAnalyzer:
         
         return {
             'name': name,
+            'type': 'guild',
             'description': f"A professional organization that {purpose}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
             'npcs': [
-                random.choice(["Guild master", "Senior member", "Initiate", "Guild enforcer"]),
-                random.choice(["Client", "Rival guild member", "Informant", "Potential recruit"])
+                            self._safe_random_choice(database_manager.get_table("npc_names", "guild_members", self.language) or [], "guild_members"),
+            self._safe_random_choice(database_manager.get_table("npc_names", "guild_visitors", self.language) or [], "guild_visitors")
             ]
         }
     
@@ -1391,26 +1481,13 @@ class CityOverlayAnalyzer:
         elif city_data and 'residences' in city_data:
             residences = city_data['residences']
         if not residences:
-            residences = [
-                "The Mourning House",
-                "Widow's Manor",
-                "The Corpse Cottage",
-                "House of Broken Hearts",
-                "The Weeping Residence",
-                "Manor of Lost Souls",
-                "The Dying Estate",
-                "House of Final Breaths",
-                "The Sorrow Mansion",
-                "Tomb Home"
-            ]
-        inhabitants = [
-            "the ghost of its former owner",
-            "a family cursed by tragedy",
-            "a reclusive scholar of dark arts",
-            "servants who refuse to leave their dead master",
-            "multiple families who don't know about each other",
-            "something that was once human"
-        ]
+            residences = database_manager.get_table('names', 'residence_names', self.language)
+            if not residences:
+                raise ValueError("No residence names available in database")
+        
+        inhabitants = database_manager.get_table('descriptions', 'residence_inhabitants', self.language)
+        if not inhabitants:
+            raise ValueError("No residence inhabitants available in database")
         name = random.choice(residences)
         inhabitant = random.choice(inhabitants)
         encounters = []
@@ -1421,7 +1498,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The residence {random.choice(['seems normal from outside but holds dark secrets', 'shifts and changes when not observed', 'exists in multiple time periods simultaneously', 'draws the lonely and desperate'])}."
+            # Try to get encounters from database
+            try:
+                residence_encounters = database_manager.get_table('encounters', 'residence_encounters', self.language)
+                if residence_encounters:
+                    encounter = random.choice(residence_encounters)
+                else:
+                    raise ValueError("No residence encounters available in database")
+            except Exception:
+                raise ValueError("No residence encounters available in database")
         atmospheres = []
         if district_data and 'atmosphere_modifiers' in district_data:
             atmospheres = district_data['atmosphere_modifiers']
@@ -1430,7 +1515,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"The home {random.choice(['feels alive with memories', 'whispers with domestic tragedy', 'aches with profound loneliness', 'pulses with family secrets'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         random_table = []
         if district_data and 'random_tables' in district_data and 'residence' in district_data['random_tables']:
             random_table = district_data['random_tables']['residence']
@@ -1440,11 +1533,12 @@ class CityOverlayAnalyzer:
             random_table = self._generate_residence_random_table()
         return {
             'name': name,
+            'type': 'residence',
             'description': f"A dwelling inhabited by {inhabitant}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
-            'treasures': [random.choice(["Family heirloom", "Hidden vault", "Personal diary", "Secret passage"])]
+            'treasures': [self._safe_random_choice(database_manager.get_table("loot", "residence_treasures", self.language) or [], "residence_treasures")]
         }
     
     def _generate_ruins_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
@@ -1455,26 +1549,13 @@ class CityOverlayAnalyzer:
         elif city_data and 'ruins' in city_data:
             ruins = city_data['ruins']
         if not ruins:
-            ruins = [
-                "The Fallen Spire",
-                "Ruins of the Old Palace",
-                "The Collapsed Cathedral",
-                "Broken Tower of Memory",
-                "The Shattered Archive",
-                "Ruins of the First Church",
-                "The Fallen Monument",
-                "Wreckage of the Golden Age",
-                "The Crumbling Fortress",
-                "Bones of Better Times"
-            ]
-        histories = [
-            "destroyed during the great catastrophe",
-            "abandoned when its purpose was forgotten",
-            "collapsed under the weight of accumulated sin",
-            "shattered by divine wrath",
-            "consumed by otherworldly forces",
-            "left empty when hope finally died"
-        ]
+            ruins = database_manager.get_table('names', 'ruins_names', self.language)
+            if not ruins:
+                raise ValueError("No ruins names available in database")
+        
+        histories = database_manager.get_table('descriptions', 'ruins_histories', self.language)
+        if not histories:
+            raise ValueError("No ruins histories available in database")
         name = random.choice(ruins)
         history = random.choice(histories)
         encounters = []
@@ -1485,7 +1566,15 @@ class CityOverlayAnalyzer:
         if encounters:
             encounter = random.choice(encounters)
         else:
-            encounter = f"The ruins {random.choice(['are haunted by echoes of the past', 'hide secrets in their depths', 'attract treasure hunters and scholars', 'serve as lairs for dangerous creatures'])}."
+            # Try to get encounters from database
+            try:
+                ruins_encounters = database_manager.get_table('encounters', 'ruins_encounters', self.language)
+                if ruins_encounters:
+                    encounter = random.choice(ruins_encounters)
+                else:
+                    raise ValueError("No ruins encounters available in database")
+            except Exception:
+                raise ValueError("No ruins encounters available in database")
         atmospheres = []
         if district_data and 'atmosphere_modifiers' in district_data:
             atmospheres = district_data['atmosphere_modifiers']
@@ -1494,7 +1583,15 @@ class CityOverlayAnalyzer:
         if atmospheres:
             atmosphere = random.choice(atmospheres)
         else:
-            atmosphere = f"The broken stones {random.choice(['whisper with forgotten glory', 'ache with profound loss', 'pulse with residual power', 'weep for better days'])}."
+            # Try to get atmospheres from database
+            try:
+                atmospheres = database_manager.get_table('core', 'atmospheres', self.language)
+                if atmospheres:
+                    atmosphere = random.choice(atmospheres)
+                else:
+                    raise ValueError("No atmospheres available in database")
+            except Exception:
+                raise ValueError("No atmospheres available in database")
         random_table = []
         if district_data and 'random_tables' in district_data and 'ruins' in district_data['random_tables']:
             random_table = district_data['random_tables']['ruins']
@@ -1504,13 +1601,14 @@ class CityOverlayAnalyzer:
             random_table = self._generate_ruins_random_table()
         return {
             'name': name,
+            'type': 'ruins',
             'description': f"Ancient ruins {history}.",
             'encounter': encounter,
             'atmosphere': atmosphere,
             'random_table': random_table,
             'treasures': [
-                random.choice(["Ancient artifact", "Forgotten knowledge", "Hidden treasure", "Lost relic"]),
-                random.choice(["Historical document", "Valuable material", "Cursed item", "Sacred object"])
+                self._safe_random_choice(database_manager.get_table("loot", "ruins_treasures", self.language) or [], "ruins_treasures"),
+                self._safe_random_choice(database_manager.get_table("loot", "ruins_artifacts", self.language) or [], "ruins_artifacts")
             ]
         }
     
@@ -1519,22 +1617,15 @@ class CityOverlayAnalyzer:
         # Edge positions (outer ring)
         if row == 0 or row == 4 or col == 0 or col == 4:
             content['position_type'] = 'edge'
-            content['notable_features'].append("At the city's edge, less developed")
-            
         # Corner positions
         elif (row == 0 and col == 0) or (row == 0 and col == 4) or (row == 4 and col == 0) or (row == 4 and col == 4):
             content['position_type'] = 'corner'
-            content['notable_features'].append("At a corner, often fortified")
-            
         # Center position
         elif row == 2 and col == 2:
             content['position_type'] = 'center'
-            content['notable_features'].append("At the city's heart, most important")
-            
         # Inner positions
         else:
             content['position_type'] = 'inner'
-            content['notable_features'].append("Within the city proper, well developed")
         
         return content
     
@@ -1543,10 +1634,7 @@ class CityOverlayAnalyzer:
         if not city_data:
             return content
         
-        print(f"DEBUG: Integrating content for type: {content.get('type')}")
-        print(f"DEBUG: City data keys: {list(city_data.keys())}")
-        print(f"DEBUG: Available enriched fields: {[k for k in city_data.keys() if k in ['weather_conditions', 'city_events', 'npc_traits', 'npc_concerns', 'npc_wants', 'npc_secrets', 'tavern_menu', 'tavern_innkeeper', 'tavern_patrons', 'items_sold', 'beast_prices', 'services', 'npc_names', 'npc_trades', 'affiliations', 'factions']]}")
-        content['debug_marker'] = 'INTEGRATE_WAS_CALLED'
+        # Database-driven integration; no hardcoded fallbacks
         
         # Add city events
         if 'city_events' in city_data and city_data['city_events']:
@@ -1556,8 +1644,24 @@ class CityOverlayAnalyzer:
         if 'weather_conditions' in city_data and isinstance(city_data['weather_conditions'], list) and len(city_data['weather_conditions']) > 0:
             content['weather'] = random.choice(city_data['weather_conditions'])
         
+        # Add population
+        if 'populations' in city_data and isinstance(city_data['populations'], list) and len(city_data['populations']) > 0:
+            content['population'] = random.choice(city_data['populations'])
+        
+        # Add notable features for relevant content types
+        if content.get('type') in ['landmark', 'building', 'street', 'district']:
+            if 'features' in city_data and isinstance(city_data['features'], dict):
+                features = city_data['features']
+                feature_type = f"{content.get('type')}_features"
+                if feature_type in features and isinstance(features[feature_type], list) and len(features[feature_type]) > 0:
+                    content['notable_features'] = [random.choice(features[feature_type])]
+                else:
+                    # Fallback to general features
+                    if 'landmark_features' in features and isinstance(features['landmark_features'], list) and len(features['landmark_features']) > 0:
+                        content['notable_features'] = [random.choice(features['landmark_features'])]
+        
         # Add NPC traits for relevant content types
-        if content.get('type') in ['tavern', 'guild', 'temple', 'market', 'service']:
+        if content.get('type') in ['tavern', 'guild', 'temple', 'market', 'service', 'street', 'building', 'landmark', 'residence', 'ruins']:
             if 'npc_traits' in city_data and isinstance(city_data['npc_traits'], list) and len(city_data['npc_traits']) > 0:
                 content['npc_trait'] = random.choice(city_data['npc_traits'])
             if 'npc_concerns' in city_data and isinstance(city_data['npc_concerns'], list) and len(city_data['npc_concerns']) > 0:
@@ -1567,9 +1671,16 @@ class CityOverlayAnalyzer:
             if 'npc_secrets' in city_data and isinstance(city_data['npc_secrets'], list) and len(city_data['npc_secrets']) > 0:
                 content['npc_secret'] = random.choice(city_data['npc_secrets'])
             
-            # Add NPC name and trade
-            if 'npc_names' in city_data and isinstance(city_data['npc_names'], list) and len(city_data['npc_names']) > 0:
-                content['npc_name'] = random.choice(city_data['npc_names'])
+            # Add NPC name and trade (support dict structure with first/second names)
+            if 'npc_names' in city_data:
+                names_src = city_data['npc_names']
+                if isinstance(names_src, dict):
+                    first_names = names_src.get('first_names', [])
+                    second_names = names_src.get('second_names', [])
+                    if isinstance(first_names, list) and isinstance(second_names, list) and first_names and second_names:
+                        content['npc_name'] = f"{random.choice(first_names)} {random.choice(second_names)}"
+                elif isinstance(names_src, list) and names_src:
+                    content['npc_name'] = random.choice(names_src)
             if 'npc_trades' in city_data and isinstance(city_data['npc_trades'], list) and len(city_data['npc_trades']) > 0:
                 content['npc_trade'] = random.choice(city_data['npc_trades'])
             
@@ -1619,22 +1730,65 @@ class CityOverlayAnalyzer:
         # Add patrons for businesses (taverns, markets, guilds)
         if content.get('type') in ['tavern', 'market', 'guild']:
             patrons = []
-            if 'npc_names' in city_data and isinstance(city_data['npc_names'], list) and len(city_data['npc_names']) > 0:
+            names_pool: list = []
+            if 'npc_names' in city_data:
+                names_src = city_data['npc_names']
+                if isinstance(names_src, dict):
+                    first_names = names_src.get('first_names', [])
+                    second_names = names_src.get('second_names', [])
+                    if isinstance(first_names, list) and isinstance(second_names, list) and first_names and second_names:
+                        for _ in range(10):
+                            names_pool.append(f"{random.choice(first_names)} {random.choice(second_names)}")
+                elif isinstance(names_src, list):
+                    names_pool = names_src[:]
+
+            if names_pool:
                 if 'npc_trades' in city_data and isinstance(city_data['npc_trades'], list) and len(city_data['npc_trades']) > 0:
-                    # Generate 2-4 patrons with names and trades
                     num_patrons = random.randint(2, 4)
                     for _ in range(num_patrons):
-                        name = random.choice(city_data['npc_names'])
+                        name = random.choice(names_pool)
                         trade = random.choice(city_data['npc_trades'])
                         patrons.append(f"{name} ({trade})")
                 else:
-                    # Just use names
                     num_patrons = random.randint(2, 4)
-                    selected_names = random.sample(city_data['npc_names'], min(num_patrons, len(city_data['npc_names'])))
-                    patrons = selected_names
+                    patrons = random.sample(names_pool, min(num_patrons, len(names_pool)))
             
             if patrons:
                 content['patrons'] = patrons
+        
+        # Add key NPCs for all content types
+        if 'npc_names' in city_data:
+            names_src = city_data['npc_names']
+            names_pool: list = []
+            if isinstance(names_src, dict):
+                first_names = names_src.get('first_names', [])
+                second_names = names_src.get('second_names', [])
+                if isinstance(first_names, list) and isinstance(second_names, list) and first_names and second_names:
+                    for _ in range(10):
+                        names_pool.append(f"{random.choice(first_names)} {random.choice(second_names)}")
+            elif isinstance(names_src, list):
+                names_pool = names_src[:]
+
+            if names_pool:
+                num_key_npcs = random.randint(2, 3)
+                key_npcs = []
+                for _ in range(num_key_npcs):
+                    name = random.choice(names_pool)
+                    if 'npc_trades' in city_data and isinstance(city_data['npc_trades'], list) and len(city_data['npc_trades']) > 0:
+                        trade = random.choice(city_data['npc_trades'])
+                        key_npcs.append(f"{name} ({trade})")
+                    else:
+                        key_npcs.append(name)
+                content['key_npcs'] = key_npcs
+        
+        # Add active factions
+        if 'factions' in city_data and isinstance(city_data['factions'], dict):
+            factions_data = city_data['factions']
+            if 'faction_names' in factions_data and isinstance(factions_data['faction_names'], list) and len(factions_data['faction_names']) > 0:
+                # Generate 1-3 active factions
+                num_factions = random.randint(1, 3)
+                selected_factions = random.sample(factions_data['faction_names'], min(num_factions, len(factions_data['faction_names'])))
+                content['active_factions'] = selected_factions
         
         return content
     
@@ -1679,8 +1833,8 @@ class CityOverlayAnalyzer:
         return hex_grid
     
     def _get_enhanced_fallback_content(self, content_type: str) -> List[str]:
-        """Get enhanced fallback content with more variety and thematic elements."""
-        # Try to get content from the loaded database tables first
+        """Get enhanced fallback content for a specific type."""
+        # Try to get content from database first
         if hasattr(self, 'content_tables') and self.content_tables:
             # Map content types to database table names
             table_mapping = {
@@ -1699,75 +1853,8 @@ class CityOverlayAnalyzer:
             if table_name and table_name in self.content_tables:
                 return self.content_tables[table_name]
         
-        # Fallback to hardcoded content if database not available
-        enhanced_content = {
-            'buildings': [
-                "The Moldering Manor", "House of Broken Dreams", "The Weeping Tower", "Crimson Archives",
-                "The Bone Foundry", "House of Whispers", "The Iron Sanctuary", "Tower of Screams",
-                "The Bloody Library", "Chamber of Echoes", "The Cursed Observatory", "Temple of Forgotten Gods",
-                "The Soul Collector's Workshop", "The Memory Mill", "The Dreamer's Asylum", "The Time-Worn Keep",
-                "The Whispering Gallery", "The Bone Cathedral", "The Shadow Forge", "The Echo Chamber"
-            ],
-            'streets': [
-                "Corpse Alley", "Bleeding Way", "The Bone Road", "Sorrow Street", "Plague Path",
-                "The Withered Walk", "Death's Door Lane", "The Screaming Steps", "Tomb Street",
-                "The Cursed Crossing", "Memory Lane", "The Forgotten Path", "Whisper Street",
-                "The Echoing Way", "Shadow Road", "The Time-Lost Avenue", "Dreamer's Walk",
-                "The Soul Collector's Path", "The Bone Procession", "The Weeping Way"
-            ],
-            'landmarks': [
-                "The Central Heptalith", "The Weeping Fountain", "The Soul Well", "The Corpse Clock",
-                "The Memory Tree", "The Time-Worn Statue", "The Echoing Bell", "The Shadow Mirror",
-                "The Dreamer's Monument", "The Bone Throne", "The Whispering Stone", "The Cursed Obelisk",
-                "The Memory Pool", "The Time Portal", "The Soul Gate", "The Echo Chamber",
-                "The Shadow Tower", "The Dreamer's Circle", "The Bone Altar", "The Whispering Arch"
-            ],
-            'markets': [
-                "The Bone Market", "The Memory Exchange", "The Soul Bazaar", "The Dreamer's Market",
-                "The Time-Lost Bazaar", "The Echo Market", "The Shadow Exchange", "The Whispering Market",
-                "The Cursed Bazaar", "The Memory Square", "The Soul Market", "The Bone Exchange",
-                "The Dreamer's Bazaar", "The Time Market", "The Echo Exchange", "The Shadow Bazaar",
-                "The Whispering Exchange", "The Cursed Market", "The Memory Bazaar", "The Soul Exchange"
-            ],
-            'temples': [
-                "The Basilisk Shrine", "The Temple of Forgotten Gods", "The Soul Collector's Chapel",
-                "The Memory Temple", "The Dreamer's Sanctuary", "The Time-Worn Cathedral", "The Echo Temple",
-                "The Shadow Chapel", "The Whispering Shrine", "The Cursed Cathedral", "The Bone Temple",
-                "The Memory Chapel", "The Soul Temple", "The Dreamer's Cathedral", "The Time Shrine",
-                "The Echo Chapel", "The Shadow Temple", "The Whispering Cathedral", "The Cursed Shrine",
-                "The Bone Chapel"
-            ],
-            'taverns': [
-                "The Rotting Corpse", "The Memory Inn", "The Soul Collector's Rest", "The Dreamer's Tavern",
-                "The Time-Worn Inn", "The Echo Tavern", "The Shadow Rest", "The Whispering Inn",
-                "The Cursed Tavern", "The Bone Rest", "The Memory Tavern", "The Soul Inn",
-                "The Dreamer's Rest", "The Time Tavern", "The Echo Inn", "The Shadow Tavern",
-                "The Whispering Rest", "The Cursed Inn", "The Bone Tavern", "The Memory Rest"
-            ],
-            'guilds': [
-                "The Soul Collectors Guild", "The Memory Keepers", "The Dreamer's Guild", "The Time Weavers",
-                "The Echo Guild", "The Shadow Brotherhood", "The Whispering Guild", "The Cursed Order",
-                "The Bone Guild", "The Memory Brotherhood", "The Soul Order", "The Dreamer's Brotherhood",
-                "The Time Guild", "The Echo Order", "The Shadow Guild", "The Whispering Brotherhood",
-                "The Cursed Guild", "The Bone Order", "The Memory Guild", "The Soul Brotherhood"
-            ],
-            'residences': [
-                "The Memory House", "The Soul Collector's Home", "The Dreamer's Residence", "The Time-Worn House",
-                "The Echo Home", "The Shadow Residence", "The Whispering House", "The Cursed Home",
-                "The Bone Residence", "The Memory Home", "The Soul House", "The Dreamer's Home",
-                "The Time Residence", "The Echo House", "The Shadow Home", "The Whispering Residence",
-                "The Cursed House", "The Bone Home", "The Memory Residence", "The Soul Home"
-            ],
-            'ruins': [
-                "The Memory Ruins", "The Soul Collector's Ruins", "The Dreamer's Ruins", "The Time-Worn Ruins",
-                "The Echo Ruins", "The Shadow Ruins", "The Whispering Ruins", "The Cursed Ruins",
-                "The Bone Ruins", "The Memory Ruins", "The Soul Ruins", "The Dreamer's Ruins",
-                "The Time Ruins", "The Echo Ruins", "The Shadow Ruins", "The Whispering Ruins",
-                "The Cursed Ruins", "The Bone Ruins", "The Memory Ruins", "The Soul Ruins"
-            ]
-        }
-        
-        return enhanced_content.get(content_type, [])
+        # If no database content available, raise error instead of using hardcoded fallbacks
+        raise ValueError(f"No {content_type} content available in database")
     
     def _are_complementary_types(self, type1: str, type2: str) -> bool:
         """Check if two content types are complementary."""
@@ -1994,11 +2081,22 @@ class CityOverlayAnalyzer:
                 
                 lines.append(f"")
                 lines.append(f"[{row+1},{col+1}] {content.get('name', 'Unknown')}")
-                lines.append(f"Type: {content.get('type', 'Unknown').title()}")
-                lines.append(f"Description: {content.get('description', 'No description')}")
+                # Use translation system if available
+                try:
+                    from backend.translation_system import translation_system
+                    type_label = translation_system.t('type')
+                    description_label = translation_system.t('description')
+                    encounter_label = translation_system.t('encounter')
+                except ImportError:
+                    type_label = 'Type'
+                    description_label = 'Description'
+                    encounter_label = 'Encounter'
+                
+                lines.append(f"{type_label}: {content.get('type', 'Unknown').title()}")
+                lines.append(f"{description_label}: {content.get('description', 'No description')}")
                 
                 if content.get('encounter'):
-                    lines.append(f"Encounter: {content.get('encounter')}")
+                    lines.append(f"{encounter_label}: {content.get('encounter')}")
                 
                 if content.get('random_table'):
                     lines.append("Random Events:")

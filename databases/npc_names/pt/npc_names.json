@@ -1,5 +1,10 @@
 {
   "category": "npc_names",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
   "tables": {
     "first_names": [
       "Aerg-Tval",
@@ -64,15 +69,103 @@
       "Tarvl",
       "Urkin",
       "Galt",
-      "Wakta",
-      "Mardul"
+      "Wakta"
+    ],
+    "tavern_npcs": [
+      "Taverneiro experiente",
+      "Estranho misterioso",
+      "Profeta bêbado",
+      "Mercenário marcado",
+      "Cozinheira sábia",
+      "Guarda noturno",
+      "Músico itinerante",
+      "Contador de histórias",
+      "Ferreiro local",
+      "Curandeiro"
+    ],
+    "tavern_customers": [
+      "Garçonete da taverna",
+      "Patrono regular",
+      "Bardo viajante",
+      "Fofoqueiro local",
+      "Mercador rico",
+      "Soldado ferido",
+      "Peregrino perdido",
+      "Caçador de tesouros",
+      "Nobre disfarçado",
+      "Ladrão profissional"
+    ],
+    "guild_members": [
+      "Mestre da guilda",
+      "Membro sênior",
+      "Iniciado",
+      "Executor da guilda",
+      "Tesoureiro",
+      "Guardião dos segredos",
+      "Recrutador",
+      "Arbitro",
+      "Especialista",
+      "Veterano"
+    ],
+    "guild_visitors": [
+      "Cliente",
+      "Membro de guilda rival",
+      "Informante",
+      "Recruta potencial",
+      "Embaixador",
+      "Espião",
+      "Fornecedor",
+      "Competidor",
+      "Observador",
+      "Visitante oficial"
+    ],
+    "market_merchants": [
+      "Mercador experiente",
+      "Vendedor ambulante",
+      "Comerciante rico",
+      "Artífice local",
+      "Importador",
+      "Vendedor de raridades",
+      "Mercador de especiarias",
+      "Vendedor de armas",
+      "Comerciante de tecidos",
+      "Vendedor de joias"
+    ],
+    "market_customers": [
+      "Comprador rico",
+      "Nobre local",
+      "Viajante curioso",
+      "Colecionador",
+      "Mercenário",
+      "Sacerdote",
+      "Estudioso",
+      "Aventureiro",
+      "Ladrão",
+      "Cidadão comum"
+    ],
+    "temple_npcs": [
+      "Sumo sacerdote",
+      "Acolito",
+      "Guardião do templo",
+      "Curandeiro sagrado",
+      "Profeta",
+      "Sacerdote iniciado",
+      "Guardião dos rituais",
+      "Mestre de cerimônias",
+      "Conselheiro espiritual",
+      "Protetor da fé"
+    ],
+    "temple_worshippers": [
+      "Devoto fiel",
+      "Peregrino",
+      "Suplicante",
+      "Convertido",
+      "Nobre religioso",
+      "Mendigo sagrado",
+      "Criança órfã",
+      "Viúva",
+      "Doente",
+      "Arrependido"
     ]
-  },
-  "metadata": {
-    "version": "1.0",
-    "language": "pt",
-    "last_updated": "2025-01-27T10:00:00.000000",
-    "description": "Geração de nomes de NPCs Mörk Borg usando sistema d6+d6",
-    "usage": "Role d6 para primeiro nome, d6 para segundo nome, combine-os"
   }
 }

@@ -1,0 +1,118 @@
+{
+  "category": "features",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "landmark_features": [
+      "Inscrições antigas cobrem a superfície",
+      "Símbolos estranhos brilham com luz sobrenatural",
+      "O marco pulsa com energia sobrenatural",
+      "Sons misteriosos ecoam de dentro",
+      "O marco atrai entidades sobrenaturais",
+      "A realidade parece se dobrar ao redor do marco",
+      "O marco existe em múltiplas dimensões",
+      "O tempo flui diferentemente perto do marco",
+      "O marco está cercado por oferendas",
+      "O marco concede visões àqueles que o tocam"
+    ],
+    "building_features": [
+      "O prédio tem arquitetura impossível",
+      "Luzes estranhas piscam nas janelas",
+      "O prédio parece respirar",
+      "O prédio atrai os desesperados e perdidos",
+      "O prédio está cheio de entidades sobrenaturais",
+      "O prédio existe em múltiplos períodos temporais",
+      "O prédio está cercado por uma aura de pavor",
+      "As portas do prédio abrem para lugares diferentes",
+      "O prédio está coberto de símbolos misteriosos",
+      "O prédio concede bênçãos sombrias aos visitantes"
+    ],
+    "street_features": [
+      "A rua muda de direção quando não observada",
+      "Sombras se movem independentemente pela rua",
+      "A rua está coberta de marcas estranhas",
+      "Ecos de eventos passados ressoam dos paralelepípedos",
+      "A rua é assombrada por figuras espectrais",
+      "A rua está cheia dos sons de gritos distantes",
+      "Algo invisível patrulha a rua",
+      "Uma névoa misteriosa rola pela rua",
+      "A rua está alinhada com posses abandonadas",
+      "Luzes estranhas piscam nas janelas da rua"
+    ],
+    "market_features": [
+      "O mercado opera apenas durante certas horas",
+      "O mercado requer pagamento em moedas estranhas",
+      "O mercado atrai clientes de outros reinos",
+      "O mercado existe em múltiplas dimensões simultaneamente",
+      "O mercado está cheio de mercadorias proibidas",
+      "O mercado é patrulhado por guardas misteriosos",
+      "O mercado é o local de transações sombrias",
+      "O mercado está cercado por barreiras sobrenaturais",
+      "O mercado é frequentado por seres sobrenaturais",
+      "O mercado é o centro de atividades ilegais"
+    ],
+    "temple_features": [
+      "O templo realiza serviços à meia-noite",
+      "O templo requer oferendas de sangue",
+      "O templo concede bênçãos sombrias aos suplicantes",
+      "O templo ecoa com cantos sobrenaturais",
+      "O templo está cheio de adoradores desesperados",
+      "O templo é o local de rituais proibidos",
+      "O templo é guardado por sacerdotes fanáticos",
+      "O templo atrai os perdidos e desesperados",
+      "O templo está cercado por energia sobrenatural",
+      "O templo é o portal para outros reinos"
+    ],
+    "tavern_features": [
+      "A taverna serve bebidas que concedem visões",
+      "A taverna é uma fachada para atividades ilegais",
+      "A taverna hospeda lutas até a morte",
+      "A taverna acolhe tanto vivos quanto mortos",
+      "A taverna está cheia de patronos perigosos",
+      "A taverna é o local de negócios sombrios",
+      "A taverna é assombrada por tragédias passadas",
+      "A taverna é frequentada por seres sobrenaturais",
+      "A taverna é o centro de fofocas locais",
+      "A taverna é o local de reuniões secretas"
+    ],
+    "guild_features": [
+      "A guilda recruta apenas os desesperados",
+      "A guilda exige juramentos terríveis de lealdade",
+      "A guilda opera de câmaras escondidas",
+      "A guilda controla funções vitais da cidade",
+      "A guilda está cheia de membros perigosos",
+      "A guilda é o local de rituais sombrios",
+      "A guilda é guardada por executores fanáticos",
+      "A guilda atrai os ambiciosos e impiedosos",
+      "A guilda está cercada por barreiras sobrenaturais",
+      "A guilda é o portal para conhecimento proibido"
+    ],
+    "residence_features": [
+      "A residência parece normal por fora mas guarda segredos sombrios",
+      "A residência muda quando não observada",
+      "A residência existe em múltiplos períodos temporais simultaneamente",
+      "A residência atrai os solitários e desesperados",
+      "A residência está cheia de entidades sobrenaturais",
+      "A residência é o local de eventos trágicos",
+      "A residência é guardada por forças misteriosas",
+      "A residência atrai os perdidos e esquecidos",
+      "A residência está cercada por energia sobrenatural",
+      "A residência é o portal para outros reinos"
+    ],
+    "ruins_features": [
+      "As ruínas são assombradas por ecos do passado",
+      "As ruínas escondem segredos em suas profundezas",
+      "As ruínas atraem caçadores de tesouros e estudiosos",
+      "As ruínas servem como covis para criaturas perigosas",
+      "As ruínas estão cheias de entidades sobrenaturais",
+      "As ruínas são o local de tragédias antigas",
+      "As ruínas são guardadas por forças misteriosas",
+      "As ruínas atraem os perdidos e desesperados",
+      "As ruínas estão cercadas por energia sobrenatural",
+      "As ruínas são o portal para outros reinos"
+    ]
+  }
+}

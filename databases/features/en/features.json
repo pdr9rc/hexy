@@ -1,0 +1,118 @@
+{
+  "category": "features",
+  "metadata": {
+    "version": "1.0",
+    "language": "en",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "landmark_features": [
+      "Ancient inscriptions cover the surface",
+      "Strange symbols glow with otherworldly light",
+      "The landmark pulses with supernatural energy",
+      "Mysterious sounds echo from within",
+      "The landmark attracts supernatural entities",
+      "Reality seems to bend around the landmark",
+      "The landmark exists in multiple dimensions",
+      "Time flows differently near the landmark",
+      "The landmark is surrounded by offerings",
+      "The landmark grants visions to those who touch it"
+    ],
+    "building_features": [
+      "The building has impossible architecture",
+      "Strange lights flicker in the windows",
+      "The building seems to breathe",
+      "The building attracts the desperate and lost",
+      "The building is filled with supernatural entities",
+      "The building exists in multiple time periods",
+      "The building is surrounded by an aura of dread",
+      "The building's doors open to different places",
+      "The building is covered in mysterious symbols",
+      "The building grants dark blessings to visitors"
+    ],
+    "street_features": [
+      "The street changes direction when not observed",
+      "Shadows move independently along the street",
+      "The street is covered in strange markings",
+      "Echoes of past events resonate from the cobblestones",
+      "The street is haunted by spectral figures",
+      "The street is filled with the sounds of distant screams",
+      "Something invisible patrols the street",
+      "A mysterious fog rolls through the street",
+      "The street is lined with abandoned possessions",
+      "Strange lights flicker in the street's windows"
+    ],
+    "market_features": [
+      "The market operates only during certain hours",
+      "The market requires payment in strange currencies",
+      "The market attracts customers from other realms",
+      "The market exists in multiple dimensions simultaneously",
+      "The market is filled with forbidden goods",
+      "The market is patrolled by mysterious guards",
+      "The market is the site of dark transactions",
+      "The market is surrounded by supernatural barriers",
+      "The market is frequented by otherworldly beings",
+      "The market is the center of illegal activities"
+    ],
+    "temple_features": [
+      "The temple holds services at midnight",
+      "The temple requires blood offerings",
+      "The temple grants dark blessings to supplicants",
+      "The temple echoes with otherworldly chants",
+      "The temple is filled with desperate worshippers",
+      "The temple is the site of forbidden rituals",
+      "The temple is guarded by fanatical priests",
+      "The temple attracts the lost and desperate",
+      "The temple is surrounded by supernatural energy",
+      "The temple is the gateway to other realms"
+    ],
+    "tavern_features": [
+      "The tavern serves drinks that grant visions",
+      "The tavern is a front for illegal activities",
+      "The tavern hosts fights to the death",
+      "The tavern welcomes both living and dead",
+      "The tavern is filled with dangerous patrons",
+      "The tavern is the site of dark deals",
+      "The tavern is haunted by past tragedies",
+      "The tavern is frequented by supernatural beings",
+      "The tavern is the center of local gossip",
+      "The tavern is the site of secret meetings"
+    ],
+    "guild_features": [
+      "The guild recruits only the desperate",
+      "The guild demands terrible oaths of loyalty",
+      "The guild operates from hidden chambers",
+      "The guild controls vital city functions",
+      "The guild is filled with dangerous members",
+      "The guild is the site of dark rituals",
+      "The guild is guarded by fanatical enforcers",
+      "The guild attracts the ambitious and ruthless",
+      "The guild is surrounded by supernatural barriers",
+      "The guild is the gateway to forbidden knowledge"
+    ],
+    "residence_features": [
+      "The residence seems normal from outside but holds dark secrets",
+      "The residence shifts and changes when not observed",
+      "The residence exists in multiple time periods simultaneously",
+      "The residence draws the lonely and desperate",
+      "The residence is filled with supernatural entities",
+      "The residence is the site of tragic events",
+      "The residence is guarded by mysterious forces",
+      "The residence attracts the lost and forgotten",
+      "The residence is surrounded by supernatural energy",
+      "The residence is the gateway to other realms"
+    ],
+    "ruins_features": [
+      "The ruins are haunted by echoes of the past",
+      "The ruins hide secrets in their depths",
+      "The ruins attract treasure hunters and scholars",
+      "The ruins serve as lairs for dangerous creatures",
+      "The ruins are filled with supernatural entities",
+      "The ruins are the site of ancient tragedies",
+      "The ruins are guarded by mysterious forces",
+      "The ruins attract the lost and desperate",
+      "The ruins are surrounded by supernatural energy",
+      "The ruins are the gateway to other realms"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "category": "regions",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "region_names": [
+      "O Vale dos Mortos Infelizes",
+      "As Planícies Amaldiçoadas",
+      "As Colinas Sombreadas",
+      "O Pântano de Sangue",
+      "A Floresta de Ossos",
+      "Os Resíduos Cinzentos",
+      "As Montanhas Torcidas",
+      "As Águas Sombrias",
+      "As Ruínas Esquecidas",
+      "Os Vales Assombrados"
+    ],
+    "region_descriptions": [
+      "Um vale desolado onde os mortos andam livremente",
+      "Uma terra amaldiçoada onde nada cresce",
+      "Colinas envoltas em escuridão perpétua",
+      "Um pântano cheio de águas vermelho-sangue",
+      "Uma floresta onde as árvores são feitas de osso",
+      "Resíduos cobertos de cinzas cinzentas e desespero",
+      "Montanhas torcidas por magia sombria",
+      "Águas que engolem luz e esperança",
+      "Ruínas de uma civilização há muito esquecida",
+      "Vales onde espíritos sussurram segredos"
+    ],
+    "region_threats": [
+      "Hordas de mortos-vivos vagam livremente",
+      "Criaturas amaldiçoadas se escondem nas sombras",
+      "Magia sombria corrompe todos que entram",
+      "Vapores venenosos matam lentamente",
+      "Armadilhas antigas reclamam os incautos",
+      "Tempestades sobrenaturais rugem constantemente",
+      "A própria realidade é torcida e distorcida",
+      "O tempo flui diferentemente aqui",
+      "Os mortos se recusam a ficar enterrados",
+      "A loucura se espalha como uma doença"
+    ]
+  }
+}

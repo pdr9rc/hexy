@@ -8,6 +8,8 @@ replacing the markdown parsing approach with structured data classes.
 from dataclasses import dataclass, field
 from typing import Optional, List, Dict, Any
 from enum import Enum
+from backend.utils.hex_field_creator import create_common_hex_fields, create_loot_item
+from backend.models import LootItem, LootType, AncientKnowledge
 
 
 class TerrainType(Enum):
@@ -32,50 +34,7 @@ class HexType(Enum):
     SEA_ENCOUNTER = "sea_encounter"
 
 
-class LootType(Enum):
-    """Types of loot items."""
-    VALUABLE = "valuable"
-    ARMOR = "armor"
-    WEAPON = "weapon"
-    UTILITY = "utility"
 
-
-@dataclass
-class LootItem:
-    """Represents a loot item found in a hex."""
-    description: str
-    full_description: str
-    item: str
-    type: LootType
-    magical_effect: Optional[str] = None
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert loot item to dictionary for API response."""
-        return {
-            "description": self.description,
-            "full_description": self.full_description,
-            "item": self.item,
-            "type": self.type.value,
-            "magical_effect": self.magical_effect
-        }
-
-
-@dataclass
-class AncientKnowledge:
-    """Represents ancient knowledge or scrolls found in a hex."""
-    content: str
-    description: str
-    effect: str
-    type: str
-    
-    def to_dict(self) -> Dict[str, Any]:
-        """Convert ancient knowledge to dictionary for API response."""
-        return {
-            "content": self.content,
-            "description": self.description,
-            "effect": self.effect,
-            "type": self.type
-        }
 
 
 @dataclass
@@ -151,7 +110,7 @@ class SettlementHex:
             "weather": self.weather,
             "city_event": self.city_event,
             "tavern_details": self.tavern_details,
-            "redirect_to": "settlement"
+            "redirect_to": "city" if self.is_major_city else "settlement"
         }
 
 
@@ -389,28 +348,26 @@ class HexModelManager:
                 trap_section=data.get('trap_section')
             )
         elif data.get('is_beast'):
+            # Use centralized field creator for common fields
+            common_fields = create_common_hex_fields(data, hex_code, terrain)
             return BeastHex(
-                hex_code=hex_code,
-                terrain=terrain,
-                encounter=data.get('encounter', 'Unknown beast'),
                 beast_type=data.get('beast_type', 'Unknown'),
                 beast_feature=data.get('beast_feature', 'Unknown'),
                 beast_behavior=data.get('beast_behavior', 'Unknown'),
-                denizen=data.get('denizen', 'No denizen information'),
-                territory=data.get('territory', 'Unknown territory'),
-                threat_level=data.get('threat_level', 'Unknown'),
-                notable_feature=data.get('notable_feature', 'No notable features'),
-                atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
-                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None,
                 # Beast specific fields
                 treasure_found=data.get('treasure_found', ''),
-                beast_art=data.get('beast_art', '')
+                beast_art=data.get('beast_art', ''),
+                **common_fields
             )
         elif data.get('is_npc'):
+            # Use centralized field creator for common fields, but exclude fields that NPCHex doesn't have
+            common_fields = create_common_hex_fields(data, hex_code, terrain)
+            # Remove fields that NPCHex doesn't have
+            fields_to_remove = ['denizen', 'territory', 'threat_level']
+            for field in fields_to_remove:
+                if field in common_fields:
+                    del common_fields[field]
             return NPCHex(
-                hex_code=hex_code,
-                terrain=terrain,
-                encounter=data.get('encounter', 'Unknown NPC'),
                 name=data.get('name', 'Unknown'),
                 denizen_type=data.get('denizen_type', 'Unknown'),
                 # Mörk Borg NPC fields
@@ -426,50 +383,22 @@ class HexModelManager:
                 motivation=data.get('motivation', ''),
                 feature=data.get('feature', ''),
                 demeanor=data.get('demeanor', ''),
-                notable_feature=data.get('notable_feature', 'No notable features'),
-                atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
-                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None
+                **common_fields
             )
         elif data.get('is_sea_encounter'):
+            # Use centralized field creator for common fields
+            common_fields = create_common_hex_fields(data, hex_code, terrain)
             return SeaEncounterHex(
-                hex_code=hex_code,
-                terrain=terrain,
-                encounter=data.get('encounter', 'Unknown sea encounter'),
                 encounter_type=data.get('encounter_type', 'Unknown'),
-                denizen=data.get('denizen', 'No denizen information'),
-                territory=data.get('territory', 'Unknown territory'),
-                threat_level=data.get('threat_level', 'Unknown'),
-                notable_feature=data.get('notable_feature', 'No notable features'),
-                atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
-                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None,
                 # Sea encounter specific fields
                 origin=data.get('origin', ''),
-                sunken_treasure=data.get('sunken_treasure', '')
+                sunken_treasure=data.get('sunken_treasure', ''),
+                **common_fields
             )
         else:
             return WildernessHex(hex_code=hex_code, terrain=terrain)
     
-    def _create_loot_item(self, loot_data: Dict[str, Any]) -> Optional[LootItem]:
-        if not isinstance(loot_data, dict):
-            return None
-        
-        # Convert string type to LootType enum
-        loot_type_str = loot_data.get('type', '')
-        loot_type = None
-        if loot_type_str:
-            try:
-                loot_type = LootType(loot_type_str)
-            except ValueError:
-                # If the string doesn't match any enum value, default to UTILITY
-                loot_type = LootType.UTILITY
-        
-        return LootItem(
-            description=loot_data.get('description', ''),
-            full_description=loot_data.get('full_description', ''),
-            item=loot_data.get('item', ''),
-            type=loot_type or LootType.UTILITY,
-            magical_effect=loot_data.get('magical_effect', None)
-        )
+    # Use centralized loot item creator from utils.hex_field_creator
     
     def _create_ancient_knowledge(self, scroll_data: Dict[str, Any]) -> AncientKnowledge:
         """Create an AncientKnowledge from raw data."""

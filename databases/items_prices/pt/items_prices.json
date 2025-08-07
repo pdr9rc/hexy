@@ -1,0 +1,46 @@
+{
+  "category": "items_prices",
+  "metadata": {
+    "version": "1.0",
+    "language": "pt",
+    "last_updated": "2025-01-16T00:00:00.000000"
+  },
+  "tables": {
+    "item_prices": [
+      "1 moeda de cobre",
+      "5 moedas de cobre",
+      "10 moedas de cobre",
+      "1 moeda de prata",
+      "5 moedas de prata",
+      "10 moedas de prata",
+      "25 moedas de prata",
+      "50 moedas de prata",
+      "1 moeda de ouro",
+      "5 moedas de ouro"
+    ],
+    "item_rarity": [
+      "Comum",
+      "Incomum",
+      "Raro",
+      "Muito raro",
+      "Lendário",
+      "Mítico",
+      "Único",
+      "Artefato",
+      "Divino",
+      "Primordial"
+    ],
+    "item_categories": [
+      "Armas",
+      "Armaduras",
+      "Poções",
+      "Pergaminhos",
+      "Joias",
+      "Ferramentas",
+      "Vestimentas",
+      "Decorações",
+      "Livros",
+      "Artefatos"
+    ]
+  }
+}

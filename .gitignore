@@ -53,3 +53,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+pmd-bin-6.55.0/*
+
+backend/web/static/*.js
+backend/web/static/utils/*.js
+backend/web/static/*.map
+backend/web/static/**/*.map
