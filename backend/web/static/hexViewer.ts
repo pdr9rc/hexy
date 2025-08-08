@@ -878,13 +878,33 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
     const population = settlement.population || '?';
     const atmosphere = settlement.atmosphere || '?';
     const description = settlement.description || '';
-    const features = (settlement.notable_features && settlement.notable_features.length > 0) ? settlement.notable_features.join("\n") : '';
+    const features = (() => {
+      const arr = Array.isArray(settlement.notable_features)
+        ? settlement.notable_features
+        : (settlement.notable_feature ? [settlement.notable_feature] : []);
+      return arr.length ? arr.join("\n") : '';
+    })();
     const tavern = settlement.local_tavern || '';
     const power = settlement.local_power || '';
     // Mörk Borg settlement fields
     const weather = settlement.weather || '';
     const cityEvent = settlement.city_event || '';
     const tavernDetails = settlement.tavern_details || null;
+    const formatMenuEntry = (entry: any): string => {
+      if (entry == null) return '';
+      if (typeof entry === 'string') return entry;
+      if (Array.isArray(entry)) return entry.map(formatMenuEntry).join('\n');
+      if (typeof entry === 'object') {
+        const name = entry.name ?? '';
+        const price = entry.price ?? '';
+        const currency = entry.currency ?? '';
+        const notes = entry.notes ?? entry.quality ?? '';
+        const pricePart = [price, currency].filter(Boolean).join(' ');
+        const main = [name, pricePart].filter(Boolean).join(' - ');
+        return notes ? `${main} (${notes})` : (main || JSON.stringify(entry));
+      }
+      return String(entry);
+    };
     const settlementArt = settlement.settlement_art || '';
     // Build HTML
     let html = `
@@ -937,10 +957,12 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
             ${tavernDetails ? `
             <div class="ascii-section ascii-hex-tavern-details">
               <span>${t('TAVERN DETAILS')}:</span>
-              <div class="ascii-content">${tavernDetails.select_menu ? `${t('SELECT MENU')}: ${tavernDetails.select_menu}` : ''}
-${tavernDetails.budget_menu ? `${t('BUDGET MENU')}: ${tavernDetails.budget_menu}` : ''}
-${tavernDetails.innkeeper ? `${t('INNKEEPER')}: ${tavernDetails.innkeeper}` : ''}
-${tavernDetails.notable_patron ? `${t('NOTABLE PATRON')}: ${tavernDetails.notable_patron}` : ''}</div>
+              <div class="ascii-content">${[
+                tavernDetails.select_menu ? `${t('SELECT MENU')}: ${formatMenuEntry(tavernDetails.select_menu)}` : '',
+                tavernDetails.budget_menu ? `${t('BUDGET MENU')}: ${formatMenuEntry(tavernDetails.budget_menu)}` : '',
+                tavernDetails.innkeeper ? `${t('INNKEEPER')}: ${tavernDetails.innkeeper}` : '',
+                tavernDetails.notable_patron ? `${t('NOTABLE PATRON')}: ${tavernDetails.notable_patron}` : ''
+              ].filter(Boolean).join('\n')}</div>
             </div>
             ` : ''}
             ${settlementArt ? `

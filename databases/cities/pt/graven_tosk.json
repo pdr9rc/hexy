@@ -1,60 +1,60 @@
 {
   "city_name": "Graven-Tosk",
-  "display_name": "Graven-Tosk - O Cemitério Antigo",
-  "description": "Graven-Tosk é um cemitério verdadeiramente antigo localizado no fundo da floresta de Sarkash, onde os caminhos se entrelaçam e serpenteiam na escuridão exuberante. É preenchido com mausoléus, querubins de olhos vazios, fontes estagnadas, covas de peste e túmulos comuns. O ar aqui é pesado, viciado e difícil de respirar, frequentemente acompanhado pelo som de arranhões frenéticos. Elevando-se acima desta paisagem melancólica está o castelo gótico negro conhecido como o Palácio do Rei das Sombras.",
+  "display_name": "Graven-Tosk - O Antigo Cemitério",
+  "description": "No fundo de Sarkash, onde trilhas se enroscam na sombra, ergue-se Graven‑Tosk. Mausoléus, querubins de olhos vazios, fontes estagnadas, covas de peste e valas comuns. O ar é pesado, viciado, difícil de puxar; sempre há um som de arranhar. Sobre tudo, o palácio negro do Rei das Sombras vigia.",
   "theme": "necropolis_decay_hidden",
   "district_matrix": [
     [
       "",
       "",
-      "Fringe",
-      "Fringe",
-      "Fringe",
+      "Borda",
+      "Borda",
+      "Borda",
       "",
       ""
     ],
     [
       "",
-      "Upper Graves",
-      "Upper Graves",
-      "Royal Ruins",
-      "Upper Graves",
-      "Upper Graves",
+      "Túmulos Superiores",
+      "Túmulos Superiores",
+      "Ruínas Reais",
+      "Túmulos Superiores",
+      "Túmulos Superiores",
       ""
     ],
     [
-      "Fringe",
-      "Royal Ruins",
-      "Palace Quarter",
-      "Palace Quarter",
-      "Royal Ruins",
-      "Royal Ruins",
-      "Fringe"
+      "Borda",
+      "Ruínas Reais",
+      "Quarteirão do Palácio",
+      "Quarteirão do Palácio",
+      "Ruínas Reais",
+      "Ruínas Reais",
+      "Borda"
     ],
     [
       "",
-      "Royal Ruins",
-      "Palace Quarter",
-      "Palace Quarter",
-      "Royal Ruins",
-      "Upper Graves",
-      ""
-    ],
-    [
-      "",
-      "Upper Graves",
-      "Lower Catacombs",
-      "Upper Graves",
-      "Lower Catacombs",
-      "Upper Graves",
+      "Ruínas Reais",
+      "Quarteirão do Palácio",
+      "Quarteirão do Palácio",
+      "Ruínas Reais",
+      "Túmulos Superiores",
       ""
     ],
     [
       "",
+      "Túmulos Superiores",
+      "Catacumbas Inferiores",
+      "Túmulos Superiores",
+      "Catacumbas Inferiores",
+      "Túmulos Superiores",
+      ""
+    ],
+    [
       "",
-      "Lower Catacombs",
-      "Lower Catacombs",
-      "Lower Catacombs",
+      "",
+      "Catacumbas Inferiores",
+      "Catacumbas Inferiores",
+      "Catacumbas Inferiores",
       "",
       ""
     ],
@@ -70,322 +70,322 @@
   ],
   "districts": [
     {
-      "name": "Palace Quarter",
-      "description": "The relatively intact inner wing of the Palace of the Shadow King, serving as the home for the Shadow King, his courtiers, servants, and slaves. This gothic black castle looms over Graven-Tosk, mirroring the Cathedral of the Two-Headed Basilisk in Galgenbeck.",
+      "name": "Quarteirão do Palácio",
+      "description": "A ala interna, relativamente intacta, do Palácio do Rei das Sombras. Ali vivem o Rei, cortesãos, servos e escravos. O castelo gótico negro paira sobre Graven‑Tosk, espelho profano da Catedral do Basilisco de Duas Cabeças em Galgenbeck.",
       "theme": "royal_decay",
       "buildings": [
-        "The Inner Wing of the Palace",
-        "The Royal Stables",
-        "Servants' Quarters",
-        "The Courtiers' Chambers"
+        "A Ala Interna do Palácio",
+        "Os Estábulos Reais",
+        "Alojamentos dos Servos",
+        "As Câmaras dos Cortesãos"
       ],
       "streets": [
-        "Shadow King's Path",
-        "Loyalty Lane",
-        "Sorrow's Walk"
+        "Caminho do Rei das Sombras",
+        "Travessa da Lealdade",
+        "Passo da Mágoa"
       ],
       "landmarks": [
-        "The Throne Room",
-        "The Black Spire (Palace Tower)",
-        "The Royal Menagerie (Ruined)",
-        "The Council's Crypt"
+        "Sala do Trono",
+        "A Agulha Negra (Torre do Palácio)",
+        "A Menagerie Real (em ruínas)",
+        "A Cripta do Conselho"
       ],
       "encounters": [
-        "Servants of the King doing his will",
-        "Princes disguised as ordinary men, wandering the ruins and tricking travelers",
-        "Courtiers engaged in ritualistic practices"
+        "Servos do Rei cumprindo sua vontade",
+        "Príncipes disfarçados de homens comuns, vagueando pelas ruínas e enganando viajantes",
+        "Cortesãos envolvidos em práticas ritualísticas"
       ],
       "random_tables": [
-        "1-2: A prince of the line attempting to trick PCs",
-        "3-4: A panicked slave fleeing the inner wing",
-        "5-6: A courtier seeking favors or gossiping about rivals"
+        "1-2: Um príncipe da linhagem tentando ludibriar os PCs",
+        "3-4: Um escravo em pânico foge da ala interna",
+        "5-6: Um cortesão busca favores ou espalha boatos sobre rivais"
       ],
       "atmosphere_modifiers": [
-        "The air hangs heavy with ancient rituals and faded opulence",
-        "Whispers of loyalty and betrayal echo through the halls",
-        "A sense of ancient power and lingering dread pervades the area"
+        "O ar pesa com rituais antigos e opulência desbotada",
+        "Sussurros de lealdade e traição ecoam pelos salões",
+        "Um senso de poder ancestral e pavor persistente permeia a área"
       ]
     },
     {
-      "name": "Royal Ruins",
-      "description": "The crumbling remains of the Palace of the Shadow King, providing shelter for unfortunate souls. The structures here are heavily decayed, suggesting centuries of neglect and ruin.",
+      "name": "Ruínas Reais",
+      "description": "Os restos desabados do Palácio do Rei das Sombras abrigam almas azaradas. A decadência é profunda — séculos de abandono.",
       "theme": "structural_collapse_habitation",
       "buildings": [
-        "Collapsed Halls",
-        "Shattered Towers",
-        "Makeshift Shelters (within ruins)"
+        "Salões Colapsados",
+        "Torres Estilhaçadas",
+        "Abrigos Improvisados (nas ruínas)"
       ],
       "streets": [
-        "Rubble Paths",
-        "Crumbling Corridors",
-        "Broken Battlements"
+        "Trilhas de Escombro",
+        "Corredores Esboroantes",
+        "Baluartes Quebrados"
       ],
       "landmarks": [
-        "The Great Fall (a large collapsed section)",
-        "The Whispering Walls",
-        "The Shadowed Courtyard"
+        "A Grande Queda (uma grande seção colapsada)",
+        "As Paredes Sussurrantes",
+        "O Pátio Enlutuado"
       ],
       "encounters": [
-        "Unfortunate souls seeking shelter",
-        "Packs of feral Ash-mink",
-        "Zombies rising from the debris [5-8]",
-        "Grotesques lurking in the shadows"
+        "Almas azaradas buscando abrigo",
+        "Matilhas de visons‑de‑cinza selvagens",
+        "Zumbis erguendo‑se dos destroços [5‑8]",
+        "Grotescos à espreita nas sombras"
       ],
       "random_tables": [
-        "1-2: A section of the ruins collapses, requiring an Agility test to avoid damage",
-        "3-4: Scavengers fighting over meager resources",
-        "5-6: A sudden, inexplicable silence falls over the area, unnerving all"
+        "1-2: Uma seção das ruínas desaba; é preciso um teste de Agilidade para evitar dano",
+        "3-4: Catadores brigam por recursos minguados",
+        "5-6: Um silêncio súbito e inexplicável cai sobre a área, assustando a todos"
       ],
       "atmosphere_modifiers": [
-        "The constant sound of creaking stone and shifting rubble",
-        "A pervasive smell of damp earth and decay",
-        "Cold pockets of air despite the general warmth"
+        "Som constante de pedra rangendo e entulho movendo‑se",
+        "Cheiro onipresente de terra úmida e decomposição",
+        "Bolsões de ar frio apesar do morno geral"
       ]
     },
     {
-      "name": "Upper Graves",
-      "description": "The main cemetery area of Graven-Tosk, characterized by mausoleums, blank-eyed cherubs, stagnant fountains, plague pits, and countless ordinary graves. The land here is riddled with hidden burrows and disturbing signs of life within death.",
+      "name": "Túmulos Superiores",
+      "description": "A grande área cemiterial: mausoléus, querubins de olhos vazios, fontes paradas, covas de peste e incontáveis sepulturas. O solo é cravejado de tocas ocultas — vida indevida dentro da morte.",
       "theme": "ancient_cemetery_pestilence",
       "buildings": [
-        "Mausoleums",
-        "Graves (general)"
+        "Mausoléus",
+        "Sepulturas (geral)"
       ],
       "streets": [
-        "Grave Paths",
-        "Cherub's Walk",
-        "Plague Pit Lane"
+        "Trilhas dos Túmulos",
+        "Passeio do Querubim",
+        "Alameda da Cova da Peste"
       ],
       "landmarks": [
-        "The Great Plague Pit",
-        "The Stagnant Fountain",
-        "The Weeping Angel Mausoleum",
-        "Crypts (general, potentially like those in the Valley of Unfortunate Undead, which Nagl wandered)"
+        "A Grande Cova da Peste",
+        "A Fonte Estagnada",
+        "O Mausoléu do Anjo Lacrimoso",
+        "Criptas (geral; semelhantes às do Vale dos Desmortos Desafortunados, por onde Nagl vagueou)"
       ],
       "encounters": [
-        "Undead creatures (e.g., Zombies [5-8])",
-        "Grotesques stalking graveyards",
-        "Ghouls feasting on remains (implied by necropolis theme, not explicitly stated in sources for Graven-Tosk)",
-        "Rabid animals scavenging among graves"
+        "Criaturas mortas‑vivas (p.ex., Zumbis [5‑8])",
+        "Grotescos rondando cemitérios",
+        "Carniçais banqueteando restos (inferido pelo tema de necrópole)",
+        "Animais raivosos vasculhando entre sepulturas"
       ],
       "random_tables": [
-        "1-2: A freshly opened grave, its contents disturbed",
-        "3-4: The ground trembles, and a section of graves sinks slightly",
-        "5-6: A strange, sweet scent emanates from a mausoleum, attracting insects"
+        "1-2: Uma cova recém‑aberta, conteúdo perturbado",
+        "3-4: O chão treme e um trecho de sepulturas afunda levemente",
+        "5-6: Um aroma adocicado e estranho emana de um mausoléu, atraindo insetos"
       ],
       "atmosphere_modifiers": [
-        "The overwhelming stench of decay and damp earth",
-        "The unsettling silence broken only by distant scratching sounds",
-        "A faint, ghostly luminescence on gravestones at night"
+        "Fedor esmagador de decomposição e terra úmida",
+        "Silêncio inquietante, rompido apenas por arranhões distantes",
+        "Luz tênue e espectral nas lápides à noite"
       ]
     },
     {
-      "name": "Lower Catacombs",
-      "description": "A vast network of tunnels, catacombs, and cellars that sprawl beneath the Palace and the cemetery like writhing roots, digging deeper into the cold earth like cancerous veins. These dark passages are often knee-deep in muck and water. This area may contain features reminiscent of larger map locations like the Sunken Temple or Quarry-Grave [12-15].",
+      "name": "Catacumbas Inferiores",
+      "description": "Rede vasta de túneis, catacumbas e porões sob o Palácio e o cemitério, como raízes contorcidas e veias cancerosas que cavam a terra fria. Passagens escuras, muitas vezes à altura dos joelhos em lama e água. Lembram lugares maiores como o Templo Submerso ou a Fossa‑Pedreira.",
       "theme": "subterranean_horror_imprisonment",
       "buildings": [
-        "Underground Chambers",
-        "Hidden Crypts",
-        "Forgotten Cellars"
+        "Câmaras Subterrâneas",
+        "Criptas Ocultas",
+        "Porões Esquecidos"
       ],
       "streets": [
-        "Twisting Tunnels",
-        "Root-choked Passages",
-        "The Deep Paths"
+        "Túneis Retorcidos",
+        "Passagens Enraizadas",
+        "As Trilhas Profundas"
       ],
       "landmarks": [
-        "The Sunken Temple (a set of three ash-buried towers from which crawling animals emerge)",
-        "The Quarry-Grave (a rough-hewn wedge into a mountain, containing injured and dying people in a cage, and Undying Miners)",
-        "Thief-Tunnels (as one possible origin for a Heretical Priest)"
+        "O Templo Submerso (três torres soterradas em cinza, de onde emergem animais rastejantes)",
+        "A Fossa‑Pedreira (cunha tosca numa montanha; gaiola com feridos e moribundos; Mineiros Imortais)",
+        "Túneis de Ladrões (uma origem possível para um Sacerdote Herético)"
       ],
       "encounters": [
-        "Undying Miners, emaciated and withered, clutching pickaxes",
-        "Crawling animals (as seen at the Sunken Temple)",
-        "Prisoners or other beings trapped in pits or cages (similar to Quarry-Grave)",
-        "Corporeal manifestations of nightmare, from the kind of undeath that results from wandering the Valley of the Unfortunate Undead"
+        "Mineiros Imortais, emaciados e mirrados, agarrando picaretas",
+        "Animais rastejantes (como no Templo Submerso)",
+        "Prisioneiros ou outras criaturas presas em fossos ou gaiolas (como na Fossa‑Pedreira)",
+        "Manifestações corpóreas de pesadelo, da não‑vida que nasce ao vagar pelo Vale dos Desmortos Desafortunados"
       ],
       "random_tables": [
-        "1-2: The sounds of frantic scratching echoing from the walls",
-        "3-4: A section of tunnel unexpectedly floods or collapses",
-        "5-6: Strange, glowing fungi illuminate a passage, revealing skeletal remains"
+        "1-2: Sons frenéticos de arranhar ecoam das paredes",
+        "3-4: Um trecho de túnel alaga ou desaba de súbito",
+        "5-6: Fungos estranhos e luminosos iluminam um corredor, revelando restos esqueléticos"
       ],
       "atmosphere_modifiers": [
-        "The constant echo of water dripping and distant, unsettling sounds",
-        "The pervasive smell of damp earth, rot, and sulfur (similar to other dungeon/cave descriptions)",
-        "An oppressive sense of being watched from the dark"
+        "Eco constante de água pingando e sons distantes e inquietantes",
+        "Cheiro onipresente de terra úmida, podridão e enxofre",
+        "Um senso opressor de estar sendo observado no escuro"
       ]
     },
     {
-      "name": "Fringe (Sarkash Edge)",
-      "description": "The transitional area where the ancient cemetery of Graven-Tosk meets the gloomy, overgrown forest of Sarkash. Paths here tangle and wind, leading wanderers astray. This is an 'untamed wild' of Tveland.",
+      "name": "Borda (Limiar de Sarkash)",
+      "description": "Onde o cemitério antigo encontra a floresta de Sarkash. Trilhas se enredam e desviam o caminhante. É o ermo indômito de Tveland.",
       "theme": "wilderness_encroachment",
       "buildings": [
-        "Overgrown Ruins",
-        "Forgotten Shrines"
+        "Ruínas Tomadas pelo Matagal",
+        "Santuários Esquecidos"
       ],
       "streets": [
-        "Tangled Paths",
-        "Sarkash Road (leading away to Tveland)"
+        "Trilhas Emaranhadas",
+        "Estrada de Sarkash (para Tveland)"
       ],
       "landmarks": [
-        "The Petrified Grove",
-        "The Silent Stream",
-        "Hidden Burial Mounds"
+        "O Bosque Petrificado",
+        "O Riacho Silencioso",
+        "Montes de Sepultamento Ocultos"
       ],
       "encounters": [
-        "Goblins shooting with twanging bows, carrying a curse",
-        "Sarkash scum with poisoned knives",
-        "Aland, wickhead knife-wielders skulking",
-        "Pale ones, destructive and detached, as if fallen from the stars",
-        "Nagl, the Wretched Royal, or other necromancers, having wandered here"
+        "Goblins atiram arcos trinados, levando uma maldição",
+        "Escória de Sarkash com facas envenenadas",
+        "Aland, wickheads de lâmina à espreita",
+        "Pálidos, destrutivos e alheios, como caídos das estrelas",
+        "Nagl, a Realeza Abjeta, ou outros necromantes, tendo vagado até aqui"
       ],
       "random_tables": [
-        "1-2: The forest seems to spread unnaturally fast",
-        "3-4: A disturbing stillness falls over the area, amplifying distant sounds",
-        "5-6: Strange, glowing insects flit through the undergrowth, leading nowhere"
+        "1-2: A floresta parece espalhar‑se de modo antinatural",
+        "3-4: Uma quietude perturbadora cai sobre a área, amplificando sons distantes",
+        "5-6: Insetos estranhos e luminosos volitam pelo matagal, levando a lugar nenhum"
       ],
       "atmosphere_modifiers": [
-        "The oppressive gloom and tangling paths of the forest",
-        "The air grows heavy, stale, and hard to breathe",
-        "A constant, faint scratching sound from within the undergrowth"
+        "A penumbra opressiva e trilhas que se enredam na floresta",
+        "O ar torna‑se pesado, viciado e difícil de puxar",
+        "Arranhar constante e tênue vindo do sub-bosque"
       ]
     }
   ],
   "buildings": [
-    "The Inner Wing of the Palace",
-    "Mausoleums",
-    "Collapsed Palace Halls",
-    "Forgotten Crypts (thematically fitting, as Nagl wandered the Valley of Unfortunate Undead which has crypts)",
-    "Makeshift Shelters (within Palace ruins)",
-    "Underground Chambers (Catacombs beneath the Palace)",
-    "Sunken Temple (a distinct location on the Ashen Sea map, but thematically relevant to underground ruins)",
-    "Quarry-Grave (a distinct location on the Ashen Sea map, relevant to underground excavations and imprisonment)"
+    "A Ala Interna do Palácio",
+    "Mausoléus",
+    "Salões Colapsados do Palácio",
+    "Criptas Esquecidas (Nagl vagou pelo Vale dos Desmortos Desafortunados, que tem criptas)",
+    "Abrigos Improvisados (nas ruínas do Palácio)",
+    "Câmaras Subterrâneas (Catacumbas sob o Palácio)",
+    "Templo Submerso (no mapa do Mar Cinzento; ruínas subterrâneas)",
+    "Fossa‑Pedreira (no mapa do Mar Cinzento; escavação e aprisionamento)"
   ],
   "streets": [
-    "Shadow King's Path",
-    "Rubble Paths",
-    "Grave Paths",
-    "Twisting Tunnels (under the palace)",
-    "Sarkash Road (leading into the forest)",
-    "Plague Pit Lane ",
-    "Cherub's Walk ",
-    "Thief-Tunnels"
+    "Caminho do Rei das Sombras",
+    "Trilhas de Escombro",
+    "Trilhas dos Túmulos",
+    "Túneis Retorcidos (sob o palácio)",
+    "Estrada de Sarkash (levando à floresta)",
+    "Travessa da Cova da Peste",
+    "Passeio do Querubim",
+    "Túneis de Ladrões"
   ],
   "landmarks": [
-    "The Palace of the Shadow King",
-    "The Great Plague Pit",
-    "The Stagnant Fountain",
-    "The Sunken Temple",
-    "The Quarry-Grave"
+    "O Palácio do Rei das Sombras",
+    "A Grande Cova da Peste",
+    "A Fonte Estagnada",
+    "O Templo Submerso",
+    "A Fossa‑Pedreira"
   ],
   "temples": [
-    "Shrine of Bone Collection (a type of shrine found in Galgenbeck, thematically fitting for a necropolis, but not explicitly stated for Graven-Tosk)"
+    "Santuário da Coleta de Ossos (tipo visto em Galgenbeck; adequado à necrópole)"
   ],
   "taverns": [],
   "guilds": [
-    "The Death Certificate Society (a guild found in Galgenbeck, thematically fitting for a necropolis, but not explicitly stated for Graven-Tosk)"
+    "Sociedade do Certificado de Óbito (guilda de Galgenbeck; adequada à necrópole)"
   ],
   "residences": [
-    "The Shadow King's Residence (within the Palace Quarter)",
-    "Mausoleums (as a form of eternal residence)",
-    "Burrows (for Undying Miners)",
-    "Shelters of Unfortunate Souls (within the Royal Ruins)"
+    "Residência do Rei das Sombras (no Quarteirão do Palácio)",
+    "Mausoléus (morada eterna)",
+    "Tocas (dos Mineiros Imortais)",
+    "Abrigos de Almas Azaradas (nas Ruínas Reais)"
   ],
   "ruins": [
-    "Ruins of the Shadow King's Palace",
-    "Sunken Temple",
-    "Quarry-Grave (an excavated ruin)",
-    "Towers (collapsed)"
+    "Ruínas do Palácio do Rei das Sombras",
+    "Templo Submerso",
+    "Fossa‑Pedreira (ruína escavada)",
+    "Torres (colapsadas)"
   ],
   "encounters": {
     "district": [
-      "Undead (Zombies [5-8], Grotesques stalking graveyards)",
-      "Goblins with bows, carrying a curse",
-      "Pale ones",
-      "Undying Miners",
-      "Crawling animals (as seen at the Sunken Temple)",
-      "Princes of the Shadow King's line in disguise",
-      "Corpse-things (relevant to the Valley of the Unfortunate Undead, which Nagl wandered, and where undeath mutates into mournful despair)"
+      "Mortos‑vivos (Zumbis [5‑8], Grotescos rondando cemitérios)",
+      "Goblins com arcos, carregando uma maldição",
+      "Pálidos",
+      "Mineiros Imortais",
+      "Animais rastejantes (como no Templo Submerso)",
+      "Príncipes da linhagem do Rei das Sombras disfarçados",
+      "Coisas‑de‑cadáver (eco do Vale dos Desmortos Desafortunados, onde a não‑vida se deforma em desespero)"
     ],
     "street": [
-      "Feral Ash-mink",
-      "Sarkash scum with poisoned knives",
-      "Aland, wickhead knife-wielders skulking"
+      "Vison‑de‑cinza selvagem",
+      "Escória de Sarkash com facas envenenadas",
+      "Aland, wickheads de lâmina à espreita"
     ],
     "building": [
-      "Skeletons patrolling the grounds (a general MÖRK BORG encounter, fitting for a necropolis)",
-      "Trapped corpses reanimating as Flesh Puppets (a general MÖRK BORG encounter, fitting for a grotesque fort)",
-      "Wretched souls sheltering in crumbling parts"
+      "Esqueletos patrulhando os terrenos",
+      "Cadáveres presos reanimam como Marionetes de Carne",
+      "Almas miseráveis se abrigam nas partes em ruína"
     ],
     "landmark": [
-      "Flocks of crows following something (like a Dustlion)",
-      "Dry-Witches (who dwell near the Glassthrone, a distinct map location, but mentioned in rumors of the world)",
-      "Monsters (general) present around a landmark"
+      "Bando de corvos segue algo (como um Leão‑de‑Pó)",
+      "Bruxas‑Secas (próximas ao Trono de Vidro)",
+      "Monstros (geral) espreitam o marco"
     ],
     "temple": [
-      "Ritualistic practices (as Nagl developed a taste for necromancy, implying such activities)"
+      "Práticas ritualísticas (Nagl desenvolveu gosto por necromancia)"
     ],
     "tavern": [],
     "guild": [],
     "residence": [
-      "A miserable face of an Undying Miner in a burrow"
+      "O rosto miserável de um Mineiro Imortal na toca"
     ],
     "ruins": [
-      "Unfortunate souls sheltering",
-      "Crawling animals",
-      "Zombies [5-8]",
-      "The faint, disembodied cries of children echoing from the rubble (a general MÖRK BORG theme of suffering and lost children, fitting for the bleakness)"
+      "Almas azaradas abrigadas",
+      "Animais rastejantes",
+      "Zumbis [5‑8]",
+      "Fracos gritos desencarnados de crianças ecoam dos escombros"
     ]
   },
   "random_tables": {
     "district": [
-      "1-2: The forest of Sarkash seems to spread unnaturally fast, encroaching further into the cemetery",
-      "3-4: The air grows heavy, stale, and hard to breathe, accompanied by frantic scratching sounds",
-      "5-6: A previously hidden plague pit opens, releasing foul odors and d4 zombies [1, 5-8]"
+      "1-2: A floresta de Sarkash parece espalhar‑se de modo antinatural, invadindo mais o cemitério",
+      "3-4: O ar torna‑se pesado, viciado e difícil de puxar, acompanhado de arranhões frenéticos",
+      "5-6: Abre‑se uma cova da peste antes oculta, liberando fedor e d4 zumbis [1, 5‑8]"
     ],
     "building": [
-      "1-2: A collapsing section of the Palace reveals old bones and debris",
-      "3-4: A ghostly whisper or vision related to Nagl or the Valley of the Unfortunate Undead",
-      "5-6: Signs of recent passage by 'crawling animals' near the Sunken Temple"
+      "1-2: Uma seção colapsada do Palácio revela ossos antigos e detritos",
+      "3-4: Sussurro ou visão espectral ligada a Nagl ou ao Vale dos Desmortos Desafortunados",
+      "5-6: Sinais de passagem recente de 'animais rastejantes' perto do Templo Submerso"
     ],
     "street": [
-      "1-2: A flock of crows follows a massive Dustlion in the distance",
-      "3-4: An encounter with a disguised Prince of the Shadow King's line",
-      "5-6: A sudden, inexplicable chill or feeling of despair passes over the area (similar to cursed effects in sources)"
+      "1-2: Um bando de corvos segue um imenso Leão‑de‑Pó ao longe",
+      "3-4: Encontro com um Príncipe disfarçado da linhagem do Rei das Sombras",
+      "5-6: Um frio inexplicável e súbito (ou desespero) assola a área"
     ],
     "landmark": [
-      "1-2: A skeletal jester appears, seeking a new liege",
-      "3-4: The Quarry-Grave's cage contains injured and dying people",
-      "5-6: A hidden cache of gems (like Nagl's bribe) is discovered in a mausoleum"
+      "1-2: Um bobo esquelético surge, buscando novo senhor",
+      "3-4: A gaiola da Fossa‑Pedreira contém feridos e moribundos",
+      "5-6: Descobre‑se um esconderijo de gemas (como o suborno de Nagl) num mausoléu"
     ],
     "temple": [
-      "1-2: Ritualistic markings appear on ancient stones, suggesting a dark ceremony (Nagl's necromancy)",
-      "3-4: The sound of faint, pained moans from beneath the ground",
-      "5-6: An ancient mausoleum door creaks open, revealing undisturbed darkness"
+      "1-2: Marcas rituais aparecem nas pedras antigas, sugerindo cerimônia sombria",
+      "3-4: Ouve‑se o som de gemidos fracos sob a terra",
+      "5-6: A porta de um mausoléu antigo range, revelando escuridão intacta"
     ],
     "tavern": [],
     "guild": [],
     "residence": [
-      "1-2: An Undying Miner can be seen peeking from a burrow, jaws slack",
-      "3-4: A small, hidden stash of bone fragments and grim trinkets is found"
+      "1-2: Um Mineiro Imortal espreita da toca, queixo frouxo",
+      "3-4: Encontra‑se um pequeno esconderijo de fragmentos de osso e bugigangas lúgubres"
     ],
     "ruins": [
-      "1-2: A section of the ruins collapses, trapping d3 unfortunate souls",
-      "3-4: A rustling sound from within the debris suggests 'crawling animals'",
-      "5-6: The faint, disembodied cries of children echo from the rubble (a general MÖRK BORG theme of suffering and lost children, fitting for the bleakness)"
+      "1-2: Uma seção das ruínas desaba, prendendo d3 almas azaradas",
+      "3-4: Um farfalhar nos escombros sugere 'animais rastejantes'",
+      "5-6: Fracos gritos desencarnados de crianças ecoam dos escombros"
     ]
   },
   "atmosphere_modifiers": [
-    "The oppressive gloom and tangling paths of Sarkash",
-    "The heavy, stale, and hard-to-breathe air",
-    "The constant, frantic scratching sound",
-    "The pervasive stench of decay and damp earth",
-    "A chilling sense of sorrow and hopelessness (from descriptions of undead and general setting)"
+    "A penumbra opressiva e trilhas que se enredam de Sarkash",
+    "O ar pesado, viciado e difícil de puxar",
+    "O arranhar constante e frenético",
+    "O fedor onipresente de decomposição e terra úmida",
+    "Um frio senso de mágoa e desesperança"
   ],
   "metadata": {
     "migrated_from": "databases/cities/graven_tosk.json",
     "language": "pt",
-    "last_updated": "2025-01-16T00:00:00.000000",
-    "translation_needed": true,
-    "translation_note": "This file needs Portuguese translation of city names, descriptions, and content"
+    "last_updated": "2025-08-08T00:00:00.000000",
+    "translation_needed": false,
+    "translation_note": "Conteúdo em português revisado/traduzido e tom ajustado; esquema preservado."
   }
 }

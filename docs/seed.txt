@@ -1,0 +1,573 @@
+You're looking for a comprehensive collection of random tables, complete with details and lore, to generate various aspects of a dark and dying world. This includes monsters, loot, NPCs, taverns, dungeons, world descriptions, locations, and travel encounters. Drawing on the provided sources, here's a detailed compilation of such tables and their associated lore:
+--------------------------------------------------------------------------------
+General World & Setting Lore
+The world is a bleak and brutal place, with the sun unseen for years, and doomsayers are often proved right
+. Water is a form of wealth, as fire has boiled away springs and streams, making sky-borne water or "hot red stuff of life" the primary sources. Coins have no utility, and water is exchanged as wealth, with one day's worth valued at 20s
+.
+The Calendar of Nechrubel dictates prophecies of the apocalypse, such as the city being made hollow, the earth shaking to release poisonous mist, and flying spectres and crawling beasts emerging from the underworld
+. The final psalm speaks of "Yetsabu-Nech, the underworld’s nightmare, the black disk which stands before the sun," "Verhu, beaming with delight," and "the fire which burns all" before darkness swallows darkness
+.
+Several notable regions and factions exist:
+• The Ashen Sea: A central map location with various points of interest
+. Boat travel is common, and daily encounters are rolled on a d100 table
+.
+• Galgenbeck - The Corpse City: A sprawling metropolis built on ancient bones, ruled by Arch-Priestess Josilfa Migol who enforces the Ordinance of Devotion. The Harvester delivers summons for sacrifice, causing the population to shrink daily to forestall a comet's destruction
+. The air often tastes of bone dust and old blood, and soul extraction machines hum in the distance. Districts include Altmarkt and Rattingen, where humans fight rats for survival, and the streets may feature corruption, plague-ridden beggars, or bone grinding operations
+.
+• Kergüs: Home to Anthelia, Blood-Countess of Kergüs, who amuses herself with tournaments
+.
+• Sarkash: A vast forest of gloomy overgrowth and dread
+. Travel through Sarkash is challenging, with thick, twisted wood and inhospitable conditions. The Black Salt Winds are linked to Sarkash, as are catacombs plagued by cannibalism
+.
+• Targ-Dungel: A region with factions like the Scions of Schleswig, the Mud Cult, and the Immortal Algae-Rots. It's described as a rot-bloated swamp
+.
+Factions & Affiliations
+Factions are groups united by beliefs, origins, or a will to survive
+.
+Factions within the world:
+• Ashmouth Raiders: A chaotic fusion of natural stone and repurposed organic materials, their fortresses serve as bazaars. They often have 2d20 Raiders willing to join as crew, selling most goods at double prices. Street violence is common and indiscriminate
+. Their vessels vary wildly, captained by a Raider Leader with a crew of Raiders
+.
+• Bloodhunters: Sell information on the best places to hunt
+. Their initiation, "Blooding," involves prospective members being cast into the "Clot" (a great pool of coagulating mixed blood beneath a mountain) and finding their way out. Many failed members remain trapped like "bugs in amber". They find religious ecstasy in the hunt and sell specialist hunting equipment, trackers, guides, and hunted results
+.
+• Burnt Offerings: Encountered as faction boats with crew
+. They seek the "Revelations of Flame" found in everburning jars
+.
+• Cannibal Count: Located at Mount-Manse
+. Orders from the Cannibal Count, years old, might address you by name and bid you to visit
+.
+• Pneumatic Order: A faction with specific units and vessels
+. They value Captured Plasm of Beyond
+.
+• Urniversity: A faction whose scholars are ceaseless, often found dissecting subjects and turning them to the study of the Apocalypse in The Dome, a huge swollen balloon of architecture
+. The Library, looming over other buildings, is only accessible from The Dome, filled with books and feral scribes. They offer o-books work. Offerings include weather-maps, archival research on ruined areas, and artifact identification. They practice "Committing of Knowledge," adding new information to their library. Notable scholars include Szilagyi (lectures endlessly), Lakatos (leaves sentences trailing), Kende (never satisfied), Illes (miserable), and Kis (treats everyone as a sibling). Scholars are "brightly coloured peacocks," their learning often useless. Field-Researchers are more practically minded, able to replicate random power effects by futzing with artifacts. Each vial of Ash in their Ash-Library is worth 3dw
+.
+• Heretical Clergy: A type of NPC affiliation
+. The fort in Death's Fort is garrisoned by a strange heretical religion whose practices transformed it into a grotesque living mass
+.
+• Pale Ones: Four Pale Ones conduct strange experiments on lost souls in Sarkash. Nagl lives among them. They prize the Black Disc from The Crater
+. They can be encountered searching for the Black Disc or in their Basement
+.
+• Cult of the Blood God: An independent production focused on introducing Mörk Borg gameplay
+.
+General Affiliations (Monsters & NPCs):
+• Monster Affiliations: Cult of the Dying God, Brotherhood of Bones, Circle of Carrion, Order of the Black Sun, Servants of the Void, Children of Pestilence, Followers of the Last Prophet, Legion of the Damned, Covenant of Shadows, Disciples of Decay, Heralds of the End, Apostles of Agony
+.
+• NPC Affiliations: Royal Guard remnants, Merchant Guild outcasts, Heretical clergy, Plague survivors, Bandit confederations
+.
+Denizens & NPCs
+Denizen Types: Diseased beggar, Mad hermit, Wandering cultist, Desperate bandit, Plague doctor, Witch hunter, Corrupted priest, Feral child, Broken soldier, Death merchant, Bone collector, Grave robber, Cursed wanderer, Zealot preacher, Flesh trader, Scavenger lord, Plague bearer, Doom prophet
+.
+Denizen Motivations: Seeks redemption for past sins, hunts for forbidden knowledge, flees from terrible pursuers, searches for lost family, collects trophies from the dead, spreads word of the coming end, guards ancient secrets, trades in human misery, seeks to break an ancient curse, worships forgotten gods, harvests organs for dark rituals, prophesies doom and destruction
+.
+Denizen Features: Covered in ritual scars, Missing several fingers, Eyes clouded with cataracts, Speaks in whispers, Constantly muttering prayers, Smells of decay, Wears tattered robes, Carries strange implements, Bears holy symbols, Has visible plague marks, Moves with unnatural stiffness, Avoids eye contact, Nervous tics and twitches, Unnaturally pale skin, Teeth filed to points, Burns easily in sunlight
+.
+Denizen Demeanors: Hostile, Suspicious, Desperate, Helpful, Indifferent, Cryptic
+.
+Specific NPCs/Denizens:
+• Clerks at the Jetty: Furtive and grubby, they pay 3dw for any human corpse and are eager to pay off characters
+.
+• Regretful Templar: Can swap locations with the target of any melee attack, changing the target
+.
+• Von: A tough, ruthless, rough, and toothless prisoner loyal to anyone who frees him
+.
+• Old Man (Shattered Tunnels): Withered and frail, lives near the volcano summit, collecting rare plants and fungi. He wants to help and craves an audience for his tales, including that the Blood Wizard ripped out his own heart to survive
+.
+• Ilyich (Murderer): An alien determined to continue slaying after a gate was destroyed. Bounty hunters search for him
+.
+• Nicolas Mocanu (Wizard of the Woods): An arcane spellcaster who sometimes visits the city for supplies. He recognizes experienced adventurers and asks for assistance in finding various items, paying silver for each
+.
+• Adam Tassou (Doppelganger): An otherworldly visitor who can absorb the appearance, memories, and skills of anyone after an hour in their vicinity, mimicking them perfectly. Reducing him to 0 HP reveals his natural state as a featureless humanoid
+.
+Beasts & Monsters
+The world is full of various creatures, some of which can be hunted or encountered randomly.
+General Beast Characteristics:
+• Morale: Beasts have a Morale score. If a roll over their Morale occurs in combat, they may flee or surrender
+.
+• HP: Health Points are typically double their damage die
+.
+• Armor: Can range from no armor to various levels of damage reduction
+.
+• Special Abilities: Many beasts have unique attacks or traits
+.
+Common Beast Types & Lore:
+• Ash Mink: Small creatures
+. Notes on how to tame one exist
+.
+• Dustlion: Packs can destroy boats and gobble up crews
+. Crows following something indicate a very large dustlion. Prices: 3dw (Dustlion), 15dw (Dustlion Mother)
+.
+    ◦ Dustlion Mother: Attempts to strike the boat, causing Stability rolls, potentially flipping the vessel and damaging crew. Often appears with d4 Dustlions and Like 1000 Crows
+.
+• Dry-Witches: They weigh lives as part of the cost for anything they give you. Always carry a body to offer them
+. Their lair is Glassthrone, a smashed orb of green-tinged obsidian with glass towers connected by gut-rope ladders. They drain captured victims. Each tower belongs to a Dry-Witch, consisting of 2d6 floors that refract and warp physical space. Their lair is a tangle of razor-sharp glass fragments, requiring Defense rolls to avoid damage. One Dry-Witch, Wlfrun, Helix-Skulled, is a master of deformations, able to make the body rebel violently. They deny a painful fate in return for easy victims (three bodies). Another, Eanflead, has 45 HP with "Armouring Words" (-d2) and "Fist-Smash" (2d10/d2 Structure damage). She is huge, illiterate, and her armor is locked tight; tricking her into speaking the words reduces her armor. They also have skulls of prior Dry-Witches on iron pegs
+.
+• Lungfish: Eating them is warned against
+. Price: 2d100
+.
+• Like 1000 Crows: A massive flock, described as a "statistic"
+.
+• Shit Monster: Made of shit, mud, and phlegm. They grapple victims, absorbing HP and voice
+. Juvenile Shit Monsters cling to dungeon ceilings
+.
+• Flesh Puppets: Corpses animated like marionettes on living sinew strings. They are difficult to attack and defend against
+.
+• BEAR-THING: An insatiable creature that feeds on goblins and man-flesh
+.
+• Automaton: Relentless, will not stop until destroyed. They are massive suits of armor made of metal, slow, and have a "Bigswing" attack that can strike multiple combatants
+. They seldom work in pairs and hate the wizard
+.
+• Thunderlizard: Can be companions
+. A foretooth of a Thunderlizard Juvenile can be carved into a sewing needle. A bound adult Thunderlizard is found suspended from the ceiling in Glassthrone, making muted, unhappy hissing sounds
+.
+• Undying Miners: Emaciated, withered figures clutching pickaxes and shovels found in Quarry-Grave. They cannot be killed, but can be cut into useless meat
+.
+• Fungal Mercenaries: Have heavy armor, attack with their weapon, and can "communicate" vibes and feelings via spores that afflict the inhaler. They cannot otherwise speak
+.
+• Black Iron Guardians: Created in a "Warrior-Womb" and skinned in armor at the Forge
+.
+Random Encounters (Creatures):
+• Daily Boat Travel Encounters: Ash Mink, Dustlion, Dustlion Mother, Rising Spiders, Carnivorous Cold, Miserable Bird, Needlebugs, Like 1000 Crows, Lungfish, Dry-Witch, Slatehead Termites, Tentacled Mole Whale, Thunderlizard, Wingwalker Bats, Burnt Offerings (faction boats)
+.
+• Forest Fiends (Sarkash): Big Game Hunter(s), Occult Herbmaster, Earthbound, Prowler(s), Bounty Hunter, Goblins
+.
+• Hunting Tables: Tusked Bison, Flayed Vultures, RATBIT, Dredgehog, Straw-Lion, Nameless & Tameless Strays, Phantom Rats, Tomb Ape, Grubstopper, Weakwill'd Whisperbird, Tunnel Sneak
+.
+Items & Loot
+Wealth is primarily water, with 20s per day of water
+. Loot is often found from corpses or specific locations.
+Looting & Random Items:
+• Corpse Plundering Table: Can yield days of water, a skin-map with locations, teeth/lips/tongue in a glass sphere (moves in magic presence), an Ember of the Conflagration (relights dead fires), Thunderlizard Foretooth needle, Slatehead Termite faceplate fragment, tiny prayerbook, pouch of razor-blades, Shard of a Glass Tower (key, Dry-Witch face seen in firelight), Fingerbones of a failed Burnt Offering initiate, blacked-out book, yellow feather in envelopes, bag of holed stones, vial of unidentified blood, rough blueprints for a novel vessel, Needlebug Proboscis tool, Dustlion-Leather cape, tin mask, Captured Plasm of Beyond (precious to Pneumatics), Orders from the Cannibal Count, Raider Warlord icon, Urniversity Scholarship, notes on taming an Ash-mink, or location of a buried stash (30% empty)
+.
+• Muck Items (Death's Fort): Silver snuff box, necklace of yellowed teeth, rations, full waterskin, bottle of wine, life elixir, random armor bits, random weapon, inverted cross amulet, boomstick
+.
+• Random Barracks Items: Roll on Starting Equipment tables
+.
+• Mine Treasures: 3d6x10 silver coins, 5d6x10s worth of uncut gems
+.
+• Religious Trinkets (Death's Fort Vault): Gold chalice, small stone icon, blasphemous text, urn of a true believer's ashes, random Unclean Scroll, vials of poison, random Sacred Scroll, ritual dagger, religious vestments, d2 doses Life Elixir, vault key
+.
+Specific Magic Items & Artifacts:
+• Scapegoat Homunculus: Costs 10dw, has 2d10 HP. It redirects powers, curses, or lightning attacks targeting the boat. 10% chance of side-effect when damaged. Can be eaten in emergencies
+.
+• Sigrödh the Indignant: A charred human skull wrapped in linen. When unwrapped, it speaks loudly and incessantly on 1d6 topics (untimely demise, indignity, requests for headwear, pleading not to be left behind, complaints about being carried, accurately identifying threats). Increases DR of Presence tests by 1 within earshot. Stops speaking when rewrapped
+.
+• Greatsword: Wrapped in tattered sheet music. Has a 1d6 chance to softly play happy music after a hit. The sheet music can charm a single creature (Presence DR10) once per day for 2d6 hours; nearby creatures of the same type must test Presence DR14 or be charmed
+.
+• Paper Blight Bird: Made of papier-mâché with strange symbols. Stabbing it kills one small animal. Cutting it open releases a 4' cloud of plague dust, infecting everyone within range (sickness lasts 1d6 days, spreads via air/contact, -1 to attack/defense)
+.
+• Scroll of Unclean Scrolls: Unclean scroll that, if cast successfully, generates another random unclean scroll in its tube for every kill made by the user in the next 1d6 hours (not small creatures). All generated scrolls disintegrate after time
+.
+• Stone Dagger: When used to kill a being at zero HP, the wielder can communicate with the dead for 1d6 hours
+.
+• Jören’s Pleonasmic Hexaméron: A thick leather-bound book that contains six chapters, each acting as a scroll once read. Effects last 1d6 minutes (Black Darkness, Burning Fire, Poisonous Venom, Bleary Eyed, Safe Haven, Freezing Ice). Pages blacken after three uses
+.
+• Frögun’s Headbanger: A spiked wooden flail. Short ranged, uses Strength DR12 instead of Presence. Requires 13 STR. On a crit (natural 20), re-roll; on a second crit, target's head explodes, otherwise double damage
+.
+• Rogue’s Shadow Staff: Oak staff, unusually heavy. When held in shadows/darkness, it will
+.
+• Bone Flute: Strung with bells. If shaken vigorously in presence of buried dead, they rise. Also works on other undead. Effect lasts as long as shaken
+.
+• Hourglass of Unquenchable Thirst: Brass hourglass with blood red sand. Measures 60 minutes. If a body part is placed in its compartment and inverted, the person begins to desiccate (extreme thirst, then death in 2d6 days)
+.
+• Borgildha’s Secret Ingredient: Glass vial with amber liquid. A drop makes anything irresistibly delicious. A splash drives nearby creatures mad with desire to feast on "anything," potentially their own body parts. Pouring it on gold/coins could be deadly
+.
+• Bring to Ruin: Unclean scroll. Summons a large creature from another realm that destroys walls/buildings/structures for 3d6 minutes, then vanishes. Cannot be harmed
+.
+• Candlestick of Hidden Treasures: Brass candlestick. When lit, nearby treasure becomes invisible but can still be felt. Treasure remains unseen until candles extinguished
+.
+• Crypt of the Three Whispers: Stone crypt with three salt-packed skeletons. Entering allows hearing whispers (1d6 for rumors: 1-2 truth, 3-4 partially true, 5-6 lies)
+.
+• Skärlog’s Broken Pillar: Toppled whitestone effigy. Touching causes searing pain (d6 burning damage). Provides 1d6 chance of seeing a vision of the next Psalm of the Calendar of Nechrubel
+.
+• Killing Crown: Spread from the Tainted Chapel, infected Graven-Tosk. Thousands died of blood-cough. Triggered the First Psalm
+.
+• Occult Treasures: Ash-grey ring (obliterates anything passing through), keening flute (animates fetus-sized meat golem), famine spoon (death from slow starvation), malevolently-accurate mirror (shows shameful truth of soul), vampiric phurba (heals wielder as it harms target, addiction risk), black pearl (rolls to nearest exit in darkness), immortal hour torch (wielder lives with negative HP until dropped/burnt out), silver bird cage (slays and reanimates twice as strong), black crown of the crippled king (crooks body, +10 attack/-10 defense for all within 100 yards, removable only under full moon)
+.
+• Tablets of Ochre Obscurity: Relics of a forgotten mind-cult, sold for 100 silver. Act like scrolls but break on fumbled attack/defense. Wielder must have Presence +3 or be a Forlorn Philosopher
+. Powers include: Time-Locked Pneumotoxin (crushed powder damages/kills, reappears daily), Total Matter Comprehension (mends/breaks items/armor/weapons), Ping the Shared Subconscious (senses living creatures within 70ft), Logical Prognostication (deduces traps/mechanisms/powers), Induced Irrelevance (removes creature's meaning, enemies won't attack), Carno-Organic Speleophagy (transforms rock into meat), Memetic Cognitive Palpitation (mind-plague causes mad dancing)
+.
+• Spiral Crown: A silver crown with a spiked halo, adorned with swirling gemstones of every color. Found by placing a spiral-patterned metal disc in a floor depression
+.
+• Tenebrous Reliquary: Includes items like Mercy's Bane (spiked flail, extra damage to surrendering enemies), Ripper's Blade (removes armor), Roses of Winter (flower petal numbs pain, makes user unkillable), Spine of God (attracts the poor), Tentacles of Zen (rusty lamp, shadow tendrils burrow into nostrils, +/-Presence), Tyrant's Tongue (skull screams last words), Veil of Blood (shroud strangles, victims become blood-drenched skeletons), Voodoo Fire (eternally burning green flame, spreads fire, extinguished by SHE's tears), Volt Thrower (ancient javelin), Foehammer (cursed warhammer, new daily grudge), Cauldron of Lies (beverages reveal lies), Book of Oblivion (sentient tome, transfers knowledge/memory), Bowels of a Baby Killer (entrails give monster scent, evades detection), Black Mantle of the Serpent (renders wielder immune to lightning/acid/fire, changes scroll effects), Eyes and Teeth (replaces missing parts, various effects), Black Candles (flickers towards greatest threat)
+.
+Equipment Lists & Prices:
+• Starting Equipment: 2d6x10 silver, waterskin, d4 days food. Options include backpack, sack, small wagon, donkey. Various items like rope, torches, lantern, magnesium strip, random unclean scroll, sharp needle, medicine chest, metal file, lockpicks, bear trap, bomb, red poison, silver crucifix, life elixir, random sacred scroll, small vicious dog, monkeys, exquisite perfume, toolbox, heavy chain, grappling hook, shield, crowbar, lard, tent
+.
+• Weapons: Femur d4, Staff d4, Shortsword d4, Knife d4, Warhammer d6, Sword d6, Bow d6, Flail d8, Crossbow d8, Zweihänder d10
+. Improvised weapons deal d4 damage
+.
+• Armor: No armor, Light (-d2, 20s), Medium (-d4, 100s, DR +2 Agility tests), Heavy (-d6, 200s, DR +4 Agility tests)
+. Shields (-1 damage, 20s)
+.
+• Blackpowder Weapons: Blackpowder Bomb (3d4, 50s), Basilisk Gun (2d10, 300s, two people), Ribauldequin (6d6, 600s, 9 shots), Cannon (4d10, 1000s, needs pack animal)
+.
+Taverns
+Taverns are places for gossip, booze, and board, often reflecting the grim nature of the world.
+Example Taverns & Menus:
+• The Tousled Cat (City): Offers cheap beer, but it may be befouled
+.
+• The Heartless Knave (Docks District): A dirty, crime-infested tavern where visiting wizards and sorcerers may sell magical goods
+.
+• Grey Galth Inn (Example Menu): Braised chicken with wine-drenched apples, spiced rutabaga/swede, Galgenbeckian stew with embryonic boars, Tveland yam hash with tomb-truffle, Migol’s pie (blackened venison and chicken bone broth jelly), black soup with baked hog face
+.
+• Tavern Name Generator: Combines first and second parts (e.g., The Bloody Queen, The Hanged Donkey, The Screaming Jester)
+.
+• Tavern Decoration: Can feature bookshelves, carved wood, draperies, fishing/hunting trophies, flags, glowing crystals, naughty drawings, naval items, old tools/weapons, painted plates, paintings, plants, porcelain dolls, quest posters, shields, skulls and bones, stuffed animals, tapestries, torture instruments, trophies
+.
+• Bartender Traits: Always busy, checks every coin, cocktail master, extravagant clothing, famous, hidden weapon, piercings, magic tricks, looking for opportunities, needs help, never washes glasses, not there, older than seems, poisons at disposal, retired adventurer, stunning, tattooed, terrible secret, thick accent, tipsy
+. Second trait: Absent minded, always complaining, disturbed, flirty, funny, generous, good listener, grumpy, inquisitive, jumpy, loud, moody, nice, playful, rude, silent, talkative, unpleasant, welcoming, worrying
+.
+• Patrons: Drunks, commoners, adventurers, bandits/pirates, guards/soldiers, merchants, nobles, scholars. Specific examples: courier, drunk dwarf, foreign prince(ss), highwayman, halfling dancing, lycanthrope/vampire, man with food-covered table, peasant looking for job, pickpocket, priest(ress), guild recruiter, slaver, someone celebrating birthday, someone hiring adventurers, succubus/incubus, tax collector, three goblins in disguise, traveler, vampire hunter
+.
+• Entertainment: Bard, dancers, fortune teller, humorist, jester, magician, musicians, poet
+. Activities: arm wrestling, betting, billiards, bingo, books, brawls, cards, chess, dancing, darts, dice, dominoes, drinking games, eating contest, fighting ring, hot bath, knife throwing, marbles, obstacle course, wheel of fortune
+.
+• Tavern Rooms: Best available rooms range from suite to mattress and chamber pot. Special rooms can be badly decorated, freezing, haunted, have leaking roof, be a sinister event location, or rat infested
+.
+• Outside Amenities: Can include a well, fountain, shed, outhouse, stables, firewood pile, trash dump, clothesline, communal bath, small garden, small pond, outdoor seating, stage, or a practice area
+.
+Dungeons & Lairs
+Dungeons are underground locations where monsters dwell and protect treasure, seen as alive and antagonistic
+. Lairs can be found in wilderness or dungeons, varying greatly in nature
+.
+General Dungeon Concepts:
+• Megadungeons: Multiple dungeons (areas) linked together, where distances traveled underground may not match aboveground
+.
+• Areas: Characterized by at least one entrance, multiple vertically linked levels, and exits to other areas
+.
+• Themes: Dungeons can have themes like Burnt, Crystalline, Demonic, Flooded, Fortified, Fungal, Haunted, or Vegetal
+.
+• Levels: Each area has a number of levels, possibly subdivided, at various depths
+.
+• Rooms: Each level has a number of rooms (2d20+10). Rooms can be trapped, empty, special, or contain monsters
+.
+• Corridors: Defined by 6-square long sections with features like doors, traps, or corpses
+.
+• Doors: Can be stuck, locked wooden, portcullis, magic, or locked metal doors
+.
+    ◦ Secret Doors: Very well hidden or in plain sight with no apparent way to open
+.
+    ◦ Magic Doors: Can be Demon doors (require tasks like bringing items, doing bad deeds, finding keys, solving riddles, or taking a leap of faith) or Magic seals
+.
+• Traps: Numerous types including acid pool, alarm, blade, cage, caltrops, circular saw, crossbow, crushing ceiling/walls, darts, electric shock, elevator to another level, extreme temperature, gas (confusion, death, sleep), illusory floor, landslide, lasso, lava flow/pool, magic spells, mist dispenser, piston, pit, poisoned caltrops, portcullis closing, projectile wall, quicksands, ram, rolling stone, slippery floor, spray (acid, smelly, sticky), spike pit, stretched spiky branch, taut rope, trapdoor (pit, spike pit, lower level), vacuum chamber, violent air/water stream, wolf trap
+.
+• Empty Rooms: Can contain abandoned guard posts, alchemy tables, altars, chained skeletons, crates, fireplaces, furnished libraries, graffiti, or many other mundane or eerie things that hint at the dungeon's history or inhabitants
+.
+• Special Rooms (Examples):
+    ◦ Advanced Technology: Strange contraptions with blinking lights, glass vats with mutated monsters/humanoids or healing fluid (induces mutations after uses)
+.
+    ◦ Animated Furniture: Furniture that resists being opened
+.
+    ◦ Ancient Memories Sphere: Touching allows flow of ancient dungeon memories (once daily)
+.
+    ◦ Anti-Magic Room: Magic (items, potions, scrolls, spells) does not work
+.
+    ◦ Boss Monster: Lair of a powerful variant (+3HD, +2AC, +2ML) with two slightly weaker lieutenants
+.
+    ◦ Cursed Room: All rolls suffer -1 penalty. Critical failures on 1 or 2, critical hits on 19 or 20
+.
+    ◦ Demonic Portal: If opened, 1d3 demons appear daily until killed
+.
+    ◦ Devouring Coin: A mimic disguised as a valuable gold coin, feeds exclusively on other coins in inventory/hoard
+.
+    ◦ Divination Basin: Dipping head allows visions of the future
+.
+    ◦ Divine Altar: Offering blood/body parts can grant favors from a god
+.
+    ◦ Dungeon Tavern: Full tavern with monster patrons. Monster food poisons humans. Alcohol inflicts damage but acts as acid
+.
+    ◦ Duplicating Machine: Duplicates items, but copies are less effective, have short lifespan, or have side-effects
+.
+    ◦ Fake Gold Items: Treasure rooms with items painted or plated to look like gold, but worth far less
+.
+    ◦ Fear Room: Deepest fear takes shape as a monster upon entry
+.
+    ◦ Gold Statue: Statue of a monster made of pure gold, worth 10x XP of the monster. Touching it awakens it to attack
+.
+    ◦ Hallucinogenic Spores: Room covered in fungus spores, causes hallucinations, can trigger mutations
+.
+    ◦ Human Outpost: Guards check intentions, may need supplies. Soldiers might be killed on return visits
+.
+    ◦ Illusory Treasure: Treasure is an illusion, monsters ambush those who attempt to take it
+.
+    ◦ Invisible Bridge: A pit divided by an invisible bridge, poles indicate width
+.
+    ◦ Key Storage Room: Walls covered in keys. Many are broken/cursed. Cursed keys cause extra monsters
+.
+    ◦ Lava Pit: Large pit with a platform and chest. Opening chest causes lava to fill pit
+.
+    ◦ Mislabeled Potions: Potions with labels showing one effect but containing another
+.
+    ◦ Monster Market: Market organized by humanoid monsters selling monster goods, slaves, mercenaries; OR market organized by humans selling monsters (dead or alive)
+.
+    ◦ Moving Statues: Statues that move to block exits each time the room is re-entered. Access to treasure only when 3 exits are blocked
+.
+    ◦ Musical Slabs: Floor slabs emit notes when stepped on, attracting wandering monsters. Playing specific songs can have effects (lullaby, marche funèbre, party song)
+.
+    ◦ Mutation Room: A radioactive black rock causes mutations
+.
+    ◦ No Way Back: Room designed to prevent exit from the dungeon
+.
+    ◦ Orb of Transformation: Touching it transforms someone into a monster/animal, restricting speech and reaction rolls
+.
+    ◦ Parasitized Monster: A monster with a parasitic creature attached, gaining bonus stats. If vanquished, parasite jumps to nearest host
+.
+    ◦ Party Room: Dark room with loud music. Bouncer demands weapons. No magic allowed. Monsters and characters forced to coexist
+.
+    ◦ Petrified Adventurers: Petrified adventurers, likely by basilisk, medusa, or Gorgon. Can be revived
+.
+    ◦ Powerful Electromagnet: Hidden control room can activate electromagnet, affecting metal items/armor
+.
+    ◦ Rabbit Switch: Pressing a button makes rabbits appear. Harming them makes subsequent rabbits weirder/bigger, eventually summoning a giant bunny monster
+.
+    ◦ Safe: Impossible to get items with claw machine. Time flows twice as fast. Spending too much time can trigger new monsters
+. A conventional safe requires combination (known by monsters on same level) and key (from monster two levels higher). Opening triggers alarm
+.
+    ◦ Shrinking Pedestal: Shrinks items or living beings. Repeated use increases chance of explosion
+.
+    ◦ Shrinking Ray: Upon entering, characters/monsters shrink, navigating grooves as a labyrinth. A magic stone restores size and grants immunity
+.
+    ◦ Sleep Inducing Room: Comfortable boudoir, induces sleepiness/paralysis
+.
+    ◦ Slot Machine: Pulling lever inserts coins, can trigger various events (wandering monsters, damage, information, small/big treasure, dragon appearance)
+.
+    ◦ Talking Skull: Pestering skull in a cage. Promises hidden treasure if listened to
+.
+    ◦ Translating Device: Helmet that allows speaking/comprehending any language, but can cause shocks or translation errors
+.
+    ◦ True Intentions Room: Library revealing dungeon builder's intentions and secrets
+.
+    ◦ Valuable Monster (alive/part): Lair of humanoids with a wanted leader (dead or alive). Or monsters with valuable glands/organs/claws/venom requiring special collection methods
+.
+    ◦ Vending Machine: Contraption selling rations, healing potions, or random scrolls. Kicking/damaging triggers alarm. Replenishes after 1d6 days
+.
+    ◦ Voices of the Ancestors: Dark room with voices of dead rulers arguing. Mediating dispute grants information about another room
+.
+    ◦ Vortex: Huge blue/gray swirling vortex that transports anything sucked into it to another room, outside dungeon, or another dungeon
+.
+    ◦ Wish Fountain: Richly decorated fountain with coins. Wishes are granted but almost always misinterpreted
+.
+Lairs:
+• Inhabitants: Determined by biome encounter table. Proportion of monsters inside vs. outside lair can be rolled
+.
+• Layout: Various layouts for small groups or larger monster forces
+.
+Settlements (Hamlets, Villages, Cities, Castles, Towers, Abbeys)
+General Settlement Concepts:
+• Civilian Settlements (Hamlets, Villages, Cities): Offer resting, healing, provisions, retainers. Names can be generated with various components
+.
+• Class Related Settlements (Castles, Towers, Abbeys): Embody faction power, hold powerful Fighters, Wizards, Clerics. May house retired PCs
+.
+• Disposition: Initial disposition of inhabitants towards PCs can be rolled (Attack on sight, Hostile, Neutral, Welcoming, Enthusiastic)
+.
+Hamlets:
+• Main Building: Brewery/Vineyard, Chapel, Farm/Ranch, Manor, Mill, Mine, Sawmill, Shop, Tavern, Toll, Tourney grounds, Watchtower. Plus 1d6-1 peasant houses
+.
+• Layouts: Three possible configurations
+.
+• Secrets: Hamlet inhabitants might be hiding that they are cannibals, cultists, dopplegangers, inbred, murderers, or lycanthropes/vampires
+.
+Villages:
+• Size: Small (50 people), Medium (100 people), Big (150 people)
+.
+• Occupations: Farming and cattle breeding are default, with possible additional occupations like Brewing, Fishing, Hunting, Logging, Mining, Pottery
+.
+• Layouts: Three possible configurations
+.
+• Points of Interest: Blacksmith, Market, Tavern, Well always present. Special locations: Abandoned/Burnt/Ruined building, Apothecary, Bakery, Butcher, Castle-farm, Church, Famous person’s house, General store, Graveyard, Guard post, Guildhouse, Gypsy wagon, Horse stables, Library, Mill, Monument/Memorial, Orchard, School, Tailor
+.
+• Defense: Wooden palisade, Motte, Chevaux de frise, Moat, Watchtowers. Guards (1d3+3 x village size)
+.
+• Rulers: Knight, Clergy, Council, Mayor, Merchants’ guild, Thieves’ guild, Vampire
+.
+• Secrets: Animals turned human, Curse, Elder god cult, Eternal youth, Hidden treasure, Hiding outlaws, Hivemind, Inability to leave, Pact with a demon, Sadistic rituals, Secret society, Underground galleries
+.
+• Events: Announcement by crier, Ceremony, Controlled by monsters, Disappearances, Famine, Festival/Fair, Fire, Looting, Market day, Plague, Visit of notable person
+.
+Cities:
+• Size: Similar to villages but larger (150-3000 people)
+.
+• Points of Interest: N blacksmiths, cemeteries, churches, general stores, libraries, markets, stables, taverns. Special locations: Aqueduct, Archaeological site, Bridge, Calvary, Carriage stop, Construction site, Famous street, Fighting pit, Fountain, Gallows, Junkyard, Market hall, Military cemetery, Monument/Memorial, Park, Pilgrimage, Plaza, Slave pit
+.
+• Buildings of Interest: Arcane university, Archives, Asylum, City hall, Conservatory, Dispensary, Embassy, Fire station, Mayor office, Meteorological institute, Mint, Palace, Post office, School, Sewers, Tax office, Tourist office, Tribunal, University, Water tower (Public). Catacombs, Cathedral, Church, Covent, Mausoleum, Monastery, Necropolis, Orphanage, Sanctuary, Seminar, Shrine, Ziggurat (Religious). Armory, Barracks, Canteen, Citadel, Fort, Guard post, Guard tower, Jail, Menagerie, Military archives, Military hospital, Military school, Military surplus, Prison, Recruitment center, Siege workshop, Spy academy, Training hall, Underground vault, Warehouse (Military)
+.
+• Defense: 50% chance of stone walls with towers. Gates can be wooden, portcullis, or both
+.
+• Rulers: Noble, Clergy, Council, Mayor, Merchants’ guild, Thieves’ guild, Vampire
+.
+• Events: Similar to villages, but also Assassination, Siege/Looting, Tournament, Vermin invasion
+.
+Castles:
+• Name: Composed names (e.g., "Castle Dark Moor")
+.
+• Condition: Perfect, Worn, Aged, Crumbling
+.
+• Shape: Square/Rectangle, Round, Shell
+.
+• Defense: 1d4 defensive structures: Ballista, Boiling oil, Catapult, Hoarding, Iron spikes, Piles of rocks. Gates can be portcullis, wooden door, or drawbridge
+.
+• Events: Similar to cities, plus Big HD monster attack, Resources/Gold dwindling, Rival lord scouting, Small HD monsters wanting lair
+.
+Towers:
+• Levels: 1-6 aboveground, 0-4 underground
+.
+• Connections: Staircase, spiral staircase, ladder, elevator, magic elevator, teleportation portals
+.
+• Appearance: Material (cobblestone, wood, bricks, sandstone, limestone, marble, metal), shape (square, round, conical, tilted, asymmetrical, S-shaped, stacked, twisted), details (balcony, banners, battlements, climbing plants, flags, moldings, porch, stained glass, statues/gargoyles, turrets)
+.
+• Usage: Each level has a specific use
+.
+Abbeys:
+• Layout: Includes Abbot's room, Cellars, Cemetery, Church, Cloisters and garden, Infirmary, Kitchen and refectory, Monks cells, Necessarium (latrines), Servants/laborers/tradesmen quarters, Storehouses
+.
+• Additional Locations: Garden (flower, fountain, kitchen, physic), Infirmary (bloodletting, drugstore, physician's residence, critical patients), Religious buildings (Chapter house, Parlour, School, Scriptorium/library), Other (Abbot's gateway, Barns/stables, Guest rooms, Vestarium, Washhouse, Watchtower)
+.
+• Activities: Farming (barley, chickens, cotton, cows, goats, grapes, hops, orchard, pigs, sheeps, vegetables, wheat), Workshop (baking, brewing/winemaking, butchery, cheese, leatherworking, pottery, weaving), Other (carpentry, fishing, hunting, metalworking, stonecutting, woodcutting)
+.
+• Fame: Can be famous for religious artifact (arm, blood, bones, eye, flesh, head, heart, item that killed saint, leg, piece of clothing, prayer book, religious symbol, ring, sandals, scalp, shroud, skin, tongue, tooth, walking stick), priest spell level
+.
+• Events: Broken device, Cowls shrunken/dyed in red, Demonic corruption, Disappearance of abbot, Drought/Flood, Festival/Fair, Fire, Looting, Moles/Rats infestation, Plague, Scandal, Visit of notable person
+.
+• History: What happened to the abbey in the past
+.
+Encounters & Travel
+Travel through the dying lands involves various encounters and hazards.
+General Travel:
+• Distances: Measured in days between locales (e.g., Grift to Galgenbeck is d12+12 days)
+.
+• Roads: Almost-forgotten dirt tracks, narrow wagon tracks, tracks drawn by beasts, well-maintained trade roads fallen into disrepair, or paved roads
+.
+• Resting: Catching breath heals d4 HP, a night's sleep heals d6 HP. Infection prevents healing and deals d6 damage daily
+.
+• Camping Conundrums (Sarkash): Includes bad smells, flies, ink-like blackness, eerie glowing sun, and ice chunks
+.
+• Carrying Capacity: Strength +8 normal-sized items. Over this increases DR for Strength and Agility tests
+.
+Random Encounters (Roads/Wilderness):
+• Events by the Road: Rags-clad people fighting, peglegged sailor bragging, laborers carrying casket, penniless carpenter, patron robbed/stabbed, rats, crossbow bolt, hanged heretics, bonfire with spy
+.
+• Specific Roadside Events: Empty village, plague-stricken village, trading post, bandit-ruled village, spider cultist-dominated village
+.
+• Leaving the Road Encounters: Petrified forest, ancient battlefield, valley of extinct animal bones, pre-human god's temple, entrance to underworld, cannibal village, goblin-infested hills, ruined abbey (with grotesque, occult artifact), pumpkin patch (hallucinogenic, protective farmers), wyvern silhouette, clock tower (heretic witches), vast bog (with bloated tentacular royalty)
+.
+Boat Travel (Ashen Sea):
+• Encounters: Roll d100 each day. Possible encounters include Ash Mink, Dustlion, Dustlion Mother, Rising Spiders, Carnivorous Cold, Miserable Bird, Needlebugs, Like 1000 Crows, Lungfish, Dry-Witch, Slatehead Termites, Tentacled Mole Whale, Thunderlizard, Wingwalker Bats, Burnt Offerings
+.
+• Weather: Blood Rain (sea stinks, animals slow from gorging, flies reduce visibility)
+.
+• Sea Encounters: Dragon turtles, Giant squids, Whales, Manta rays, Sharks, Buccaneers, Pirates, Orcs, Lizard-men, Nixies, Mermaids
+.
+• Island Encounters: Dinosaurs, Hydras, Fire salamanders, Giant crabs, Crocodiles, Pirates, Buccaneers, Orcs, Lizard-men, Nixies, Spectres
+.
+City Events (Galgenbeck):
+• Harvester delivering Holy Summons, Rat trappers vs human trappers, Worm Sorcerer spreading eggs, Dunglanders emerging from sewers, Yellow blob cultists, Flutters nesting, Violent mob, Curse leak, Burning buildings, Old lady Mirth selling meat pies, Town crier proclaiming floating cursed head, Hail storm, Free silver with tarantulas, Vanishing building
+.
+Character Information & Rules
+• Abilities: Agility (defend, balance, swim, flee), Presence (perceive, aim, charm, wield Powers), Strength (crush, lift, strike, grapple), Toughness (resist poison/cold/heat, survive falling)
+.
+• Tests: Roll d20 +/- ability. Result equal to or greater than DR (Difficulty Rating) for success
+. DRs range from 6 (simple) to 18 (should not be possible)
+.
+• Hit Points (HP): Toughness + d8 (never less than 1)
+. Zero HP is "broken," negative HP is "dead"
+.
+• Broken Status: Fall unconscious, broken/severed limb, or lost eye
+.
+• Omens: Eldritch watchers or Fates. Used to deal max damage, reroll dice, lower damage, neutralize crit/fumble, lower test DR
+. Regain after resting
+.
+• Powers & Scrolls: Found written in scrolls. Use Presence + d4 times per day. Test Presence DR12 to activate. Failure causes d2 HP loss and dizziness
+. Crits/Fumbles have special effects
+.
+    ◦ Unclean Scrolls: Ball of fire (d8 damage), confusion, telekinesis, levitation, suffocation, lightning bolts, invisibility, summon skeletons/zombies, daze, overall HP loss
+.
+    ◦ Sacred Scrolls: Heal HP, grant bonuses, speak to dead, extra HP, revive dead, speak with animals, light/darkness manipulation, find traps, HP loss to enemies, compel obedience
+.
+• Terrible Traits (Character Flaws): Endlessly aggravated, inferiority complex, problems with authority, loud mouth, cruel, egocentric, nihilistic, prone to substance abuse, conflicted, shrewd, vindictive, cowardly, lazy, suspicious, ruthless, worried, bitter, deceitful, wasteful, arrogant
+.
+• Broken Bodies (Physical Traits): Staring manic gaze, blasphemous tattoos, rotting face (wears mask), lost three toes, starved, hook hand, decaying teeth, hauntingly beautiful, hands caked with sores, cataracts, long tangled hair with cockroach, broken ears, juddering/stuttering, corpulent/ravenous/drooling, hand lacks thumb/index finger, red/swollen alcoholic's nose, resting maniac face, chronic athlete's foot, slashed/stinking eye, cracked/black nails
+.
+• Troubling Tales (Backstories): Pursued for manslaughter, massive debt, rare item, cursed wound, illegal affair, tracked by golem, "Burn or be burned" fate, flesh heals fast but companions slow, sees "guardian angel"
+.
+• Arcane Catastrophes (Power Fumbles): Teeth fall out replaced by brittle fingernails, magical STD causes plague/zombies, skeleton possessed and tries to kill caster, skin tatters/flesh melts (becomes walking skeleton), gnashing mouth on neck spits secrets, warped sky/stars (thrown into future), target transforms into a fungal monstrosity, Power feeds on anima (permanently gaunt/hungry), fall into Cube-Violet
+.
+• Optional Classes:
+    ◦ Fanged Deserter: Enormous, protruding teeth (Bite Attack d6, DR10). Begins with 2d6x10s and d2 Omens. HP: Toughness + d10. Earliest memories include a burnt building, rotting ship, brothel, sleeping with dogs, or being eaten
+. Specific items include "the brown scimitar of Galgenbeck," "wizard teeth," "Old Sigûrd’s sling," "ancient gore-hound," or "the shoe of Death’s horse"
+.
+    ◦ Gutterborn Scum: Small, stealthy (-2 DR to Agility/Presence tests). Begins with d6x10s and d2 Omens. HP: Toughness + d8. Specialties: Coward’s Jab, Filthy Fingersmith, Abominable Gob Lobber, Escaping Fate, Excremental Stealth
+.
+    ◦ Serpent-Touched: Alien mind/movements (+1 Agility/Presence), hollow/fragile bones (-2 Toughness). Cannot use scrolls, but instinctively uses a random Power daily. Begins with d6x10s and d4 Omens. HP: Toughness + d6. Unspoken origins include caught by fishermen, summoned by cultists, vomited by foul beast, fell from sky, hatched from Bog-Witch egg, crawled from crack
+.
+    ◦ Wretched Royalty: Painfully average abilities. Begins with 2d6x10s and d2 Omens. HP: Toughness + d8. Starts with two of: Blade of Ancestors (talking sword), crown of a dead saint (random sacred scroll), royal signet ring (allows passing as nobility), horn of the Schleswig lords (can grant automatic success)
+.
+    ◦ Heretical Priest: Insightful (+2 Presence), frail (-2 Strength). Can use Powers with medium armor. Begins with 3d6x10s and d4 Omens. HP: Toughness + d8. Unholy origins include Galgenbeck cathedral, massacred Alliáns cult, crypts of Grift, Temple ruins, thief-tunnels, secret Bergen Chrypt church
+. Possessions: Sacred Shepherd’s Crook, Stolen Mitre, List of Sins, Blasphemous Nechrubel Bible
+.
+    ◦ Occult Herbmaster: Tough as wood (+2 Toughness), low in protein (-2 Strength). Carries a portable laboratory, can brew d4 doses of two random decoctions daily. Begins with 2d6x10s and d2 Omens. HP: Toughness + d6. Raised in Sarkash dark, illegal markets of Schleswig, heretic isle of Crëlut, old frozen ruins, witch's cottage, Shadow King's manse
+. Decoctions: red poison, Ezumiel’s vapor
+.
+    ◦ Forlorn Philosopher: Obsessed (+2 Presence), weak (-2 Toughness). Begins with 2d6x10s and d2 Omens. HP: Toughness + d8. Starts with one of: Thorns of Comprehension, Hegelian Owl, Prism of Ambiguity, Flute of Tosk
+.
+    ◦ Bard: Amplified personality (+2 Presence), hard life (-2 Toughness). Can unsettling foes and calming friends in morale checks. Begins with 4d6x10s and d2 Omens. HP: Toughness + d6. Gained one of accursed instruments: Skin Whip or Bloodwrit Esoterica
+.
+Sandbox Generation Framework
+A "sandbox" campaign allows players free choice within the setting
+. It involves systematic generation of geography, locales, and NPCs
+.
+Process for Generating a Sandbox:
+1. Sketch a world/continent map, label regions, and write a one-page background for each
+.
+2. Pick a main campaign region (e.g., 200x150 miles), draw a hex map, add mountains, rivers, hills, and vegetation
+.
+3. Place Population Locales (settlements), Lairs (monster homes), Ruins, and other miscellaneous locales
+.
+4. Name geography (including islands)
+.
+5. Write paragraphs describing the region, geography, locales, and lairs
+.
+6. Develop 2-4 plots tying locales together
+.
+7. Create 3-5 encounters for each population locale, and 6-12 general encounters for the region
+.
+8. Draw sketch maps for important population locales, and a full-page map for the starting "Home Base"
+.
+9. Detail buildings and notable NPCs/monsters with blurbs and stats
+.
+10. Identify regional organizations and stat out common encounters
+.
+11. Create a rumor chart (10-20 items leading to encounters/plots)
+.
+12. Create random encounter charts for major regions (monsters, wildlife, NPCs)
+.
+Hex Map & Biomes:
+• Biomes: Grassland, Forest, Hills, Marsh, Mountains
+. Can be expanded by generating layers
+.
+• Encounters per Biome: Different monster types are associated with each biome (e.g., Dinosaurs in Grassland, Ents in Forest, Manticores in Hills, Moth-men in Marsh, Giants in Mountains)
+.
+• Features: Prominent things inside hexes (Landmark, Settlement, Lair, Dungeon)
+.
+• Random Encounters (Hex): Can involve Dragons, other factions, current hex's faction, NPCs, or biome-specific monsters
+.
+Landmarks:
+• Types: Natural, Artificial, Magic
+.
+• Content: Can be a Hazard (dangerous), Empty (info about world/inhabitants), Special (mystery/event with reward), or contain Monsters
+.
+• Hazards: Acid pits, allergenic plants, illness, curse, dangerous footing, easy to get lost, fog, fumes, ghosts, hallucinogenic spores, hidden pits, hunting traps, magic corruption, plague, quicksands, radiations, sabotage/trap, unstable, venomous animals, volcanic area
+.
+• Empty Landmark Info: Info about nearby monsters, alchemy recipe, curative effects, directions, dungeon location, future event, past event, legend/myth, local custom, password, secret passage, spell/ritual, magic weapon tale, toxicity, upcoming weather, monster language words
+.
+• Special Landmark Events: Arbitrate dispute, prevent threat, solve puzzle/riddle, uncover mystery, NPC(s)/Monster(s) in need, or related to the landmark (e.g., evil ceremony, flood, frenzied animals, magic corruption, plague, wildfire)
+.
+Adventures at Sea:
+• Sea Hexes: External hexes are empty. Central hexes can contain Nothing, a Landmark, or an Island
+.
+• Maritime Landmarks: Active underwater volcano, Buoy, Coral reef, Giant animal skeleton, Iceberg, Natural stone arch, Permanent fog, Regatta course, Sandbar, Sunk galleon, Underwater grotto, Whirlpools
+.
+• Island Types: Atoll, Jungle, Rocky, Volcanic
+.
+This framework, combined with the detailed tables and lore, offers a robust system for generating a unique and immersive dying world.

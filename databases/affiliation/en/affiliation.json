@@ -56,12 +56,24 @@
       "Obsessed (with a dark purpose or desire)",
       "Fickle and Unreliable (prone to betrayal)",
       "Corpse-Bound (driven by undeath)"
-    ]
+    ],
+    "affiliations": {
+      "npc_affiliations": [
+        "Guild",
+        "Church",
+        "Cult"
+      ],
+      "affiliation_attitudes": [
+        "Friendly",
+        "Neutral",
+        "Hostile"
+      ]
+    }
   },
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "migrated_from": "databases/languages/en/affiliation.json"
   }
 }

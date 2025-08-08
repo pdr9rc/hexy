@@ -1,1584 +1,1584 @@
 {
   "city_name": "Bergen Chrypt",
-  "display_name": "Bergen Chrypt - The Frozen Necropolis",
-  "description": "Carved into the heart of a glacier, where the living and dead walk side by side",
+  "display_name": "Bergen Chrypt - A Necrópole Congelada",
+  "description": "Uma erupção infecciosa no mundo; pústulas imundas congeladas no gelo. Escavada no coração de uma geleira onde vivos e mortos caminham lado a lado. Ventos podres, moscas de carniça e o ARQUI‑GELO rondam cada fôlego.",
   "theme": "frozen_undead_fortress",
   "district_matrix": [
     [
-      "The Upper Crypts",
-      "The Upper Crypts",
-      "Noble Undead Quarter",
-      "Noble Undead Quarter",
-      "Frozen Battlements",
-      "Frozen Battlements",
-      "The Glacier Heart",
-      "The Glacier Heart",
-      "Servant's Tunnels",
-      "Servant's Tunnels"
+      "Criptas Superiores",
+      "Criptas Superiores",
+      "Quarteirão Nobre dos Mortos",
+      "Quarteirão Nobre dos Mortos",
+      "Baluartes Congelados",
+      "Baluartes Congelados",
+      "Coração da Geleira",
+      "Coração da Geleira",
+      "Túneis dos Criados",
+      "Túneis dos Criados"
     ],
     [
-      "The Upper Crypts",
-      "The Upper Crypts",
-      "Noble Undead Quarter",
-      "Noble Undead Quarter",
-      "Frozen Battlements",
-      "Frozen Battlements",
-      "The Glacier Heart",
-      "The Glacier Heart",
-      "Servant's Tunnels",
-      "Servant's Tunnels"
+      "Criptas Superiores",
+      "Criptas Superiores",
+      "Quarteirão Nobre dos Mortos",
+      "Quarteirão Nobre dos Mortos",
+      "Baluartes Congelados",
+      "Baluartes Congelados",
+      "Coração da Geleira",
+      "Coração da Geleira",
+      "Túneis dos Criados",
+      "Túneis dos Criados"
     ],
     [
-      "The Ancient Vaults",
-      "The Ancient Vaults",
-      "Ice Palace District",
-      "Ice Palace District",
-      "The Eternal Watch",
-      "The Eternal Watch",
-      "Crypt Lord's Domain",
-      "Crypt Lord's Domain",
-      "The Frozen Gates",
-      "The Frozen Gates"
+      "Câmaras Antigas",
+      "Câmaras Antigas",
+      "Distrito do Palácio de Gelo",
+      "Distrito do Palácio de Gelo",
+      "Vigia Eterna",
+      "Vigia Eterna",
+      "Domínio do Senhor das Criptas",
+      "Domínio do Senhor das Criptas",
+      "Portões Gelados",
+      "Portões Gelados"
     ],
     [
-      "The Ancient Vaults",
-      "The Ancient Vaults",
-      "Ice Palace District",
-      "Ice Palace District",
-      "The Eternal Watch",
-      "The Eternal Watch",
-      "Crypt Lord's Domain",
-      "Crypt Lord's Domain",
-      "The Frozen Gates",
-      "The Frozen Gates"
+      "Câmaras Antigas",
+      "Câmaras Antigas",
+      "Distrito do Palácio de Gelo",
+      "Distrito do Palácio de Gelo",
+      "Vigia Eterna",
+      "Vigia Eterna",
+      "Domínio do Senhor das Criptas",
+      "Domínio do Senhor das Criptas",
+      "Portões Gelados",
+      "Portões Gelados"
     ],
     [
-      "The Upper Crypts",
-      "The Upper Crypts",
-      "Noble Undead Quarter",
-      "Noble Undead Quarter",
-      "Frozen Battlements",
-      "Frozen Battlements",
-      "The Glacier Heart",
-      "The Glacier Heart",
-      "Servant's Tunnels",
-      "Servant's Tunnels"
+      "Criptas Superiores",
+      "Criptas Superiores",
+      "Quarteirão Nobre dos Mortos",
+      "Quarteirão Nobre dos Mortos",
+      "Baluartes Congelados",
+      "Baluartes Congelados",
+      "Coração da Geleira",
+      "Coração da Geleira",
+      "Túneis dos Criados",
+      "Túneis dos Criados"
     ],
     [
-      "The Upper Crypts",
-      "The Upper Crypts",
-      "Noble Undead Quarter",
-      "Noble Undead Quarter",
-      "Frozen Battlements",
-      "Frozen Battlements",
-      "The Glacier Heart",
-      "The Glacier Heart",
-      "Servant's Tunnels",
-      "Servant's Tunnels"
+      "Criptas Superiores",
+      "Criptas Superiores",
+      "Quarteirão Nobre dos Mortos",
+      "Quarteirão Nobre dos Mortos",
+      "Baluartes Congelados",
+      "Baluartes Congelados",
+      "Coração da Geleira",
+      "Coração da Geleira",
+      "Túneis dos Criados",
+      "Túneis dos Criados"
     ],
     [
-      "The Ancient Vaults",
-      "The Ancient Vaults",
-      "Ice Palace District",
-      "Ice Palace District",
-      "The Eternal Watch",
-      "The Eternal Watch",
-      "Crypt Lord's Domain",
-      "Crypt Lord's Domain",
-      "The Frozen Gates",
-      "The Frozen Gates"
+      "Câmaras Antigas",
+      "Câmaras Antigas",
+      "Distrito do Palácio de Gelo",
+      "Distrito do Palácio de Gelo",
+      "Vigia Eterna",
+      "Vigia Eterna",
+      "Domínio do Senhor das Criptas",
+      "Domínio do Senhor das Criptas",
+      "Portões Gelados",
+      "Portões Gelados"
     ],
     [
-      "The Ancient Vaults",
-      "The Ancient Vaults",
-      "Ice Palace District",
-      "Ice Palace District",
-      "The Eternal Watch",
-      "The Eternal Watch",
-      "Crypt Lord's Domain",
-      "Crypt Lord's Domain",
-      "The Frozen Gates",
-      "The Frozen Gates"
+      "Câmaras Antigas",
+      "Câmaras Antigas",
+      "Distrito do Palácio de Gelo",
+      "Distrito do Palácio de Gelo",
+      "Vigia Eterna",
+      "Vigia Eterna",
+      "Domínio do Senhor das Criptas",
+      "Domínio do Senhor das Criptas",
+      "Portões Gelados",
+      "Portões Gelados"
     ],
     [
-      "The Upper Crypts",
-      "The Upper Crypts",
-      "Noble Undead Quarter",
-      "Noble Undead Quarter",
-      "Frozen Battlements",
-      "Frozen Battlements",
-      "The Glacier Heart",
-      "The Glacier Heart",
-      "Servant's Tunnels",
-      "Servant's Tunnels"
+      "Criptas Superiores",
+      "Criptas Superiores",
+      "Quarteirão Nobre dos Mortos",
+      "Quarteirão Nobre dos Mortos",
+      "Baluartes Congelados",
+      "Baluartes Congelados",
+      "Coração da Geleira",
+      "Coração da Geleira",
+      "Túneis dos Criados",
+      "Túneis dos Criados"
     ],
     [
-      "The Upper Crypts",
-      "The Upper Crypts",
-      "Noble Undead Quarter",
-      "Noble Undead Quarter",
-      "Frozen Battlements",
-      "Frozen Battlements",
-      "The Glacier Heart",
-      "The Glacier Heart",
-      "Servant's Tunnels",
-      "Servant's Tunnels"
+      "Criptas Superiores",
+      "Criptas Superiores",
+      "Quarteirão Nobre dos Mortos",
+      "Quarteirão Nobre dos Mortos",
+      "Baluartes Congelados",
+      "Baluartes Congelados",
+      "Coração da Geleira",
+      "Coração da Geleira",
+      "Túneis dos Criados",
+      "Túneis dos Criados"
     ]
   ],
   "districts": [
     {
-      "name": "The Upper Crypts",
-      "description": "The highest level of the city, where the most prestigious undead nobles reside",
+      "name": "Criptas Superiores",
+      "description": "O nível mais alto da cidade, onde residem os mais prestigiosos nobres mortos‑vivos.",
       "theme": "noble_undead_luxury",
       "buildings": [
-        "Crypt Lord's Ice Palace",
-        "The Eternal Throne Room",
-        "Undead Noble Mansion",
-        "The Ice Archive",
-        "The Cold Treasury"
+        "Palácio de Gelo do Senhor das Criptas",
+        "Sala do Trono Eterno",
+        "Mansão de Nobre Morto‑Vivo",
+        "Arquivo de Gelo",
+        "Tesouraria Fria"
       ],
       "streets": [
-        "Frozen Path of Sorrows",
-        "The Undead Promenade",
-        "Crypt Lord's Way"
+        "Caminho Congelado das Mágoas",
+        "Passeio dos Mortos‑Vivos",
+        "Caminho do Senhor das Criptas"
       ],
       "landmarks": [
-        "The Glacier Heart",
-        "Eternal Ice Throne",
-        "Undead Noble Monument"
+        "O Coração da Geleira",
+        "Trono de Gelo Eterno",
+        "Monumento ao Nobre Morto‑Vivo"
       ],
       "markets": [
-        "The Preservation Market",
-        "Undead Servants Exchange",
-        "The Cold Storage"
+        "Mercado da Preservação",
+        "Bolsa dos Servos Mortos‑Vivos",
+        "Depósito Frio"
       ],
       "temples": [
-        "Temple of Eternal Preservation",
-        "Shrine of the Undead Noble",
-        "The Frozen Altar"
+        "Templo da Preservação Eterna",
+        "Santuário do Nobre Morto‑Vivo",
+        "O Altar Congelado"
       ],
       "taverns": [
-        "The Frozen Goblet",
-        "The Undead's Rest",
-        "The Icy Draught"
+        "O Cálice Congelado",
+        "O Descanso do Morto‑Vivo",
+        "A Caneca Gelada"
       ],
       "guilds": [
-        "The Preservation Society",
-        "Guild of Undead Servants",
-        "The Ice Crafters"
+        "Sociedade da Preservação",
+        "Guilda dos Servos Mortos‑Vivos",
+        "Os Artífices do Gelo"
       ],
       "residences": [
-        "Undead Noble's Mansion",
-        "The Warden's Quarters",
-        "Servant's Ice Chambers"
+        "Mansão de Nobre Morto‑Vivo",
+        "Alojamentos do Guardião",
+        "Câmaras de Gelo dos Servos"
       ],
       "ruins": [
-        "Pre-Undead Nordic Ruins",
-        "Collapsed Ice Palace Wing",
-        "The Shattered Watchtower"
+        "Ruínas Nórdicas Pré‑Mortos‑Vivos",
+        "Ala do Palácio de Gelo Desabada",
+        "A Torre de Vigia Estilhaçada"
       ],
       "encounters": [
-        "Undead nobles conducting eternal court business",
-        "Crypt Lord's servants maintaining the glacier",
-        "Ancient Nordic spirits warning of forgotten laws"
+        "Magos da Pedra sussurram sobre o Motor Demônio enquanto o Pálido drena cor",
+        "Gólems de cadáver arrastam livros‑razão e ossos pela Avenida dos Reis",
+        "Ocidentais deslizam como óleo por galerias, prenunciando dano e desastre"
       ],
       "random_tables": {
         "district": [
-          "1-2: Undead nobles hold court, discussing centuries-old politics",
-          "3-4: Preservation engines malfunction, causing rapid ice formation",
-          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
+          "1-2: Nobres mortos‑vivos reúnem-se em corte, debatendo política de séculos",
+          "3-4: Máquinas de preservação falham, formando gelo rapidamente",
+          "5-6: Espíritos nórdicos antigos se manifestam, buscando justiça esquecida"
         ],
         "building": [
-          "1-2: The structure phases between life and death realms",
-          "3-4: Preservation magic fails temporarily, causing rapid decay",
-          "5-6: Undead nobility conduct eternal administrative business"
+          "1-2: A estrutura oscila entre os reinos da vida e da morte",
+          "3-4: A magia de preservação falha temporariamente, causando rápida decomposição",
+          "5-6: A nobreza morta‑viva conduz negócios administrativos eternos"
         ],
         "street": [
-          "1-2: Undead noble procession blocks passage for hours",
-          "3-4: Ice crystals form rapidly, making travel dangerous",
-          "5-6: Ancient Nordic spirits demand respect for old laws"
+          "1-2: Procissão de nobres mortos‑vivos bloqueia a passagem por horas",
+          "3-4: Cristais de gelo se formam rapidamente, tornando a caminhada perigosa",
+          "5-6: Espíritos nórdicos antigos exigem respeito às velhas leis"
         ],
         "landmark": [
-          "1-2: The monument activates ancient Nordic magic",
-          "3-4: Undead nobles gather for ceremonial purposes",
-          "5-6: The Crypt Lord appears to make pronouncements"
+          "1-2: O monumento ativa magia nórdica antiga",
+          "3-4: Nobres mortos‑vivos reúnem‑se para fins cerimoniais",
+          "5-6: O Senhor das Criptas aparece para fazer pronunciamentos"
         ],
         "market": [
-          "1-2: Eternal contracts bind unwary customers forever",
-          "3-4: Undead nobles purchase services for the afterlife",
-          "5-6: Ancient Nordic artifacts gain magical properties"
+          "1-2: Contratos eternos prendem clientes desavisados para sempre",
+          "3-4: Nobres mortos‑vivos compram serviços para o pós‑vida",
+          "5-6: Artefatos nórdicos antigos adquirem propriedades mágicas"
         ],
         "temple": [
-          "1-2: Ancient Nordic gods manifest during worship",
-          "3-4: The altar demands preservation of life essence",
-          "5-6: Undead nobles seek blessings for eternal rest"
+          "1-2: Deuses nórdicos antigos manifestam‑se durante o culto",
+          "3-4: O altar exige preservação da essência vital",
+          "5-6: Nobres mortos‑vivos buscam bênçãos para o descanso eterno"
         ],
         "tavern": [
-          "1-2: Undead nobles share centuries-old gossip and secrets",
-          "3-4: Ancient Nordic drinking songs summon ancestral spirits",
-          "5-6: Ice wine grants visions of the past and future"
+          "1-2: Nobres mortos‑vivos compartilham boatos e segredos seculares",
+          "3-4: Cantos nórdicos antigos de bebida evocam espíritos ancestrais",
+          "5-6: Vinho de gelo concede visões do passado e do futuro"
         ],
         "guild": [
-          "1-2: Guild masters offer apprenticeships lasting centuries",
-          "3-4: Ancient Nordic techniques are jealously guarded",
-          "5-6: The Crypt Lord commissions eternal public works"
+          "1-2: Mestres de guilda oferecem aprendizagens que duram séculos",
+          "3-4: Técnicas nórdicas antigas são guardadas com ciúme",
+          "5-6: O Senhor das Criptas comissiona obras públicas eternas"
         ],
         "residence": [
-          "1-2: Ancient Nordic family spirits demand recognition",
-          "3-4: The home exists simultaneously in multiple time periods",
-          "5-6: Undead nobles entertain guests from past centuries"
+          "1-2: Espíritos familiares nórdicos antigos exigem reconhecimento",
+          "3-4: A casa existe simultaneamente em múltiplos períodos",
+          "5-6: Nobres mortos‑vivos recebem convidados de séculos passados"
         ],
         "ruins": [
-          "1-2: Ancient Nordic treasure is discovered in the rubble",
-          "3-4: Preservation magic attempts to restore the ruins",
-          "5-6: Undead from before the city's transformation appear"
+          "1-2: Um tesouro nórdico antigo é descoberto entre os escombros",
+          "3-4: Magia de preservação tenta restaurar as ruínas",
+          "5-6: Mortos‑vivos de antes da transformação da cidade aparecem"
         ]
       },
       "atmosphere_modifiers": [
-        "The air is so cold it burns the lungs",
-        "Ice crystals form with each breath",
-        "Ancient Nordic chants echo from the glacier"
+        "O ar é tão frio que queima os pulmões",
+        "Cristais de gelo se formam a cada respiração",
+        "Cantos nórdicos antigos ecoam da geleira"
       ]
     },
     {
-      "name": "Noble Undead Quarter",
-      "description": "Where the lesser undead nobility maintain their eternal estates",
+      "name": "Quarteirão Nobre dos Mortos",
+      "description": "Onde a pequena nobreza morta‑viva mantém seus domínios eternos.",
       "theme": "undead_aristocracy",
       "buildings": [
-        "Undead Noble Mansion",
-        "The Preservation Chamber",
-        "Ancient Nordic Hall",
-        "The Noble's Estate"
+        "Mansão de Nobre Morto‑Vivo",
+        "Câmara de Preservação",
+        "Salão Nórdico Antigo",
+        "Solar dos Nobres"
       ],
       "streets": [
-        "The Noble's Passage",
-        "Ice Crystal Avenue",
-        "The Eternal March"
+        "Passagem dos Nobres",
+        "Avenida dos Cristais de Gelo",
+        "A Marcha Eterna"
       ],
       "landmarks": [
-        "The Crypt Lord's Seal",
-        "The Ice Crystal Chandelier",
-        "The Eternal Flame (Cold)"
+        "O Selo do Senhor das Criptas",
+        "O Candelabro de Cristal de Gelo",
+        "A Chama Eterna (Fria)"
       ],
       "markets": [
-        "The Noble's Commerce",
-        "Eternal Service Market",
-        "The Ice Craft Fair"
+        "Comércio dos Nobres",
+        "Mercado do Serviço Eterno",
+        "Feira do Ofício do Gelo"
       ],
       "temples": [
-        "Shrine of Nordic Ancestors",
-        "The Ice Crystal Sanctuary",
-        "Temple of Beautiful Death"
+        "Santuário dos Ancestrais Nórdicos",
+        "Santuário do Cristal de Gelo",
+        "Templo da Morte Bela"
       ],
       "taverns": [
-        "The Noble's Table",
-        "The Eternal Tavern",
-        "The Crypt's Warmth"
+        "A Mesa do Nobre",
+        "A Taverna Eterna",
+        "O Calor da Cripta"
       ],
       "guilds": [
-        "The Noble's Attendants",
-        "Nordic Grave Tenders",
-        "The Eternal Guard"
+        "Atendentes dos Nobres",
+        "Zeladores de Tumbas Nórdicas",
+        "Guarda Eterna"
       ],
       "residences": [
-        "The Preservation House",
-        "Ancient Nordic Lodge",
-        "The Eternal Residence"
+        "Casa da Preservação",
+        "Abrigo Nórdico Antigo",
+        "Residência Eterna"
       ],
       "ruins": [
-        "Ancient Glacier Caves",
-        "Broken Ice Sculptures",
-        "The Lost Nordic Hall"
+        "Grutas Antigas da Geleira",
+        "Esculturas de Gelo Quebradas",
+        "O Salão Nórdico Perdido"
       ],
       "encounters": [
-        "Noble undead discussing politics from past ages",
-        "Servants who died centuries ago still work here",
-        "The building exists partially in the realm of death"
+        "Chá eterno vira alcatrão; etiqueta mascara fome voraz",
+        "Máscaras dvörga embaçam com grisú enquanto o CÓDIGO é imposto",
+        "Porta‑Ossos trocam segredos por silêncio em salões sombreados"
       ],
       "random_tables": {
         "district": [
-          "1-2: Noble undead hold eternal tea ceremonies",
-          "3-4: Ancient family feuds erupt between undead houses",
-          "5-6: Preservation magic creates temporal anomalies"
+          "1-2: Nobres mortos‑vivos realizam eternos salões de chá",
+          "3-4: Rixas de famílias antigas eclodem entre casas mortas‑vivas",
+          "5-6: Magia de preservação cria anomalias temporais"
         ],
         "building": [
-          "1-2: The structure maintains itself through undead magic",
-          "3-4: Ice never melts within these preserved walls",
-          "5-6: Undead nobles conduct eternal business here"
+          "1-2: A estrutura se mantém por magia morta‑viva",
+          "3-4: O gelo nunca derrete dentro destas paredes preservadas",
+          "5-6: Nobres mortos‑vivos conduzem negócios eternos aqui"
         ],
         "street": [
-          "1-2: Undead nobles process in ancient ceremonial order",
-          "3-4: Ice crystals make the pathway treacherous",
-          "5-6: Ancient Nordic spirits patrol the streets"
+          "1-2: Nobres mortos‑vivos marcham em ordem cerimonial antiga",
+          "3-4: Cristais de gelo tornam o caminho traiçoeiro",
+          "5-6: Espíritos nórdicos antigos patrulham as ruas"
         ],
         "landmark": [
-          "1-2: The monument preserves ancient Nordic glory",
-          "3-4: Undead nobles gather here for eternal ceremonies",
-          "5-6: The Crypt Lord appears for important occasions"
+          "1-2: O monumento preserva a glória nórdica antiga",
+          "3-4: Nobres mortos‑vivos reúnem‑se para cerimônias eternas",
+          "5-6: O Senhor das Criptas surge em ocasiões importantes"
         ],
         "market": [
-          "1-2: Trade conducted with services instead of coin",
-          "3-4: Undead nobles purchase eternal luxuries",
-          "5-6: Ancient Nordic artifacts change hands"
+          "1-2: Comércio feito em serviços em vez de moeda",
+          "3-4: Nobres mortos‑vivos compram luxos eternos",
+          "5-6: Artefatos nórdicos antigos mudam de mãos"
         ],
         "temple": [
-          "1-2: The altar preserves offerings for eternity",
-          "3-4: Undead nobles seek blessings for their condition",
-          "5-6: Ancient Nordic gods still receive worship"
+          "1-2: O altar preserva oferendas por toda a eternidade",
+          "3-4: Nobres mortos‑vivos buscam bênçãos para sua condição",
+          "5-6: Deuses nórdicos antigos ainda recebem culto"
         ],
         "tavern": [
-          "1-2: Drinks are supernaturally preserved and never spoil",
-          "3-4: Undead nobles share tales of past centuries",
-          "5-6: Ancient Nordic drinking songs echo eternally"
+          "1-2: Bebidas são preservadas sobrenaturalmente e nunca estragam",
+          "3-4: Nobres mortos‑vivos contam histórias de séculos idos",
+          "5-6: Cantos nórdicos antigos ecoam eternamente"
         ],
         "guild": [
-          "1-2: Guild members serve the city's undead nobility",
-          "3-4: Ancient Nordic crafting techniques are preserved",
-          "5-6: The Crypt Lord's authority governs all guilds"
+          "1-2: Membros servem a nobreza morta‑viva da cidade",
+          "3-4: Técnicas artesanais nórdicas antigas são preservadas",
+          "5-6: A autoridade do Senhor das Criptas rege todas as guildas"
         ],
         "residence": [
-          "1-2: The home is preserved in eternal perfection",
-          "3-4: Undead nobles live in timeless luxury",
-          "5-6: Ancient Nordic family spirits inhabit rooms"
+          "1-2: O lar é preservado em perfeição eterna",
+          "3-4: Nobres mortos‑vivos vivem em luxo sem tempo",
+          "5-6: Espíritos familiares nórdicos antigos habitam os cômodos"
         ],
         "ruins": [
-          "1-2: Ancient Nordic power still lingers in the stones",
-          "3-4: The Crypt Lord's magic failed to preserve this",
-          "5-6: Undead from before the preservation wander here"
+          "1-2: O poder nórdico antigo ainda paira nas pedras",
+          "3-4: A magia do Senhor das Criptas falhou em preservar isto",
+          "5-6: Mortos‑vivos de antes da preservação vagueiam aqui"
         ]
       },
       "atmosphere_modifiers": [
-        "Undead nobility conversing in archaic languages",
-        "Cold magic makes the air shimmer with frost",
-        "The creaking of ancient ice under pressure"
+        "Nobreza morta‑viva conversa em línguas arcaicas",
+        "Magia fria faz o ar cintilar de geada",
+        "O estalar do gelo antigo sob pressão"
       ]
     },
     {
-      "name": "Frozen Battlements",
-      "description": "The defensive perimeter where eternal guards maintain their watch",
+      "name": "Baluartes Congelados",
+      "description": "O perímetro defensivo onde guardas eternos mantêm vigília inquebrantável.",
       "theme": "eternal_vigilance",
       "buildings": [
-        "The Warden's Tower",
-        "The Eternal Watch",
-        "Ancient Nordic Hall"
+        "Torre do Guardião",
+        "A Vigia Eterna",
+        "Salão Nórdico Antigo"
       ],
       "streets": [
-        "The Warden's Patrol",
-        "The Eternal March",
-        "The Preservation Walk"
+        "Patrulha do Guardião",
+        "A Marcha Eterna",
+        "Passeio da Preservação"
       ],
       "landmarks": [
-        "The Frozen Watchtower",
-        "The Eternal Flame (Cold)",
-        "Ancient Nordic Runestone"
+        "A Torre de Vigia Congelada",
+        "A Chama Eterna (Fria)",
+        "Runa Nórdica Antiga"
       ],
       "markets": [
-        "The Frozen Goods",
-        "Crypt Supplies Exchange",
-        "The Glacier Harvest"
+        "Bens Congelados",
+        "Bolsa de Suprimentos das Criptas",
+        "Colheita da Geleira"
       ],
       "temples": [
-        "Cathedral of Endless Winter",
-        "The Crypt Lord's Chapel",
-        "Temple of the Glacier Heart"
+        "Catedral do Inverno Sem Fim",
+        "Capela do Senhor das Criptas",
+        "Templo do Coração da Geleira"
       ],
       "taverns": [
-        "The Glacier Inn",
-        "The Preserved Spirits",
-        "The Cold Comfort"
+        "A Estalagem da Geleira",
+        "Os Espíritos Preservados",
+        "O Conforto Frio"
       ],
       "guilds": [
-        "The Eternal Guard",
-        "Crypt Maintenance Union",
-        "Glacier Sculptors Guild"
+        "Guarda Eterna",
+        "União de Manutenção das Criptas",
+        "Guilda dos Escultores da Geleira"
       ],
       "residences": [
-        "The Warden's Quarters",
-        "Crypt Keeper's Home",
-        "The Frozen Manor"
+        "Alojamentos do Guardião",
+        "Casa do Zelador da Cripta",
+        "Solar Congelado"
       ],
       "ruins": [
-        "The Fallen Crypt Spire",
-        "Ruined Preservation Engine",
-        "Abandoned Servant Quarters"
+        "A Agulha da Cripta Caída",
+        "Máquina de Preservação em Ruínas",
+        "Alojamentos de Servos Abandonados"
       ],
       "encounters": [
-        "Eternal guards patrolling with centuries of discipline",
-        "Frozen battlements manned by undead sentries",
-        "The Glacier Heart pulsing with ancient power"
+        "Catadores‑Rato de Pax Gangrän testam a paliçada e fogem se errados",
+        "Gnutz roem ferro; a Ponte Uivante começa a cantar",
+        "Uma aurora amarela rói ânimos enquanto dobra o sino do Guarda"
       ],
       "random_tables": {
         "district": [
-          "1-2: Eternal guards challenge all who lack proper authorization",
-          "3-4: The Crypt Lord's procession passes through the district",
-          "5-6: Glacier shifts, revealing new chambers and passages"
+          "1-2: Guardas eternos desafiam todos os que não têm a devida autorização",
+          "3-4: A procissão do Senhor das Criptas atravessa o distrito",
+          "5-6: A geleira se move, revelando novas câmaras e passagens"
         ],
         "building": [
-          "1-2: Ancient Nordic runes power the building",
-          "3-4: The Crypt Lord's authority emanates from within",
-          "5-6: Preservation engines keep everything frozen"
+          "1-2: Runas nórdicas antigas alimentam o edifício",
+          "3-4: A autoridade do Senhor das Criptas emana de dentro",
+          "5-6: Motores de preservação mantêm tudo congelado"
         ],
         "street": [
-          "1-2: The Crypt Lord's procession passes through",
-          "3-4: Preservation magic keeps the path eternally frozen",
-          "5-6: Servants clear ice that forms continuously"
+          "1-2: A procissão do Senhor das Criptas passa pelo local",
+          "3-4: Magia de preservação mantém o caminho eternamente congelado",
+          "5-6: Servos removem continuamente o gelo que se forma"
         ],
         "landmark": [
-          "1-2: Ice magic emanates from the structure",
-          "3-4: Ancient runes activate when approached",
-          "5-6: The landmark serves as a gateway to death"
+          "1-2: Magia de gelo emana da estrutura",
+          "3-4: Runas antigas ativam-se quando alguém se aproxima",
+          "5-6: O marco serve como um portal para a morte"
         ],
         "market": [
-          "1-2: The Crypt Lord's servants oversee all trade",
-          "3-4: Ice crafts that never melt are highly valued",
-          "5-6: Services for the dead and undead are common"
+          "1-2: Servos do Senhor das Criptas supervisionam todo o comércio",
+          "3-4: Ofícios de gelo que nunca derretem são muito valorizados",
+          "5-6: São comuns serviços para mortos e mortos‑vivos"
         ],
         "temple": [
-          "1-2: The Crypt Lord conducts dark ceremonies",
-          "3-4: Ice forms sacred patterns during rituals",
-          "5-6: Preservation magic sanctifies the space"
+          "1-2: O Senhor das Criptas realiza cerimônias sombrias",
+          "3-4: O gelo forma padrões sagrados durante rituais",
+          "5-6: Magia de preservação santifica o espaço"
         ],
         "tavern": [
-          "1-2: The Crypt Lord's servants gather information",
-          "3-4: Ice wine that burns cold is the specialty",
-          "5-6: Preservation magic keeps food fresh forever"
+          "1-2: Servos do Senhor das Criptas coletam informações",
+          "3-4: Vinho de gelo que queima frio é a especialidade",
+          "5-6: Magia de preservação mantém a comida fresca para sempre"
         ],
         "guild": [
-          "1-2: Preservation magic enhances all guild work",
-          "3-4: Undead masters teach eternal apprentices",
-          "5-6: Ice crafting requires centuries to master"
+          "1-2: Magia de preservação aprimora o trabalho de todas as guildas",
+          "3-4: Mestres mortos‑vivos ensinam aprendizes eternos",
+          "5-6: O artesanato do gelo exige séculos para se dominar"
         ],
         "residence": [
-          "1-2: Preservation magic maintains all furnishings",
-          "3-4: The Crypt Lord's favor protects residents",
-          "5-6: Ice never forms inside due to special wards"
+          "1-2: Magia de preservação mantém todo o mobiliário",
+          "3-4: O favor do Senhor das Criptas protege os moradores",
+          "5-6: O gelo nunca se forma no interior devido a proteções especiais"
         ],
         "ruins": [
-          "1-2: Ice has reclaimed what magic could not save",
-          "3-4: Nordic spirits mourn their forgotten home",
-          "5-6: Preservation attempts left strange magical effects"
+          "1-2: O gelo retomou o que a magia não pôde salvar",
+          "3-4: Espíritos nórdicos lamentam sua casa esquecida",
+          "5-6: Tentativas de preservação deixaram estranhos efeitos mágicos"
         ]
       },
       "atmosphere_modifiers": [
-        "The sound of preservation engines humming",
-        "Cold wind carries whispers of the long dead",
-        "Frozen statues of ancient heroes line the way"
+        "O zumbido dos motores de preservação",
+        "O vento frio carrega sussurros dos muito mortos",
+        "Estátuas congeladas de heróis antigos ladeiam o caminho"
       ]
     },
     {
-      "name": "The Glacier Heart",
-      "description": "The mystical center where the city's preservation magic originates",
+      "name": "Coração da Geleira",
+      "description": "O centro místico de onde brota a magia de preservação da cidade.",
       "theme": "mystical_preservation",
       "buildings": [
-        "The Preservation Engine",
-        "Glacier Carved Cathedral",
-        "The Ice Archive"
+        "A Máquina de Preservação",
+        "Catedral Esculpida na Geleira",
+        "Arquivo de Gelo"
       ],
       "streets": [
-        "Glacier Heart Road",
-        "The Preservation Walk",
-        "The Ancient Processional"
+        "Estrada do Coração da Geleira",
+        "Passeio da Preservação",
+        "Procissão Antiga"
       ],
       "landmarks": [
-        "The Glacier Heart",
-        "The Preservation Engine",
-        "Ancient Nordic Runestone"
+        "O Coração da Geleira",
+        "A Máquina de Preservação",
+        "Runa Nórdica Antiga"
       ],
       "markets": [
-        "The Preservation Market",
-        "Nordic Relic Bazaar",
-        "The Ice Craft Fair"
+        "Mercado da Preservação",
+        "Bazar de Relíquias Nórdicas",
+        "Feira do Ofício do Gelo"
       ],
       "temples": [
-        "Temple of the Glacier Heart",
-        "The Preservation Shrine",
-        "Shrine of Nordic Ancestors"
+        "Templo do Coração da Geleira",
+        "Santuário da Preservação",
+        "Santuário dos Ancestrais Nórdicos"
       ],
       "taverns": [
-        "The Preserved Spirits",
-        "The Cold Comfort",
-        "The Warden's Lodge"
+        "Os Espíritos Preservados",
+        "O Conforto Frio",
+        "O Albergue do Guardião"
       ],
       "guilds": [
-        "The Preservation Society",
-        "The Cold Preservers",
-        "Ancient Rune Keepers"
+        "Sociedade da Preservação",
+        "Os Preservadores do Frio",
+        "Guardiões das Runas Antigas"
       ],
       "residences": [
-        "The Preservation House",
-        "The Eternal Residence",
-        "Ice Palace Apartments"
+        "Casa da Preservação",
+        "Residência Eterna",
+        "Apartamentos do Palácio de Gelo"
       ],
       "ruins": [
-        "The Cracked Glacier Heart",
-        "Ruined Preservation Engine",
-        "Ancient Glacier Caves"
+        "O Coração da Geleira Fendido",
+        "Máquina de Preservação em Ruínas",
+        "Grutas Antigas da Geleira"
       ],
       "encounters": [
-        "Preservation engines humming with cold magic",
-        "Ice crystals forming spontaneously in the air",
-        "Servants preparing the district for eternal winter"
+        "A Máquina de Preservação grita, exigindo um sacrifício de memórias",
+        "Neve negra de óleo deriva de reservas rompidas lá embaixo",
+        "Luz fria vaza de fendas rúnicas; o hálito tingi‑se de púrpura"
       ],
       "random_tables": {
         "district": [
-          "1-2: Preservation engines malfunction, causing rapid ice formation",
-          "3-4: The Glacier Heart demands a sacrifice of memories",
-          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
+          "1-2: Motores de preservação falham, causando formação rápida de gelo",
+          "3-4: O Coração da Geleira exige um sacrifício de memórias",
+          "5-6: Espíritos nórdicos antigos se manifestam, buscando justiça esquecida"
         ],
         "building": [
-          "1-2: Preservation engines keep everything frozen",
-          "3-4: Servants who died centuries ago still work here",
-          "5-6: The building exists partially in the realm of death"
+          "1-2: Motores de preservação mantêm tudo congelado",
+          "3-4: Servos que morreram há séculos ainda trabalham aqui",
+          "5-6: O edifício existe parcialmente no reino da morte"
         ],
         "street": [
-          "1-2: The street leads deeper into the glacier",
-          "3-4: Cold wind carries whispers of the long dead",
-          "5-6: Frozen statues of ancient heroes line the way"
+          "1-2: A rua leva mais fundo na geleira",
+          "3-4: Vento frio carrega sussurros dos muito mortos",
+          "5-6: Estátuas congeladas de heróis antigos ladeiam o caminho"
         ],
         "landmark": [
-          "1-2: Preservation magic keeps it eternally perfect",
-          "3-4: Nordic ancestors manifest around the monument",
-          "5-6: The structure connects to the Glacier Heart"
+          "1-2: Magia de preservação o mantém eternamente perfeito",
+          "3-4: Ancestrais nórdicos manifestam‑se ao redor do monumento",
+          "5-6: A estrutura se conecta ao Coração da Geleira"
         ],
         "market": [
-          "1-2: Preservation services are the main commerce",
-          "3-4: Nordic runes are carved into trading tokens",
-          "5-6: Cold magic enhances all goods sold here"
+          "1-2: Serviços de preservação são o principal comércio",
+          "3-4: Runas nórdicas são gravadas em fichas de troca",
+          "5-6: Magia fria aprimora todos os bens vendidos aqui"
         ],
         "temple": [
-          "1-2: The dead and undead worship together",
-          "3-4: Nordic runes channel divine cold energy",
-          "5-6: Eternal flames provide sacred illumination"
+          "1-2: Vivos e mortos‑vivos cultuam juntos",
+          "3-4: Runas nórdicas canalizam energia fria divina",
+          "5-6: Chamas eternas fornecem iluminação sagrada"
         ],
         "tavern": [
-          "1-2: Nordic heroes' spirits join in revelry",
-          "3-4: Cold magic makes all drinks refreshingly frozen",
-          "5-6: Eternal warmth emanates from the hearth"
+          "1-2: Espíritos de heróis nórdicos juntam‑se à farra",
+          "3-4: Magia fria torna todas as bebidas refrescantemente geladas",
+          "5-6: Calor eterno emana da lareira"
         ],
         "guild": [
-          "1-2: Guild halls are carved from glacier ice",
-          "3-4: Nordic runes mark all guild certifications",
-          "5-6: Cold magic is essential to most professions"
+          "1-2: Salões de guilda são esculpidos no gelo da geleira",
+          "3-4: Runas nórdicas marcam todas as certificações",
+          "5-6: Magia fria é essencial para a maioria das profissões"
         ],
         "residence": [
-          "1-2: Servants who died centuries ago still work",
-          "3-4: Nordic heritage is displayed prominently",
-          "5-6: Cold magic keeps the home eternally comfortable"
+          "1-2: Servos que morreram há séculos ainda trabalham",
+          "3-4: Herança nórdica exibida de forma proeminente",
+          "5-6: Magia fria mantém o lar eternamente confortável"
         ],
         "ruins": [
-          "1-2: The ruins serve as a warning of impermanence",
-          "3-4: Ancient runes flicker with dying power",
-          "5-6: Cold magic here is wild and unpredictable"
+          "1-2: As ruínas servem como aviso da impermanência",
+          "3-4: Runas antigas cintilam com poder agonizante",
+          "5-6: A magia fria aqui é selvagem e imprevisível"
         ]
       },
       "atmosphere_modifiers": [
-        "The smell of eternal preservation and old ice",
-        "Light refracting through countless ice formations",
-        "The path is lit by cold, eternal flames"
+        "Cheiro de preservação eterna e gelo antigo",
+        "Luz se refrata por incontáveis formações de gelo",
+        "O caminho é iluminado por chamas frias e eternas"
       ]
     },
     {
-      "name": "Servant's Tunnels",
-      "description": "The labyrinthine passages where the living and undead servants work",
+      "name": "Túneis dos Criados",
+      "description": "Passagens labirínticas onde trabalham servos vivos e mortos‑vivos.",
       "theme": "servant_labyrinth",
       "buildings": [
-        "Servant's Ice Chambers",
-        "The Preservation House",
-        "The Eternal Residence"
+        "Câmaras de Gelo dos Servos",
+        "Casa da Preservação",
+        "Residência Eterna"
       ],
       "streets": [
-        "The Preservation Walk",
-        "The Warden's Patrol",
-        "The Ancient Processional"
+        "Passeio da Preservação",
+        "Patrulha do Guardião",
+        "Procissão Antiga"
       ],
       "landmarks": [
-        "The Preservation Engine",
-        "Ancient Nordic Runestone",
-        "The Eternal Flame (Cold)"
+        "A Máquina de Preservação",
+        "Runa Nórdica Antiga",
+        "A Chama Eterna (Fria)"
       ],
       "markets": [
-        "Undead Servants Exchange",
-        "The Cold Storage",
-        "Eternal Service Market"
+        "Bolsa dos Servos Mortos‑Vivos",
+        "Depósito Frio",
+        "Mercado do Serviço Eterno"
       ],
       "temples": [
-        "The Preservation Shrine",
-        "Shrine of Nordic Ancestors",
-        "The Ice Crystal Sanctuary"
+        "Santuário da Preservação",
+        "Santuário dos Ancestrais Nórdicos",
+        "Santuário do Cristal de Gelo"
       ],
       "taverns": [
-        "The Cold Comfort",
-        "The Warden's Lodge",
-        "The Preserved Spirits"
+        "O Conforto Frio",
+        "O Albergue do Guardião",
+        "Os Espíritos Preservados"
       ],
       "guilds": [
-        "Guild of Undead Servants",
-        "The Cold Preservers",
-        "Crypt Maintenance Union"
+        "Guilda dos Servos Mortos‑Vivos",
+        "Os Preservadores do Frio",
+        "União de Manutenção das Criptas"
       ],
       "residences": [
-        "Servant's Ice Chambers",
-        "The Preservation House",
-        "The Eternal Residence"
+        "Câmaras de Gelo dos Servos",
+        "Casa da Preservação",
+        "Residência Eterna"
       ],
       "ruins": [
-        "Abandoned Servant Quarters",
-        "Ancient Glacier Caves",
-        "The Lost Nordic Hall"
+        "Alojamentos de Servos Abandonados",
+        "Grutas Antigas da Geleira",
+        "O Salão Nórdico Perdido"
       ],
       "encounters": [
-        "Crypt Lord's servants maintaining the glacier",
-        "Servants who died centuries ago still work here",
-        "Servants preparing the district for eternal winter"
+        "Servos do Senhor das Criptas mantêm a geleira",
+        "Servos que morreram há séculos ainda trabalham aqui",
+        "Servos preparam o distrito para o inverno eterno"
       ],
       "random_tables": {
         "district": [
-          "1-2: Servants clear ice that forms continuously",
-          "3-4: The Crypt Lord's servants perform maintenance rituals",
-          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
+          "1-2: Servos removem continuamente o gelo que se forma",
+          "3-4: Servos do Senhor das Criptas realizam rituais de manutenção",
+          "5-6: Espíritos nórdicos antigos se manifestam, buscando justiça esquecida"
         ],
         "building": [
-          "1-2: Servants who died centuries ago still work here",
-          "3-4: The building exists partially in the realm of death",
-          "5-6: Glacier ice forms the very foundation"
+          "1-2: Servos que morreram há séculos ainda trabalham aqui",
+          "3-4: O edifício existe parcialmente no reino da morte",
+          "5-6: O gelo da geleira forma a própria fundação"
         ],
         "street": [
-          "1-2: Servants clear ice that forms continuously",
-          "3-4: The street leads deeper into the glacier",
-          "5-6: Cold wind carries whispers of the long dead"
+          "1-2: Servos limpam o gelo que se forma sem parar",
+          "3-4: A rua conduz mais fundo na geleira",
+          "5-6: Vento frio carrega sussurros dos muito mortos"
         ],
         "landmark": [
-          "1-2: Cold flames burn eternally around the landmark",
-          "3-4: The structure connects to the Glacier Heart",
-          "5-6: Ancient runes activate when approached"
+          "1-2: Chamas frias ardem eternamente ao redor do marco",
+          "3-4: A estrutura conecta‑se ao Coração da Geleira",
+          "5-6: Runas antigas se ativam ao aproximar‑se"
         ],
         "market": [
-          "1-2: Services for the dead and undead are common",
-          "3-4: Nordic runes are carved into trading tokens",
-          "5-6: Eternal contracts bind all transactions"
+          "1-2: São comuns serviços para mortos e mortos‑vivos",
+          "3-4: Runas nórdicas são gravadas em fichas de troca",
+          "5-6: Contratos eternos vinculam todas as transações"
         ],
         "temple": [
-          "1-2: The temple exists in both life and death",
-          "3-4: Nordic runes channel divine cold energy",
-          "5-6: Eternal flames provide sacred illumination"
+          "1-2: O templo existe tanto na vida quanto na morte",
+          "3-4: Runas nórdicas canalizam energia fria divina",
+          "5-6: Chamas eternas fornecem iluminação sagrada"
         ],
         "tavern": [
-          "1-2: The tavern serves both living and dead patrons",
-          "3-4: Cold magic makes all drinks refreshingly frozen",
-          "5-6: Eternal warmth emanates from the hearth"
+          "1-2: A taverna serve clientes vivos e mortos‑vivos",
+          "3-4: Magia fria torna todas as bebidas refrescantemente geladas",
+          "5-6: Calor eterno emana do lar"
         ],
         "guild": [
-          "1-2: Eternal contracts bind guild memberships",
-          "3-4: Nordic runes mark all guild certifications",
-          "5-6: Cold magic is essential to most professions"
+          "1-2: Contratos eternos vinculam as filiações às guildas",
+          "3-4: Runas nórdicas marcam todas as certificações",
+          "5-6: Magia fria é essencial para a maioria das profissões"
         ],
         "residence": [
-          "1-2: Servants who died centuries ago still work",
-          "3-4: Nordic heritage is displayed prominently",
-          "5-6: The residence exists partially in death's realm"
+          "1-2: Servos que morreram há séculos ainda trabalham",
+          "3-4: Herança nórdica exibida de forma proeminente",
+          "5-6: A residência existe parcialmente no reino da morte"
         ],
         "ruins": [
-          "1-2: The glacier slowly consumes the ruins",
-          "3-4: Ancient runes flicker with dying power",
-          "5-6: Cold magic here is wild and unpredictable"
+          "1-2: A geleira lentamente consome as ruínas",
+          "3-4: Runas antigas tremeluzem com poder moribundo",
+          "5-6: A magia fria aqui é selvagem e imprevisível"
         ]
       },
       "atmosphere_modifiers": [
-        "The sound of preservation engines humming",
-        "Whispers of the long dead carried on cold winds",
-        "The path leads deeper into the glacier"
+        "O zumbido dos motores de preservação",
+        "Sussurros dos muito mortos carregados por ventos frios",
+        "O caminho leva mais fundo na geleira"
       ]
     },
     {
-      "name": "The Ancient Vaults",
-      "description": "Deep chambers where the city's most precious treasures are preserved",
+      "name": "Câmaras Antigas",
+      "description": "Profundas câmaras onde se guardam os tesouros mais preciosos da cidade.",
       "theme": "treasure_preservation",
       "buildings": [
-        "The Cold Treasury",
-        "The Preservation Chamber",
-        "Ancient Nordic Hall"
+        "Tesouraria Fria",
+        "Câmara de Preservação",
+        "Salão Nórdico Antigo"
       ],
       "streets": [
-        "The Ancient Processional",
-        "The Preservation Walk",
-        "Glacier Heart Road"
+        "Procissão Antiga",
+        "Passeio da Preservação",
+        "Estrada do Coração da Geleira"
       ],
       "landmarks": [
-        "The Great Crypt Spiral",
-        "Ancient Nordic Runestone",
-        "The Preservation Engine"
+        "A Grande Espiral Críptica",
+        "Runa Nórdica Antiga",
+        "A Máquina de Preservação"
       ],
       "markets": [
-        "The Cold Storage",
-        "Nordic Relic Bazaar",
-        "The Ice Craft Fair"
+        "Depósito Frio",
+        "Bazar de Relíquias Nórdicas",
+        "Feira do Ofício do Gelo"
       ],
       "temples": [
-        "Shrine of Nordic Ancestors",
-        "The Ice Crystal Sanctuary",
-        "Temple of Beautiful Death"
+        "Santuário dos Ancestrais Nórdicos",
+        "Santuário do Cristal de Gelo",
+        "Templo da Morte Bela"
       ],
       "taverns": [
-        "The Cold Comfort",
-        "The Warden's Lodge",
-        "The Preserved Spirits"
+        "O Conforto Frio",
+        "O Albergue do Guardião",
+        "Os Espíritos Preservados"
       ],
       "guilds": [
-        "Ancient Rune Keepers",
-        "The Cold Preservers",
-        "Nordic Grave Tenders"
+        "Guardiões das Runas Antigas",
+        "Os Preservadores do Frio",
+        "Zeladores de Tumbas Nórdicas"
       ],
       "residences": [
-        "Ancient Nordic Lodge",
-        "The Eternal Residence",
-        "Ice Palace Apartments"
+        "Abrigo Nórdico Antigo",
+        "Residência Eterna",
+        "Apartamentos do Palácio de Gelo"
       ],
       "ruins": [
-        "Ancient Glacier Caves",
-        "Broken Ice Sculptures",
-        "The Lost Nordic Hall"
+        "Grutas Antigas da Geleira",
+        "Esculturas de Gelo Quebradas",
+        "O Salão Nórdico Perdido"
       ],
       "encounters": [
-        "Ancient Nordic spirits warning of forgotten laws",
-        "The building exists partially in the realm of death",
-        "Cold magic preserves all who enter"
+        "Espíritos nórdicos antigos alertam sobre leis esquecidas",
+        "O edifício existe parcialmente no reino da morte",
+        "Magia fria preserva todos que entram"
       ],
       "random_tables": {
         "district": [
-          "1-2: Ancient Nordic spirits manifest, seeking forgotten justice",
-          "3-4: Preservation magic creates temporal anomalies",
-          "5-6: The Crypt Lord's authority is questioned publicly"
+          "1-2: Espíritos nórdicos antigos se manifestam, buscando justiça esquecida",
+          "3-4: Magia de preservação cria anomalias temporais",
+          "5-6: A autoridade do Senhor das Criptas é questionada em público"
         ],
         "building": [
-          "1-2: Ancient Nordic runes power the building",
-          "3-4: Cold magic preserves all who enter",
-          "5-6: The building exists partially in the realm of death"
+          "1-2: Runas nórdicas antigas alimentam o edifício",
+          "3-4: Magia fria preserva todos que entram",
+          "5-6: O edifício existe parcialmente no reino da morte"
         ],
         "street": [
-          "1-2: Ancient Nordic spirits patrol the streets",
-          "3-4: The street leads deeper into the glacier",
-          "5-6: Cold wind carries whispers of the long dead"
+          "1-2: Espíritos nórdicos antigos patrulham as ruas",
+          "3-4: A rua leva mais fundo na geleira",
+          "5-6: Vento frio carrega sussurros dos muito mortos"
         ],
         "landmark": [
-          "1-2: Ancient runes activate when approached",
-          "3-4: Nordic ancestors manifest around the monument",
-          "5-6: The structure connects to the Glacier Heart"
+          "1-2: Runas antigas se ativam quando alguém se aproxima",
+          "3-4: Ancestrais nórdicos manifestam‑se ao redor do monumento",
+          "5-6: A estrutura se conecta ao Coração da Geleira"
         ],
         "market": [
-          "1-2: Ancient Nordic artifacts change hands",
-          "3-4: Nordic runes are carved into trading tokens",
-          "5-6: Eternal contracts bind all transactions"
+          "1-2: Artefatos nórdicos antigos mudam de mãos",
+          "3-4: Runas nórdicas são gravadas em fichas de comércio",
+          "5-6: Contratos eternos vinculam todas as transações"
         ],
         "temple": [
-          "1-2: Ancient Nordic gods still receive worship",
-          "3-4: Nordic runes channel divine cold energy",
-          "5-6: The temple exists in both life and death"
+          "1-2: Deuses nórdicos antigos ainda recebem culto",
+          "3-4: Runas nórdicas canalizam energia fria divina",
+          "5-6: O templo existe tanto na vida quanto na morte"
         ],
         "tavern": [
-          "1-2: Ancient Nordic drinking songs echo eternally",
-          "3-4: Nordic heroes' spirits join in revelry",
-          "5-6: The tavern serves both living and dead patrons"
+          "1-2: Cantos nórdicos antigos de bebida ecoam eternamente",
+          "3-4: Espíritos de heróis nórdicos juntam‑se à farra",
+          "5-6: A taverna atende tanto vivos quanto mortos‑vivos"
         ],
         "guild": [
-          "1-2: Ancient Nordic crafting techniques are preserved",
-          "3-4: Nordic runes mark all guild certifications",
-          "5-6: Guild halls are carved from glacier ice"
+          "1-2: Técnicas artesanais nórdicas antigas são preservadas",
+          "3-4: Runas nórdicas marcam todas as certificações",
+          "5-6: Salões de guilda são esculpidos no gelo da geleira"
         ],
         "residence": [
-          "1-2: Ancient Nordic family spirits inhabit rooms",
-          "3-4: Nordic heritage is displayed prominently",
-          "5-6: The residence exists partially in death's realm"
+          "1-2: Espíritos familiares nórdicos antigos habitam os cômodos",
+          "3-4: Herança nórdica exibida de forma proeminente",
+          "5-6: A residência existe parcialmente no reino da morte"
         ],
         "ruins": [
-          "1-2: Ancient Nordic power still lingers in the stones",
-          "3-4: Nordic spirits mourn their forgotten home",
-          "5-6: Ancient runes flicker with dying power"
+          "1-2: O poder nórdico antigo ainda paira nas pedras",
+          "3-4: Espíritos nórdicos pranteiam seu lar esquecido",
+          "5-6: Runas antigas tremeluzem com poder moribundo"
         ]
       },
       "atmosphere_modifiers": [
-        "Ancient Nordic chants echo from the glacier",
-        "Cold magic makes the air shimmer with frost",
-        "The creaking of ancient ice under pressure"
+        "Cantos nórdicos antigos ecoam da geleira",
+        "Magia fria faz o ar cintilar de geada",
+        "O estalar do gelo antigo sob pressão"
       ]
     },
     {
-      "name": "Ice Palace District",
-      "description": "The grandest area where the Crypt Lord's influence is strongest",
+      "name": "Distrito do Palácio de Gelo",
+      "description": "A área mais grandiosa, onde a influência do Senhor das Criptas é absoluta.",
       "theme": "crypt_lord_dominion",
       "buildings": [
-        "Crypt Lord's Ice Palace",
-        "The Eternal Throne Room",
-        "Ice Palace Apartments"
+        "Palácio de Gelo do Senhor das Criptas",
+        "Sala do Trono Eterno",
+        "Apartamentos do Palácio de Gelo"
       ],
       "streets": [
-        "Crypt Lord's Way",
-        "The Undead Promenade",
-        "The Noble's Passage"
+        "Caminho do Senhor das Criptas",
+        "Passeio dos Mortos‑Vivos",
+        "Passagem dos Nobres"
       ],
       "landmarks": [
-        "Eternal Ice Throne",
-        "The Crypt Lord's Seal",
-        "The Great Crypt Spiral"
+        "Trono de Gelo Eterno",
+        "O Selo do Senhor das Criptas",
+        "A Grande Espiral Críptica"
       ],
       "markets": [
-        "The Noble's Commerce",
-        "Eternal Service Market",
-        "The Ice Craft Fair"
+        "Comércio dos Nobres",
+        "Mercado do Serviço Eterno",
+        "Feira do Ofício do Gelo"
       ],
       "temples": [
-        "The Crypt Lord's Chapel",
-        "Temple of Beautiful Death",
-        "The Preservation Shrine"
+        "Capela do Senhor das Criptas",
+        "Templo da Morte Bela",
+        "Santuário da Preservação"
       ],
       "taverns": [
-        "The Noble's Table",
-        "The Eternal Tavern",
-        "The Crypt's Warmth"
+        "A Mesa do Nobre",
+        "A Taverna Eterna",
+        "O Calor da Cripta"
       ],
       "guilds": [
-        "The Noble's Attendants",
-        "The Eternal Guard",
-        "Crypt Maintenance Union"
+        "Atendentes dos Nobres",
+        "Guarda Eterna",
+        "União de Manutenção das Criptas"
       ],
       "residences": [
-        "Ice Palace Apartments",
-        "The Noble's Estate",
-        "The Eternal Residence"
+        "Apartamentos do Palácio de Gelo",
+        "Solar dos Nobres",
+        "Residência Eterna"
       ],
       "ruins": [
-        "Collapsed Ice Palace Wing",
-        "The Fallen Crypt Spire",
-        "Broken Ice Sculptures"
+        "Ala do Palácio de Gelo Desabada",
+        "A Agulha da Cripta Caída",
+        "Esculturas de Gelo Quebradas"
       ],
       "encounters": [
-        "The Crypt Lord's authority emanates from within",
-        "Noble undead discussing politics from past ages",
-        "The Crypt Lord appears for important occasions"
+        "A autoridade do Senhor das Criptas emana de dentro",
+        "Nobreza morta‑viva discute política de eras passadas",
+        "O Senhor das Criptas surge em ocasiões importantes"
       ],
       "random_tables": {
         "district": [
-          "1-2: The Crypt Lord's procession passes through the district",
-          "3-4: The Crypt Lord appears to make pronouncements",
-          "5-6: The Crypt Lord's authority is questioned publicly"
+          "1-2: A procissão do Senhor das Criptas atravessa o distrito",
+          "3-4: O Senhor das Criptas aparece para fazer pronunciamentos",
+          "5-6: A autoridade do Senhor das Criptas é questionada em público"
         ],
         "building": [
-          "1-2: The Crypt Lord's authority emanates from within",
-          "3-4: Ancient Nordic runes power the building",
-          "5-6: Preservation engines keep everything frozen"
+          "1-2: A autoridade do Senhor das Criptas emana de dentro",
+          "3-4: Runas nórdicas antigas alimentam o edifício",
+          "5-6: Motores de preservação mantêm tudo congelado"
         ],
         "street": [
-          "1-2: The Crypt Lord's procession passes through",
-          "3-4: Ice crystals make the pathway treacherous",
-          "5-6: Ancient Nordic spirits patrol the streets"
+          "1-2: A procissão do Senhor das Criptas passa pelo local",
+          "3-4: Cristais de gelo tornam o caminho traiçoeiro",
+          "5-6: Espíritos nórdicos antigos patrulham as ruas"
         ],
         "landmark": [
-          "1-2: The Crypt Lord appears for important occasions",
-          "3-4: Ice magic emanates from the structure",
-          "5-6: The landmark serves as a gateway to death"
+          "1-2: O Senhor das Criptas aparece em ocasiões importantes",
+          "3-4: Magia de gelo emana da estrutura",
+          "5-6: O marco serve como um portal para a morte"
         ],
         "market": [
-          "1-2: The Crypt Lord's servants oversee all trade",
-          "3-4: Undead nobles purchase eternal luxuries",
-          "5-6: Eternal contracts bind all transactions"
+          "1-2: Servos do Senhor das Criptas supervisionam todo o comércio",
+          "3-4: Nobres mortos‑vivos compram luxos eternos",
+          "5-6: Contratos eternos vinculam todas as transações"
         ],
         "temple": [
-          "1-2: The Crypt Lord conducts dark ceremonies",
-          "3-4: The altar preserves offerings for eternity",
-          "5-6: Preservation magic sanctifies the space"
+          "1-2: O Senhor das Criptas realiza cerimônias sombrias",
+          "3-4: O altar preserva oferendas por toda a eternidade",
+          "5-6: Magia de preservação santifica o espaço"
         ],
         "tavern": [
-          "1-2: The Crypt Lord's servants gather information",
-          "3-4: Undead nobles share tales of past centuries",
-          "5-6: The tavern serves both living and dead patrons"
+          "1-2: Servos do Senhor das Criptas recolhem informações",
+          "3-4: Nobres mortos‑vivos contam histórias de séculos idos",
+          "5-6: A taverna atende tanto vivos quanto mortos‑vivos"
         ],
         "guild": [
-          "1-2: The Crypt Lord's authority governs all guilds",
-          "3-4: Guild members serve the city's undead nobility",
-          "5-6: Eternal contracts bind guild memberships"
+          "1-2: A autoridade do Senhor das Criptas rege todas as guildas",
+          "3-4: Membros de guilda servem a nobreza morta‑viva da cidade",
+          "5-6: Contratos eternos vinculam as filiações às guildas"
         ],
         "residence": [
-          "1-2: The Crypt Lord's favor protects residents",
-          "3-4: Undead nobles live in timeless luxury",
-          "5-6: The residence exists partially in death's realm"
+          "1-2: O favor do Senhor das Criptas protege os moradores",
+          "3-4: Nobres mortos‑vivos vivem em luxo sem tempo",
+          "5-6: A residência existe parcialmente no reino da morte"
         ],
         "ruins": [
-          "1-2: The Crypt Lord's magic failed to preserve this",
-          "3-4: The ruins serve as a warning of impermanence",
-          "5-6: Ancient runes flicker with dying power"
+          "1-2: A magia do Senhor das Criptas falhou em preservar isto",
+          "3-4: As ruínas servem como um aviso da impermanência",
+          "5-6: Runas antigas tremeluzem com poder moribundo"
         ]
       },
       "atmosphere_modifiers": [
-        "Undead nobility conversing in archaic languages",
-        "The sound of preservation engines humming",
-        "Cold wind carries whispers of the long dead"
+        "Nobreza morta‑viva conversa em línguas arcaicas",
+        "O zumbido dos motores de preservação",
+        "Vento frio carrega sussurros dos muito mortos"
       ]
     },
     {
-      "name": "The Eternal Watch",
-      "description": "Where the city's eternal guardians maintain their unending vigil",
+      "name": "Vigia Eterna",
+      "description": "Onde os guardiões eternos da cidade mantêm sua vigília sem fim.",
       "theme": "eternal_guardianship",
       "buildings": [
-        "The Warden's Tower",
-        "The Eternal Watch",
-        "Crypt Keeper's Home"
+        "Torre do Guardião",
+        "A Vigia Eterna",
+        "Casa do Zelador da Cripta"
       ],
       "streets": [
-        "The Warden's Patrol",
-        "The Eternal March",
-        "The Preservation Walk"
+        "Patrulha do Guardião",
+        "A Marcha Eterna",
+        "Passeio da Preservação"
       ],
       "landmarks": [
-        "The Frozen Watchtower",
-        "The Eternal Flame (Cold)",
-        "Ancient Nordic Runestone"
+        "A Torre de Vigia Congelada",
+        "A Chama Eterna (Fria)",
+        "Runa Nórdica Antiga"
       ],
       "markets": [
-        "Crypt Supplies Exchange",
-        "The Frozen Goods",
-        "The Glacier Harvest"
+        "Bolsa de Suprimentos das Criptas",
+        "Bens Congelados",
+        "Colheita da Geleira"
       ],
       "temples": [
-        "The Crypt Lord's Chapel",
-        "Temple of the Glacier Heart",
-        "The Preservation Shrine"
+        "Capela do Senhor das Criptas",
+        "Templo do Coração da Geleira",
+        "Santuário da Preservação"
       ],
       "taverns": [
-        "The Warden's Lodge",
-        "The Cold Comfort",
-        "The Preserved Spirits"
+        "O Albergue do Guardião",
+        "O Conforto Frio",
+        "Os Espíritos Preservados"
       ],
       "guilds": [
-        "The Eternal Guard",
-        "Crypt Maintenance Union",
-        "Glacier Sculptors Guild"
+        "Guarda Eterna",
+        "União de Manutenção das Criptas",
+        "Guilda dos Escultores da Geleira"
       ],
       "residences": [
-        "The Warden's Quarters",
-        "Crypt Keeper's Home",
-        "The Frozen Manor"
+        "Alojamentos do Guardião",
+        "Casa do Zelador da Cripta",
+        "Solar Congelado"
       ],
       "ruins": [
-        "The Shattered Watchtower",
-        "The Fallen Crypt Spire",
-        "Abandoned Servant Quarters"
+        "A Torre de Vigia Estilhaçada",
+        "A Agulha da Cripta Caída",
+        "Alojamentos de Servos Abandonados"
       ],
       "encounters": [
-        "Eternal guards patrolling with centuries of discipline",
-        "Frozen battlements manned by undead sentries",
-        "The Crypt Lord's servants maintaining the glacier"
+        "Guardas eternos patrulhando com disciplina de séculos",
+        "Baluartes congelados guarnecidos por sentinelas mortas‑vivas",
+        "Servos do Senhor das Criptas mantêm a geleira"
       ],
       "random_tables": {
         "district": [
-          "1-2: Eternal guards challenge all who lack proper authorization",
-          "3-4: The Crypt Lord's servants perform maintenance rituals",
-          "5-6: Glacier shifts, revealing new chambers and passages"
+          "1-2: Guardas eternos desafiam quem não tem autorização",
+          "3-4: Servos do Senhor das Criptas realizam rituais de manutenção",
+          "5-6: A geleira se move, revelando novas câmaras e passagens"
         ],
         "building": [
-          "1-2: Ancient Nordic runes power the building",
-          "3-4: Preservation engines keep everything frozen",
-          "5-6: Servants who died centuries ago still work here"
+          "1-2: Runas nórdicas antigas alimentam o edifício",
+          "3-4: Motores de preservação mantêm tudo congelado",
+          "5-6: Servos que morreram há séculos ainda trabalham aqui"
         ],
         "street": [
-          "1-2: The Warden's Patrol maintains order",
-          "3-4: Preservation magic keeps the path eternally frozen",
-          "5-6: Servants clear ice that forms continuously"
+          "1-2: A Patrulha do Guardião mantém a ordem",
+          "3-4: Magia de preservação mantém o caminho eternamente congelado",
+          "5-6: Servos removem continuamente o gelo que se forma"
         ],
         "landmark": [
-          "1-2: The Frozen Watchtower stands eternal",
-          "3-4: Ancient runes activate when approached",
-          "5-6: The landmark serves as a gateway to death"
+          "1-2: A Torre de Vigia Congelada permanece eterna",
+          "3-4: Runas antigas se ativam ao aproximar‑se",
+          "5-6: O marco serve como um portal para a morte"
         ],
         "market": [
-          "1-2: Crypt supplies are traded for services",
-          "3-4: The Crypt Lord's servants oversee all trade",
-          "5-6: Eternal contracts bind all transactions"
+          "1-2: Suprimentos de cripta são trocados por serviços",
+          "3-4: Servos do Senhor das Criptas supervisionam todo o comércio",
+          "5-6: Contratos eternos vinculam todas as transações"
         ],
         "temple": [
-          "1-2: The Crypt Lord conducts dark ceremonies",
-          "3-4: Preservation magic sanctifies the space",
-          "5-6: The temple exists in both life and death"
+          "1-2: O Senhor das Criptas realiza cerimônias sombrias",
+          "3-4: Magia de preservação santifica o espaço",
+          "5-6: O templo existe tanto na vida quanto na morte"
         ],
         "tavern": [
-          "1-2: The Warden's Lodge serves eternal guards",
-          "3-4: Preservation magic keeps food fresh forever",
-          "5-6: The tavern serves both living and dead patrons"
+          "1-2: O Albergue do Guardião serve guardas eternos",
+          "3-4: Magia de preservação mantém a comida fresca para sempre",
+          "5-6: A taverna atende tanto vivos quanto mortos‑vivos"
         ],
         "guild": [
-          "1-2: The Eternal Guard maintains discipline",
-          "3-4: Crypt Maintenance Union preserves the city",
-          "5-6: Eternal contracts bind guild memberships"
+          "1-2: A Guarda Eterna mantém a disciplina",
+          "3-4: A União de Manutenção das Criptas preserva a cidade",
+          "5-6: Contratos eternos vinculam as filiações às guildas"
         ],
         "residence": [
-          "1-2: The Warden's Quarters are well-maintained",
-          "3-4: Preservation magic maintains all furnishings",
-          "5-6: The residence exists partially in death's realm"
+          "1-2: Os Alojamentos do Guardião são bem mantidos",
+          "3-4: Magia de preservação mantém todo o mobiliário",
+          "5-6: A residência existe parcialmente no reino da morte"
         ],
         "ruins": [
-          "1-2: The Shattered Watchtower stands as warning",
-          "3-4: The ruins serve as a warning of impermanence",
-          "5-6: Ancient runes flicker with dying power"
+          "1-2: A Torre de Vigia Estilhaçada permanece como aviso",
+          "3-4: As ruínas servem como um aviso da impermanência",
+          "5-6: Runas antigas tremeluzem com poder moribundo"
         ]
       },
       "atmosphere_modifiers": [
-        "The sound of preservation engines humming",
-        "Frozen statues of ancient heroes line the way",
-        "The path is lit by cold, eternal flames"
+        "O zumbido dos motores de preservação",
+        "Estátuas congeladas de heróis antigos ladeiam o caminho",
+        "O caminho é iluminado por chamas frias e eternas"
       ]
     },
     {
-      "name": "Crypt Lord's Domain",
-      "description": "The innermost sanctum where the Crypt Lord's power is absolute",
+      "name": "Domínio do Senhor das Criptas",
+      "description": "O santuário mais interior, onde o poder do Senhor das Criptas é absoluto.",
       "theme": "absolute_authority",
       "buildings": [
-        "Crypt Lord's Ice Palace",
-        "The Eternal Throne Room",
-        "The Preservation Chamber"
+        "Palácio de Gelo do Senhor das Criptas",
+        "Sala do Trono Eterno",
+        "Câmara de Preservação"
       ],
       "streets": [
-        "Crypt Lord's Way",
-        "The Undead Promenade",
-        "The Noble's Passage"
+        "Caminho do Senhor das Criptas",
+        "Passeio dos Mortos‑Vivos",
+        "Passagem dos Nobres"
       ],
       "landmarks": [
-        "Eternal Ice Throne",
-        "The Crypt Lord's Seal",
-        "The Glacier Heart"
+        "Trono de Gelo Eterno",
+        "O Selo do Senhor das Criptas",
+        "O Coração da Geleira"
       ],
       "markets": [
-        "The Noble's Commerce",
-        "Eternal Service Market",
-        "The Ice Craft Fair"
+        "Comércio dos Nobres",
+        "Mercado do Serviço Eterno",
+        "Feira do Ofício do Gelo"
       ],
       "temples": [
-        "The Crypt Lord's Chapel",
-        "Temple of Beautiful Death",
-        "The Preservation Shrine"
+        "Capela do Senhor das Criptas",
+        "Templo da Morte Bela",
+        "Santuário da Preservação"
       ],
       "taverns": [
-        "The Noble's Table",
-        "The Eternal Tavern",
-        "The Crypt's Warmth"
+        "A Mesa do Nobre",
+        "A Taverna Eterna",
+        "O Calor da Cripta"
       ],
       "guilds": [
-        "The Noble's Attendants",
-        "The Eternal Guard",
-        "Crypt Maintenance Union"
+        "Atendentes dos Nobres",
+        "Guarda Eterna",
+        "União de Manutenção das Criptas"
       ],
       "residences": [
-        "Ice Palace Apartments",
-        "The Noble's Estate",
-        "The Eternal Residence"
+        "Apartamentos do Palácio de Gelo",
+        "Solar dos Nobres",
+        "Residência Eterna"
       ],
       "ruins": [
-        "Collapsed Ice Palace Wing",
-        "The Fallen Crypt Spire",
-        "Broken Ice Sculptures"
+        "Ala do Palácio de Gelo Desabada",
+        "A Agulha da Cripta Caída",
+        "Esculturas de Gelo Quebradas"
       ],
       "encounters": [
-        "The Crypt Lord's authority emanates from within",
-        "The Crypt Lord appears for important occasions",
-        "The Crypt Lord conducts dark ceremonies"
+        "A autoridade do Senhor das Criptas emana de dentro",
+        "O Senhor das Criptas aparece em ocasiões importantes",
+        "O Senhor das Criptas realiza cerimônias sombrias"
       ],
       "random_tables": {
         "district": [
-          "1-2: The Crypt Lord's procession passes through the district",
-          "3-4: The Crypt Lord appears to make pronouncements",
-          "5-6: The Crypt Lord conducts marriage ceremonies"
+          "1-2: A procissão do Senhor das Criptas atravessa o distrito",
+          "3-4: O Senhor das Criptas aparece para fazer pronunciamentos",
+          "5-6: O Senhor das Criptas realiza cerimônias de casamento"
         ],
         "building": [
-          "1-2: The Crypt Lord's authority emanates from within",
-          "3-4: Ancient Nordic runes power the building",
-          "5-6: Preservation engines keep everything frozen"
+          "1-2: A autoridade do Senhor das Criptas emana de dentro",
+          "3-4: Runas nórdicas antigas alimentam o edifício",
+          "5-6: Motores de preservação mantêm tudo congelado"
         ],
         "street": [
-          "1-2: The Crypt Lord's procession passes through",
-          "3-4: Ice crystals make the pathway treacherous",
-          "5-6: Ancient Nordic spirits patrol the streets"
+          "1-2: A procissão do Senhor das Criptas passa pelo local",
+          "3-4: Cristais de gelo tornam o caminho traiçoeiro",
+          "5-6: Espíritos nórdicos antigos patrulham as ruas"
         ],
         "landmark": [
-          "1-2: The Crypt Lord appears for important occasions",
-          "3-4: Ice magic emanates from the structure",
-          "5-6: The landmark serves as a gateway to death"
+          "1-2: O Senhor das Criptas aparece em ocasiões importantes",
+          "3-4: Magia de gelo emana da estrutura",
+          "5-6: O marco serve como um portal para a morte"
         ],
         "market": [
-          "1-2: The Crypt Lord's servants oversee all trade",
-          "3-4: Undead nobles purchase eternal luxuries",
-          "5-6: Eternal contracts bind all transactions"
+          "1-2: Servos do Senhor das Criptas supervisionam todo o comércio",
+          "3-4: Nobres mortos‑vivos compram luxos eternos",
+          "5-6: Contratos eternos vinculam todas as transações"
         ],
         "temple": [
-          "1-2: The Crypt Lord conducts dark ceremonies",
-          "3-4: The altar preserves offerings for eternity",
-          "5-6: Preservation magic sanctifies the space"
+          "1-2: O Senhor das Criptas realiza cerimônias sombrias",
+          "3-4: O altar preserva oferendas por toda a eternidade",
+          "5-6: Magia de preservação santifica o espaço"
         ],
         "tavern": [
-          "1-2: The Crypt Lord's servants gather information",
-          "3-4: Undead nobles share tales of past centuries",
-          "5-6: The tavern serves both living and dead patrons"
+          "1-2: Servos do Senhor das Criptas recolhem informações",
+          "3-4: Nobres mortos‑vivos contam histórias de séculos idos",
+          "5-6: A taverna atende tanto vivos quanto mortos‑vivos"
         ],
         "guild": [
-          "1-2: The Crypt Lord's authority governs all guilds",
-          "3-4: Guild members serve the city's undead nobility",
-          "5-6: Eternal contracts bind guild memberships"
+          "1-2: A autoridade do Senhor das Criptas rege todas as guildas",
+          "3-4: Membros de guilda servem a nobreza morta‑viva da cidade",
+          "5-6: Contratos eternos vinculam as filiações às guildas"
         ],
         "residence": [
-          "1-2: The Crypt Lord's favor protects residents",
-          "3-4: Undead nobles live in timeless luxury",
-          "5-6: The residence exists partially in death's realm"
+          "1-2: O favor do Senhor das Criptas protege os moradores",
+          "3-4: Nobres mortos‑vivos vivem em luxo sem tempo",
+          "5-6: A residência existe parcialmente no reino da morte"
         ],
         "ruins": [
-          "1-2: The Crypt Lord's magic failed to preserve this",
-          "3-4: The ruins serve as a warning of impermanence",
-          "5-6: Ancient runes flicker with dying power"
+          "1-2: A magia do Senhor das Criptas falhou em preservar isto",
+          "3-4: As ruínas servem como um aviso da impermanência",
+          "5-6: Runas antigas tremeluzem com poder moribundo"
         ]
       },
       "atmosphere_modifiers": [
-        "Undead nobility conversing in archaic languages",
-        "The sound of preservation engines humming",
-        "Cold wind carries whispers of the long dead"
+        "Nobreza morta‑viva conversa em línguas arcaicas",
+        "O zumbido dos motores de preservação",
+        "Vento frio carrega sussurros dos muito mortos"
       ]
     },
     {
-      "name": "The Frozen Gates",
-      "description": "The entrance districts where visitors first experience the city's eternal winter",
+      "name": "Portões Gelados",
+      "description": "Os distritos de entrada, onde o visitante conhece o inverno eterno da cidade.",
       "theme": "first_impression",
       "buildings": [
-        "The Warden's Tower",
-        "The Preservation House",
-        "The Eternal Residence"
+        "Torre do Guardião",
+        "Casa da Preservação",
+        "Residência Eterna"
       ],
       "streets": [
-        "The Preservation Walk",
-        "The Warden's Patrol",
-        "The Ancient Processional"
+        "Passeio da Preservação",
+        "Patrulha do Guardião",
+        "Procissão Antiga"
       ],
       "landmarks": [
-        "The Frozen Watchtower",
-        "Ancient Nordic Runestone",
-        "The Eternal Flame (Cold)"
+        "A Torre de Vigia Congelada",
+        "Runa Nórdica Antiga",
+        "A Chama Eterna (Fria)"
       ],
       "markets": [
-        "The Frozen Goods",
-        "Crypt Supplies Exchange",
-        "The Glacier Harvest"
+        "Bens Congelados",
+        "Bolsa de Suprimentos das Criptas",
+        "Colheita da Geleira"
       ],
       "temples": [
-        "The Preservation Shrine",
-        "Shrine of Nordic Ancestors",
-        "The Ice Crystal Sanctuary"
+        "Santuário da Preservação",
+        "Santuário dos Ancestrais Nórdicos",
+        "Santuário do Cristal de Gelo"
       ],
       "taverns": [
-        "The Warden's Lodge",
-        "The Cold Comfort",
-        "The Preserved Spirits"
+        "O Albergue do Guardião",
+        "O Conforto Frio",
+        "Os Espíritos Preservados"
       ],
       "guilds": [
-        "The Eternal Guard",
-        "Crypt Maintenance Union",
-        "Glacier Sculptors Guild"
+        "Guarda Eterna",
+        "União de Manutenção das Criptas",
+        "Guilda dos Escultores da Geleira"
       ],
       "residences": [
-        "The Warden's Quarters",
-        "The Preservation House",
-        "The Eternal Residence"
+        "Alojamentos do Guardião",
+        "Casa da Preservação",
+        "Residência Eterna"
       ],
       "ruins": [
-        "The Shattered Watchtower",
-        "Ancient Glacier Caves",
-        "Abandoned Servant Quarters"
+        "A Torre de Vigia Estilhaçada",
+        "Grutas Antigas da Geleira",
+        "Alojamentos de Servos Abandonados"
       ],
       "encounters": [
-        "Eternal guards patrolling with centuries of discipline",
-        "Servants preparing the district for eternal winter",
-        "The Glacier Heart pulsing with ancient power"
+        "Guardas eternos patrulhando com disciplina de séculos",
+        "Servos preparam o distrito para o inverno eterno",
+        "O Coração da Geleira pulsa com poder antigo"
       ],
       "random_tables": {
         "district": [
-          "1-2: Eternal guards challenge all who lack proper authorization",
-          "3-4: Servants clear ice that forms continuously",
-          "5-6: Glacier shifts, revealing new chambers and passages"
+          "1-2: Guardas eternos desafiam quem não tem autorização",
+          "3-4: Servos removem continuamente o gelo que se forma",
+          "5-6: A geleira se move, revelando novas câmaras e passagens"
         ],
         "building": [
-          "1-2: Ancient Nordic runes power the building",
-          "3-4: Preservation engines keep everything frozen",
-          "5-6: Servants who died centuries ago still work here"
+          "1-2: Runas nórdicas antigas alimentam o edifício",
+          "3-4: Motores de preservação mantêm tudo congelado",
+          "5-6: Servos que morreram há séculos ainda trabalham aqui"
         ],
         "street": [
-          "1-2: The Warden's Patrol maintains order",
-          "3-4: Preservation magic keeps the path eternally frozen",
-          "5-6: Servants clear ice that forms continuously"
+          "1-2: A Patrulha do Guardião mantém a ordem",
+          "3-4: Magia de preservação mantém o caminho eternamente congelado",
+          "5-6: Servos removem continuamente o gelo que se forma"
         ],
         "landmark": [
-          "1-2: The Frozen Watchtower stands eternal",
-          "3-4: Ancient runes activate when approached",
-          "5-6: The landmark serves as a gateway to death"
+          "1-2: A Torre de Vigia Congelada permanece eterna",
+          "3-4: Runas antigas se ativam ao aproximar‑se",
+          "5-6: O marco serve como um portal para a morte"
         ],
         "market": [
-          "1-2: Crypt supplies are traded for services",
-          "3-4: The Crypt Lord's servants oversee all trade",
-          "5-6: Eternal contracts bind all transactions"
+          "1-2: Suprimentos de cripta são trocados por serviços",
+          "3-4: Servos do Senhor das Criptas supervisionam todo o comércio",
+          "5-6: Contratos eternos vinculam todas as transações"
         ],
         "temple": [
-          "1-2: The Preservation Shrine welcomes visitors",
-          "3-4: Preservation magic sanctifies the space",
-          "5-6: The temple exists in both life and death"
+          "1-2: O Santuário da Preservação recebe visitantes",
+          "3-4: Magia de preservação santifica o espaço",
+          "5-6: O templo existe tanto na vida quanto na morte"
         ],
         "tavern": [
-          "1-2: The Warden's Lodge serves eternal guards",
-          "3-4: Preservation magic keeps food fresh forever",
-          "5-6: The tavern serves both living and dead patrons"
+          "1-2: O Albergue do Guardião serve guardas eternos",
+          "3-4: Magia de preservação mantém a comida fresca para sempre",
+          "5-6: A taverna atende tanto vivos quanto mortos‑vivos"
         ],
         "guild": [
-          "1-2: The Eternal Guard maintains discipline",
-          "3-4: Crypt Maintenance Union preserves the city",
-          "5-6: Eternal contracts bind guild memberships"
+          "1-2: A Guarda Eterna mantém a disciplina",
+          "3-4: A União de Manutenção das Criptas preserva a cidade",
+          "5-6: Contratos eternos vinculam as filiações às guildas"
         ],
         "residence": [
-          "1-2: The Warden's Quarters are well-maintained",
-          "3-4: Preservation magic maintains all furnishings",
-          "5-6: The residence exists partially in death's realm"
+          "1-2: Os Alojamentos do Guardião são bem mantidos",
+          "3-4: Magia de preservação mantém todo o mobiliário",
+          "5-6: A residência existe parcialmente no reino da morte"
         ],
         "ruins": [
-          "1-2: The Shattered Watchtower stands as warning",
-          "3-4: The ruins serve as a warning of impermanence",
-          "5-6: Ancient runes flicker with dying power"
+          "1-2: A Torre de Vigia Estilhaçada permanece como aviso",
+          "3-4: As ruínas servem como um aviso da impermanência",
+          "5-6: Runas antigas tremeluzem com poder moribundo"
         ]
       },
       "atmosphere_modifiers": [
-        "The air is so cold it burns the lungs",
-        "Ice crystals form with each breath",
-        "The path is lit by cold, eternal flames"
+        "O ar é tão frio que queima os pulmões",
+        "Cristais de gelo se formam a cada respiração",
+        "O caminho é iluminado por chamas frias e eternas"
       ]
     }
   ],
   "buildings": [
-    "Crypt Lord's Ice Palace",
-    "The Eternal Throne Room",
-    "Frozen Mausoleum",
-    "Undead Noble Mansion",
-    "The Ice Archive",
-    "Glacier Carved Cathedral",
-    "The Cold Treasury",
-    "Ancient Nordic Hall",
-    "The Warden's Tower",
-    "The Preservation Chamber"
+    "Palácio de Gelo do Senhor das Criptas",
+    "Sala do Trono Eterno",
+    "Mausoléu Congelado",
+    "Mansão de Nobre Morto‑Vivo",
+    "Arquivo de Gelo",
+    "Catedral Esculpida na Geleira",
+    "Tesouraria Fria",
+    "Salão Nórdico Antigo",
+    "Torre do Guardião",
+    "Câmara de Preservação"
   ],
   "streets": [
-    "Frozen Path of Sorrows",
-    "The Undead Promenade",
-    "Ice Crystal Avenue",
-    "The Eternal March",
-    "Crypt Lord's Way",
-    "The Preservation Walk",
-    "Glacier Heart Road",
-    "The Noble's Passage",
-    "The Warden's Patrol",
-    "The Ancient Processional"
+    "Caminho Congelado das Mágoas",
+    "Passeio dos Mortos‑Vivos",
+    "Avenida dos Cristais de Gelo",
+    "A Marcha Eterna",
+    "Caminho do Senhor das Criptas",
+    "Passeio da Preservação",
+    "Estrada do Coração da Geleira",
+    "Passagem dos Nobres",
+    "Patrulha do Guardião",
+    "Procissão Antiga"
   ],
   "landmarks": [
-    "The Glacier Heart",
-    "Eternal Ice Throne",
-    "The Great Crypt Spiral",
-    "Undead Noble Monument",
-    "The Preservation Engine",
-    "Ancient Nordic Runestone",
-    "The Frozen Watchtower",
-    "The Crypt Lord's Seal",
-    "The Ice Crystal Chandelier",
-    "The Eternal Flame (Cold)"
+    "O Coração da Geleira",
+    "Trono de Gelo Eterno",
+    "A Grande Espiral Críptica",
+    "Monumento ao Nobre Morto‑Vivo",
+    "A Máquina de Preservação",
+    "Runa Nórdica Antiga",
+    "A Torre de Vigia Congelada",
+    "O Selo do Senhor das Criptas",
+    "O Candelabro de Cristal de Gelo",
+    "A Chama Eterna (Fria)"
   ],
   "markets": [
-    "The Preservation Market",
-    "Undead Servants Exchange",
-    "The Cold Storage",
-    "Nordic Relic Bazaar",
-    "The Ice Craft Fair",
-    "Eternal Service Market",
-    "The Frozen Goods",
-    "Crypt Supplies Exchange",
-    "The Noble's Commerce",
-    "The Glacier Harvest"
+    "Mercado da Preservação",
+    "Bolsa dos Servos Mortos‑Vivos",
+    "Depósito Frio",
+    "Bazar de Relíquias Nórdicas",
+    "Feira do Ofício do Gelo",
+    "Mercado do Serviço Eterno",
+    "Bens Congelados",
+    "Bolsa de Suprimentos das Criptas",
+    "Comércio dos Nobres",
+    "Colheita da Geleira"
   ],
   "temples": [
-    "Temple of Eternal Preservation",
-    "Shrine of the Undead Noble",
-    "The Frozen Altar",
-    "Cathedral of Endless Winter",
-    "The Crypt Lord's Chapel",
-    "Temple of the Glacier Heart",
-    "Shrine of Nordic Ancestors",
-    "The Ice Crystal Sanctuary",
-    "Temple of Beautiful Death",
-    "The Preservation Shrine"
+    "Templo da Preservação Eterna",
+    "Santuário do Nobre Morto‑Vivo",
+    "O Altar Congelado",
+    "Catedral do Inverno Sem Fim",
+    "Capela do Senhor das Criptas",
+    "Templo do Coração da Geleira",
+    "Santuário dos Ancestrais Nórdicos",
+    "Santuário do Cristal de Gelo",
+    "Templo da Morte Bela",
+    "Santuário da Preservação"
   ],
   "taverns": [
-    "The Frozen Goblet",
-    "The Undead's Rest",
-    "The Icy Draught",
-    "The Eternal Tavern",
-    "The Crypt's Warmth",
-    "The Noble's Table",
-    "The Glacier Inn",
-    "The Preserved Spirits",
-    "The Cold Comfort",
-    "The Warden's Lodge"
+    "O Cálice Congelado",
+    "O Descanso do Morto‑Vivo",
+    "A Caneca Gelada",
+    "A Taverna Eterna",
+    "O Calor da Cripta",
+    "A Mesa do Nobre",
+    "A Estalagem da Geleira",
+    "Os Espíritos Preservados",
+    "O Conforto Frio",
+    "O Albergue do Guardião"
   ],
   "guilds": [
-    "The Preservation Society",
-    "Guild of Undead Servants",
-    "The Ice Crafters",
-    "Nordic Grave Tenders",
-    "The Eternal Guard",
-    "Crypt Maintenance Union",
-    "The Noble's Attendants",
-    "Glacier Sculptors Guild",
-    "The Cold Preservers",
-    "Ancient Rune Keepers"
+    "Sociedade da Preservação",
+    "Guilda dos Servos Mortos‑Vivos",
+    "Os Artífices do Gelo",
+    "Zeladores de Tumbas Nórdicas",
+    "Guarda Eterna",
+    "União de Manutenção das Criptas",
+    "Atendentes dos Nobres",
+    "Guilda dos Escultores da Geleira",
+    "Os Preservadores do Frio",
+    "Guardiões das Runas Antigas"
   ],
   "residences": [
-    "Undead Noble's Mansion",
-    "The Warden's Quarters",
-    "Servant's Ice Chambers",
-    "The Preservation House",
-    "Ancient Nordic Lodge",
-    "The Eternal Residence",
-    "Crypt Keeper's Home",
-    "The Frozen Manor",
-    "Ice Palace Apartments",
-    "The Noble's Estate"
+    "Mansão de Nobre Morto‑Vivo",
+    "Alojamentos do Guardião",
+    "Câmaras de Gelo dos Servos",
+    "Casa da Preservação",
+    "Abrigo Nórdico Antigo",
+    "Residência Eterna",
+    "Casa do Zelador da Cripta",
+    "Solar Congelado",
+    "Apartamentos do Palácio de Gelo",
+    "Solar dos Nobres"
   ],
   "ruins": [
-    "Pre-Undead Nordic Ruins",
-    "Collapsed Ice Palace Wing",
-    "The Shattered Watchtower",
-    "Ancient Glacier Caves",
-    "Ruined Preservation Engine",
-    "The Fallen Crypt Spire",
-    "Broken Ice Sculptures",
-    "The Lost Nordic Hall",
-    "Abandoned Servant Quarters",
-    "The Cracked Glacier Heart"
+    "Ruínas Nórdicas Pré‑Mortos‑Vivos",
+    "Ala do Palácio de Gelo Desabada",
+    "A Torre de Vigia Estilhaçada",
+    "Grutas Antigas da Geleira",
+    "Máquina de Preservação em Ruínas",
+    "A Agulha da Cripta Caída",
+    "Esculturas de Gelo Quebradas",
+    "O Salão Nórdico Perdido",
+    "Alojamentos de Servos Abandonados",
+    "O Coração da Geleira Fendido"
   ],
   "encounters": {
     "district": [
-      "Undead nobles conducting eternal court business",
-      "Crypt Lord's servants maintaining the glacier",
-      "Ancient Nordic spirits warning of forgotten laws",
-      "Preservation engines humming with cold magic",
-      "Ice crystals forming spontaneously in the air",
-      "Eternal guards patrolling with centuries of discipline",
-      "Frozen battlements manned by undead sentries",
-      "Noble undead discussing politics from past ages",
-      "Servants preparing the district for eternal winter",
-      "The Glacier Heart pulsing with ancient power"
+      "Uma aurora amarela doentia rasga o gelo; ânimos se esgarçam e lâminas saem",
+      "Uma FENDA (TEAR) abre a geleira; vento amargo e sussurros vazam",
+      "Correntes de servos‑cadáver arrastam blocos rumo à Máquina de Preservação",
+      "Catadores‑Rato de Pax Gangrän esgueiram‑se pelas muralhas, provando os portões",
+      "Ocidentais escorrem como óleo e sonho, oferecendo bens que mancham a alma",
+      "Porta‑Ossos dvörga entoam em muros rúnicos, buscando o favor DELA",
+      "Acólitos do Culto do Cadáver sondam discretamente por Noronecron",
+      "Gnutz roem ferro e pedra; um vão começa a cantar e ceder",
+      "Corta‑Tornozelos espreitam em poças de óleo sob o gelo, talhando tendões",
+      "O ARQUI‑GELO pulsa; cor drena da carne e do aço, a esperança afina"
     ],
     "building": [
-      "The structure maintains itself through undead magic",
-      "Ice never melts within these preserved walls",
-      "Undead nobles conduct eternal business here",
-      "Ancient Nordic runes power the building",
-      "The Crypt Lord's authority emanates from within",
-      "Preservation engines keep everything frozen",
-      "Servants who died centuries ago still work here",
-      "The building exists partially in the realm of death",
-      "Glacier ice forms the very foundation",
-      "Cold magic preserves all who enter"
+      "Gólems de cadáver giram guinchos no Salão de Montagem",
+      "A Máquina de Preservação guincha quando o gelo antigo racha",
+      "Um banho no crânio petrificado de um gigante exala vapor de osso",
+      "O Motor Demônio tique‑taque sob geada; desejos azedam e apodrecem",
+      "Runas antigas empolam e descascam de portas fendidas",
+      "Viveiros fervilham de filhotes rosados de rato em tinas",
+      "Bombas de óleo tossem gosma negra que come a luz",
+      "A torre oscilante canta; fogo púrpura lambe as tesouras",
+      "Elevadores de catacumba rangem, levando 'doações' ao Necrotério",
+      "Uma capela congelada tange sinos sob a canga da geada"
     ],
     "street": [
-      "Undead nobles process in ancient ceremonial order",
-      "Ice crystals make the pathway treacherous",
-      "Ancient Nordic spirits patrol the streets",
-      "The Crypt Lord's procession passes through",
-      "Preservation magic keeps the path eternally frozen",
-      "Servants clear ice that forms continuously",
-      "The street leads deeper into the glacier",
-      "Cold wind carries whispers of the long dead",
-      "Frozen statues of ancient heroes line the way",
-      "The path is lit by cold, eternal flames"
+      "Uma ponte ciclópica geme; um troll falante exige tributo de crânios",
+      "Neve ácida chia no aço, corroendo lâminas e queimando pele",
+      "Sete cruzes pregadas num espigão — bocas costuradas — explodem ao toque",
+      "Um memorial talhado num golem de pedra inerte; ele se ergue se profanado",
+      "Dois gigantes arremessam lajes serrilhadas; um estilhaço grita ao passar",
+      "Uma caravana de Ocidentais desliza no gelo negro, vendendo óleos‑sonho",
+      "Arcos runescos vazam luz fria; o hálito tinge‑se de púrpura",
+      "Abutres de Chrypt seguem o grupo, prontos para bicar e infectar",
+      "Um ponto de poder zune sobre um túmulo; aproximar fere, tocar condena",
+      "Um sino congelado dobra sob o gelo; passos respondem lá embaixo"
     ],
     "landmark": [
-      "The monument preserves ancient Nordic glory",
-      "Undead nobles gather here for eternal ceremonies",
-      "The Crypt Lord appears for important occasions",
-      "Ice magic emanates from the structure",
-      "Ancient runes activate when approached",
-      "The landmark serves as a gateway to death",
-      "Preservation magic keeps it eternally perfect",
-      "Nordic ancestors manifest around the monument",
-      "The structure connects to the Glacier Heart",
-      "Cold flames burn eternally around the landmark"
+      "A Grande Roda do Leste gira sob mãos de gólems de cadáver",
+      "A Ponte Uivante toca uma canção triste pelos furos dos gnutz",
+      "A Avenida dos Reis fita com olhos de pedra",
+      "O Pálido bebe cor do sopro e do sangue",
+      "Os Jardins Petrificados mancham ossos com estrume de troll",
+      "Um campanário submerso dobra sobre um charco de pérolas amarelas",
+      "Uma catedral desabando exala poeira de praga",
+      "Cabeças de ponte rivais brigam por um desfiladeiro rasgado",
+      "Um observatório vigia a estrela negra ferindo o céu",
+      "Cairns talhados em runas latejam com o ARQUI‑GELO"
     ],
     "market": [
-      "Trade conducted with services instead of coin",
-      "Undead nobles purchase eternal luxuries",
-      "Ancient Nordic artifacts change hands",
-      "Preservation services are the main commerce",
-      "The Crypt Lord's servants oversee all trade",
-      "Ice crafts that never melt are highly valued",
-      "Services for the dead and undead are common",
-      "Nordic runes are carved into trading tokens",
-      "Cold magic enhances all goods sold here",
-      "Eternal contracts bind all transactions"
+      "O Mercado Velho vende pergaminhos impuros sob o sorriso de um Ocidental",
+      "Povo‑Rato troca cativos vivos e frascos de tutano",
+      "Livros‑razão de gemas de Kartusch trocam de mãos sob o CÓDIGO",
+      "Óleo negro é barganhado por mascarados na lama",
+      "O Culto do Cadáver aluga gólems por hora",
+      "Relíquias nórdicas rachadas e sujas de sangue compram sussurros",
+      "Uma 'cidade santa' de mármore vende pérolas amarelas e heresia",
+      "Carvoeiros dos Vales trocam sacos de pão de cinza e mentiras",
+      "Mercadorias ocidentais brilham como óleo e mancham como culpa",
+      "Compradores de sucata pesam fêmures ao lado de peixe congelado"
     ],
     "temple": [
-      "The altar preserves offerings for eternity",
-      "Undead nobles seek blessings for their condition",
-      "Ancient Nordic gods still receive worship",
-      "The Crypt Lord conducts dark ceremonies",
-      "Ice forms sacred patterns during rituals",
-      "Preservation magic sanctifies the space",
-      "The dead and undead worship together",
-      "Nordic runes channel divine cold energy",
-      "Eternal flames provide sacred illumination",
-      "The temple exists in both life and death"
+      "A Capela de Hollywood sussurra a ELA sob tijolo negro de piche",
+      "O Templo Cintilante abençoa gemas para ELA",
+      "Um templo de deus consumido exige ofertas mornas",
+      "Catedral de ossos range; um bebê de cabelos dourados dorme no altar",
+      "Santuários ocultos na Floresta Escura erguem javalis possuídos",
+      "Uma catedral talhada na geleira sangra luz fria",
+      "Magos da pedra murmuram ritos que cicatrizam o Pálido",
+      "Um Santuário da Preservação bebe cor dos lábios",
+      "Heréticos da Língua Amarela cantam para uma estrela negra",
+      "Orações mortuárias costuram pele a propósito"
     ],
     "tavern": [
-      "Drinks are supernaturally preserved and never spoil",
-      "Undead nobles share tales of past centuries",
-      "Ancient Nordic drinking songs echo eternally",
-      "The Crypt Lord's servants gather information",
-      "Ice wine that burns cold is the specialty",
-      "Preservation magic keeps food fresh forever",
-      "Nordic heroes' spirits join in revelry",
-      "Cold magic makes all drinks refreshingly frozen",
-      "Eternal warmth emanates from the hearth",
-      "The tavern serves both living and dead patrons"
+      "A Cruz Quebrada fede a cerveja velha e desespero",
+      "O Berço Encharcado tem dono que escorrega de propósito na barba",
+      "Uma estalagem roída por ratos serve ensopado de tutano e pior",
+      "Um Ocidental vende sorte em garrafas que sabem a óleo",
+      "Mineiros bebem em silêncio — máscaras no rosto, olhos ocos",
+      "Corta‑Tornozelos beliscam bolsas por baixo dos bancos",
+      "Tutores de uma universidade morta trocam maldições por bebida",
+      "Um leproso enfaixado paga rodadas, pregando terminação",
+      "Um mascate de língua mercúrio oferece cartas falantes",
+      "Um cordeiro púrpura entra e sai, absolutamente imperturbável"
     ],
     "guild": [
-      "Guild members serve the city's undead nobility",
-      "Ancient Nordic crafting techniques are preserved",
-      "The Crypt Lord's authority governs all guilds",
-      "Preservation magic enhances all guild work",
-      "Undead masters teach eternal apprentices",
-      "Ice crafting requires centuries to master",
-      "Guild halls are carved from glacier ice",
-      "Nordic runes mark all guild certifications",
-      "Cold magic is essential to most professions",
-      "Eternal contracts bind guild memberships"
+      "Porta‑Ossos barganham verdades por um preço de silêncio",
+      "Magos da Pedra de Spinel lavram cartas proibidas",
+      "Tecelões de carne do Culto do Cadáver recrutam com sorrisos precisos",
+      "Zeladores dvörga impõem o CÓDIGO com Olhos‑de‑Tinta",
+      "Fatores ocidentais firmam contratos em tinta preto‑sonho",
+      "Arquivistas da Heresia Mortuária buscam pedra feita de praga",
+      "A Heresia da Língua Amarela dizima dízimos em pérolas",
+      "Sacerdotes‑Rato pesam dor em câmaras rituais",
+      "Dvörga proscritos vendem rotas sob as montanhas",
+      "Sucateiros da ponte leiloam ferro roído por gnutz"
     ],
     "residence": [
-      "The home is preserved in eternal perfection",
-      "Undead nobles live in timeless luxury",
-      "Ancient Nordic family spirits inhabit rooms",
-      "Preservation magic maintains all furnishings",
-      "The Crypt Lord's favor protects residents",
-      "Ice never forms inside due to special wards",
-      "Servants who died centuries ago still work",
-      "Nordic heritage is displayed prominently",
-      "Cold magic keeps the home eternally comfortable",
-      "The residence exists partially in death's realm"
+      "Um quarto de aldeia decrepita sussurra sobre mapas roídos por vermes",
+      "Um balneário no crânio petrificado de um gigante suspira vapor",
+      "Um solar nobre mantém um tutor morto‑vivo e crianças ainda mais frias",
+      "Um dormitório dvörga cheira a mofo e grisú",
+      "Um homem‑rato aninha-se sob o assoalho, sussurrando favores",
+      "A cortina de cama de um Ocidental cheira a chuva sobre óleo",
+      "O fantasma de um bibliotecário arquiva ameaças ao lado de canções de ninar",
+      "Uma velha avó oferece biscoitos que ninguém lembra de comer",
+      "Um fantasma silencioso observa das vigas de uma estalagem",
+      "Uma casa congelada guarda dezesseis corações numa caixa"
     ],
     "ruins": [
-      "Ancient Nordic power still lingers in the stones",
-      "The Crypt Lord's magic failed to preserve this",
-      "Undead from before the preservation wander here",
-      "Ice has reclaimed what magic could not save",
-      "Nordic spirits mourn their forgotten home",
-      "Preservation attempts left strange magical effects",
-      "The ruins serve as a warning of impermanence",
-      "Ancient runes flicker with dying power",
-      "Cold magic here is wild and unpredictable",
-      "The glacier slowly consumes the ruins"
+      "ARK’HAR em ruínas fervilha de selvagens imundos e seu rei de entranhas",
+      "O campanário de uma capela submersa dobra sobre lodo e pérolas",
+      "O templo de um deus consumido bebe sangue para o Deus‑Cervo",
+      "A torre oscilante crepita; fogo púrpura coroa a tempestade",
+      "A maior biblioteca fumega; Karoling sussurra recompensas",
+      "As lentes de Jergal Joch giram para a estrela negra",
+      "Cabeças de ponte em guerra arremessam rochas sobre um abismo",
+      "Um aqueduto verte sangue de demônio que alcatroa quem bebe",
+      "Uma cidade santa de mármore fala com línguas amarelas",
+      "Uma universidade dos mortos zune com lições de Malakbal"
     ]
   },
   "random_tables": {
     "district": [
-      "1-2: Undead nobles hold court, discussing centuries-old politics",
-      "3-4: Preservation engines malfunction, causing rapid ice formation",
-      "5-6: Ancient Nordic spirits manifest, seeking forgotten justice",
-      "7-8: The Crypt Lord's procession passes through the district",
-      "9-10: Glacier shifts, revealing new chambers and passages",
-      "11-12: Eternal guards challenge all who lack proper authorization"
+      "1-2: Nobres mortos‑vivos reúnem‑se em corte, debatendo política de séculos",
+      "3-4: Motores de preservação falham, causando formação rápida de gelo",
+      "5-6: Espíritos nórdicos antigos manifestam‑se, buscando justiça esquecida",
+      "7-8: A procissão do Senhor das Criptas atravessa o distrito",
+      "9-10: A geleira se move, revelando novas câmaras e passagens",
+      "11-12: Guardas eternos desafiam todos os que não têm a devida autorização"
     ],
     "building": [
-      "1-2: The structure phases between life and death realms",
-      "3-4: Preservation magic fails temporarily, causing rapid decay",
-      "5-6: Undead nobility conduct eternal administrative business",
-      "7-8: Ancient Nordic runes activate, changing the building",
-      "9-10: The Crypt Lord's servants perform maintenance rituals",
-      "11-12: Ice magic creates new rooms and passages"
+      "1-2: A estrutura oscila entre os reinos da vida e da morte",
+      "3-4: A magia de preservação falha temporariamente, causando rápida decomposição",
+      "5-6: A nobreza morta‑viva conduz negócios administrativos eternos",
+      "7-8: Runas nórdicas antigas ativam‑se, transformando o edifício",
+      "9-10: Servos do Senhor das Criptas realizam rituais de manutenção",
+      "11-12: Magia de gelo cria novas salas e passagens"
     ],
     "street": [
-      "1-2: Undead noble procession blocks passage for hours",
-      "3-4: Ice crystals form rapidly, making travel dangerous",
-      "5-6: Ancient Nordic spirits demand respect for old laws",
-      "7-8: Preservation magic creates temporal anomalies",
-      "9-10: The Crypt Lord's authority is questioned publicly",
-      "11-12: Cold magic makes the air visible and hard to breathe"
+      "1-2: Procissão de nobres mortos‑vivos bloqueia a passagem por horas",
+      "3-4: Cristais de gelo se formam rapidamente, tornando a viagem perigosa",
+      "5-6: Espíritos nórdicos antigos exigem respeito às velhas leis",
+      "7-8: Magia de preservação cria anomalias temporais",
+      "9-10: A autoridade do Senhor das Criptas é questionada em público",
+      "11-12: Magia fria torna o ar visível e difícil de respirar"
     ],
     "landmark": [
-      "1-2: The monument activates ancient Nordic magic",
-      "3-4: Undead nobles gather for ceremonial purposes",
-      "5-6: The Crypt Lord appears to make pronouncements",
-      "7-8: Preservation magic creates an eternal moment",
-      "9-10: Ice forms sacred patterns around the landmark",
-      "11-12: Ancient spirits manifest to share forgotten wisdom"
+      "1-2: O monumento ativa magia nórdica antiga",
+      "3-4: Nobres mortos‑vivos reúnem‑se para fins cerimoniais",
+      "5-6: O Senhor das Criptas aparece para fazer pronunciamentos",
+      "7-8: Magia de preservação cria um momento eterno",
+      "9-10: O gelo forma padrões sagrados ao redor do marco",
+      "11-12: Espíritos antigos manifestam‑se para compartilhar sabedoria esquecida"
     ],
     "market": [
-      "1-2: Eternal contracts bind unwary customers forever",
-      "3-4: Undead nobles purchase services for the afterlife",
-      "5-6: Ancient Nordic artifacts gain magical properties",
-      "7-8: Preservation services are traded for life essence",
-      "9-10: The Crypt Lord's tax collectors demand tribute",
-      "11-12: Ice crafts spontaneously gain sentience"
+      "1-2: Contratos eternos prendem clientes desavisados para sempre",
+      "3-4: Nobres mortos‑vivos compram serviços para o pós‑vida",
+      "5-6: Artefatos nórdicos antigos adquirem propriedades mágicas",
+      "7-8: Serviços de preservação são trocados por essência vital",
+      "9-10: Coletores de impostos do Senhor das Criptas exigem tributo",
+      "11-12: Trabalhos em gelo ganham senciência espontaneamente"
     ],
     "temple": [
-      "1-2: Ancient Nordic gods manifest during worship",
-      "3-4: The altar demands preservation of life essence",
-      "5-6: Undead nobles seek blessings for eternal rest",
-      "7-8: Preservation magic sanctifies offerings permanently",
-      "9-10: The Crypt Lord conducts marriage ceremonies",
-      "11-12: Ice forms divine patterns during rituals"
+      "1-2: Deuses nórdicos antigos manifestam‑se durante o culto",
+      "3-4: O altar exige preservação da essência vital",
+      "5-6: Nobres mortos‑vivos buscam bênçãos para o descanso eterno",
+      "7-8: Magia de preservação santifica oferendas permanentemente",
+      "9-10: O Senhor das Criptas realiza cerimônias de casamento",
+      "11-12: O gelo forma padrões divinos durante rituais"
     ],
     "tavern": [
-      "1-2: Undead nobles share centuries-old gossip and secrets",
-      "3-4: Ancient Nordic drinking songs summon ancestral spirits",
-      "5-6: Ice wine grants visions of the past and future",
-      "7-8: Preservation magic keeps conversations eternally fresh",
-      "9-10: The Crypt Lord's spies gather information from patrons",
-      "11-12: Cold magic makes drinks burn with frozen fire"
+      "1-2: Nobres mortos‑vivos compartilham fofocas e segredos seculares",
+      "3-4: Cantos nórdicos antigos de bebida evocam espíritos ancestrais",
+      "5-6: Vinho de gelo concede visões do passado e do futuro",
+      "7-8: Magia de preservação mantém conversas eternamente 'frescas'",
+      "9-10: Espiões do Senhor das Criptas extraem informações dos fregueses",
+      "11-12: Magia fria faz as bebidas queimarem com fogo congelado"
     ],
     "guild": [
-      "1-2: Guild masters offer apprenticeships lasting centuries",
-      "3-4: Ancient Nordic techniques are jealously guarded",
-      "5-6: The Crypt Lord commissions eternal public works",
-      "7-8: Preservation magic enhances all crafted items",
-      "9-10: Undead craftsmen compete with living workers",
-      "11-12: Ice magic creates tools that work themselves"
+      "1-2: Mestres de guilda oferecem aprendizagens que duram séculos",
+      "3-4: Técnicas nórdicas antigas são guardadas com ciúme",
+      "5-6: O Senhor das Criptas comissiona obras públicas eternas",
+      "7-8: Magia de preservação aprimora todos os itens fabricados",
+      "9-10: Artesãos mortos‑vivos competem com trabalhadores vivos",
+      "11-12: Magia de gelo cria ferramentas que trabalham sozinhas"
     ],
     "residence": [
-      "1-2: Ancient Nordic family spirits demand recognition",
-      "3-4: The home exists simultaneously in multiple time periods",
-      "5-6: Undead nobles entertain guests from past centuries",
-      "7-8: Preservation magic maintains perfect cleanliness",
-      "9-10: The Crypt Lord's servants conduct surprise inspections",
-      "11-12: Ice magic creates rooms that change with the seasons"
+      "1-2: Espíritos familiares nórdicos antigos exigem reconhecimento",
+      "3-4: O lar existe simultaneamente em múltiplos períodos de tempo",
+      "5-6: Nobres mortos‑vivos recebem convidados de séculos passados",
+      "7-8: Magia de preservação mantém limpeza perfeita",
+      "9-10: Servos do Senhor das Criptas fazem inspeções surpresa",
+      "11-12: Magia de gelo cria cômodos que mudam com as estações"
     ],
     "ruins": [
-      "1-2: Ancient Nordic treasure is discovered in the rubble",
-      "3-4: Preservation magic attempts to restore the ruins",
-      "5-6: Undead from before the city's transformation appear",
-      "7-8: The Crypt Lord's power cannot reach this place",
-      "9-10: Ice magic runs wild, creating dangerous formations",
-      "11-12: Nordic spirits offer quests to restore their homes"
+      "1-2: Tesouro nórdico antigo é descoberto entre os escombros",
+      "3-4: Magia de preservação tenta restaurar as ruínas",
+      "5-6: Mortos‑vivos de antes da transformação da cidade aparecem",
+      "7-8: O poder do Senhor das Criptas não alcança este lugar",
+      "9-10: Magia de gelo enlouquece, criando formações perigosas",
+      "11-12: Espíritos nórdicos oferecem tarefas para restaurar seus lares"
     ]
   },
   "atmosphere_modifiers": [
-    "The air is so cold it burns the lungs",
-    "Ice crystals form with each breath",
-    "Ancient Nordic chants echo from the glacier",
-    "The sound of preservation engines humming",
-    "Undead nobility conversing in archaic languages",
-    "Cold magic makes the air shimmer with frost",
-    "The creaking of ancient ice under pressure",
-    "Whispers of the long dead carried on cold winds",
-    "The smell of eternal preservation and old ice",
-    "Light refracting through countless ice formations"
+    "Vento podre leva enxames de moscas de carniça das criptas",
+    "Uma aurora amarela doentia mancha a noite e rói os ânimos",
+    "O ARQUI‑GELO suga cor e calor da pedra e da carne",
+    "Gritos distantes e abafados correm por corredores talhados no gelo",
+    "Neve negra de óleo deriva de reservas rompidas lá embaixo",
+    "O fedor de gordura fervida e sangue antigo dos servos‑cadáver",
+    "Sussurros preservados a frio arranham atrás de muros runescos",
+    "Sinos congelados dobram de uma capela submersa sob o gelo",
+    "A geleira geme; FENDAS (TEARS) se abrem em sua face",
+    "Luz pálida e doente se refrata em geada tingida de púrpura"
   ],
   "metadata": {
     "migrated_from": "databases/cities/bergen_chrypt.json",
     "language": "pt",
-    "last_updated": "2025-01-16T00:00:00.000000",
-    "translation_needed": true,
-    "translation_note": "This file needs Portuguese translation of city names, descriptions, and content"
+    "last_updated": "2025-08-08T00:00:00.000000",
+    "translation_needed": false,
+    "translation_note": "Conteúdo em português revisado/traduzido e tom ajustado; esquema preservado."
   }
 }

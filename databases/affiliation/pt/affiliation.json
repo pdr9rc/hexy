@@ -56,12 +56,24 @@
       "Medrosamente obediente",
       "Relutantemente cooperativo",
       "Cegamente leal"
-    ]
+    ],
+    "affiliations": {
+      "npc_affiliations": [
+        "Guilda",
+        "Igreja",
+        "Culto"
+      ],
+      "affiliation_attitudes": [
+        "Amigável",
+        "Neutro",
+        "Hostil"
+      ]
+    }
   },
   "metadata": {
     "version": "1.0",
     "language": "pt",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "migrated_from": "databases/languages/pt/affiliation.json"
   }
 }

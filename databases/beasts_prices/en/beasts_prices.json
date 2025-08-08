@@ -22,12 +22,24 @@
         "price": 8,
         "currency": "silver"
       }
+    ],
+    "beast_prices": [
+      "10 silver",
+      "25 silver",
+      "50 silver",
+      "1 gold",
+      "5 gold",
+      "10 gold",
+      "25 gold",
+      "50 gold",
+      "100 gold",
+      "500 gold"
     ]
   },
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "description": "Mörk Borg beast prices",
     "usage": "Reference for beast costs",
     "migrated_from": "databases/languages/en/beasts_prices.json"

@@ -66,12 +66,36 @@
       "Galt",
       "Wakta",
       "Mardul"
+    ],
+    "tavern_npcs": [
+      "Seasoned barkeep",
+      "Mysterious stranger",
+      "Drunk prophet",
+      "Scarred mercenary",
+      "Wise cook",
+      "Night watchman",
+      "Itinerant musician",
+      "Storyteller",
+      "Local blacksmith",
+      "Healer"
+    ],
+    "tavern_customers": [
+      "Tavern maid",
+      "Regular patron",
+      "Traveling bard",
+      "Local gossip",
+      "Rich merchant",
+      "Wounded soldier",
+      "Lost pilgrim",
+      "Treasure hunter",
+      "Disguised noble",
+      "Professional thief"
     ]
   },
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "description": "Mörk Borg NPC name generation using d6+d6 system",
     "usage": "Roll d6 for first name, d6 for second name, combine them",
     "migrated_from": "databases/languages/en/npc_names.json"

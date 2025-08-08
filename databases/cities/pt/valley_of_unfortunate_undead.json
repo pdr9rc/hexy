@@ -1,7 +1,7 @@
 {
-  "city_name": "Valley of Unfortunate Undead",
-  "display_name": "Valley of Unfortunate Undead - The Haunted Valley",
-  "description": "A vast valley filled with mass graves and restless spirits. The ground is always soft, and the air is thick with the moans of the dead. The valley is shrouded in perpetual mist and haunted by the spirits of those who died in agony.",
+  "city_name": "Vale dos Desmortos Desafortunados",
+  "display_name": "Vale dos Desmortos Desafortunados - O Vale Assombrado",
+  "description": "Um vale vasto, coalhado de valas comuns e espíritos inquietos. O chão cede sob os pés; o ar pesa de gemidos. Névoa perpétua cobre tudo — os que morreram em agonia não partem.",
   "theme": "haunted_necropolis",
   "district_matrix": [
     [
@@ -9,8 +9,8 @@
       "",
       "",
       "",
-      "Grave Fields",
-      "Grave Fields",
+      "Campos de Tumbas",
+      "Campos de Tumbas",
       "",
       "",
       "",
@@ -20,10 +20,10 @@
       "",
       "",
       "",
-      "Bone River",
-      "Spirit Mound",
-      "Mist Hollow",
-      "Echo Valley",
+      "Rio de Ossos",
+      "Monte dos Espíritos",
+      "Clareira da Névoa",
+      "Vale do Eco",
       "",
       "",
       ""
@@ -31,94 +31,94 @@
     [
       "",
       "",
-      "Bone River",
-      "Spirit Mound",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Echo Valley",
-      "Bone River",
+      "Rio de Ossos",
+      "Monte dos Espíritos",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Vale do Eco",
+      "Rio de Ossos",
       "",
       ""
     ],
     [
       "",
-      "Bone River",
-      "Spirit Mound",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Echo Valley",
-      "Bone River",
+      "Rio de Ossos",
+      "Monte dos Espíritos",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Vale do Eco",
+      "Rio de Ossos",
       "",
       ""
     ],
     [
       "",
-      "Weeping Grove",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Echo Valley",
-      "Bone River",
+      "Bosque Lacrimoso",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Vale do Eco",
+      "Rio de Ossos",
       "",
       ""
     ],
     [
       "",
-      "Weeping Grove",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Echo Valley",
-      "Echo Valley",
+      "Bosque Lacrimoso",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Vale do Eco",
+      "Vale do Eco",
       "",
       ""
     ],
     [
       "",
-      "Weeping Grove",
-      "Weeping Grove",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Echo Valley",
-      "Echo Valley",
-      "Echo Valley",
+      "Bosque Lacrimoso",
+      "Bosque Lacrimoso",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Vale do Eco",
+      "Vale do Eco",
+      "Vale do Eco",
       "",
       ""
     ],
     [
       "",
-      "Weeping Grove",
-      "Weeping Grove",
-      "Weeping Grove",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Echo Valley",
-      "Echo Valley",
-      "",
-      ""
-    ],
-    [
-      "",
-      "",
-      "Weeping Grove",
-      "Weeping Grove",
-      "Mist Hollow",
-      "Mist Hollow",
-      "Mist Hollow",
-      "",
+      "Bosque Lacrimoso",
+      "Bosque Lacrimoso",
+      "Bosque Lacrimoso",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Vale do Eco",
+      "Vale do Eco",
       "",
       ""
     ],
     [
       "",
       "",
+      "Bosque Lacrimoso",
+      "Bosque Lacrimoso",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
       "",
-      "Sorrow's End",
-      "Mist Hollow",
-      "Mist Hollow",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      "Fim da Mágoa",
+      "Clareira da Névoa",
+      "Clareira da Névoa",
       "",
       "",
       "",
@@ -127,348 +127,348 @@
   ],
   "districts": [
     {
-      "name": "Mist Hollow",
-      "description": "The heart of the valley, where the mist is thickest and the spirits are most active. Ancient burial mounds dot the landscape, and the air is filled with the whispers of the dead.",
+      "name": "Clareira da Névoa",
+      "description": "O coração do vale, onde a névoa é mais densa e os espíritos mais ativos. Tumulus antigos pontilham a paisagem, e o ar está cheio dos sussurros dos mortos.",
       "theme": "haunted_core",
       "buildings": [
-        "Spirit Shrine",
-        "Mist-Walker's Hut",
-        "Ancient Burial Chamber",
-        "The Whispering Tower",
-        "Soul Collector's Lodge"
+        "Santuário Espiritual",
+        "Cabana do Andarilho da Névoa",
+        "Câmara Fúnebre Antiga",
+        "A Torre dos Sussurros",
+        "Albergue do Coletor de Almas"
       ],
       "streets": [
-        "Mist-Walker's Path",
-        "Spirit Alley",
-        "The Whispering Way",
-        "Soul Collector's Road"
+        "Trilha do Andarilho da Névoa",
+        "Beco dos Espíritos",
+        "Caminho Sussurrante",
+        "Estrada do Coletor de Almas"
       ],
       "landmarks": [
-        "The Great Burial Mound",
-        "Spirit Convergence Point",
-        "The Mist Portal",
-        "Ancient Spirit Well"
+        "O Grande Tumulus",
+        "Ponto de Convergência Espiritual",
+        "O Portal da Névoa",
+        "Poço Espiritual Antigo"
       ],
       "encounters": [
-        "Mist-walker collecting lost souls",
-        "Spirit guide offering cryptic advice",
-        "Ancient ghost seeking rest",
-        "Soul collector bargaining for memories"
+        "Andarilho da névoa recolhendo almas perdidas",
+        "Guia espiritual oferecendo conselhos crípticos",
+        "Fantasma ancestral buscando descanso",
+        "Coletor de almas barganhando por memórias"
       ],
       "random_tables": [
-        "1-2: Mist thickens, revealing hidden burial sites",
-        "3-4: Spirits emerge from the ground in waves",
-        "5-6: Ancient burial chamber opens unexpectedly"
+        "1-2: A névoa engrossa, revelando sepulturas ocultas",
+        "3-4: Espíritos emergem do solo em ondas",
+        "5-6: Uma câmara fúnebre antiga se abre inesperadamente"
       ],
       "atmosphere_modifiers": [
-        "The mist carries whispers of the dead",
-        "Spirits flicker in and out of visibility",
-        "The ground feels soft and yielding"
+        "A névoa carrega sussurros dos mortos",
+        "Espíritos oscilam entre o visível e o invisível",
+        "O chão parece macio e cedente"
       ]
     },
     {
-      "name": "Grave Fields",
-      "description": "Endless rows of mass graves stretch across this desolate landscape. The ground is constantly shifting as new bodies are buried and old ones rise. Grave robbers and spirit hunters roam the area.",
+      "name": "Campos de Tumbas",
+      "description": "Fileiras infinitas de valas comuns se estendem por esta paisagem desolada. O solo muda sem parar: novos corpos são enterrados, antigos retornam. Saqueadores de tumbas e caçadores de espíritos rondam a área.",
       "theme": "mass_graves",
       "buildings": [
-        "Grave Digger's Hut",
-        "Spirit Hunter's Lodge",
-        "Mass Grave Marker",
-        "The Bone Collector's Shed"
+        "Barraco do Coveiro",
+        "Albergue do Caçador de Espíritos",
+        "Marco de Vala Comum",
+        "Cabana do Coletor de Ossos"
       ],
       "streets": [
-        "Grave Digger's Path",
-        "Spirit Hunter's Trail",
-        "The Bone Road",
-        "Mass Grave Avenue"
+        "Trilha do Coveiro",
+        "Trilha do Caçador de Espíritos",
+        "Estrada dos Ossos",
+        "Avenida da Vala Comum"
       ],
       "landmarks": [
-        "The Great Mass Grave",
-        "Spirit Hunter's Watchtower",
-        "Bone Collector's Mound",
-        "Ancient Burial Site"
+        "A Grande Vala Comum",
+        "Torre de Vigia do Caçador de Espíritos",
+        "O Monte do Coletor de Ossos",
+        "Sítio de Sepultamento Antigo"
       ],
       "encounters": [
-        "Grave digger with a cart of fresh corpses",
-        "Spirit hunter tracking restless dead",
-        "Bone collector gathering remains",
-        "Lost soul wandering the graves"
+        "Coveiro com um carro de cadáveres frescos",
+        "Caçador de espíritos rastreando mortos inquietos",
+        "Coletor de ossos ajuntando restos",
+        "Alma perdida vagando entre as tumbas"
       ],
       "random_tables": [
-        "1-2: Fresh graves open, revealing new corpses",
-        "3-4: Spirit hunters clash with grave robbers",
-        "5-6: Mass grave shifts, exposing ancient remains"
+        "1-2: Valas recém‑abertas revelam novos cadáveres",
+        "3-4: Caçadores de espíritos entram em choque com saqueadores de tumbas",
+        "5-6: Uma vala comum se desloca, expondo restos antigos"
       ],
       "atmosphere_modifiers": [
-        "The stench of fresh graves fills the air",
-        "Bones protrude from the soft earth",
-        "The sound of digging echoes constantly"
+        "O fedor de valas recentes enche o ar",
+        "Ossos despontam da terra macia",
+        "O som de escavação ecoa sem cessar"
       ]
     },
     {
-      "name": "Bone River",
-      "description": "A river of bones flows through the valley, carrying the remains of countless dead. The water is black and thick with ash, and bones constantly wash up on the shores. Fishermen cast nets for bones instead of fish.",
+      "name": "Rio de Ossos",
+      "description": "Um rio de ossos corta o vale, carregando os restos de incontáveis mortos. A água é negra e espessa de cinza; ossos encalham sem cessar nas margens. Pescadores lançam redes por ossos, não por peixes.",
       "theme": "bone_waterway",
       "buildings": [
-        "Bone Fisher's Hut",
-        "River Watch Tower",
-        "Ash Collector's Shed",
-        "The Bone Bridge House"
+        "Barraco do Pescador de Ossos",
+        "Torre de Vigia do Rio",
+        "Cabana do Coletor de Cinzas",
+        "A Casa da Ponte de Ossos"
       ],
       "streets": [
-        "Bone Fisher's Path",
-        "River Watch Road",
-        "Ash Collector's Trail",
-        "The Bone Bridge"
+        "Trilha do Pescador de Ossos",
+        "Estrada da Vigia do Rio",
+        "Trilha do Coletor de Cinzas",
+        "A Ponte de Ossos"
       ],
       "landmarks": [
-        "The Great Bone Bridge",
-        "Bone Fisher's Dock",
-        "River Watch Tower",
-        "Ash Collector's Mound"
+        "A Grande Ponte de Ossos",
+        "O Cais do Pescador de Ossos",
+        "Torre de Vigia do Rio",
+        "O Monte do Coletor de Cinzas"
       ],
       "encounters": [
-        "Bone fisher with a net full of skulls",
-        "River watchman warning of bone floods",
-        "Ash collector gathering river sediment",
-        "Lost spirit walking on water"
+        "Pescador de ossos com uma rede cheia de crânios",
+        "Vigia do rio alerta sobre enchentes de ossos",
+        "Coletor de cinzas ajunta sedimento do rio",
+        "Espírito perdido caminha sobre a água"
       ],
       "random_tables": [
-        "1-2: Bone flood washes ashore new remains",
-        "3-4: River watchman spots floating spirits",
-        "5-6: Ash collector discovers ancient bones"
+        "1-2: Uma enchente de ossos traz novos restos às margens",
+        "3-4: O vigia do rio avista espíritos flutuando",
+        "5-6: O coletor de cinzas descobre ossos antigos"
       ],
       "atmosphere_modifiers": [
-        "The sound of bones clattering in the water",
-        "Black ash falls like snow from the sky",
-        "The river flows with a mournful whisper"
+        "O som de ossos tilintando na água",
+        "Cinza negra cai do céu como neve",
+        "O rio corre num sussurro lutuoso"
       ]
     },
     {
-      "name": "Echo Valley",
-      "description": "A deep valley where every sound echoes endlessly. The moans of the dead reverberate through the canyon walls, creating a symphony of sorrow. Echo hunters come here to capture the sounds of the dead.",
+      "name": "Vale do Eco",
+      "description": "Um vale profundo onde todo som ecoa sem fim. Os gemidos dos mortos reverberam nas paredes do desfiladeiro, uma sinfonia de pesar. Caçadores de eco vêm para capturar os sons dos mortos.",
       "theme": "echoing_sorrow",
       "buildings": [
-        "Echo Hunter's Lodge",
-        "Sound Collector's Hut",
-        "The Echo Chamber",
-        "Mourning Hall"
+        "Albergue do Caçador de Ecos",
+        "Barraco do Coletor de Sons",
+        "A Câmara do Eco",
+        "Salão do Luto"
       ],
       "streets": [
-        "Echo Hunter's Path",
-        "Sound Collector's Road",
-        "The Echoing Way",
-        "Mourning Path"
+        "Trilha do Caçador de Ecos",
+        "Estrada do Coletor de Sons",
+        "Caminho Ecoante",
+        "Trilha do Luto"
       ],
       "landmarks": [
-        "The Great Echo Chamber",
-        "Sound Collector's Tower",
-        "Mourning Hall",
-        "Echo Hunter's Watch"
+        "A Grande Câmara do Eco",
+        "A Torre do Coletor de Sons",
+        "Salão do Luto",
+        "Vigia do Caçador de Ecos"
       ],
       "encounters": [
-        "Echo hunter with a device to capture sounds",
-        "Sound collector gathering echoes",
-        "Mourner wailing in the valley",
-        "Lost echo of a dead soul"
+        "Caçador de eco com aparelho para capturar sons",
+        "Coletor de sons ajuntando ecos",
+        "Pranteador uivando no vale",
+        "Eco perdido de uma alma morta"
       ],
       "random_tables": [
-        "1-2: Echo reveals hidden burial site",
-        "3-4: Sound collector captures spirit voice",
-        "5-6: Mourning hall fills with ghostly echoes"
+        "1-2: Um eco revela sepultura oculta",
+        "3-4: Coletor de sons captura a voz de um espírito",
+        "5-6: O salão do luto enche‑se de ecos espectrais"
       ],
       "atmosphere_modifiers": [
-        "Every sound echoes seven times",
-        "The moans of the dead never cease",
-        "Echoes reveal hidden truths"
+        "Cada som ecoa sete vezes",
+        "Os gemidos dos mortos nunca cessam",
+        "Ecos revelam verdades ocultas"
       ]
     },
     {
-      "name": "Weeping Grove",
-      "description": "A grove of dead trees that constantly weep black sap. The trees are said to be the spirits of those who died in the valley, transformed into eternal mourners. Tree-cutters harvest the weeping sap.",
+      "name": "Bosque Lacrimoso",
+      "description": "Um bosque de árvores mortas que choram seiva negra sem cessar. Dizem que são os espíritos dos que morreram no vale, transformados em pranteadores eternos. Lenhadores colhem a seiva que verte.",
       "theme": "weeping_forest",
       "buildings": [
-        "Tree-Cutter's Hut",
-        "Sap Collector's Lodge",
-        "The Weeping Shrine",
-        "Mourning Tree House"
+        "Barraco do Lenhador",
+        "Albergue do Coletor de Seiva",
+        "O Santuário Lacrimoso",
+        "A Casa da Árvore do Luto"
       ],
       "streets": [
-        "Tree-Cutter's Path",
-        "Sap Collector's Road",
-        "The Weeping Way",
-        "Mourning Tree Trail"
+        "Trilha do Lenhador",
+        "Estrada do Coletor de Seiva",
+        "Caminho Lacrimoso",
+        "Trilha da Árvore do Luto"
       ],
       "landmarks": [
-        "The Great Weeping Tree",
-        "Sap Collector's Pool",
-        "Weeping Shrine",
-        "Mourning Tree Circle"
+        "A Grande Árvore Lacrimosa",
+        "Poça do Coletor de Seiva",
+        "Santuário Lacrimoso",
+        "Círculo da Árvore do Luto"
       ],
       "encounters": [
-        "Tree-cutter harvesting weeping sap",
-        "Sap collector gathering black tears",
-        "Weeping tree spirit seeking comfort",
-        "Mourner praying to the trees"
+        "Lenhador colhendo a seiva que verte",
+        "Coletor de seiva ajuntando lágrimas negras",
+        "Espírito da árvore lacrimosa busca consolo",
+        "Pranteador reza às árvores"
       ],
       "random_tables": [
-        "1-2: New weeping tree grows overnight",
-        "3-4: Sap collector discovers ancient tears",
-        "5-6: Weeping shrine reveals hidden burial"
+        "1-2: Surge uma nova árvore lacrimosa da noite para o dia",
+        "3-4: Coletor de seiva descobre lágrimas antigas",
+        "5-6: Santuário lacrimoso revela sepultura oculta"
       ],
       "atmosphere_modifiers": [
-        "Black sap drips constantly from trees",
-        "The trees whisper in mourning voices",
-        "The grove is always dark and damp"
+        "Seiva negra pinga das árvores sem cessar",
+        "As árvores sussurram em vozes de luto",
+        "O bosque é sempre escuro e úmido"
       ]
     },
     {
-      "name": "Spirit Mound",
-      "description": "Ancient burial mounds where powerful spirits are said to dwell. The mounds are constantly shifting as spirits move between them. Spirit seekers come here to commune with the dead.",
+      "name": "Monte dos Espíritos",
+      "description": "Antigos montes funerários onde dizem habitar espíritos poderosos. Os montes mudam sem cessar conforme os espíritos transitam. Buscadores de espíritos vêm comungar com os mortos.",
       "theme": "ancient_spirits",
       "buildings": [
-        "Spirit Seeker's Hut",
-        "Ancient Burial Chamber",
-        "The Spirit Portal",
-        "Mound Watcher's Lodge"
+        "Barraco do Buscador de Espíritos",
+        "Câmara Fúnebre Antiga",
+        "O Portal Espiritual",
+        "Albergue do Vigia dos Montes"
       ],
       "streets": [
-        "Spirit Seeker's Path",
-        "Ancient Burial Road",
-        "The Spirit Way",
-        "Mound Watcher's Trail"
+        "Trilha do Buscador de Espíritos",
+        "Estrada do Sepultamento Antigo",
+        "Caminho Espiritual",
+        "Trilha do Vigia dos Montes"
       ],
       "landmarks": [
-        "The Great Spirit Mound",
-        "Ancient Burial Chamber",
-        "Spirit Portal",
-        "Mound Watcher's Tower"
+        "O Grande Monte Espiritual",
+        "Câmara Fúnebre Antiga",
+        "Portal Espiritual",
+        "A Torre do Vigia dos Montes"
       ],
       "encounters": [
-        "Spirit seeker communing with the dead",
-        "Ancient spirit emerging from mound",
-        "Mound watcher guarding the spirits",
-        "Lost soul seeking burial"
+        "Buscador de espíritos comungando com os mortos",
+        "Espírito ancestral emerge do monte",
+        "Vigia dos montes guarda os espíritos",
+        "Alma perdida busca sepultamento"
       ],
       "random_tables": [
-        "1-2: Spirit mound opens, revealing ancient burial",
-        "3-4: Spirit seeker receives cryptic message",
-        "5-6: Ancient spirit grants boon or curse"
+        "1-2: Um monte espiritual se abre, revelando sepultamento antigo",
+        "3-4: Buscador de espíritos recebe mensagem críptica",
+        "5-6: Espírito ancestral concede bênção ou maldição"
       ],
       "atmosphere_modifiers": [
-        "The mounds pulse with spiritual energy",
-        "Ancient voices whisper from the earth",
-        "The air crackles with supernatural power"
+        "Os montes pulsam com energia espiritual",
+        "Vozes antigas sussurram da terra",
+        "O ar crepita com poder sobrenatural"
       ]
     },
     {
-      "name": "Sorrow's End",
-      "description": "The deepest part of the valley, where sorrow and death reach their ultimate expression. This is where the most powerful spirits dwell, and where the valley's dark magic is strongest.",
+      "name": "Fim da Mágoa",
+      "description": "A parte mais profunda do vale, onde a mágoa e a morte chegam ao extremo. Aqui habitam os espíritos mais poderosos e a magia sombria do vale é mais forte.",
       "theme": "ultimate_sorrow",
       "buildings": [
-        "Sorrow's Temple",
-        "The Final Resting Place",
-        "Spirit Master's Lodge",
-        "The End of All Things"
+        "Templo da Mágoa",
+        "O Descanso Final",
+        "Albergue do Mestre dos Espíritos",
+        "O Fim de Todas as Coisas"
       ],
       "streets": [
-        "Sorrow's Path",
-        "The Final Road",
-        "Spirit Master's Way",
-        "The End of All Paths"
+        "Trilha da Mágoa",
+        "A Estrada Final",
+        "Caminho do Mestre dos Espíritos",
+        "O Fim de Todos os Caminhos"
       ],
       "landmarks": [
-        "Sorrow's Temple",
-        "The Final Resting Place",
-        "Spirit Master's Throne",
-        "The End of All Things"
+        "Templo da Mágoa",
+        "O Descanso Final",
+        "Trono do Mestre dos Espíritos",
+        "O Fim de Todas as Coisas"
       ],
       "encounters": [
-        "Sorrow priest performing dark rituals",
-        "Spirit master commanding the dead",
-        "Ancient spirit of ultimate sorrow",
-        "Lost soul seeking final rest"
+        "Sacerdote da Mágoa realizando rituais sombrios",
+        "Mestre dos espíritos comanda os mortos",
+        "Espírito ancestral da mágoa derradeira",
+        "Alma perdida busca descanso final"
       ],
       "random_tables": [
-        "1-2: Sorrow's temple reveals dark truth",
-        "3-4: Spirit master grants ultimate power",
-        "5-6: Ancient spirit offers final choice"
+        "1-2: O templo da mágoa revela uma verdade sombria",
+        "3-4: O mestre dos espíritos concede poder derradeiro",
+        "5-6: Um espírito ancestral oferece a escolha final"
       ],
       "atmosphere_modifiers": [
-        "The air is thick with ultimate sorrow",
-        "Dark magic pulses through the ground",
-        "The end of all things feels near"
+        "O ar é denso de mágoa derradeira",
+        "Magia sombria pulsa pelo chão",
+        "O fim de todas as coisas parece próximo"
       ]
     }
   ],
   "city_events": [
-    "Mass grave opens, revealing ancient burial site",
-    "Spirit flood sweeps through the valley",
-    "Bone river overflows, washing bones ashore",
-    "Weeping trees bloom with black flowers",
-    "Echo valley reveals hidden truth",
-    "Spirit mound grants boon to seeker",
-    "Sorrow's end calls to the living"
+    "Uma vala comum se abre, revelando sepulcro antigo",
+    "Enxurrada de espíritos varre o vale",
+    "O rio de ossos transborda, lançando ossos às margens",
+    "Árvores lacrimosas florescem com flores negras",
+    "O vale do eco revela uma verdade oculta",
+    "O monte espiritual concede um favor ao buscador",
+    "O fim da mágoa chama os vivos"
   ],
   "weather_conditions": [
-    "Perpetual mist shrouds the valley",
-    "Black ash falls like snow",
-    "Bone-choked fog rolls in",
-    "Spirit winds howl through the valley",
-    "Echoing rain falls without end",
-    "Weeping trees drip black sap",
-    "Sorrow's storm approaches"
+    "Névoa perpétua envolve o vale",
+    "Cinza negra cai como neve",
+    "Névoa entupida de ossos avança",
+    "Ventos espirituais uivam pelo vale",
+    "Chuva ecoante cai sem fim",
+    "Árvores lacrimosas pingam seiva negra",
+    "Tempestade da mágoa se aproxima"
   ],
   "major_factions": [
     {
-      "name": "The Spirit Collectors",
-      "leader": "Master of Souls",
-      "hq": "Spirit Convergence Point",
-      "influence": "High",
-      "attitude": "Mysterious",
+      "name": "Os Coletores de Almas",
+      "leader": "Mestre das Almas",
+      "hq": "Ponto de Convergência Espiritual",
+      "influence": "Alta",
+      "attitude": "Misteriosa",
       "activities": [
-        "Soul collection",
-        "Spirit communication",
-        "Burial rituals"
+        "Coleta de almas",
+        "Comunicação com espíritos",
+        "Rituais de sepultamento"
       ]
     },
     {
-      "name": "The Bone Harvesters",
-      "leader": "Bone Master",
-      "hq": "Bone River",
-      "influence": "Medium",
-      "attitude": "Greedy",
+      "name": "Os Ceifadores de Ossos",
+      "leader": "Mestre dos Ossos",
+      "hq": "Rio de Ossos",
+      "influence": "Média",
+      "attitude": "Gananciosa",
       "activities": [
-        "Bone collection",
-        "Grave robbing",
-        "Corpse processing"
+        "Coleta de ossos",
+        "Saque de tumbas",
+        "Processamento de cadáveres"
       ]
     },
     {
-      "name": "The Mist Walkers",
-      "leader": "Mist Seer",
-      "hq": "Mist Hollow",
-      "influence": "Medium",
-      "attitude": "Secretive",
+      "name": "Os Andarilhos da Névoa",
+      "leader": "Vidente da Névoa",
+      "hq": "Clareira da Névoa",
+      "influence": "Média",
+      "attitude": "Secreta",
       "activities": [
-        "Mist navigation",
-        "Spirit guidance",
-        "Hidden knowledge"
+        "Navegação na névoa",
+        "Orientação espiritual",
+        "Conhecimento oculto"
       ]
     }
   ],
   "local_factions": [
-    "The Echo Hunters",
-    "The Weeping Tree Cult",
-    "The Sorrow Priests",
-    "The Grave Diggers",
-    "The Spirit Seekers"
+    "Os Caçadores de Ecos",
+    "O Culto da Árvore Lacrimosa",
+    "Os Sacerdotes da Mágoa",
+    "Os Coveiros",
+    "Os Buscadores de Espíritos"
   ],
   "metadata": {
     "migrated_from": "databases/cities/valley_of_unfortunate_undead.json",
     "language": "pt",
-    "last_updated": "2025-01-16T00:00:00.000000",
-    "translation_needed": true,
-    "translation_note": "This file needs Portuguese translation of city names, descriptions, and content"
+    "last_updated": "2025-08-08T00:00:00.000000",
+    "translation_needed": false,
+    "translation_note": "Conteúdo traduzido e tom ajustado para o cenário; esquema preservado."
   }
 }

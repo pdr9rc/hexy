@@ -224,12 +224,24 @@
         "currency": "silver",
         "notes": "4 days of water"
       }
+    ],
+    "item_prices": [
+      "1 copper",
+      "5 copper",
+      "10 copper",
+      "1 silver",
+      "5 silver",
+      "10 silver",
+      "25 silver",
+      "50 silver",
+      "1 gold",
+      "5 gold"
     ]
   },
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "description": "Mörk Borg item prices and descriptions",
     "usage": "Reference for item costs and properties",
     "migrated_from": "databases/languages/en/items_prices.json"

@@ -479,7 +479,7 @@ class CityOverlayAnalyzer:
                     city_data = json.load(f)
                     
                 print(f"DEBUG: City data keys: {list(city_data.keys())}")
-                
+                    
                 # Load additional city-specific content from language database
                 enriched_content = self._load_city_specific_content(city_name)
                 print(f"DEBUG: Enriched content keys: {list(enriched_content.keys())}")
@@ -581,10 +581,11 @@ class CityOverlayAnalyzer:
                         market_data = json.load(f)
                         # Extract data from tables structure
                         if 'tables' in market_data:
-                            if market_type == 'items_prices' and 'item_prices' in market_data['tables']:
-                                content['items_sold'] = market_data['tables']['item_prices']
-                            elif market_type == 'beasts_prices' and 'beast_prices' in market_data['tables']:
-                                content['beast_prices'] = market_data['tables']['beast_prices']
+                            # Use detailed entries (objects) so the UI can render name/price/currency/notes
+                            if market_type == 'items_prices' and 'items' in market_data['tables']:
+                                content['items_sold'] = market_data['tables']['items']
+                            elif market_type == 'beasts_prices' and 'beasts' in market_data['tables']:
+                                content['beast_prices'] = market_data['tables']['beasts']
                             elif market_type == 'services_prices' and 'services' in market_data['tables']:
                                 content['services'] = market_data['tables']['services']
                         else:
@@ -886,13 +887,13 @@ class CityOverlayAnalyzer:
         else:
             # Fallback purposes
             purposes = [
-                "residência abandonada de um nobre caído",
-                "oficina misteriosa de propósito desconhecido",
-                "biblioteca esquecida com conhecimento proibido",
-                "templo antigo para um deus esquecido",
-                "sede de guilda para organização secreta",
-                "armazém cheio de artefatos estranhos"
-            ]
+            "residência abandonada de um nobre caído",
+            "oficina misteriosa de propósito desconhecido",
+            "biblioteca esquecida com conhecimento proibido",
+            "templo antigo para um deus esquecido",
+            "sede de guilda para organização secreta",
+            "armazém cheio de artefatos estranhos"
+        ]
         
         name = random.choice(buildings)
         purpose = random.choice(purposes)

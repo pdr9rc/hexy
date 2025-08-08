@@ -262,12 +262,17 @@
         "relationship": "Cooperative",
         "description": "Both groups work together in corpse collection and processing"
       }
+    ],
+    "faction_names": [
+      "Order of the Dead",
+      "Shadow Brotherhood",
+      "Servants of the Abyss"
     ]
   },
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "description": "Mörk Borg faction database for cities",
     "usage": "Reference for faction generation and relationships",
     "migrated_from": "databases/languages/en/factions.json"

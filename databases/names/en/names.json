@@ -3,7 +3,7 @@
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "migrated_from": "databases/content/names.json"
   },
   "tables": {
@@ -172,6 +172,12 @@
       "Order of the Cursed Blade",
       "The Soul Harvesters",
       "Guild of the Eternal Night"
+    ],
+    "tavern_names": [
+      "The One-Handed Knave",
+      "Lotta Gravy",
+      "Gunter's Bordello",
+      "Cedar Grill"
     ]
   }
 }

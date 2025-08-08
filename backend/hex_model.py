@@ -342,7 +342,7 @@ class HexModelManager:
                 atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
                 notable_feature=data.get('notable_feature', 'No notable features'),
                 treasure=data.get('treasure', 'No treasure'),
-                loot=self._create_loot_item(data.get('loot')) if data.get('loot') else None,
+                loot=create_loot_item(data.get('loot')) if data.get('loot') else None,
                 scroll=self._create_ancient_knowledge(data.get('scroll')) if data.get('scroll') else None,
                 # Mörk Borg dungeon fields
                 trap_section=data.get('trap_section')

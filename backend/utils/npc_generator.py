@@ -18,7 +18,9 @@ def generate_npc_encounter(db_manager, language: str = 'en') -> Dict[str, Any]:
         Dictionary containing NPC encounter data
     """
     # Get NPC tables from database
-    npc_names = db_manager.get_table('npc_names', 'npc_names', language) or []
+    # Names: use first/second name tables as the base for actual names
+    first_names: List[str] = db_manager.get_table('npc_names', 'first_names', language) or []
+    second_names: List[str] = db_manager.get_table('npc_names', 'second_names', language) or []
     npc_traits = db_manager.get_table('npc_traits', 'traits', language) or []
     npc_trades = db_manager.get_table('npc_trades', 'trades', language) or []
     npc_concerns = db_manager.get_table('npc_concerns', 'concerns', language) or []
@@ -26,16 +28,27 @@ def generate_npc_encounter(db_manager, language: str = 'en') -> Dict[str, Any]:
     npc_apocalypse = db_manager.get_table('npc_apocalypse', 'apocalypse_attitudes', language) or []
     npc_secrets = db_manager.get_table('npc_secrets', 'secrets', language) or []
     
-    # Generate NPC name
-    name_prefixes = db_manager.get_table('core', 'denizen_names_prefix', language) or []
-    name_suffixes = db_manager.get_table('core', 'denizen_names_suffix', language) or []
-    
-    if name_prefixes and name_suffixes:
-        prefix = random.choice(name_prefixes)
-        suffix = random.choice(name_suffixes)
-        name = f"{prefix} {suffix}"
+    # Generate NPC name: compose from first + second; use prefix/suffix only as modifiers
+    name_prefixes: List[str] = db_manager.get_table('core', 'denizen_names_prefix', language) or []
+    name_suffixes: List[str] = db_manager.get_table('core', 'denizen_names_suffix', language) or []
+
+    # Base name
+    if first_names and second_names:
+        base_first = random.choice(first_names)
+        base_second = random.choice(second_names)
+        name = f"{base_first} {base_second}"
+    elif first_names:
+        name = random.choice(first_names)
+    elif second_names:
+        name = random.choice(second_names)
     else:
-        name = f"Unknown Denizen"
+        name = "Unknown Denizen"
+
+    # Optional modifiers
+    if name_prefixes and random.random() < 0.5:
+        name = f"{random.choice(name_prefixes)} {name}"
+    if name_suffixes and random.random() < 0.5:
+        name = f"{name} {random.choice(name_suffixes)}"
     
     # Generate Mörk Borg elements
     trait = random.choice(npc_traits) if npc_traits else "Mysterious"

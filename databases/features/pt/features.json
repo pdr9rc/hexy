@@ -3,7 +3,7 @@
   "metadata": {
     "version": "1.0",
     "language": "pt",
-    "last_updated": "2025-01-16T00:00:00.000000"
+    "last_updated": "2025-08-07T22:56:40.000000"
   },
   "tables": {
     "landmark_features": [
@@ -113,6 +113,11 @@
       "As ruínas atraem os perdidos e desesperados",
       "As ruínas estão cercadas por energia sobrenatural",
       "As ruínas são o portal para outros reinos"
+    ],
+    "district_features": [
+      "Habitação densa",
+      "Bairro industrial",
+      "Borda de favela"
     ]
   }
 }

@@ -6,7 +6,7 @@ import { initializeControls } from "./controls.js"
 import { showNotification, showError } from "./uiUtils.js"
 import { showCityOverlayGrid } from './cityOverlays.js';
 import { generateDistrictColor } from './utils/colorUtils.js';
-import { t } from './translations.js';
+import { t, getCurrentLanguage } from './translations.js';
 
 // Global state for hex editing
 let currentEditingHex: string | null = null;
@@ -349,13 +349,24 @@ class DyingLandsApp {
       
       // Helper to format arrays of strings or objects
       const formatEntries = (arr: any[]): string => {
+        const lang = getCurrentLanguage();
+        const currencyLabel = (c: string): string => {
+          if (lang === 'pt') {
+            if (!c) return c;
+            const m = c.toLowerCase();
+            if (m === 'silver') return 'prata';
+            if (m === 'gold') return 'ouro';
+            if (m === 'copper') return 'cobre';
+          }
+          return c;
+        };
         if (!Array.isArray(arr)) return '';
         return arr.map((item: any) => {
           if (typeof item === 'string') return item;
           if (item && typeof item === 'object') {
             const name = item.name ?? '';
             const price = item.price ?? '';
-            const currency = item.currency ?? '';
+            const currency = currencyLabel(item.currency ?? '');
             const notes = item.notes ?? '';
             const pricePart = [price, currency].filter(Boolean).join(' ');
             const main = [name, pricePart].filter(Boolean).join(' - ');

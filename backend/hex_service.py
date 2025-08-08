@@ -7,6 +7,7 @@ replacing the markdown parsing approach.
 
 import json
 from pathlib import Path
+import ast
 from typing import Dict, Any, Optional, List
 from backend.hex_model import hex_manager, BaseHex, TerrainType, SettlementHex
 from backend.config import get_config
@@ -240,41 +241,44 @@ class HexService:
             # Section headers
             if line == '## Encounter':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section != 'tavern_details':
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'encounter'
                 section_content = []
             elif line == '## Denizen':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section != 'tavern_details':
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'description'  # Map denizen section to description field
                 section_content = []
             elif line == '## Notable Feature':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section != 'tavern_details':
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'notable_feature'
                 section_content = []
             elif line == '## Atmosphere':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section != 'tavern_details':
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'atmosphere'
                 section_content = []
             elif line == '## Settlement Layout':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section != 'tavern_details':
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'settlement_art'  # Map settlement layout section to settlement_art field
                 section_content = []
             elif line == '## Tavern Details':
                 if current_section and section_content:
-                    if current_section == 'tavern_details':
-                        # Don't overwrite tavern_details with string content
-                        pass
-                    else:
+                    if current_section != 'tavern_details':
                         settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'tavern_details'
                 section_content = []
             elif line == '## Loot Found':
                 if current_section and section_content:
-                    settlement_data[current_section] = ' '.join(section_content).strip()
+                    if current_section != 'tavern_details':
+                        settlement_data[current_section] = ' '.join(section_content).strip()
                 current_section = 'loot_found'
                 section_content = []
             # Named fields
@@ -287,15 +291,32 @@ class HexService:
                     settlement_data['population'] = population_part.strip()
                 else:
                     settlement_data['name'] = encounter_line.replace('⌂ **', '').replace('**', '').strip()
-            elif line.startswith('**Local Tavern:**'):
-                settlement_data['local_tavern'] = line.replace('**Local Tavern:**', '').strip()
-            elif line.startswith('**Local Power:**'):
-                settlement_data['local_power'] = line.replace('**Local Power:**', '').strip()
+            elif line.startswith('**Local Tavern:**') or line.startswith('**Taberna Local:**'):
+                # Support EN and PT labels
+                settlement_data['local_tavern'] = (
+                    line.replace('**Local Tavern:**', '')
+                        .replace('**Taberna Local:**', '')
+                        .strip()
+                )
+            elif line.startswith('**Local Power:**') or line.startswith('**Poder Local:**'):
+                settlement_data['local_power'] = (
+                    line.replace('**Local Power:**', '')
+                        .replace('**Poder Local:**', '')
+                        .strip()
+                )
             # Mörk Borg fields (scan every line for these)
-            if '**Weather:**' in line:
-                settlement_data['weather'] = line.split('**Weather:**')[1].strip()
-            elif '**City Event:**' in line:
-                settlement_data['city_event'] = line.split('**City Event:**')[1].strip()
+            if '**Weather:**' in line or '**Clima:**' in line:
+                settlement_data['weather'] = (
+                    line.split('**Weather:**')[-1]
+                        .split('**Clima:**')[-1]
+                        .strip()
+                )
+            elif '**City Event:**' in line or '**Evento da Cidade:**' in line:
+                settlement_data['city_event'] = (
+                    line.split('**City Event:**')[-1]
+                        .split('**Evento da Cidade:**')[-1]
+                        .strip()
+                )
             # Loot Found fields (scan every line for these, but only in loot_found section)
             elif '**Type:**' in line and current_section == 'loot_found':
                 # This is loot information, don't add to section content
@@ -325,35 +346,51 @@ class HexService:
             elif '**Select Menu:**' in line:
                 if settlement_data['tavern_details'] is None:
                     settlement_data['tavern_details'] = {}
-                settlement_data['tavern_details']['select_menu'] = line.split('**Select Menu:**')[1].strip()
+                raw_value = line.split('**Select Menu:**')[1].strip()
+                # Try to parse python-dict-looking string to a real object
+                try:
+                    parsed = ast.literal_eval(raw_value)
+                    settlement_data['tavern_details']['select_menu'] = parsed
+                except Exception:
+                    settlement_data['tavern_details']['select_menu'] = raw_value
             elif '**Budget Menu:**' in line:
                 if settlement_data['tavern_details'] is None:
                     settlement_data['tavern_details'] = {}
-                settlement_data['tavern_details']['budget_menu'] = line.split('**Budget Menu:**')[1].strip()
-            elif '**Innkeeper:**' in line:
+                raw_value = line.split('**Budget Menu:**')[1].strip()
+                try:
+                    parsed = ast.literal_eval(raw_value)
+                    settlement_data['tavern_details']['budget_menu'] = parsed
+                except Exception:
+                    settlement_data['tavern_details']['budget_menu'] = raw_value
+            elif '**Innkeeper:**' in line or '**Taverneiro:**' in line:
                 if settlement_data['tavern_details'] is None:
                     settlement_data['tavern_details'] = {}
-                settlement_data['tavern_details']['innkeeper'] = line.split('**Innkeeper:**')[1].strip()
-            elif '**Notable Patron:**' in line:
+                settlement_data['tavern_details']['innkeeper'] = (
+                    line.split('**Innkeeper:**')[-1]
+                        .split('**Taverneiro:**')[-1]
+                        .strip()
+                )
+            elif '**Notable Patron:**' in line or '**Cliente Notável:**' in line:
                 if settlement_data['tavern_details'] is None:
                     settlement_data['tavern_details'] = {}
-                settlement_data['tavern_details']['notable_patron'] = line.split('**Notable Patron:**')[1].strip()
+                settlement_data['tavern_details']['notable_patron'] = (
+                    line.split('**Notable Patron:**')[-1]
+                        .split('**Cliente Notável:**')[-1]
+                        .strip()
+                )
             # Section content
             elif current_section and not line.startswith('##'):
                 section_content.append(line)
         # Save last section
         if current_section and section_content:
-            if current_section == 'tavern_details':
-                # Don't overwrite tavern_details with string content
-                pass
-            else:
+            if current_section != 'tavern_details':
                 settlement_data[current_section] = ' '.join(section_content).strip()
         
         # Clean up duplicate content by removing embedded fields from atmosphere section
         if settlement_data.get('atmosphere'):
             atmosphere_text = settlement_data['atmosphere']
             # Remove embedded fields that are already extracted
-            for field in ['**Local Tavern:**', '**Local Power:**']:
+            for field in ['**Local Tavern:**', '**Local Power:**', '**Taberna Local:**', '**Poder Local:**', '**Weather:**', '**City Event:**', '**Clima:**', '**Evento da Cidade:**']:
                 atmosphere_text = re.sub(rf'{re.escape(field)}[^\n]*\n?', '', atmosphere_text)
             settlement_data['atmosphere'] = atmosphere_text.strip()
         

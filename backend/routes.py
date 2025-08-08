@@ -355,12 +355,41 @@ def get_city_details(hex_code):
 @api_bp.route('/settlement/<hex_code>')
 def get_settlement_details(hex_code):
     """Get detailed information for a settlement."""
+    # Try model-based service first
     settlement_data = hex_service.get_settlement_details(hex_code)
-    
     if settlement_data:
         return jsonify(settlement_data)
-    else:
-        return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
+
+    # Fallback: read and parse the hex markdown directly if present
+    try:
+        from backend.utils import safe_file_read
+        hex_file_path = config.paths.output_path \
+            / "hexes" / f"hex_{hex_code}.md"
+        if hex_file_path.exists():
+            content = safe_file_read(hex_file_path)
+            if '⌂ **' in content:
+                parsed = extract_settlement_data(content)
+                return jsonify({
+                    'success': True,
+                    'settlement': {
+                        'name': parsed.get('name', ''),
+                        'description': parsed.get('description', ''),
+                        'population': parsed.get('population', ''),
+                        'atmosphere': parsed.get('atmosphere', ''),
+                        'notable_feature': parsed.get('notable_feature', ''),
+                        'local_tavern': parsed.get('local_tavern', ''),
+                        'local_power': parsed.get('local_power', ''),
+                        'settlement_art': parsed.get('settlement_art', ''),
+                        # Mörk Borg settlement fields
+                        'weather': parsed.get('weather'),
+                        'city_event': parsed.get('city_event'),
+                        'tavern_details': parsed.get('tavern_details')
+                    }
+                })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+    return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
 
 @api_bp.route('/hex/<hex_code>', methods=['PUT'])
 def update_hex_content(hex_code):
