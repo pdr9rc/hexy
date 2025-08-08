@@ -582,10 +582,34 @@ class CityOverlayAnalyzer:
                         # Extract data from tables structure
                         if 'tables' in market_data:
                             # Use detailed entries (objects) so the UI can render name/price/currency/notes
-                            if market_type == 'items_prices' and 'items' in market_data['tables']:
-                                content['items_sold'] = market_data['tables']['items']
-                            elif market_type == 'beasts_prices' and 'beasts' in market_data['tables']:
-                                content['beast_prices'] = market_data['tables']['beasts']
+                            if market_type == 'items_prices':
+                                if 'items' in market_data['tables'] and isinstance(market_data['tables']['items'], list):
+                                    content['items_sold'] = market_data['tables']['items']
+                                elif self.language != 'en':
+                                    # Fallback to English detailed items if local language lacks them
+                                    try:
+                                        fallback_path = f'databases/items_prices/en/items_prices.json'
+                                        if os.path.exists(fallback_path):
+                                            with open(fallback_path, 'r', encoding='utf-8') as ef:
+                                                en_data = json.load(ef)
+                                                if 'tables' in en_data and 'items' in en_data['tables']:
+                                                    content['items_sold'] = en_data['tables']['items']
+                                    except Exception:
+                                        pass
+                            elif market_type == 'beasts_prices':
+                                if 'beasts' in market_data['tables'] and isinstance(market_data['tables']['beasts'], list):
+                                    content['beast_prices'] = market_data['tables']['beasts']
+                                elif self.language != 'en':
+                                    # Fallback to English detailed beasts if local language lacks them
+                                    try:
+                                        fallback_path = f'databases/beasts_prices/en/beasts_prices.json'
+                                        if os.path.exists(fallback_path):
+                                            with open(fallback_path, 'r', encoding='utf-8') as ef:
+                                                en_data = json.load(ef)
+                                                if 'tables' in en_data and 'beasts' in en_data['tables']:
+                                                    content['beast_prices'] = en_data['tables']['beasts']
+                                    except Exception:
+                                        pass
                             elif market_type == 'services_prices' and 'services' in market_data['tables']:
                                 content['services'] = market_data['tables']['services']
                         else:

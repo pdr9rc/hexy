@@ -6,6 +6,28 @@
     "last_updated": "2025-08-07T22:56:40.000000"
   },
   "tables": {
+    "beasts": [
+      {
+        "name": "Cão (treinado)",
+        "price": 25,
+        "currency": "silver"
+      },
+      {
+        "name": "Cavalo",
+        "price": 80,
+        "currency": "silver"
+      },
+      {
+        "name": "Mula",
+        "price": 10,
+        "currency": "silver"
+      },
+      {
+        "name": "Rato (domesticado)",
+        "price": 8,
+        "currency": "silver"
+      }
+    ],
     "beast_prices": [
       "10 moedas de prata",
       "25 moedas de prata",
