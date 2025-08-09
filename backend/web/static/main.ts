@@ -992,39 +992,71 @@ The world is dying, but adventure lives on.
     const container = document.getElementById('details-panel');
     if (!container) return;
 
-    // Find the markdown content
-    const markdownContent = container.querySelector('.markdown-content pre');
-    if (!markdownContent) {
-      showError('No editable content found');
-      return;
-    }
+    // Find the markdown content; if missing, try to fetch raw markdown and inject
+    let markdownContent = container.querySelector('.markdown-content pre, .markdown-content .ascii-content') as HTMLElement | null;
+    const ensureMarkdownBlock = async (): Promise<HTMLElement | null> => {
+      if (markdownContent) return markdownContent;
+      try {
+        const res = await fetch(`/api/hex/${hexCode}`);
+        const data = await res.json();
+        if (data && data.raw_markdown) {
+          const block = document.createElement('div');
+          block.className = 'markdown-content';
+          const pre = document.createElement('pre');
+          pre.className = 'ascii-content';
+          pre.textContent = data.raw_markdown;
+          block.appendChild(pre);
+          container.appendChild(block);
+          return pre as HTMLElement;
+        }
+      } catch (_) {}
+      // Fallback: create an empty editable block so user can start a new file
+      const block = document.createElement('div');
+      block.className = 'markdown-content';
+      const pre = document.createElement('pre');
+      pre.className = 'ascii-content';
+      pre.textContent = `# HEX ${hexCode}\n\nDESCRIPTION: \n\nENCOUNTER: \n\nNOTABLE FEATURES: \n`;
+      block.appendChild(pre);
+      container.appendChild(block);
+      return pre as HTMLElement;
+    };
 
-    const content = markdownContent.textContent || '';
-    originalHexContent = content;
-    currentEditingHex = hexCode;
+    const proceed = async () => {
+      markdownContent = await ensureMarkdownBlock();
+      if (!markdownContent) {
+        showError('No editable content found');
+        return;
+      }
 
-    // Replace the content with a textarea
-    const textarea = document.createElement('textarea');
-    textarea.value = content;
-    textarea.style.width = '100%';
-    textarea.style.minHeight = '300px';
-    textarea.style.fontFamily = 'monospace';
-    textarea.style.backgroundColor = '#1a1a1a';
-    textarea.style.color = '#ffffff';
-    textarea.style.border = '1px solid #333';
-    textarea.style.padding = '10px';
-    textarea.style.resize = 'vertical';
+      const content = markdownContent.textContent || '';
+      originalHexContent = content;
+      currentEditingHex = hexCode;
 
-    markdownContent.parentNode?.replaceChild(textarea, markdownContent);
+      // Replace the content with a textarea
+      const textarea = document.createElement('textarea');
+      textarea.value = content;
+      textarea.style.width = '100%';
+      textarea.style.minHeight = '300px';
+      textarea.style.fontFamily = 'monospace';
+      textarea.style.backgroundColor = '#1a1a1a';
+      textarea.style.color = '#ffffff';
+      textarea.style.border = '1px solid #333';
+      textarea.style.padding = '10px';
+      textarea.style.resize = 'vertical';
 
-    // Show save/cancel buttons
-    const saveBtn = document.getElementById('save-hex-btn') as HTMLElement;
-    const cancelBtn = document.getElementById('cancel-hex-btn') as HTMLElement;
-    const editBtn = container.querySelector('button[onclick*="editHexContent"]') as HTMLElement;
-    
-    if (saveBtn) saveBtn.style.display = 'inline-block';
-    if (cancelBtn) cancelBtn.style.display = 'inline-block';
-    if (editBtn) editBtn.style.display = 'none';
+      markdownContent.parentNode?.replaceChild(textarea, markdownContent);
+
+      // Show save/cancel buttons
+      const saveBtn = document.getElementById('save-hex-btn') as HTMLElement;
+      const cancelBtn = document.getElementById('cancel-hex-btn') as HTMLElement;
+      const editBtn = container.querySelector('button[onclick*="editHexContent"]') as HTMLElement;
+      
+      if (saveBtn) saveBtn.style.display = 'inline-block';
+      if (cancelBtn) cancelBtn.style.display = 'inline-block';
+      if (editBtn) editBtn.style.display = 'none';
+    };
+
+    void proceed();
   }
 
   public async saveHexContent(hexCode: string): Promise<void> {

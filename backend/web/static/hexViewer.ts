@@ -1023,9 +1023,9 @@ function displaySimplifiedHexView(hexData: any) {
           </div>
           <div class="ascii-section ascii-hex-content">
             <span>CONTENT:</span>
-            <div class="markdown-content">
-              <div class="ascii-content">${hexData.raw_markdown}</div>
-            </div>
+          <div class="markdown-content">
+            <pre class="ascii-content">${hexData.raw_markdown}</pre>
+          </div>
           </div>
           <div class="ascii-section ascii-hex-actions">
             <button class="btn-mork-borg" onclick="window.app.editHexContent('${hexData.hex_code}')">EDIT</button>

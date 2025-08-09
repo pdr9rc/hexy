@@ -29,19 +29,32 @@ class GenerationConfig:
 
 @dataclass
 class PathConfig:
-    """File and directory paths."""
-    project_root: Path = field(default_factory=lambda: Path(__file__).parent.parent)
-    database_path: Path = field(default_factory=lambda: Path(__file__).parent.parent / "databases")
-    output_path: Path = field(default_factory=lambda: Path(__file__).parent.parent / "dying_lands_output")
-    overlay_path: Path = field(default_factory=lambda: Path(__file__).parent.parent / "data" / "city_overlays")
-    web_templates: Path = field(default_factory=lambda: Path(__file__).parent.parent / "web" / "templates")
-    web_static: Path = field(default_factory=lambda: Path(__file__).parent.parent / "web" / "static")
+    """File and directory paths. Honor HEXY_APP_DIR/HEXY_OUTPUT_DIR when set (installed app)."""
+    # Determine base root: prefer HEXY_APP_DIR
+    _base_root: Path = field(default_factory=lambda: Path(os.getenv('HEXY_APP_DIR', Path(__file__).parent.parent)))
+    project_root: Path = field(init=False)
+    database_path: Path = field(init=False)
+    output_path: Path = field(init=False)
+    overlay_path: Path = field(init=False)
+    web_templates: Path = field(init=False)
+    web_static: Path = field(init=False)
     
     def __post_init__(self):
-        """Ensure all paths exist."""
-        for path in [self.database_path, self.output_path, self.overlay_path, 
-                    self.web_templates, self.web_static]:
-            path.mkdir(parents=True, exist_ok=True)
+        base = self._base_root
+        self.project_root = base
+        self.database_path = base / "databases"
+        # Allow explicit output override
+        output_override = os.getenv('HEXY_OUTPUT_DIR')
+        self.output_path = Path(output_override) if output_override else (base / "dying_lands_output")
+        self.overlay_path = base / "data" / "city_overlays"
+        self.web_templates = base / "web" / "templates"
+        self.web_static = base / "web" / "static"
+        # Ensure all paths exist
+        for path in [self.database_path, self.output_path, self.overlay_path, self.web_templates, self.web_static]:
+            try:
+                path.mkdir(parents=True, exist_ok=True)
+            except Exception:
+                pass
 
 @dataclass
 class AppConfig:

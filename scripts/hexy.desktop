@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Hexy - The Dying Lands
+Comment=Run Hexy locally (backend + app)
+Exec=/usr/bin/env bash -c '"$HOME/.local/share/hexy/hexy-run"'
+Terminal=false
+Type=Application
+Icon=hexy
+Categories=Game;Utility;
+

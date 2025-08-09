@@ -51,7 +51,9 @@ class MainMapGenerator:
         # Map configuration
         self.map_width, self.map_height = self.config.get('map_dimensions', (30, 60))
         self.start_x, self.start_y = self.config.get('map_start', (1, 1))
-        self.output_dir = self.config.get('output_directory', 'dying_lands_output')
+        base_root = os.getenv('HEXY_OUTPUT_DIR') or os.getenv('HEXY_APP_DIR') or ''
+        default_out = os.path.join(base_root, 'dying_lands_output') if base_root else 'dying_lands_output'
+        self.output_dir = self.config.get('output_directory', default_out)
         
         # Generation rules
         self.generation_rules = self.config.get('generation_rules', {

@@ -5,9 +5,14 @@ Separated route definitions for better organization.
 """
 
 import re
+import os
+import time
+import threading
+import secrets
 import logging
 import traceback
 from flask import Blueprint, jsonify, request, abort, render_template
+import os
 from backend.config import get_config
 from backend.utils import setup_project_paths, validate_hex_code
 
@@ -31,11 +36,40 @@ from backend.utils.grid_generator import generate_hex_grid, determine_content_sy
 # Create blueprints
 main_bp = Blueprint('main', __name__)
 api_bp = Blueprint('api', __name__)
+assets_bp = Blueprint('assets', __name__)
 
 # Initialize systems
 config = get_config()
 lore_db = MorkBorgLoreDatabase()
 current_language = config.language
+
+# ===== Backend lifetime management via client heartbeat =====
+_HEXY_HEARTBEAT_TS = time.monotonic()
+_HEXY_HEARTBEAT_TOKEN = secrets.token_urlsafe(24)
+_HEXY_TIMEOUT_SECONDS = int(os.getenv('HEXY_IDLE_TIMEOUT', '90'))  # shutdown after 90s idle by default
+
+def _hexy_inactivity_monitor():
+    while True:
+        time.sleep(5)
+        try:
+            if time.monotonic() - _HEXY_HEARTBEAT_TS > _HEXY_TIMEOUT_SECONDS:
+                # Graceful shutdown if possible (Werkzeug dev server), else hard exit
+                shutdown = None
+                try:
+                    from flask import request
+                    shutdown = request.environ.get('werkzeug.server.shutdown')  # type: ignore
+                except Exception:
+                    shutdown = None
+                if shutdown:
+                    shutdown()
+                else:
+                    os._exit(0)
+        except Exception:
+            # Never crash monitor
+            pass
+
+_t = threading.Thread(target=_hexy_inactivity_monitor, name='hexy-inactivity-monitor', daemon=True)
+_t.start()
 
 def get_main_map_generator():
     """Get main map generator with current language configuration."""
@@ -90,9 +124,7 @@ def main_map():
     
     if not config.paths.output_path.exists():
         config.paths.output_path.mkdir(parents=True, exist_ok=True)
-        return render_template('setup.html', 
-                             title="The Dying Lands - Setup", 
-                             action="Run main_map_generator.py to create the map")
+    # If output is empty, show world with empty state; user can press Reset from UI
     
     # Auto-regenerate output if flag is set
     if getattr(config, 'auto_regenerate_output', False):
@@ -120,7 +152,123 @@ def main_map():
                          map_height=map_height,
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height,
-                         current_language=current_language)
+                           current_language=current_language,
+                           hexy_token=_HEXY_HEARTBEAT_TOKEN)
+
+# ===== PWA ASSETS =====
+@assets_bp.route('/manifest.webmanifest')
+def serve_manifest():
+    manifest = {
+        "name": "The Dying Lands",
+        "short_name": "Dying Lands",
+        "start_url": "/",
+        "display": "standalone",
+        "background_color": "#000000",
+        "theme_color": "#000000",
+        "icons": [
+            {"src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png"}
+        ]
+    }
+    return jsonify(manifest)
+
+@assets_bp.route('/service-worker.js')
+def serve_service_worker():
+    # Progressive Web App service worker with basic precache and runtime caching
+    version = (_HEXY_HEARTBEAT_TOKEN[:8] if isinstance(_HEXY_HEARTBEAT_TOKEN, str) else 'v')
+    sw_js = (
+        f"const CACHE_NAME='dl-{version}';\n"
+        f"const RUNTIME_CACHE='dl-runtime-{version}';\n"
+        "const PRECACHE_URLS=[\n"
+        "  '/',\n"
+        "  '/manifest.webmanifest',\n"
+        "  '/static/main.js',\n"
+        "  '/static/main.css',\n"
+        "  '/static/fonts.css',\n"
+        "  '/static/icons/icon-192.png',\n"
+        "  '/static/icons/icon-512.png'\n"
+        "];\n"
+        "self.addEventListener('install',event=>{\n"
+        "  event.waitUntil((async()=>{\n"
+        "    const cache=await caches.open(CACHE_NAME);\n"
+        "    await cache.addAll(PRECACHE_URLS);\n"
+        "    self.skipWaiting();\n"
+        "  })());\n"
+        "});\n"
+        "self.addEventListener('activate',event=>{\n"
+        "  event.waitUntil((async()=>{\n"
+        "    const names=await caches.keys();\n"
+        "    await Promise.all(names.map(n=>{ if(n!==CACHE_NAME && n!==RUNTIME_CACHE){ return caches.delete(n);} }));\n"
+        "    self.clients.claim();\n"
+        "  })());\n"
+        "});\n"
+        "self.addEventListener('fetch',event=>{\n"
+        "  const req=event.request;\n"
+        "  const url=new URL(req.url);\n"
+        "  if(req.method!=='GET'){ return; }\n"
+        "  // API: network-first, fallback to cache\n"
+        "  if(url.origin===location.origin && url.pathname.startsWith('/api/')){\n"
+        "    event.respondWith((async()=>{\n"
+        "      try{\n"
+        "        const fresh=await fetch(req);\n"
+        "        const cache=await caches.open(RUNTIME_CACHE);\n"
+        "        cache.put(req, fresh.clone());\n"
+        "        return fresh;\n"
+        "      }catch(e){\n"
+        "        const cached=await caches.match(req);\n"
+        "        if(cached) return cached;\n"
+        "        throw e;\n"
+        "      }\n"
+        "    })());\n"
+        "    return;\n"
+        "  }\n"
+        "  // Static assets: cache-first\n"
+        "  if(url.origin===location.origin && (url.pathname.startsWith('/static/') || PRECACHE_URLS.includes(url.pathname))){\n"
+        "    event.respondWith((async()=>{\n"
+        "      const cached=await caches.match(req);\n"
+        "      if(cached) return cached;\n"
+        "      const resp=await fetch(req);\n"
+        "      const runtime=await caches.open(RUNTIME_CACHE);\n"
+        "      runtime.put(req, resp.clone());\n"
+        "      return resp;\n"
+        "    })());\n"
+        "    return;\n"
+        "  }\n"
+        "  // Default: try network, fallback to cache\n"
+        "  event.respondWith(fetch(req).catch(()=>caches.match(req)));\n"
+        "});\n"
+    )
+    from flask import Response
+    return Response(sw_js, mimetype='application/javascript')
+
+# ===== Heartbeat/Health API =====
+@api_bp.route('/heartbeat', methods=['POST'])
+def heartbeat():
+    global _HEXY_HEARTBEAT_TS
+    # Be permissive: accept heartbeats unconditionally to avoid idle shutdowns
+    # when the page is served from cache or after a backend restart.
+    _HEXY_HEARTBEAT_TS = time.monotonic()
+    return jsonify({'success': True})
+
+@api_bp.route('/health', methods=['GET'])
+def health():
+    """Simple health endpoint used by the frontend to detect backend availability."""
+    return jsonify({'ok': True})
+
+@api_bp.route('/debug-paths', methods=['GET'])
+def debug_paths():
+    try:
+        from backend.config import get_config
+        cfg = get_config()
+        return jsonify({
+            'cwd': os.getcwd(),
+            'HEXY_APP_DIR': os.getenv('HEXY_APP_DIR'),
+            'HEXY_OUTPUT_DIR': os.getenv('HEXY_OUTPUT_DIR'),
+            'output_path': str(cfg.paths.output_path),
+            'project_root': str(cfg.paths.project_root)
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 # ===== API ROUTES =====
 
@@ -129,6 +277,12 @@ def reset_continent():
     """Reset the entire continent and regenerate all content."""
     try:
         result = main_map_generator.reset_continent()
+        # Invalidate overlay caches if any
+        try:
+            from backend.city_overlay_analyzer import city_overlay_analyzer
+            city_overlay_analyzer.invalidate_cache()
+        except Exception:
+            pass
         # Clear hex service cache after reset
         hex_service.hex_data_cache.clear()
         hex_manager.clear_cache()

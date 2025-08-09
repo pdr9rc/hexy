@@ -458,7 +458,10 @@ A {population} settlement in the {terrain}.
         self.default_rules.update(rules)
         print(f"✅ Custom rules applied: {list(rules.keys())}")
     
-    def reset_all_data(self, output_directory: str = "dying_lands_output"):
+    def reset_all_data(self, output_directory: str = None):
+        if output_directory is None:
+            base_root = os.getenv('HEXY_OUTPUT_DIR') or os.getenv('HEXY_APP_DIR') or ''
+            output_directory = os.path.join(base_root, 'dying_lands_output') if base_root else 'dying_lands_output'
         """Reset all generated data and clear caches."""
         print("🔄 Resetting all data...")
         

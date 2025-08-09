@@ -23,11 +23,19 @@ class CityOverlayAnalyzer:
     
     def __init__(self, language='en'):
         self.lore_db = MorkBorgLoreDatabase()
-        self.output_directory = 'dying_lands_output/city_overlays'
+        base_root = os.getenv('HEXY_OUTPUT_DIR') or os.getenv('HEXY_APP_DIR') or os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        self.output_directory = os.path.join(base_root, 'dying_lands_output', 'city_overlays')
         os.makedirs(self.output_directory, exist_ok=True)
         self.language = language
         self.content_tables = database_manager.load_tables(language)
         self.overlays_cache = {}
+
+    def invalidate_cache(self) -> None:
+        """Clear in-memory overlays cache after a reset."""
+        try:
+            self.overlays_cache.clear()
+        except Exception:
+            self.overlays_cache = {}
 
     def get_available_overlays(self) -> List[Dict[str, Any]]:
         """Get list of available city overlays by name only (no image files)."""
@@ -825,70 +833,59 @@ class CityOverlayAnalyzer:
     
     def _generate_district_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate district content."""
-        if district_data:
-            # Use specific district data
-            name = district_data.get('name', 'Unknown District')
-            # Try to get district description from database
+        if not district_data:
+            district_data = {}
+
+        name = district_data.get('name', 'Unknown District')
+
+        # Compute description with safe fallback, regardless of errors
         try:
             district_descriptions = database_manager.get_table('descriptions', 'district_descriptions', self.language)
             if district_descriptions:
                 description = random.choice(district_descriptions)
             else:
-                description = district_data.get('description', f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}.")
+                description = district_data.get(
+                    'description',
+                    f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}."
+                )
         except Exception:
-            description = district_data.get('description', f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}.")
-            
-            # Get encounters from district data
-            encounters = district_data.get('encounters', [])
-            if encounters:
-                encounter = random.choice(encounters)
-            else:
-                encounter = "Mysterious activities in the district"
-            
-            # Get atmosphere from district data
-            atmospheres = district_data.get('atmosphere_modifiers', [])
-            if atmospheres:
-                atmosphere = random.choice(atmospheres)
-            else:
-                atmosphere = "Dark and foreboding"
-            
-            # Get random table from district data
-            random_tables = district_data.get('random_tables', {})
-            if 'district' in random_tables:
-                random_table = random_tables['district']
-            else:
-                random_table = self._generate_district_random_table()
-            
-            # Get notable features from district data
-            notable_features = []
-            for content_type in ['buildings', 'streets', 'landmarks']:
-                if content_type in district_data and district_data[content_type]:
-                    notable_features.append(random.choice(district_data[content_type]))
-            
-            if not notable_features:
-                notable_features = [
-                    random.choice(["Crumbling mansions", "Narrow alleyways", "Ancient statues", "Broken fountains"]),
-                    random.choice(["Abandoned shops", "Boarded windows", "Graffiti-covered walls", "Overgrown gardens"])
-                ]
-            
-            return {
-                'name': name,
-                'description': description,
-                'encounter': encounter,
-                'atmosphere': atmosphere,
-                'random_table': random_table,
-                'notable_features': notable_features
-            }
-        else:
-            # Use centralized fallback district data
-            return create_fallback_district_data(
-                city_data,
-                self._get_city_content_list,
-                self._get_city_encounters,
-                self._get_city_atmospheres,
-                self._get_city_random_table,
-                self._generate_district_random_table
+            description = district_data.get(
+                'description',
+                f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}."
             )
+
+        # Encounters
+        encounters = district_data.get('encounters', [])
+        encounter = random.choice(encounters) if encounters else "Mysterious activities in the district"
+
+        # Atmosphere
+        atmospheres = district_data.get('atmosphere_modifiers', [])
+        atmosphere = random.choice(atmospheres) if atmospheres else "Dark and foreboding"
+
+        # Random table
+        random_tables = district_data.get('random_tables', {})
+        random_table = random_tables.get('district', self._generate_district_random_table())
+
+        # Notable features
+        notable_features: List[str] = []
+        for content_type in ['buildings', 'streets', 'landmarks']:
+            entries = district_data.get(content_type, [])
+            if entries:
+                notable_features.append(random.choice(entries))
+        if not notable_features:
+            notable_features = [
+                random.choice(["Crumbling mansions", "Narrow alleyways", "Ancient statues", "Broken fountains"]),
+                random.choice(["Abandoned shops", "Boarded windows", "Graffiti-covered walls", "Overgrown gardens"])
+            ]
+
+        return {
+            'name': name,
+            'description': description,
+            'encounter': encounter,
+            'atmosphere': atmosphere,
+            'random_table': random_table,
+            'notable_features': notable_features
+        }
     
     def _generate_building_content(self, city_data: Optional[Dict[str, Any]] = None, district_data: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """Generate building content."""
