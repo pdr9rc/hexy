@@ -87,7 +87,7 @@ mkdir -p "${PROFILE_DIR}"
 
 open_chromium() {
   local bin="$1"
-  nohup "$bin" --user-data-dir="${PROFILE_DIR}" --app="${APP_URL}" --new-window --no-first-run >/dev/null 2>&1 &
+  nohup "$bin" --user-data-dir="${PROFILE_DIR}" --app="${APP_URL}" --new-window --no-first-run --window-size=1600,900 --class="hexy" --name="Hexy - The Dying Lands" >/dev/null 2>&1 &
 }
 
 open_chromium_flatpak() {

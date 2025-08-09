@@ -12,7 +12,7 @@ else
   APP_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 fi
 VENVDIR="${STATE_DIR}/venv"
-PORT="${HEXY_PORT:-6660}"
+PORT="${HEXY_PORT:-7777}"
 
 mkdir -p "${STATE_DIR}"
 export PYTHONPATH="${APP_DIR}:${PYTHONPATH:-}"
