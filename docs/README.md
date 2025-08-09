@@ -1,158 +1,353 @@
-# Hexy - Dying Lands Hexcrawl Generator
+# Hexy - Technical Documentation
 
-A streamlined hexcrawl generator for **The Dying Lands** campaign with web-based visualization and lore-accurate city placement.
+Technical documentation for the Hexy hexcrawl generator system.
 
-## 🎯 Core Features
+## 🏗️ System Architecture
 
-- **Complete 25×30 hex map** generation (750 hexes)
-- **6 Major Mörk Borg cities** with canonical lore placement
-- **Interactive web interface** for viewing and generating content
-- **Bilingual support** (English/Portuguese)
-- **Terrain-aware content** generation
+### Backend Architecture (Flask)
 
-## 🚀 Quick Start
-
-### Installation
-```bash
-# Install Flask for web interface
-pip3 install flask
-
-# Clone repository
-git clone <repo-url>
-cd hexy
-```
-
-### Generate Complete Map
-```bash
-# Generate full 750-hex map in Portuguese
-cd src && python3 main_map_generator.py --language pt
-
-# Generate in English  
-cd src && python3 main_map_generator.py --language en
-```
-
-### Launch Web Interface
-```bash
-# Start the web viewer (only interface needed)
-cd src && python3 ascii_map_viewer.py
-
-# Visit http://localhost:5000
-```
-
-## 📁 Project Structure
+The backend is built with Flask using a modular architecture:
 
 ```
-hexy/
-├── src/                              # Core system (10 files)
-│   ├── ascii_map_viewer.py          # 🌐 Web interface (ONLY viewer needed)
-│   ├── main_map_generator.py        # 🗺️ Complete map generation
-│   ├── generation_engine.py         # ⚙️ Content creation system
-│   ├── mork_borg_lore_database.py   # 📚 Cities & lore placement
-│   ├── database_manager.py          # 🗄️ Database management
-│   ├── terrain_system.py            # 🗺️ Terrain analysis
-│   ├── translation_system.py        # 🌍 Translation support
-│   ├── city_overlay_analyzer.py     # 🏙️ City overlay system
-│   └── image_analyzer.py            # 🖼️ Image processing
-├── dying_lands_output/               # Generated content
-│   ├── hexes/ (750 files)           # Individual hex descriptions
-│   ├── npcs/                        # Generated NPCs
-│   ├── dying_lands_summary.md       # Complete campaign summary
-│   └── ascii_map.txt                # Simple ASCII overview
-├── data/                             # Campaign materials
-│   └── TheDyingLands-Campaign Sheet.png
-└── docs/                             # Documentation
+backend/
+├── __init__.py              # Flask app factory
+├── app.py                   # Main application entry point
+├── routes.py                # API endpoints and web routes
+├── config.py                # Configuration management
+├── hex_service.py           # Hex data management service
+├── generation_engine.py     # Content generation engine
+├── city_overlay_analyzer.py # City overlay system
+├── mork_borg_lore_database.py # Lore integration
+├── database_manager.py      # Database access layer
+├── translation_system.py    # Internationalization
+├── terrain_system.py        # Terrain analysis
+├── hex_model.py             # Hex data models
+├── models.py                # Database models
+├── utils.py                 # Utility functions
+├── image_analyzer.py        # Image processing
+├── ascii_map_viewer.py     # ASCII map generation
+└── web/                     # Frontend assets
+    ├── static/              # JavaScript, CSS, images
+    └── templates/           # HTML templates
 ```
 
-## 🏰 Major Cities
+### Frontend Architecture (Vanilla JS/TypeScript)
 
-All **6 canonical Mörk Borg cities** are automatically placed:
+The frontend uses vanilla JavaScript with TypeScript for development:
 
-- **Galgenbeck** (1215) - Central urban hub, population 501-1000
-- **Bergen Chrypt** (0805) - Northern mountain fortress, population 101-500
-- **Sarkash Forest Settlement** (0508) - Northwest forest outpost, population 51-100
-- **Tveland Outpost** (2012) - Eastern trading post, population 51-100
-- **Kergus Plains Settlement** (1525) - Southern agriculture, population 101-500
-- **Pyre-Chrypt** (0618) - Abandoned plague city, population 0
-
-## 🌍 Terrain Distribution
-
-**Optimized 25×30 Map:**
-- 🌾 Plains: ~31% (Perfect for settlements)
-- ⛰️ Mountains: ~27% (Eastern ranges) 
-- 🌲 Forests: ~23% (Northern Sarkash region)
-- 🐸 Swamps: ~14% (Southern wetlands)
-- 🌊 Coast: ~5% (Western shoreline)
-
-## 🎮 Usage
-
-### Generate Individual Hexes
-```bash
-cd src && python3 main_map_generator.py --hex 0508
-# Generate specific hex: 0508 (Sarkash Forest area)
+```
+backend/web/static/
+├── main.js                  # Main application logic
+├── hexViewer.js             # Hex visualization
+├── api.js                   # API communication
+├── translations.js          # Internationalization
+├── controls.js              # UI controls
+├── mapRenderer.js           # Map rendering
+├── uiUtils.js               # UI utilities
+├── cityOverlays.js          # City overlay handling
+├── cityOverlay.js           # Individual city overlays
+├── utils/                   # Utility modules
+│   ├── apiUtils.js          # API utilities
+│   └── colorUtils.js        # Color utilities
+└── icons/                   # Application icons
 ```
 
-### Web Interface Features
-- **Interactive ASCII map** with clickable hexes
-- **Real-time hex generation** 
-- **City information** and lore details
-- **Terrain overview** with statistics
-- **Search and navigation** tools
+## 🔧 Configuration System
 
-### API Endpoints
-- `/api/hex/<hex_code>` - Get hex information
-- `/api/generate-hex` - Generate single hex
-- `/api/terrain-overview` - Map analysis
+### Environment Variables
 
-## 🌍 Language Support
+The application uses environment variables for configuration:
 
 ```bash
-# Portuguese generation (default for Mörk Borg atmosphere)
-cd src && python3 main_map_generator.py --language pt
+# Application paths
+HEXY_APP_DIR=/path/to/app          # Application directory
+HEXY_OUTPUT_DIR=/path/to/output     # Output directory
 
-# English generation
-cd src && python3 main_map_generator.py --language en
+# Server configuration
+HEXY_PORT=7777                      # Server port (default: 6660)
+HEXY_IDLE_TIMEOUT=1800              # Idle timeout in seconds
+
+# Browser configuration
+HEXY_BROWSER=chromium               # Preferred browser
 ```
 
-## 📊 Web Interface Only
+### Configuration Classes
 
-This system is designed around the **single web interface**. No other viewers are needed:
-
-- ✅ **Interactive map visualization**
-- ✅ **Real-time content generation** 
-- ✅ **City and lore information**
-- ✅ **Mobile-friendly responsive design**
-- ✅ **All features integrated** in one interface
-
-## 🔧 Advanced Usage
-
-### Regenerate Existing Content
-```bash
-# Force regeneration of all hexes
-cd src && python3 main_map_generator.py --reset --language pt
-```
-
-### Custom Content Generation
 ```python
-# Generate specific terrain types
-from src.main_map_generator import MainMapGenerator
-generator = MainMapGenerator({'language': 'en'})
-hex_data = generator.generate_hex("0508")
+@dataclass
+class AppConfig:
+    language: str = 'pt'
+    debug: bool = True
+    host: str = '127.0.0.1'
+    port: int = int(os.getenv('HEXY_PORT', '6660'))
+    
+    # Map configuration
+    map: MapConfig = field(default_factory=MapConfig)
+    
+    # Generation configuration
+    generation: GenerationConfig = field(default_factory=GenerationConfig)
+    
+    # Path configuration
+    paths: PathConfig = field(default_factory=PathConfig)
 ```
 
-## 🎯 Perfect For
+## 🗄️ Database System
 
-- **Mörk Borg campaigns** with official lore integration
-- **Hexcrawl adventures** with detailed terrain
-- **Campaign preparation** with automated content
-- **Web-based gaming** with interactive maps
+### SQLite Databases
 
-## 📈 File Count
+Content is stored in SQLite databases in the `databases/` directory:
 
-- **Core system**: 10 Python files (streamlined)
-- **Generated content**: 750+ hex files + cities
-- **Single web interface**: All viewing in one place
-- **No redundant viewers**: Clean, focused system
+```
+databases/
+├── encounters.db            # Random encounters
+├── npcs.db                 # NPC data
+├── loot.db                 # Treasure tables
+├── descriptions.db          # Location descriptions
+├── atmospheres.db          # Atmospheric details
+└── translations.db         # Translation data
+```
+
+### Database Manager
+
+The `database_manager.py` provides a unified interface:
+
+```python
+class DatabaseManager:
+    def get_table(self, table_type: str, table_name: str, language: str) -> List[str]
+    def get_random_entry(self, table_type: str, table_name: str, language: str) -> str
+    def get_all_tables(self, table_type: str, language: str) -> Dict[str, List[str]]
+```
+
+## 🎮 API Reference
+
+### Core Endpoints
+
+#### Health & Status
+- `GET /api/health` - Health check
+- `GET /api/debug-paths` - Debug path configuration
+- `POST /api/heartbeat` - Client heartbeat
+
+#### Hex Management
+- `GET /api/hex/<hex_code>` - Get hex information
+- `PUT /api/hex/<hex_code>` - Update hex content
+- `POST /api/generate-hex` - Generate single hex
+- `POST /api/reset-continent` - Regenerate entire continent
+
+#### City Overlays
+- `GET /api/city-overlays` - List available city overlays
+- `GET /api/city-overlay/<name>` - Get city overlay data
+- `GET /api/city-overlay/<name>/ascii` - Get ASCII representation
+- `GET /api/city-overlay/<name>/hex/<hex_id>` - Get specific hex in overlay
+
+#### Language & Configuration
+- `POST /api/set-language` - Change language (en/pt)
+- `GET /api/lore-overview` - Get lore overview
+
+### Response Formats
+
+#### Hex Data
+```json
+{
+  "hex_code": "1113",
+  "terrain": "forest",
+  "hex_type": "dungeon",
+  "is_dungeon": true,
+  "encounter": "▲ **Bone pit**",
+  "denizen": "Bone pit, built on unholy ground.",
+  "danger": "Cursed artifacts",
+  "atmosphere": "Scratching sounds",
+  "raw_markdown": "# Hex 1113\n\n**Terrain:** Forest...",
+  "exists": true
+}
+```
+
+#### Reset Response
+```json
+{
+  "success": true,
+  "generated_count": 1800,
+  "message": "Continent reset complete. Generated 1800 hexes."
+}
+```
+
+## 🔄 Content Generation
+
+### Generation Engine
+
+The `generation_engine.py` handles content generation:
+
+```python
+class GenerationEngine:
+    def generate_hex(self, hex_code: str) -> Dict[str, Any]
+    def generate_settlement(self, hex_code: str) -> Dict[str, Any]
+    def generate_dungeon(self, hex_code: str) -> Dict[str, Any]
+    def generate_beast(self, hex_code: str) -> Dict[str, Any]
+    def generate_npc(self, hex_code: str) -> Dict[str, Any]
+```
+
+### Content Types
+
+1. **Settlements** (⌂) - Villages, towns, cities
+2. **Dungeons** (▲) - Ruins, tombs, lairs
+3. **Beasts** (※) - Monsters and creatures
+4. **NPCs** (☉) - Wandering characters
+5. **Sea Encounters** (≈) - Coastal events
+6. **Basic Hexes** - Terrain descriptions
+
+### Terrain System
+
+The `terrain_system.py` provides terrain analysis:
+
+```python
+class TerrainSystem:
+    def get_terrain_for_hex(self, hex_code: str) -> str
+    def get_terrain_symbol(self, terrain: str) -> str
+    def analyze_terrain_distribution(self) -> Dict[str, int]
+```
+
+## 🌍 Internationalization
+
+### Translation System
+
+The `translation_system.py` handles multiple languages:
+
+```python
+class TranslationSystem:
+    def translate(self, key: str, language: str) -> str
+    def get_available_languages(self) -> List[str]
+    def set_language(self, language: str) -> None
+```
+
+### Supported Languages
+- **Portuguese (pt)** - Default for Mörk Borg atmosphere
+- **English (en)** - Alternative language
+
+## 🏙️ City Overlay System
+
+### City Overlay Analyzer
+
+The `city_overlay_analyzer.py` generates detailed city content:
+
+```python
+class CityOverlayAnalyzer:
+    def generate_city_overlay(self, city_name: str) -> Dict[str, Any]
+    def get_district_details(self, city_name: str, district: str) -> Dict[str, Any]
+    def generate_random_table(self, city_name: str, district: str) -> List[str]
+```
+
+### Available Cities
+- **Galgenbeck** - Central urban hub
+- **Bergen Chrypt** - Northern mountain fortress
+- **Sarkash Forest Settlement** - Northwest forest outpost
+- **Tveland Outpost** - Eastern trading post
+- **Kergus Plains Settlement** - Southern agriculture
+- **Pyre-Chrypt** - Abandoned plague city
+
+## 🚀 Deployment
+
+### Desktop Launcher
+
+The launcher system provides easy desktop integration:
+
+```bash
+# Install launcher
+./scripts/install-launcher.sh
+
+# Launcher files
+~/.local/share/hexy/hexy-run      # Main launcher script
+~/.local/share/hexy/hexy-backend  # Backend service script
+~/.local/share/applications/hexy.desktop  # Desktop entry
+```
+
+### Systemd Service
+
+Optional systemd service for auto-start:
+
+```ini
+[Unit]
+Description=Hexy Backend
+After=network.target
+
+[Service]
+Type=simple
+Environment=HEXY_PORT=6660
+ExecStart=~/.local/share/hexy/hexy-backend
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+```
+
+### Production Deployment
+
+1. **WSGI Server**: Use Gunicorn or uWSGI
+2. **Reverse Proxy**: Nginx or Apache
+3. **SSL**: Configure HTTPS certificates
+4. **Environment**: Set production environment variables
+
+## 🧪 Testing
+
+### Test Structure
+```
+backend/tests/
+├── test_hex_service.py      # Hex service tests
+├── test_generation_engine.py # Generation tests
+├── test_api.py              # API endpoint tests
+└── test_integration.py      # Integration tests
+```
+
+### Running Tests
+```bash
+# Run all tests
+python -m pytest backend/tests/
+
+# Run specific test file
+python -m pytest backend/tests/test_hex_service.py
+
+# Run with coverage
+python -m pytest --cov=backend backend/tests/
+```
+
+## 🔍 Debugging
+
+### Debug Endpoints
+- `GET /api/debug-paths` - Show current path configuration
+- `GET /api/health` - Health check with status
+- `POST /api/heartbeat` - Client connectivity test
+
+### Log Files
+- `/tmp/hexy-launcher.log` - Launcher activity
+- `/tmp/hexy-backend.log` - Backend server logs
+
+### Common Debug Commands
+```bash
+# Check backend status
+curl http://127.0.0.1:7777/api/health
+
+# View debug paths
+curl http://127.0.0.1:7777/api/debug-paths
+
+# Reset continent
+curl -X POST http://127.0.0.1:7777/api/reset-continent
+
+# Check launcher logs
+tail -f /tmp/hexy-launcher.log
+```
+
+## 📊 Performance
+
+### Optimization Strategies
+1. **Hex Service Caching** - In-memory hex data cache
+2. **Database Indexing** - Optimized SQLite queries
+3. **Static Asset Caching** - Browser caching for static files
+4. **Lazy Loading** - Load hex data on demand
+
+### Monitoring
+- **Memory Usage**: Monitor hex service cache size
+- **Response Times**: API endpoint performance
+- **Database Queries**: SQLite query optimization
+- **Frontend Performance**: JavaScript execution time
 
 ---
 
-**🎲 Ready to explore The Dying Lands! Launch the web interface and start your hexcrawl.** 
+**For user documentation, see the main README.md file.** 
