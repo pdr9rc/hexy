@@ -63,7 +63,7 @@ class AppConfig:
     supported_languages: Tuple[str, ...] = ('en', 'pt')
     debug: bool = True
     host: str = '127.0.0.1'
-    port: int = 6660
+    port: int = int(os.getenv('HEXY_PORT', '6660'))
     
     # Map configuration
     map: MapConfig = field(default_factory=MapConfig)

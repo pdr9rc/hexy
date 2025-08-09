@@ -16,9 +16,9 @@ PORT="${HEXY_PORT:-6660}"
 
 mkdir -p "${STATE_DIR}"
 export PYTHONPATH="${APP_DIR}:${PYTHONPATH:-}"
-export FLASK_APP='backend:create_app'
 export HEXY_APP_DIR="${APP_DIR}"
-export HEXY_OUTPUT_DIR="${APP_DIR}"
+export HEXY_OUTPUT_DIR="${APP_DIR}/dying_lands_output"
+export HEXY_PORT="${PORT}"
 echo $$ > "${PIDFILE}" 2>/dev/null || true
 
 use_system_python() {
@@ -33,7 +33,7 @@ for m in mods:
     except Exception:
         subprocess.check_call([sys.executable, '-m', 'pip', 'install', '--user', m])
 PY
-  exec python3 -m flask run --host 127.0.0.1 --port "${PORT}"
+  exec python3 -m backend.run
 }
 
 if python3 -m venv --help >/dev/null 2>&1; then
@@ -48,7 +48,7 @@ if python3 -m venv --help >/dev/null 2>&1; then
     else
       pip install flask || true
     fi
-    exec python -m flask run --host 127.0.0.1 --port "${PORT}"
+    exec python -m backend.run
   fi
 fi
 
