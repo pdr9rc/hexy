@@ -2,6 +2,9 @@
 
 A modern web-based hexcrawl generator for **The Dying Lands** campaign with interactive visualization and lore-accurate content generation.
 
+![Hexy demo preview](docs/demo.gif)
+
+
 ## 🎯 Features
 
 - **Interactive web interface** with real-time hex generation
@@ -10,6 +13,8 @@ A modern web-based hexcrawl generator for **The Dying Lands** campaign with inte
 - **Bilingual support** (English/Portuguese)
 - **Desktop launcher** for easy access
 - **Progressive Web App** with offline capabilities
+
+![Language reset preview](docs/language_reset.gif)
 
 ## 🚀 Quick Start
 

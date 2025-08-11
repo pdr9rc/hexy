@@ -285,6 +285,8 @@ export async function renderHexDetails(app: DyingLandsApp, hexCode: string) {
   } catch (error) {
     console.error('Error loading hex details:', error);
     showErrorState('Failed to load hex details');
+  } finally {
+    ui.hideLoading();
   }
 }
 

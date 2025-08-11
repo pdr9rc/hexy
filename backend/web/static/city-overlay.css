@@ -17,7 +17,6 @@
 .city-overlay-header h2 {
   color: var(--text-accent);
   margin: 0;
-  font-family: "Jacquard 12", monospace;
 }
 
 .city-overlay-controls {
@@ -51,7 +50,6 @@
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
-  font-family: "Pixelify Sans", monospace;
 }
 
 .city-hex-cell:hover {
@@ -117,7 +115,7 @@
 .city-legend h4 {
   color: var(--text-accent);
   margin: 0 0 10px 0;
-  font-family: "Jacquard 12", monospace;
+  
 }
 
 .legend-items {
@@ -155,7 +153,7 @@
 .city-hex-details h3 {
   color: var(--text-accent);
   margin: 0 0 10px 0;
-  font-family: "Jacquard 12", monospace;
+  
 }
 
 .hex-type-badge {

@@ -78,7 +78,7 @@ class AppConfig:
     output_formats: Tuple[str, ...] = ('markdown', 'ascii')
     
     # Feature flags
-    skip_existing: bool = True
+    skip_existing: bool = False
     create_summary: bool = True
     create_ascii_map: bool = True
     # Auto-regenerate output on server start or map request

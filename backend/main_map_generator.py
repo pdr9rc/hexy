@@ -6,6 +6,7 @@ Consolidates MapGenerator and HexGenerator into one unified system.
 """
 
 import os
+import time
 import random
 import shutil
 from typing import Dict, List, Tuple, Optional, Any
@@ -51,9 +52,23 @@ class MainMapGenerator:
         # Map configuration
         self.map_width, self.map_height = self.config.get('map_dimensions', (30, 60))
         self.start_x, self.start_y = self.config.get('map_start', (1, 1))
-        base_root = os.getenv('HEXY_OUTPUT_DIR') or os.getenv('HEXY_APP_DIR') or ''
-        default_out = os.path.join(base_root, 'dying_lands_output') if base_root else 'dying_lands_output'
-        self.output_dir = self.config.get('output_directory', default_out)
+        hexy_output_env = os.getenv('HEXY_OUTPUT_DIR')
+        hexy_app_dir = os.getenv('HEXY_APP_DIR')
+        if hexy_output_env:
+            default_out = hexy_output_env
+        elif hexy_app_dir:
+            default_out = os.path.join(hexy_app_dir, 'dying_lands_output')
+        else:
+            default_out = 'dying_lands_output'
+
+        # Resolve output directory: if configuration provides a value, honor
+        # absolute paths; if it's a relative placeholder like 'dying_lands_output',
+        # use the environment-driven default directory instead to avoid nesting.
+        cfg_out = self.config.get('output_directory')
+        if cfg_out is None or cfg_out == '' or cfg_out == 'dying_lands_output' or cfg_out == '.':
+            self.output_dir = default_out
+        else:
+            self.output_dir = cfg_out if os.path.isabs(cfg_out) else os.path.join(default_out, cfg_out)
         
         # Generation rules
         self.generation_rules = self.config.get('generation_rules', {
@@ -88,7 +103,10 @@ class MainMapGenerator:
             'language': 'en',
             'map_dimensions': (30, 60),
             'map_start': (1, 1),
-            'output_directory': 'dying_lands_output',
+            # Do not force an output_directory here; let environment decide.
+            # When not specified, the generator will use HEXY_OUTPUT_DIR or
+            # fallback to APP_DIR/dying_lands_output.
+            'output_directory': None,
             'generation_rules': {
                 'settlement_chance': 0.15,  # Reduced to make room for more dungeons/beasts
                 'dungeon_chance': 0.45,     # Increased from 0.30 - more dungeons!
@@ -98,7 +116,7 @@ class MainMapGenerator:
                 'scroll_chance': 0.35       # Increased from 0.30
             },
             'output_formats': ['markdown', 'ascii'],
-            'skip_existing': True,
+            'skip_existing': False,
             'create_summary': True,
             'create_ascii_map': True
         }

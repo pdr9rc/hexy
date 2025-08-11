@@ -76,15 +76,20 @@
 html, body {
   height: 100%;
   min-height: 100%;
+  font-family: 'IBM', monospace;
 }
 
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: "Pixelify Sans", monospace;
   min-height: 100vh;
   overflow-x: auto;
   line-height: 1.6;
+  font-family: 'IBM', monospace;
+}
+
+pre {
+  font-family: 'IBM', monospace;
 }
 
 h1,
@@ -93,7 +98,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "adhesive-nr-seven", serif;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: var(--spacing-md);
@@ -114,7 +118,7 @@ h6 {
 }
 
 .header h1 {
-  font-family: "Jacquard 12", monospace;
+  
   font-size: 2.5em;
   color: var(--text-accent);
   text-shadow: var(--shadow-pink);
@@ -212,7 +216,7 @@ h6 {
   border: 2px solid var(--border-primary);
   background: var(--bg-primary);
   color: var(--mork-pink) !important;
-  font-family: "Pixelify Sans", monospace;
+  font-family: 'Kun-Denta', monospace;
   font-size: 14px;
   cursor: pointer;
   border-radius: var(--border-radius);
@@ -251,7 +255,7 @@ h6 {
   background: var(--bg-primary);
   border: 2px solid var(--border-primary);
   color: var(--mork-pink) !important;
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+  font-family: 'Kun-Denta', monospace;
   font-size: 12px;
   font-weight: bold;
   padding: 8px 12px;
@@ -565,7 +569,7 @@ h6 {
 }
 
 .details-header h2 {
-  font-family: "Jacquard 12", monospace;
+  
   color: var(--text-accent);
   margin: 0;
   font-size: 1.5em;
@@ -581,8 +585,7 @@ h6 {
 .hex-info h3 {
   color: var(--mork-yellow) !important;
   margin: 0 0 15px 0;
-  font-family: "BLACH", monospace;
-  font-size: 1.3em;
+  font-size: 0.3em;
 }
 
 .hex-info .hex-type {
@@ -609,7 +612,6 @@ h6 {
   text-transform: uppercase;
   border-bottom: 1px solid var(--border-primary);
   padding-bottom: 2px;
-  font-family: "BLACH", monospace;
 }
 
 .hex-info .section p {
@@ -682,8 +684,8 @@ h6 {
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.8);
   color: var(--mork-pink) !important;
-  font-family: "Jacquard 12", monospace;
-  font-size: 10px;
+  
+  font-size: 12px;
   font-weight: bold;
   padding: 2px 6px;
   border: 1px solid var(--border-primary);
@@ -723,7 +725,7 @@ h6 {
   /* Visual styling - unified appearance */
   font-size: 14px;
   font-weight: bold;
-  font-family: "Jacquard 12", monospace;
+  
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
   
@@ -755,6 +757,8 @@ h6 {
   --hex-spacing: 0.85;
 }
 
+
+
 .header-ascii {
   color: var(--mork-yellow) !important; 
   position: relative;
@@ -764,6 +768,7 @@ h6 {
 .header-ascii pre {
   margin: 0;
   padding: var(--spacing-sm);
+  font-size: 6.66px !important;
   background: var(--bg-primary);
   border-bottom: 1px solid var(--border-muted);
 }
@@ -907,7 +912,7 @@ h6 {
 }
 
 .ascii-modal pre {
-  font-family: "Courier New", monospace;
+  
   font-size: 11px;
   line-height: 1.2;
   color: var(--mork-yellow);
@@ -951,7 +956,7 @@ h6 {
   background: var(--mork-black);
   border: 1px solid var(--mork-pink);
   padding: 15px;
-  font-family: "Courier New", monospace;
+  
   font-size: 12px;
   line-height: 1.4;
   color: var(--mork-white);
@@ -1137,7 +1142,7 @@ h6 {
 
   /* Tablet city name adjustments */
   .city-name-label {
-    font-size: 8px;
+    font-size: 12px;
     top: -20px;
     padding: 1px 4px;
   }
@@ -1271,7 +1276,6 @@ h6 {
 
 .city-overlay-header h2 {
   color: var(--mork-pink);
-  font-family: "BLACH", monospace;
   font-size: 1.5em;
   text-align: center;
   margin-bottom: var(--spacing-sm);
@@ -1358,7 +1362,7 @@ h6 {
 
 .city-legend h3 {
   color: var(--mork-pink) !important;
-  font-family: "Jacquard 12", monospace;
+  
   font-size: 1.2em;
   text-align: center;
   margin-bottom: var(--spacing-md);
@@ -1507,7 +1511,7 @@ h6 {
 }
 
 .city-hex-symbol {
-  font-family: "Jacquard 12", monospace;
+  
   font-size: 1.2em;
   font-weight: bold;
   /* Match world hex text styling - inherit color and use simple text shadow */
@@ -1525,7 +1529,6 @@ h6 {
   align-items: flex-start;
   width: 100%;
   margin: 0 auto;
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
 }
 /* Ensure all .city-hex-details-box and children have consistent background and color */
 .city-hex-details-box {
@@ -1541,7 +1544,7 @@ h6 {
   border: 2px solid var(--border-primary);
   border-radius: var(--border-radius);
   padding: 15px;
-  font-family: "Courier New", monospace;
+  
   font-size: 12px;
   line-height: 1.2;
   color: var(--text-primary);
@@ -1591,7 +1594,7 @@ h6 {
   padding: 6px 0 4px 0;
   margin-bottom: 4px;
   color: var(--mork-yellow);
-  font-size: 1.1em;
+  font-size: 14px;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
@@ -1605,7 +1608,6 @@ h6 {
   letter-spacing: 1px;
 }
 .city-hex-details-box .ascii-section .ascii-content {
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace !important;
   font-size: 1.1em;
   color: var(--mork-yellow) !important;
   background: none !important;
@@ -1617,6 +1619,24 @@ h6 {
   word-wrap: break-word;
   overflow-wrap: break-word;
   display: block;
+}
+
+/* Scrollable ASCII content blocks with touch support */
+.ascii-content {
+  max-height: 50vh;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+/* Make city selected hex behave like world selected hex */
+.city-hex-cell.city-hex-selected {
+  background-color: var(--mork-yellow) !important;
+  color: var(--mork-black) !important;
+  animation: hex-bounce 0.5s cubic-bezier(0.4, 0.2, 0.6, 1.2);
+  z-index: 2;
+  position: relative;
+  box-shadow: var(--shadow-yellow), 0 0 20px 10px var(--mork-pink);
 }
 
 /* ===== INTEGRATED CITY VIEW STYLES ===== */
@@ -1649,6 +1669,7 @@ h6 {
   border: 2px solid var(--mork-pink) !important;
   padding: 6px 12px;
   border-radius: var(--border-radius-sm);
+  font-family: 'Kun-Denta', monospace;
   font-size: 0.8em;
   font-weight: bold;
   text-transform: uppercase;
@@ -1760,7 +1781,6 @@ h6 {
 }
 
 .city-overlay-ascii-section .ascii-content {
-  font-family: 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace !important;
   font-size: 1.1em;
   color: var(--mork-yellow) !important;
   background: none !important;
@@ -1882,6 +1902,7 @@ h6 {
   border: 2px solid var(--mork-pink) !important;
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--border-radius-sm);
+  font-family: 'Kun-Denta', monospace;
   font-size: 0.9em;
   font-weight: bold;
   text-transform: uppercase;
@@ -2030,7 +2051,7 @@ h6 {
 .ascii-settlement-layout pre {
   color: var(--mork-cyan);
   text-shadow: 0 0 3px var(--mork-cyan);
-  font-family: "Courier New", monospace;
+  
 }
 
 .ascii-settlement-layout:hover {
@@ -2058,7 +2079,7 @@ h6 {
 .ascii-hex-npc-location pre {
   color: var(--mork-pink);
   text-shadow: 0 0 3px var(--mork-pink);
-  font-family: "Courier New", monospace;
+  
 }
 
 .ascii-hex-npc-carries:hover,
@@ -2087,7 +2108,7 @@ h6 {
 .ascii-hex-beast-art pre {
   color: var(--mork-yellow);
   text-shadow: 0 0 3px var(--mork-yellow);
-  font-family: "Courier New", monospace;
+  
 }
 
 .ascii-hex-treasure-found:hover,
@@ -2108,7 +2129,6 @@ h6 {
   border-radius: 5px;
   white-space: pre-wrap;
   word-wrap: break-word;
-  font-family: 'Courier New', monospace;
   font-size: 12px;
   line-height: 1.4;
   max-height: 400px;
@@ -2120,7 +2140,6 @@ h6 {
   border: 1px solid #333;
   padding: 15px;
   border-radius: 5px;
-  font-family: 'Courier New', monospace;
   font-size: 12px;
   line-height: 1.4;
   color: #ffffff;
@@ -2141,6 +2160,7 @@ h6 {
 .ascii-hex-actions button {
   flex: 1;
   min-width: 80px;
+  font-family: 'Kun-Denta', monospace;
 }
 
 /* ===== ENHANCED CITY CONTROLS PANEL ===== */
@@ -2177,6 +2197,7 @@ h6 {
   border: 1px solid var(--border-muted);
   color: var(--text-primary);
   padding: var(--spacing-sm);
+  font-family: 'Kun-Denta', monospace;
   font-size: 12px;
   cursor: pointer;
   transition: var(--transition-fast);
@@ -2229,6 +2250,7 @@ h6 {
 
 .btn-small {
   padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: 'Kun-Denta', monospace;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -2378,3 +2400,114 @@ h6 {
     padding: var(--spacing-xs);
   }
 }
+
+/* ===== GLOBAL LOADING OVERLAY (Lottie) ===== */
+.loading-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.loading-indicator[hidden] { display: none !important; }
+.loading-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.loading-indicator lottie-player {
+  position: relative;
+  z-index: 1;
+  filter: none;
+}
+
+/* Lottie container */
+.lottie-wrap{ position: relative; z-index:1; width: 1024px; height: 1024px; display:flex; align-items:center; justify-content:center; }
+#lottie-loader{ width: 1024px; height: 1024px; }
+
+/* ===== Bulletproof CSS Spinner (no external deps) ===== */
+.loading-spinner{ position: relative; width: 56px; height:56px; }
+.loading-spinner:before{ content:''; box-sizing: border-box; position:absolute; inset:0; border:6px solid rgba(255,255,0,0.25); border-top-color:#ffff00; border-radius:50%; animation:spin 0.9s linear infinite; filter: drop-shadow(0 0 8px #ffff00); }
+
+/* Center spinner inside overlay */
+.loading-indicator .loading-spinner{ z-index:1; }
+
+/* ===== BLEEDING EFFECT ===== */
+.bleeding-effect {
+  display: block;
+  box-sizing: border-box;
+  position: fixed;
+  top: -15px;
+  right: 0;
+  /* Slightly extend past the bottom to guarantee full coverage on high-DPI
+     and fractional layout cases where 100% can round short. */
+  bottom: -24px;
+  left: 0;
+  z-index: 2; /* below video (z-index:3), above backdrop (z-index:1 via stacking) */
+  width: 100%;
+  height: calc(100% + 24px);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 2s;
+}
+
+.bleeding-effect.hidden {
+  opacity: 0;
+}
+
+.bleeding-effect line {
+  stroke: var(--mork-pink);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* WebM loader */
+.loading-video{ 
+  position: relative; 
+  z-index:3; /* ensure skull above bleeding */
+  width:300px; 
+  height:300px; 
+  object-fit: contain; 
+    filter: sepia(1) hue-rotate(30deg) saturate(2) brightness(1.1) contrast(1.2);
+  background: transparent !important;
+  border: none;
+  outline: none;
+  mix-blend-mode: normal;
+    /* Order: vendor-specific first, then standard */
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: pixelated;
+}
+
+/* GIF fallback */
+.loading-gif{ position:relative; z-index:1; width:160px; height:160px; object-fit:contain; display:none; filter: drop-shadow(0 0 10px var(--mork-yellow)); }
+
+/* Lottie loader */
+.lottie-container{ position: relative; z-index:1; width:180px; height:180px; display: flex; align-items: center; justify-content: center; filter: none; }
+
+/* Reset confirmation overlay within loading indicator */
+.confirm-reset-overlay{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:4;
+}
+.confirm-reset-modal{
+  background: transparent; /* transparent background */
+  border: 2px solid transparent; /* transparent border */
+  padding: 16px;
+  min-height: 45vh; /* approximately ~3x taller */
+  max-width: 420px;
+  color: var(--mork-yellow);
+  box-shadow: none; /* remove shadow */
+  text-align: center;
+  transform: translateY(-18vh); /* move modal up from center */
+}
+.confirm-reset-modal h4{ margin: 0 0 8px 0; color: var(--mork-pink); }
+.confirm-reset-modal p{ margin: 0 0 12px 0; color: var(--mork-white); font-size: 12px; }
+.confirm-reset-actions{ display:flex; gap:8px; justify-content:center; }

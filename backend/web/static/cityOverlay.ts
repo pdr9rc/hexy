@@ -206,7 +206,7 @@ export async function showCityOverlayAsciiInMap(app: any, overlayName: string, h
               <h4 style="color: var(--mork-cyan); margin-bottom: 15px;">
                 ⌂ CITY OVERLAY - ASCII VIEW
               </h4>
-              <pre style="font-family: 'Courier New', monospace; font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word; text-align: left;">
+              <pre style="font-size: 10px; line-height: 1.2; color: var(--mork-cyan); margin: 0; white-space: pre-wrap; word-wrap: break-word; text-align: left;">
 ${data.ascii}
               </div>
             </div>

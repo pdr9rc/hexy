@@ -168,6 +168,10 @@ class DyingLandsApp {
 
     if (!hexId || !overlayName) return
 
+    // Immediate visual feedback: toggle selected class
+    document.querySelectorAll('.city-hex-cell.city-hex-selected').forEach(el => el.classList.remove('city-hex-selected'))
+    hexElement.classList.add('city-hex-selected')
+
     this.showCityHexDetails(overlayName, hexId)
   }
 
@@ -446,6 +450,17 @@ class DyingLandsApp {
     `;
     
     detailsPanel.innerHTML = html
+
+    // Ensure ascii-content blocks are touch-scrollable and show grab cursor on touchstart
+    detailsPanel.querySelectorAll('.ascii-content').forEach((el) => {
+      const block = el as HTMLElement
+      block.style.maxHeight = block.style.maxHeight || '50vh'
+      block.style.overflow = 'auto'
+      ;(block.style as any).webkitOverflowScrolling = 'touch'
+      block.style.touchAction = 'pan-y'
+      block.addEventListener('touchstart', () => { block.style.cursor = 'grabbing' }, { passive: true })
+      block.addEventListener('touchend', () => { block.style.cursor = '' }, { passive: true })
+    })
   }
 
   private updateDistrictDetails(hexData: any): void {

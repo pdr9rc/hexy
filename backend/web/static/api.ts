@@ -51,11 +51,12 @@ export async function setLanguage(language: string): Promise<any> {
   }
 }
 
-export async function resetContinent(): Promise<any> {
+export async function resetContinent(language?: string): Promise<any> {
   try {
     const response = await fetch('/api/reset-continent', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(language ? { language } : {})
     });
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);

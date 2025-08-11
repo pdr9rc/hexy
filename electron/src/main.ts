@@ -58,7 +58,7 @@ function createWindow(): void {
   });
 
   // Enforce 16:9 aspect ratio
-  mainWindow.setAspectRatio(16 / 9);
+  // Removed aspect ratio lock; window starts at 1600x900 but can be freely resized
 
   // Load the Flask app
   mainWindow.loadURL(BACKEND_URL);
@@ -143,6 +143,8 @@ function createMenu(): void {
 // Disable sandbox to avoid sandbox errors
 app.commandLine.appendSwitch('--no-sandbox');
 app.commandLine.appendSwitch('--disable-setuid-sandbox');
+// Prefer correct platform backend automatically (Wayland/X11)
+app.commandLine.appendSwitch('ozone-platform-hint', 'auto');
 
 // This method will be called when Electron has finished initialization
 app.whenReady().then(async () => {
@@ -172,10 +174,21 @@ app.on('activate', () => {
   }
 });
 
-// Security: Prevent new window creation
+// Security: Prevent new window creation and restrict external navigation
 app.on('web-contents-created', (_event, contents) => {
+  // Allow in-app same-origin navigations; open external origins outside
   contents.on('will-navigate', (event, navigationUrl) => {
-    event.preventDefault();
-    shell.openExternal(navigationUrl);
+    try {
+      const target = new URL(navigationUrl);
+      const appOrigin = new URL(BACKEND_URL).origin;
+      if (target.origin !== appOrigin) {
+        event.preventDefault();
+        shell.openExternal(navigationUrl);
+      }
+    } catch {
+      // If parsing fails, block and open externally as a precaution
+      event.preventDefault();
+      shell.openExternal(navigationUrl);
+    }
   });
 });

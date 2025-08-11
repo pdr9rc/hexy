@@ -3,6 +3,25 @@
  */
 
 /**
+ * Merge helper to combine default fetch options with caller options
+ */
+function withDefaults(options?: RequestInit): RequestInit {
+  const defaultHeaders: HeadersInit = {
+    'Cache-Control': 'no-cache',
+    'Pragma': 'no-cache'
+  };
+  const merged: RequestInit = {
+    cache: 'no-store',
+    ...options,
+    headers: {
+      ...defaultHeaders,
+      ...(options?.headers as any)
+    }
+  };
+  return merged;
+}
+
+/**
  * Generic API call function with centralized error handling.
  * 
  * @param url - API endpoint URL
@@ -11,7 +30,7 @@
  */
 export async function apiCall<T>(url: string, options?: RequestInit): Promise<T> {
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(url, withDefaults(options));
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -29,7 +48,9 @@ export async function apiCall<T>(url: string, options?: RequestInit): Promise<T>
  * @returns Promise with response data
  */
 export async function apiGet<T>(url: string): Promise<T> {
-  return apiCall<T>(url);
+  // Append a cache-busting param for APIs to avoid runtime cache hits
+  const buster = url.includes('?') ? `&t=${Date.now()}` : `?t=${Date.now()}`;
+  return apiCall<T>(`${url}${buster}`);
 }
 
 /**

@@ -6,6 +6,17 @@ import { setLanguage } from './translations.js';
 
 export { setupControls as initializeControls };
 
+async function clearServiceWorkerCaches(): Promise<void> {
+  try {
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(regs.map(r => r.unregister().catch(()=>{})));
+    }
+    const keys = await caches.keys();
+    await Promise.all(keys.map(k => caches.delete(k)));
+  } catch (_e) {}
+}
+
 export function setupControls(app: DyingLandsApp) {
   // Lore button
   const loreBtn = document.getElementById('lore-btn');
@@ -26,28 +37,41 @@ export function setupControls(app: DyingLandsApp) {
   const resetBtn = document.getElementById('reset-btn');
   if (resetBtn) {
     resetBtn.addEventListener('click', async () => {
-      if (!confirm('This will reset the entire continent and regenerate all content. This action cannot be undone. Continue?')) return;
-      ui.showLoading('Resetting continent...');
-      try {
-        await api.resetContinent();
+      // Show overlay and bleed immediately
+      ui.showLoading('');
+      setTimeout(() => {
+        const w: any = window as any;
+        if (typeof w.startBleeding === 'function') w.startBleeding();
+      }, 0);
+
+      // Ask for confirmation without blocking
+      ui.showResetConfirm(async () => {
+        try {
+          await api.resetContinent();
+          await clearServiceWorkerCaches();
+          window.location.replace('/?t=' + Date.now());
+        } catch (e: any) {
+          ui.hideLoading();
+          ui.showNotification(e.message || 'Failed to reset continent', 'error');
+        }
+      }, () => {
+        // Cancel: reset bleeding and hide overlay
+        ui.resetBleedingToTop();
         ui.hideLoading();
-        window.location.reload();
-      } catch (e: any) {
-        ui.hideLoading();
-        ui.showNotification(e.message || 'Failed to reset continent', 'error');
-      }
+      });
     });
   }
   // Language selector
   const langSel = document.getElementById('language-selector') as HTMLSelectElement;
   if (langSel) {
     langSel.addEventListener('change', async () => {
-      ui.showLoading('Changing language...');
+      ui.showLoading('');
       try {
-        await api.setLanguage(langSel.value);
-        setLanguage(langSel.value);
-        ui.hideLoading();
-        window.location.reload();
+        const lang = langSel.value;
+        await api.setLanguage(lang);
+        setLanguage(lang);
+        await clearServiceWorkerCaches();
+        window.location.replace('/?t=' + Date.now());
       } catch (e: any) {
         ui.hideLoading();
         ui.showNotification(e.message || 'Failed to change language', 'error');

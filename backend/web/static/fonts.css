@@ -1,8 +1,16 @@
 /* Font definitions for The Dying Lands */
 
 @font-face {
-    font-family: 'BLACH';
-    src: url('/static/BLACH___.TTF') format('truetype');
+    font-family: 'IBM';
+    src: url('/static/fonts/PxPlus_IBM_MDA.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Kun-Denta';
+    src: url('/static/fonts/Kun-Denta.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

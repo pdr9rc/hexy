@@ -23,6 +23,7 @@ class CityOverlayAnalyzer:
     
     def __init__(self, language='en'):
         self.lore_db = MorkBorgLoreDatabase()
+        # Honor HEXY_OUTPUT_DIR directly if provided, else fallback to app dir
         base_root = os.getenv('HEXY_OUTPUT_DIR') or os.getenv('HEXY_APP_DIR') or os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         self.output_directory = os.path.join(base_root, 'dying_lands_output', 'city_overlays')
         os.makedirs(self.output_directory, exist_ok=True)
@@ -79,28 +80,28 @@ class CityOverlayAnalyzer:
         """Generate a round hex grid overlay for a city image."""
         try:
             overlays = self.get_available_overlays()
-            
+        
             overlay_info = next((o for o in overlays if o['name'] == overlay_name), None)
-            
+        
             if not overlay_info:
                 # Try case-insensitive match
                 overlay_info = next((o for o in overlays if o['name'].lower() == overlay_name.lower()), None)
-            
+        
             if not overlay_info:
                 raise ValueError(f"City overlay '{overlay_name}' not found")
-            
+        
             # Load city data
             city_data = self._load_city_database(overlay_name.lower())
-            
+        
             # Generate round hex grid
             hex_grid = self._generate_round_hex_grid(overlay_name, city_data)
-            
+        
             # Add cross-references between related hexes
             hex_grid = self._add_cross_references(hex_grid, city_data)
-            
+        
             # Calculate grid radius
             radius = self._calculate_grid_radius(hex_grid)
-            
+        
             # Create overlay data structure
             overlay_data = {
                 'name': overlay_name,
@@ -111,10 +112,10 @@ class CityOverlayAnalyzer:
                 'hex_grid': hex_grid,
                 'total_hexes': len(hex_grid)
             }
-            
+        
             # Save overlay data
             self._save_overlay_data(overlay_name, overlay_data)
-            
+        
             return overlay_data
             
         except Exception as e:
@@ -127,17 +128,17 @@ class CityOverlayAnalyzer:
         """Generate a round hex grid for city overlay."""
         try:
             hex_grid = {}
-            
+        
             # Get district matrix if available
             district_matrix = self._get_district_matrix(city_data)
-            
+        
             if district_matrix:
                 # Use district matrix for content generation
                 hex_grid = self._apply_district_matrix(district_matrix, overlay_name, city_data)
             else:
                 # Generate default round grid
                 hex_grid = self._generate_default_round_grid(overlay_name, city_data)
-            
+        
             return hex_grid
             
         except Exception as e:
@@ -406,25 +407,25 @@ class CityOverlayAnalyzer:
         """Generate content based on type with detailed error reporting."""
         try:
             if content_type == 'district':
-                return self._generate_district_content(city_data, district_data)
+                    return self._generate_district_content(city_data, district_data)
             elif content_type == 'building':
-                return self._generate_building_content(city_data, district_data)
+                    return self._generate_building_content(city_data, district_data)
             elif content_type == 'street':
-                return self._generate_street_content(city_data, district_data)
+                    return self._generate_street_content(city_data, district_data)
             elif content_type == 'landmark':
-                return self._generate_landmark_content(city_data, district_data)
+                    return self._generate_landmark_content(city_data, district_data)
             elif content_type == 'market':
-                return self._generate_market_content(city_data, district_data)
+                    return self._generate_market_content(city_data, district_data)
             elif content_type == 'temple':
-                return self._generate_temple_content(city_data, district_data)
+                    return self._generate_temple_content(city_data, district_data)
             elif content_type == 'tavern':
-                return self._generate_tavern_content(city_data, district_data)
+                    return self._generate_tavern_content(city_data, district_data)
             elif content_type == 'guild':
-                return self._generate_guild_content(city_data, district_data)
+                    return self._generate_guild_content(city_data, district_data)
             elif content_type == 'residence':
-                return self._generate_residence_content(city_data, district_data)
+                    return self._generate_residence_content(city_data, district_data)
             elif content_type == 'ruins':
-                return self._generate_ruins_content(city_data, district_data)
+                    return self._generate_ruins_content(city_data, district_data)
             else:
                 # Default to district content
                 return self._generate_district_content(city_data, district_data)
@@ -487,7 +488,7 @@ class CityOverlayAnalyzer:
                     city_data = json.load(f)
                     
                 print(f"DEBUG: City data keys: {list(city_data.keys())}")
-                    
+                
                 # Load additional city-specific content from language database
                 enriched_content = self._load_city_specific_content(city_name)
                 print(f"DEBUG: Enriched content keys: {list(enriched_content.keys())}")
@@ -593,7 +594,7 @@ class CityOverlayAnalyzer:
                             if market_type == 'items_prices':
                                 if 'items' in market_data['tables'] and isinstance(market_data['tables']['items'], list):
                                     content['items_sold'] = market_data['tables']['items']
-                                elif self.language != 'en':
+                            elif self.language != 'en':
                                     # Fallback to English detailed items if local language lacks them
                                     try:
                                         fallback_path = f'databases/items_prices/en/items_prices.json'
@@ -836,7 +837,7 @@ class CityOverlayAnalyzer:
         if not district_data:
             district_data = {}
 
-        name = district_data.get('name', 'Unknown District')
+            name = district_data.get('name', 'Unknown District')
 
         # Compute description with safe fallback, regardless of errors
         try:
@@ -853,31 +854,31 @@ class CityOverlayAnalyzer:
                 'description',
                 f"A district where {random.choice(['the wealthy once lived', 'merchants once thrived', 'scholars once studied', 'the poor struggle to survive'])}."
             )
-
+            
         # Encounters
         encounters = district_data.get('encounters', [])
         encounter = random.choice(encounters) if encounters else "Mysterious activities in the district"
-
+            
         # Atmosphere
         atmospheres = district_data.get('atmosphere_modifiers', [])
         atmosphere = random.choice(atmospheres) if atmospheres else "Dark and foreboding"
-
+            
         # Random table
         random_tables = district_data.get('random_tables', {})
         random_table = random_tables.get('district', self._generate_district_random_table())
-
+            
         # Notable features
         notable_features: List[str] = []
         for content_type in ['buildings', 'streets', 'landmarks']:
             entries = district_data.get(content_type, [])
             if entries:
                 notable_features.append(random.choice(entries))
-        if not notable_features:
-            notable_features = [
-                random.choice(["Crumbling mansions", "Narrow alleyways", "Ancient statues", "Broken fountains"]),
-                random.choice(["Abandoned shops", "Boarded windows", "Graffiti-covered walls", "Overgrown gardens"])
-            ]
-
+            if not notable_features:
+                notable_features = [
+                    random.choice(["Crumbling mansions", "Narrow alleyways", "Ancient statues", "Broken fountains"]),
+                    random.choice(["Abandoned shops", "Boarded windows", "Graffiti-covered walls", "Overgrown gardens"])
+                ]
+            
         return {
             'name': name,
             'description': description,
@@ -908,13 +909,13 @@ class CityOverlayAnalyzer:
         else:
             # Fallback purposes
             purposes = [
-            "residência abandonada de um nobre caído",
-            "oficina misteriosa de propósito desconhecido",
-            "biblioteca esquecida com conhecimento proibido",
-            "templo antigo para um deus esquecido",
-            "sede de guilda para organização secreta",
-            "armazém cheio de artefatos estranhos"
-        ]
+                "residência abandonada de um nobre caído",
+                "oficina misteriosa de propósito desconhecido",
+                "biblioteca esquecida com conhecimento proibido",
+                "templo antigo para um deus esquecido",
+                "sede de guilda para organização secreta",
+                "armazém cheio de artefatos estranhos"
+            ]
         
         name = random.choice(buildings)
         purpose = random.choice(purposes)
@@ -1147,9 +1148,9 @@ class CityOverlayAnalyzer:
         
         if not markets:
             # Try to get markets from database
-            markets = database_manager.get_table('names', 'market_names', self.language)
-            if not markets:
-                raise ValueError("No market names available in database")
+                markets = database_manager.get_table('names', 'market_names', self.language)
+                if not markets:
+                    raise ValueError("No market names available in database")
         
         # Get market features from city data
         specialties = []
@@ -1159,7 +1160,7 @@ class CityOverlayAnalyzer:
                 specialties = market_features
         
         if not specialties:
-            # Try to get specialties from database
+        # Try to get specialties from database
             specialties = database_manager.get_table('descriptions', 'market_specialties', self.language)
             if not specialties:
                 raise ValueError("No market specialties available in database")
@@ -1240,9 +1241,10 @@ class CityOverlayAnalyzer:
         
         if not temples:
             temples = database_manager.get_table('names', 'temple_names', self.language)
-            if not temples:
-                raise ValueError("No temple names available in database")
+        if not temples:
+            raise ValueError("No temple names available in database")
         
+        # Get deities from database
         deities = database_manager.get_table('descriptions', 'temple_deities', self.language)
         if not deities:
             raise ValueError("No temple deities available in database")

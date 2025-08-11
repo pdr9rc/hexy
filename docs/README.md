@@ -2,6 +2,16 @@
 
 Technical documentation for the Hexy hexcrawl generator system.
 
+## Preview
+
+Demo:
+
+![Hexy demo preview](./demo.gif)
+
+Language reset flow:
+
+![Language reset preview](./language_reset.gif)
+
 ## 🏗️ System Architecture
 
 ### Backend Architecture (Flask)

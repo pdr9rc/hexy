@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive map viewer for The Dying Lands - Mörk Borg hexcrawl">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/static/icons/icon-512.png">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+  <title>🗺️ The Dying Lands - Interactive Map</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts.css') }}?v={{ hexy_token }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}?v={{ hexy_token }}">
+</head>
+<body>
+  <!-- Header Section with Overlaid Controls -->
+  <header class="main-header">
+    <div class="header-ascii" style="text-align: center;" aria-hidden="true">
+      <pre>
+                 @   @@   @@                     @     @  @       @@@@@@   @@@      @                                     @@    @@@         @@                    
+     @@@@@    @  @@   @@@  @@@@@            @@@@@@@@    @@@       @ @@@     @@@@    @@     @@@@               @@@           @@@    @@@     @@@@@@          @@@     
+@@@@@@@@@@@@@@   @@  @@@  @@@@@@@@@               @@@@@   @@@@   @@@@@@      @@@    @@@     @@@@               @@@           @@@   @@@     @@  @@@@@   @@@ @@@@     
+       @@@      @@@  @@  @@@@                   @@@   @@@@ @@  @@@  @@@     @@@@@  @@@    @@@@@              @@@           @@@    @@@@@  @@@ @@@   @@@@ @@@@@      
+        @@      @@@  @@   @@                     @@    @   @@ @@     @@      @@@@  @@    @@   @               @@           @@@@    @@@@   @   @@    @   @@  @@     
+        @@       @@@@@@  @@@@@@@                 @@  @@     @@@@     @@      @@@@  @@@@@@@@                   @@          @@ @@    @@@@   @   @@   @@  @@          
+        @@       @   @@   @@@@@@@                @@ @@@      @@      @@      @@@@@ @@ @ @@@@@@@@@@            @           @ @@@    @@ @@ @    @@ @@@    @@@@@      
+        @@       @@  @@@  @@@                    @@@@        @@      @@      @@ @@ @@@   @@  @@@              @@    @@ @@@@   @@   @@ @@ @    @@@@          @@@    
+       @@@@     @@@  @@@  @@@@@@@@@            @@@@          @@@     @@@    @@    @@@    @@@@@@@             @@  @@@@@ @@@    @@@@@@    @@   @@@@     @@@ @@@@     
+      @@@      @@@  @@@@@@@@@@@@@@             @@@          @@@   @@@@@@@@@@@    @@@     @@@@@            @@@@@@@@@@@@@@      @@ @@@   @@@   @@@        @@@@       
+       @        @@   @@@@@@                     @           @       @@@     @     @@       @@@            @@@@        @        @@ @     @@   @@          @@        
+        </pre
+    </div>
+  </header>
+
+  <!-- Main Application Content -->
+  <main class="main-content">
+    <!-- Map Panel (Left) -->
+    <section class="map-side" aria-label="Hex Map">
+      <div class="map-container" id="map-container">
+        <div class="map-zoom-container" id="map-zoom-container">
+          <div class="hex-grid" id="hexGrid" aria-label="Hex Map Grid">
+            <!-- Map content will be rendered here by JavaScript -->
+          </div>
+        </div>
+      </div>
+      
+      <!-- World Map Controls - Bottom Left -->
+      <nav class="world-map-controls" aria-label="World map controls">
+        <div class="controls-group">
+          <button class="btn-mork-borg" id="lore-btn" aria-label="Show Lore">🍄 Lore</button>
+          <button class="btn-mork-borg btn-warning" id="reset-btn" aria-label="Reset Continent">🩸 Reset</button>
+          <select class="btn-mork-borg" id="language-selector" aria-label="Select Language">
+            <option value="en" {% if current_language == 'en' %}selected{% endif %}> English</option>
+            <option value="pt" {% if current_language == 'pt' %}selected{% endif %}> Português</option>
+          </select>
+        </div>
+      </nav>
+    </section>
+
+    <!-- Details Panel (Right) -->
+    <section class="modal-side" aria-label="Hex Details">
+      <div class="modal-content-container" id="details-panel">
+        <!-- Default empty state -->
+        <div class="city-hex-details-box">
+          <div class="ascii-box">
+            <div class="ascii-inner-box">
+              <div class="ascii-section ascii-hex-title"><span>THE DYING LANDS</span></div>
+              <div class="ascii-section ascii-hex-description">
+                <span>WELCOME TO THE HEXCRAWL</span>
+                <pre>
+Click a hex to explore its mysteries...
+
+Each hex contains unique encounters, denizens,
+and secrets waiting to be discovered.
+
+The world is dying, but adventure lives on.
+                </pre>
+              </div>
+              <div class="ascii-section ascii-hex-instructions">
+                <span>INSTRUCTIONS</span>
+                <pre>
+• Click any hex on the map to view its details
+• Major cities (◆) have additional overlay views
+• Settlements (⌂) provide local information
+• Bold hexes contain special content
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Loading Indicator with Bleeding Effect -->
+  <div id="loading-indicator" class="loading-indicator" role="status" aria-live="polite" hidden>
+    <div class="loading-backdrop"></div>
+    <video id="loading-video" class="loading-video" src="/static/Skull.webm" autoplay muted loop playsinline preload="auto"></video>
+    
+    <!-- Bleeding Effect SVG -->
+    <svg xmlns="http://www.w3.org/2000/svg" 
+         xmlns:xlink="http://www.w3.org/1999/xlink" 
+         preserveAspectRatio="xMinYMin slice" 
+         class="bleeding-effect hidden" 
+         id="svgContainer">
+      <filter id="liquify">
+        <feGaussianBlur in="SourceGraphic" 
+                        stdDeviation="20" 
+                        result="blur" />
+        <feColorMatrix in="blur" 
+                       type="matrix"
+                       values=".15 0 0 0 0,  0 0 0 0 0,  0 0 0 0 0,  0 0 0 100 -20"/>
+      </filter>
+      <g filter="url(#liquify)">
+      </g>
+    </svg>
+  </div>
+
+  <!-- Heartbeat & App Scripts -->
+  <script>
+    (function(){
+      const TOKEN = '{{ hexy_token }}';
+      async function checkAndRevive(){
+        try{ const r = await fetch('/api/health'); if(!r.ok){ throw new Error('down'); } }catch(e){ try{ window.location.href = 'hexy://launch'; }catch(_){} }
+      }
+      async function beat(){ try{ await fetch('/api/heartbeat',{method:'POST',headers:{'Content-Type':'application/json','X-Hexy-Token':TOKEN},body:JSON.stringify({token:TOKEN})}); }catch(e){} }
+      window.addEventListener('load', ()=>{ beat(); setInterval(beat, 20000); setInterval(checkAndRevive, 15000); });
+      window.addEventListener('focus', beat);
+    })();
+  </script>
+  <script type="module" src="{{ url_for('static', filename='main.js') }}?v={{ hexy_token }}"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').catch((err) => { console.warn('SW reg failed:', err); });
+      });
+    }
+  </script>
+</body>
+</html>

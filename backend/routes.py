@@ -24,7 +24,12 @@ from backend.mork_borg_lore_database import MorkBorgLoreDatabase
 from backend.terrain_system import terrain_system
 from backend.main_map_generator import MainMapGenerator
 from backend.translation_system import translation_system
-from backend.city_overlay_analyzer import city_overlay_analyzer
+# City overlay analyzer may fail to import during development; guard it
+try:
+    from backend.city_overlay_analyzer import city_overlay_analyzer  # type: ignore
+except Exception as _e:  # SyntaxError or other import-time errors
+    city_overlay_analyzer = None  # type: ignore
+    _CITY_OVERLAY_IMPORT_ERROR = _e  # type: ignore
 from backend.hex_service import hex_service
 from backend.hex_model import hex_manager
 from backend.utils.city_processor import create_major_city_response
@@ -36,7 +41,7 @@ from backend.utils.grid_generator import generate_hex_grid, determine_content_sy
 # Create blueprints
 main_bp = Blueprint('main', __name__)
 api_bp = Blueprint('api', __name__)
-assets_bp = Blueprint('assets', __name__)
+assets_bp = Blueprint('assets', __name__, url_prefix='/')
 
 # Initialize systems
 config = get_config()
@@ -202,15 +207,23 @@ def serve_service_worker():
         "    self.clients.claim();\n"
         "  })());\n"
         "});\n"
+        "self.addEventListener('message', async (event)=>{\n"
+        "  if(!event || !event.data) return;\n"
+        "  if(event.data.type==='CLEAR_CACHES'){\n"
+        "    const names=await caches.keys();\n"
+        "    await Promise.all(names.map(n=>caches.delete(n)));\n"
+        "    try{ const clients=await self.clients.matchAll({type:'window'}); clients.forEach(c=>c.navigate(c.url)); }catch(e){}\n"
+        "  }\n"
+        "});\n"
         "self.addEventListener('fetch',event=>{\n"
         "  const req=event.request;\n"
         "  const url=new URL(req.url);\n"
         "  if(req.method!=='GET'){ return; }\n"
-        "  // API: network-first, fallback to cache\n"
+        "  // API: network-first, fallback to cache, and never use http cache\n"
         "  if(url.origin===location.origin && url.pathname.startsWith('/api/')){\n"
         "    event.respondWith((async()=>{\n"
         "      try{\n"
-        "        const fresh=await fetch(req);\n"
+        "        const fresh=await fetch(new Request(req,{cache:'no-store'}));\n"
         "        const cache=await caches.open(RUNTIME_CACHE);\n"
         "        cache.put(req, fresh.clone());\n"
         "        return fresh;\n"
@@ -240,6 +253,26 @@ def serve_service_worker():
     )
     from flask import Response
     return Response(sw_js, mimetype='application/javascript')
+
+@assets_bp.route('/lottie.js')
+def serve_lottie_js():
+    """Serve lottie-web player. Prefer node_modules during dev, fallback to static vendor."""
+    try:
+        from pathlib import Path
+        base = Path(__file__).parent.parent  # backend/
+        project_root = base.parent  # repo root
+        node_path = project_root / 'node_modules' / 'lottie-web' / 'build' / 'player' / 'lottie.min.js'
+        vendor_path = base / 'web' / 'static' / 'vendor' / 'lottie.min.js'
+        target = node_path if node_path.exists() else vendor_path
+        with open(target, 'rb') as f:
+            data = f.read()
+        from flask import Response
+        return Response(data, mimetype='application/javascript')
+    except Exception as e:
+        # Last resort: minimal shim so app does not crash
+        shim = b"(function(){window.lottie=window.lottie||{loadAnimation:function(){return {play:function(){},stop:function(){},destroy:function(){}}}}})();"
+        from flask import Response
+        return Response(shim, mimetype='application/javascript')
 
 # ===== Heartbeat/Health API =====
 @api_bp.route('/heartbeat', methods=['POST'])
@@ -274,8 +307,24 @@ def debug_paths():
 
 @api_bp.route('/reset-continent', methods=['POST'])
 def reset_continent():
-    """Reset the entire continent and regenerate all content."""
+    """Reset the entire continent and regenerate all content.
+    Optionally accepts {"language": "en|pt"} to switch language before regenerating.
+    """
     try:
+        # Optional language override from request body
+        try:
+            data = request.get_json(silent=True) or {}
+        except Exception:
+            data = {}
+        new_language = data.get('language') if isinstance(data, dict) else None
+
+        if new_language in ['en', 'pt']:
+            global current_language, main_map_generator
+            current_language = new_language
+            # Update translation system and re-init generator
+            translation_system.set_language(new_language)
+            main_map_generator = get_main_map_generator()
+
         result = main_map_generator.reset_continent()
         # Invalidate overlay caches if any
         try:
@@ -543,7 +592,7 @@ def get_settlement_details(hex_code):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
-    return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
+        return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
 
 @api_bp.route('/hex/<hex_code>', methods=['PUT'])
 def update_hex_content(hex_code):
@@ -615,6 +664,8 @@ def get_city_overlays():
 @api_bp.route('/city-overlay/<overlay_name>')
 def get_city_overlay(overlay_name):
     try:
+        if city_overlay_analyzer is None:
+            return jsonify({'success': False, 'error': f'City overlay analyzer unavailable: {_CITY_OVERLAY_IMPORT_ERROR}'}), 500
         
         overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
         if not overlay_data:
@@ -666,6 +717,8 @@ def get_city_overlay(overlay_name):
 @api_bp.route('/city-overlay/<overlay_name>/ascii')
 def get_city_overlay_ascii(overlay_name):
     try:
+        if city_overlay_analyzer is None:
+            return jsonify({'success': False, 'error': f'City overlay analyzer unavailable: {_CITY_OVERLAY_IMPORT_ERROR}'}), 500
         ascii_view = city_overlay_analyzer.get_overlay_ascii_view(overlay_name)
         return jsonify({
             'success': True,
@@ -678,6 +731,8 @@ def get_city_overlay_ascii(overlay_name):
 def get_city_context(city_name):
     """Get city context information for the left panel."""
     try:
+        if city_overlay_analyzer is None:
+            return jsonify({'success': False, 'error': f'City overlay analyzer unavailable: {_CITY_OVERLAY_IMPORT_ERROR}'}), 500
         context = city_overlay_analyzer.get_city_context(city_name)
         response = jsonify({
             'success': True,
@@ -695,6 +750,8 @@ def get_city_context(city_name):
 @api_bp.route('/city-overlay/<overlay_name>/hex/<hex_id>')
 def get_city_overlay_hex(overlay_name, hex_id):
     try:
+        if city_overlay_analyzer is None:
+            return jsonify({'success': False, 'error': f'City overlay analyzer unavailable: {_CITY_OVERLAY_IMPORT_ERROR}'}), 500
         overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
         if not overlay_data:
             overlay_data = city_overlay_analyzer.generate_city_overlay(overlay_name)
@@ -719,14 +776,14 @@ def get_city_overlay_hex(overlay_name, hex_id):
                 # Hex-specific enriched content
                 'weather': hex_content.get('weather'),
                 'city_event': hex_content.get('city_event'),
-                'npc_name': hex_content.get('npc_name'),
-                'npc_trade': hex_content.get('npc_trade'),
-                'npc_trait': hex_content.get('npc_trait'),
-                'npc_concern': hex_content.get('npc_concern'),
-                'npc_want': hex_content.get('npc_want'),
-                'npc_secret': hex_content.get('npc_secret'),
-                'npc_affiliation': hex_content.get('npc_affiliation'),
-                'npc_attitude': hex_content.get('npc_attitude'),
+                                            'npc_name': hex_content.get('npc_name'),
+                            'npc_trade': hex_content.get('npc_trade'),
+                            'npc_trait': hex_content.get('npc_trait'),
+                            'npc_concern': hex_content.get('npc_concern'),
+                            'npc_want': hex_content.get('npc_want'),
+                            'npc_secret': hex_content.get('npc_secret'),
+                            'npc_affiliation': hex_content.get('npc_affiliation'),
+                            'npc_attitude': hex_content.get('npc_attitude'),
                 'tavern_menu': hex_content.get('tavern_menu'),
                 'tavern_innkeeper': hex_content.get('tavern_innkeeper'),
                 'tavern_patron': hex_content.get('tavern_patron'),
@@ -761,6 +818,8 @@ def get_city_overlay_hex(overlay_name, hex_id):
 def regenerate_hex(overlay_name, hex_id):
     """Regenerate a specific hex in a city overlay."""
     try:
+        if city_overlay_analyzer is None:
+            return jsonify({'success': False, 'error': f'City overlay analyzer unavailable: {_CITY_OVERLAY_IMPORT_ERROR}'}), 500
         # Load or generate the city overlay
         overlay_data = city_overlay_analyzer.load_overlay_data(overlay_name)
         if not overlay_data:
@@ -819,6 +878,8 @@ def regenerate_hex(overlay_name, hex_id):
 def regenerate_overlay(overlay_name):
     """Regenerate an entire city overlay."""
     try:
+        if city_overlay_analyzer is None:
+            return jsonify({'success': False, 'error': f'City overlay analyzer unavailable: {_CITY_OVERLAY_IMPORT_ERROR}'}), 500
           
         # Regenerate the entire overlay
         overlay_data = city_overlay_analyzer.regenerate_overlay(overlay_name)

@@ -460,8 +460,14 @@ A {population} settlement in the {terrain}.
     
     def reset_all_data(self, output_directory: str = None):
         if output_directory is None:
-            base_root = os.getenv('HEXY_OUTPUT_DIR') or os.getenv('HEXY_APP_DIR') or ''
-            output_directory = os.path.join(base_root, 'dying_lands_output') if base_root else 'dying_lands_output'
+            hexy_output_env = os.getenv('HEXY_OUTPUT_DIR')
+            hexy_app_dir = os.getenv('HEXY_APP_DIR')
+            if hexy_output_env:
+                output_directory = hexy_output_env
+            elif hexy_app_dir:
+                output_directory = os.path.join(hexy_app_dir, 'dying_lands_output')
+            else:
+                output_directory = 'dying_lands_output'
         """Reset all generated data and clear caches."""
         print("🔄 Resetting all data...")
         

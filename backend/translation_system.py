@@ -87,11 +87,11 @@ class TranslationSystem:
                 'close': 'CLOSE',
                 'generate_content': 'GENERATE CONTENT',
                 'generate_all': '⚡ GENERATE ALL',
-                'reset_continent': '🔄 RESET CONTINENT',
+                'reset_continent': '🩸 RESET CONTINENT',
                 'zoom_in': '🔍+',
                 'zoom_out': '🔍-',
                 'terrain_button': '🗺️ TERRAIN',
-                'lore_button': '📜 LORE',
+                'lore_button': '🍄 LORE',
                 
                 # Map Information
                 'click_hexes': 'CLICK HEXES TO VIEW/GENERATE CONTENT',
@@ -227,11 +227,11 @@ class TranslationSystem:
                 'close': 'FECHAR',
                 'generate_content': 'GERAR CONTEÚDO',
                 'generate_all': '⚡ GERAR TUDO',
-                'reset_continent': '🔄 RESETAR CONTINENTE',
+                'reset_continent': '🩸 RESETAR CONTINENTE',
                 'zoom_in': '🔍+',
                 'zoom_out': '🔍-',
                 'terrain_button': '🗺️ TERRENO',
-                'lore_button': '📜 LORE',
+                'lore_button': '🍄 LORE',
                 
                 # Map Information
                 'click_hexes': 'CLIQUE NOS HEXES PARA VER/GERAR CONTEÚDO',

@@ -5,7 +5,13 @@
 
 set -euo pipefail
 
-STATE_DIR="${HOME}/.local/share/hexy"
+# OS-aware state dir
+if [[ "${OSTYPE:-}" == darwin* ]]; then
+  STATE_DIR="${HOME}/Library/Application Support/hexy"
+else
+  STATE_DIR="${HOME}/.local/share/hexy"
+fi
+
 APP_DIR=""
 
 # Prefer installed app_dir if present, otherwise fallback to repo-relative
@@ -28,7 +34,22 @@ echo "📡 Starting Flask backend..."
 cd "${APP_DIR}"
 export PYTHONPATH="${APP_DIR}:${PYTHONPATH:-}"
 export HEXY_APP_DIR="${APP_DIR}"
-export HEXY_OUTPUT_DIR="${APP_DIR}/dying_lands_output"
+
+# Decide output dir: migrate to STATE_DIR if present, else fallback to APP_DIR to avoid breakage
+OUTPUT_STATE="${STATE_DIR}/dying_lands_output"
+OUTPUT_APP="${APP_DIR}/dying_lands_output"
+# If app output exists and state output missing, migrate once
+if [ -d "${OUTPUT_APP}/hexes" ] && [ ! -d "${OUTPUT_STATE}/hexes" ]; then
+  mkdir -p "${OUTPUT_STATE}"
+  rsync -a "${OUTPUT_APP}/" "${OUTPUT_STATE}/" || true
+fi
+# Prefer state output if it looks valid, else fallback to app output
+if [ -d "${OUTPUT_STATE}/hexes" ]; then
+  export HEXY_OUTPUT_DIR="${OUTPUT_STATE}"
+else
+  export HEXY_OUTPUT_DIR="${OUTPUT_APP}"
+fi
+
 HEXY_PORT=7777 python3 -m backend.run >/tmp/hexy-backend.log 2>&1 &
 BACKEND_PID=$!
 
@@ -53,6 +74,8 @@ if [ ! -x "$ELECTRON_BIN" ]; then
   kill "$BACKEND_PID" 2>/dev/null || true
   exit 1
 fi
+# Hint Electron/Chromium to auto-select the appropriate platform backend (Wayland/X11)
+export ELECTRON_OZONE_PLATFORM_HINT=${ELECTRON_OZONE_PLATFORM_HINT:-auto}
 "$ELECTRON_BIN" "${APP_DIR}/dist/electron/main.js" --no-sandbox --disable-setuid-sandbox
 
 # Cleanup when Electron exits

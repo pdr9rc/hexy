@@ -1306,13 +1306,12 @@ def create_templates():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🗺️ The Dying Lands - Interactive Map</title>
+    <title> The Dying Lands - Interactive Map</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
     body {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
         color: #e0e0e0;
-        font-family: 'Courier New', monospace;
     }
     
     .map-container {
@@ -1325,7 +1324,6 @@ def create_templates():
     }
     
     .hex-grid {
-        font-family: 'Courier New', monospace;
         font-size: 11px;
         line-height: 1.1;
         overflow: auto;
@@ -1448,12 +1446,12 @@ def create_templates():
                 <div class="col-md-8">
                     <div class="btn-group me-2" role="group">
                         <button class="btn btn-warning btn-sm" onclick="showTerrainOverview()">🗺️ Terrain</button>
-                        <button class="btn btn-info btn-sm" onclick="showLoreOverview()">📜 Lore</button>
+                        <button class="btn btn-info btn-sm" onclick="showLoreOverview()">🍄 Lore</button>
                         <button class="btn btn-secondary btn-sm" onclick="showLegend()">🗂️ Legend</button>
                     </div>
                     <div class="btn-group" role="group">
                         <button class="btn btn-success btn-sm" onclick="generateFullMap()">⚡ Generate All</button>
-                        <button class="btn btn-danger btn-sm" onclick="resetContinent()">🔄 Reset Continent</button>
+                        <button class="btn btn-danger btn-sm" onclick="resetContinent()">🩸 Reset Continent</button>
                         <button class="btn btn-primary btn-sm" onclick="zoomIn()">🔍+</button>
                         <button class="btn btn-primary btn-sm" onclick="zoomOut()">🔍-</button>
                     </div>
@@ -1995,7 +1993,6 @@ def create_templates():
     body {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d1b2e 100%);
         color: #e0e0e0;
-        font-family: 'Courier New', monospace;
         height: 100vh;
         display: flex;
         align-items: center;
