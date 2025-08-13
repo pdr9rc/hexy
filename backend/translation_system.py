@@ -2,317 +2,142 @@
 """
 Unified Translation System for The Dying Lands
 Handles all translation and localization functionality.
+Loads translations from JSON files to maintain consistency.
 """
 
+import json
+import os
 from typing import Dict, Any, Optional, List
+from pathlib import Path
 
 class TranslationSystem:
     """Unified translation system for The Dying Lands."""
     
-    def __init__(self, language: str = 'en'):
+    def __init__(self, language: str = 'en', base_path: Optional[str] = None):
         self.language = language
-        self.translations = self._load_translations()
+        self.base_path = base_path or self._get_default_base_path()
+        self.translations: Dict[str, Dict[str, Any]] = {}
+        self._load_all_translations()
     
-    def _load_translations(self) -> Dict[str, Dict[str, str]]:
-        """Load all translation data."""
-        return {
-            'en': {
-                # UI Elements
-                'hex_prompt': 'Enter hex code (XXYY format, e.g., 0601) or range (0601-0610): ',
-                'terrain_prompt': 'Terrain type for this hex (mountain/forest/coast/plains/swamp): ',
-                'invalid_hex': 'Invalid hex format. Using default range.',
-                'files_generated': 'Files generated in \'dying_lands_output/\' directory:',
-                'hex_files': 'hex files in hexes/',
-                'overland_hex_map': 'The Dying Lands Hex Map',
-                'hex_descriptions': 'Hex Descriptions',
-                
-                # Content Types
-                'terrain': 'Terrain',
-                'encounter': 'Encounter',
-                'denizen': 'Denizen',
-                'location': 'Location',
-                'notable_feature': 'Notable Feature',
-                'atmosphere': 'Atmosphere',
-                'motivation': 'Motivation',
-                'demeanor': 'Demeanor',
-                
-                # Generation Messages
-                'generating_full_map': 'Generating Full Map',
-                'map_size': 'Map Size',
-                'language': 'Language',
-                'generation_complete': 'Generation Complete',
-                'creating_ascii_map': 'Creating ASCII Map',
-                'generating_hex': 'Generating hex',
-                'skipping_existing': 'Skipping existing hex',
-                
-                # Error Messages
-                'error_loading_hex': 'ERROR LOADING HEX',
-                'error_loading_city': 'ERROR LOADING CITY DETAILS',
-                'error_loading_settlement': 'ERROR LOADING SETTLEMENT DETAILS',
-                'error_generating_hex': 'ERROR GENERATING HEX CONTENT',
-                'error_generating_map': 'ERROR GENERATING FULL MAP',
-                'error_resetting_continent': 'ERROR RESETTING CONTINENT',
-                
-                # Success Messages
-                'generated_hexes': 'Generated {count} hexes!',
-                'continent_reset': 'Continent reset! Generated {count} fresh hexes',
-                'hex_generated': 'Generated content for hex {hex_code}',
-                
-                # Confirmation Messages
-                'confirm_generate_all': 'GENERATE CONTENT FOR THE ENTIRE MAP? THIS MAY TAKE A WHILE...',
-                'confirm_reset_continent': '🚨 RESET ENTIRE CONTINENT? 🚨\n\nTHIS WILL DELETE ALL GENERATED CONTENT AND CREATE A COMPLETELY FRESH MAP.\n\nTHIS ACTION CANNOT BE UNDONE!',
-                
-                # Status Messages
-                'generating_map': '⏳ Generating Map...',
-                'resetting_generating': '🔄 Resetting & Generating...',
-                'clearing_content': '🗑️ Clearing old content and generating fresh map...',
-                'generating_hex_content': '⏳ Generating hex content...',
-                'resetting_continent': '🔄 Resetting continent...',
-                
-                # Map Elements
-                'major_cities': 'MAJOR CITIES',
-                'settlements': 'SETTLEMENTS',
-                'terrain_legend': 'TERRAIN:',
-                'locations_legend': 'LOCATIONS:',
-                'has_content': 'BOLD = HAS CONTENT',
-                
-                # Modal Titles
-                'hex_details': 'HEX DETAILS',
-                'city_details': 'CITY DETAILS',
-                'settlement_details': 'SETTLEMENT DETAILS',
-                'terrain_overview': '🗺️ TERRAIN OVERVIEW',
-                'lore_overview': '📜 MÖRK BORG LORE',
-                
-                # Button Labels
-                'close': 'CLOSE',
-                'generate_content': 'GENERATE CONTENT',
-                'generate_all': '⚡ GENERATE ALL',
-                'reset_continent': '🩸 RESET CONTINENT',
-                'zoom_in': '🔍+',
-                'zoom_out': '🔍-',
-                'terrain_button': '🗺️ TERRAIN',
-                'lore_button': '🍄 LORE',
-                
-                # Map Information
-                'click_hexes': 'CLICK HEXES TO VIEW/GENERATE CONTENT',
-                'major_city_symbol': '◆ = MAJOR CITIES',
-                'settlement_symbol': '⌂ = SETTLEMENTS',
-                
-                # Terrain Names
-                'mountain': 'Mountain',
-                'forest': 'Forest', 
-                'coast': 'Coast',
-                'plains': 'Plains',
-                'swamp': 'Swamp',
-                'desert': 'Desert',
-                'unknown': 'Unknown',
-                
-                # NPC Field Labels
-                'npc_trait': 'Trait',
-                'npc_concern': 'Concern',
-                'npc_want': 'Want',
-                'npc_apocalypse_attitude': 'Apocalypse Attitude',
-                'npc_secret': 'Secret',
-                'npc_location': 'Location',
-                'npc_carries': 'Carries',
-                
-                # Content Field Labels
-                'territory': 'Territory',
-                'threat_level': 'Threat Level',
-                'treasure_found': 'Treasure Found',
-                'loot_found': 'Loot Found',
-                'type': 'Type',
-                'item': 'Item',
-                'description': 'Description',
-                'full_description': 'Full Description',
-                'name': 'Name',
-                'behavior': 'Behavior',
-                'feature': 'Feature',
-                'danger': 'Danger',
-                'atmosphere': 'Atmosphere',
-                'motivation': 'Motivation',
-                'demeanor': 'Demeanor',
-                'origin': 'Origin',
-                'weather': 'Weather',
-                'innkeeper': 'Innkeeper',
-                'effect': 'Effect',
-                'builder': 'Builder',
-                'age': 'Age',
-                'population': 'Population',
-                'trend': 'Trend',
-                'government': 'Government',
-                
-                # Settlement Field Labels
-                'local_tavern': 'Local Tavern',
-                'local_power': 'Local Power',
-                'city_event': 'City Event',
-                'settlement_layout': 'Settlement Layout',
-                'key_npcs': 'Key NPCs',
-                
-                # City Overlay Field Labels
-                'district': 'District',
-                'position': 'Position',
-                'random_encounters': 'Random Encounters',
-                'notable_features': 'Notable Features',
-                'encounter': 'Encounter'
-            },
-            'pt': {
-                # UI Elements
-                'hex_prompt': 'Digite o código do hex (formato XXYY, ex: 0601) ou intervalo (0601-0610): ',
-                'terrain_prompt': 'Tipo de terreno para este hex (montanha/floresta/costa/planicie/pantano): ',
-                'invalid_hex': 'Formato de hex inválido. Usando intervalo padrão.',
-                'files_generated': 'Arquivos gerados no diretório \'dying_lands_output/\':',
-                'hex_files': 'arquivos de hex em hexes/',
-                'overland_hex_map': 'Mapa Hexagonal das Terras Moribundas',
-                'hex_descriptions': 'Descrições dos Hexágonos',
-                
-                # Content Types
-                'terrain': 'Terreno',
-                'encounter': 'Encontro',
-                'denizen': 'Habitante',
-                'location': 'Localização',
-                'notable_feature': 'Característica Notável',
-                'atmosphere': 'Atmosfera',
-                'motivation': 'Motivação',
-                'demeanor': 'Comportamento',
-                
-                # Generation Messages
-                'generating_full_map': 'Gerando Mapa Completo',
-                'map_size': 'Tamanho do Mapa',
-                'language': 'Idioma',
-                'generation_complete': 'Geração Completa',
-                'creating_ascii_map': 'Criando Mapa ASCII',
-                'generating_hex': 'Gerando hex',
-                'skipping_existing': 'Pulando hex existente',
-                
-                # Error Messages
-                'error_loading_hex': 'ERRO AO CARREGAR HEX',
-                'error_loading_city': 'ERRO AO CARREGAR DETALHES DA CIDADE',
-                'error_loading_settlement': 'ERRO AO CARREGAR DETALHES DO ASSENTAMENTO',
-                'error_generating_hex': 'ERRO AO GERAR CONTEÚDO DO HEX',
-                'error_generating_map': 'ERRO AO GERAR MAPA COMPLETO',
-                'error_resetting_continent': 'ERRO AO RESETAR CONTINENTE',
-                
-                # Success Messages
-                'generated_hexes': 'Gerados {count} hexes!',
-                'continent_reset': 'Continente resetado! Gerados {count} hexes frescos',
-                'hex_generated': 'Conteúdo gerado para hex {hex_code}',
-                
-                # Confirmation Messages
-                'confirm_generate_all': 'GERAR CONTEÚDO PARA TODO O MAPA? ISSO PODE DEMORAR...',
-                'confirm_reset_continent': '🚨 RESETAR CONTINENTE INTEIRO? 🚨\n\nISSO IRÁ DELETAR TODO O CONTEÚDO GERADO E CRIAR UM MAPA COMPLETAMENTE NOVO.\n\nESTA AÇÃO NÃO PODE SER DESFEITA!',
-                
-                # Status Messages
-                'generating_map': '⏳ Gerando Mapa...',
-                'resetting_generating': '🔄 Resetando & Gerando...',
-                'clearing_content': '🗑️ Limpando conteúdo antigo e gerando mapa fresco...',
-                'generating_hex_content': '⏳ Gerando conteúdo do hex...',
-                'resetting_continent': '🔄 Resetando continente...',
-                
-                # Map Elements
-                'major_cities': 'CIDADES PRINCIPAIS',
-                'settlements': 'ASSENTAMENTOS',
-                'terrain_legend': 'TERRENO:',
-                'locations_legend': 'LOCALIZAÇÕES:',
-                'has_content': 'NEGRITO = TEM CONTEÚDO',
-                
-                # Modal Titles
-                'hex_details': 'DETALHES DO HEX',
-                'city_details': 'DETALHES DA CIDADE',
-                'settlement_details': 'DETALHES DO ASSENTAMENTO',
-                'terrain_overview': '🗺️ VISÃO GERAL DO TERRENO',
-                'lore_overview': '📜 LORE DO MÖRK BORG',
-                
-                # Button Labels
-                'close': 'FECHAR',
-                'generate_content': 'GERAR CONTEÚDO',
-                'generate_all': '⚡ GERAR TUDO',
-                'reset_continent': '🩸 RESETAR CONTINENTE',
-                'zoom_in': '🔍+',
-                'zoom_out': '🔍-',
-                'terrain_button': '🗺️ TERRENO',
-                'lore_button': '🍄 LORE',
-                
-                # Map Information
-                'click_hexes': 'CLIQUE NOS HEXES PARA VER/GERAR CONTEÚDO',
-                'major_city_symbol': '◆ = CIDADES PRINCIPAIS',
-                'settlement_symbol': '⌂ = ASSENTAMENTOS',
-                
-                # Terrain Names
-                'mountain': 'Montanha',
-                'forest': 'Floresta',
-                'coast': 'Costa',
-                'plains': 'Planície',
-                'swamp': 'Pântano',
-                'desert': 'Deserto',
-                'unknown': 'Desconhecido',
-                
-                # NPC Field Labels
-                'npc_trait': 'Característica',
-                'npc_concern': 'Preocupação',
-                'npc_want': 'Desejo',
-                'npc_apocalypse_attitude': 'Atitude do Apocalipse',
-                'npc_secret': 'Segredo',
-                'npc_location': 'Localização',
-                'npc_carries': 'Carrega',
-                
-                # Content Field Labels
-                'territory': 'Território',
-                'threat_level': 'Nível de Ameaça',
-                'treasure_found': 'Tesouro Encontrado',
-                'loot_found': 'Saque Encontrado',
-                'type': 'Tipo',
-                'item': 'Item',
-                'description': 'Descrição',
-                'full_description': 'Descrição Completa',
-                'name': 'Nome',
-                'behavior': 'Comportamento',
-                'feature': 'Característica',
-                'danger': 'Perigo',
-                'atmosphere': 'Atmosfera',
-                'motivation': 'Motivação',
-                'demeanor': 'Comportamento',
-                'origin': 'Origem',
-                'weather': 'Clima',
-                'innkeeper': 'Taverneiro',
-                'effect': 'Efeito',
-                'builder': 'Construtor',
-                'age': 'Idade',
-                'population': 'População',
-                'trend': 'Tendência',
-                'government': 'Governo',
-                
-                # Settlement Field Labels
-                'local_tavern': 'Taberna Local',
-                'local_power': 'Poder Local',
-                'city_event': 'Evento da Cidade',
-                'settlement_layout': 'Layout do Assentamento',
-                'key_npcs': 'NPCs Principais',
-                
-                # City Overlay Field Labels
-                'district': 'Distrito',
-                'position': 'Posição',
-                'random_encounters': 'Encontros Aleatórios',
-                'notable_features': 'Características Notáveis',
-                'encounter': 'Encontro'
-            }
-        }
+    def _get_default_base_path(self) -> str:
+        """Get the default path to translation files."""
+        current_dir = Path(__file__).parent
+        return str(current_dir.parent / "databases" / "languages")
     
-    def t(self, key: str, **kwargs) -> str:
-        """Translate a key to the current language with optional formatting."""
-        translation = self.translations.get(self.language, {}).get(key, key)
+    def _load_all_translations(self) -> None:
+        """Load all translation files for all supported languages."""
+        for language_code in ['en', 'pt']:
+            language_path = Path(self.base_path) / language_code
+            if language_path.exists():
+                self.translations[language_code] = self._load_language_files(language_path)
+            else:
+                print(f"⚠️  Warning: Language directory not found: {language_path}")
+                self.translations[language_code] = {}
+    
+    def _load_language_files(self, language_path: Path) -> Dict[str, Any]:
+        """Load all JSON files for a specific language."""
+        combined_translations = {}
+        
+        # Load each JSON file in the language directory
+        for json_file in language_path.glob("*.json"):
+            try:
+                with open(json_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    
+                # Extract category and tables/translations
+                category = data.get('category', json_file.stem)
+                
+                # Handle different JSON structures
+                if 'tables' in data:
+                    # Database format with tables
+                    for table_name, table_data in data['tables'].items():
+                        key = f"{category}.{table_name}"
+                        combined_translations[key] = table_data
+                elif 'translations' in data:
+                    # Translation format with translations object
+                    for key, value in data['translations'].items():
+                        combined_translations[f"{category}.{key}"] = value
+                else:
+                    # Direct key-value format or other structures
+                    combined_translations[category] = data
+                    
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"⚠️  Error loading translation file {json_file}: {e}")
+        
+        return combined_translations
+    
+    def t(self, key: str, language: Optional[str] = None, fallback: Optional[str] = None, **kwargs) -> str:
+        """
+        Translate a key to the specified language with optional formatting.
+        
+        Args:
+            key: Translation key (can be dotted path like 'ui.confirm_generate_all')
+            language: Optional language override
+            fallback: Fallback text if translation not found
+            **kwargs: Variables for string formatting
+        """
+        target_language = language or self.language
+        
+        # Get translation from the appropriate language
+        translation = self._get_translation(key, target_language)
+        
+        # Fall back to English if not found in target language
+        if translation is None and target_language != 'en':
+            translation = self._get_translation(key, 'en')
+        
+        # Use fallback or original key if no translation found
+        if translation is None:
+            translation = fallback or key
         
         # Apply formatting if kwargs provided
-        if kwargs:
+        if kwargs and isinstance(translation, str):
             try:
                 translation = translation.format(**kwargs)
             except (KeyError, ValueError):
-                # If formatting fails, return the key
-                return key
+                # If formatting fails, return unformatted translation
+                pass
         
-        return translation
+        return str(translation)
     
-    def set_language(self, language: str):
+    def _get_translation(self, key: str, language: str) -> Optional[Any]:
+        """Get a translation for a specific key and language."""
+        translations = self.translations.get(language, {})
+        
+        # Handle dotted key paths
+        if '.' in key:
+            parts = key.split('.')
+            current = translations
+            
+            for part in parts:
+                if isinstance(current, dict) and part in current:
+                    current = current[part]
+                else:
+                    return None
+            return current
+        else:
+            return translations.get(key)
+    
+    def get_table(self, category: str, table_name: str, language: Optional[str] = None) -> List[Any]:
+        """
+        Get a table of data for random selection.
+        
+        Args:
+            category: Category name (e.g., 'core', 'npc_traits')
+            table_name: Table name (e.g., 'denizen_names_prefix')
+            language: Optional language override
+        """
+        target_language = language or self.language
+        key = f"{category}.{table_name}"
+        result = self._get_translation(key, target_language)
+        
+        # Fall back to English if not found
+        if result is None and target_language != 'en':
+            result = self._get_translation(key, 'en')
+        
+        # Return as list if found, empty list otherwise
+        return result if isinstance(result, list) else []
+    
+    def set_language(self, language: str) -> None:
         """Set the current language."""
         if language in self.translations:
             self.language = language
@@ -328,16 +153,42 @@ class TranslationSystem:
         """Get the current language."""
         return self.language
     
-    def has_translation(self, key: str) -> bool:
-        """Check if a translation key exists for the current language."""
-        return key in self.translations.get(self.language, {})
+    def has_translation(self, key: str, language: Optional[str] = None) -> bool:
+        """Check if a translation key exists for the specified language."""
+        target_language = language or self.language
+        return self._get_translation(key, target_language) is not None
     
-    def get_all_translations(self, key: str) -> Dict[str, str]:
+    def get_all_translations(self, key: str) -> Dict[str, Any]:
         """Get all translations for a key across all languages."""
         return {
-            lang: translations.get(key, key)
-            for lang, translations in self.translations.items()
+            lang: self._get_translation(key, lang)
+            for lang in self.translations.keys()
+            if self._get_translation(key, lang) is not None
         }
+    
+    def get_ui_translations(self, language: Optional[str] = None) -> Dict[str, str]:
+        """Get all UI translations for frontend consumption."""
+        target_language = language or self.language
+        ui_translations = {}
+        
+        # Extract UI-related translations
+        for key, value in self.translations.get(target_language, {}).items():
+            if key == 'ui' and isinstance(value, dict):
+                # Get all translations from the ui category
+                ui_translations.update(value)
+            elif key.startswith('ui.') and isinstance(value, str):
+                # Remove 'ui.' prefix for frontend
+                ui_key = key[3:]
+                ui_translations[ui_key] = value
+            elif isinstance(value, str) and not key.endswith('.json'):
+                # Include all direct string translations for backward compatibility
+                ui_translations[key] = value
+        
+        return ui_translations
+    
+    def reload_translations(self) -> None:
+        """Reload all translation files."""
+        self._load_all_translations()
 
 # Global translation system instance
 translation_system = TranslationSystem() 

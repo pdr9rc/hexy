@@ -24,7 +24,9 @@ export class LanguageSelector {
         const savedLanguage = localStorage.getItem('hexy-language');
         if (savedLanguage && availableLanguages.some(lang => lang.code === savedLanguage)) {
             this._currentLanguage = savedLanguage;
-            translationManager.setLanguage(savedLanguage);
+            translationManager.setLanguage(savedLanguage).catch(error => {
+                console.warn('Failed to set saved language:', error);
+            });
         }
     }
     getCurrentLanguage(): string {
@@ -38,7 +40,7 @@ export class LanguageSelector {
         this._currentLanguage = languageCode;
         localStorage.setItem('hexy-language', languageCode);
         // Update translation manager
-        translationManager.setLanguage(languageCode);
+        await translationManager.setLanguage(languageCode);
         // Reload the page to apply translations
         window.location.reload();
     }
