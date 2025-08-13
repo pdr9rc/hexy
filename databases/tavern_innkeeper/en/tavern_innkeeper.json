@@ -2,24 +2,24 @@
   "category": "tavern_innkeeper",
   "tables": {
     "innkeeper_quirks": [
-      "Katleen \"the Castrator\" Keen, the bandit queen, is hiding in the loft.",
-      "Thinks you are the Lokr cult who promised to come in disguise and bury them alive. (The cult is already here.)",
-      "Three different children from three different guest families vanished in the night without a sound or trace.",
-      "They say the Two-Headed Basilisks are at large and searching for heathens.",
-      "Judging by the droppings, something has gotten into ... well, everything. (Toughness DR12 or lose d4 HP vomiting.)",
-      "Jorat-Tug's rowdy gang were recently reanimated by ... something. He's too scared to tell them they are dead.",
-      "Old Man Agar is exhibiting his infectious ulcers. Soon he'll start popping them to a jaunty beat.",
-      "One patron is clearly a disguised necromancer. (Nearly all are; that one is just bad at disguises.)",
-      "Clear and audible scratching from the cellar hatch. Everyone else ignores it.",
-      "Their caged bird has stopped singing and started speaking prophecy."
+      "Katleen \"the Castrator\" Keen, that notorious bandit queen, doth hide herself in the loft above.",
+      "Believeth ye to be the dreaded Lokr cult who promised to come in disguise and bury them alive beneath the earth. (The cult is already here amongst us.)",
+      "Three different children from three different guest families vanished in the night without sound or trace, as if swallowed by darkness itself.",
+      "They whisper that the Two-Headed Basilisks roam free and search for heathens to devour.",
+      "Judging by the droppings, some vile creature hath gotten into... well, everything. (Toughness DR12 or lose d4 HP retching most violently.)",
+      "Jorat-Tug's rowdy gang were recently reanimated by... something unspeakable. He's too terrified to inform them they are quite dead.",
+      "Old Man Agar doth exhibit his infectious ulcers with pride. Soon he'll commence popping them to a jaunty beat most revolting.",
+      "One patron is clearly a necromancer in poor disguise. (Nearly all are; that one is simply terrible at concealment.)",
+      "Clear and audible scratching emanates from the cellar hatch below. All others ignore it with studied determination.",
+      "Their caged songbird hath ceased its melodies and begun speaking prophecies of doom most dire."
     ]
   },
   "metadata": {
     "version": "1.0",
     "language": "en",
     "last_updated": "2025-08-07T22:56:40.000000",
-    "description": "Mörk Borg tavern innkeeper quirks and problems",
-    "usage": "Roll d10 to determine why the innkeeper is twitching",
+    "description": "Mörk Borg tavern innkeeper quirks and tribulations most vexing",
+    "usage": "Roll d10 to divine why the innkeeper doth twitch so nervously",
     "migrated_from": "databases/languages/en/tavern_innkeeper.json"
   }
 }
