@@ -1,0 +1,2990 @@
+{
+  "statistics": {
+    "detectionDate": "2025-08-13T14:40:57.911Z",
+    "formats": {
+      "json": {
+        "sources": {
+          "/workspace/databases/wilderness/pt/wilderness.json": {
+            "lines": 54,
+            "tokens": 232,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/wilderness/en/wilderness.json": {
+            "lines": 54,
+            "tokens": 232,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 51,
+            "duplicatedTokens": 220,
+            "percentage": 94.44,
+            "percentageTokens": 94.83,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/weather/pt/weather.json": {
+            "lines": 37,
+            "tokens": 169,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/weather/en/weather.json": {
+            "lines": 37,
+            "tokens": 169,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 32,
+            "duplicatedTokens": 143,
+            "percentage": 86.49,
+            "percentageTokens": 84.62,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/weapons_prices/pt/weapons_prices.json": {
+            "lines": 116,
+            "tokens": 655,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/weapons_prices/en/weapons_prices.json": {
+            "lines": 116,
+            "tokens": 655,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 111,
+            "duplicatedTokens": 629,
+            "percentage": 95.69,
+            "percentageTokens": 96.03,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/traps_triggers/pt/traps_triggers.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/traps_triggers/en/traps_triggers.json": {
+            "lines": 28,
+            "tokens": 133,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 23,
+            "duplicatedTokens": 107,
+            "percentage": 82.14,
+            "percentageTokens": 80.45,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/traps_effects/pt/traps_effects.json": {
+            "lines": 33,
+            "tokens": 145,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/traps_effects/en/traps_effects.json": {
+            "lines": 62,
+            "tokens": 317,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 57,
+            "duplicatedTokens": 291,
+            "percentage": 91.94,
+            "percentageTokens": 91.8,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/traps_builders/pt/traps_builders.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/traps_builders/en/traps_builders.json": {
+            "lines": 35,
+            "tokens": 164,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 131,
+            "percentage": 82.86,
+            "percentageTokens": 79.88,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/terrain/pt/terrain.json": {
+            "lines": 217,
+            "tokens": 910,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/terrain/en/terrain.json": {
+            "lines": 326,
+            "tokens": 1346,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern_patrons/pt/tavern_patrons.json": {
+            "lines": 34,
+            "tokens": 157,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern_patrons/en/tavern_patrons.json": {
+            "lines": 34,
+            "tokens": 157,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 131,
+            "percentage": 85.29,
+            "percentageTokens": 83.44,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern_menu/pt/tavern_menu.json": {
+            "lines": 100,
+            "tokens": 562,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern_menu/en/tavern_menu.json": {
+            "lines": 100,
+            "tokens": 562,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 95,
+            "duplicatedTokens": 536,
+            "percentage": 95,
+            "percentageTokens": 95.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern_innkeeper/pt/tavern_innkeeper.json": {
+            "lines": 24,
+            "tokens": 117,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern_innkeeper/en/tavern_innkeeper.json": {
+            "lines": 24,
+            "tokens": 117,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern/pt/tavern.json": {
+            "lines": 34,
+            "tokens": 154,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/tavern/en/tavern.json": {
+            "lines": 34,
+            "tokens": 153,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 31,
+            "duplicatedTokens": 141,
+            "percentage": 91.18,
+            "percentageTokens": 92.16,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/stats/pt/stats.json": {
+            "lines": 105,
+            "tokens": 568,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 170,
+            "duplicatedTokens": 966,
+            "percentage": 161.9,
+            "percentageTokens": 170.07,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/stats/en/stats.json": {
+            "lines": 105,
+            "tokens": 568,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 68,
+            "duplicatedTokens": 410,
+            "percentage": 64.76,
+            "percentageTokens": 72.18,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/settlements/pt/settlements.json": {
+            "lines": 89,
+            "tokens": 372,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/settlements/en/settlements.json": {
+            "lines": 89,
+            "tokens": 372,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/services_prices/pt/services_prices.json": {
+            "lines": 70,
+            "tokens": 392,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/services_prices/en/services_prices.json": {
+            "lines": 70,
+            "tokens": 392,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 65,
+            "duplicatedTokens": 366,
+            "percentage": 92.86,
+            "percentageTokens": 93.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/scroll/pt/scroll.json": {
+            "lines": 52,
+            "tokens": 225,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/scroll/en/scroll.json": {
+            "lines": 52,
+            "tokens": 225,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 49,
+            "duplicatedTokens": 213,
+            "percentage": 94.23,
+            "percentageTokens": 94.67,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/regions/pt/regions.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/regions/en/regions.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_wants/pt/npc_wants.json": {
+            "lines": 26,
+            "tokens": 125,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_wants/en/npc_wants.json": {
+            "lines": 26,
+            "tokens": 125,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 21,
+            "duplicatedTokens": 99,
+            "percentage": 80.77,
+            "percentageTokens": 79.2,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_traits/pt/npc_traits.json": {
+            "lines": 62,
+            "tokens": 269,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_traits/en/npc_traits.json": {
+            "lines": 62,
+            "tokens": 269,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 57,
+            "duplicatedTokens": 243,
+            "percentage": 91.94,
+            "percentageTokens": 90.33,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_trades/pt/npc_trades.json": {
+            "lines": 48,
+            "tokens": 213,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_trades/en/npc_trades.json": {
+            "lines": 48,
+            "tokens": 213,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 43,
+            "duplicatedTokens": 187,
+            "percentage": 89.58,
+            "percentageTokens": 87.79,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_secrets/pt/npc_secrets.json": {
+            "lines": 34,
+            "tokens": 157,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_secrets/en/npc_secrets.json": {
+            "lines": 34,
+            "tokens": 157,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 131,
+            "percentage": 85.29,
+            "percentageTokens": 83.44,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_names/pt/npc_names.json": {
+            "lines": 170,
+            "tokens": 701,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 65,
+            "duplicatedTokens": 265,
+            "percentage": 38.24,
+            "percentageTokens": 37.8,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_names/en/npc_names.json": {
+            "lines": 102,
+            "tokens": 432,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 134,
+            "duplicatedTokens": 546,
+            "percentage": 131.37,
+            "percentageTokens": 126.39,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_concerns/pt/npc_concerns.json": {
+            "lines": 45,
+            "tokens": 201,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_concerns/en/npc_concerns.json": {
+            "lines": 45,
+            "tokens": 201,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 40,
+            "duplicatedTokens": 175,
+            "percentage": 88.89,
+            "percentageTokens": 87.06,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_apocalypse/pt/npc_apocalypse.json": {
+            "lines": 20,
+            "tokens": 101,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/npc_apocalypse/en/npc_apocalypse.json": {
+            "lines": 20,
+            "tokens": 101,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/names/pt/names.json": {
+            "lines": 212,
+            "tokens": 874,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/names/en/names.json": {
+            "lines": 182,
+            "tokens": 752,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/lore/pt/lore.json": {
+            "lines": 8,
+            "tokens": 46,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/lore/en/lore.json": {
+            "lines": 8,
+            "tokens": 46,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/loot/pt/loot.json": {
+            "lines": 93,
+            "tokens": 390,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/loot/en/loot.json": {
+            "lines": 93,
+            "tokens": 399,
+            "sources": 1,
+            "clones": 3,
+            "duplicatedLines": 116,
+            "duplicatedTokens": 483,
+            "percentage": 124.73,
+            "percentageTokens": 121.05,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/pt/languages.json": {
+            "lines": 8,
+            "tokens": 46,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/wilderness.json": {
+            "lines": 54,
+            "tokens": 232,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 51,
+            "duplicatedTokens": 220,
+            "percentage": 94.44,
+            "percentageTokens": 94.83,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/weather.json": {
+            "lines": 36,
+            "tokens": 162,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 32,
+            "duplicatedTokens": 143,
+            "percentage": 88.89,
+            "percentageTokens": 88.27,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/weapons_prices.json": {
+            "lines": 115,
+            "tokens": 648,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 111,
+            "duplicatedTokens": 629,
+            "percentage": 96.52,
+            "percentageTokens": 97.07,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/traps_triggers.json": {
+            "lines": 27,
+            "tokens": 126,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 23,
+            "duplicatedTokens": 107,
+            "percentage": 85.19,
+            "percentageTokens": 84.92,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/traps_effects.json": {
+            "lines": 61,
+            "tokens": 310,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 57,
+            "duplicatedTokens": 291,
+            "percentage": 93.44,
+            "percentageTokens": 93.87,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/traps_builders.json": {
+            "lines": 34,
+            "tokens": 157,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 131,
+            "percentage": 85.29,
+            "percentageTokens": 83.44,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/tavern_patrons.json": {
+            "lines": 33,
+            "tokens": 150,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 131,
+            "percentage": 87.88,
+            "percentageTokens": 87.33,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/tavern_menu.json": {
+            "lines": 99,
+            "tokens": 555,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 95,
+            "duplicatedTokens": 536,
+            "percentage": 95.96,
+            "percentageTokens": 96.58,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/tavern_innkeeper.json": {
+            "lines": 23,
+            "tokens": 110,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/tavern.json": {
+            "lines": 34,
+            "tokens": 153,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 31,
+            "duplicatedTokens": 141,
+            "percentage": 91.18,
+            "percentageTokens": 92.16,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/stats.json": {
+            "lines": 105,
+            "tokens": 568,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 102,
+            "duplicatedTokens": 556,
+            "percentage": 97.14,
+            "percentageTokens": 97.89,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/services_prices.json": {
+            "lines": 69,
+            "tokens": 385,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 65,
+            "duplicatedTokens": 366,
+            "percentage": 94.2,
+            "percentageTokens": 95.06,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/scroll.json": {
+            "lines": 52,
+            "tokens": 225,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 49,
+            "duplicatedTokens": 213,
+            "percentage": 94.23,
+            "percentageTokens": 94.67,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_wants.json": {
+            "lines": 25,
+            "tokens": 118,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 21,
+            "duplicatedTokens": 99,
+            "percentage": 84,
+            "percentageTokens": 83.9,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_traits.json": {
+            "lines": 61,
+            "tokens": 262,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 57,
+            "duplicatedTokens": 243,
+            "percentage": 93.44,
+            "percentageTokens": 92.75,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_trades.json": {
+            "lines": 47,
+            "tokens": 206,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 43,
+            "duplicatedTokens": 187,
+            "percentage": 91.49,
+            "percentageTokens": 90.78,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_secrets.json": {
+            "lines": 33,
+            "tokens": 150,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 29,
+            "duplicatedTokens": 131,
+            "percentage": 87.88,
+            "percentageTokens": 87.33,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_names.json": {
+            "lines": 77,
+            "tokens": 327,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 69,
+            "duplicatedTokens": 281,
+            "percentage": 89.61,
+            "percentageTokens": 85.93,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_concerns.json": {
+            "lines": 44,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 40,
+            "duplicatedTokens": 175,
+            "percentage": 90.91,
+            "percentageTokens": 90.21,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/npc_apocalypse.json": {
+            "lines": 19,
+            "tokens": 94,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/loot.json": {
+            "lines": 57,
+            "tokens": 245,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 54,
+            "duplicatedTokens": 233,
+            "percentage": 94.74,
+            "percentageTokens": 95.1,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/languages.json": {
+            "lines": 8,
+            "tokens": 46,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/items_trinkets.json": {
+            "lines": 113,
+            "tokens": 470,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 109,
+            "duplicatedTokens": 451,
+            "percentage": 96.46,
+            "percentageTokens": 95.96,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/items_prices.json": {
+            "lines": 235,
+            "tokens": 1328,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 226,
+            "duplicatedTokens": 1280,
+            "percentage": 96.17,
+            "percentageTokens": 96.39,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/factions.json": {
+            "lines": 193,
+            "tokens": 1323,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 264,
+            "duplicatedTokens": 1387,
+            "percentage": 136.79,
+            "percentageTokens": 104.84,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/enhanced_loot.json": {
+            "lines": 58,
+            "tokens": 250,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 55,
+            "duplicatedTokens": 238,
+            "percentage": 94.83,
+            "percentageTokens": 95.2,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/dungeon.json": {
+            "lines": 78,
+            "tokens": 331,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 75,
+            "duplicatedTokens": 319,
+            "percentage": 96.15,
+            "percentageTokens": 96.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/denizen.json": {
+            "lines": 70,
+            "tokens": 298,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 67,
+            "duplicatedTokens": 286,
+            "percentage": 95.71,
+            "percentageTokens": 95.97,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/core.json": {
+            "lines": 65,
+            "tokens": 280,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 62,
+            "duplicatedTokens": 268,
+            "percentage": 95.38,
+            "percentageTokens": 95.71,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/city_events.json": {
+            "lines": 53,
+            "tokens": 230,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 49,
+            "duplicatedTokens": 211,
+            "percentage": 92.45,
+            "percentageTokens": 91.74,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/bestiary.json": {
+            "lines": 61,
+            "tokens": 261,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/beasts_prices.json": {
+            "lines": 33,
+            "tokens": 178,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 130,
+            "percentage": 72.73,
+            "percentageTokens": 73.03,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/basic.json": {
+            "lines": 32,
+            "tokens": 145,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 104,
+            "percentage": 75,
+            "percentageTokens": 71.72,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/languages/en/affiliation.json": {
+            "lines": 66,
+            "tokens": 283,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 58,
+            "duplicatedTokens": 241,
+            "percentage": 87.88,
+            "percentageTokens": 85.16,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/items_trinkets/pt/items_trinkets.json": {
+            "lines": 114,
+            "tokens": 477,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/items_trinkets/en/items_trinkets.json": {
+            "lines": 114,
+            "tokens": 477,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 109,
+            "duplicatedTokens": 451,
+            "percentage": 95.61,
+            "percentageTokens": 94.55,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/items_prices/pt/items_prices.json": {
+            "lines": 75,
+            "tokens": 1015,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/items_prices/en/items_prices.json": {
+            "lines": 248,
+            "tokens": 1384,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 226,
+            "duplicatedTokens": 1280,
+            "percentage": 91.13,
+            "percentageTokens": 92.49,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/features/pt/features.json": {
+            "lines": 122,
+            "tokens": 509,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/features/en/features.json": {
+            "lines": 122,
+            "tokens": 509,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/factions/pt/factions.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/factions/en/factions.json": {
+            "lines": 279,
+            "tokens": 1463,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 264,
+            "duplicatedTokens": 1387,
+            "percentage": 94.62,
+            "percentageTokens": 94.81,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/enhanced_loot/pt/enhanced_loot.json": {
+            "lines": 58,
+            "tokens": 250,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/enhanced_loot/en/enhanced_loot.json": {
+            "lines": 58,
+            "tokens": 250,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 55,
+            "duplicatedTokens": 238,
+            "percentage": 94.83,
+            "percentageTokens": 95.2,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/encounters/pt/encounters.json": {
+            "lines": 129,
+            "tokens": 537,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/encounters/en/encounters.json": {
+            "lines": 129,
+            "tokens": 537,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/dungeon/pt/dungeon.json": {
+            "lines": 78,
+            "tokens": 331,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/dungeon/en/dungeon.json": {
+            "lines": 78,
+            "tokens": 331,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 75,
+            "duplicatedTokens": 319,
+            "percentage": 96.15,
+            "percentageTokens": 96.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/descriptions/pt/descriptions.json": {
+            "lines": 93,
+            "tokens": 390,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/descriptions/en/descriptions.json": {
+            "lines": 93,
+            "tokens": 390,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/denizens/pt/denizens.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/denizens/en/denizens.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/denizen/pt/denizen.json": {
+            "lines": 70,
+            "tokens": 298,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/denizen/en/denizen.json": {
+            "lines": 70,
+            "tokens": 298,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 67,
+            "duplicatedTokens": 286,
+            "percentage": 95.71,
+            "percentageTokens": 95.97,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/core/pt/core.json": {
+            "lines": 65,
+            "tokens": 281,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/core/en/core.json": {
+            "lines": 65,
+            "tokens": 280,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 62,
+            "duplicatedTokens": 268,
+            "percentage": 95.38,
+            "percentageTokens": 95.71,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/city_events/pt/city_events.json": {
+            "lines": 54,
+            "tokens": 237,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/city_events/en/city_events.json": {
+            "lines": 54,
+            "tokens": 237,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 49,
+            "duplicatedTokens": 211,
+            "percentage": 90.74,
+            "percentageTokens": 89.03,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/valley_of_unfortunate_undead.json": {
+            "lines": 473,
+            "tokens": 2036,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/schleswig.json": {
+            "lines": 938,
+            "tokens": 3895,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/major_cities.json": {
+            "lines": 67,
+            "tokens": 388,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/grift.json": {
+            "lines": 521,
+            "tokens": 2293,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/graven_tosk.json": {
+            "lines": 390,
+            "tokens": 1682,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/cities.json": {
+            "lines": 8,
+            "tokens": 46,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/pt/allians.json": {
+            "lines": 283,
+            "tokens": 1243,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 206,
+            "duplicatedTokens": 786,
+            "percentage": 72.79,
+            "percentageTokens": 63.23,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/valley_of_unfortunate_undead.json": {
+            "lines": 471,
+            "tokens": 2022,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/schleswig.json": {
+            "lines": 936,
+            "tokens": 3881,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/major_cities.json": {
+            "lines": 67,
+            "tokens": 388,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/grift.json": {
+            "lines": 519,
+            "tokens": 2279,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/graven_tosk.json": {
+            "lines": 388,
+            "tokens": 1668,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/cities.json": {
+            "lines": 8,
+            "tokens": 46,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/cities/en/allians.json": {
+            "lines": 281,
+            "tokens": 1229,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 206,
+            "duplicatedTokens": 786,
+            "percentage": 73.31,
+            "percentageTokens": 63.95,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/bestiary/pt/bestiary.json": {
+            "lines": 345,
+            "tokens": 1397,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/bestiary/en/bestiary.json": {
+            "lines": 327,
+            "tokens": 1325,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/beasts_prices/pt/beasts_prices.json": {
+            "lines": 55,
+            "tokens": 262,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/beasts_prices/en/beasts_prices.json": {
+            "lines": 46,
+            "tokens": 234,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 130,
+            "percentage": 52.17,
+            "percentageTokens": 55.56,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/beasts/pt/beasts.json": {
+            "lines": 74,
+            "tokens": 303,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/beasts/en/beasts.json": {
+            "lines": 74,
+            "tokens": 305,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/basic/pt/basic.json": {
+            "lines": 50,
+            "tokens": 218,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/basic/en/basic.json": {
+            "lines": 50,
+            "tokens": 218,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 104,
+            "percentage": 48,
+            "percentageTokens": 47.71,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/affiliation/pt/affiliation.json": {
+            "lines": 78,
+            "tokens": 333,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/affiliation/en/affiliation.json": {
+            "lines": 78,
+            "tokens": 333,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 58,
+            "duplicatedTokens": 241,
+            "percentage": 74.36,
+            "percentageTokens": 72.37,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/tsconfig.json": {
+            "lines": 13,
+            "tokens": 92,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/databases/lore/lore.json": {
+            "lines": 45,
+            "tokens": 194,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/electron/tsconfig.json": {
+            "lines": 28,
+            "tokens": 168,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/tsconfig.json": {
+            "lines": 26,
+            "tokens": 176,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/package.json": {
+            "lines": 25,
+            "tokens": 154,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/.eslintrc.json": {
+            "lines": 23,
+            "tokens": 124,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 14817,
+          "tokens": 67609,
+          "sources": 141,
+          "clones": 35,
+          "duplicatedLines": 2370,
+          "duplicatedTokens": 11314,
+          "percentage": 16,
+          "percentageTokens": 16.73,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 14817,
+      "tokens": 67609,
+      "sources": 141,
+      "clones": 35,
+      "duplicatedLines": 2370,
+      "duplicatedTokens": 11314,
+      "percentage": 16,
+      "percentageTokens": 16.73,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "json",
+      "lines": 69,
+      "fragment": "{\n  \"category\": \"stats\",\n  \"tables\": {\n    \"creature_stats\": {\n      \"weak\": {\n        \"hp\": \"1d4\",\n        \"armor\": \"10\",\n        \"morale\": \"6\",\n        \"damage\": \"1d4\"\n      },\n      \"normal\": {\n        \"hp\": \"1d6\",\n        \"armor\": \"12\",\n        \"morale\": \"7\",\n        \"damage\": \"1d6\"\n      },\n      \"strong\": {\n        \"hp\": \"2d6\",\n        \"armor\": \"14\",\n        \"morale\": \"8\",\n        \"damage\": \"1d8\"\n      },\n      \"elite\": {\n        \"hp\": \"3d6\",\n        \"armor\": \"16\",\n        \"morale\": \"9\",\n        \"damage\": \"1d10\"\n      },\n      \"boss\": {\n        \"hp\": \"4d6+4\",\n        \"armor\": \"18\",\n        \"morale\": \"10\",\n        \"damage\": \"2d6\"\n      }\n    },\n    \"npc_stats\": {\n      \"peasant\": {\n        \"hp\": \"1d4\",\n        \"armor\": \"10\",\n        \"morale\": \"5\",\n        \"damage\": \"1d3\"\n      },\n      \"soldier\": {\n        \"hp\": \"1d6+1\",\n        \"armor\": \"14\",\n        \"morale\": \"7\",\n        \"damage\": \"1d6\"\n      },\n      \"veteran\": {\n        \"hp\": \"2d6\",\n        \"armor\": \"16\",\n        \"morale\": \"8\",\n        \"damage\": \"1d8\"\n      },\n      \"leader\": {\n        \"hp\": \"3d6\",\n        \"armor\": \"18\",\n        \"morale\": \"9\",\n        \"damage\": \"1d10\"\n      },\n      \"champion\": {\n        \"hp\": \"4d6+2\",\n        \"armor\": \"20\",\n        \"morale\": \"10\",\n        \"damage\": \"2d6\"\n      }\n    },\n    \"special_abilities\": [\n      \"Regenerates 1 HP per round\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/stats/en/stats.json",
+        "start": 1,
+        "end": 69,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 69,
+          "column": 29,
+          "position": 410
+        }
+      },
+      "secondFile": {
+        "name": "databases/stats/pt/stats.json",
+        "start": 1,
+        "end": 69,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 69,
+          "column": 26,
+          "position": 410
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 66,
+      "fragment": ",\n  \"tables\": {\n    \"first_names\": [\n      \"Aerg-Tval\",\n      \"Agn\",\n      \"Domm\",\n      \"Vukkan\",\n      \"Borda\",\n      \"Daeru\",\n      \"Kathan\",\n      \"Felban\",\n      \"Gotven\",\n      \"Grin\",\n      \"Grittr\",\n      \"Haeru\",\n      \"Hargha\",\n      \"Harmug\",\n      \"Jotna\",\n      \"Karg\",\n      \"Karva\",\n      \"Katla\",\n      \"Senkil\",\n      \"Keftar\",\n      \"Klort\",\n      \"Kratar\",\n      \"Kutz\",\n      \"Kvetin\",\n      \"Merkari\",\n      \"Margar\",\n      \"Nagl\",\n      \"Niduk\",\n      \"Nifehl\",\n      \"Prugl\",\n      \"Svind\",\n      \"Schlefzum\",\n      \"Ulg\",\n      \"Yuk-Tval\",\n      \"Drud\",\n      \"Bor\",\n      \"Vrask\",\n      \"Gat\",\n      \"Skel\",\n      \"Gritt\",\n      \"Bard\"\n    ],\n    \"second_names\": [\n      \"Theras\",\n      \"Therg\",\n      \"Thorvul\",\n      \"Torn\",\n      \"Urm\",\n      \"Drugel\",\n      \"Vagal\",\n      \"Vatan\",\n      \"Von\",\n      \"Vrakh\",\n      \"Vresi\",\n      \"Wemut\",\n      \"Skelh\",\n      \"Burder\",\n      \"Jaurk\",\n      \"Thron\",\n      \"Tarvl\",\n      \"Urkin\",\n      \"Galt\",\n      \"Wakta\",",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/npc_names/en/npc_names.json",
+        "start": 2,
+        "end": 67,
+        "startLoc": {
+          "line": 2,
+          "column": 12,
+          "position": 7
+        },
+        "endLoc": {
+          "line": 67,
+          "column": 2,
+          "position": 272
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_names/pt/npc_names.json",
+        "start": 7,
+        "end": 73,
+        "startLoc": {
+          "line": 7,
+          "column": 2,
+          "position": 37
+        },
+        "endLoc": {
+          "line": 73,
+          "column": 2,
+          "position": 304
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 32,
+      "fragment": "\"treasure_values\": [\n      \"Worthless but cursed\",\n      \"Few copper pieces\",\n      \"Handful of silver\",\n      \"Small fortune in gold\",\n      \"Priceless but dangerous\",\n      \"Valuable to cultists\",\n      \"Sought by collectors\",\n      \"Worth a life\",\n      \"Magically valuable\",\n      \"Historically significant\",\n      \"Religiously important\",\n      \"Extremely rare\"\n    ],\n    \"treasure_effects\": [\n      \"brings bad luck\",\n      \"attracts undead\",\n      \"causes nightmares\",\n      \"grants dark visions\",\n      \"whispers constantly\",\n      \"feels unnaturally cold\",\n      \"pulses with evil energy\",\n      \"corrupts nearby items\",\n      \"reveals hidden passages\",\n      \"allows communion with dead\",\n      \"protects from holy symbols\",\n      \"enhances dark magic\",\n      \"marks bearer for death\",\n      \"slowly drains life force\"\n    ]\n  },\n  \"metadata\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/loot/en/loot.json",
+        "start": 57,
+        "end": 88,
+        "startLoc": {
+          "line": 57,
+          "column": 5,
+          "position": 239
+        },
+        "endLoc": {
+          "line": 88,
+          "column": 11,
+          "position": 364
+        }
+      },
+      "secondFile": {
+        "name": "databases/loot/en/loot.json",
+        "start": 21,
+        "end": 52,
+        "startLoc": {
+          "line": 21,
+          "column": 5,
+          "position": 85
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 9,
+          "position": 210
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 52,
+      "fragment": "{\n  \"category\": \"wilderness\",\n  \"tables\": {\n    \"wilderness_encounters\": [\n      \"A circle of standing stones humming with power\",\n      \"Abandoned cart with scattered belongings\",\n      \"Fresh graves with disturbed earth\",\n      \"Gallows tree with old rope\",\n      \"Ruined watchtower on a hill\",\n      \"Stream running red with unknown substance\",\n      \"Crossroads with weathered signpost\",\n      \"Burned farmhouse with blackened timbers\",\n      \"Ancient cairn marking forgotten dead\",\n      \"Ritual circle drawn in ash and bone\",\n      \"Well with rope cut and bucket missing\",\n      \"Trail of blood leading into darkness\",\n      \"Shepherd's hut with door hanging open\",\n      \"Stone bridge over rushing water\",\n      \"Grove of dead trees in perfect circle\",\n      \"Merchant's bones picked clean by crows\",\n      \"Cave mouth sealed with heavy stones\",\n      \"Battlefield littered with old weapons\",\n      \"Shrine to forgotten deity\",\n      \"Gibbet cage swaying empty\"\n    ],\n    \"random_events\": [\n      \"A murder of crows follows the party ominously\",\n      \"Strange lights dance in the distance\",\n      \"The air grows thick and hard to breathe\",\n      \"Distant screaming echoes across the land\",\n      \"An unnatural fog rolls in quickly\",\n      \"The ground trembles with unknown cause\",\n      \"Dead animals litter the path ahead\",\n      \"A cold wind brings whispers of the past\",\n      \"The sky darkens despite the hour\",\n      \"Flowers wilt as the party approaches\",\n      \"A terrible stench fills the air\",\n      \"Shadows move independently of their casters\",\n      \"The temperature drops suddenly\",\n      \"Strange symbols appear carved in trees\",\n      \"A blood-red moon rises despite daylight\",\n      \"The party feels watched by unseen eyes\",\n      \"Time seems to slow and distort\",\n      \"A child's laughter echoes from nowhere\",\n      \"The dead rise from unmarked graves\",\n      \"Holy symbols crack and tarnish\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-07-13T10:26:38.980999\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/wilderness.json",
+        "start": 1,
+        "end": 52,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 29,
+          "position": 220
+        }
+      },
+      "secondFile": {
+        "name": "databases/wilderness/en/wilderness.json",
+        "start": 1,
+        "end": 52,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 29,
+          "position": 220
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 33,
+      "fragment": "{\n  \"category\": \"weather\",\n  \"tables\": {\n    \"weather_conditions\": [\n      \"Lifeless grey\",\n      \"Hammering rain\",\n      \"Piercing wind\",\n      \"Deafening storm\",\n      \"Black as night\",\n      \"Dead quiet\",\n      \"Cloudburst\",\n      \"Soup-thick mist\",\n      \"Crackling frost\",\n      \"Irritating drizzle\",\n      \"Roaring thunder\",\n      \"Gravelike cold\",\n      \"Unnatural cold\",\n      \"Scratching sounds\",\n      \"Purple mist\",\n      \"Dark fog\",\n      \"Sweat vapor\",\n      \"Feeble light\",\n      \"Thick mist\",\n      \"Sewage tide\",\n      \"Methane cloud\",\n      \"Spitting torch\",\n      \"Mushroom spores\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/weather.json",
+        "start": 1,
+        "end": 33,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 33,
+          "column": 29,
+          "position": 143
+        }
+      },
+      "secondFile": {
+        "name": "databases/weather/en/weather.json",
+        "start": 1,
+        "end": 33,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 33,
+          "column": 29,
+          "position": 143
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 112,
+      "fragment": "{\n  \"category\": \"weapons_prices\",\n  \"tables\": {\n    \"weapons\": [\n      {\n        \"name\": \"Battle axe\",\n        \"damage\": \"d8\",\n        \"price\": 35,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Club\",\n        \"damage\": \"d6\",\n        \"price\": 10,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Crossbow\",\n        \"damage\": \"d8\",\n        \"price\": 40,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Dagger\",\n        \"damage\": \"d4\",\n        \"price\": 5,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Falchion\",\n        \"damage\": \"d6\",\n        \"price\": 15,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Handaxe\",\n        \"damage\": \"d6\",\n        \"price\": 10,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Knife\",\n        \"damage\": \"d4\",\n        \"price\": 5,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Shortbow\",\n        \"damage\": \"d6\",\n        \"price\": 15,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Shortsword\",\n        \"damage\": \"d6\",\n        \"price\": 20,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Sling\",\n        \"damage\": \"d4\",\n        \"price\": 8,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Spear\",\n        \"damage\": \"d6\",\n        \"price\": 10,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Sword\",\n        \"damage\": \"d8\",\n        \"price\": 30,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Warhammer\",\n        \"damage\": \"d8\",\n        \"price\": 60,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Whip\",\n        \"damage\": \"d4\",\n        \"price\": 8,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Tinderbox\",\n        \"damage\": \"d0\",\n        \"price\": 20,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"10 bolts\",\n        \"damage\": \"\",\n        \"price\": 10,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"20 arrows\",\n        \"damage\": \"\",\n        \"price\": 10,\n        \"currency\": \"silver\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/weapons_prices.json",
+        "start": 1,
+        "end": 112,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 112,
+          "column": 29,
+          "position": 629
+        }
+      },
+      "secondFile": {
+        "name": "databases/weapons_prices/en/weapons_prices.json",
+        "start": 1,
+        "end": 112,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 112,
+          "column": 29,
+          "position": 629
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 24,
+      "fragment": "{\n  \"category\": \"traps_triggers\",\n  \"tables\": {\n    \"trap_triggers\": [\n      \"... not leaving the room in time.\",\n      \"... stepping on the wrong floor tile.\",\n      \"... touching a damned doorknob.\",\n      \"... pushing an alluring button.\",\n      \"... turning the key.\",\n      \"... discussing a foul inscription.\",\n      \"... stealing a prized item.\",\n      \"... talking too loudly.\",\n      \"... taking a torch.\",\n      \"... opening a box/sarcophagus.\",\n      \"... treading on the trip wire.\",\n      \"... rattling your weapons.\",\n      \"... drinking Elixir Vitalis in a cursed room.\",\n      \"... lighting a lantern where gloom reigns.\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/traps_triggers.json",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 29,
+          "position": 107
+        }
+      },
+      "secondFile": {
+        "name": "databases/traps_triggers/en/traps_triggers.json",
+        "start": 1,
+        "end": 24,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 24,
+          "column": 29,
+          "position": 107
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 58,
+      "fragment": "{\n  \"category\": \"traps_effects\",\n  \"tables\": {\n    \"trap_effects\": [\n      {\n        \"description\": \"Shimmering, bile-yellow poisonous gas.\",\n        \"effect\": \"Test Toughness DR18 or die. Test every minute.\"\n      },\n      {\n        \"description\": \"Poisonous darts shoot from wall-holes.\",\n        \"effect\": \"D2 damage. Test Toughness DR16 or die.\"\n      },\n      {\n        \"description\": \"Giant marble falls from the ceiling or from a ramp in an adjacent room.\",\n        \"effect\": \"Test Agility DR14 or die.\"\n      },\n      {\n        \"description\": \"Cruel creature is released from a hidden chamber.\",\n        \"effect\": \"Varying.\"\n      },\n      {\n        \"description\": \"Sharpened pole hits you from the side.\",\n        \"effect\": \"Fate decides. Roll a die: an odd result is d20 damage.\"\n      },\n      {\n        \"description\": \"Falling net. Something approaches.\",\n        \"effect\": \"Presence DR16 to escape.\"\n      },\n      {\n        \"description\": \"A Power affects you.\",\n        \"effect\": \"Varying.\"\n      },\n      {\n        \"description\": \"A pit opens under your feet.\",\n        \"effect\": \"1-in-6 chance of impalement (instant death). Otherwise, d6 damage per 10'.\"\n      },\n      {\n        \"description\": \"Doors lock and water fills the room.\",\n        \"effect\": \"Better find a way out.\"\n      },\n      {\n        \"description\": \"Alarm goes off; something awakens.\",\n        \"effect\": \"Varying.\"\n      },\n      {\n        \"description\": \"The walls are closing in.\",\n        \"effect\": \"Better find a way out. 1-in-6 chance that the walls get stuck ... if you're lucky.\"\n      },\n      {\n        \"description\": \"Burning oil pouring from a ceiling cauldron.\",\n        \"effect\": \"Fate decides. Roll a die: an odd result is d12 damage.\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/traps_effects.json",
+        "start": 1,
+        "end": 58,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 58,
+          "column": 29,
+          "position": 291
+        }
+      },
+      "secondFile": {
+        "name": "databases/traps_effects/en/traps_effects.json",
+        "start": 1,
+        "end": 58,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 58,
+          "column": 29,
+          "position": 291
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 30,
+      "fragment": "{\n  \"category\": \"traps_builders\",\n  \"tables\": {\n    \"trap_builders\": [\n      \"A slow, calculating grotesque.\",\n      \"An death-sentenced Uguth† mine-thrall.\",\n      \"A simple goblin.\",\n      \"A forgotten berserker king.\",\n      \"A deranged shadow being.\",\n      \"A bitter necromancer.\",\n      \"A dying troll mourning its mother.\",\n      \"A spiteful child from a torched village.\",\n      \"A slumbering, nebulous daemon.\",\n      \"A catacomb creatorʼs executioner.\",\n      \"An inveterate nail collector.\",\n      \"A cunning, crafty skeleton.\",\n      \"A bewildered wickhead.\",\n      \"A sickly, blind demigod.\",\n      \"A group of terrified goons.\",\n      \"A mindless death-cultist.\",\n      \"A witch lost in Labyrinth Lecht.‡\",\n      \"A bored, teeth-counting hermit.\",\n      \"A sadistic graveyard architect.\",\n      \"An anxious undead doll.\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/traps_builders.json",
+        "start": 1,
+        "end": 30,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 30,
+          "column": 29,
+          "position": 131
+        }
+      },
+      "secondFile": {
+        "name": "databases/traps_builders/en/traps_builders.json",
+        "start": 1,
+        "end": 30,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 30,
+          "column": 29,
+          "position": 131
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 30,
+      "fragment": "{\n  \"category\": \"tavern_patrons\",\n  \"tables\": {\n    \"patron_traits\": [\n      \"Filth\",\n      \"Boozehound\",\n      \"One Eye\",\n      \"Gum Rot\",\n      \"Fancy Boy (half-brother to Oily Boy)\",\n      \"Stinker\",\n      \"Braggard\",\n      \"Nosey\",\n      \"Hook Hand\",\n      \"Slurper\",\n      \"Aggro\",\n      \"Nags-a-lot\",\n      \"Archbishop of Mockery (smirking bully)\",\n      \"Catastrophic Cough\",\n      \"Hysterical Tears\",\n      \"No Nose\",\n      \"Tongueless\",\n      \"Oily Boy (Fancy Boy's half-brother)\",\n      \"Trauma Dreams\",\n      \"Acid Face\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/tavern_patrons.json",
+        "start": 1,
+        "end": 30,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 30,
+          "column": 29,
+          "position": 131
+        }
+      },
+      "secondFile": {
+        "name": "databases/tavern_patrons/en/tavern_patrons.json",
+        "start": 1,
+        "end": 30,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 30,
+          "column": 29,
+          "position": 131
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 96,
+      "fragment": "{\n  \"category\": \"tavern_menu\",\n  \"tables\": {\n    \"select_menu\": [\n      {\n        \"name\": \"Braised chicken with dangerously alcoholic wine-drenched apples\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"quality\": \"select\"\n      },\n      {\n        \"name\": \"Spiced rutabaga/swede from dark Sarkash soil, a delicacy\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"quality\": \"select\"\n      },\n      {\n        \"name\": \"Galgenbeckian stew with whole embryonic boars. Delicious!\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"quality\": \"select\"\n      },\n      {\n        \"name\": \"Tveland yam hash with sliced pungent tomb-truffle\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"quality\": \"select\"\n      },\n      {\n        \"name\": \"Migol's pie (blackened venison and chicken bone broth jelly)\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"quality\": \"select\"\n      },\n      {\n        \"name\": \"Black soup with baked hog face\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"quality\": \"select\"\n      }\n    ],\n    \"budget_menu\": [\n      {\n        \"name\": \"Watery femur soup. The femur is large. It's been there a while.\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"Thick ooze soup! At least one chunk. The ooze is pure, I assure you!\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"Sour celery pudding with a side of compressed last-week's-meat\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"Gloomberry mix (Toughness DR12 to avoid explosive diarrhea)\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"\\\"Goblin's gall\\\", famous swamp-mud broth. Sourced from local swamps!\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"Baked staring-pig-head with filled whispering-lips. Most won't touch it.\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"Chunky stew and hearty ale (Lotta Gravy's specialty)\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      },\n      {\n        \"name\": \"Galgenburger (mystery meat, may turn you into a zombie)\",\n        \"price\": 3,\n        \"currency\": \"silver\",\n        \"quality\": \"budget\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/tavern_menu.json",
+        "start": 1,
+        "end": 96,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 96,
+          "column": 29,
+          "position": 536
+        }
+      },
+      "secondFile": {
+        "name": "databases/tavern_menu/en/tavern_menu.json",
+        "start": 1,
+        "end": 96,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 96,
+          "column": 29,
+          "position": 536
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 32,
+      "fragment": "{\n  \"category\": \"tavern\",\n  \"tables\": {\n    \"tavern_descriptions\": [\n      \"Smokey\",\n      \"Silent\",\n      \"Filthy\",\n      \"Dark\",\n      \"Rowdy\",\n      \"Smelly\"\n    ],\n    \"tavern_special_1\": [\n      \"Maggot\",\n      \"Troll steak\",\n      \"Monkey brain\",\n      \"Goblin toe\",\n      \"Long pig\",\n      \"Bat liver\"\n    ],\n    \"tavern_special_2\": [\n      \"Mushroom\",\n      \"Algae\",\n      \"Cockroach\",\n      \"Spider\",\n      \"Eyeball\",\n      \"Locust\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-07-13T10:26:38.979798\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/tavern.json",
+        "start": 1,
+        "end": 32,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 29,
+          "position": 141
+        }
+      },
+      "secondFile": {
+        "name": "databases/tavern/en/tavern.json",
+        "start": 1,
+        "end": 32,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 32,
+          "column": 29,
+          "position": 141
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 103,
+      "fragment": "{\n  \"category\": \"stats\",\n  \"tables\": {\n    \"creature_stats\": {\n      \"weak\": {\n        \"hp\": \"1d4\",\n        \"armor\": \"10\",\n        \"morale\": \"6\",\n        \"damage\": \"1d4\"\n      },\n      \"normal\": {\n        \"hp\": \"1d6\",\n        \"armor\": \"12\",\n        \"morale\": \"7\",\n        \"damage\": \"1d6\"\n      },\n      \"strong\": {\n        \"hp\": \"2d6\",\n        \"armor\": \"14\",\n        \"morale\": \"8\",\n        \"damage\": \"1d8\"\n      },\n      \"elite\": {\n        \"hp\": \"3d6\",\n        \"armor\": \"16\",\n        \"morale\": \"9\",\n        \"damage\": \"1d10\"\n      },\n      \"boss\": {\n        \"hp\": \"4d6+4\",\n        \"armor\": \"18\",\n        \"morale\": \"10\",\n        \"damage\": \"2d6\"\n      }\n    },\n    \"npc_stats\": {\n      \"peasant\": {\n        \"hp\": \"1d4\",\n        \"armor\": \"10\",\n        \"morale\": \"5\",\n        \"damage\": \"1d3\"\n      },\n      \"soldier\": {\n        \"hp\": \"1d6+1\",\n        \"armor\": \"14\",\n        \"morale\": \"7\",\n        \"damage\": \"1d6\"\n      },\n      \"veteran\": {\n        \"hp\": \"2d6\",\n        \"armor\": \"16\",\n        \"morale\": \"8\",\n        \"damage\": \"1d8\"\n      },\n      \"leader\": {\n        \"hp\": \"3d6\",\n        \"armor\": \"18\",\n        \"morale\": \"9\",\n        \"damage\": \"1d10\"\n      },\n      \"champion\": {\n        \"hp\": \"4d6+2\",\n        \"armor\": \"20\",\n        \"morale\": \"10\",\n        \"damage\": \"2d6\"\n      }\n    },\n    \"special_abilities\": [\n      \"Regenerates 1 HP per round\",\n      \"Immune to normal weapons\",\n      \"Causes fear (morale -2)\",\n      \"Poisonous attack (save or die)\",\n      \"Invisible until attacks\",\n      \"Flies at will\",\n      \"Breathes fire (2d6 damage)\",\n      \"Drains life force\",\n      \"Splits when killed\",\n      \"Phases through walls\",\n      \"Summons reinforcements\",\n      \"Reflects magic\",\n      \"Berserker rage (+2 damage)\",\n      \"Death curse on killer\",\n      \"Explodes when killed\"\n    ],\n    \"weaknesses\": [\n      \"Vulnerable to silver\",\n      \"Harmed by holy symbols\",\n      \"Fears bright light\",\n      \"Cannot cross running water\",\n      \"Repelled by garlic\",\n      \"Weakened by iron\",\n      \"Affected by salt circles\",\n      \"Damaged by holy water\",\n      \"Bound by true names\",\n      \"Confused by mirrors\",\n      \"Paralyzed by music\",\n      \"Slowed by cold iron\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-07-13T10:26:38.981168\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/stats.json",
+        "start": 1,
+        "end": 103,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 103,
+          "column": 29,
+          "position": 556
+        }
+      },
+      "secondFile": {
+        "name": "databases/stats/pt/stats.json",
+        "start": 1,
+        "end": 103,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 103,
+          "column": 29,
+          "position": 556
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 66,
+      "fragment": "{\n  \"category\": \"services_prices\",\n  \"tables\": {\n    \"services\": [\n      {\n        \"name\": \"Night in hospice\",\n        \"price\": 3,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Drink\",\n        \"price\": 1,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Steady meal\",\n        \"price\": 2,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Hot meal\",\n        \"price\": 3,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Bribe, clerk\",\n        \"price\": \"20-40\",\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Bribe, rabble\",\n        \"price\": \"5-15\",\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      }\n    ],\n    \"armor_repair\": [\n      {\n        \"tier\": \"1 to 2\",\n        \"cost\": 25,\n        \"currency\": \"silver\",\n        \"notes\": \"Armor cannot be repaired to a tier higher than its original\"\n      },\n      {\n        \"tier\": \"2 to 3\",\n        \"cost\": 40,\n        \"currency\": \"silver\",\n        \"notes\": \"Armor cannot be repaired to a tier higher than its original\"\n      },\n      {\n        \"tier\": \"3 to 4\",\n        \"cost\": 50,\n        \"currency\": \"silver\",\n        \"notes\": \"Armor cannot be repaired to a tier higher than its original\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/services_prices.json",
+        "start": 1,
+        "end": 66,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 66,
+          "column": 29,
+          "position": 366
+        }
+      },
+      "secondFile": {
+        "name": "databases/services_prices/en/services_prices.json",
+        "start": 1,
+        "end": 66,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 66,
+          "column": 29,
+          "position": 366
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 50,
+      "fragment": "{\n  \"category\": \"scroll\",\n  \"tables\": {\n    \"scroll_types\": [\n      \"Crumbling parchment\",\n      \"Blood-stained vellum\",\n      \"Bone tablets\",\n      \"Metal scrolls\",\n      \"Flesh pages\",\n      \"Stone inscriptions\",\n      \"Tree bark writings\",\n      \"Skin manuscripts\",\n      \"Clay fragments\",\n      \"Wax tablets\"\n    ],\n    \"scroll_content\": [\n      \"heretical prayers\",\n      \"forbidden spells\",\n      \"plague recipes\",\n      \"death rituals\",\n      \"curses and hexes\",\n      \"prophecies of doom\",\n      \"maps to lost places\",\n      \"alchemical formulas\",\n      \"summoning circles\",\n      \"torture methods\",\n      \"poison guides\",\n      \"necromantic arts\",\n      \"demonic contracts\",\n      \"blasphemous hymns\"\n    ],\n    \"scroll_effects\": [\n      \"causes nightmares when read\",\n      \"burns the reader's hands\",\n      \"whispers dark secrets\",\n      \"ages the reader rapidly\",\n      \"summons malevolent spirits\",\n      \"inflicts temporary blindness\",\n      \"drives reader temporarily mad\",\n      \"reveals hidden truths\",\n      \"grants dark knowledge\",\n      \"curses the reader\",\n      \"attracts undead\",\n      \"causes uncontrollable fear\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-07-13T10:26:38.980498\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/scroll.json",
+        "start": 1,
+        "end": 50,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 50,
+          "column": 29,
+          "position": 213
+        }
+      },
+      "secondFile": {
+        "name": "databases/scroll/en/scroll.json",
+        "start": 1,
+        "end": 50,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 50,
+          "column": 29,
+          "position": 213
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 22,
+      "fragment": "{\n  \"category\": \"npc_wants\",\n  \"tables\": {\n    \"wants\": [\n      \"Glorious death\",\n      \"To travel\",\n      \"Bloodshed\",\n      \"Forgiveness\",\n      \"Revenge\",\n      \"To retire\",\n      \"Love\",\n      \"A drink\",\n      \"To be left alone\",\n      \"Knowledge\",\n      \"To feel that there is some kind of meaning or purpose to it all\",\n      \"Gambling\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/npc_wants.json",
+        "start": 1,
+        "end": 22,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 29,
+          "position": 99
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_wants/en/npc_wants.json",
+        "start": 1,
+        "end": 22,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 22,
+          "column": 29,
+          "position": 99
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 58,
+      "fragment": "{\n  \"category\": \"npc_traits\",\n  \"tables\": {\n    \"traits\": [\n      \"Annoyed\",\n      \"Nervous\",\n      \"Bleeding\",\n      \"Confused\",\n      \"Scared\",\n      \"Deaf\",\n      \"Envious\",\n      \"Rotting\",\n      \"Sad\",\n      \"Itching\",\n      \"Desperate\",\n      \"Pompous\",\n      \"Dying\",\n      \"Bitter\",\n      \"Starving\",\n      \"Gullible\",\n      \"Morbid\",\n      \"Lazy\",\n      \"Wounded\",\n      \"Exhausted\",\n      \"Gaudy\",\n      \"Heretical\",\n      \"Worried\",\n      \"Hopeless\",\n      \"Apathetic\",\n      \"Drunk\",\n      \"Betrayed\",\n      \"Thieving\",\n      \"Possessed\",\n      \"Worm-infested\",\n      \"Cursed\",\n      \"Immortal\",\n      \"Demon-possessed\",\n      \"Human-rat hybrid\",\n      \"Undead\",\n      \"Gargoyle\",\n      \"Basilisk knight\",\n      \"Basilisk priest\",\n      \"Worm sorcerer\",\n      \"Archbishop\",\n      \"Vicar General\",\n      \"Archhealer\",\n      \"Church Treasurer\",\n      \"Professor\",\n      \"Koopman\",\n      \"Crime lord\",\n      \"Cult leader\",\n      \"Hermit\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/npc_traits.json",
+        "start": 1,
+        "end": 58,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 58,
+          "column": 29,
+          "position": 243
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_traits/en/npc_traits.json",
+        "start": 1,
+        "end": 58,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 58,
+          "column": 29,
+          "position": 243
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 44,
+      "fragment": "{\n  \"category\": \"npc_trades\",\n  \"tables\": {\n    \"trades\": [\n      \"Baker / Butcher\",\n      \"Gravedigger\",\n      \"Peddler / Drifter\",\n      \"Soothsayer\",\n      \"Snake breeder\",\n      \"Blacksmith\",\n      \"Innkeeper\",\n      \"Murdered friend\",\n      \"Corrupt priest\",\n      \"Peasant\",\n      \"Brigand / Thief\",\n      \"Herbalist\",\n      \"Lawless scum\",\n      \"Former hermit\",\n      \"Priest / Priestess\",\n      \"Drudge / Dreg\",\n      \"Struggling artisan\",\n      \"Monkey tamer\",\n      \"Bell ringer\",\n      \"Shitshoveller\",\n      \"Ditch digger\",\n      \"Rat-catcher\",\n      \"Mercenary\",\n      \"Witch hunter\",\n      \"Bookbinder / Bookburner\",\n      \"Tax collector\",\n      \"Full-time gambler\",\n      \"Seafarer\",\n      \"Corpse collector\",\n      \"Barber-surgeon\",\n      \"Miner / Bomb chemist\",\n      \"Vagabond / Hunter\",\n      \"Cruel captain\",\n      \"Corrupt clerk\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/npc_trades.json",
+        "start": 1,
+        "end": 44,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 44,
+          "column": 29,
+          "position": 187
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_trades/en/npc_trades.json",
+        "start": 1,
+        "end": 44,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 44,
+          "column": 29,
+          "position": 187
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 30,
+      "fragment": "{\n  \"category\": \"npc_secrets\",\n  \"tables\": {\n    \"secrets\": [\n      \"A spy\",\n      \"An inquisitor\",\n      \"Undead\",\n      \"Reborn\",\n      \"A necromancer\",\n      \"A cultist\",\n      \"An assassin\",\n      \"A shapeshifter\",\n      \"A disguised noble\",\n      \"Just a mirage\",\n      \"Full of insects\",\n      \"A cannibal\",\n      \"A serial killer\",\n      \"Possessed by a daemon\",\n      \"A daemon\",\n      \"Cursed\",\n      \"A cultist\",\n      \"Head of a murder cult\",\n      \"A disguised noble\",\n      \"Just a mirage\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/npc_secrets.json",
+        "start": 1,
+        "end": 30,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 30,
+          "column": 29,
+          "position": 131
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_secrets/en/npc_secrets.json",
+        "start": 1,
+        "end": 30,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 30,
+          "column": 29,
+          "position": 131
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 70,
+      "fragment": "{\n  \"category\": \"npc_names\",\n  \"tables\": {\n    \"first_names\": [\n      \"Aerg-Tval\",\n      \"Agn\",\n      \"Domm\",\n      \"Vukkan\",\n      \"Borda\",\n      \"Daeru\",\n      \"Kathan\",\n      \"Felban\",\n      \"Gotven\",\n      \"Grin\",\n      \"Grittr\",\n      \"Haeru\",\n      \"Hargha\",\n      \"Harmug\",\n      \"Jotna\",\n      \"Karg\",\n      \"Karva\",\n      \"Katla\",\n      \"Senkil\",\n      \"Keftar\",\n      \"Klort\",\n      \"Kratar\",\n      \"Kutz\",\n      \"Kvetin\",\n      \"Merkari\",\n      \"Margar\",\n      \"Nagl\",\n      \"Niduk\",\n      \"Nifehl\",\n      \"Prugl\",\n      \"Svind\",\n      \"Schlefzum\",\n      \"Ulg\",\n      \"Yuk-Tval\",\n      \"Drud\",\n      \"Bor\",\n      \"Vrask\",\n      \"Gat\",\n      \"Skel\",\n      \"Gritt\",\n      \"Bard\"\n    ],\n    \"second_names\": [\n      \"Theras\",\n      \"Therg\",\n      \"Thorvul\",\n      \"Torn\",\n      \"Urm\",\n      \"Drugel\",\n      \"Vagal\",\n      \"Vatan\",\n      \"Von\",\n      \"Vrakh\",\n      \"Vresi\",\n      \"Wemut\",\n      \"Skelh\",\n      \"Burder\",\n      \"Jaurk\",\n      \"Thron\",\n      \"Tarvl\",\n      \"Urkin\",\n      \"Galt\",\n      \"Wakta\",\n      \"Mardul\"\n    ]\n  }",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/npc_names.json",
+        "start": 1,
+        "end": 70,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 70,
+          "column": 2,
+          "position": 281
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_names/en/npc_names.json",
+        "start": 1,
+        "end": 69,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 69,
+          "column": 2,
+          "position": 279
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 41,
+      "fragment": "{\n  \"category\": \"npc_concerns\",\n  \"tables\": {\n    \"concerns\": [\n      \"Incredible debt\",\n      \"Stolen goods\",\n      \"Gang of ruffians\",\n      \"Kidnapped kin\",\n      \"A pool of blood\",\n      \"Possessed spouse\",\n      \"Family curse\",\n      \"Murdered friend\",\n      \"Weird wart\",\n      \"Corrupt priests\",\n      \"The world's end\",\n      \"Muffled promise\",\n      \"Holy Summons\",\n      \"The Harvester\",\n      \"Josilfa's scythe\",\n      \"The comet\",\n      \"Worm infestation\",\n      \"Rat war\",\n      \"Demon possession\",\n      \"Basilisk cult\",\n      \"Sacrifice\",\n      \"The Ordinance of Devotion\",\n      \"Memory loss\",\n      \"The Undercity\",\n      \"Cathedral secrets\",\n      \"Worm Sorcerer\",\n      \"The Old One\",\n      \"Blank worms\",\n      \"The Harvester's summons\",\n      \"Josilfa's rule\",\n      \"The end of the world\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-27T10:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/npc_concerns.json",
+        "start": 1,
+        "end": 41,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 41,
+          "column": 29,
+          "position": 175
+        }
+      },
+      "secondFile": {
+        "name": "databases/npc_concerns/en/npc_concerns.json",
+        "start": 1,
+        "end": 41,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 41,
+          "column": 29,
+          "position": 175
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 55,
+      "fragment": "{\n  \"category\": \"loot\",\n  \"tables\": {\n    \"treasure_types\": [\n      \"Cursed jewelry\",\n      \"Tainted coins\",\n      \"Bone ornaments\",\n      \"Blood gems\",\n      \"Skull chalices\",\n      \"Ritual daggers\",\n      \"Plague masks\",\n      \"Death totems\",\n      \"Forbidden books\",\n      \"Soul stones\",\n      \"Corpse candles\",\n      \"Grave dirt\",\n      \"Unholy relics\",\n      \"Demon bottles\",\n      \"Witch tools\"\n    ],\n    \"treasure_values\": [\n      \"Worthless but cursed\",\n      \"Few copper pieces\",\n      \"Handful of silver\",\n      \"Small fortune in gold\",\n      \"Priceless but dangerous\",\n      \"Valuable to cultists\",\n      \"Sought by collectors\",\n      \"Worth a life\",\n      \"Magically valuable\",\n      \"Historically significant\",\n      \"Religiously important\",\n      \"Extremely rare\"\n    ],\n    \"treasure_effects\": [\n      \"brings bad luck\",\n      \"attracts undead\",\n      \"causes nightmares\",\n      \"grants dark visions\",\n      \"whispers constantly\",\n      \"feels unnaturally cold\",\n      \"pulses with evil energy\",\n      \"corrupts nearby items\",\n      \"reveals hidden passages\",\n      \"allows communion with dead\",\n      \"protects from holy symbols\",\n      \"enhances dark magic\",\n      \"marks bearer for death\",\n      \"slowly drains life force\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-07-13T10:26:38.980648\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/languages/en/loot.json",
+        "start": 1,
+        "end": 55,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 55,
+          "column": 29,
+          "position": 233
+        }
+      },
+      "secondFile": {
+        "name": "databases/loot/en/loot.json",
+        "start": 1,
+        "end": 91,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 91,
+          "column": 29,
+          "position": 387
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 110,
+      "fragment": "{\n  \"category\": \"items_trinkets\",\n  \"tables\": {\n    \"trinkets\": [\n      \"A few bad apples\",\n      \"Pile of skulls\",\n      \"Two blood-stained torches\",\n      \"Comb with a single gray hair\",\n      \"Flute (hates horrible)\",\n      \"Small, blood-filled bottle\",\n      \"Spiked leather bracer\",\n      \"Broken porcelain doll\",\n      \"Piece of molar bread\",\n      \"Dead black cat\",\n      \"Fishing rod with rusty hook\",\n      \"Crimson hood and mask\",\n      \"Long nose\",\n      \"Small wooden chest (empty)\",\n      \"d8 colorful glass marbles\",\n      \"Swanshoe (horn of a spider)\",\n      \"Oil painting of a hooded skeleton\",\n      \"Fan shaped like a bear claw\",\n      \"Exquisite silk glove\",\n      \"Dried bat meat\",\n      \"Copper nose ring\",\n      \"Two eyes in a jar\",\n      \"d6 dice (bone)\",\n      \"d4 huge fangs\",\n      \"Latrine bucket\",\n      \"Broken harp\",\n      \"Horned helmet\",\n      \"Chip-stained ladle\",\n      \"Sad chicken in a cage\",\n      \"Arrow stuck in shield\",\n      \"Handful of human teeth\",\n      \"Recently sharpened scythe (d8)\",\n      \"Empty perfume bottle\",\n      \"Some keys without a lock\",\n      \"Leather vest with rivets\",\n      \"Purse with 2d6 silver\",\n      \"Well-used belt\",\n      \"Sack of dead rats\",\n      \"Gilded skull, worth 2d10+10 silver\",\n      \"Boot (won't fit)\",\n      \"d10 arrows\",\n      \"Book: \\\"Night Queen\\\"\",\n      \"Stuffed magpie\",\n      \"Butcher's knife (d4)\",\n      \"d20 silver\",\n      \"Jar of fermented fish\",\n      \"Hourglass (1 damage)\",\n      \"Black and white face paint\",\n      \"Linen sack with body parts\",\n      \"Cracked mirror\",\n      \"Long iron chain\",\n      \"Book: \\\"Wizard Fight\\\"\",\n      \"Curved ritual knife (d4)\",\n      \"Chain mail, torso still in it\",\n      \"Dog collar with chain\",\n      \"Pouch containing salt\",\n      \"Sooty silver ring\",\n      \"Pennon from a sunken ship\",\n      \"Flattened human skin\",\n      \"Blanket (with fleas)\",\n      \"Charred metal necklace\",\n      \"Broken leather armor\",\n      \"d4 gold teeth worth 10s each\",\n      \"Pair of scissors (d4)\",\n      \"Pickaxe (d4)\",\n      \"Broken witch pentagram amulet\",\n      \"Bloody doll\",\n      \"Book of Psalms\",\n      \"Bird-billed mask\",\n      \"Charcoal drawing of a demon\",\n      \"Half a dead dog\",\n      \"Gritty fancy eye patch\",\n      \"Hammer and some nails\",\n      \"Ball and chain (and a foot)\",\n      \"Sharp fire iron (d4+1)\",\n      \"Pain of warm socks (soggy)\",\n      \"Box of black feathers\",\n      \"Damaged wolf pelt\",\n      \"Rotten meat (d2 days' worth)\",\n      \"Small box with a white marble\",\n      \"Tattered walkie-talkie in it\",\n      \"Wooden dentures\",\n      \"Good luck charm (well...)\",\n      \"d6 empty scrolls\",\n      \"Wooden lantern\",\n      \"Pair of wooden handcuffs\",\n      \"Jar with 3 severed thumbs\",\n      \"Tangled ball of human hair\",\n      \"Thumbtacks\",\n      \"Very small horseshoe\",\n      \"Shovel (d4)\",\n      \"Necklace of rat teeth\",\n      \"Half a treasure map\",\n      \"Bottle of red poison\",\n      \"Small wooden horse\",\n      \"Heavy iron tongs\",\n      \"Black sack with a cat's heart\",\n      \"Big lump of coal\",\n      \"Two severed hands\",\n      \"Child-sized iron maiden\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-16T00:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/items_trinkets/en/items_trinkets.json",
+        "start": 1,
+        "end": 110,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 110,
+          "column": 29,
+          "position": 451
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/items_trinkets.json",
+        "start": 1,
+        "end": 110,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 110,
+          "column": 29,
+          "position": 451
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 227,
+      "fragment": "{\n  \"category\": \"items_prices\",\n  \"tables\": {\n    \"items\": [\n      {\n        \"name\": \"Backpack\",\n        \"price\": 6,\n        \"currency\": \"silver\",\n        \"notes\": \"Holds 7 normal-sized items\"\n      },\n      {\n        \"name\": \"Bear trap\",\n        \"price\": 20,\n        \"currency\": \"silver\",\n        \"notes\": \"Presence DR14 to spot, d8 damage\"\n      },\n      {\n        \"name\": \"Blanket\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Caltrops\",\n        \"price\": 7,\n        \"currency\": \"silver\",\n        \"notes\": \"d4 damage + infection on 1 in 6\"\n      },\n      {\n        \"name\": \"Chalk\",\n        \"price\": 1,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Chewing tobacco\",\n        \"price\": 1,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Crowbar\",\n        \"price\": 8,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Crucifix, silver\",\n        \"price\": 60,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Dried food\",\n        \"price\": 1,\n        \"currency\": \"silver\",\n        \"notes\": \"1 day\"\n      },\n      {\n        \"name\": \"Exquisite perfume\",\n        \"price\": 25,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Firesteel\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Grappling hook\",\n        \"price\": 12,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Hammer\",\n        \"price\": 8,\n        \"currency\": \"silver\",\n        \"notes\": \"Heavy chain\"\n      },\n      {\n        \"name\": \"Iron nails\",\n        \"price\": 7,\n        \"currency\": \"silver\",\n        \"notes\": \"10 nails\"\n      },\n      {\n        \"name\": \"Ladder\",\n        \"price\": 10,\n        \"currency\": \"silver\",\n        \"notes\": \"15 feet\"\n      },\n      {\n        \"name\": \"Lantern oil\",\n        \"price\": 5,\n        \"currency\": \"silver\",\n        \"notes\": \"Presence +4 hours\"\n      },\n      {\n        \"name\": \"Lockpicks\",\n        \"price\": 9,\n        \"currency\": \"silver\",\n        \"notes\": \"May function as 5 meals\"\n      },\n      {\n        \"name\": \"Magnesium strip\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Manacles\",\n        \"price\": 10,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Mattress\",\n        \"price\": 3,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Meat cleaver\",\n        \"price\": 10,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Medicine box\",\n        \"price\": 15,\n        \"currency\": \"silver\",\n        \"notes\": \"Stops bleeding/infection and +d6 HP. Presence + 4 uses\"\n      },\n      {\n        \"name\": \"Metal file\",\n        \"price\": 10,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Mirror\",\n        \"price\": 6,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Muzzle\",\n        \"price\": 10,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Opiate\",\n        \"price\": 20,\n        \"currency\": \"silver\",\n        \"notes\": \"DR14 or d6 damage + blind for one hour. 3 doses\"\n      },\n      {\n        \"name\": \"Poison (black)\",\n        \"price\": 20,\n        \"currency\": \"silver\",\n        \"notes\": \"DR12 or d6 damage. 3 doses\"\n      },\n      {\n        \"name\": \"Poison (red)\",\n        \"price\": \"60+d6\",\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Rope\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"notes\": \"30 feet\"\n      },\n      {\n        \"name\": \"Salt\",\n        \"price\": 3,\n        \"currency\": \"silver\",\n        \"notes\": \"Holds 10 normal-size items\"\n      },\n      {\n        \"name\": \"Sack\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Scissors\",\n        \"price\": 9,\n        \"currency\": \"silver\",\n        \"notes\": \"-50s to sell. Can't be bought.\"\n      },\n      {\n        \"name\": \"Sharp needle\",\n        \"price\": 3,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Small wagon\",\n        \"price\": 25,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Tent\",\n        \"price\": 12,\n        \"currency\": \"silver\",\n        \"notes\": \"\"\n      },\n      {\n        \"name\": \"Toolbox\",\n        \"price\": 20,\n        \"currency\": \"silver\",\n        \"notes\": \"10 nails, hammer, small saw, tongs\"\n      },\n      {\n        \"name\": \"Waterskin\",\n        \"price\": 4,\n        \"currency\": \"silver\",\n        \"notes\": \"4 days of water\"\n      }\n    ],",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/items_prices/en/items_prices.json",
+        "start": 1,
+        "end": 227,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 227,
+          "column": 2,
+          "position": 1280
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/items_prices.json",
+        "start": 1,
+        "end": 228,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 228,
+          "column": 2,
+          "position": 1282
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 265,
+      "fragment": "{\n  \"category\": \"factions\",\n  \"tables\": {\n    \"major_factions\": [\n      {\n        \"name\": \"The Dying Church\",\n        \"description\": \"The dominant religious institution that enforces the Ordinance of Devotion\",\n        \"leader\": \"Arch-Priestess Josilfa Migol\",\n        \"headquarters\": \"The Cathedral\",\n        \"influence\": \"High\",\n        \"attitude\": \"Fanatically devoted\",\n        \"activities\": [\n          \"Sacrifice ceremonies\",\n          \"Heretic hunting\",\n          \"Soul collection\",\n          \"Religious enforcement\"\n        ]\n      },\n      {\n        \"name\": \"House of Broken Nobles\",\n        \"description\": \"Fallen aristocracy clinging to remnants of power and privilege\",\n        \"leader\": \"Various disgraced nobles\",\n        \"headquarters\": \"The Rotting Mansion\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Openly contemptuous\",\n        \"activities\": [\n          \"Political intrigue\",\n          \"Wealth hoarding\",\n          \"Status preservation\",\n          \"Corruption\"\n        ]\n      },\n      {\n        \"name\": \"Merchants of Misery\",\n        \"description\": \"Guild controlling trade in forbidden goods and human suffering\",\n        \"leader\": \"Koopman Achim Igelfreund\",\n        \"headquarters\": \"The Corpse Warehouse\",\n        \"influence\": \"High\",\n        \"attitude\": \"Opportunistically friendly\",\n        \"activities\": [\n          \"Forbidden trade\",\n          \"Soul brokering\",\n          \"Corpse commerce\",\n          \"Black market\"\n        ]\n      },\n      {\n        \"name\": \"The Bone Throne\",\n        \"description\": \"Secretive order of necromancers and death cultists\",\n        \"leader\": \"Unknown\",\n        \"headquarters\": \"Hidden catacombs\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Secretly plotting\",\n        \"activities\": [\n          \"Necromancy\",\n          \"Death rituals\",\n          \"Corpse manipulation\",\n          \"Dark magic\"\n        ]\n      },\n      {\n        \"name\": \"Plague Wardens\",\n        \"description\": \"Organization dedicated to managing and exploiting disease\",\n        \"leader\": \"Archhealer René Elwes\",\n        \"headquarters\": \"The Sooty Hospital\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Cautiously neutral\",\n        \"activities\": [\n          \"Disease management\",\n          \"Medical experiments\",\n          \"Plague control\",\n          \"Healing services\"\n        ]\n      },\n      {\n        \"name\": \"Shadow Parliament\",\n        \"description\": \"Secretive council of powerful individuals manipulating city politics\",\n        \"leader\": \"Council of Worms\",\n        \"headquarters\": \"Hidden chambers\",\n        \"influence\": \"Very High\",\n        \"attitude\": \"Secretly plotting\",\n        \"activities\": [\n          \"Political manipulation\",\n          \"Information gathering\",\n          \"Assassination\",\n          \"Power brokering\"\n        ]\n      }\n    ],\n    \"local_factions\": [\n      {\n        \"name\": \"Basilisk Knights Order\",\n        \"description\": \"Elite warriors dedicated to hunting heretics and protecting the church\",\n        \"leader\": \"Cardinal Benjamin von Swerdenö\",\n        \"headquarters\": \"The Cathedral's Shadow\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Violently hostile\",\n        \"activities\": [\n          \"Heretic hunting\",\n          \"Religious enforcement\",\n          \"Combat training\",\n          \"Patrol duties\"\n        ]\n      },\n      {\n        \"name\": \"Worm Sorcerer's Disciples\",\n        \"description\": \"Cult following the teachings of the mysterious Worm Sorcerer\",\n        \"leader\": \"Worm Sorcerer\",\n        \"headquarters\": \"The Worm Sorcerer's Hideout\",\n        \"influence\": \"Low\",\n        \"attitude\": \"Fanatically devoted\",\n        \"activities\": [\n          \"Dark magic\",\n          \"Worm breeding\",\n          \"Corruption\",\n          \"Secret rituals\"\n        ]\n      },\n      {\n        \"name\": \"Dunglander Collective\",\n        \"description\": \"Group specializing in harvesting and cultivating mushrooms\",\n        \"leader\": \"Maggot Marl\",\n        \"headquarters\": \"Klum's Big Shroom\",\n        \"influence\": \"Low\",\n        \"attitude\": \"Grudgingly helpful\",\n        \"activities\": [\n          \"Mushroom farming\",\n          \"Dung harvesting\",\n          \"Food production\",\n          \"Trade\"\n        ]\n      },\n      {\n        \"name\": \"The Vultures\",\n        \"description\": \"Scavengers who collect spoils from the city's waste and corpses\",\n        \"leader\": \"Various scavenger chiefs\",\n        \"headquarters\": \"Sewer entrances\",\n        \"influence\": \"Low\",\n        \"attitude\": \"Deeply suspicious\",\n        \"activities\": [\n          \"Scavenging\",\n          \"Corpse collection\",\n          \"Waste processing\",\n          \"Information gathering\"\n        ]\n      },\n      {\n        \"name\": \"Mushroom Farmers Guild\",\n        \"description\": \"Professional organization controlling mushroom cultivation and trade\",\n        \"leader\": \"Guild Master\",\n        \"headquarters\": \"The Guild Hall\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Cautiously neutral\",\n        \"activities\": [\n          \"Mushroom cultivation\",\n          \"Trade regulation\",\n          \"Quality control\",\n          \"Market control\"\n        ]\n      },\n      {\n        \"name\": \"Flutter Breeders\",\n        \"description\": \"Specialists in breeding and training the dangerous Flutter creatures\",\n        \"leader\": \"Master Breeder\",\n        \"headquarters\": \"The Breeding Pits\",\n        \"influence\": \"Low\",\n        \"attitude\": \"Fearfully obedient\",\n        \"activities\": [\n          \"Creature breeding\",\n          \"Training\",\n          \"Sale\",\n          \"Research\"\n        ]\n      }\n    ],\n    \"criminal_factions\": [\n      {\n        \"name\": \"Grave Robber Crews\",\n        \"description\": \"Organized groups that raid tombs and collect valuable corpses\",\n        \"leader\": \"Various crew leaders\",\n        \"headquarters\": \"Hidden tunnels\",\n        \"influence\": \"Low\",\n        \"attitude\": \"Deeply suspicious\",\n        \"activities\": [\n          \"Tomb raiding\",\n          \"Corpse collection\",\n          \"Grave robbing\",\n          \"Underground trade\"\n        ]\n      },\n      {\n        \"name\": \"Mercenary Companies\",\n        \"description\": \"Professional fighters for hire, often working for the highest bidder\",\n        \"leader\": \"Various captains\",\n        \"headquarters\": \"Taverns and barracks\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Opportunistically friendly\",\n        \"activities\": [\n          \"Combat\",\n          \"Protection\",\n          \"Escort\",\n          \"Assassination\"\n        ]\n      },\n      {\n        \"name\": \"Cultist Cells\",\n        \"description\": \"Secretive groups worshipping forbidden entities and practicing dark magic\",\n        \"leader\": \"Various cult leaders\",\n        \"headquarters\": \"Hidden locations\",\n        \"influence\": \"Low\",\n        \"attitude\": \"Secretly plotting\",\n        \"activities\": [\n          \"Dark rituals\",\n          \"Worship\",\n          \"Recruitment\",\n          \"Sacrifice\"\n        ]\n      },\n      {\n        \"name\": \"Death Merchant Cartels\",\n        \"description\": \"Organizations specializing in the trade of death-related goods and services\",\n        \"leader\": \"Various cartel bosses\",\n        \"headquarters\": \"The Corpse Market\",\n        \"influence\": \"Medium\",\n        \"attitude\": \"Opportunistically friendly\",\n        \"activities\": [\n          \"Death trade\",\n          \"Corpse commerce\",\n          \"Funeral services\",\n          \"Necromantic supplies\"\n        ]\n      }\n    ],\n    \"faction_relationships\": [\n      {\n        \"faction1\": \"The Dying Church\",\n        \"faction2\": \"Basilisk Knights Order\",\n        \"relationship\": \"Allied\",\n        \"description\": \"The church provides authority and the knights provide enforcement\"\n      },\n      {\n        \"faction1\": \"The Dying Church\",\n        \"faction2\": \"Cultist Cells\",\n        \"relationship\": \"Hostile\",\n        \"description\": \"The church actively hunts and destroys cultist groups\"\n      },\n      {\n        \"faction1\": \"Merchants of Misery\",\n        \"faction2\": \"Death Merchant Cartels\",\n        \"relationship\": \"Competitive\",\n        \"description\": \"Both groups compete for control of death-related commerce\"\n      },\n      {\n        \"faction1\": \"House of Broken Nobles\",\n        \"faction2\": \"Shadow Parliament\",\n        \"relationship\": \"Manipulated\",\n        \"description\": \"The parliament manipulates the nobles for political gain\"\n      },\n      {\n        \"faction1\": \"The Vultures\",\n        \"faction2\": \"Grave Robber Crews\",\n        \"relationship\": \"Cooperative\",\n        \"description\": \"Both groups work together in corpse collection and processing\"\n      }\n    ],",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/factions/en/factions.json",
+        "start": 1,
+        "end": 265,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 265,
+          "column": 2,
+          "position": 1387
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/factions.json",
+        "start": 1,
+        "end": 186,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 186,
+          "column": 2,
+          "position": 1277
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 56,
+      "fragment": "{\n  \"category\": \"enhanced_loot\",\n  \"tables\": {\n    \"weapon_loot\": [\n      \"Rusted sword (+1 damage, breaks on 1)\",\n      \"Bone dagger (1d4, +1 vs undead)\",\n      \"Plague doctor's cane (1d6, causes disease)\",\n      \"Executioner's axe (1d8, intimidating)\",\n      \"Witch hunter's crossbow (1d6, +2 vs magic users)\",\n      \"Grave robber's crowbar (1d4, useful tool)\",\n      \"Cursed blade (1d8, hurts wielder on 1)\",\n      \"Holy symbol mace (1d6, +1 vs undead)\",\n      \"Poisoned stiletto (1d4, save or paralyzed)\",\n      \"Broken knight's sword (1d6, once noble)\"\n    ],\n    \"armor_loot\": [\n      \"Tattered leather armor (AC 12, smells awful)\",\n      \"Plague doctor's robes (AC 11, disease immunity)\",\n      \"Rusty chainmail (AC 14, noisy)\",\n      \"Bone plate armor (AC 15, intimidating)\",\n      \"Witch's cloak (AC 11, +1 vs magic)\",\n      \"Grave dirt coating (AC 10, undead ignore you)\",\n      \"Cursed helmet (AC +1, constant whispers)\",\n      \"Holy vestments (AC 12, +1 vs evil)\",\n      \"Thieves' leathers (AC 13, +1 stealth)\",\n      \"Broken shield (AC +1, once magnificent)\"\n    ],\n    \"valuable_loot\": [\n      \"Bag of silver teeth (50 coins)\",\n      \"Cursed jewelry (100 coins, bad luck)\",\n      \"Rare plague mask (200 coins to collectors)\",\n      \"Ancient tome (300 coins, forbidden knowledge)\",\n      \"Soul gem (500 coins, whispers constantly)\",\n      \"Golden skull chalice (150 coins, unholy)\",\n      \"Witch's grimoire (400 coins, dangerous spells)\",\n      \"Noble's signet ring (80 coins, political value)\",\n      \"Demon bottle (600 coins, contains something)\",\n      \"Relic bone (250 coins, holy/unholy power)\"\n    ],\n    \"utility_loot\": [\n      \"Thieves' tools (lockpicking kit)\",\n      \"Healing potion (restore 1d6 HP)\",\n      \"Rope (50 feet, sturdy)\",\n      \"Lantern with oil (6 hours light)\",\n      \"Grappling hook (climbing aid)\",\n      \"Poison vial (coat weapon)\",\n      \"Holy water (1d4 damage to undead)\",\n      \"Smoke bomb (escape aid)\",\n      \"Crowbar (useful tool)\",\n      \"Manacles (restraint device)\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-16T00:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/enhanced_loot/en/enhanced_loot.json",
+        "start": 1,
+        "end": 56,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 56,
+          "column": 29,
+          "position": 238
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/enhanced_loot.json",
+        "start": 1,
+        "end": 56,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 56,
+          "column": 29,
+          "position": 238
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 76,
+      "fragment": "{\n  \"category\": \"dungeon\",\n  \"tables\": {\n    \"dungeon_types\": [\n      \"Ancient tomb\",\n      \"Ruined temple\",\n      \"Collapsed mine\",\n      \"Forgotten crypt\",\n      \"Abandoned tower\",\n      \"Underground warren\",\n      \"Sunken cathedral\",\n      \"Twisted labyrinth\",\n      \"Bone pit\",\n      \"Plague house\",\n      \"Cursed cellar\",\n      \"Sacrificial chamber\"\n    ],\n    \"dungeon_features\": [\n      \"flooded with black water\",\n      \"filled with poisonous gas\",\n      \"haunted by restless spirits\",\n      \"overrun with vermin\",\n      \"decorated with blasphemous murals\",\n      \"littered with ancient bones\",\n      \"carved from living rock\",\n      \"built on unholy ground\",\n      \"twisted by dark magic\",\n      \"scarred by old battles\",\n      \"abandoned in haste\",\n      \"sealed for good reason\"\n    ],\n    \"dungeon_dangers\": [\n      \"Collapsing ceiling\",\n      \"Pit trap with spikes\",\n      \"Poisonous gas leak\",\n      \"Unstable floor\",\n      \"Cursed artifacts\",\n      \"Territorial undead\",\n      \"Aggressive scavengers\",\n      \"Hidden blade traps\",\n      \"Magical wards\",\n      \"Disease-ridden corpses\",\n      \"Flooding chambers\",\n      \"Structural decay\",\n      \"Ancient curses\",\n      \"Toxic mold\",\n      \"Predatory creatures\"\n    ],\n    \"dungeon_treasures\": [\n      \"Silver coins scattered about\",\n      \"A rusted but valuable weapon\",\n      \"Ancient scrolls\",\n      \"Precious gemstones\",\n      \"Religious artifacts\",\n      \"Old maps and documents\",\n      \"Jewelry from the dead\",\n      \"Rare herbs and components\",\n      \"Forgotten tools\",\n      \"Ornate containers\",\n      \"Mysterious potions\",\n      \"Carved idols\",\n      \"Rare metals\",\n      \"Lost books\"\n    ],\n    \"dungeon_atmospheres\": [\n      \"Oppressive silence\",\n      \"Echoing drips\",\n      \"Scratching sounds\",\n      \"Distant moaning\",\n      \"Unnatural cold\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-16T00:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/dungeon/en/dungeon.json",
+        "start": 1,
+        "end": 76,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 76,
+          "column": 29,
+          "position": 319
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/dungeon.json",
+        "start": 1,
+        "end": 76,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 76,
+          "column": 29,
+          "position": 319
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 68,
+      "fragment": "{\n  \"category\": \"denizen\",\n  \"tables\": {\n    \"denizen_types\": [\n      \"Diseased beggar\",\n      \"Mad hermit\",\n      \"Wandering cultist\",\n      \"Desperate bandit\",\n      \"Plague doctor\",\n      \"Witch hunter\",\n      \"Corrupted priest\",\n      \"Feral child\",\n      \"Broken soldier\",\n      \"Death merchant\",\n      \"Bone collector\",\n      \"Grave robber\",\n      \"Cursed wanderer\",\n      \"Zealot preacher\",\n      \"Flesh trader\",\n      \"Scavenger lord\",\n      \"Plague bearer\",\n      \"Doom prophet\"\n    ],\n    \"denizen_motivations\": [\n      \"seeks redemption for past sins\",\n      \"hunts for forbidden knowledge\",\n      \"flees from terrible pursuers\",\n      \"searches for lost family\",\n      \"collects trophies from the dead\",\n      \"spreads word of the coming end\",\n      \"guards ancient secrets\",\n      \"trades in human misery\",\n      \"seeks to break an ancient curse\",\n      \"worships forgotten gods\",\n      \"harvests organs for dark rituals\",\n      \"prophesies doom and destruction\"\n    ],\n    \"denizen_features\": [\n      \"Covered in ritual scars\",\n      \"Missing several fingers\",\n      \"Eyes clouded with cataracts\",\n      \"Speaks in whispers\",\n      \"Constantly muttering prayers\",\n      \"Smells of decay\",\n      \"Wears tattered robes\",\n      \"Carries strange implements\",\n      \"Bears holy symbols\",\n      \"Has visible plague marks\",\n      \"Moves with unnatural stiffness\",\n      \"Avoids eye contact\",\n      \"Nervous tics and twitches\",\n      \"Unnaturally pale skin\",\n      \"Teeth filed to points\",\n      \"Burns easily in sunlight\"\n    ],\n    \"denizen_demeanors\": [\n      \"Hostile\",\n      \"Suspicious\",\n      \"Desperate\",\n      \"Helpful\",\n      \"Indifferent\",\n      \"Cryptic\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-16T00:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/denizen/en/denizen.json",
+        "start": 1,
+        "end": 68,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 68,
+          "column": 29,
+          "position": 286
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/denizen.json",
+        "start": 1,
+        "end": 68,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 68,
+          "column": 29,
+          "position": 286
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 63,
+      "fragment": "{\n  \"category\": \"core\",\n  \"tables\": {\n    \"denizen_names_prefix\": [\n      \"Brother\",\n      \"Sister\",\n      \"Father\",\n      \"Mother\",\n      \"Old\",\n      \"Young\",\n      \"Mad\",\n      \"Saint\",\n      \"Heretic\",\n      \"Lost\"\n    ],\n    \"denizen_names_suffix\": [\n      \"Bones\",\n      \"Ash\",\n      \"Crow\",\n      \"Thorn\",\n      \"Rust\",\n      \"Mold\",\n      \"Grime\",\n      \"Rot\",\n      \"Doom\",\n      \"Blight\"\n    ],\n    \"denizen_motivations\": [\n      \"seeks redemption for past sins\",\n      \"hunts for forbidden knowledge\",\n      \"flees from terrible pursuers\",\n      \"searches for lost family\",\n      \"guards ancient secrets\",\n      \"trades in human misery\"\n    ],\n    \"denizen_features\": [\n      \"Covered in ritual scars\",\n      \"Missing several fingers\",\n      \"Eyes clouded with cataracts\",\n      \"Constantly muttering prayers\",\n      \"Smells of decay\",\n      \"Wears tattered robes\"\n    ],\n    \"denizen_demeanors\": [\n      \"Hostile\",\n      \"Suspicious\",\n      \"Desperate\",\n      \"Helpful\",\n      \"Indifferent\",\n      \"Cryptic\"\n    ],\n    \"atmospheres\": [\n      \"Oppressive silence\",\n      \"Echoing sounds\",\n      \"Unnatural cold\",\n      \"Thick mist\",\n      \"Strange lights\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-01-16T00:00:00.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/core/en/core.json",
+        "start": 1,
+        "end": 63,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 63,
+          "column": 29,
+          "position": 268
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/core.json",
+        "start": 1,
+        "end": 63,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 63,
+          "column": 29,
+          "position": 268
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 50,
+      "fragment": "{\n  \"category\": \"city_events\",\n  \"tables\": {\n    \"city_events\": [\n      \"Exhausted corpse-carter heading for the graves with a full load.\",\n      \"d4 nobles promenading, beating people beneath them with gilded clubs.\",\n      \"Travelling weed-merchant asking for directions to the Seer's.\",\n      \"Urchin painting \\\"LISTEN!\\\" with goat's blood on a wall.\",\n      \"Passing wastecart/barge. The stench is unbearable.\",\n      \"Melancholic melodies from a broke, starving gutter bard.\",\n      \"There's a dead body in the street. Not even the dogs seem to care.\",\n      \"Poor child crying in a corner. Lost, cold and alone.\",\n      \"The sudden cacophony of wings and croaks. A murder of crows.\",\n      \"Heavy rain. The streets are cleared as people seek shelter.\",\n      \"Fishmonger trying to fend off a pack of stray cats.\",\n      \"Procession of masked flagellants. Cursing and screaming.\",\n      \"Decadent acrobats, high and witless. Almost break their necks.\",\n      \"Family desperately trying to rebuild their burnt hovel.\",\n      \"Old man slumped against a wall. Panting, grabbing his heart.\",\n      \"Hopelessly depressed farmer stares at the sky. Has lost everything.\",\n      \"Heartbroken young fool seeking comfort in alley-found dregs.\",\n      \"Huge load of trash and waste splashes down, thrown from a window.\",\n      \"Old woman lying in the gutter. Someone stole her crutch.\",\n      \"Drunken clerk stumbling, falling. Scrolls and maps everywhere.\",\n      \"Rags-clad people fighting over bread. Guards watching. Placing bets.\",\n      \"Peglegged sailor stops the PCs to brag about the Angloarfish.\",\n      \"Laborers carrying a boat-size casket to an anonymous priest.\",\n      \"Penniless carpenter (so they say) trying to sell a worn crutch.\",\n      \"Patron violently escorted from a pub. Then robbed. Then stabbed.\",\n      \"A chittering wave of a hundred rats scurry across the street.\",\n      \"Group of ragtag scum playing Three Dead Skulls with weighted dice.\",\n      \"Suddenly, a crossbow bolt hits a nearby door. Someone is practicing.\",\n      \"Around the corner, a giant tree with a dozen hanged heretics.\",\n      \"Twenty people keeping warm around a bonfire. One is a Grift spy.\",\n      \"People keeping distance from a rabid dog rummaging in the trash.\",\n      \"Three hardened mercenaries pull a dead troll across the street.\",\n      \"Severely hungover chaplain cursing the state of things.\",\n      \"The smell of dry snuff, herbs and hash from a crowded market.\",\n      \"Two monkeys eating what's left of a dead raven.\",\n      \"Explosion! Smoke and screams from a ruined alchemist's workshop.\",\n      \"Demagogue yelling about prophecy falsehood. Guards on their way.\",\n      \"Devastated, eyeless peasant in a pillory. Begs for water.\",\n      \"Well-used, rusty guillotine being repaired and cleaned.\",\n      \"Occultist placing copper coins in intricate patterns.\"\n    ]\n  },\n  \"metadata\": {\n    \"version\": \"1.0\",\n    \"language\": \"en\",\n    \"last_updated\": \"2025-08-07T22:56:40.000000\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/city_events/en/city_events.json",
+        "start": 1,
+        "end": 50,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 50,
+          "column": 29,
+          "position": 211
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/city_events.json",
+        "start": 1,
+        "end": 50,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 50,
+          "column": 29,
+          "position": 211
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 104,
+      "fragment": ",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"Núcleo da Cidade\",\n      \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"Núcleo da Cidade\",\n      \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"Núcleo da Cidade\",\n      \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"Núcleo da Cidade\",\n      \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n        \"Núcleo da Cidade\",\n        \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n        \"Núcleo da Cidade\",\n        \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n        \"Núcleo da Cidade\",\n        \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n        \"Núcleo da Cidade\",\n        \"Núcleo da Cidade\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ]\n  ]",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/cities/pt/allians.json",
+        "start": 24,
+        "end": 127,
+        "startLoc": {
+          "line": 24,
+          "column": 19,
+          "position": 103
+        },
+        "endLoc": {
+          "line": 127,
+          "column": 2,
+          "position": 496
+        }
+      },
+      "secondFile": {
+        "name": "databases/cities/pt/allians.json",
+        "start": 12,
+        "end": 42,
+        "startLoc": {
+          "line": 12,
+          "column": 3,
+          "position": 57
+        },
+        "endLoc": {
+          "line": 42,
+          "column": 2,
+          "position": 172
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 104,
+      "fragment": ",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ],\n    [\n      \"\",\n      \"\",\n      \"\",\n      \"City Core\",\n      \"City Core\",\n      \"\",\n      \"\",\n      \"\",\n      \"\",\n      \"\"\n    ]\n  ]",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/cities/en/allians.json",
+        "start": 24,
+        "end": 127,
+        "startLoc": {
+          "line": 24,
+          "column": 12,
+          "position": 103
+        },
+        "endLoc": {
+          "line": 127,
+          "column": 2,
+          "position": 496
+        }
+      },
+      "secondFile": {
+        "name": "databases/cities/en/allians.json",
+        "start": 12,
+        "end": 42,
+        "startLoc": {
+          "line": 12,
+          "column": 3,
+          "position": 57
+        },
+        "endLoc": {
+          "line": 42,
+          "column": 2,
+          "position": 172
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 25,
+      "fragment": "{\n  \"category\": \"beasts_prices\",\n  \"tables\": {\n    \"beasts\": [\n      {\n        \"name\": \"Dog (trained)\",\n        \"price\": 25,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Horse\",\n        \"price\": 80,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Mule\",\n        \"price\": 10,\n        \"currency\": \"silver\"\n      },\n      {\n        \"name\": \"Rat (tame)\",\n        \"price\": 8,\n        \"currency\": \"silver\"\n      }\n    ],",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/beasts_prices/en/beasts_prices.json",
+        "start": 1,
+        "end": 25,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 25,
+          "column": 2,
+          "position": 130
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/beasts_prices.json",
+        "start": 1,
+        "end": 26,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 26,
+          "column": 2,
+          "position": 132
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 25,
+      "fragment": "{\n  \"category\": \"basic\",\n  \"tables\": {\n    \"populations\": [\n      \"20-50\",\n      \"51-100\",\n      \"101-500\",\n      \"501-1000\"\n    ],\n    \"buildings\": [\n      \"Straw\",\n      \"Cob\",\n      \"Stone\",\n      \"Logs\",\n      \"Clay brick\",\n      \"Lime mortar\"\n    ],\n    \"sounds\": [\n      \"Silence\",\n      \"Bustle\",\n      \"Fighting\",\n      \"Laughter\",\n      \"Screaming\",\n      \"Chanting\"\n    ],",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/basic/en/basic.json",
+        "start": 1,
+        "end": 25,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 25,
+          "column": 2,
+          "position": 104
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/basic.json",
+        "start": 1,
+        "end": 26,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 26,
+          "column": 2,
+          "position": 106
+        }
+      }
+    },
+    {
+      "format": "json",
+      "lines": 59,
+      "fragment": "{\n  \"category\": \"affiliation\",\n  \"tables\": {\n    \"monster_affiliations\": [\n      \"Dry-Witches (Water Abductors)\",\n      \"Slatehead Termites (Hive Swarms)\",\n      \"Shit Monsters (Fortress Denizens)\",\n      \"Flesh Puppets (Absorbing Constructs)\",\n      \"Terrifying TreeSpiders (Human-Handed Arachnids)\",\n      \"Boargod Skewered (Frenzied Blood-Beast)\",\n      \"Salamanders (Arsonist's Living Coals)\",\n      \"Lighthead Stalkers (Blinding Terrors)\",\n      \"Nodh (Plague-Spreading Reanimated)\",\n      \"Wingwalker Bats (Ash-Dwelling Flyers)\",\n      \"Tentacled Mole Whales (Ash-Sea Leviathans)\",\n      \"Grotesques (Stalking Stone-Beasts)\"\n    ],\n    \"npc_affiliations\": [\n      \"Ashmouth Raider Personalities (Deathless Elder, Sack-of-Heads)\",\n      \"Bloodhunter Ritualists (Half-Blooded, Full-Blooded)\",\n      \"Burnt Offerings Necromancers (Vessel Controllers)\",\n      \"Cannibal Count's Servants (Lardermen, Chef, Clerks)\",\n      \"Pneumatic Regretful Templars (Masked Zealots)\",\n      \"Urniversity Field-Researchers (Artifact Wielders)\",\n      \"Courtyard Dregs (Disinterested Survivors)\",\n      \"Pale Ones (Shrine Experimenters)\",\n      \"King Fathmu's Loyalists (Disgraced Royal Guard)\",\n      \"Memory Thieves (Identity Stealers)\",\n      \"Dunglander Collective (Sewer Foragers)\",\n      \"Scavenger Gangs (Wilderness Scroungers)\"\n    ],\n    \"faction_affiliations\": [\n      \"Ashmouth Raiders (Screaming Hordes of the Ash)\",\n      \"Bloodhunters (God-Draining Cultists)\",\n      \"Burnt Offerings (Burning-Afflicted Healers)\",\n      \"The Cannibal Count's Estate (Mansion of Flesh-Eaters)\",\n      \"The Pneumatic Order (Ascetics of Transcendence)\",\n      \"The Urniversity (Apocalypse Catalogers)\",\n      \"The Two-Headed Basilisks (The One True Faith Inquisition)\",\n      \"The Shadow King's Palace (Crumbling Gothic Rule)\",\n      \"Blood-Countess Anthelia's Court (Kergüs Aristocracy)\",\n      \"The Scions of Schleswig (Reanimated Ghoul-Lords)\",\n      \"The Mud Cult (Flesh-Shapers of Tveländ)\",\n      \"The Immortal Algae-Rots (Undying Swamp Denizens)\"\n    ],\n    \"affiliation_attitudes\": [\n      \"Violently Hostile (to all outsiders)\",\n      \"Deeply Suspicious (of new arrivals)\",\n      \"Cautiously Neutral (observing from afar)\",\n      \"Grudgingly Helpful (for a price or shared enemy)\",\n      \"Desperately Seeking Aid (against a greater threat)\",\n      \"Fanatically Devoted (to their twisted cause)\",\n      \"Secretly Plotting (against rivals or former allies)\",\n      \"Openly Contemptuous (of weakness or ignorance)\",\n      \"Fearfully Obedient (under constant threat)\",\n      \"Obsessed (with a dark purpose or desire)\",\n      \"Fickle and Unreliable (prone to betrayal)\",\n      \"Corpse-Bound (driven by undeath)\"\n    ],",
+      "tokens": 0,
+      "firstFile": {
+        "name": "databases/affiliation/en/affiliation.json",
+        "start": 1,
+        "end": 59,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 59,
+          "column": 2,
+          "position": 241
+        }
+      },
+      "secondFile": {
+        "name": "databases/languages/en/affiliation.json",
+        "start": 1,
+        "end": 60,
+        "startLoc": {
+          "line": 1,
+          "column": 1,
+          "position": 0
+        },
+        "endLoc": {
+          "line": 60,
+          "column": 2,
+          "position": 243
+        }
+      }
+    }
+  ],
+  "filename": "/home/ubuntu/.nvm/versions/node/v22.16.0/lib/node_modules/jscpd/node_modules/@jscpd/html-reporter/dist/templates/main.pug"
+}

@@ -22,6 +22,19 @@ function withDefaults(options?: RequestInit): RequestInit {
 }
 
 /**
+ * Create request options for JSON requests.
+ */
+function createJsonRequestOptions(method: string, data?: any): RequestInit {
+  return {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: data ? JSON.stringify(data) : undefined,
+  };
+}
+
+/**
  * Generic API call function with centralized error handling.
  * 
  * @param url - API endpoint URL
@@ -61,13 +74,7 @@ export async function apiGet<T>(url: string): Promise<T> {
  * @returns Promise with response data
  */
 export async function apiPost<T>(url: string, data?: any): Promise<T> {
-  return apiCall<T>(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: data ? JSON.stringify(data) : undefined,
-  });
+  return apiCall<T>(url, createJsonRequestOptions('POST', data));
 }
 
 /**
@@ -78,26 +85,10 @@ export async function apiPost<T>(url: string, data?: any): Promise<T> {
  * @returns Promise with response data
  */
 export async function apiPut<T>(url: string, data?: any): Promise<T> {
-  return apiCall<T>(url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: data ? JSON.stringify(data) : undefined,
-  });
+  return apiCall<T>(url, createJsonRequestOptions('PUT', data));
 }
 
-/**
- * DELETE request with error handling.
- * 
- * @param url - API endpoint URL
- * @returns Promise with response data
- */
-export async function apiDelete<T>(url: string): Promise<T> {
-  return apiCall<T>(url, {
-    method: 'DELETE',
-  });
-}
+
 
 /**
  * Handle API errors with consistent error messages.

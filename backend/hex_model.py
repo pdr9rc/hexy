@@ -46,13 +46,20 @@ class BaseHex:
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert hex to dictionary for API response."""
-        return {
+        base_dict = {
             "hex_code": self.hex_code,
             "terrain": self.terrain.value,
             "exists": self.exists,
             "hex_type": self.get_hex_type().value,
             "content_type": self.get_hex_type().value
         }
+        # Add subclass-specific fields
+        base_dict.update(self._get_specific_fields())
+        return base_dict
+    
+    def _get_specific_fields(self) -> Dict[str, Any]:
+        """Get subclass-specific fields. Override in subclasses."""
+        return {}
     
     def get_hex_type(self) -> HexType:
         """Get the hex type - to be implemented by subclasses."""
@@ -90,12 +97,8 @@ class SettlementHex:
     def get_hex_type(self) -> HexType:
         return HexType.SETTLEMENT
     
-    def to_dict(self) -> Dict[str, Any]:
+    def _get_specific_fields(self) -> Dict[str, Any]:
         return {
-            "hex_code": self.hex_code,
-            "terrain": self.terrain.value,
-            "exists": self.exists,
-            "hex_type": self.get_hex_type().value,
             "is_settlement": not self.is_major_city,  # Only true if not a major city
             "is_major_city": self.is_major_city,      # True for major cities
             "name": self.name,
@@ -135,12 +138,8 @@ class DungeonHex:
     def get_hex_type(self) -> HexType:
         return HexType.DUNGEON
     
-    def to_dict(self) -> Dict[str, Any]:
+    def _get_specific_fields(self) -> Dict[str, Any]:
         return {
-            "hex_code": self.hex_code,
-            "terrain": self.terrain.value,
-            "exists": self.exists,
-            "hex_type": self.get_hex_type().value,
             "is_dungeon": True,
             "encounter": self.encounter,
             "dungeon_type": self.dungeon_type,
@@ -157,10 +156,8 @@ class DungeonHex:
 
 
 @dataclass
-class BeastHex:
+class BeastHex(BaseHex):
     """Beast hex with creature details, territory, and threat level."""
-    hex_code: str
-    terrain: TerrainType
     encounter: str
     beast_type: str
     beast_feature: str
@@ -179,12 +176,8 @@ class BeastHex:
     def get_hex_type(self) -> HexType:
         return HexType.BEAST
     
-    def to_dict(self) -> Dict[str, Any]:
+    def _get_specific_fields(self) -> Dict[str, Any]:
         return {
-            "hex_code": self.hex_code,
-            "terrain": self.terrain.value,
-            "exists": self.exists,
-            "hex_type": self.get_hex_type().value,
             "is_beast": True,
             "encounter": self.encounter,
             "beast_type": self.beast_type,
@@ -203,10 +196,8 @@ class BeastHex:
 
 
 @dataclass
-class NPCHex:
+class NPCHex(BaseHex):
     """NPC hex with character details, motivations, and demeanor."""
-    hex_code: str
-    terrain: TerrainType
     encounter: str
     name: str
     denizen_type: str
@@ -231,12 +222,8 @@ class NPCHex:
     def get_hex_type(self) -> HexType:
         return HexType.NPC
     
-    def to_dict(self) -> Dict[str, Any]:
+    def _get_specific_fields(self) -> Dict[str, Any]:
         return {
-            "hex_code": self.hex_code,
-            "terrain": self.terrain.value,
-            "exists": self.exists,
-            "hex_type": self.get_hex_type().value,
             "is_npc": True,
             "encounter": self.encounter,
             "name": self.name,
@@ -261,10 +248,8 @@ class NPCHex:
 
 
 @dataclass
-class SeaEncounterHex:
+class SeaEncounterHex(BaseHex):
     """Sea encounter hex with abyssal entities and oceanic horrors."""
-    hex_code: str
-    terrain: TerrainType
     encounter: str
     encounter_type: str
     denizen: str
@@ -281,12 +266,8 @@ class SeaEncounterHex:
     def get_hex_type(self) -> HexType:
         return HexType.SEA_ENCOUNTER
     
-    def to_dict(self) -> Dict[str, Any]:
+    def _get_specific_fields(self) -> Dict[str, Any]:
         return {
-            "hex_code": self.hex_code,
-            "terrain": self.terrain.value,
-            "exists": self.exists,
-            "hex_type": self.get_hex_type().value,
             "is_sea_encounter": True,
             "encounter": self.encounter,
             "encounter_type": self.encounter_type,

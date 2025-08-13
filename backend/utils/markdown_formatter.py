@@ -5,6 +5,23 @@ Markdown formatting utilities for generating consistent hex content.
 from typing import Dict, Any, List
 
 
+def _add_common_sections(lines: List[str], hex_data: Dict[str, Any], translation_system=None, include_threat_territory: bool = True, include_loot: bool = True):
+    """
+    Add common sections (threat level, territory, loot) to markdown lines.
+    
+    Args:
+        lines: List to append to
+        hex_data: Dictionary containing hex data
+        translation_system: Translation system instance
+        include_threat_territory: Whether to include threat level and territory
+        include_loot: Whether to include loot section
+    """
+    if include_threat_territory:
+        lines.extend(format_threat_level_and_territory(hex_data, translation_system))
+    if include_loot:
+        lines.extend(format_loot_section(hex_data, translation_system))
+
+
 def format_threat_level_and_territory(hex_data: Dict[str, Any], translation_system=None) -> List[str]:
     """
     Format threat level and territory sections for markdown.
@@ -80,8 +97,7 @@ def format_beast_details(hex_data: Dict[str, Any], translation_system=None) -> L
     lines.append("")
     
     # Add common sections
-    lines.extend(format_threat_level_and_territory(hex_data, translation_system))
-    lines.extend(format_loot_section(hex_data, translation_system))
+    _add_common_sections(lines, hex_data, translation_system)
     
     return lines
 
@@ -105,8 +121,7 @@ def format_sea_encounter_details(hex_data: Dict[str, Any], translation_system=No
     lines.append("")
     
     # Add common sections
-    lines.extend(format_threat_level_and_territory(hex_data, translation_system))
-    lines.extend(format_loot_section(hex_data, translation_system))
+    _add_common_sections(lines, hex_data, translation_system)
     
     return lines
 
@@ -162,6 +177,6 @@ def format_npc_details(hex_data: Dict[str, Any], translation_system=None) -> Lis
     lines.append("")
     
     # Add loot section
-    lines.extend(format_loot_section(hex_data, translation_system))
+    _add_common_sections(lines, hex_data, translation_system, include_threat_territory=False, include_loot=True)
     
     return lines 

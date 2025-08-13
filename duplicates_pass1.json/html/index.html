@@ -1,0 +1,2379 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Copy/Paste Detector Report</title><link href="styles/tailwind.css" rel="stylesheet"><link href="styles/prism.css" rel="stylesheet"></head><body class="bg-gray-100"><header class="bg-white shadow py-4"><div class="container mx-auto px-4"><h1 class="text-3xl font-semibold text-gray-800">jscpd - copy/paste report</h1></div></header><main class="container mx-auto my-8 p-4 bg-white shadow rounded"><section class="mb-8" id="dashboard"><h2 class="text-2xl font-semibold text-gray-700 mb-4">Dashboard</h2><div class="grid grid-cols-4 gap-4"><div class="bg-blue-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-blue-800 mb-2">Total Files</h3><span class="text-4xl font-bold text-blue-800">141</span></div><div class="bg-green-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-green-800 mb-2">Total Lines of Code</h3><span class="text-4xl font-bold text-green-800">14817</span></div><div class="bg-yellow-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-yellow-800 mb-2">Number of Clones</h3><span class="text-4xl font-bold text-yellow-800">35</span></div><div class="bg-red-200 p-4 rounded text-center"><h3 class="text-lg font-semibold text-red-800 mb-2">Duplicated Lines</h3><span class="text-4xl font-bold text-red-800">2370 (16.00%)</span></div></div></section><section class="mb-8" id="formats"><h2 class="text-2xl font-semibold text-gray-700 mb-4">Formats with Duplications</h2><table class="w-full table-auto"><thead><tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal"><th class="py-3 px-6 text-left">Format</th><th class="py-3 px-6 text-left">Files</th><th class="py-3 px-6 text-left">Lines</th><th class="py-3 px-6 text-left">Clones</th><th class="py-3 px-6 text-left">Duplicated Lines</th><th class="py-3 px-6 text-left">Duplicated Tokens</th></tr></thead><tbody><tr class="bg-white border-b border-gray-200 text-gray-800 text-sm"><td class="py-3 px-6"><a class="text-blue-600 hover:underline" href="#json-clones">json</a></td><td class="py-3 px-6">141</td><td class="py-3 px-6">14817</td><td class="py-3 px-6">35</td><td class="py-3 px-6">2370</td><td class="py-3 px-6">11314</td></tr></tbody></table></section><section class="mb-8" id="txt-clones"><a name="json-clones"></a><h2 class="text-2xl font-semibold text-gray-700 mb-4">json</h2><div class="divide-y divide-gray-200 border-b-2"><div class="py-4"><p class="text-gray-600">databases/stats/en/stats.json (Line 1:1 - Line 69:29), databases/stats/pt/stats.json (Line 1:1 - Line 69:26)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn0" onclick="toggleCodeBlock('cloneGroup0', 'expandBtn0', 'collapseBtn0')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn0" onclick="toggleCodeBlock('cloneGroup0', 'expandBtn0', 'collapseBtn0')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup0"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;stats&quot;,
+  &quot;tables&quot;: {
+    &quot;creature_stats&quot;: {
+      &quot;weak&quot;: {
+        &quot;hp&quot;: &quot;1d4&quot;,
+        &quot;armor&quot;: &quot;10&quot;,
+        &quot;morale&quot;: &quot;6&quot;,
+        &quot;damage&quot;: &quot;1d4&quot;
+      },
+      &quot;normal&quot;: {
+        &quot;hp&quot;: &quot;1d6&quot;,
+        &quot;armor&quot;: &quot;12&quot;,
+        &quot;morale&quot;: &quot;7&quot;,
+        &quot;damage&quot;: &quot;1d6&quot;
+      },
+      &quot;strong&quot;: {
+        &quot;hp&quot;: &quot;2d6&quot;,
+        &quot;armor&quot;: &quot;14&quot;,
+        &quot;morale&quot;: &quot;8&quot;,
+        &quot;damage&quot;: &quot;1d8&quot;
+      },
+      &quot;elite&quot;: {
+        &quot;hp&quot;: &quot;3d6&quot;,
+        &quot;armor&quot;: &quot;16&quot;,
+        &quot;morale&quot;: &quot;9&quot;,
+        &quot;damage&quot;: &quot;1d10&quot;
+      },
+      &quot;boss&quot;: {
+        &quot;hp&quot;: &quot;4d6+4&quot;,
+        &quot;armor&quot;: &quot;18&quot;,
+        &quot;morale&quot;: &quot;10&quot;,
+        &quot;damage&quot;: &quot;2d6&quot;
+      }
+    },
+    &quot;npc_stats&quot;: {
+      &quot;peasant&quot;: {
+        &quot;hp&quot;: &quot;1d4&quot;,
+        &quot;armor&quot;: &quot;10&quot;,
+        &quot;morale&quot;: &quot;5&quot;,
+        &quot;damage&quot;: &quot;1d3&quot;
+      },
+      &quot;soldier&quot;: {
+        &quot;hp&quot;: &quot;1d6+1&quot;,
+        &quot;armor&quot;: &quot;14&quot;,
+        &quot;morale&quot;: &quot;7&quot;,
+        &quot;damage&quot;: &quot;1d6&quot;
+      },
+      &quot;veteran&quot;: {
+        &quot;hp&quot;: &quot;2d6&quot;,
+        &quot;armor&quot;: &quot;16&quot;,
+        &quot;morale&quot;: &quot;8&quot;,
+        &quot;damage&quot;: &quot;1d8&quot;
+      },
+      &quot;leader&quot;: {
+        &quot;hp&quot;: &quot;3d6&quot;,
+        &quot;armor&quot;: &quot;18&quot;,
+        &quot;morale&quot;: &quot;9&quot;,
+        &quot;damage&quot;: &quot;1d10&quot;
+      },
+      &quot;champion&quot;: {
+        &quot;hp&quot;: &quot;4d6+2&quot;,
+        &quot;armor&quot;: &quot;20&quot;,
+        &quot;morale&quot;: &quot;10&quot;,
+        &quot;damage&quot;: &quot;2d6&quot;
+      }
+    },
+    &quot;special_abilities&quot;: [
+      &quot;Regenerates 1 HP per round&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/npc_names/en/npc_names.json (Line 2:12 - Line 67:2), databases/npc_names/pt/npc_names.json (Line 7:2 - Line 73:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn1" onclick="toggleCodeBlock('cloneGroup1', 'expandBtn1', 'collapseBtn1')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn1" onclick="toggleCodeBlock('cloneGroup1', 'expandBtn1', 'collapseBtn1')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup1"><code class="language-json text-sm text-gray-800">,
+  &quot;tables&quot;: {
+    &quot;first_names&quot;: [
+      &quot;Aerg-Tval&quot;,
+      &quot;Agn&quot;,
+      &quot;Domm&quot;,
+      &quot;Vukkan&quot;,
+      &quot;Borda&quot;,
+      &quot;Daeru&quot;,
+      &quot;Kathan&quot;,
+      &quot;Felban&quot;,
+      &quot;Gotven&quot;,
+      &quot;Grin&quot;,
+      &quot;Grittr&quot;,
+      &quot;Haeru&quot;,
+      &quot;Hargha&quot;,
+      &quot;Harmug&quot;,
+      &quot;Jotna&quot;,
+      &quot;Karg&quot;,
+      &quot;Karva&quot;,
+      &quot;Katla&quot;,
+      &quot;Senkil&quot;,
+      &quot;Keftar&quot;,
+      &quot;Klort&quot;,
+      &quot;Kratar&quot;,
+      &quot;Kutz&quot;,
+      &quot;Kvetin&quot;,
+      &quot;Merkari&quot;,
+      &quot;Margar&quot;,
+      &quot;Nagl&quot;,
+      &quot;Niduk&quot;,
+      &quot;Nifehl&quot;,
+      &quot;Prugl&quot;,
+      &quot;Svind&quot;,
+      &quot;Schlefzum&quot;,
+      &quot;Ulg&quot;,
+      &quot;Yuk-Tval&quot;,
+      &quot;Drud&quot;,
+      &quot;Bor&quot;,
+      &quot;Vrask&quot;,
+      &quot;Gat&quot;,
+      &quot;Skel&quot;,
+      &quot;Gritt&quot;,
+      &quot;Bard&quot;
+    ],
+    &quot;second_names&quot;: [
+      &quot;Theras&quot;,
+      &quot;Therg&quot;,
+      &quot;Thorvul&quot;,
+      &quot;Torn&quot;,
+      &quot;Urm&quot;,
+      &quot;Drugel&quot;,
+      &quot;Vagal&quot;,
+      &quot;Vatan&quot;,
+      &quot;Von&quot;,
+      &quot;Vrakh&quot;,
+      &quot;Vresi&quot;,
+      &quot;Wemut&quot;,
+      &quot;Skelh&quot;,
+      &quot;Burder&quot;,
+      &quot;Jaurk&quot;,
+      &quot;Thron&quot;,
+      &quot;Tarvl&quot;,
+      &quot;Urkin&quot;,
+      &quot;Galt&quot;,
+      &quot;Wakta&quot;,</code></pre></div><div class="py-4"><p class="text-gray-600">databases/loot/en/loot.json (Line 57:5 - Line 88:11), databases/loot/en/loot.json (Line 21:5 - Line 52:9)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn2" onclick="toggleCodeBlock('cloneGroup2', 'expandBtn2', 'collapseBtn2')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn2" onclick="toggleCodeBlock('cloneGroup2', 'expandBtn2', 'collapseBtn2')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup2"><code class="language-json text-sm text-gray-800">&quot;treasure_values&quot;: [
+      &quot;Worthless but cursed&quot;,
+      &quot;Few copper pieces&quot;,
+      &quot;Handful of silver&quot;,
+      &quot;Small fortune in gold&quot;,
+      &quot;Priceless but dangerous&quot;,
+      &quot;Valuable to cultists&quot;,
+      &quot;Sought by collectors&quot;,
+      &quot;Worth a life&quot;,
+      &quot;Magically valuable&quot;,
+      &quot;Historically significant&quot;,
+      &quot;Religiously important&quot;,
+      &quot;Extremely rare&quot;
+    ],
+    &quot;treasure_effects&quot;: [
+      &quot;brings bad luck&quot;,
+      &quot;attracts undead&quot;,
+      &quot;causes nightmares&quot;,
+      &quot;grants dark visions&quot;,
+      &quot;whispers constantly&quot;,
+      &quot;feels unnaturally cold&quot;,
+      &quot;pulses with evil energy&quot;,
+      &quot;corrupts nearby items&quot;,
+      &quot;reveals hidden passages&quot;,
+      &quot;allows communion with dead&quot;,
+      &quot;protects from holy symbols&quot;,
+      &quot;enhances dark magic&quot;,
+      &quot;marks bearer for death&quot;,
+      &quot;slowly drains life force&quot;
+    ]
+  },
+  &quot;metadata&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/wilderness.json (Line 1:1 - Line 52:29), databases/wilderness/en/wilderness.json (Line 1:1 - Line 52:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn3" onclick="toggleCodeBlock('cloneGroup3', 'expandBtn3', 'collapseBtn3')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn3" onclick="toggleCodeBlock('cloneGroup3', 'expandBtn3', 'collapseBtn3')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup3"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;wilderness&quot;,
+  &quot;tables&quot;: {
+    &quot;wilderness_encounters&quot;: [
+      &quot;A circle of standing stones humming with power&quot;,
+      &quot;Abandoned cart with scattered belongings&quot;,
+      &quot;Fresh graves with disturbed earth&quot;,
+      &quot;Gallows tree with old rope&quot;,
+      &quot;Ruined watchtower on a hill&quot;,
+      &quot;Stream running red with unknown substance&quot;,
+      &quot;Crossroads with weathered signpost&quot;,
+      &quot;Burned farmhouse with blackened timbers&quot;,
+      &quot;Ancient cairn marking forgotten dead&quot;,
+      &quot;Ritual circle drawn in ash and bone&quot;,
+      &quot;Well with rope cut and bucket missing&quot;,
+      &quot;Trail of blood leading into darkness&quot;,
+      &quot;Shepherd's hut with door hanging open&quot;,
+      &quot;Stone bridge over rushing water&quot;,
+      &quot;Grove of dead trees in perfect circle&quot;,
+      &quot;Merchant's bones picked clean by crows&quot;,
+      &quot;Cave mouth sealed with heavy stones&quot;,
+      &quot;Battlefield littered with old weapons&quot;,
+      &quot;Shrine to forgotten deity&quot;,
+      &quot;Gibbet cage swaying empty&quot;
+    ],
+    &quot;random_events&quot;: [
+      &quot;A murder of crows follows the party ominously&quot;,
+      &quot;Strange lights dance in the distance&quot;,
+      &quot;The air grows thick and hard to breathe&quot;,
+      &quot;Distant screaming echoes across the land&quot;,
+      &quot;An unnatural fog rolls in quickly&quot;,
+      &quot;The ground trembles with unknown cause&quot;,
+      &quot;Dead animals litter the path ahead&quot;,
+      &quot;A cold wind brings whispers of the past&quot;,
+      &quot;The sky darkens despite the hour&quot;,
+      &quot;Flowers wilt as the party approaches&quot;,
+      &quot;A terrible stench fills the air&quot;,
+      &quot;Shadows move independently of their casters&quot;,
+      &quot;The temperature drops suddenly&quot;,
+      &quot;Strange symbols appear carved in trees&quot;,
+      &quot;A blood-red moon rises despite daylight&quot;,
+      &quot;The party feels watched by unseen eyes&quot;,
+      &quot;Time seems to slow and distort&quot;,
+      &quot;A child's laughter echoes from nowhere&quot;,
+      &quot;The dead rise from unmarked graves&quot;,
+      &quot;Holy symbols crack and tarnish&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-07-13T10:26:38.980999&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/weather.json (Line 1:1 - Line 33:29), databases/weather/en/weather.json (Line 1:1 - Line 33:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn4" onclick="toggleCodeBlock('cloneGroup4', 'expandBtn4', 'collapseBtn4')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn4" onclick="toggleCodeBlock('cloneGroup4', 'expandBtn4', 'collapseBtn4')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup4"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;weather&quot;,
+  &quot;tables&quot;: {
+    &quot;weather_conditions&quot;: [
+      &quot;Lifeless grey&quot;,
+      &quot;Hammering rain&quot;,
+      &quot;Piercing wind&quot;,
+      &quot;Deafening storm&quot;,
+      &quot;Black as night&quot;,
+      &quot;Dead quiet&quot;,
+      &quot;Cloudburst&quot;,
+      &quot;Soup-thick mist&quot;,
+      &quot;Crackling frost&quot;,
+      &quot;Irritating drizzle&quot;,
+      &quot;Roaring thunder&quot;,
+      &quot;Gravelike cold&quot;,
+      &quot;Unnatural cold&quot;,
+      &quot;Scratching sounds&quot;,
+      &quot;Purple mist&quot;,
+      &quot;Dark fog&quot;,
+      &quot;Sweat vapor&quot;,
+      &quot;Feeble light&quot;,
+      &quot;Thick mist&quot;,
+      &quot;Sewage tide&quot;,
+      &quot;Methane cloud&quot;,
+      &quot;Spitting torch&quot;,
+      &quot;Mushroom spores&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/weapons_prices.json (Line 1:1 - Line 112:29), databases/weapons_prices/en/weapons_prices.json (Line 1:1 - Line 112:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn5" onclick="toggleCodeBlock('cloneGroup5', 'expandBtn5', 'collapseBtn5')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn5" onclick="toggleCodeBlock('cloneGroup5', 'expandBtn5', 'collapseBtn5')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup5"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;weapons_prices&quot;,
+  &quot;tables&quot;: {
+    &quot;weapons&quot;: [
+      {
+        &quot;name&quot;: &quot;Battle axe&quot;,
+        &quot;damage&quot;: &quot;d8&quot;,
+        &quot;price&quot;: 35,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Club&quot;,
+        &quot;damage&quot;: &quot;d6&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Crossbow&quot;,
+        &quot;damage&quot;: &quot;d8&quot;,
+        &quot;price&quot;: 40,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Dagger&quot;,
+        &quot;damage&quot;: &quot;d4&quot;,
+        &quot;price&quot;: 5,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Falchion&quot;,
+        &quot;damage&quot;: &quot;d6&quot;,
+        &quot;price&quot;: 15,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Handaxe&quot;,
+        &quot;damage&quot;: &quot;d6&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Knife&quot;,
+        &quot;damage&quot;: &quot;d4&quot;,
+        &quot;price&quot;: 5,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Shortbow&quot;,
+        &quot;damage&quot;: &quot;d6&quot;,
+        &quot;price&quot;: 15,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Shortsword&quot;,
+        &quot;damage&quot;: &quot;d6&quot;,
+        &quot;price&quot;: 20,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Sling&quot;,
+        &quot;damage&quot;: &quot;d4&quot;,
+        &quot;price&quot;: 8,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Spear&quot;,
+        &quot;damage&quot;: &quot;d6&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Sword&quot;,
+        &quot;damage&quot;: &quot;d8&quot;,
+        &quot;price&quot;: 30,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Warhammer&quot;,
+        &quot;damage&quot;: &quot;d8&quot;,
+        &quot;price&quot;: 60,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Whip&quot;,
+        &quot;damage&quot;: &quot;d4&quot;,
+        &quot;price&quot;: 8,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Tinderbox&quot;,
+        &quot;damage&quot;: &quot;d0&quot;,
+        &quot;price&quot;: 20,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;10 bolts&quot;,
+        &quot;damage&quot;: &quot;&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;20 arrows&quot;,
+        &quot;damage&quot;: &quot;&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;
+      }
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/traps_triggers.json (Line 1:1 - Line 24:29), databases/traps_triggers/en/traps_triggers.json (Line 1:1 - Line 24:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn6" onclick="toggleCodeBlock('cloneGroup6', 'expandBtn6', 'collapseBtn6')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn6" onclick="toggleCodeBlock('cloneGroup6', 'expandBtn6', 'collapseBtn6')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup6"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;traps_triggers&quot;,
+  &quot;tables&quot;: {
+    &quot;trap_triggers&quot;: [
+      &quot;... not leaving the room in time.&quot;,
+      &quot;... stepping on the wrong floor tile.&quot;,
+      &quot;... touching a damned doorknob.&quot;,
+      &quot;... pushing an alluring button.&quot;,
+      &quot;... turning the key.&quot;,
+      &quot;... discussing a foul inscription.&quot;,
+      &quot;... stealing a prized item.&quot;,
+      &quot;... talking too loudly.&quot;,
+      &quot;... taking a torch.&quot;,
+      &quot;... opening a box/sarcophagus.&quot;,
+      &quot;... treading on the trip wire.&quot;,
+      &quot;... rattling your weapons.&quot;,
+      &quot;... drinking Elixir Vitalis in a cursed room.&quot;,
+      &quot;... lighting a lantern where gloom reigns.&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/traps_effects.json (Line 1:1 - Line 58:29), databases/traps_effects/en/traps_effects.json (Line 1:1 - Line 58:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn7" onclick="toggleCodeBlock('cloneGroup7', 'expandBtn7', 'collapseBtn7')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn7" onclick="toggleCodeBlock('cloneGroup7', 'expandBtn7', 'collapseBtn7')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup7"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;traps_effects&quot;,
+  &quot;tables&quot;: {
+    &quot;trap_effects&quot;: [
+      {
+        &quot;description&quot;: &quot;Shimmering, bile-yellow poisonous gas.&quot;,
+        &quot;effect&quot;: &quot;Test Toughness DR18 or die. Test every minute.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Poisonous darts shoot from wall-holes.&quot;,
+        &quot;effect&quot;: &quot;D2 damage. Test Toughness DR16 or die.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Giant marble falls from the ceiling or from a ramp in an adjacent room.&quot;,
+        &quot;effect&quot;: &quot;Test Agility DR14 or die.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Cruel creature is released from a hidden chamber.&quot;,
+        &quot;effect&quot;: &quot;Varying.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Sharpened pole hits you from the side.&quot;,
+        &quot;effect&quot;: &quot;Fate decides. Roll a die: an odd result is d20 damage.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Falling net. Something approaches.&quot;,
+        &quot;effect&quot;: &quot;Presence DR16 to escape.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;A Power affects you.&quot;,
+        &quot;effect&quot;: &quot;Varying.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;A pit opens under your feet.&quot;,
+        &quot;effect&quot;: &quot;1-in-6 chance of impalement (instant death). Otherwise, d6 damage per 10'.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Doors lock and water fills the room.&quot;,
+        &quot;effect&quot;: &quot;Better find a way out.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Alarm goes off; something awakens.&quot;,
+        &quot;effect&quot;: &quot;Varying.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;The walls are closing in.&quot;,
+        &quot;effect&quot;: &quot;Better find a way out. 1-in-6 chance that the walls get stuck ... if you're lucky.&quot;
+      },
+      {
+        &quot;description&quot;: &quot;Burning oil pouring from a ceiling cauldron.&quot;,
+        &quot;effect&quot;: &quot;Fate decides. Roll a die: an odd result is d12 damage.&quot;
+      }
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/traps_builders.json (Line 1:1 - Line 30:29), databases/traps_builders/en/traps_builders.json (Line 1:1 - Line 30:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn8" onclick="toggleCodeBlock('cloneGroup8', 'expandBtn8', 'collapseBtn8')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn8" onclick="toggleCodeBlock('cloneGroup8', 'expandBtn8', 'collapseBtn8')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup8"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;traps_builders&quot;,
+  &quot;tables&quot;: {
+    &quot;trap_builders&quot;: [
+      &quot;A slow, calculating grotesque.&quot;,
+      &quot;An death-sentenced Uguth† mine-thrall.&quot;,
+      &quot;A simple goblin.&quot;,
+      &quot;A forgotten berserker king.&quot;,
+      &quot;A deranged shadow being.&quot;,
+      &quot;A bitter necromancer.&quot;,
+      &quot;A dying troll mourning its mother.&quot;,
+      &quot;A spiteful child from a torched village.&quot;,
+      &quot;A slumbering, nebulous daemon.&quot;,
+      &quot;A catacomb creatorʼs executioner.&quot;,
+      &quot;An inveterate nail collector.&quot;,
+      &quot;A cunning, crafty skeleton.&quot;,
+      &quot;A bewildered wickhead.&quot;,
+      &quot;A sickly, blind demigod.&quot;,
+      &quot;A group of terrified goons.&quot;,
+      &quot;A mindless death-cultist.&quot;,
+      &quot;A witch lost in Labyrinth Lecht.‡&quot;,
+      &quot;A bored, teeth-counting hermit.&quot;,
+      &quot;A sadistic graveyard architect.&quot;,
+      &quot;An anxious undead doll.&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/tavern_patrons.json (Line 1:1 - Line 30:29), databases/tavern_patrons/en/tavern_patrons.json (Line 1:1 - Line 30:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn9" onclick="toggleCodeBlock('cloneGroup9', 'expandBtn9', 'collapseBtn9')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn9" onclick="toggleCodeBlock('cloneGroup9', 'expandBtn9', 'collapseBtn9')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup9"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;tavern_patrons&quot;,
+  &quot;tables&quot;: {
+    &quot;patron_traits&quot;: [
+      &quot;Filth&quot;,
+      &quot;Boozehound&quot;,
+      &quot;One Eye&quot;,
+      &quot;Gum Rot&quot;,
+      &quot;Fancy Boy (half-brother to Oily Boy)&quot;,
+      &quot;Stinker&quot;,
+      &quot;Braggard&quot;,
+      &quot;Nosey&quot;,
+      &quot;Hook Hand&quot;,
+      &quot;Slurper&quot;,
+      &quot;Aggro&quot;,
+      &quot;Nags-a-lot&quot;,
+      &quot;Archbishop of Mockery (smirking bully)&quot;,
+      &quot;Catastrophic Cough&quot;,
+      &quot;Hysterical Tears&quot;,
+      &quot;No Nose&quot;,
+      &quot;Tongueless&quot;,
+      &quot;Oily Boy (Fancy Boy's half-brother)&quot;,
+      &quot;Trauma Dreams&quot;,
+      &quot;Acid Face&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/tavern_menu.json (Line 1:1 - Line 96:29), databases/tavern_menu/en/tavern_menu.json (Line 1:1 - Line 96:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn10" onclick="toggleCodeBlock('cloneGroup10', 'expandBtn10', 'collapseBtn10')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn10" onclick="toggleCodeBlock('cloneGroup10', 'expandBtn10', 'collapseBtn10')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup10"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;tavern_menu&quot;,
+  &quot;tables&quot;: {
+    &quot;select_menu&quot;: [
+      {
+        &quot;name&quot;: &quot;Braised chicken with dangerously alcoholic wine-drenched apples&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;select&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Spiced rutabaga/swede from dark Sarkash soil, a delicacy&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;select&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Galgenbeckian stew with whole embryonic boars. Delicious!&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;select&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Tveland yam hash with sliced pungent tomb-truffle&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;select&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Migol's pie (blackened venison and chicken bone broth jelly)&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;select&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Black soup with baked hog face&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;select&quot;
+      }
+    ],
+    &quot;budget_menu&quot;: [
+      {
+        &quot;name&quot;: &quot;Watery femur soup. The femur is large. It's been there a while.&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Thick ooze soup! At least one chunk. The ooze is pure, I assure you!&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Sour celery pudding with a side of compressed last-week's-meat&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Gloomberry mix (Toughness DR12 to avoid explosive diarrhea)&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;\&quot;Goblin's gall\&quot;, famous swamp-mud broth. Sourced from local swamps!&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Baked staring-pig-head with filled whispering-lips. Most won't touch it.&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Chunky stew and hearty ale (Lotta Gravy's specialty)&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Galgenburger (mystery meat, may turn you into a zombie)&quot;,
+        &quot;price&quot;: 3,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;quality&quot;: &quot;budget&quot;
+      }
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/tavern.json (Line 1:1 - Line 32:29), databases/tavern/en/tavern.json (Line 1:1 - Line 32:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn11" onclick="toggleCodeBlock('cloneGroup11', 'expandBtn11', 'collapseBtn11')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn11" onclick="toggleCodeBlock('cloneGroup11', 'expandBtn11', 'collapseBtn11')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup11"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;tavern&quot;,
+  &quot;tables&quot;: {
+    &quot;tavern_descriptions&quot;: [
+      &quot;Smokey&quot;,
+      &quot;Silent&quot;,
+      &quot;Filthy&quot;,
+      &quot;Dark&quot;,
+      &quot;Rowdy&quot;,
+      &quot;Smelly&quot;
+    ],
+    &quot;tavern_special_1&quot;: [
+      &quot;Maggot&quot;,
+      &quot;Troll steak&quot;,
+      &quot;Monkey brain&quot;,
+      &quot;Goblin toe&quot;,
+      &quot;Long pig&quot;,
+      &quot;Bat liver&quot;
+    ],
+    &quot;tavern_special_2&quot;: [
+      &quot;Mushroom&quot;,
+      &quot;Algae&quot;,
+      &quot;Cockroach&quot;,
+      &quot;Spider&quot;,
+      &quot;Eyeball&quot;,
+      &quot;Locust&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-07-13T10:26:38.979798&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/stats.json (Line 1:1 - Line 103:29), databases/stats/pt/stats.json (Line 1:1 - Line 103:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn12" onclick="toggleCodeBlock('cloneGroup12', 'expandBtn12', 'collapseBtn12')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn12" onclick="toggleCodeBlock('cloneGroup12', 'expandBtn12', 'collapseBtn12')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup12"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;stats&quot;,
+  &quot;tables&quot;: {
+    &quot;creature_stats&quot;: {
+      &quot;weak&quot;: {
+        &quot;hp&quot;: &quot;1d4&quot;,
+        &quot;armor&quot;: &quot;10&quot;,
+        &quot;morale&quot;: &quot;6&quot;,
+        &quot;damage&quot;: &quot;1d4&quot;
+      },
+      &quot;normal&quot;: {
+        &quot;hp&quot;: &quot;1d6&quot;,
+        &quot;armor&quot;: &quot;12&quot;,
+        &quot;morale&quot;: &quot;7&quot;,
+        &quot;damage&quot;: &quot;1d6&quot;
+      },
+      &quot;strong&quot;: {
+        &quot;hp&quot;: &quot;2d6&quot;,
+        &quot;armor&quot;: &quot;14&quot;,
+        &quot;morale&quot;: &quot;8&quot;,
+        &quot;damage&quot;: &quot;1d8&quot;
+      },
+      &quot;elite&quot;: {
+        &quot;hp&quot;: &quot;3d6&quot;,
+        &quot;armor&quot;: &quot;16&quot;,
+        &quot;morale&quot;: &quot;9&quot;,
+        &quot;damage&quot;: &quot;1d10&quot;
+      },
+      &quot;boss&quot;: {
+        &quot;hp&quot;: &quot;4d6+4&quot;,
+        &quot;armor&quot;: &quot;18&quot;,
+        &quot;morale&quot;: &quot;10&quot;,
+        &quot;damage&quot;: &quot;2d6&quot;
+      }
+    },
+    &quot;npc_stats&quot;: {
+      &quot;peasant&quot;: {
+        &quot;hp&quot;: &quot;1d4&quot;,
+        &quot;armor&quot;: &quot;10&quot;,
+        &quot;morale&quot;: &quot;5&quot;,
+        &quot;damage&quot;: &quot;1d3&quot;
+      },
+      &quot;soldier&quot;: {
+        &quot;hp&quot;: &quot;1d6+1&quot;,
+        &quot;armor&quot;: &quot;14&quot;,
+        &quot;morale&quot;: &quot;7&quot;,
+        &quot;damage&quot;: &quot;1d6&quot;
+      },
+      &quot;veteran&quot;: {
+        &quot;hp&quot;: &quot;2d6&quot;,
+        &quot;armor&quot;: &quot;16&quot;,
+        &quot;morale&quot;: &quot;8&quot;,
+        &quot;damage&quot;: &quot;1d8&quot;
+      },
+      &quot;leader&quot;: {
+        &quot;hp&quot;: &quot;3d6&quot;,
+        &quot;armor&quot;: &quot;18&quot;,
+        &quot;morale&quot;: &quot;9&quot;,
+        &quot;damage&quot;: &quot;1d10&quot;
+      },
+      &quot;champion&quot;: {
+        &quot;hp&quot;: &quot;4d6+2&quot;,
+        &quot;armor&quot;: &quot;20&quot;,
+        &quot;morale&quot;: &quot;10&quot;,
+        &quot;damage&quot;: &quot;2d6&quot;
+      }
+    },
+    &quot;special_abilities&quot;: [
+      &quot;Regenerates 1 HP per round&quot;,
+      &quot;Immune to normal weapons&quot;,
+      &quot;Causes fear (morale -2)&quot;,
+      &quot;Poisonous attack (save or die)&quot;,
+      &quot;Invisible until attacks&quot;,
+      &quot;Flies at will&quot;,
+      &quot;Breathes fire (2d6 damage)&quot;,
+      &quot;Drains life force&quot;,
+      &quot;Splits when killed&quot;,
+      &quot;Phases through walls&quot;,
+      &quot;Summons reinforcements&quot;,
+      &quot;Reflects magic&quot;,
+      &quot;Berserker rage (+2 damage)&quot;,
+      &quot;Death curse on killer&quot;,
+      &quot;Explodes when killed&quot;
+    ],
+    &quot;weaknesses&quot;: [
+      &quot;Vulnerable to silver&quot;,
+      &quot;Harmed by holy symbols&quot;,
+      &quot;Fears bright light&quot;,
+      &quot;Cannot cross running water&quot;,
+      &quot;Repelled by garlic&quot;,
+      &quot;Weakened by iron&quot;,
+      &quot;Affected by salt circles&quot;,
+      &quot;Damaged by holy water&quot;,
+      &quot;Bound by true names&quot;,
+      &quot;Confused by mirrors&quot;,
+      &quot;Paralyzed by music&quot;,
+      &quot;Slowed by cold iron&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-07-13T10:26:38.981168&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/services_prices.json (Line 1:1 - Line 66:29), databases/services_prices/en/services_prices.json (Line 1:1 - Line 66:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn13" onclick="toggleCodeBlock('cloneGroup13', 'expandBtn13', 'collapseBtn13')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn13" onclick="toggleCodeBlock('cloneGroup13', 'expandBtn13', 'collapseBtn13')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup13"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;services_prices&quot;,
+  &quot;tables&quot;: {
+    &quot;services&quot;: [
+      {
+        &quot;name&quot;: &quot;Night in hospice&quot;,
+        &quot;price&quot;: 3,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Drink&quot;,
+        &quot;price&quot;: 1,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Steady meal&quot;,
+        &quot;price&quot;: 2,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Hot meal&quot;,
+        &quot;price&quot;: 3,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Bribe, clerk&quot;,
+        &quot;price&quot;: &quot;20-40&quot;,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Bribe, rabble&quot;,
+        &quot;price&quot;: &quot;5-15&quot;,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      }
+    ],
+    &quot;armor_repair&quot;: [
+      {
+        &quot;tier&quot;: &quot;1 to 2&quot;,
+        &quot;cost&quot;: 25,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Armor cannot be repaired to a tier higher than its original&quot;
+      },
+      {
+        &quot;tier&quot;: &quot;2 to 3&quot;,
+        &quot;cost&quot;: 40,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Armor cannot be repaired to a tier higher than its original&quot;
+      },
+      {
+        &quot;tier&quot;: &quot;3 to 4&quot;,
+        &quot;cost&quot;: 50,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Armor cannot be repaired to a tier higher than its original&quot;
+      }
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/scroll.json (Line 1:1 - Line 50:29), databases/scroll/en/scroll.json (Line 1:1 - Line 50:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn14" onclick="toggleCodeBlock('cloneGroup14', 'expandBtn14', 'collapseBtn14')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn14" onclick="toggleCodeBlock('cloneGroup14', 'expandBtn14', 'collapseBtn14')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup14"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;scroll&quot;,
+  &quot;tables&quot;: {
+    &quot;scroll_types&quot;: [
+      &quot;Crumbling parchment&quot;,
+      &quot;Blood-stained vellum&quot;,
+      &quot;Bone tablets&quot;,
+      &quot;Metal scrolls&quot;,
+      &quot;Flesh pages&quot;,
+      &quot;Stone inscriptions&quot;,
+      &quot;Tree bark writings&quot;,
+      &quot;Skin manuscripts&quot;,
+      &quot;Clay fragments&quot;,
+      &quot;Wax tablets&quot;
+    ],
+    &quot;scroll_content&quot;: [
+      &quot;heretical prayers&quot;,
+      &quot;forbidden spells&quot;,
+      &quot;plague recipes&quot;,
+      &quot;death rituals&quot;,
+      &quot;curses and hexes&quot;,
+      &quot;prophecies of doom&quot;,
+      &quot;maps to lost places&quot;,
+      &quot;alchemical formulas&quot;,
+      &quot;summoning circles&quot;,
+      &quot;torture methods&quot;,
+      &quot;poison guides&quot;,
+      &quot;necromantic arts&quot;,
+      &quot;demonic contracts&quot;,
+      &quot;blasphemous hymns&quot;
+    ],
+    &quot;scroll_effects&quot;: [
+      &quot;causes nightmares when read&quot;,
+      &quot;burns the reader's hands&quot;,
+      &quot;whispers dark secrets&quot;,
+      &quot;ages the reader rapidly&quot;,
+      &quot;summons malevolent spirits&quot;,
+      &quot;inflicts temporary blindness&quot;,
+      &quot;drives reader temporarily mad&quot;,
+      &quot;reveals hidden truths&quot;,
+      &quot;grants dark knowledge&quot;,
+      &quot;curses the reader&quot;,
+      &quot;attracts undead&quot;,
+      &quot;causes uncontrollable fear&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-07-13T10:26:38.980498&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/npc_wants.json (Line 1:1 - Line 22:29), databases/npc_wants/en/npc_wants.json (Line 1:1 - Line 22:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn15" onclick="toggleCodeBlock('cloneGroup15', 'expandBtn15', 'collapseBtn15')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn15" onclick="toggleCodeBlock('cloneGroup15', 'expandBtn15', 'collapseBtn15')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup15"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;npc_wants&quot;,
+  &quot;tables&quot;: {
+    &quot;wants&quot;: [
+      &quot;Glorious death&quot;,
+      &quot;To travel&quot;,
+      &quot;Bloodshed&quot;,
+      &quot;Forgiveness&quot;,
+      &quot;Revenge&quot;,
+      &quot;To retire&quot;,
+      &quot;Love&quot;,
+      &quot;A drink&quot;,
+      &quot;To be left alone&quot;,
+      &quot;Knowledge&quot;,
+      &quot;To feel that there is some kind of meaning or purpose to it all&quot;,
+      &quot;Gambling&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/npc_traits.json (Line 1:1 - Line 58:29), databases/npc_traits/en/npc_traits.json (Line 1:1 - Line 58:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn16" onclick="toggleCodeBlock('cloneGroup16', 'expandBtn16', 'collapseBtn16')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn16" onclick="toggleCodeBlock('cloneGroup16', 'expandBtn16', 'collapseBtn16')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup16"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;npc_traits&quot;,
+  &quot;tables&quot;: {
+    &quot;traits&quot;: [
+      &quot;Annoyed&quot;,
+      &quot;Nervous&quot;,
+      &quot;Bleeding&quot;,
+      &quot;Confused&quot;,
+      &quot;Scared&quot;,
+      &quot;Deaf&quot;,
+      &quot;Envious&quot;,
+      &quot;Rotting&quot;,
+      &quot;Sad&quot;,
+      &quot;Itching&quot;,
+      &quot;Desperate&quot;,
+      &quot;Pompous&quot;,
+      &quot;Dying&quot;,
+      &quot;Bitter&quot;,
+      &quot;Starving&quot;,
+      &quot;Gullible&quot;,
+      &quot;Morbid&quot;,
+      &quot;Lazy&quot;,
+      &quot;Wounded&quot;,
+      &quot;Exhausted&quot;,
+      &quot;Gaudy&quot;,
+      &quot;Heretical&quot;,
+      &quot;Worried&quot;,
+      &quot;Hopeless&quot;,
+      &quot;Apathetic&quot;,
+      &quot;Drunk&quot;,
+      &quot;Betrayed&quot;,
+      &quot;Thieving&quot;,
+      &quot;Possessed&quot;,
+      &quot;Worm-infested&quot;,
+      &quot;Cursed&quot;,
+      &quot;Immortal&quot;,
+      &quot;Demon-possessed&quot;,
+      &quot;Human-rat hybrid&quot;,
+      &quot;Undead&quot;,
+      &quot;Gargoyle&quot;,
+      &quot;Basilisk knight&quot;,
+      &quot;Basilisk priest&quot;,
+      &quot;Worm sorcerer&quot;,
+      &quot;Archbishop&quot;,
+      &quot;Vicar General&quot;,
+      &quot;Archhealer&quot;,
+      &quot;Church Treasurer&quot;,
+      &quot;Professor&quot;,
+      &quot;Koopman&quot;,
+      &quot;Crime lord&quot;,
+      &quot;Cult leader&quot;,
+      &quot;Hermit&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/npc_trades.json (Line 1:1 - Line 44:29), databases/npc_trades/en/npc_trades.json (Line 1:1 - Line 44:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn17" onclick="toggleCodeBlock('cloneGroup17', 'expandBtn17', 'collapseBtn17')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn17" onclick="toggleCodeBlock('cloneGroup17', 'expandBtn17', 'collapseBtn17')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup17"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;npc_trades&quot;,
+  &quot;tables&quot;: {
+    &quot;trades&quot;: [
+      &quot;Baker / Butcher&quot;,
+      &quot;Gravedigger&quot;,
+      &quot;Peddler / Drifter&quot;,
+      &quot;Soothsayer&quot;,
+      &quot;Snake breeder&quot;,
+      &quot;Blacksmith&quot;,
+      &quot;Innkeeper&quot;,
+      &quot;Murdered friend&quot;,
+      &quot;Corrupt priest&quot;,
+      &quot;Peasant&quot;,
+      &quot;Brigand / Thief&quot;,
+      &quot;Herbalist&quot;,
+      &quot;Lawless scum&quot;,
+      &quot;Former hermit&quot;,
+      &quot;Priest / Priestess&quot;,
+      &quot;Drudge / Dreg&quot;,
+      &quot;Struggling artisan&quot;,
+      &quot;Monkey tamer&quot;,
+      &quot;Bell ringer&quot;,
+      &quot;Shitshoveller&quot;,
+      &quot;Ditch digger&quot;,
+      &quot;Rat-catcher&quot;,
+      &quot;Mercenary&quot;,
+      &quot;Witch hunter&quot;,
+      &quot;Bookbinder / Bookburner&quot;,
+      &quot;Tax collector&quot;,
+      &quot;Full-time gambler&quot;,
+      &quot;Seafarer&quot;,
+      &quot;Corpse collector&quot;,
+      &quot;Barber-surgeon&quot;,
+      &quot;Miner / Bomb chemist&quot;,
+      &quot;Vagabond / Hunter&quot;,
+      &quot;Cruel captain&quot;,
+      &quot;Corrupt clerk&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/npc_secrets.json (Line 1:1 - Line 30:29), databases/npc_secrets/en/npc_secrets.json (Line 1:1 - Line 30:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn18" onclick="toggleCodeBlock('cloneGroup18', 'expandBtn18', 'collapseBtn18')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn18" onclick="toggleCodeBlock('cloneGroup18', 'expandBtn18', 'collapseBtn18')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup18"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;npc_secrets&quot;,
+  &quot;tables&quot;: {
+    &quot;secrets&quot;: [
+      &quot;A spy&quot;,
+      &quot;An inquisitor&quot;,
+      &quot;Undead&quot;,
+      &quot;Reborn&quot;,
+      &quot;A necromancer&quot;,
+      &quot;A cultist&quot;,
+      &quot;An assassin&quot;,
+      &quot;A shapeshifter&quot;,
+      &quot;A disguised noble&quot;,
+      &quot;Just a mirage&quot;,
+      &quot;Full of insects&quot;,
+      &quot;A cannibal&quot;,
+      &quot;A serial killer&quot;,
+      &quot;Possessed by a daemon&quot;,
+      &quot;A daemon&quot;,
+      &quot;Cursed&quot;,
+      &quot;A cultist&quot;,
+      &quot;Head of a murder cult&quot;,
+      &quot;A disguised noble&quot;,
+      &quot;Just a mirage&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/npc_names.json (Line 1:1 - Line 70:2), databases/npc_names/en/npc_names.json (Line 1:1 - Line 69:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn19" onclick="toggleCodeBlock('cloneGroup19', 'expandBtn19', 'collapseBtn19')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn19" onclick="toggleCodeBlock('cloneGroup19', 'expandBtn19', 'collapseBtn19')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup19"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;npc_names&quot;,
+  &quot;tables&quot;: {
+    &quot;first_names&quot;: [
+      &quot;Aerg-Tval&quot;,
+      &quot;Agn&quot;,
+      &quot;Domm&quot;,
+      &quot;Vukkan&quot;,
+      &quot;Borda&quot;,
+      &quot;Daeru&quot;,
+      &quot;Kathan&quot;,
+      &quot;Felban&quot;,
+      &quot;Gotven&quot;,
+      &quot;Grin&quot;,
+      &quot;Grittr&quot;,
+      &quot;Haeru&quot;,
+      &quot;Hargha&quot;,
+      &quot;Harmug&quot;,
+      &quot;Jotna&quot;,
+      &quot;Karg&quot;,
+      &quot;Karva&quot;,
+      &quot;Katla&quot;,
+      &quot;Senkil&quot;,
+      &quot;Keftar&quot;,
+      &quot;Klort&quot;,
+      &quot;Kratar&quot;,
+      &quot;Kutz&quot;,
+      &quot;Kvetin&quot;,
+      &quot;Merkari&quot;,
+      &quot;Margar&quot;,
+      &quot;Nagl&quot;,
+      &quot;Niduk&quot;,
+      &quot;Nifehl&quot;,
+      &quot;Prugl&quot;,
+      &quot;Svind&quot;,
+      &quot;Schlefzum&quot;,
+      &quot;Ulg&quot;,
+      &quot;Yuk-Tval&quot;,
+      &quot;Drud&quot;,
+      &quot;Bor&quot;,
+      &quot;Vrask&quot;,
+      &quot;Gat&quot;,
+      &quot;Skel&quot;,
+      &quot;Gritt&quot;,
+      &quot;Bard&quot;
+    ],
+    &quot;second_names&quot;: [
+      &quot;Theras&quot;,
+      &quot;Therg&quot;,
+      &quot;Thorvul&quot;,
+      &quot;Torn&quot;,
+      &quot;Urm&quot;,
+      &quot;Drugel&quot;,
+      &quot;Vagal&quot;,
+      &quot;Vatan&quot;,
+      &quot;Von&quot;,
+      &quot;Vrakh&quot;,
+      &quot;Vresi&quot;,
+      &quot;Wemut&quot;,
+      &quot;Skelh&quot;,
+      &quot;Burder&quot;,
+      &quot;Jaurk&quot;,
+      &quot;Thron&quot;,
+      &quot;Tarvl&quot;,
+      &quot;Urkin&quot;,
+      &quot;Galt&quot;,
+      &quot;Wakta&quot;,
+      &quot;Mardul&quot;
+    ]
+  }</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/npc_concerns.json (Line 1:1 - Line 41:29), databases/npc_concerns/en/npc_concerns.json (Line 1:1 - Line 41:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn20" onclick="toggleCodeBlock('cloneGroup20', 'expandBtn20', 'collapseBtn20')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn20" onclick="toggleCodeBlock('cloneGroup20', 'expandBtn20', 'collapseBtn20')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup20"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;npc_concerns&quot;,
+  &quot;tables&quot;: {
+    &quot;concerns&quot;: [
+      &quot;Incredible debt&quot;,
+      &quot;Stolen goods&quot;,
+      &quot;Gang of ruffians&quot;,
+      &quot;Kidnapped kin&quot;,
+      &quot;A pool of blood&quot;,
+      &quot;Possessed spouse&quot;,
+      &quot;Family curse&quot;,
+      &quot;Murdered friend&quot;,
+      &quot;Weird wart&quot;,
+      &quot;Corrupt priests&quot;,
+      &quot;The world's end&quot;,
+      &quot;Muffled promise&quot;,
+      &quot;Holy Summons&quot;,
+      &quot;The Harvester&quot;,
+      &quot;Josilfa's scythe&quot;,
+      &quot;The comet&quot;,
+      &quot;Worm infestation&quot;,
+      &quot;Rat war&quot;,
+      &quot;Demon possession&quot;,
+      &quot;Basilisk cult&quot;,
+      &quot;Sacrifice&quot;,
+      &quot;The Ordinance of Devotion&quot;,
+      &quot;Memory loss&quot;,
+      &quot;The Undercity&quot;,
+      &quot;Cathedral secrets&quot;,
+      &quot;Worm Sorcerer&quot;,
+      &quot;The Old One&quot;,
+      &quot;Blank worms&quot;,
+      &quot;The Harvester's summons&quot;,
+      &quot;Josilfa's rule&quot;,
+      &quot;The end of the world&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-27T10:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/languages/en/loot.json (Line 1:1 - Line 55:29), databases/loot/en/loot.json (Line 1:1 - Line 91:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn21" onclick="toggleCodeBlock('cloneGroup21', 'expandBtn21', 'collapseBtn21')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn21" onclick="toggleCodeBlock('cloneGroup21', 'expandBtn21', 'collapseBtn21')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup21"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;loot&quot;,
+  &quot;tables&quot;: {
+    &quot;treasure_types&quot;: [
+      &quot;Cursed jewelry&quot;,
+      &quot;Tainted coins&quot;,
+      &quot;Bone ornaments&quot;,
+      &quot;Blood gems&quot;,
+      &quot;Skull chalices&quot;,
+      &quot;Ritual daggers&quot;,
+      &quot;Plague masks&quot;,
+      &quot;Death totems&quot;,
+      &quot;Forbidden books&quot;,
+      &quot;Soul stones&quot;,
+      &quot;Corpse candles&quot;,
+      &quot;Grave dirt&quot;,
+      &quot;Unholy relics&quot;,
+      &quot;Demon bottles&quot;,
+      &quot;Witch tools&quot;
+    ],
+    &quot;treasure_values&quot;: [
+      &quot;Worthless but cursed&quot;,
+      &quot;Few copper pieces&quot;,
+      &quot;Handful of silver&quot;,
+      &quot;Small fortune in gold&quot;,
+      &quot;Priceless but dangerous&quot;,
+      &quot;Valuable to cultists&quot;,
+      &quot;Sought by collectors&quot;,
+      &quot;Worth a life&quot;,
+      &quot;Magically valuable&quot;,
+      &quot;Historically significant&quot;,
+      &quot;Religiously important&quot;,
+      &quot;Extremely rare&quot;
+    ],
+    &quot;treasure_effects&quot;: [
+      &quot;brings bad luck&quot;,
+      &quot;attracts undead&quot;,
+      &quot;causes nightmares&quot;,
+      &quot;grants dark visions&quot;,
+      &quot;whispers constantly&quot;,
+      &quot;feels unnaturally cold&quot;,
+      &quot;pulses with evil energy&quot;,
+      &quot;corrupts nearby items&quot;,
+      &quot;reveals hidden passages&quot;,
+      &quot;allows communion with dead&quot;,
+      &quot;protects from holy symbols&quot;,
+      &quot;enhances dark magic&quot;,
+      &quot;marks bearer for death&quot;,
+      &quot;slowly drains life force&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-07-13T10:26:38.980648&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/items_trinkets/en/items_trinkets.json (Line 1:1 - Line 110:29), databases/languages/en/items_trinkets.json (Line 1:1 - Line 110:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn22" onclick="toggleCodeBlock('cloneGroup22', 'expandBtn22', 'collapseBtn22')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn22" onclick="toggleCodeBlock('cloneGroup22', 'expandBtn22', 'collapseBtn22')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup22"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;items_trinkets&quot;,
+  &quot;tables&quot;: {
+    &quot;trinkets&quot;: [
+      &quot;A few bad apples&quot;,
+      &quot;Pile of skulls&quot;,
+      &quot;Two blood-stained torches&quot;,
+      &quot;Comb with a single gray hair&quot;,
+      &quot;Flute (hates horrible)&quot;,
+      &quot;Small, blood-filled bottle&quot;,
+      &quot;Spiked leather bracer&quot;,
+      &quot;Broken porcelain doll&quot;,
+      &quot;Piece of molar bread&quot;,
+      &quot;Dead black cat&quot;,
+      &quot;Fishing rod with rusty hook&quot;,
+      &quot;Crimson hood and mask&quot;,
+      &quot;Long nose&quot;,
+      &quot;Small wooden chest (empty)&quot;,
+      &quot;d8 colorful glass marbles&quot;,
+      &quot;Swanshoe (horn of a spider)&quot;,
+      &quot;Oil painting of a hooded skeleton&quot;,
+      &quot;Fan shaped like a bear claw&quot;,
+      &quot;Exquisite silk glove&quot;,
+      &quot;Dried bat meat&quot;,
+      &quot;Copper nose ring&quot;,
+      &quot;Two eyes in a jar&quot;,
+      &quot;d6 dice (bone)&quot;,
+      &quot;d4 huge fangs&quot;,
+      &quot;Latrine bucket&quot;,
+      &quot;Broken harp&quot;,
+      &quot;Horned helmet&quot;,
+      &quot;Chip-stained ladle&quot;,
+      &quot;Sad chicken in a cage&quot;,
+      &quot;Arrow stuck in shield&quot;,
+      &quot;Handful of human teeth&quot;,
+      &quot;Recently sharpened scythe (d8)&quot;,
+      &quot;Empty perfume bottle&quot;,
+      &quot;Some keys without a lock&quot;,
+      &quot;Leather vest with rivets&quot;,
+      &quot;Purse with 2d6 silver&quot;,
+      &quot;Well-used belt&quot;,
+      &quot;Sack of dead rats&quot;,
+      &quot;Gilded skull, worth 2d10+10 silver&quot;,
+      &quot;Boot (won't fit)&quot;,
+      &quot;d10 arrows&quot;,
+      &quot;Book: \&quot;Night Queen\&quot;&quot;,
+      &quot;Stuffed magpie&quot;,
+      &quot;Butcher's knife (d4)&quot;,
+      &quot;d20 silver&quot;,
+      &quot;Jar of fermented fish&quot;,
+      &quot;Hourglass (1 damage)&quot;,
+      &quot;Black and white face paint&quot;,
+      &quot;Linen sack with body parts&quot;,
+      &quot;Cracked mirror&quot;,
+      &quot;Long iron chain&quot;,
+      &quot;Book: \&quot;Wizard Fight\&quot;&quot;,
+      &quot;Curved ritual knife (d4)&quot;,
+      &quot;Chain mail, torso still in it&quot;,
+      &quot;Dog collar with chain&quot;,
+      &quot;Pouch containing salt&quot;,
+      &quot;Sooty silver ring&quot;,
+      &quot;Pennon from a sunken ship&quot;,
+      &quot;Flattened human skin&quot;,
+      &quot;Blanket (with fleas)&quot;,
+      &quot;Charred metal necklace&quot;,
+      &quot;Broken leather armor&quot;,
+      &quot;d4 gold teeth worth 10s each&quot;,
+      &quot;Pair of scissors (d4)&quot;,
+      &quot;Pickaxe (d4)&quot;,
+      &quot;Broken witch pentagram amulet&quot;,
+      &quot;Bloody doll&quot;,
+      &quot;Book of Psalms&quot;,
+      &quot;Bird-billed mask&quot;,
+      &quot;Charcoal drawing of a demon&quot;,
+      &quot;Half a dead dog&quot;,
+      &quot;Gritty fancy eye patch&quot;,
+      &quot;Hammer and some nails&quot;,
+      &quot;Ball and chain (and a foot)&quot;,
+      &quot;Sharp fire iron (d4+1)&quot;,
+      &quot;Pain of warm socks (soggy)&quot;,
+      &quot;Box of black feathers&quot;,
+      &quot;Damaged wolf pelt&quot;,
+      &quot;Rotten meat (d2 days' worth)&quot;,
+      &quot;Small box with a white marble&quot;,
+      &quot;Tattered walkie-talkie in it&quot;,
+      &quot;Wooden dentures&quot;,
+      &quot;Good luck charm (well...)&quot;,
+      &quot;d6 empty scrolls&quot;,
+      &quot;Wooden lantern&quot;,
+      &quot;Pair of wooden handcuffs&quot;,
+      &quot;Jar with 3 severed thumbs&quot;,
+      &quot;Tangled ball of human hair&quot;,
+      &quot;Thumbtacks&quot;,
+      &quot;Very small horseshoe&quot;,
+      &quot;Shovel (d4)&quot;,
+      &quot;Necklace of rat teeth&quot;,
+      &quot;Half a treasure map&quot;,
+      &quot;Bottle of red poison&quot;,
+      &quot;Small wooden horse&quot;,
+      &quot;Heavy iron tongs&quot;,
+      &quot;Black sack with a cat's heart&quot;,
+      &quot;Big lump of coal&quot;,
+      &quot;Two severed hands&quot;,
+      &quot;Child-sized iron maiden&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-16T00:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/items_prices/en/items_prices.json (Line 1:1 - Line 227:2), databases/languages/en/items_prices.json (Line 1:1 - Line 228:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn23" onclick="toggleCodeBlock('cloneGroup23', 'expandBtn23', 'collapseBtn23')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn23" onclick="toggleCodeBlock('cloneGroup23', 'expandBtn23', 'collapseBtn23')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup23"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;items_prices&quot;,
+  &quot;tables&quot;: {
+    &quot;items&quot;: [
+      {
+        &quot;name&quot;: &quot;Backpack&quot;,
+        &quot;price&quot;: 6,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Holds 7 normal-sized items&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Bear trap&quot;,
+        &quot;price&quot;: 20,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Presence DR14 to spot, d8 damage&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Blanket&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Caltrops&quot;,
+        &quot;price&quot;: 7,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;d4 damage + infection on 1 in 6&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Chalk&quot;,
+        &quot;price&quot;: 1,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Chewing tobacco&quot;,
+        &quot;price&quot;: 1,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Crowbar&quot;,
+        &quot;price&quot;: 8,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Crucifix, silver&quot;,
+        &quot;price&quot;: 60,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Dried food&quot;,
+        &quot;price&quot;: 1,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;1 day&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Exquisite perfume&quot;,
+        &quot;price&quot;: 25,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Firesteel&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Grappling hook&quot;,
+        &quot;price&quot;: 12,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Hammer&quot;,
+        &quot;price&quot;: 8,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Heavy chain&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Iron nails&quot;,
+        &quot;price&quot;: 7,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;10 nails&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Ladder&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;15 feet&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Lantern oil&quot;,
+        &quot;price&quot;: 5,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Presence +4 hours&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Lockpicks&quot;,
+        &quot;price&quot;: 9,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;May function as 5 meals&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Magnesium strip&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Manacles&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Mattress&quot;,
+        &quot;price&quot;: 3,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Meat cleaver&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Medicine box&quot;,
+        &quot;price&quot;: 15,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Stops bleeding/infection and +d6 HP. Presence + 4 uses&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Metal file&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Mirror&quot;,
+        &quot;price&quot;: 6,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Muzzle&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Opiate&quot;,
+        &quot;price&quot;: 20,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;DR14 or d6 damage + blind for one hour. 3 doses&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Poison (black)&quot;,
+        &quot;price&quot;: 20,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;DR12 or d6 damage. 3 doses&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Poison (red)&quot;,
+        &quot;price&quot;: &quot;60+d6&quot;,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Rope&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;30 feet&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Salt&quot;,
+        &quot;price&quot;: 3,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;Holds 10 normal-size items&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Sack&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Scissors&quot;,
+        &quot;price&quot;: 9,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;-50s to sell. Can't be bought.&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Sharp needle&quot;,
+        &quot;price&quot;: 3,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Small wagon&quot;,
+        &quot;price&quot;: 25,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Tent&quot;,
+        &quot;price&quot;: 12,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Toolbox&quot;,
+        &quot;price&quot;: 20,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;10 nails, hammer, small saw, tongs&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Waterskin&quot;,
+        &quot;price&quot;: 4,
+        &quot;currency&quot;: &quot;silver&quot;,
+        &quot;notes&quot;: &quot;4 days of water&quot;
+      }
+    ],</code></pre></div><div class="py-4"><p class="text-gray-600">databases/factions/en/factions.json (Line 1:1 - Line 265:2), databases/languages/en/factions.json (Line 1:1 - Line 186:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn24" onclick="toggleCodeBlock('cloneGroup24', 'expandBtn24', 'collapseBtn24')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn24" onclick="toggleCodeBlock('cloneGroup24', 'expandBtn24', 'collapseBtn24')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup24"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;factions&quot;,
+  &quot;tables&quot;: {
+    &quot;major_factions&quot;: [
+      {
+        &quot;name&quot;: &quot;The Dying Church&quot;,
+        &quot;description&quot;: &quot;The dominant religious institution that enforces the Ordinance of Devotion&quot;,
+        &quot;leader&quot;: &quot;Arch-Priestess Josilfa Migol&quot;,
+        &quot;headquarters&quot;: &quot;The Cathedral&quot;,
+        &quot;influence&quot;: &quot;High&quot;,
+        &quot;attitude&quot;: &quot;Fanatically devoted&quot;,
+        &quot;activities&quot;: [
+          &quot;Sacrifice ceremonies&quot;,
+          &quot;Heretic hunting&quot;,
+          &quot;Soul collection&quot;,
+          &quot;Religious enforcement&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;House of Broken Nobles&quot;,
+        &quot;description&quot;: &quot;Fallen aristocracy clinging to remnants of power and privilege&quot;,
+        &quot;leader&quot;: &quot;Various disgraced nobles&quot;,
+        &quot;headquarters&quot;: &quot;The Rotting Mansion&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Openly contemptuous&quot;,
+        &quot;activities&quot;: [
+          &quot;Political intrigue&quot;,
+          &quot;Wealth hoarding&quot;,
+          &quot;Status preservation&quot;,
+          &quot;Corruption&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Merchants of Misery&quot;,
+        &quot;description&quot;: &quot;Guild controlling trade in forbidden goods and human suffering&quot;,
+        &quot;leader&quot;: &quot;Koopman Achim Igelfreund&quot;,
+        &quot;headquarters&quot;: &quot;The Corpse Warehouse&quot;,
+        &quot;influence&quot;: &quot;High&quot;,
+        &quot;attitude&quot;: &quot;Opportunistically friendly&quot;,
+        &quot;activities&quot;: [
+          &quot;Forbidden trade&quot;,
+          &quot;Soul brokering&quot;,
+          &quot;Corpse commerce&quot;,
+          &quot;Black market&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;The Bone Throne&quot;,
+        &quot;description&quot;: &quot;Secretive order of necromancers and death cultists&quot;,
+        &quot;leader&quot;: &quot;Unknown&quot;,
+        &quot;headquarters&quot;: &quot;Hidden catacombs&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Secretly plotting&quot;,
+        &quot;activities&quot;: [
+          &quot;Necromancy&quot;,
+          &quot;Death rituals&quot;,
+          &quot;Corpse manipulation&quot;,
+          &quot;Dark magic&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Plague Wardens&quot;,
+        &quot;description&quot;: &quot;Organization dedicated to managing and exploiting disease&quot;,
+        &quot;leader&quot;: &quot;Archhealer René Elwes&quot;,
+        &quot;headquarters&quot;: &quot;The Sooty Hospital&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Cautiously neutral&quot;,
+        &quot;activities&quot;: [
+          &quot;Disease management&quot;,
+          &quot;Medical experiments&quot;,
+          &quot;Plague control&quot;,
+          &quot;Healing services&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Shadow Parliament&quot;,
+        &quot;description&quot;: &quot;Secretive council of powerful individuals manipulating city politics&quot;,
+        &quot;leader&quot;: &quot;Council of Worms&quot;,
+        &quot;headquarters&quot;: &quot;Hidden chambers&quot;,
+        &quot;influence&quot;: &quot;Very High&quot;,
+        &quot;attitude&quot;: &quot;Secretly plotting&quot;,
+        &quot;activities&quot;: [
+          &quot;Political manipulation&quot;,
+          &quot;Information gathering&quot;,
+          &quot;Assassination&quot;,
+          &quot;Power brokering&quot;
+        ]
+      }
+    ],
+    &quot;local_factions&quot;: [
+      {
+        &quot;name&quot;: &quot;Basilisk Knights Order&quot;,
+        &quot;description&quot;: &quot;Elite warriors dedicated to hunting heretics and protecting the church&quot;,
+        &quot;leader&quot;: &quot;Cardinal Benjamin von Swerdenö&quot;,
+        &quot;headquarters&quot;: &quot;The Cathedral's Shadow&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Violently hostile&quot;,
+        &quot;activities&quot;: [
+          &quot;Heretic hunting&quot;,
+          &quot;Religious enforcement&quot;,
+          &quot;Combat training&quot;,
+          &quot;Patrol duties&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Worm Sorcerer's Disciples&quot;,
+        &quot;description&quot;: &quot;Cult following the teachings of the mysterious Worm Sorcerer&quot;,
+        &quot;leader&quot;: &quot;Worm Sorcerer&quot;,
+        &quot;headquarters&quot;: &quot;The Worm Sorcerer's Hideout&quot;,
+        &quot;influence&quot;: &quot;Low&quot;,
+        &quot;attitude&quot;: &quot;Fanatically devoted&quot;,
+        &quot;activities&quot;: [
+          &quot;Dark magic&quot;,
+          &quot;Worm breeding&quot;,
+          &quot;Corruption&quot;,
+          &quot;Secret rituals&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Dunglander Collective&quot;,
+        &quot;description&quot;: &quot;Group specializing in harvesting and cultivating mushrooms&quot;,
+        &quot;leader&quot;: &quot;Maggot Marl&quot;,
+        &quot;headquarters&quot;: &quot;Klum's Big Shroom&quot;,
+        &quot;influence&quot;: &quot;Low&quot;,
+        &quot;attitude&quot;: &quot;Grudgingly helpful&quot;,
+        &quot;activities&quot;: [
+          &quot;Mushroom farming&quot;,
+          &quot;Dung harvesting&quot;,
+          &quot;Food production&quot;,
+          &quot;Trade&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;The Vultures&quot;,
+        &quot;description&quot;: &quot;Scavengers who collect spoils from the city's waste and corpses&quot;,
+        &quot;leader&quot;: &quot;Various scavenger chiefs&quot;,
+        &quot;headquarters&quot;: &quot;Sewer entrances&quot;,
+        &quot;influence&quot;: &quot;Low&quot;,
+        &quot;attitude&quot;: &quot;Deeply suspicious&quot;,
+        &quot;activities&quot;: [
+          &quot;Scavenging&quot;,
+          &quot;Corpse collection&quot;,
+          &quot;Waste processing&quot;,
+          &quot;Information gathering&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Mushroom Farmers Guild&quot;,
+        &quot;description&quot;: &quot;Professional organization controlling mushroom cultivation and trade&quot;,
+        &quot;leader&quot;: &quot;Guild Master&quot;,
+        &quot;headquarters&quot;: &quot;The Guild Hall&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Cautiously neutral&quot;,
+        &quot;activities&quot;: [
+          &quot;Mushroom cultivation&quot;,
+          &quot;Trade regulation&quot;,
+          &quot;Quality control&quot;,
+          &quot;Market control&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Flutter Breeders&quot;,
+        &quot;description&quot;: &quot;Specialists in breeding and training the dangerous Flutter creatures&quot;,
+        &quot;leader&quot;: &quot;Master Breeder&quot;,
+        &quot;headquarters&quot;: &quot;The Breeding Pits&quot;,
+        &quot;influence&quot;: &quot;Low&quot;,
+        &quot;attitude&quot;: &quot;Fearfully obedient&quot;,
+        &quot;activities&quot;: [
+          &quot;Creature breeding&quot;,
+          &quot;Training&quot;,
+          &quot;Sale&quot;,
+          &quot;Research&quot;
+        ]
+      }
+    ],
+    &quot;criminal_factions&quot;: [
+      {
+        &quot;name&quot;: &quot;Grave Robber Crews&quot;,
+        &quot;description&quot;: &quot;Organized groups that raid tombs and collect valuable corpses&quot;,
+        &quot;leader&quot;: &quot;Various crew leaders&quot;,
+        &quot;headquarters&quot;: &quot;Hidden tunnels&quot;,
+        &quot;influence&quot;: &quot;Low&quot;,
+        &quot;attitude&quot;: &quot;Deeply suspicious&quot;,
+        &quot;activities&quot;: [
+          &quot;Tomb raiding&quot;,
+          &quot;Corpse collection&quot;,
+          &quot;Grave robbing&quot;,
+          &quot;Underground trade&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Mercenary Companies&quot;,
+        &quot;description&quot;: &quot;Professional fighters for hire, often working for the highest bidder&quot;,
+        &quot;leader&quot;: &quot;Various captains&quot;,
+        &quot;headquarters&quot;: &quot;Taverns and barracks&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Opportunistically friendly&quot;,
+        &quot;activities&quot;: [
+          &quot;Combat&quot;,
+          &quot;Protection&quot;,
+          &quot;Escort&quot;,
+          &quot;Assassination&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Cultist Cells&quot;,
+        &quot;description&quot;: &quot;Secretive groups worshipping forbidden entities and practicing dark magic&quot;,
+        &quot;leader&quot;: &quot;Various cult leaders&quot;,
+        &quot;headquarters&quot;: &quot;Hidden locations&quot;,
+        &quot;influence&quot;: &quot;Low&quot;,
+        &quot;attitude&quot;: &quot;Secretly plotting&quot;,
+        &quot;activities&quot;: [
+          &quot;Dark rituals&quot;,
+          &quot;Worship&quot;,
+          &quot;Recruitment&quot;,
+          &quot;Sacrifice&quot;
+        ]
+      },
+      {
+        &quot;name&quot;: &quot;Death Merchant Cartels&quot;,
+        &quot;description&quot;: &quot;Organizations specializing in the trade of death-related goods and services&quot;,
+        &quot;leader&quot;: &quot;Various cartel bosses&quot;,
+        &quot;headquarters&quot;: &quot;The Corpse Market&quot;,
+        &quot;influence&quot;: &quot;Medium&quot;,
+        &quot;attitude&quot;: &quot;Opportunistically friendly&quot;,
+        &quot;activities&quot;: [
+          &quot;Death trade&quot;,
+          &quot;Corpse commerce&quot;,
+          &quot;Funeral services&quot;,
+          &quot;Necromantic supplies&quot;
+        ]
+      }
+    ],
+    &quot;faction_relationships&quot;: [
+      {
+        &quot;faction1&quot;: &quot;The Dying Church&quot;,
+        &quot;faction2&quot;: &quot;Basilisk Knights Order&quot;,
+        &quot;relationship&quot;: &quot;Allied&quot;,
+        &quot;description&quot;: &quot;The church provides authority and the knights provide enforcement&quot;
+      },
+      {
+        &quot;faction1&quot;: &quot;The Dying Church&quot;,
+        &quot;faction2&quot;: &quot;Cultist Cells&quot;,
+        &quot;relationship&quot;: &quot;Hostile&quot;,
+        &quot;description&quot;: &quot;The church actively hunts and destroys cultist groups&quot;
+      },
+      {
+        &quot;faction1&quot;: &quot;Merchants of Misery&quot;,
+        &quot;faction2&quot;: &quot;Death Merchant Cartels&quot;,
+        &quot;relationship&quot;: &quot;Competitive&quot;,
+        &quot;description&quot;: &quot;Both groups compete for control of death-related commerce&quot;
+      },
+      {
+        &quot;faction1&quot;: &quot;House of Broken Nobles&quot;,
+        &quot;faction2&quot;: &quot;Shadow Parliament&quot;,
+        &quot;relationship&quot;: &quot;Manipulated&quot;,
+        &quot;description&quot;: &quot;The parliament manipulates the nobles for political gain&quot;
+      },
+      {
+        &quot;faction1&quot;: &quot;The Vultures&quot;,
+        &quot;faction2&quot;: &quot;Grave Robber Crews&quot;,
+        &quot;relationship&quot;: &quot;Cooperative&quot;,
+        &quot;description&quot;: &quot;Both groups work together in corpse collection and processing&quot;
+      }
+    ],</code></pre></div><div class="py-4"><p class="text-gray-600">databases/enhanced_loot/en/enhanced_loot.json (Line 1:1 - Line 56:29), databases/languages/en/enhanced_loot.json (Line 1:1 - Line 56:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn25" onclick="toggleCodeBlock('cloneGroup25', 'expandBtn25', 'collapseBtn25')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn25" onclick="toggleCodeBlock('cloneGroup25', 'expandBtn25', 'collapseBtn25')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup25"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;enhanced_loot&quot;,
+  &quot;tables&quot;: {
+    &quot;weapon_loot&quot;: [
+      &quot;Rusted sword (+1 damage, breaks on 1)&quot;,
+      &quot;Bone dagger (1d4, +1 vs undead)&quot;,
+      &quot;Plague doctor's cane (1d6, causes disease)&quot;,
+      &quot;Executioner's axe (1d8, intimidating)&quot;,
+      &quot;Witch hunter's crossbow (1d6, +2 vs magic users)&quot;,
+      &quot;Grave robber's crowbar (1d4, useful tool)&quot;,
+      &quot;Cursed blade (1d8, hurts wielder on 1)&quot;,
+      &quot;Holy symbol mace (1d6, +1 vs undead)&quot;,
+      &quot;Poisoned stiletto (1d4, save or paralyzed)&quot;,
+      &quot;Broken knight's sword (1d6, once noble)&quot;
+    ],
+    &quot;armor_loot&quot;: [
+      &quot;Tattered leather armor (AC 12, smells awful)&quot;,
+      &quot;Plague doctor's robes (AC 11, disease immunity)&quot;,
+      &quot;Rusty chainmail (AC 14, noisy)&quot;,
+      &quot;Bone plate armor (AC 15, intimidating)&quot;,
+      &quot;Witch's cloak (AC 11, +1 vs magic)&quot;,
+      &quot;Grave dirt coating (AC 10, undead ignore you)&quot;,
+      &quot;Cursed helmet (AC +1, constant whispers)&quot;,
+      &quot;Holy vestments (AC 12, +1 vs evil)&quot;,
+      &quot;Thieves' leathers (AC 13, +1 stealth)&quot;,
+      &quot;Broken shield (AC +1, once magnificent)&quot;
+    ],
+    &quot;valuable_loot&quot;: [
+      &quot;Bag of silver teeth (50 coins)&quot;,
+      &quot;Cursed jewelry (100 coins, bad luck)&quot;,
+      &quot;Rare plague mask (200 coins to collectors)&quot;,
+      &quot;Ancient tome (300 coins, forbidden knowledge)&quot;,
+      &quot;Soul gem (500 coins, whispers constantly)&quot;,
+      &quot;Golden skull chalice (150 coins, unholy)&quot;,
+      &quot;Witch's grimoire (400 coins, dangerous spells)&quot;,
+      &quot;Noble's signet ring (80 coins, political value)&quot;,
+      &quot;Demon bottle (600 coins, contains something)&quot;,
+      &quot;Relic bone (250 coins, holy/unholy power)&quot;
+    ],
+    &quot;utility_loot&quot;: [
+      &quot;Thieves' tools (lockpicking kit)&quot;,
+      &quot;Healing potion (restore 1d6 HP)&quot;,
+      &quot;Rope (50 feet, sturdy)&quot;,
+      &quot;Lantern with oil (6 hours light)&quot;,
+      &quot;Grappling hook (climbing aid)&quot;,
+      &quot;Poison vial (coat weapon)&quot;,
+      &quot;Holy water (1d4 damage to undead)&quot;,
+      &quot;Smoke bomb (escape aid)&quot;,
+      &quot;Crowbar (useful tool)&quot;,
+      &quot;Manacles (restraint device)&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-16T00:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/dungeon/en/dungeon.json (Line 1:1 - Line 76:29), databases/languages/en/dungeon.json (Line 1:1 - Line 76:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn26" onclick="toggleCodeBlock('cloneGroup26', 'expandBtn26', 'collapseBtn26')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn26" onclick="toggleCodeBlock('cloneGroup26', 'expandBtn26', 'collapseBtn26')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup26"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;dungeon&quot;,
+  &quot;tables&quot;: {
+    &quot;dungeon_types&quot;: [
+      &quot;Ancient tomb&quot;,
+      &quot;Ruined temple&quot;,
+      &quot;Collapsed mine&quot;,
+      &quot;Forgotten crypt&quot;,
+      &quot;Abandoned tower&quot;,
+      &quot;Underground warren&quot;,
+      &quot;Sunken cathedral&quot;,
+      &quot;Twisted labyrinth&quot;,
+      &quot;Bone pit&quot;,
+      &quot;Plague house&quot;,
+      &quot;Cursed cellar&quot;,
+      &quot;Sacrificial chamber&quot;
+    ],
+    &quot;dungeon_features&quot;: [
+      &quot;flooded with black water&quot;,
+      &quot;filled with poisonous gas&quot;,
+      &quot;haunted by restless spirits&quot;,
+      &quot;overrun with vermin&quot;,
+      &quot;decorated with blasphemous murals&quot;,
+      &quot;littered with ancient bones&quot;,
+      &quot;carved from living rock&quot;,
+      &quot;built on unholy ground&quot;,
+      &quot;twisted by dark magic&quot;,
+      &quot;scarred by old battles&quot;,
+      &quot;abandoned in haste&quot;,
+      &quot;sealed for good reason&quot;
+    ],
+    &quot;dungeon_dangers&quot;: [
+      &quot;Collapsing ceiling&quot;,
+      &quot;Pit trap with spikes&quot;,
+      &quot;Poisonous gas leak&quot;,
+      &quot;Unstable floor&quot;,
+      &quot;Cursed artifacts&quot;,
+      &quot;Territorial undead&quot;,
+      &quot;Aggressive scavengers&quot;,
+      &quot;Hidden blade traps&quot;,
+      &quot;Magical wards&quot;,
+      &quot;Disease-ridden corpses&quot;,
+      &quot;Flooding chambers&quot;,
+      &quot;Structural decay&quot;,
+      &quot;Ancient curses&quot;,
+      &quot;Toxic mold&quot;,
+      &quot;Predatory creatures&quot;
+    ],
+    &quot;dungeon_treasures&quot;: [
+      &quot;Silver coins scattered about&quot;,
+      &quot;A rusted but valuable weapon&quot;,
+      &quot;Ancient scrolls&quot;,
+      &quot;Precious gemstones&quot;,
+      &quot;Religious artifacts&quot;,
+      &quot;Old maps and documents&quot;,
+      &quot;Jewelry from the dead&quot;,
+      &quot;Rare herbs and components&quot;,
+      &quot;Forgotten tools&quot;,
+      &quot;Ornate containers&quot;,
+      &quot;Mysterious potions&quot;,
+      &quot;Carved idols&quot;,
+      &quot;Rare metals&quot;,
+      &quot;Lost books&quot;
+    ],
+    &quot;dungeon_atmospheres&quot;: [
+      &quot;Oppressive silence&quot;,
+      &quot;Echoing drips&quot;,
+      &quot;Scratching sounds&quot;,
+      &quot;Distant moaning&quot;,
+      &quot;Unnatural cold&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-16T00:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/denizen/en/denizen.json (Line 1:1 - Line 68:29), databases/languages/en/denizen.json (Line 1:1 - Line 68:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn27" onclick="toggleCodeBlock('cloneGroup27', 'expandBtn27', 'collapseBtn27')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn27" onclick="toggleCodeBlock('cloneGroup27', 'expandBtn27', 'collapseBtn27')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup27"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;denizen&quot;,
+  &quot;tables&quot;: {
+    &quot;denizen_types&quot;: [
+      &quot;Diseased beggar&quot;,
+      &quot;Mad hermit&quot;,
+      &quot;Wandering cultist&quot;,
+      &quot;Desperate bandit&quot;,
+      &quot;Plague doctor&quot;,
+      &quot;Witch hunter&quot;,
+      &quot;Corrupted priest&quot;,
+      &quot;Feral child&quot;,
+      &quot;Broken soldier&quot;,
+      &quot;Death merchant&quot;,
+      &quot;Bone collector&quot;,
+      &quot;Grave robber&quot;,
+      &quot;Cursed wanderer&quot;,
+      &quot;Zealot preacher&quot;,
+      &quot;Flesh trader&quot;,
+      &quot;Scavenger lord&quot;,
+      &quot;Plague bearer&quot;,
+      &quot;Doom prophet&quot;
+    ],
+    &quot;denizen_motivations&quot;: [
+      &quot;seeks redemption for past sins&quot;,
+      &quot;hunts for forbidden knowledge&quot;,
+      &quot;flees from terrible pursuers&quot;,
+      &quot;searches for lost family&quot;,
+      &quot;collects trophies from the dead&quot;,
+      &quot;spreads word of the coming end&quot;,
+      &quot;guards ancient secrets&quot;,
+      &quot;trades in human misery&quot;,
+      &quot;seeks to break an ancient curse&quot;,
+      &quot;worships forgotten gods&quot;,
+      &quot;harvests organs for dark rituals&quot;,
+      &quot;prophesies doom and destruction&quot;
+    ],
+    &quot;denizen_features&quot;: [
+      &quot;Covered in ritual scars&quot;,
+      &quot;Missing several fingers&quot;,
+      &quot;Eyes clouded with cataracts&quot;,
+      &quot;Speaks in whispers&quot;,
+      &quot;Constantly muttering prayers&quot;,
+      &quot;Smells of decay&quot;,
+      &quot;Wears tattered robes&quot;,
+      &quot;Carries strange implements&quot;,
+      &quot;Bears holy symbols&quot;,
+      &quot;Has visible plague marks&quot;,
+      &quot;Moves with unnatural stiffness&quot;,
+      &quot;Avoids eye contact&quot;,
+      &quot;Nervous tics and twitches&quot;,
+      &quot;Unnaturally pale skin&quot;,
+      &quot;Teeth filed to points&quot;,
+      &quot;Burns easily in sunlight&quot;
+    ],
+    &quot;denizen_demeanors&quot;: [
+      &quot;Hostile&quot;,
+      &quot;Suspicious&quot;,
+      &quot;Desperate&quot;,
+      &quot;Helpful&quot;,
+      &quot;Indifferent&quot;,
+      &quot;Cryptic&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-16T00:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/core/en/core.json (Line 1:1 - Line 63:29), databases/languages/en/core.json (Line 1:1 - Line 63:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn28" onclick="toggleCodeBlock('cloneGroup28', 'expandBtn28', 'collapseBtn28')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn28" onclick="toggleCodeBlock('cloneGroup28', 'expandBtn28', 'collapseBtn28')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup28"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;core&quot;,
+  &quot;tables&quot;: {
+    &quot;denizen_names_prefix&quot;: [
+      &quot;Brother&quot;,
+      &quot;Sister&quot;,
+      &quot;Father&quot;,
+      &quot;Mother&quot;,
+      &quot;Old&quot;,
+      &quot;Young&quot;,
+      &quot;Mad&quot;,
+      &quot;Saint&quot;,
+      &quot;Heretic&quot;,
+      &quot;Lost&quot;
+    ],
+    &quot;denizen_names_suffix&quot;: [
+      &quot;Bones&quot;,
+      &quot;Ash&quot;,
+      &quot;Crow&quot;,
+      &quot;Thorn&quot;,
+      &quot;Rust&quot;,
+      &quot;Mold&quot;,
+      &quot;Grime&quot;,
+      &quot;Rot&quot;,
+      &quot;Doom&quot;,
+      &quot;Blight&quot;
+    ],
+    &quot;denizen_motivations&quot;: [
+      &quot;seeks redemption for past sins&quot;,
+      &quot;hunts for forbidden knowledge&quot;,
+      &quot;flees from terrible pursuers&quot;,
+      &quot;searches for lost family&quot;,
+      &quot;guards ancient secrets&quot;,
+      &quot;trades in human misery&quot;
+    ],
+    &quot;denizen_features&quot;: [
+      &quot;Covered in ritual scars&quot;,
+      &quot;Missing several fingers&quot;,
+      &quot;Eyes clouded with cataracts&quot;,
+      &quot;Constantly muttering prayers&quot;,
+      &quot;Smells of decay&quot;,
+      &quot;Wears tattered robes&quot;
+    ],
+    &quot;denizen_demeanors&quot;: [
+      &quot;Hostile&quot;,
+      &quot;Suspicious&quot;,
+      &quot;Desperate&quot;,
+      &quot;Helpful&quot;,
+      &quot;Indifferent&quot;,
+      &quot;Cryptic&quot;
+    ],
+    &quot;atmospheres&quot;: [
+      &quot;Oppressive silence&quot;,
+      &quot;Echoing sounds&quot;,
+      &quot;Unnatural cold&quot;,
+      &quot;Thick mist&quot;,
+      &quot;Strange lights&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-01-16T00:00:00.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/city_events/en/city_events.json (Line 1:1 - Line 50:29), databases/languages/en/city_events.json (Line 1:1 - Line 50:29)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn29" onclick="toggleCodeBlock('cloneGroup29', 'expandBtn29', 'collapseBtn29')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn29" onclick="toggleCodeBlock('cloneGroup29', 'expandBtn29', 'collapseBtn29')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup29"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;city_events&quot;,
+  &quot;tables&quot;: {
+    &quot;city_events&quot;: [
+      &quot;Exhausted corpse-carter heading for the graves with a full load.&quot;,
+      &quot;d4 nobles promenading, beating people beneath them with gilded clubs.&quot;,
+      &quot;Travelling weed-merchant asking for directions to the Seer's.&quot;,
+      &quot;Urchin painting \&quot;LISTEN!\&quot; with goat's blood on a wall.&quot;,
+      &quot;Passing wastecart/barge. The stench is unbearable.&quot;,
+      &quot;Melancholic melodies from a broke, starving gutter bard.&quot;,
+      &quot;There's a dead body in the street. Not even the dogs seem to care.&quot;,
+      &quot;Poor child crying in a corner. Lost, cold and alone.&quot;,
+      &quot;The sudden cacophony of wings and croaks. A murder of crows.&quot;,
+      &quot;Heavy rain. The streets are cleared as people seek shelter.&quot;,
+      &quot;Fishmonger trying to fend off a pack of stray cats.&quot;,
+      &quot;Procession of masked flagellants. Cursing and screaming.&quot;,
+      &quot;Decadent acrobats, high and witless. Almost break their necks.&quot;,
+      &quot;Family desperately trying to rebuild their burnt hovel.&quot;,
+      &quot;Old man slumped against a wall. Panting, grabbing his heart.&quot;,
+      &quot;Hopelessly depressed farmer stares at the sky. Has lost everything.&quot;,
+      &quot;Heartbroken young fool seeking comfort in alley-found dregs.&quot;,
+      &quot;Huge load of trash and waste splashes down, thrown from a window.&quot;,
+      &quot;Old woman lying in the gutter. Someone stole her crutch.&quot;,
+      &quot;Drunken clerk stumbling, falling. Scrolls and maps everywhere.&quot;,
+      &quot;Rags-clad people fighting over bread. Guards watching. Placing bets.&quot;,
+      &quot;Peglegged sailor stops the PCs to brag about the Angloarfish.&quot;,
+      &quot;Laborers carrying a boat-size casket to an anonymous priest.&quot;,
+      &quot;Penniless carpenter (so they say) trying to sell a worn crutch.&quot;,
+      &quot;Patron violently escorted from a pub. Then robbed. Then stabbed.&quot;,
+      &quot;A chittering wave of a hundred rats scurry across the street.&quot;,
+      &quot;Group of ragtag scum playing Three Dead Skulls with weighted dice.&quot;,
+      &quot;Suddenly, a crossbow bolt hits a nearby door. Someone is practicing.&quot;,
+      &quot;Around the corner, a giant tree with a dozen hanged heretics.&quot;,
+      &quot;Twenty people keeping warm around a bonfire. One is a Grift spy.&quot;,
+      &quot;People keeping distance from a rabid dog rummaging in the trash.&quot;,
+      &quot;Three hardened mercenaries pull a dead troll across the street.&quot;,
+      &quot;Severely hungover chaplain cursing the state of things.&quot;,
+      &quot;The smell of dry snuff, herbs and hash from a crowded market.&quot;,
+      &quot;Two monkeys eating what's left of a dead raven.&quot;,
+      &quot;Explosion! Smoke and screams from a ruined alchemist's workshop.&quot;,
+      &quot;Demagogue yelling about prophecy falsehood. Guards on their way.&quot;,
+      &quot;Devastated, eyeless peasant in a pillory. Begs for water.&quot;,
+      &quot;Well-used, rusty guillotine being repaired and cleaned.&quot;,
+      &quot;Occultist placing copper coins in intricate patterns.&quot;
+    ]
+  },
+  &quot;metadata&quot;: {
+    &quot;version&quot;: &quot;1.0&quot;,
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;last_updated&quot;: &quot;2025-08-07T22:56:40.000000&quot;</code></pre></div><div class="py-4"><p class="text-gray-600">databases/cities/pt/allians.json (Line 24:19 - Line 127:2), databases/cities/pt/allians.json (Line 12:3 - Line 42:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn30" onclick="toggleCodeBlock('cloneGroup30', 'expandBtn30', 'collapseBtn30')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn30" onclick="toggleCodeBlock('cloneGroup30', 'expandBtn30', 'collapseBtn30')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup30"><code class="language-json text-sm text-gray-800">,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+        &quot;Núcleo da Cidade&quot;,
+        &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+        &quot;Núcleo da Cidade&quot;,
+        &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+        &quot;Núcleo da Cidade&quot;,
+        &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+        &quot;Núcleo da Cidade&quot;,
+        &quot;Núcleo da Cidade&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ]
+  ]</code></pre></div><div class="py-4"><p class="text-gray-600">databases/cities/en/allians.json (Line 24:12 - Line 127:2), databases/cities/en/allians.json (Line 12:3 - Line 42:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn31" onclick="toggleCodeBlock('cloneGroup31', 'expandBtn31', 'collapseBtn31')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn31" onclick="toggleCodeBlock('cloneGroup31', 'expandBtn31', 'collapseBtn31')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup31"><code class="language-json text-sm text-gray-800">,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ],
+    [
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;City Core&quot;,
+      &quot;City Core&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;,
+      &quot;&quot;
+    ]
+  ]</code></pre></div><div class="py-4"><p class="text-gray-600">databases/beasts_prices/en/beasts_prices.json (Line 1:1 - Line 25:2), databases/languages/en/beasts_prices.json (Line 1:1 - Line 26:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn32" onclick="toggleCodeBlock('cloneGroup32', 'expandBtn32', 'collapseBtn32')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn32" onclick="toggleCodeBlock('cloneGroup32', 'expandBtn32', 'collapseBtn32')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup32"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;beasts_prices&quot;,
+  &quot;tables&quot;: {
+    &quot;beasts&quot;: [
+      {
+        &quot;name&quot;: &quot;Dog (trained)&quot;,
+        &quot;price&quot;: 25,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Horse&quot;,
+        &quot;price&quot;: 80,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Mule&quot;,
+        &quot;price&quot;: 10,
+        &quot;currency&quot;: &quot;silver&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Rat (tame)&quot;,
+        &quot;price&quot;: 8,
+        &quot;currency&quot;: &quot;silver&quot;
+      }
+    ],</code></pre></div><div class="py-4"><p class="text-gray-600">databases/basic/en/basic.json (Line 1:1 - Line 25:2), databases/languages/en/basic.json (Line 1:1 - Line 26:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn33" onclick="toggleCodeBlock('cloneGroup33', 'expandBtn33', 'collapseBtn33')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn33" onclick="toggleCodeBlock('cloneGroup33', 'expandBtn33', 'collapseBtn33')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup33"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;basic&quot;,
+  &quot;tables&quot;: {
+    &quot;populations&quot;: [
+      &quot;20-50&quot;,
+      &quot;51-100&quot;,
+      &quot;101-500&quot;,
+      &quot;501-1000&quot;
+    ],
+    &quot;buildings&quot;: [
+      &quot;Straw&quot;,
+      &quot;Cob&quot;,
+      &quot;Stone&quot;,
+      &quot;Logs&quot;,
+      &quot;Clay brick&quot;,
+      &quot;Lime mortar&quot;
+    ],
+    &quot;sounds&quot;: [
+      &quot;Silence&quot;,
+      &quot;Bustle&quot;,
+      &quot;Fighting&quot;,
+      &quot;Laughter&quot;,
+      &quot;Screaming&quot;,
+      &quot;Chanting&quot;
+    ],</code></pre></div><div class="py-4"><p class="text-gray-600">databases/affiliation/en/affiliation.json (Line 1:1 - Line 59:2), databases/languages/en/affiliation.json (Line 1:1 - Line 60:2)</p><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2" id="expandBtn34" onclick="toggleCodeBlock('cloneGroup34', 'expandBtn34', 'collapseBtn34')">Show code</button><button class="bg-gray-500 text-white px-1 py-0.5 text-xs rounded focus:outline-none ml-2 hidden" id="collapseBtn34" onclick="toggleCodeBlock('cloneGroup34', 'expandBtn34', 'collapseBtn34')">Hide code</button><pre class="bg-gray-100 border border-gray-200 p-4 rounded mt-2 hidden" id="cloneGroup34"><code class="language-json text-sm text-gray-800">{
+  &quot;category&quot;: &quot;affiliation&quot;,
+  &quot;tables&quot;: {
+    &quot;monster_affiliations&quot;: [
+      &quot;Dry-Witches (Water Abductors)&quot;,
+      &quot;Slatehead Termites (Hive Swarms)&quot;,
+      &quot;Shit Monsters (Fortress Denizens)&quot;,
+      &quot;Flesh Puppets (Absorbing Constructs)&quot;,
+      &quot;Terrifying TreeSpiders (Human-Handed Arachnids)&quot;,
+      &quot;Boargod Skewered (Frenzied Blood-Beast)&quot;,
+      &quot;Salamanders (Arsonist's Living Coals)&quot;,
+      &quot;Lighthead Stalkers (Blinding Terrors)&quot;,
+      &quot;Nodh (Plague-Spreading Reanimated)&quot;,
+      &quot;Wingwalker Bats (Ash-Dwelling Flyers)&quot;,
+      &quot;Tentacled Mole Whales (Ash-Sea Leviathans)&quot;,
+      &quot;Grotesques (Stalking Stone-Beasts)&quot;
+    ],
+    &quot;npc_affiliations&quot;: [
+      &quot;Ashmouth Raider Personalities (Deathless Elder, Sack-of-Heads)&quot;,
+      &quot;Bloodhunter Ritualists (Half-Blooded, Full-Blooded)&quot;,
+      &quot;Burnt Offerings Necromancers (Vessel Controllers)&quot;,
+      &quot;Cannibal Count's Servants (Lardermen, Chef, Clerks)&quot;,
+      &quot;Pneumatic Regretful Templars (Masked Zealots)&quot;,
+      &quot;Urniversity Field-Researchers (Artifact Wielders)&quot;,
+      &quot;Courtyard Dregs (Disinterested Survivors)&quot;,
+      &quot;Pale Ones (Shrine Experimenters)&quot;,
+      &quot;King Fathmu's Loyalists (Disgraced Royal Guard)&quot;,
+      &quot;Memory Thieves (Identity Stealers)&quot;,
+      &quot;Dunglander Collective (Sewer Foragers)&quot;,
+      &quot;Scavenger Gangs (Wilderness Scroungers)&quot;
+    ],
+    &quot;faction_affiliations&quot;: [
+      &quot;Ashmouth Raiders (Screaming Hordes of the Ash)&quot;,
+      &quot;Bloodhunters (God-Draining Cultists)&quot;,
+      &quot;Burnt Offerings (Burning-Afflicted Healers)&quot;,
+      &quot;The Cannibal Count's Estate (Mansion of Flesh-Eaters)&quot;,
+      &quot;The Pneumatic Order (Ascetics of Transcendence)&quot;,
+      &quot;The Urniversity (Apocalypse Catalogers)&quot;,
+      &quot;The Two-Headed Basilisks (The One True Faith Inquisition)&quot;,
+      &quot;The Shadow King's Palace (Crumbling Gothic Rule)&quot;,
+      &quot;Blood-Countess Anthelia's Court (Kergüs Aristocracy)&quot;,
+      &quot;The Scions of Schleswig (Reanimated Ghoul-Lords)&quot;,
+      &quot;The Mud Cult (Flesh-Shapers of Tveländ)&quot;,
+      &quot;The Immortal Algae-Rots (Undying Swamp Denizens)&quot;
+    ],
+    &quot;affiliation_attitudes&quot;: [
+      &quot;Violently Hostile (to all outsiders)&quot;,
+      &quot;Deeply Suspicious (of new arrivals)&quot;,
+      &quot;Cautiously Neutral (observing from afar)&quot;,
+      &quot;Grudgingly Helpful (for a price or shared enemy)&quot;,
+      &quot;Desperately Seeking Aid (against a greater threat)&quot;,
+      &quot;Fanatically Devoted (to their twisted cause)&quot;,
+      &quot;Secretly Plotting (against rivals or former allies)&quot;,
+      &quot;Openly Contemptuous (of weakness or ignorance)&quot;,
+      &quot;Fearfully Obedient (under constant threat)&quot;,
+      &quot;Obsessed (with a dark purpose or desire)&quot;,
+      &quot;Fickle and Unreliable (prone to betrayal)&quot;,
+      &quot;Corpse-Bound (driven by undeath)&quot;
+    ],</code></pre></div><!-- Add more clone groups for .txt format as needed         // Add more clone groups for .txt format as needed--></div></section><!-- Add more sections for other formats and clone groups as needed--></main><footer class="bg-white shadow mt-8 py-4"><div class="container mx-auto px-4 text-center"><p class="text-sm text-gray-600">This report is generated by jscpd, an open-source copy/paste detector.</p><p class="text-sm text-gray-600">jscpd is licensed under the MIT License.</p><a class="text-blue-500 text-sm" href="https://github.com/kucherenko/jscpd" target="_blank" rel="noopener noreferrer">View jscpd on GitHub</a></div></footer><script src="js/prism.js"></script><script>function toggleCodeBlock(codeBlockId, expandBtnId, collapseBtnId) {
+  const codeBlock = document.getElementById(codeBlockId);
+  const expandBtn = document.getElementById(expandBtnId);
+  const collapseBtn = document.getElementById(collapseBtnId);
+
+  codeBlock.classList.toggle('hidden');
+  expandBtn.classList.toggle('hidden');
+  collapseBtn.classList.toggle('hidden');
+}</script></body></html>
