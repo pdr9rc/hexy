@@ -4,44 +4,44 @@
     "major_factions": [
       {
         "name": "The Dying Church",
-        "description": "The dominant religious institution that enforces the Ordinance of Devotion",
-        "leader": "Arch-Priestess Josilfa Migol",
-        "headquarters": "The Cathedral",
+        "description": "The dominant religious institution that doth enforce the sacred Ordinance of Devotion with zealous fervor",
+        "leader": "Arch-Priestess Josilfa Migol, She Who Speaketh for the Silent God",
+        "headquarters": "The Cathedral of Endless Sorrows",
         "influence": "High",
-        "attitude": "Fanatically devoted",
+        "attitude": "Fanatically devoted to their crumbling faith",
         "activities": [
-          "Sacrifice ceremonies",
-          "Heretic hunting",
-          "Soul collection",
-          "Religious enforcement"
+          "Elaborate sacrifice ceremonies to appease silent gods",
+          "Heretic hunting with righteous fury",
+          "Soul collection through sacred rites",
+          "Religious enforcement with iron discipline"
         ]
       },
       {
         "name": "House of Broken Nobles",
-        "description": "Fallen aristocracy clinging to remnants of power and privilege",
-        "leader": "Various disgraced nobles",
-        "headquarters": "The Rotting Mansion",
+        "description": "Fallen aristocracy clinging desperately to the tattered remnants of their former power and privilege",
+        "leader": "Various disgraced nobles of once-proud lineages",
+        "headquarters": "The Rotting Mansion, monument to past glories",
         "influence": "Medium",
-        "attitude": "Openly contemptuous",
+        "attitude": "Openly contemptuous of their lessers",
         "activities": [
-          "Political intrigue",
-          "Wealth hoarding",
-          "Status preservation",
-          "Corruption"
+          "Byzantine political intrigue and scheming",
+          "Hoarding what wealth remaineth to them",
+          "Desperate preservation of noble status",
+          "Corruption of all they touch"
         ]
       },
       {
         "name": "Merchants of Misery",
-        "description": "Guild controlling trade in forbidden goods and human suffering",
-        "leader": "Koopman Achim Igelfreund",
-        "headquarters": "The Corpse Warehouse",
+        "description": "A guild most profane that doth control all trade in forbidden goods and human suffering",
+        "leader": "Koopman Achim Igelfreund, Master of the Dark Commerce",
+        "headquarters": "The Corpse Warehouse, where flesh becomes coin",
         "influence": "High",
-        "attitude": "Opportunistically friendly",
+        "attitude": "Opportunistically friendly when profit beckons",
         "activities": [
-          "Forbidden trade",
-          "Soul brokering",
-          "Corpse commerce",
-          "Black market"
+          "Trade most forbidden in cursed wares",
+          "Soul brokering to the highest bidder",
+          "Commerce in corpses both fresh and ancient",
+          "Black market dealings that shame the light"
         ]
       },
       {

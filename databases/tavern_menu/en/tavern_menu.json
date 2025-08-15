@@ -3,37 +3,37 @@
   "tables": {
     "select_menu": [
       {
-        "name": "Braised chicken with dangerously alcoholic wine-drenched apples",
+        "name": "Braised fowl with dangerously potent wine-drenched apples from cursed orchards",
         "price": 4,
         "currency": "silver",
         "quality": "select"
       },
       {
-        "name": "Spiced rutabaga/swede from dark Sarkash soil, a delicacy",
+        "name": "Spiced rutabaga from the dark Sarkash soil, a delicacy of questionable provenance",
         "price": 4,
         "currency": "silver",
         "quality": "select"
       },
       {
-        "name": "Galgenbeckian stew with whole embryonic boars. Delicious!",
+        "name": "Galgenbeckian stew with whole embryonic boars most delectable and disturbing",
         "price": 4,
         "currency": "silver",
         "quality": "select"
       },
       {
-        "name": "Tveland yam hash with sliced pungent tomb-truffle",
+        "name": "Tveland yam hash garnished with slices of pungent tomb-truffle",
         "price": 4,
         "currency": "silver",
         "quality": "select"
       },
       {
-        "name": "Migol's pie (blackened venison and chicken bone broth jelly)",
+        "name": "Migol's infamous pie (blackened venison swimming in chicken bone broth jelly)",
         "price": 4,
         "currency": "silver",
         "quality": "select"
       },
       {
-        "name": "Black soup with baked hog face",
+        "name": "Black soup served with baked hog's face, eyes still staring",
         "price": 4,
         "currency": "silver",
         "quality": "select"
@@ -41,7 +41,7 @@
     ],
     "budget_menu": [
       {
-        "name": "Watery femur soup. The femur is large. It's been there a while.",
+        "name": "Watery femur soup - the bone is large and hath been festering there a considerable while",
         "price": 2,
         "currency": "silver",
         "quality": "budget"

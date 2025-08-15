@@ -2,28 +2,28 @@
   "category": "tavern",
   "tables": {
     "tavern_descriptions": [
-      "Smokey",
-      "Silent",
-      "Filthy",
-      "Dark",
-      "Rowdy",
-      "Smelly"
+      "Smoke-choked and dim",
+      "Silent as a tomb",
+      "Filth-encrusted and vile",
+      "Dark as a crypt",
+      "Raucous and unruly",
+      "Reeking of corruption"
     ],
     "tavern_special_1": [
-      "Maggot",
-      "Troll steak",
-      "Monkey brain",
-      "Goblin toe",
-      "Long pig",
-      "Bat liver"
+      "Writhing maggot stew",
+      "Charred troll steak",
+      "Pickled monkey brain",
+      "Roasted goblin toe",
+      "Long pig cutlet",
+      "Fried bat liver"
     ],
     "tavern_special_2": [
-      "Mushroom",
-      "Algae",
-      "Cockroach",
-      "Spider",
-      "Eyeball",
-      "Locust"
+      "Fetid mushroom broth",
+      "Slimy algae gruel",
+      "Crunchy cockroach pie",
+      "Hairy spider fricassee",
+      "Bloodshot eyeball soup",
+      "Crispy locust fritters"
     ]
   },
   "metadata": {

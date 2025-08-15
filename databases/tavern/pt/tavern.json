@@ -2,28 +2,28 @@
   "category": "tavern",
   "tables": {
     "tavern_descriptions": [
-      "Fumacenta e Maldita",
-      "Silenciosa como Sepulcro",
-      "Imunda e Pestilenta",
-      "Sombria como o Inferno",
-      "Estrondosa e Blasfema",
-      "Fétida como Cadáver"
+      "Enfumaçada e sombria como antro de perdição",
+      "Silenciosa qual sepulcro de malditos",
+      "Imunda e pestilenta de corrupção",
+      "Escura qual cripta dos danados",
+      "Estrondosa e desenfreada de vilania",
+      "Fétida da podridão da alma"
     ],
     "tavern_special_1": [
-      "Larvas Putrefactas",
-      "Lombo de Troll Ensanguentado", 
-      "Miolos de Macaco Podre",
-      "Dedos de Goblin Marinados",
-      "Carne Humana Defumada",
-      "Fígado de Morcego Cru"
+      "Guisado de larvas rastejantes",
+      "Lombo de troll carbonizado", 
+      "Miolos de macaco em conserva",
+      "Dedos de goblin assados",
+      "Costeleta de carne longa",
+      "Fígado de morcego frito"
     ],
     "tavern_special_2": [
-      "Cogumelos Venenosos",
-      "Algas Pantanosas",
-      "Baratas Torradas",
-      "Aranhas Cozidas",
-      "Globos Oculares Frescos",
-      "Gafanhotos Secos"
+      "Caldo de cogumelos fétidos",
+      "Mingau de algas viscosas",
+      "Torta de baratas crocantes",
+      "Fricassé de aranhas peludas",
+      "Sopa de globos oculares injetados",
+      "Bolinhos de gafanhotos crocantes"
     ]
   },
   "metadata": {

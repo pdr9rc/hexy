@@ -26,28 +26,28 @@
       "Blight"
     ],
     "denizen_motivations": [
-      "seeks redemption for past sins",
-      "hunts for forbidden knowledge",
-      "flees from terrible pursuers",
-      "searches for lost family",
-      "guards ancient secrets",
-      "trades in human misery"
+      "Seeketh redemption for sins most grievous",
+      "Hunteth for knowledge forbidden to mortals",
+      "Fleeth from pursuers terrible and relentless",
+      "Searcheth for kin lost to the darkness",
+      "Guardeth secrets ancient and dangerous",
+      "Tradeth in human misery and woe"
     ],
     "denizen_features": [
-      "Covered in ritual scars",
-      "Missing several fingers",
-      "Eyes clouded with cataracts",
-      "Constantly muttering prayers",
-      "Smells of decay",
-      "Wears tattered robes"
+      "Covered in ritual scars that speak of dark rites",
+      "Missing several fingers to unknown horrors",
+      "Eyes clouded with cataracts from witnessing evil",
+      "Constantly muttering prayers to unhearing gods",
+      "Smelleth of decay and corruption most foul",
+      "Weareth tattered robes stained with time and sin"
     ],
     "denizen_demeanors": [
-      "Hostile",
-      "Suspicious",
-      "Desperate",
-      "Helpful",
-      "Indifferent",
-      "Cryptic"
+      "Hostile and unwelcoming",
+      "Suspicious of all strangers",
+      "Desperate for aid or mercy",
+      "Helpful despite their circumstances",
+      "Indifferent to mortal concerns",
+      "Cryptic in speech and manner"
     ],
     "atmospheres": [
       "Oppressive silence",
@@ -60,7 +60,7 @@
   "metadata": {
     "version": "1.0",
     "language": "en",
-    "last_updated": "2025-01-16T00:00:00.000000",
+    "last_updated": "2025-08-07T22:56:40.000000",
     "migrated_from": "databases/languages/en/core.json"
   }
 }
