@@ -5,6 +5,13 @@ from flask import jsonify
 from typing import Dict, Any, Optional
 
 
+def _set_no_cache_headers(response):
+    """Set headers to prevent caching issues."""
+    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = '0'
+
+
 def create_json_response(data: Any, success: bool = True, status_code: int = 200) -> tuple:
     """
     Create a standardized JSON response with cache control headers.
@@ -18,12 +25,7 @@ def create_json_response(data: Any, success: bool = True, status_code: int = 200
         Tuple of (response, status_code)
     """
     response = jsonify(data)
-    
-    # Set headers to prevent caching issues
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    
+    _set_no_cache_headers(response)
     return response, status_code
 
 
@@ -66,12 +68,7 @@ def create_overlay_response(overlay_data: Dict[str, Any]) -> tuple:
         Tuple of (response, status_code)
     """
     response = jsonify({'success': True, 'overlay': overlay_data})
-    
-    # Set headers to prevent caching issues
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    
+    _set_no_cache_headers(response)
     return response, 200
 
 
@@ -86,12 +83,7 @@ def create_hex_response(hex_data: Dict[str, Any]) -> tuple:
         Tuple of (response, status_code)
     """
     response = jsonify(hex_data)
-    
-    # Set headers to prevent caching issues
-    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
-    
+    _set_no_cache_headers(response)
     return response, 200
 
 

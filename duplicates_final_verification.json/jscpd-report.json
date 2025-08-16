@@ -1,0 +1,1373 @@
+{
+  "statistics": {
+    "detectionDate": "2025-08-13T14:50:46.887Z",
+    "formats": {
+      "typescript": {
+        "sources": {
+          "/workspace/backend/web/static/utils/translationUtils.ts": {
+            "lines": 140,
+            "tokens": 1064,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/utils/translationUtils.d.ts": {
+            "lines": 7,
+            "tokens": 100,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/utils/colorUtils.ts": {
+            "lines": 97,
+            "tokens": 643,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/utils/apiUtils.ts": {
+            "lines": 125,
+            "tokens": 723,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 12,
+            "duplicatedTokens": 138,
+            "percentage": 9.6,
+            "percentageTokens": 19.09,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/uiUtils.ts": {
+            "lines": 357,
+            "tokens": 3163,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 8,
+            "duplicatedTokens": 104,
+            "percentage": 2.24,
+            "percentageTokens": 3.29,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/translations.ts": {
+            "lines": 249,
+            "tokens": 1480,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/mapRenderer.ts": {
+            "lines": 56,
+            "tokens": 643,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/controls.ts": {
+            "lines": 80,
+            "tokens": 800,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 10,
+            "duplicatedTokens": 126,
+            "percentage": 12.5,
+            "percentageTokens": 15.75,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/cityOverlays.ts": {
+            "lines": 306,
+            "tokens": 1716,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 28,
+            "duplicatedTokens": 220,
+            "percentage": 9.15,
+            "percentageTokens": 12.82,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/cityOverlay.ts": {
+            "lines": 353,
+            "tokens": 2452,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 22,
+            "duplicatedTokens": 210,
+            "percentage": 6.23,
+            "percentageTokens": 8.56,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/web/static/api.ts": {
+            "lines": 165,
+            "tokens": 1581,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 12,
+            "duplicatedTokens": 138,
+            "percentage": 7.27,
+            "percentageTokens": 8.73,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/electron/src/preload.ts": {
+            "lines": 8,
+            "tokens": 51,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/electron/src/main.ts": {
+            "lines": 193,
+            "tokens": 1403,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 2136,
+          "tokens": 15819,
+          "sources": 13,
+          "clones": 8,
+          "duplicatedLines": 46,
+          "duplicatedTokens": 468,
+          "percentage": 2.15,
+          "percentageTokens": 2.96,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      },
+      "python": {
+        "sources": {
+          "/workspace/backend/utils/tavern_generator.py": {
+            "lines": 66,
+            "tokens": 445,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/settlement_generator.py": {
+            "lines": 113,
+            "tokens": 496,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/settlement_data_creator.py": {
+            "lines": 63,
+            "tokens": 429,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/response_helpers.py": {
+            "lines": 104,
+            "tokens": 425,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/npc_generator.py": {
+            "lines": 152,
+            "tokens": 1318,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 18,
+            "duplicatedTokens": 194,
+            "percentage": 11.84,
+            "percentageTokens": 14.72,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/markdown_parser.py": {
+            "lines": 136,
+            "tokens": 829,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 17,
+            "duplicatedTokens": 73,
+            "percentage": 12.5,
+            "percentageTokens": 8.81,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/markdown_formatter.py": {
+            "lines": 181,
+            "tokens": 1224,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/loot_generator.py": {
+            "lines": 131,
+            "tokens": 880,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/hex_field_creator.py": {
+            "lines": 62,
+            "tokens": 402,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/grid_generator.py": {
+            "lines": 155,
+            "tokens": 755,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/database_categories.py": {
+            "lines": 135,
+            "tokens": 921,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 20,
+            "duplicatedTokens": 218,
+            "percentage": 14.81,
+            "percentageTokens": 23.67,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/content_parser.py": {
+            "lines": 126,
+            "tokens": 636,
+            "sources": 1,
+            "clones": 1,
+            "duplicatedLines": 17,
+            "duplicatedTokens": 73,
+            "percentage": 13.49,
+            "percentageTokens": 11.48,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/content_detector.py": {
+            "lines": 96,
+            "tokens": 464,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 14,
+            "duplicatedTokens": 126,
+            "percentage": 14.58,
+            "percentageTokens": 27.16,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/city_processor.py": {
+            "lines": 52,
+            "tokens": 302,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/city_helpers.py": {
+            "lines": 76,
+            "tokens": 445,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/beast_generator.py": {
+            "lines": 100,
+            "tokens": 677,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 8,
+            "duplicatedTokens": 94,
+            "percentage": 8,
+            "percentageTokens": 13.88,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/ascii_processor.py": {
+            "lines": 198,
+            "tokens": 1252,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 18,
+            "duplicatedTokens": 136,
+            "percentage": 9.09,
+            "percentageTokens": 10.86,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils/__init__.py": {
+            "lines": 204,
+            "tokens": 730,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/utils.py": {
+            "lines": 183,
+            "tokens": 1714,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/translation_system.py": {
+            "lines": 342,
+            "tokens": 2146,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/terrain_system.py": {
+            "lines": 260,
+            "tokens": 2396,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 14,
+            "duplicatedTokens": 214,
+            "percentage": 5.38,
+            "percentageTokens": 8.93,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/run.py": {
+            "lines": 11,
+            "tokens": 40,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/mork_borg_lore_database.py": {
+            "lines": 766,
+            "tokens": 3942,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/models.py": {
+            "lines": 55,
+            "tokens": 304,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/image_analyzer.py": {
+            "lines": 269,
+            "tokens": 3779,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 12,
+            "duplicatedTokens": 184,
+            "percentage": 4.46,
+            "percentageTokens": 4.87,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/hex_model.py": {
+            "lines": 408,
+            "tokens": 3264,
+            "sources": 1,
+            "clones": 2,
+            "duplicatedLines": 14,
+            "duplicatedTokens": 142,
+            "percentage": 3.43,
+            "percentageTokens": 4.35,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/generation_engine.py": {
+            "lines": 539,
+            "tokens": 4339,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/database_manager.py": {
+            "lines": 365,
+            "tokens": 3367,
+            "sources": 1,
+            "clones": 4,
+            "duplicatedLines": 24,
+            "duplicatedTokens": 280,
+            "percentage": 6.58,
+            "percentageTokens": 8.32,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/config.py": {
+            "lines": 180,
+            "tokens": 1695,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/app.py": {
+            "lines": 40,
+            "tokens": 212,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          },
+          "/workspace/backend/__init__.py": {
+            "lines": 47,
+            "tokens": 358,
+            "sources": 1,
+            "clones": 0,
+            "duplicatedLines": 0,
+            "duplicatedTokens": 0,
+            "percentage": 0,
+            "percentageTokens": 0,
+            "newDuplicatedLines": 0,
+            "newClones": 0
+          }
+        },
+        "total": {
+          "lines": 5615,
+          "tokens": 40186,
+          "sources": 31,
+          "clones": 14,
+          "duplicatedLines": 88,
+          "duplicatedTokens": 867,
+          "percentage": 1.57,
+          "percentageTokens": 2.16,
+          "newDuplicatedLines": 0,
+          "newClones": 0
+        }
+      }
+    },
+    "total": {
+      "lines": 7751,
+      "tokens": 56005,
+      "sources": 44,
+      "clones": 22,
+      "duplicatedLines": 134,
+      "duplicatedTokens": 1335,
+      "percentage": 1.73,
+      "percentageTokens": 2.38,
+      "newDuplicatedLines": 0,
+      "newClones": 0
+    }
+  },
+  "duplicates": [
+    {
+      "format": "typescript",
+      "lines": 5,
+      "fragment": ";\n  const svgContainer = document.getElementById('svgContainer') as SVGElement | null;\n  const svgGroup = svgContainer?.querySelector('g') as SVGElement | null;\n  \n  console",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/uiUtils.ts",
+        "start": 35,
+        "end": 39,
+        "startLoc": {
+          "line": 35,
+          "column": 2,
+          "position": 337
+        },
+        "endLoc": {
+          "line": 39,
+          "column": 8,
+          "position": 389
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/uiUtils.ts",
+        "start": 18,
+        "end": 23,
+        "startLoc": {
+          "line": 18,
+          "column": 7,
+          "position": 188
+        },
+        "endLoc": {
+          "line": 23,
+          "column": 3,
+          "position": 242
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 6,
+      "fragment": ");\n        await clearServiceWorkerCaches();\n        window.location.replace('/?t=' + Date.now());\n      } catch (e: any) {\n        ui.hideLoading();\n        ui.showNotification(e.message || 'Failed to change language'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/controls.ts",
+        "start": 72,
+        "end": 77,
+        "startLoc": {
+          "line": 72,
+          "column": 5,
+          "position": 719
+        },
+        "endLoc": {
+          "line": 77,
+          "column": 28,
+          "position": 782
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/controls.ts",
+        "start": 50,
+        "end": 55,
+        "startLoc": {
+          "line": 50,
+          "column": 2,
+          "position": 514
+        },
+        "endLoc": {
+          "line": 55,
+          "column": 28,
+          "position": 577
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 7,
+      "fragment": "const mapContainer = document.querySelector(\".map-container\")\n    const mapZoomContainer = document.getElementById(\"map-zoom-container\")\n    if (!mapContainer || !mapZoomContainer) {\n      throw new Error(\"Map container or zoom container not found\")\n    }\n\n    const",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/cityOverlays.ts",
+        "start": 86,
+        "end": 92,
+        "startLoc": {
+          "line": 86,
+          "column": 5,
+          "position": 595
+        },
+        "endLoc": {
+          "line": 92,
+          "column": 6,
+          "position": 652
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/cityOverlays.ts",
+        "start": 29,
+        "end": 36,
+        "startLoc": {
+          "line": 29,
+          "column": 5,
+          "position": 167
+        },
+        "endLoc": {
+          "line": 36,
+          "column": 46,
+          "position": 225
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 9,
+      "fragment": ";\n      app.updateWorldMapControlsVisibility();\n      app.updateDistrictButtonsVisibility();\n      app.initializeEventListeners();\n    }\n\n    ui.hideLoading()\n  } catch (error) {\n    console.error(\"Error loading ASCII view:\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/cityOverlays.ts",
+        "start": 97,
+        "end": 105,
+        "startLoc": {
+          "line": 97,
+          "column": 7,
+          "position": 701
+        },
+        "endLoc": {
+          "line": 105,
+          "column": 28,
+          "position": 754
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/cityOverlays.ts",
+        "start": 54,
+        "end": 62,
+        "startLoc": {
+          "line": 54,
+          "column": 8,
+          "position": 386
+        },
+        "endLoc": {
+          "line": 62,
+          "column": 35,
+          "position": 439
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 5,
+      "fragment": "if ((window as any).disableZoom) {\n            (window as any).disableZoom();\n        }\n        \n        const response = await fetch(`/api/city-overlay/${overlayName}/hex/",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/cityOverlay.ts",
+        "start": 260,
+        "end": 264,
+        "startLoc": {
+          "line": 260,
+          "column": 9,
+          "position": 1913
+        },
+        "endLoc": {
+          "line": 264,
+          "column": 6,
+          "position": 1963
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/cityOverlay.ts",
+        "start": 211,
+        "end": 215,
+        "startLoc": {
+          "line": 211,
+          "column": 9,
+          "position": 1607
+        },
+        "endLoc": {
+          "line": 215,
+          "column": 8,
+          "position": 1657
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 8,
+      "fragment": "const mapContainer = document.querySelector('.map-container');\n            const mapZoomContainer = document.getElementById('map-zoom-container');\n            if (mapContainer && mapZoomContainer) {\n                let html = `\n          <div style=\"text-align: center; padding: 20px; height: 100%; overflow-y: auto; -webkit-overflow-scrolling: touch; touch-action: pan-y;\">\n            <div class=\"mb-4\">\n              <button class=\"btn-mork-borg btn-warning\" onclick=\"app.restoreMap()\">RETURN TO MAP</button>\n              <button class=\"btn-mork-borg\" onclick=\"app.showCityOverlayGridInMap('${overlayName}', '${hexId",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/cityOverlay.ts",
+        "start": 269,
+        "end": 276,
+        "startLoc": {
+          "line": 269,
+          "column": 13,
+          "position": 2023
+        },
+        "endLoc": {
+          "line": 276,
+          "column": 6,
+          "position": 2078
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/cityOverlay.ts",
+        "start": 218,
+        "end": 225,
+        "startLoc": {
+          "line": 218,
+          "column": 13,
+          "position": 1689
+        },
+        "endLoc": {
+          "line": 225,
+          "column": 8,
+          "position": 1744
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 7,
+      "fragment": ");\n    if (!response.ok) {\n      throw new Error(`HTTP ${response.status}: ${response.statusText}`);\n    }\n    return await response.json();\n  } catch (error) {\n    console.error('Error fetching city overlay hex:'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/api.ts",
+        "start": 103,
+        "end": 109,
+        "startLoc": {
+          "line": 103,
+          "column": 2,
+          "position": 949
+        },
+        "endLoc": {
+          "line": 109,
+          "column": 35,
+          "position": 1018
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/utils/apiUtils.ts",
+        "start": 46,
+        "end": 52,
+        "startLoc": {
+          "line": 46,
+          "column": 2,
+          "position": 248
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 19,
+          "position": 317
+        }
+      }
+    },
+    {
+      "format": "typescript",
+      "lines": 7,
+      "fragment": ");\n        if (!response.ok) {\n            throw new Error(`HTTP ${response.status}: ${response.statusText}`);\n        }\n        return await response.json();\n    } catch (error) {\n        console.error('Error fetching city districts:'",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/web/static/api.ts",
+        "start": 117,
+        "end": 123,
+        "startLoc": {
+          "line": 117,
+          "column": 12,
+          "position": 1082
+        },
+        "endLoc": {
+          "line": 123,
+          "column": 33,
+          "position": 1151
+        }
+      },
+      "secondFile": {
+        "name": "backend/web/static/utils/apiUtils.ts",
+        "start": 46,
+        "end": 52,
+        "startLoc": {
+          "line": 46,
+          "column": 2,
+          "position": 248
+        },
+        "endLoc": {
+          "line": 52,
+          "column": 19,
+          "position": 317
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 4,
+      "fragment": "name = npc_data.get('name', 'Unknown')\n    trait = npc_data.get('trait', 'mysterious')\n    trade = npc_data.get('trade', 'wanderer')\n    concern",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/npc_generator.py",
+        "start": 103,
+        "end": 106,
+        "startLoc": {
+          "line": 103,
+          "column": 5,
+          "position": 792
+        },
+        "endLoc": {
+          "line": 106,
+          "column": 8,
+          "position": 837
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/npc_generator.py",
+        "start": 82,
+        "end": 86,
+        "startLoc": {
+          "line": 82,
+          "column": 5,
+          "position": 683
+        },
+        "endLoc": {
+          "line": 86,
+          "column": 7,
+          "position": 730
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 7,
+      "fragment": ")\n    lines.append(f\"**{trait_label}:** {trait}\")\n    lines.append(f\"**{concern_label}:** {concern}\")\n    lines.append(f\"**{want_label}:** {want}\")\n    lines.append(f\"**{apocalypse_label}:** {apocalypse_attitude}\")\n    lines.append(f\"**{secret_label}:** {secret}\")\n    lines.append(\"\"",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/npc_generator.py",
+        "start": 145,
+        "end": 151,
+        "startLoc": {
+          "line": 145,
+          "column": 20,
+          "position": 1253
+        },
+        "endLoc": {
+          "line": 151,
+          "column": 3,
+          "position": 1305
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/npc_generator.py",
+        "start": 126,
+        "end": 132,
+        "startLoc": {
+          "line": 126,
+          "column": 3,
+          "position": 1092
+        },
+        "endLoc": {
+          "line": 132,
+          "column": 2,
+          "position": 1144
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 11,
+      "fragment": "\"affiliation\", \"basic\", \"beasts_prices\", \n    \"bestiary\", \"city_events\", \"core\", \"denizen\", \"dungeon\", \"enhanced_loot\", \n    \"items_prices\", \"items_trinkets\", \"loot\", \"npc_apocalypse\", \"npc_concerns\", \n    \"npc_names\", \"npc_secrets\", \"npc_trades\", \"npc_traits\", \"npc_wants\",\n    \"scroll\", \"services_prices\", \"stats\", \"tavern\", \"tavern_innkeeper\",\n    \"tavern_menu\", \"tavern_patrons\", \"traps_builders\", \"traps_effects\", \n    \"traps_triggers\", \"weapons_prices\", \"weather\", \"wilderness\"\n]\n\n\ndef",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/database_categories.py",
+        "start": 30,
+        "end": 40,
+        "startLoc": {
+          "line": 30,
+          "column": 2,
+          "position": 219
+        },
+        "endLoc": {
+          "line": 40,
+          "column": 4,
+          "position": 328
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/database_categories.py",
+        "start": 10,
+        "end": 19,
+        "startLoc": {
+          "line": 10,
+          "column": 5,
+          "position": 48
+        },
+        "endLoc": {
+          "line": 19,
+          "column": 43,
+          "position": 156
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 18,
+      "fragment": ", content, re.DOTALL)\n    if description_match:\n        data['description'] = description_match.group(1).strip()\n    \n    return data\n\n\ndef parse_loot_section(content: str) -> Optional[Dict[str, str]]:\n    \"\"\"\n    Parse loot section from markdown content.\n    \n    Args:\n        content: Markdown content string\n        \n    Returns:\n        Dictionary containing loot data or None if not found\n    \"\"\"\n    # Use centralized markdown parser",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/content_parser.py",
+        "start": 28,
+        "end": 45,
+        "startLoc": {
+          "line": 28,
+          "column": 38,
+          "position": 144
+        },
+        "endLoc": {
+          "line": 45,
+          "column": 34,
+          "position": 217
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/markdown_parser.py",
+        "start": 38,
+        "end": 55,
+        "startLoc": {
+          "line": 38,
+          "column": 34,
+          "position": 264
+        },
+        "endLoc": {
+          "line": 55,
+          "column": 11,
+          "position": 337
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 8,
+      "fragment": "try:\n        # Use configurable path from config system\n        from backend.config import get_config\n        config = get_config()\n        hex_file_path = config.paths.output_path / \"hexes\" / f\"hex_{hex_code}.md\"\n        \n        if not hex_file_path.exists():\n            return False",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/content_detector.py",
+        "start": 54,
+        "end": 61,
+        "startLoc": {
+          "line": 54,
+          "column": 5,
+          "position": 232
+        },
+        "endLoc": {
+          "line": 61,
+          "column": 6,
+          "position": 295
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/content_detector.py",
+        "start": 19,
+        "end": 26,
+        "startLoc": {
+          "line": 19,
+          "column": 5,
+          "position": 40
+        },
+        "endLoc": {
+          "line": 26,
+          "column": 5,
+          "position": 103
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 5,
+      "fragment": "beast_type = beast_data.get('beast_type', 'Unknown beast')\n    feature = beast_data.get('beast_feature', 'mysterious appearance')\n    behavior = beast_data.get('beast_behavior', 'hunts in the area')\n    \n    lines",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/beast_generator.py",
+        "start": 73,
+        "end": 77,
+        "startLoc": {
+          "line": 73,
+          "column": 5,
+          "position": 430
+        },
+        "endLoc": {
+          "line": 77,
+          "column": 6,
+          "position": 477
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/beast_generator.py",
+        "start": 55,
+        "end": 59,
+        "startLoc": {
+          "line": 55,
+          "column": 5,
+          "position": 344
+        },
+        "endLoc": {
+          "line": 59,
+          "column": 7,
+          "position": 391
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 10,
+      "fragment": "if current_section and section_content:\n        section_text = '\\n'.join(section_content).strip()\n        if current_section in data:\n            if current_section == 'tavern_details':\n                # Don't overwrite tavern_details with string content\n                pass\n            else:\n                data[current_section] = section_text\n    \n    return",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/utils/ascii_processor.py",
+        "start": 85,
+        "end": 94,
+        "startLoc": {
+          "line": 85,
+          "column": 5,
+          "position": 510
+        },
+        "endLoc": {
+          "line": 94,
+          "column": 7,
+          "position": 578
+        }
+      },
+      "secondFile": {
+        "name": "backend/utils/ascii_processor.py",
+        "start": 58,
+        "end": 66,
+        "startLoc": {
+          "line": 58,
+          "column": 13,
+          "position": 310
+        },
+        "endLoc": {
+          "line": 66,
+          "column": 16,
+          "position": 376
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 4,
+      "fragment": "for x in range(1, self.map_width + 1):\n            for y in range(1, self.map_height + 1):\n                hex_code = f\"{x:02d}{y:02d}\"\n                overview",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/terrain_system.py",
+        "start": 194,
+        "end": 197,
+        "startLoc": {
+          "line": 194,
+          "column": 9,
+          "position": 1711
+        },
+        "endLoc": {
+          "line": 197,
+          "column": 9,
+          "position": 1763
+        }
+      },
+      "secondFile": {
+        "name": "backend/terrain_system.py",
+        "start": 113,
+        "end": 116,
+        "startLoc": {
+          "line": 113,
+          "column": 9,
+          "position": 909
+        },
+        "endLoc": {
+          "line": 116,
+          "column": 10,
+          "position": 961
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 5,
+      "fragment": "}\n        for x in range(1, self.map_width + 1):\n            for y in range(1, self.map_height + 1):\n                hex_code = f\"{x:02d}{y:02d}\"\n                terrain",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/terrain_system.py",
+        "start": 201,
+        "end": 205,
+        "startLoc": {
+          "line": 201,
+          "column": 14,
+          "position": 1824
+        },
+        "endLoc": {
+          "line": 205,
+          "column": 8,
+          "position": 1879
+        }
+      },
+      "secondFile": {
+        "name": "backend/terrain_system.py",
+        "start": 193,
+        "end": 116,
+        "startLoc": {
+          "line": 193,
+          "column": 2,
+          "position": 1708
+        },
+        "endLoc": {
+          "line": 116,
+          "column": 10,
+          "position": 961
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 4,
+      "fragment": ":\n                    color = self.map_image.getpixel((x, y))\n                    if isinstance(color, tuple) and len(color) >= 3:\n                        colors",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/image_analyzer.py",
+        "start": 180,
+        "end": 183,
+        "startLoc": {
+          "line": 180,
+          "column": 4,
+          "position": 2697
+        },
+        "endLoc": {
+          "line": 183,
+          "column": 7,
+          "position": 2742
+        }
+      },
+      "secondFile": {
+        "name": "backend/image_analyzer.py",
+        "start": 160,
+        "end": 163,
+        "startLoc": {
+          "line": 160,
+          "column": 11,
+          "position": 2326
+        },
+        "endLoc": {
+          "line": 163,
+          "column": 7,
+          "position": 2371
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 4,
+      "fragment": ".getpixel((x, y))\n                if isinstance(color, tuple) and len(color) >= 3:\n                    pixels.append(color[:3])\n        counter",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/image_analyzer.py",
+        "start": 249,
+        "end": 252,
+        "startLoc": {
+          "line": 249,
+          "column": 4,
+          "position": 3546
+        },
+        "endLoc": {
+          "line": 252,
+          "column": 8,
+          "position": 3593
+        }
+      },
+      "secondFile": {
+        "name": "backend/image_analyzer.py",
+        "start": 161,
+        "end": 164,
+        "startLoc": {
+          "line": 161,
+          "column": 10,
+          "position": 2336
+        },
+        "endLoc": {
+          "line": 164,
+          "column": 3,
+          "position": 2383
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 8,
+      "fragment": ",\n            \"denizen\": self.denizen,\n            \"territory\": self.territory,\n            \"threat_level\": self.threat_level,\n            \"notable_feature\": self.notable_feature,\n            \"atmosphere\": self.atmosphere,\n            \"loot\": self.loot.to_dict() if self.loot else None,\n            # Sea encounter specific fields",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/hex_model.py",
+        "start": 273,
+        "end": 280,
+        "startLoc": {
+          "line": 273,
+          "column": 15,
+          "position": 1956
+        },
+        "endLoc": {
+          "line": 280,
+          "column": 32,
+          "position": 2027
+        }
+      },
+      "secondFile": {
+        "name": "backend/hex_model.py",
+        "start": 185,
+        "end": 192,
+        "startLoc": {
+          "line": 185,
+          "column": 15,
+          "position": 1276
+        },
+        "endLoc": {
+          "line": 192,
+          "column": 24,
+          "position": 1347
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 8,
+      "fragment": "with open(filepath, 'r', encoding='utf-8') as f:\n                    data = json.load(f)\n                    category = filename.replace('.json', '')\n                    tables[f\"{category}_tables\"] = data.get('tables', {})\n        \n        return tables\n    \n    def _load_content_tables",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/database_manager.py",
+        "start": 85,
+        "end": 92,
+        "startLoc": {
+          "line": 85,
+          "column": 17,
+          "position": 666
+        },
+        "endLoc": {
+          "line": 92,
+          "column": 21,
+          "position": 745
+        }
+      },
+      "secondFile": {
+        "name": "backend/database_manager.py",
+        "start": 68,
+        "end": 75,
+        "startLoc": {
+          "line": 68,
+          "column": 17,
+          "position": 498
+        },
+        "endLoc": {
+          "line": 75,
+          "column": 18,
+          "position": 577
+        }
+      }
+    },
+    {
+      "format": "python",
+      "lines": 6,
+      "fragment": "all_data = {}\n            for lang in ['en', 'pt']:\n                all_data[lang] = self.load_tables(lang)\n            \n            with open(output_path, 'w', encoding='utf-8') as f:\n                yaml",
+      "tokens": 0,
+      "firstFile": {
+        "name": "backend/database_manager.py",
+        "start": 194,
+        "end": 199,
+        "startLoc": {
+          "line": 194,
+          "column": 13,
+          "position": 1738
+        },
+        "endLoc": {
+          "line": 199,
+          "column": 5,
+          "position": 1799
+        }
+      },
+      "secondFile": {
+        "name": "backend/database_manager.py",
+        "start": 185,
+        "end": 190,
+        "startLoc": {
+          "line": 185,
+          "column": 13,
+          "position": 1639
+        },
+        "endLoc": {
+          "line": 190,
+          "column": 5,
+          "position": 1700
+        }
+      }
+    }
+  ]
+}

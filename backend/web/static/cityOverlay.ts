@@ -1,6 +1,29 @@
 // web/static/cityOverlay.ts
 import * as ui from './uiUtils.js';
 
+/**
+ * Helper for API calls with loading state management.
+ */
+async function withLoadingState<T>(
+    loadingMessage: string,
+    apiCall: () => Promise<T>,
+    errorHandler?: (error: any) => void
+): Promise<T | null> {
+    ui.showLoading(loadingMessage);
+    try {
+        return await apiCall();
+    } catch (error) {
+        if (errorHandler) {
+            errorHandler(error);
+        } else {
+            console.error('API call failed:', error);
+        }
+        return null;
+    } finally {
+        ui.hideLoading();
+    }
+}
+
 export async function showCityDetailsInMap(app: any, hexCode: string): Promise<void> {
     ui.showLoading('Loading city details...');
     try {

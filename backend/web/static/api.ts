@@ -34,13 +34,11 @@ export async function getSettlement(hexCode: string): Promise<any> {
 }
 
 export async function generateHex(hexCode: string) {
-  const res = await fetch('/api/generate-hex', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ hex_code: hexCode })
-  });
-  if (!res.ok) throw new Error(`Failed to generate hex ${hexCode}`);
-  return res.json();
+  try {
+    return await apiPost('/api/generate-hex', { hex_code: hexCode });
+  } catch (error) {
+    throw handleApiError(error, `generating hex ${hexCode}`);
+  }
 }
 
 export async function setLanguage(language: string): Promise<any> {
@@ -53,84 +51,50 @@ export async function setLanguage(language: string): Promise<any> {
 
 export async function resetContinent(language?: string): Promise<any> {
   try {
-    const response = await fetch('/api/reset-continent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(language ? { language } : {})
-    });
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiPost('/api/reset-continent', language ? { language } : {});
   } catch (error) {
-    console.error('Error resetting continent:', error);
-    throw error;
+    throw handleApiError(error, 'resetting continent');
   }
 }
 
 export async function getLoreOverview(): Promise<any> {
   try {
-    const response = await fetch('/api/lore-overview');
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet('/api/lore-overview');
   } catch (error) {
-    console.error('Error fetching lore overview:', error);
-    throw error;
+    throw handleApiError(error, 'fetching lore overview');
   }
 }
 
 // City Overlay API Functions
 export async function getCityOverlays(): Promise<any> {
   try {
-    const response = await fetch('/api/city-overlays');
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet('/api/city-overlays');
   } catch (error) {
-    console.error('Error fetching city overlays:', error);
-    throw error;
+    throw handleApiError(error, 'fetching city overlays');
   }
 }
 
 export async function getCityOverlay(overlayName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-overlay/${overlayName}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`/api/city-overlay/${overlayName}`);
   } catch (error) {
-    console.error('Error fetching city overlay:', error);
-    throw error;
+    throw handleApiError(error, 'fetching city overlay');
   }
 }
 
 export async function getCityOverlayAscii(overlayName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-overlay/${overlayName}/ascii`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`/api/city-overlay/${overlayName}/ascii`);
   } catch (error) {
-    console.error('Error fetching city overlay ASCII:', error);
-    throw error;
+    throw handleApiError(error, 'fetching city overlay ASCII');
   }
 }
 
 export async function getCityContext(cityName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-context/${cityName}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`/api/city-context/${cityName}`);
   } catch (error) {
-    console.error('Error fetching city context:', error);
-    throw error;
+    throw handleApiError(error, 'fetching city context');
   }
 }
 
@@ -163,79 +127,40 @@ export async function getCityDistricts(overlayName: string): Promise<any> {
 
 export async function getCityDistrictDetails(overlayName: string, districtName: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}`);
     } catch (error) {
-        console.error('Error fetching district details:', error);
-        throw error;
+        throw handleApiError(error, 'fetching district details');
     }
 }
 
 export async function getDistrictRandomTable(overlayName: string, districtName: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table`);
     } catch (error) {
-        console.error('Error fetching district random table:', error);
-        throw error;
+        throw handleApiError(error, 'fetching district random table');
     }
 }
 
 export async function getDistrictSpecificRandomTable(overlayName: string, districtName: string, tableType: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table/${tableType}`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table/${tableType}`);
     } catch (error) {
-        console.error('Error fetching district specific random table:', error);
-        throw error;
+        throw handleApiError(error, 'fetching district specific random table');
     }
 }
 
 export async function regenerateHex(overlayName: string, hexId: string): Promise<any> {
   try {
-    const response = await fetch(`/api/regenerate-hex/${overlayName}/${hexId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    return response.json();
+    return await apiPost(`/api/regenerate-hex/${overlayName}/${hexId}`);
   } catch (error) {
-    console.error('Error regenerating hex:', error);
-    throw error;
+    throw handleApiError(error, 'regenerating hex');
   }
 }
 
 export async function regenerateOverlay(overlayName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/regenerate-overlay/${overlayName}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    return response.json();
+    return await apiPost(`/api/regenerate-overlay/${overlayName}`);
   } catch (error) {
-    console.error('Error regenerating overlay:', error);
-    throw error;
+    throw handleApiError(error, 'regenerating overlay');
   }
 }
