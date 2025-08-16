@@ -111,13 +111,13 @@ def generate_npc_markdown(npc_data: Dict[str, Any], hex_code: str, language: str
     carries = npc_data.get('carries', 'Nothing of note')
     
     # Get translated field labels
-    trait_label = translation_system.t('npc_trait', language=language)
-    concern_label = translation_system.t('npc_concern', language=language)
-    want_label = translation_system.t('npc_want', language=language)
-    apocalypse_label = translation_system.t('npc_apocalypse_attitude', language=language)
-    secret_label = translation_system.t('npc_secret', language=language)
-    location_label = translation_system.t('npc_location', language=language)
-    carries_label = translation_system.t('npc_carries', language=language)
+    trait_label = translation_system.t('ui.npc_trait', language=language)
+    concern_label = translation_system.t('ui.npc_concern', language=language)
+    want_label = translation_system.t('ui.npc_want', language=language)
+    apocalypse_label = translation_system.t('ui.npc_apocalypse_attitude', language=language)
+    secret_label = translation_system.t('ui.npc_secret', language=language)
+    location_label = translation_system.t('ui.npc_location', language=language)
+    carries_label = translation_system.t('ui.npc_carries', language=language)
     
     lines = []
     lines.append(f"☉ **{name} - {trade}**")

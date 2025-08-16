@@ -1249,4 +1249,23 @@ def extract_ruins_data(content):
     if magical_effect:
         data['magical_effect'] = magical_effect
     
-    return data 
+    return data
+
+# Translation API Routes
+@api_bp.route('/translations/ui/<language>', methods=['GET'])
+def get_ui_translations(language):
+    """Get UI translations for the specified language."""
+    try:
+        # Validate language
+        if language not in translation_system.get_supported_languages():
+            language = 'en'  # fallback to English
+        
+        # Get UI translations
+        ui_translations = translation_system.get_ui_translations(language)
+        
+        return jsonify(ui_translations)
+        
+    except Exception as e:
+        logging.error(f"Error getting UI translations for language {language}: {e}")
+        # Return empty dict on error, frontend will use defaults
+        return jsonify({}) 

@@ -20,13 +20,13 @@ def format_threat_level_and_territory(hex_data: Dict[str, Any], translation_syst
     
     # Add threat level and territory as separate sections
     if hex_data.get('threat_level'):
-        threat_label = translation_system.t('threat_level') if translation_system else 'Threat Level'
+        threat_label = translation_system.t('ui.threat_level', fallback='Threat Level') if translation_system else 'Threat Level'
         lines.append(f"## {threat_label}")
         lines.append(hex_data['threat_level'])
         lines.append("")
     
     if hex_data.get('territory'):
-        territory_label = translation_system.t('territory') if translation_system else 'Territory'
+        territory_label = translation_system.t('ui.territory', fallback='Territory') if translation_system else 'Territory'
         lines.append(f"## {territory_label}")
         lines.append(hex_data['territory'])
         lines.append("")
@@ -48,7 +48,7 @@ def format_loot_section(hex_data: Dict[str, Any], translation_system=None) -> Li
     lines = []
     
     if hex_data.get('loot'):
-        loot_label = translation_system.t('loot_found') if translation_system else 'Loot Found'
+        loot_label = translation_system.t('ui.loot_found', fallback='Loot Found') if translation_system else 'Loot Found'
         lines.append(f"## {loot_label}")
         lines.append(hex_data['loot'].get('full_description', hex_data['loot'].get('description', 'Unknown treasure')))
         lines.append("")
