@@ -130,9 +130,9 @@ class MainMapGenerator:
     
     def generate_full_map(self, options: Optional[Dict] = None) -> Dict:
         """Generate content for the entire map."""
-        print(f"🗺️ {self.translation_system.t('generating_full_map')}...")
-        print(f"📍 {self.translation_system.t('map_size')}: {self.map_width}x{self.map_height} hexes")
-        print(f"🎯 {self.translation_system.t('language')}: {self.language}")
+        print(f"🗺️ {self.translation_system.t('ui.generating_full_map', fallback='Generating Full Map')}...")
+        print(f"📍 {self.translation_system.t('ui.map_size', fallback='Map Size')}: {self.map_width}x{self.map_height} hexes")
+        print(f"🎯 {self.translation_system.t('ui.language', fallback='Language')}: {self.language}")
         
         # Apply options
         if options:
