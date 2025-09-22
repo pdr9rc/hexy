@@ -12,6 +12,7 @@ import secrets
 import logging
 import traceback
 from flask import Blueprint, jsonify, request, abort, render_template
+from flask import Response, send_file
 import os
 from backend.config import get_config
 from backend.utils import setup_project_paths, validate_hex_code
@@ -37,6 +38,11 @@ from backend.utils.markdown_parser import parse_content_sections, parse_loot_sec
 from backend.utils.response_helpers import create_overlay_response, handle_exception_response
 from backend.utils.content_detector import get_hex_content_type, check_hex_has_loot
 from backend.utils.grid_generator import generate_hex_grid, determine_content_symbol, determine_css_class
+import io
+import zipfile
+import tempfile
+import shutil
+from pathlib import Path
 
 # Create blueprints
 main_bp = Blueprint('main', __name__)
@@ -300,6 +306,86 @@ def debug_paths():
             'output_path': str(cfg.paths.output_path),
             'project_root': str(cfg.paths.project_root)
         })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# ===== Export / Import API =====
+@api_bp.route('/export', methods=['GET'])
+def export_output_zip():
+    try:
+        output_dir = config.paths.output_path
+        if not output_dir.exists():
+            return jsonify({'error': 'Output directory not found'}), 404
+        # Build zip in-memory to keep it simple
+        mem = io.BytesIO()
+        with zipfile.ZipFile(mem, 'w', compression=zipfile.ZIP_DEFLATED) as zf:
+            base_name = 'dying_lands_output'
+            for root, _, files in os.walk(output_dir):
+                for fname in files:
+                    full = Path(root) / fname
+                    # arcname should start with base_name/
+                    rel = full.relative_to(output_dir)
+                    zf.write(str(full), arcname=str(Path(base_name) / rel))
+        mem.seek(0)
+        ts = time.strftime('%Y%m%d%H%M%S')
+        filename = f"dying_lands_output-{ts}.zip"
+        return send_file(
+            mem,
+            mimetype='application/zip',
+            as_attachment=True,
+            download_name=filename
+        )
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@api_bp.route('/import', methods=['POST'])
+def import_output_zip():
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'Missing file'}), 400
+        file = request.files['file']
+        if not file.filename.lower().endswith('.zip'):
+            return jsonify({'error': 'File must be a .zip'}), 400
+
+        # Save uploaded content to memory and open as zip
+        data = file.read()
+        tmpdir = Path(tempfile.mkdtemp(prefix='hexy-import-'))
+        try:
+            with zipfile.ZipFile(io.BytesIO(data)) as zf:
+                for info in zf.infolist():
+                    # Prevent Zip Slip
+                    dest_path = (tmpdir / info.filename).resolve()
+                    if not str(dest_path).startswith(str(tmpdir.resolve())):
+                        continue
+                    if info.is_dir():
+                        dest_path.mkdir(parents=True, exist_ok=True)
+                    else:
+                        dest_path.parent.mkdir(parents=True, exist_ok=True)
+                        with zf.open(info, 'r') as src, open(dest_path, 'wb') as dst:
+                            shutil.copyfileobj(src, dst)
+
+            # Determine extracted root
+            extracted_root = tmpdir / 'dying_lands_output'
+            src_dir = extracted_root if extracted_root.exists() else tmpdir
+            # Ensure src has expected structure (at least 'hexes' or something)
+            if not any(p.is_dir() for p in src_dir.iterdir()):
+                return jsonify({'error': 'Archive appears empty'}), 400
+
+            final_dir = config.paths.output_path
+            final_dir.parent.mkdir(parents=True, exist_ok=True)
+            # Backup current directory if exists
+            backup = None
+            if final_dir.exists():
+                backup = final_dir.parent / f"{final_dir.name}.bak-{int(time.time())}"
+                shutil.move(str(final_dir), str(backup))
+            # Move imported content into place
+            shutil.move(str(src_dir), str(final_dir))
+            # Clean temp
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            return jsonify({'ok': True, 'backup': str(backup) if backup else None})
+        except Exception:
+            shutil.rmtree(tmpdir, ignore_errors=True)
+            raise
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

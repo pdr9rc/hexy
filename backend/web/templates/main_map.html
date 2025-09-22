@@ -57,6 +57,13 @@
           <button class="btn-mork-borg btn-warning" id="reset-btn" aria-label="Reset Continent">
             🩸 Reset
           </button>
+          <button class="btn-mork-borg" id="export-btn" aria-label="Export world data">
+            ⬇️ Export
+          </button>
+          <button class="btn-mork-borg" id="import-btn" aria-label="Import world data">
+            ⬆️ Import
+          </button>
+          <input type="file" id="import-file" accept=".zip" aria-label="Choose zip to import" hidden />
           <select class="btn-mork-borg" id="language-selector" aria-label="Select Language">
             <option value="en" {% if current_language == 'en' %}selected{% endif %}> English</option>
             <option value="pt" {% if current_language == 'pt' %}selected{% endif %}> Português</option>

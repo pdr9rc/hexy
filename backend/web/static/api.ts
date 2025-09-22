@@ -81,6 +81,19 @@ export async function getLoreOverview(): Promise<any> {
   }
 }
 
+export async function importZip(file: File): Promise<any> {
+  const form = new FormData();
+  form.append('file', file);
+  const res = await fetch('/api/import', {
+    method: 'POST',
+    body: form
+  });
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+  }
+  return res.json();
+}
+
 // City Overlay API Functions
 export async function getCityOverlays(): Promise<any> {
   try {

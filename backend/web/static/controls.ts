@@ -78,4 +78,56 @@ export function setupControls(app: DyingLandsApp) {
       }
     });
   }
+  // Export button
+  const exportBtn = document.getElementById('export-btn');
+  if (exportBtn) {
+    exportBtn.addEventListener('click', async () => {
+      try {
+        const res = await fetch('/api/export');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const ts = new Date().toISOString().replace(/[:.]/g, '');
+        a.href = url;
+        a.download = `dying_lands_output-${ts}.zip`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        ui.showNotification('Exported world data');
+      } catch (e: any) {
+        ui.showNotification(e.message || 'Failed to export', 'error');
+      }
+    });
+  }
+
+  // Import button + file input
+  const importBtn = document.getElementById('import-btn');
+  const importFile = document.getElementById('import-file') as HTMLInputElement | null;
+  if (importBtn && importFile) {
+    importBtn.addEventListener('click', () => importFile.click());
+    importFile.addEventListener('change', async () => {
+      const file = importFile.files && importFile.files[0];
+      if (!file) return;
+      if (!file.name.endsWith('.zip')) {
+        ui.showNotification('Please select a .zip file', 'error');
+        importFile.value = '';
+        return;
+      }
+      ui.showLoading('Importing...');
+      try {
+        await api.importZip(file);
+        ui.hideLoading();
+        ui.showNotification('Import complete');
+        await clearServiceWorkerCaches();
+        window.location.replace('/?t=' + Date.now());
+      } catch (e: any) {
+        ui.hideLoading();
+        ui.showNotification(e.message || 'Failed to import', 'error');
+      } finally {
+        importFile.value = '';
+      }
+    });
+  }
 } 
