@@ -24,7 +24,7 @@ export class LanguageSelector {
         const savedLanguage = localStorage.getItem('hexy-language');
         if (savedLanguage && availableLanguages.some(lang => lang.code === savedLanguage)) {
             this._currentLanguage = savedLanguage;
-            translationManager.setLanguage(savedLanguage).catch(error => {
+            translationManager.setLanguage(savedLanguage).catch((error: unknown) => {
                 console.warn('Failed to set saved language:', error);
             });
         }
@@ -107,7 +107,7 @@ export class LanguageSelector {
                 console.log('🌐 Language selector injected successfully');
             }, 100);
         }
-        catch (error) {
+        catch (error: unknown) {
             console.error('Failed to inject language selector:', error);
         }
     }
