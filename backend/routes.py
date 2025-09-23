@@ -152,9 +152,12 @@ def _get_output_dir_for_language(lang: str) -> Path:
 def main_map():
     """Main map page with integrated lore."""
     config = get_config()
-    
-    if not config.paths.output_path.exists():
-        config.paths.output_path.mkdir(parents=True, exist_ok=True)
+    # Determine selected language and effective output directory
+    lang = _get_selected_language()
+    output_dir = _get_output_dir_for_language(lang)
+
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True, exist_ok=True)
     # If output is empty, show world with empty state; user can press Reset from UI
     
     # Auto-regenerate output if flag is set
@@ -165,14 +168,14 @@ def main_map():
     # Get map dimensions
     map_width, map_height = terrain_system.get_map_dimensions()
     
-    # Generate ASCII map data
-    ascii_map_data = generate_ascii_map_data()
+    # Generate ASCII map data (language-aware)
+    ascii_map_data = generate_ascii_map_data_for_dir(output_dir)
 
     # If map is empty, regenerate and reload
     if not ascii_map_data:
         print("[AUTO] Map data empty, regenerating full map...")
         main_map_generator.generate_full_map()
-        ascii_map_data = generate_ascii_map_data()
+        ascii_map_data = generate_ascii_map_data_for_dir(output_dir)
     
     # Ensure all keys are strings
     ascii_map_data = {str(k): v for k, v in ascii_map_data.items()}
@@ -183,7 +186,7 @@ def main_map():
                          map_height=map_height,
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height,
-                           current_language=current_language,
+                          current_language=lang,
                            hexy_token=_HEXY_HEARTBEAT_TOKEN)
 
 # ===== PWA ASSETS =====
@@ -1116,7 +1119,7 @@ def _get_hex_file_info(hex_code: str, hex_file) -> dict:
     except Exception as e:
         return jsonify({'error': f'Failed to read hex file: {e}'}), 500
 
-def generate_ascii_map_data():
+def generate_ascii_map_data_for_dir(output_dir: Path):
     # Use centralized grid generator for base grid
     base_grid = generate_hex_grid(lore_db)
     
@@ -1137,12 +1140,12 @@ def generate_ascii_map_data():
         else:
             # Regular terrain - check for generated content
             terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
-            hex_file_exists = (config.paths.output_path / "hexes" / f"hex_{hex_code}.md").exists()
+            hex_file_exists = (output_dir / "hexes" / f"hex_{hex_code}.md").exists()
             has_loot = False
             content_type = None
             
             if hex_file_exists:
-                with open(config.paths.output_path / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
+                with open(output_dir / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
                     content = f.read()
                 hex_data_content = extract_hex_data(content)
                 terrain = normalize_terrain_name(hex_data_content.get('terrain', 'unknown'))

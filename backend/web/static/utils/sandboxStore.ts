@@ -63,6 +63,15 @@ export function getSandboxId(): string {
   }
 }
 
+function langKey(suffix: string): string {
+  try {
+    const lang = localStorage.getItem('hexy-language') || 'en';
+    return `${suffix}:${lang}`;
+  } catch (_) {
+    return `${suffix}:en`;
+  }
+}
+
 async function tx(storeName: string, mode: IDBTransactionMode): Promise<IDBObjectStore> {
   const db = await openDb();
   return db.transaction(storeName, mode).objectStore(storeName);
@@ -74,7 +83,7 @@ export const SandboxStore = {
       const store = await tx(STORE_META, 'readwrite');
       const record: WorldMapRecord = { mapData, savedAt: Date.now() };
       await new Promise<void>((resolve, reject) => {
-        const req = store.put(record, 'world');
+        const req = store.put(record, langKey('world'));
         req.onsuccess = () => resolve();
         req.onerror = () => reject(req.error);
       });
@@ -85,7 +94,7 @@ export const SandboxStore = {
     try {
       const store = await tx(STORE_META, 'readonly');
       return await new Promise<Record<string, any> | null>((resolve, reject) => {
-        const req = store.get('world');
+        const req = store.get(langKey('world'));
         req.onsuccess = () => {
           const rec = req.result as WorldMapRecord | undefined;
           resolve(rec ? rec.mapData : null);
@@ -101,7 +110,7 @@ export const SandboxStore = {
     try {
       const store = await tx(STORE_HEX, 'readonly');
       return await new Promise<string | null>((resolve, reject) => {
-        const req = store.get(hexCode);
+        const req = store.get(langKey(`hex:${hexCode}`));
         req.onsuccess = () => {
           const rec = req.result as HexMarkdownRecord | undefined;
           resolve(rec ? rec.raw_markdown : null);
@@ -116,7 +125,7 @@ export const SandboxStore = {
   async saveHexMarkdown(hexCode: string, raw_markdown: string): Promise<void> {
     try {
       const store = await tx(STORE_HEX, 'readwrite');
-      const rec: HexMarkdownRecord = { hexCode, raw_markdown, updatedAt: Date.now() };
+      const rec: HexMarkdownRecord = { hexCode: langKey(`hex:${hexCode}`), raw_markdown, updatedAt: Date.now() };
       await new Promise<void>((resolve, reject) => {
         const req = store.put(rec);
         req.onsuccess = () => resolve();
