@@ -4,8 +4,10 @@ Unified Terrain System for The Dying Lands
 Handles all terrain detection, analysis, and generation.
 """
 
-import cv2
-import numpy as np
+try:
+    import cv2  # type: ignore
+except Exception:  # OpenCV is optional in Lambda
+    cv2 = None  # type: ignore
 import os
 import random
 from typing import Dict, Tuple, Optional

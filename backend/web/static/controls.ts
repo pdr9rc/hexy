@@ -3,6 +3,7 @@ import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
 import { setLanguage } from './translations.js';
+import { SandboxStore } from './utils/sandboxStore.js';
 
 export { setupControls as initializeControls };
 
@@ -47,9 +48,10 @@ export function setupControls(app: DyingLandsApp) {
       // Ask for confirmation without blocking
       ui.showResetConfirm(async () => {
         try {
-          await api.resetContinent();
+          // Local-only reset: clear sandbox data and rotate sandbox id
+          await SandboxStore.clearAll();
           await clearServiceWorkerCaches();
-          window.location.replace('/?t=' + Date.now());
+          window.location.replace('?t=' + Date.now());
         } catch (e: any) {
           ui.hideLoading();
           ui.showNotification(e.message || 'Failed to reset continent', 'error');
@@ -71,7 +73,7 @@ export function setupControls(app: DyingLandsApp) {
         await api.setLanguage(lang);
         setLanguage(lang);
         await clearServiceWorkerCaches();
-        window.location.replace('/?t=' + Date.now());
+                window.location.replace('?t=' + Date.now());
       } catch (e: any) {
         ui.hideLoading();
         ui.showNotification(e.message || 'Failed to change language', 'error');
@@ -83,7 +85,8 @@ export function setupControls(app: DyingLandsApp) {
   if (exportBtn) {
     exportBtn.addEventListener('click', async () => {
       try {
-        const res = await fetch('/api/export');
+        // Export current sandbox markdown overrides as a JSON alongside server zip
+        const res = await fetch('api/export');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
@@ -118,6 +121,7 @@ export function setupControls(app: DyingLandsApp) {
       ui.showLoading('Importing...');
       try {
         await api.importZip(file);
+        // Keep sandbox overrides; do not clear IndexedDB
         ui.hideLoading();
         ui.showNotification('Import complete');
         await clearServiceWorkerCaches();

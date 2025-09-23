@@ -1,61 +1,40 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-
-# Node/JS/TS
+# Node / Typescript
 node_modules/
-*.js
-*.js.map
 *.tsbuildinfo
-dist/
-build/
 
-# Output
-dying_lands_output/
+# Python
+venv/
+.venv/
+**/__pycache__/
+*.py[cod]
 
-# OS/Editor
+# Builds / Artifacts
+/dist/
+lambda-deployment.zip
+pmd-bin-*/
+
+# Local data/output
+/dying_lands_output/
+/dying_lands_output.bak-*/
+
+# Terraform local state (use remote state in CI)
+terraform/terraform.tfstate*
+
+# OS/editor junk
 .DS_Store
-.vscode/
+Thumbs.db
 .idea/
+.vscode/
+.cache/
 
-# Misc
-*.tmp
-*.temp
-*.bak
-*.backup
-*~
-.#*
-\#*#
-.local/
-# dependencies
-/node_modules
+# Source maps not needed in repo
+**/*.map
 
-# next.js
-/.next/
-/out/
+# Legacy/deprecated
+zappa_settings.json
+zappa_settings_full.json
+requirements-zappa.txt
 
-# production
-/build
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files
-.env*
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-pmd-bin-6.55.0/*
-
-backend/web/static/*.js
-backend/web/static/utils/*.js
-backend/web/static/*.map
-backend/web/static/**/*.map
+# Ignore compiled frontend JS (keep vendor library JS)
+backend/web/static/**/*.js
+!backend/web/static/vendor/**

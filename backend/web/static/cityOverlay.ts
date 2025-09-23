@@ -1,11 +1,11 @@
 // web/static/cityOverlay.ts
 import * as ui from './uiUtils.js';
+import { apiGet } from './utils/apiUtils.js';
 
 export async function showCityDetailsInMap(app: any, hexCode: string): Promise<void> {
     ui.showLoading('Loading city details...');
     try {
-        const response = await fetch(`/api/city/${hexCode}`);
-        const data = await response.json();
+        const data: any = await apiGet(`api/city/${hexCode}`);
         if (data.success) {
             const city = data.city;
             const container = document.getElementById('details-panel');
@@ -42,8 +42,7 @@ export async function showCityDetailsInMap(app: any, hexCode: string): Promise<v
 export async function showSettlementDetailsInMap(app: any, hexCode: string): Promise<void> {
     ui.showLoading('Loading settlement details...');
     try {
-        const response = await fetch(`/api/settlement/${hexCode}`);
-        const data = await response.json();
+        const data: any = await apiGet(`api/settlement/${hexCode}`);
         if (data.success) {
             const settlement = data.settlement;
             const container = document.getElementById('details-panel');
@@ -77,8 +76,7 @@ export async function showSettlementDetailsInMap(app: any, hexCode: string): Pro
 export async function showCityOverlayInMap(app: any, hexCode: string): Promise<void> {
     ui.showLoading('Loading city overlays...');
     try {
-        const response = await fetch('/api/city-overlays');
-        const data = await response.json();
+        const data: any = await apiGet('api/city-overlays');
         if (data.success && data.overlays.length > 0) {
             const overlayName = data.overlays[0].name;
             await showCityOverlayGridInMap(app, overlayName, hexCode);
@@ -99,8 +97,7 @@ export async function showCityOverlayInMap(app: any, hexCode: string): Promise<v
 export async function showCityOverlayGridInMap(app: any, overlayName: string, hexCode: string): Promise<void> {
     ui.showLoading('Loading city overlay...');
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}`);
-        const data = await response.json();
+        const data: any = await apiGet(`api/city-overlay/${overlayName}`);
         console.log('DEBUG: Received overlay data:', data);
         if (data.success) {
             const overlay = data.overlay;
@@ -189,8 +186,7 @@ export async function showCityOverlayAsciiInMap(app: any, overlayName: string, h
             (window as any).disableZoom();
         }
         
-        const response = await fetch(`/api/city-overlay/${overlayName}/ascii`);
-        const data = await response.json();
+        const data: any = await apiGet(`api/city-overlay/${overlayName}/ascii`);
         if (data.success) {
             const mapContainer = document.querySelector('.map-container');
             const mapZoomContainer = document.getElementById('map-zoom-container');
@@ -238,8 +234,7 @@ export async function showCityHexDetailsInMap(app: any, overlayName: string, hex
             (window as any).disableZoom();
         }
         
-        const response = await fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`);
-        const data = await response.json();
+        const data: any = await apiGet(`api/city-overlay/${overlayName}/hex/${hexId}`);
         if (data.success) {
             const hex = data.hex;
             const content = hex.content;

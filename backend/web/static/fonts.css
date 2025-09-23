@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'IBM';
-    src: url('/static/fonts/PxPlus_IBM_MDA.ttf') format('truetype');
+    src: url('fonts/PxPlus_IBM_MDA.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -10,7 +10,7 @@
 
 @font-face {
     font-family: 'Kun-Denta';
-    src: url('/static/fonts/Kun-Denta.ttf') format('truetype');
+    src: url('fonts/Kun-Denta.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

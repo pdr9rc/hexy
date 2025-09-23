@@ -1,5 +1,6 @@
 // web/static/main.ts
 import { getCityOverlay, getCityOverlayHex, updateHex } from "./api.js"
+import { apiGet, apiPost } from './utils/apiUtils.js'
 import { showHexDetails as renderHexDetails, showCityDetails, showSettlementDetails } from "./hexViewer.js"
 import { renderMap } from "./mapRenderer.js"
 import { initializeControls } from "./controls.js"
@@ -7,6 +8,7 @@ import { showNotification, showError } from "./uiUtils.js"
 import { showCityOverlayGrid } from './cityOverlays.js';
 import { generateDistrictColor } from './utils/colorUtils.js';
 import { t, getCurrentLanguage } from './translations.js';
+import { SandboxStore, getSandboxId } from './utils/sandboxStore.js';
 
 // Global state for hex editing
 let currentEditingHex: string | null = null;
@@ -87,7 +89,14 @@ class DyingLandsApp {
 
     // Initialize components
     this.initializeEventListeners()
-    this.renderWorldMap()
+    // Try to hydrate map from sandbox; fallback to server-rendered mapData
+    void (async () => {
+      const cached = await SandboxStore.loadWorldMap();
+      if (cached && Object.keys(cached).length) {
+        this.mapData = cached as any;
+      }
+      this.renderWorldMap()
+    })();
     this.updateWorldMapControlsVisibility()
     initializeControls(this)
 
@@ -180,8 +189,7 @@ class DyingLandsApp {
       console.log('🔍 showCityHexDetails called with:', { overlayName, hexId });
       
       // Call the API directly to get enriched hex data
-      const response = await fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`);
-      const data = await response.json();
+      const data: any = await apiGet(`api/city-overlay/${overlayName}/hex/${hexId}`);
       console.log('📦 API response:', data);
       
       if (data.success && data.hex) {
@@ -499,13 +507,8 @@ class DyingLandsApp {
     
     try {
       // Call the backend to regenerate the hex
-      const response = await fetch(`/api/regenerate-hex/${targetOverlayName}/${hexId}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      });
-      
-      if (response.ok) {
-        const result = await response.json();
+      const result: any = await apiPost(`api/regenerate-hex/${targetOverlayName}/${hexId}`);
+      if (result) {
         if (result.success) {
           // Update the current overlay with new hex data if it exists
           if (this.currentCityOverlay) {
@@ -523,8 +526,8 @@ class DyingLandsApp {
           showNotification("Failed to regenerate hex: " + result.error, "error");
         }
       } else {
-        console.error("Failed to regenerate hex:", response.statusText);
-        showNotification("Failed to regenerate hex: " + response.statusText, "error");
+        console.error("Failed to regenerate hex:", result.error || 'unknown');
+        showNotification("Failed to regenerate hex: " + (result.error || 'unknown'), "error");
       }
     } catch (error) {
       console.error("Error regenerating hex:", error);
@@ -919,6 +922,8 @@ The world is dying, but adventure lives on.
 
   private renderWorldMap(): void {
     renderMap(this)
+    // Persist the current map locally for sandboxing
+    void SandboxStore.saveWorldMap(this.mapData)
   }
 
   public showCityDetailsInMap(hexCode: string): void {
@@ -1012,8 +1017,7 @@ The world is dying, but adventure lives on.
     const ensureMarkdownBlock = async (): Promise<HTMLElement | null> => {
       if (markdownContent) return markdownContent;
       try {
-        const res = await fetch(`/api/hex/${hexCode}`);
-        const data = await res.json();
+        const data: any = await apiGet(`api/hex/${hexCode}`);
         if (data && data.raw_markdown) {
           const block = document.createElement('div');
           block.className = 'markdown-content';
@@ -1043,32 +1047,46 @@ The world is dying, but adventure lives on.
         return;
       }
 
-      const content = markdownContent.textContent || '';
-      originalHexContent = content;
-      currentEditingHex = hexCode;
+      // Prefer locally cached edits if available
+      let content = markdownContent.textContent || '';
+      try {
+        SandboxStore.getHexMarkdown(hexCode).then(localMd => {
+          if (localMd) {
+            content = localMd;
+          }
+        }).finally(() => {
+          finalize(content);
+        });
+        return;
+      } catch (_) {}
+      finalize(content);
 
-      // Replace the content with a textarea
-      const textarea = document.createElement('textarea');
-      textarea.value = content;
-      textarea.style.width = '100%';
-      textarea.style.minHeight = '300px';
-      textarea.style.fontFamily = 'monospace';
-      textarea.style.backgroundColor = '#1a1a1a';
-      textarea.style.color = '#ffffff';
-      textarea.style.border = '1px solid #333';
-      textarea.style.padding = '10px';
-      textarea.style.resize = 'vertical';
+      function finalize(current: string) {
+        originalHexContent = current;
+        currentEditingHex = hexCode;
 
-      markdownContent.parentNode?.replaceChild(textarea, markdownContent);
+        // Replace the content with a textarea
+        const textarea = document.createElement('textarea');
+        textarea.value = current;
+        textarea.style.width = '100%';
+        textarea.style.minHeight = '300px';
+        textarea.style.fontFamily = 'monospace';
+        textarea.style.backgroundColor = '#1a1a1a';
+        textarea.style.color = '#ffffff';
+        textarea.style.border = '1px solid #333';
+        textarea.style.padding = '10px';
+        textarea.style.resize = 'vertical';
 
-      // Show save/cancel buttons
-      const saveBtn = document.getElementById('save-hex-btn') as HTMLElement;
-      const cancelBtn = document.getElementById('cancel-hex-btn') as HTMLElement;
-      const editBtn = container.querySelector('button[onclick*="editHexContent"]') as HTMLElement;
-      
-      if (saveBtn) saveBtn.style.display = 'inline-block';
-      if (cancelBtn) cancelBtn.style.display = 'inline-block';
-      if (editBtn) editBtn.style.display = 'none';
+        markdownContent!.parentNode?.replaceChild(textarea, markdownContent!);
+
+        // Show save/cancel buttons
+        const saveBtn = document.getElementById('save-hex-btn') as HTMLElement | null;
+        const cancelBtn = document.getElementById('cancel-hex-btn') as HTMLElement | null;
+        const editBtn = container ? (container.querySelector('button[onclick*="editHexContent"]') as HTMLElement | null) : null;
+        if (saveBtn) saveBtn.style.display = 'inline-block';
+        if (cancelBtn) cancelBtn.style.display = 'inline-block';
+        if (editBtn) editBtn.style.display = 'none';
+      }
     };
 
     void proceed();
@@ -1078,7 +1096,7 @@ The world is dying, but adventure lives on.
     console.log('💾 Saving hex content:', hexCode);
     
     const container = document.getElementById('details-panel');
-    if (!container) return;
+    if (!container) { showError('No details panel'); return; }
 
     const textarea = container.querySelector('textarea');
     if (!textarea) {
@@ -1089,8 +1107,8 @@ The world is dying, but adventure lives on.
     const newContent = (textarea as HTMLTextAreaElement).value;
 
     try {
-      await updateHex(hexCode, newContent);
-      showNotification('Hex content saved successfully');
+      await SandboxStore.saveHexMarkdown(hexCode, newContent);
+      showNotification('Saved to your sandbox');
       
       // Refresh the hex details
       this.showHexDetails(hexCode);

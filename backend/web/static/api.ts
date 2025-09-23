@@ -1,9 +1,16 @@
 // web/static/api.ts
 import { apiGet, apiPost, apiPut, handleApiError } from './utils/apiUtils.js';
+import { SandboxStore } from './utils/sandboxStore.js';
 
 export async function getHex(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`/api/hex/${hexCode}`);
+    const server = await apiGet<any>(`api/hex/${hexCode}`);
+    // Merge with local sandbox markdown if present
+    const localMd = await SandboxStore.getHexMarkdown(hexCode);
+    if (localMd) {
+      return { ...server, raw_markdown: localMd };
+    }
+    return server;
   } catch (error) {
     throw handleApiError(error, 'fetching hex');
   }
@@ -11,7 +18,9 @@ export async function getHex(hexCode: string): Promise<any> {
 
 export async function updateHex(hexCode: string, content: string): Promise<any> {
   try {
-    return await apiPut(`/api/hex/${hexCode}`, { content });
+    // Client-side only: store in sandbox and synthesize response
+    await SandboxStore.saveHexMarkdown(hexCode, content);
+    return { success: true, sandbox: true };
   } catch (error) {
     throw handleApiError(error, 'updating hex');
   }
@@ -19,7 +28,7 @@ export async function updateHex(hexCode: string, content: string): Promise<any> 
 
 export async function getCity(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`/api/city/${hexCode}`);
+    return await apiGet(`api/city/${hexCode}`);
   } catch (error) {
     throw handleApiError(error, 'fetching city');
   }
@@ -27,14 +36,14 @@ export async function getCity(hexCode: string): Promise<any> {
 
 export async function getSettlement(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`/api/settlement/${hexCode}`);
+    return await apiGet(`api/settlement/${hexCode}`);
   } catch (error) {
     throw handleApiError(error, 'fetching settlement');
   }
 }
 
 export async function generateHex(hexCode: string) {
-  const res = await fetch('/api/generate-hex', {
+  const res = await fetch('api/generate-hex', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ hex_code: hexCode })
@@ -45,7 +54,7 @@ export async function generateHex(hexCode: string) {
 
 export async function setLanguage(language: string): Promise<any> {
   try {
-    return await apiPost('/api/set-language', { language });
+    return await apiPost('api/set-language', { language });
   } catch (error) {
     throw handleApiError(error, 'setting language');
   }
@@ -53,7 +62,7 @@ export async function setLanguage(language: string): Promise<any> {
 
 export async function resetContinent(language?: string): Promise<any> {
   try {
-    const response = await fetch('/api/reset-continent', {
+    const response = await fetch('api/reset-continent', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(language ? { language } : {})
@@ -70,7 +79,7 @@ export async function resetContinent(language?: string): Promise<any> {
 
 export async function getLoreOverview(): Promise<any> {
   try {
-    const response = await fetch('/api/lore-overview');
+    const response = await fetch('api/lore-overview');
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
@@ -84,7 +93,7 @@ export async function getLoreOverview(): Promise<any> {
 export async function importZip(file: File): Promise<any> {
   const form = new FormData();
   form.append('file', file);
-  const res = await fetch('/api/import', {
+  const res = await fetch('api/import', {
     method: 'POST',
     body: form
   });
@@ -97,11 +106,7 @@ export async function importZip(file: File): Promise<any> {
 // City Overlay API Functions
 export async function getCityOverlays(): Promise<any> {
   try {
-    const response = await fetch('/api/city-overlays');
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet('api/city-overlays');
   } catch (error) {
     console.error('Error fetching city overlays:', error);
     throw error;
@@ -110,11 +115,7 @@ export async function getCityOverlays(): Promise<any> {
 
 export async function getCityOverlay(overlayName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-overlay/${overlayName}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`api/city-overlay/${overlayName}`);
   } catch (error) {
     console.error('Error fetching city overlay:', error);
     throw error;
@@ -123,11 +124,7 @@ export async function getCityOverlay(overlayName: string): Promise<any> {
 
 export async function getCityOverlayAscii(overlayName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-overlay/${overlayName}/ascii`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`api/city-overlay/${overlayName}/ascii`);
   } catch (error) {
     console.error('Error fetching city overlay ASCII:', error);
     throw error;
@@ -136,11 +133,7 @@ export async function getCityOverlayAscii(overlayName: string): Promise<any> {
 
 export async function getCityContext(cityName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-context/${cityName}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`api/city-context/${cityName}`);
   } catch (error) {
     console.error('Error fetching city context:', error);
     throw error;
@@ -149,11 +142,7 @@ export async function getCityContext(cityName: string): Promise<any> {
 
 export async function getCityOverlayHex(overlayName: string, hexId: string): Promise<any> {
   try {
-    const response = await fetch(`/api/city-overlay/${overlayName}/hex/${hexId}`);
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-    }
-    return await response.json();
+    return await apiGet(`api/city-overlay/${overlayName}/hex/${hexId}`);
   } catch (error) {
     console.error('Error fetching city overlay hex:', error);
     throw error;
@@ -163,11 +152,7 @@ export async function getCityOverlayHex(overlayName: string, hexId: string): Pro
 // Enhanced District API Functions
 export async function getCityDistricts(overlayName: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/districts`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`api/city-overlay/${overlayName}/districts`);
     } catch (error) {
         console.error('Error fetching city districts:', error);
         throw error;
@@ -176,11 +161,7 @@ export async function getCityDistricts(overlayName: string): Promise<any> {
 
 export async function getCityDistrictDetails(overlayName: string, districtName: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}`);
     } catch (error) {
         console.error('Error fetching district details:', error);
         throw error;
@@ -189,11 +170,7 @@ export async function getCityDistrictDetails(overlayName: string, districtName: 
 
 export async function getDistrictRandomTable(overlayName: string, districtName: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table`);
     } catch (error) {
         console.error('Error fetching district random table:', error);
         throw error;
@@ -202,11 +179,7 @@ export async function getDistrictRandomTable(overlayName: string, districtName: 
 
 export async function getDistrictSpecificRandomTable(overlayName: string, districtName: string, tableType: string): Promise<any> {
     try {
-        const response = await fetch(`/api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table/${tableType}`);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return await response.json();
+        return await apiGet(`api/city-overlay/${overlayName}/district/${encodeURIComponent(districtName)}/random-table/${tableType}`);
     } catch (error) {
         console.error('Error fetching district specific random table:', error);
         throw error;
@@ -215,18 +188,7 @@ export async function getDistrictSpecificRandomTable(overlayName: string, distri
 
 export async function regenerateHex(overlayName: string, hexId: string): Promise<any> {
   try {
-    const response = await fetch(`/api/regenerate-hex/${overlayName}/${hexId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    return response.json();
+    return await apiPost(`api/regenerate-hex/${overlayName}/${hexId}`);
   } catch (error) {
     console.error('Error regenerating hex:', error);
     throw error;
@@ -235,18 +197,7 @@ export async function regenerateHex(overlayName: string, hexId: string): Promise
 
 export async function regenerateOverlay(overlayName: string): Promise<any> {
   try {
-    const response = await fetch(`/api/regenerate-overlay/${overlayName}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    return response.json();
+    return await apiPost(`api/regenerate-overlay/${overlayName}`);
   } catch (error) {
     console.error('Error regenerating overlay:', error);
     throw error;

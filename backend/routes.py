@@ -172,13 +172,13 @@ def serve_manifest():
     manifest = {
         "name": "The Dying Lands",
         "short_name": "Dying Lands",
-        "start_url": "/",
+        "start_url": ".",
         "display": "standalone",
         "background_color": "#000000",
         "theme_color": "#000000",
         "icons": [
-            {"src": "/static/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
-            {"src": "/static/icons/icon-512.png", "sizes": "512x512", "type": "image/png"}
+            {"src": "static/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "static/icons/icon-512.png", "sizes": "512x512", "type": "image/png"}
         ]
     }
     return jsonify(manifest)
@@ -191,18 +191,17 @@ def serve_service_worker():
         f"const CACHE_NAME='dl-{version}';\n"
         f"const RUNTIME_CACHE='dl-runtime-{version}';\n"
         "const PRECACHE_URLS=[\n"
-        "  '/',\n"
-        "  '/manifest.webmanifest',\n"
-        "  '/static/main.js',\n"
-        "  '/static/main.css',\n"
-        "  '/static/fonts.css',\n"
-        "  '/static/icons/icon-192.png',\n"
-        "  '/static/icons/icon-512.png'\n"
+        "  'manifest.webmanifest',\n"
+        "  'static/main.js',\n"
+        "  'static/main.css',\n"
+        "  'static/fonts.css',\n"
+        "  'static/icons/icon-192.png',\n"
+        "  'static/icons/icon-512.png'\n"
         "];\n"
         "self.addEventListener('install',event=>{\n"
         "  event.waitUntil((async()=>{\n"
         "    const cache=await caches.open(CACHE_NAME);\n"
-        "    await cache.addAll(PRECACHE_URLS);\n"
+        "    try { await cache.addAll(PRECACHE_URLS); } catch(e){}\n"
         "    self.skipWaiting();\n"
         "  })());\n"
         "});\n"
@@ -226,7 +225,7 @@ def serve_service_worker():
         "  const url=new URL(req.url);\n"
         "  if(req.method!=='GET'){ return; }\n"
         "  // API: network-first, fallback to cache, and never use http cache\n"
-        "  if(url.origin===location.origin && url.pathname.startsWith('/api/')){\n"
+        "  if(url.origin===location.origin && url.pathname.includes('/api/')){\n"
         "    event.respondWith((async()=>{\n"
         "      try{\n"
         "        const fresh=await fetch(new Request(req,{cache:'no-store'}));\n"
@@ -241,8 +240,8 @@ def serve_service_worker():
         "    })());\n"
         "    return;\n"
         "  }\n"
-        "  // Static assets: cache-first\n"
-        "  if(url.origin===location.origin && (url.pathname.startsWith('/static/') || PRECACHE_URLS.includes(url.pathname))){\n"
+        "  // Static assets: cache-first (stage-aware by using relative paths)\n"
+        "  if(url.origin===location.origin && (url.pathname.includes('/static/') )){\n"
         "    event.respondWith((async()=>{\n"
         "      const cached=await caches.match(req);\n"
         "      if(cached) return cached;\n"
@@ -404,14 +403,38 @@ def reset_continent():
             data = {}
         new_language = data.get('language') if isinstance(data, dict) else None
 
-        if new_language in ['en', 'pt']:
-            global current_language, main_map_generator
-            current_language = new_language
-            # Update translation system and re-init generator
-            translation_system.set_language(new_language)
-            main_map_generator = get_main_map_generator()
+        # Determine languages to generate: requested one or all supported
+        supported = getattr(translation_system, 'get_supported_languages', lambda: ['en','pt'])()
+        langs = [new_language] if new_language in supported else list(supported)
 
-        result = main_map_generator.reset_continent()
+        # Preserve current state
+        global current_language, main_map_generator
+        original_language = current_language
+        base_output = config.paths.output_path
+
+        last_result = None
+        for lang in langs:
+            try:
+                current_language = lang
+                translation_system.set_language(lang)
+                # Re-init generator for this language
+                main_map_generator = get_main_map_generator()
+                # Write outputs under language-specific subdir
+                from backend.config import update_config
+                update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output / lang)}})
+                last_result = main_map_generator.reset_continent()
+            except Exception:
+                logging.exception(f"Reset failed for language {lang}")
+
+        # Restore original language and output path
+        try:
+            current_language = original_language
+            translation_system.set_language(original_language)
+            main_map_generator = get_main_map_generator()
+            from backend.config import update_config
+            update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output)}})
+        except Exception:
+            pass
         # Invalidate overlay caches if any
         try:
             from backend.city_overlay_analyzer import city_overlay_analyzer
@@ -421,8 +444,8 @@ def reset_continent():
         # Clear hex service cache after reset
         hex_service.hex_data_cache.clear()
         hex_manager.clear_cache()
-        logging.info("Continent reset and caches cleared.")
-        return jsonify(result)
+        logging.info("Continent reset for languages %s and caches cleared.", langs)
+        return jsonify(last_result or { 'ok': True })
     except Exception as e:
         logging.error(f"Error resetting continent: {e}\n{traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500

@@ -16,7 +16,7 @@ class TranslationManager {
             console.log('🌐 Loading translations for language:', this.currentLanguage);
             
             // Load UI translations from the unified backend API
-            const response = await fetch(`/api/translations/ui/${this.currentLanguage}`);
+            const response = await fetch(`/api/translations/ui/${this.currentLanguage}?t=${Date.now()}`);
             if (response.ok) {
                 const data = await response.json();
                 this.translations = this._flattenTranslations(data);
@@ -39,7 +39,7 @@ class TranslationManager {
     private async _loadFallbackTranslations(): Promise<void> {
         try {
             // Try loading English as fallback
-            const fallbackResponse = await fetch(`/api/translations/ui/${this.fallbackLanguage}`);
+            const fallbackResponse = await fetch(`/api/translations/ui/${this.fallbackLanguage}?t=${Date.now()}`);
             if (fallbackResponse.ok) {
                 const data = await fallbackResponse.json();
                 this.translations = this._flattenTranslations(data);

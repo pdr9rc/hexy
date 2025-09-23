@@ -405,7 +405,7 @@ async function showCityDetailsInMap(app: DyingLandsApp, hexCode: string) {
       try {
         // Fetch detailed hex data from API
         console.log('📡 Fetching hex data from API...');
-        const response = await fetch(`/api/city-overlay/${cityOverlayName}/hex/${hexId}`);
+        const response = await fetch(`/api/city-overlay/${cityOverlayName}/hex/${hexId}?t=${Date.now()}`);
         const data = await response.json();
         console.log('📦 API response:', data);
         

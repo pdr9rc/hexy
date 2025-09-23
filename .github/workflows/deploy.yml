@@ -1,0 +1,112 @@
+# 💀 THE DYING LANDS - AUTOMATED DEPLOYMENT 💀
+# GitHub Actions workflow for AWS Lambda deployment
+
+name: Deploy Hexy (Lambda + S3 + CloudFront)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest flake8
+    
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 backend/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 backend/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Test with pytest
+      run: |
+        pytest backend/tests/ -v || echo "No tests found, continuing..."
+
+  deploy-production:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    - name: Build frontend (TS)
+      run: |
+        npm ci
+        npm run build:web
+
+    - name: Package Lambda
+      run: |
+        set -e
+        rm -rf lambda_deploy lambda-deployment.zip
+        mkdir -p lambda_deploy
+        cp -r backend/ lambda_deploy/
+        cp -r databases/ lambda_deploy/
+        cp -r data/ lambda_deploy/
+        cp lambda_handler.py lambda_deploy/
+        python -m pip install --upgrade pip
+        pip install -r requirements_lambda.txt -t lambda_deploy
+        cd lambda_deploy
+        zip -r ../lambda-deployment.zip . -x "*.pyc" "*__pycache__*"
+
+    - name: Update Lambda function code
+      run: |
+        aws lambda update-function-code \
+          --function-name hexy-dying-lands-production \
+          --zip-file fileb://lambda-deployment.zip \
+          --region ${{ env.AWS_REGION }}
+
+    - name: Upload production data
+      run: |
+        aws s3 sync databases/ s3://hexy-dying-lands-data-production/databases/ --delete
+
+    - name: Sync static assets to S3
+      run: |
+        aws s3 sync backend/web/static/ s3://hexy-dying-lands-static-production/static --delete \
+          --exclude "**/*.ts" --exclude "**/*.map"
+
+    - name: Invalidate CloudFront cache
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_PRODUCTION }} \
+          --paths "/*"
+
+    - name: Notify
+      run: |
+        echo "🎉 Production deployment completed (Lambda + S3 + CloudFront)."

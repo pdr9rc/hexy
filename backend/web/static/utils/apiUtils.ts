@@ -28,9 +28,28 @@ function withDefaults(options?: RequestInit): RequestInit {
  * @param options - Fetch options (optional)
  * @returns Promise with response data
  */
+function getApiBase(): string {
+  const isCloudFront = typeof window !== 'undefined' && /cloudfront\.net$/i.test(window.location.hostname);
+  if (isCloudFront) {
+    return 'https://5fbvtc8qx4.execute-api.us-east-1.amazonaws.com/production/';
+  }
+  // Use document-relative paths (preserves /production/ stage when hosted on API Gateway)
+  return '';
+}
+
 export async function apiCall<T>(url: string, options?: RequestInit): Promise<T> {
   try {
-    const response = await fetch(url, withDefaults(options));
+    const base = url.startsWith('api/') ? getApiBase() : '';
+    // Attach sandbox id to API calls so server responses can be cached per user (at edge) if needed
+    let finalUrl = base + url;
+    try {
+      const { getSandboxId } = await import('./sandboxStore.js');
+      const sid = getSandboxId();
+      const sep = finalUrl.includes('?') ? '&' : '?';
+      finalUrl = `${finalUrl}${sep}sandbox=${encodeURIComponent(sid)}`;
+    } catch (_) {}
+
+    const response = await fetch(finalUrl, withDefaults(options));
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
