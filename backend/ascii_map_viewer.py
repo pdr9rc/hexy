@@ -19,7 +19,7 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from mork_borg_lore_database import MorkBorgLoreDatabase
-from backend.terrain_system import TerrainSystem
+from backend.terrain_system import terrain_system
 from main_map_generator import MainMapGenerator
 from translation_system import translation_system
 from city_overlay_analyzer import city_overlay_analyzer
@@ -39,7 +39,6 @@ current_language = 'en'
 # Initialize main map generator with current language
 def get_main_map_generator():
     """Get main map generator with current language configuration."""
-    global current_language
     return MainMapGenerator({'language': current_language})
 
 # Initialize with default language

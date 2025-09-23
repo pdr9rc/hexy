@@ -84,7 +84,6 @@ _t.start()
 
 def get_main_map_generator():
     """Get main map generator with current language configuration."""
-    global current_language
     return MainMapGenerator({'language': current_language})
 
 # Initialize with default language
