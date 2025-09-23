@@ -435,24 +435,22 @@ def reset_continent():
         last_result = None
         for lang in langs:
             try:
-                current_language = lang
+                # Ensure language-specific directory
+                lang_output = (base_output / lang)
+                lang_output.mkdir(parents=True, exist_ok=True)
+                # Generate into language directory without mutating global config
+                from backend.main_map_generator import MainMapGenerator
+                generator = MainMapGenerator({'language': lang, 'output_directory': str(lang_output)})
                 translation_system.set_language(lang)
-                # Re-init generator for this language
-                main_map_generator = get_main_map_generator()
-                # Write outputs under language-specific subdir
-                from backend.config import update_config
-                update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output / lang)}})
-                last_result = main_map_generator.reset_continent()
+                last_result = generator.reset_continent()
             except Exception:
                 logging.exception(f"Reset failed for language {lang}")
 
-        # Restore original language and output path
+        # Restore original language
         try:
             current_language = original_language
             translation_system.set_language(original_language)
             main_map_generator = get_main_map_generator()
-            from backend.config import update_config
-            update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output)}})
         except Exception:
             pass
         # Invalidate overlay caches if any
