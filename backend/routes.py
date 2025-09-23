@@ -152,6 +152,8 @@ def _get_output_dir_for_language(lang: str) -> Path:
 def main_map():
     """Main map page with integrated lore."""
     config = get_config()
+    # Respect requested language for initial render
+    sel_lang = _get_selected_language(current_language)
     
     if not config.paths.output_path.exists():
         config.paths.output_path.mkdir(parents=True, exist_ok=True)
@@ -165,7 +167,7 @@ def main_map():
     # Get map dimensions
     map_width, map_height = terrain_system.get_map_dimensions()
     
-    # Generate ASCII map data
+    # Generate ASCII map data for selected language
     ascii_map_data = generate_ascii_map_data()
 
     # If map is empty, regenerate and reload
@@ -183,7 +185,7 @@ def main_map():
                          map_height=map_height,
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height,
-                           current_language=current_language,
+                          current_language=sel_lang,
                            hexy_token=_HEXY_HEARTBEAT_TOKEN)
 
 # ===== PWA ASSETS =====
@@ -1135,12 +1137,19 @@ def generate_ascii_map_data():
         else:
             # Regular terrain - check for generated content
             terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
-            hex_file_exists = (config.paths.output_path / "hexes" / f"hex_{hex_code}.md").exists()
+            # Check language-scoped output for file existence
+            try:
+                lang = _get_selected_language()
+                out_dir = _get_output_dir_for_language(lang)
+            except Exception:
+                out_dir = config.paths.output_path
+            hex_file_path = out_dir / "hexes" / f"hex_{hex_code}.md"
+            hex_file_exists = hex_file_path.exists()
             has_loot = False
             content_type = None
             
             if hex_file_exists:
-                with open(config.paths.output_path / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
+                with open(hex_file_path, "r", encoding="utf-8") as f:
                     content = f.read()
                 hex_data_content = extract_hex_data(content)
                 terrain = normalize_terrain_name(hex_data_content.get('terrain', 'unknown'))
