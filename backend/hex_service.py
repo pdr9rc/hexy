@@ -24,44 +24,21 @@ class HexService:
         self.config = get_config()
         self.lore_db = MorkBorgLoreDatabase()
         self.hex_data_cache: Dict[str, Dict[str, Any]] = {}
-        self.current_cache_lang: Optional[str] = None
         self._load_hex_data()
     
-    def _get_request_language(self) -> str:
-        try:
-            from flask import request
-            lang = request.args.get('language') or request.headers.get('X-Hexy-Language')
-        except Exception:
-            lang = None
-        if not lang:
-            lang = 'en'
-        if lang not in ('en', 'pt'):
-            lang = 'en'
-        return lang
-
-    def _get_output_dir(self, lang: Optional[str] = None) -> Path:
-        base = self.config.paths.output_path
-        language = lang or self._get_request_language()
-        lang_dir = base / language
-        return lang_dir if lang_dir.exists() else base
-
-    def _maybe_reload_cache_for_lang(self, lang: str):
-        if self.current_cache_lang != lang:
-            self.hex_data_cache.clear()
-            self._load_hex_data(lang)
-            self.current_cache_lang = lang
-    
-    def _load_hex_data(self, lang: Optional[str] = None):
+    def _load_hex_data(self):
         """Load all hex data from the generated JSON files."""
-        out_dir = self._get_output_dir(lang)
-        hexes_dir = out_dir / "hexes"
+        hexes_dir = self.config.paths.output_path / "hexes"
         if not hexes_dir.exists():
             return
         
         hex_count = 0
+        # Load the hex data from the generation output
+        # This assumes the generation process creates structured data
         for hex_file in hexes_dir.glob("hex_*.md"):
             hex_code = hex_file.stem.replace("hex_", "")
             try:
+                # For now, we'll still parse the markdown but convert to structured data
                 hex_data = self._parse_hex_markdown(hex_file)
                 if hex_data:
                     self.hex_data_cache[hex_code] = hex_data
@@ -982,10 +959,6 @@ class HexService:
     
     def get_hex(self, hex_code: str) -> Optional[BaseHex]:
         """Get a hex model for the given hex code."""
-        # Ensure cache matches requested language
-        lang = self._get_request_language()
-        self._maybe_reload_cache_for_lang(lang)
-        
         # Check cache first
         cached_hex = hex_manager.get_hex(hex_code)
         if cached_hex:

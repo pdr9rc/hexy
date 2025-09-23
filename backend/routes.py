@@ -152,8 +152,6 @@ def _get_output_dir_for_language(lang: str) -> Path:
 def main_map():
     """Main map page with integrated lore."""
     config = get_config()
-    # Respect requested language for initial render
-    sel_lang = _get_selected_language(current_language)
     
     if not config.paths.output_path.exists():
         config.paths.output_path.mkdir(parents=True, exist_ok=True)
@@ -167,7 +165,7 @@ def main_map():
     # Get map dimensions
     map_width, map_height = terrain_system.get_map_dimensions()
     
-    # Generate ASCII map data for selected language
+    # Generate ASCII map data
     ascii_map_data = generate_ascii_map_data()
 
     # If map is empty, regenerate and reload
@@ -185,7 +183,7 @@ def main_map():
                          map_height=map_height,
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height,
-                          current_language=sel_lang,
+                           current_language=current_language,
                            hexy_token=_HEXY_HEARTBEAT_TOKEN)
 
 # ===== PWA ASSETS =====
@@ -437,22 +435,24 @@ def reset_continent():
         last_result = None
         for lang in langs:
             try:
-                # Ensure language-specific directory
-                lang_output = (base_output / lang)
-                lang_output.mkdir(parents=True, exist_ok=True)
-                # Generate into language directory without mutating global config
-                from backend.main_map_generator import MainMapGenerator
-                generator = MainMapGenerator({'language': lang, 'output_directory': str(lang_output)})
+                current_language = lang
                 translation_system.set_language(lang)
-                last_result = generator.reset_continent()
+                # Re-init generator for this language
+                main_map_generator = get_main_map_generator()
+                # Write outputs under language-specific subdir
+                from backend.config import update_config
+                update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output / lang)}})
+                last_result = main_map_generator.reset_continent()
             except Exception:
                 logging.exception(f"Reset failed for language {lang}")
 
-        # Restore original language
+        # Restore original language and output path
         try:
             current_language = original_language
             translation_system.set_language(original_language)
             main_map_generator = get_main_map_generator()
+            from backend.config import update_config
+            update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output)}})
         except Exception:
             pass
         # Invalidate overlay caches if any
@@ -1137,19 +1137,12 @@ def generate_ascii_map_data():
         else:
             # Regular terrain - check for generated content
             terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
-            # Check language-scoped output for file existence
-            try:
-                lang = _get_selected_language()
-                out_dir = _get_output_dir_for_language(lang)
-            except Exception:
-                out_dir = config.paths.output_path
-            hex_file_path = out_dir / "hexes" / f"hex_{hex_code}.md"
-            hex_file_exists = hex_file_path.exists()
+            hex_file_exists = (config.paths.output_path / "hexes" / f"hex_{hex_code}.md").exists()
             has_loot = False
             content_type = None
             
             if hex_file_exists:
-                with open(hex_file_path, "r", encoding="utf-8") as f:
+                with open(config.paths.output_path / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
                     content = f.read()
                 hex_data_content = extract_hex_data(content)
                 terrain = normalize_terrain_name(hex_data_content.get('terrain', 'unknown'))
