@@ -125,6 +125,27 @@ def normalize_terrain_name(name: str) -> str:
     }
     return mapping.get(name, "unknown")
 
+# Language helpers
+def _get_selected_language(default: str | None = None) -> str:
+    try:
+        lang = request.args.get('language') or request.headers.get('X-Hexy-Language')
+    except Exception:
+        lang = None
+    if not lang:
+        lang = default or current_language
+    try:
+        supported = translation_system.get_supported_languages()  # type: ignore
+    except Exception:
+        supported = ['en', 'pt']
+    if lang not in supported:
+        lang = 'en'
+    return lang
+
+def _get_output_dir_for_language(lang: str) -> Path:
+    base = config.paths.output_path
+    lang_dir = base / lang
+    return lang_dir if lang_dir.exists() else base
+
 # ===== MAIN ROUTES =====
 
 @main_bp.route('/')
@@ -454,17 +475,21 @@ def get_hex_info(hex_code):
     if not validate_hex_code(hex_code):
         return jsonify({'error': 'Invalid hex code format'}), 400
 
+    # Choose language-scoped output dir (do not mutate global config)
+    lang = _get_selected_language()
+    output_dir = _get_output_dir_for_language(lang)
+
     hex_data = hex_service.get_hex_dict(hex_code)
     if hex_data:
         # Add raw markdown if available
-        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+        hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             from backend.utils import safe_file_read
             hex_data['raw_markdown'] = safe_file_read(hex_file_path)
         return jsonify(hex_data)
 
     # If not in cache, check for a hex file and parse it for content
-    hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+    hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
     if hex_file_path.exists():
         from backend.utils import safe_file_read
         content = safe_file_read(hex_file_path)
@@ -674,7 +699,9 @@ def get_settlement_details(hex_code):
     # Fallback: read and parse the hex markdown directly if present
     try:
         from backend.utils import safe_file_read
-        hex_file_path = config.paths.output_path \
+        lang = _get_selected_language()
+        output_dir = _get_output_dir_for_language(lang)
+        hex_file_path = output_dir \
             / "hexes" / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             content = safe_file_read(hex_file_path)

@@ -40,16 +40,29 @@ function getApiBase(): string {
 export async function apiCall<T>(url: string, options?: RequestInit): Promise<T> {
   try {
     const base = url.startsWith('api/') ? getApiBase() : '';
-    // Attach sandbox id to API calls so server responses can be cached per user (at edge) if needed
+    // Attach sandbox id and selected language to API calls
     let finalUrl = base + url;
+    let headers: Record<string, string> = {};
     try {
       const { getSandboxId } = await import('./sandboxStore.js');
       const sid = getSandboxId();
       const sep = finalUrl.includes('?') ? '&' : '?';
       finalUrl = `${finalUrl}${sep}sandbox=${encodeURIComponent(sid)}`;
     } catch (_) {}
+    try {
+      const savedLang = (typeof window !== 'undefined') ? (localStorage.getItem('hexy-language') || localStorage.getItem('language') || 'en') : 'en';
+      headers['X-Hexy-Language'] = savedLang;
+      const sep2 = finalUrl.includes('?') ? '&' : '?';
+      finalUrl = `${finalUrl}${sep2}language=${encodeURIComponent(savedLang)}`;
+    } catch (_) {}
 
-    const response = await fetch(finalUrl, withDefaults(options));
+    const response = await fetch(finalUrl, withDefaults({
+      ...options,
+      headers: {
+        ...(options?.headers as any),
+        ...headers,
+      }
+    }));
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
