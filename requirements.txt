@@ -3,7 +3,6 @@
 
 # Web Framework (for the dying world interface)
 flask>=3.0.0
-flask-cors>=4.0.0
 markdown>=3.8.0
 
 # Image Processing (for official map integration)
