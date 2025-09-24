@@ -84,7 +84,8 @@ _t.start()
 
 def get_main_map_generator():
     """Get main map generator with current language configuration."""
-    return MainMapGenerator({'language': current_language, 'output_directory': str(config.paths.output_path)})
+    cfg = get_config()
+    return MainMapGenerator({'language': current_language, 'output_directory': str(cfg.paths.output_path)})
 
 # Initialize with default language
 main_map_generator = get_main_map_generator()
@@ -438,13 +439,14 @@ def reset_continent():
         last_result = None
         for lang in langs:
             try:
+                # Set output_path to language-specific subdir directly
+                config.paths.output_path = (base_output / lang)
+                config.paths.output_path.mkdir(parents=True, exist_ok=True)
+                # Then set language and re-init generator with updated config
                 current_language = lang
                 translation_system.set_language(lang)
-                # Re-init generator for this language
                 main_map_generator = get_main_map_generator()
-                # Write outputs under language-specific subdir
-                from backend.config import update_config
-                update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output / lang)}})
+                # Generate for this language into its own folder
                 last_result = main_map_generator.reset_continent()
             except Exception:
                 logging.exception(f"Reset failed for language {lang}")
@@ -453,9 +455,9 @@ def reset_continent():
         try:
             current_language = original_language
             translation_system.set_language(original_language)
+            # Restore base output path
+            config.paths.output_path = base_output
             main_map_generator = get_main_map_generator()
-            from backend.config import update_config
-            update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output)}})
         except Exception:
             pass
         # Invalidate overlay caches if any
@@ -481,166 +483,41 @@ def get_hex_info(hex_code):
     # Choose language-scoped output dir (do not mutate global config)
     lang = _get_selected_language()
     output_dir = _get_output_dir_for_language(lang)
+    # Debug logging removed
 
-    hex_data = hex_service.get_hex_dict(hex_code)
-    if hex_data:
-        # Add raw markdown if available
-        hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
-        if hex_file_path.exists():
-            from backend.utils import safe_file_read
-            hex_data['raw_markdown'] = safe_file_read(hex_file_path)
-        return jsonify(hex_data)
-
-    # If not in cache, check for a hex file and parse it for content
+    # When language is explicitly chosen, prefer reading from file directly to avoid stale cross-language cache
     hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
+    # Debug logging removed
     if hex_file_path.exists():
-        from backend.utils import safe_file_read
-        content = safe_file_read(hex_file_path)
-        hex_type = _determine_hex_type(content)
-        
-        # Base response with raw markdown
-        base_response = {
-            "hex_code": hex_code,
-            "raw_markdown": content,
-            "exists": True
-        }
-        
-        if hex_type == 'settlement':
-            parsed = extract_settlement_data(content)
+        try:
+            from backend.utils import safe_file_read
+            content = safe_file_read(hex_file_path)
+            # Serve raw markdown directly; client handles rendering/type.
+            return jsonify({"hex_code": hex_code, "exists": True, "hex_type": "unknown", "raw_markdown": content})
+        except Exception as e:
+            return jsonify({'error': f'Failed to read hex file: {e}'}), 500
+
+    # If not found in language directory, try base directory as a soft fallback
+    base_hex_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+    if base_hex_path.exists():
+        try:
+            from backend.utils import safe_file_read
+            content = safe_file_read(base_hex_path)
             return jsonify({
-                **base_response,
-                "hex_type": "settlement",
-                "content_type": "settlement",
-                "is_settlement": True,
-                "is_major_city": False,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "name": parsed.get('name'),
-                "description": parsed.get('description'),
-                "population": parsed.get('population'),
-                "atmosphere": parsed.get('atmosphere'),
-                "notable_feature": parsed.get('notable_feature'),
-                "local_tavern": parsed.get('local_tavern'),
-                "local_power": parsed.get('local_power'),
-                "settlement_art": parsed.get('settlement_art'),
-                # Mörk Borg settlement fields
-                "weather": parsed.get('weather'),
-                "city_event": parsed.get('city_event'),
-                "tavern_details": parsed.get('tavern_details'),
+                "hex_code": hex_code,
+                "exists": True,
+                "hex_type": "unknown",
+                "raw_markdown": content
             })
-        elif hex_type == 'beast':
-            parsed = extract_beast_data(content)
-            return jsonify({
-                **base_response,
-                "hex_type": "beast",
-                "content_type": "beast",
-                "is_beast": True,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "encounter": parsed.get('encounter'),
-                "beast_type": parsed.get('beast_type'),
-                "beast_feature": parsed.get('beast_feature'),
-                "beast_behavior": parsed.get('beast_behavior'),
-                "denizen": parsed.get('denizen'),
-                "territory": parsed.get('territory'),
-                "threat_level": parsed.get('threat_level'),
-                "notable_feature": parsed.get('notable_feature'),
-                "atmosphere": parsed.get('atmosphere'),
-                "loot": parsed.get('loot'),
-                "magical_effect": parsed.get('magical_effect'),
-                # Beast specific fields
-                "treasure_found": parsed.get('treasure_found'),
-                "beast_art": parsed.get('beast_art'),
-            })
-        elif hex_type == 'dungeon':
-            parsed = extract_dungeon_data(content)
-            return jsonify({
-                **base_response,
-                "hex_type": "dungeon",
-                "content_type": "dungeon",
-                "is_dungeon": True,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "encounter": parsed.get('encounter'),
-                "dungeon_type": parsed.get('dungeon_type'),
-                "denizen": parsed.get('denizen'),
-                "danger": parsed.get('danger'),
-                "atmosphere": parsed.get('atmosphere'),
-                "notable_feature": parsed.get('notable_feature'),
-                "treasure": parsed.get('treasure'),
-                "ancient_knowledge": parsed.get('ancient_knowledge'),
-                "loot": parsed.get('loot'),
-                "magical_effect": parsed.get('magical_effect'),
-                "description": parsed.get('description'),
-                # Mörk Borg trap information
-                "trap_section": parsed.get('trap_section'),
-            })
-        elif hex_type == 'npc':
-            parsed = extract_npc_data(content)
-            return jsonify({
-                **base_response,
-                "hex_type": "npc",
-                "is_npc": True,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "encounter": parsed.get('encounter'),
-                "name": parsed.get('name'),
-                "denizen_type": parsed.get('denizen_type'),
-                # Mörk Borg NPC fields
-                "trait": parsed.get('trait'),
-                "concern": parsed.get('concern'),
-                "want": parsed.get('want'),
-                "apocalypse_attitude": parsed.get('apocalypse_attitude'),
-                "secret": parsed.get('secret'),
-                # Fallback fields
-                "motivation": parsed.get('motivation'),
-                "feature": parsed.get('feature'),
-                "demeanor": parsed.get('demeanor'),
-                "key_npcs": parsed.get('key_npcs'),
-                "notable_feature": parsed.get('notable_feature'),
-                "atmosphere": parsed.get('atmosphere'),
-                "description": parsed.get('description'),
-                "denizen": parsed.get('denizen'),
-                # Additional NPC fields
-                "carries": parsed.get('carries'),
-                "location": parsed.get('location'),
-            })
-        elif hex_type == 'sea_encounter':
-            # Use hex_service for consistent parsing
-            hex_data = hex_service.get_hex_dict(hex_code)
-            if hex_data:
-                hex_data['raw_markdown'] = content
-                return jsonify(hex_data)
-            else:
-                return jsonify({'error': 'Sea encounter not found'}), 404
-        elif hex_type == 'ruins':
-            parsed = extract_ruins_data(content)
-            return jsonify({
-                **base_response,
-                "hex_type": "ruins",
-                "is_ruins": True,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "description": parsed.get('description'),
-                "danger": parsed.get('danger'),
-                "notable_feature": parsed.get('notable_feature'),
-                "atmosphere": parsed.get('atmosphere'),
-            })
-        else:
-            parsed = extract_hex_data(content)
-            return jsonify({
-                **base_response,
-                "terrain": parsed.get('terrain', 'unknown'),
-                "hex_type": "wilderness",
-                "is_settlement": False,
-                "is_major_city": False,
-                "description": parsed.get('description'),
-                "encounter": parsed.get('encounter'),
-                "notable_feature": parsed.get('notable_feature'),
-                "atmosphere": parsed.get('atmosphere'),
-            })
+        except Exception as e:
+            return jsonify({'error': f'Failed to read hex file: {e}'}), 500
 
     # Default fallback for missing hexes
     return jsonify({
         "hex_code": hex_code,
         "terrain": "unknown",
-        "exists": True,
-        "hex_type": "wilderness",
+        "exists": False,
+        "hex_type": "unknown",
         "is_settlement": False,
         "is_major_city": False,
         "description": None,
@@ -683,54 +560,69 @@ def set_language():
 
 @api_bp.route('/city/<hex_code>')
 def get_city_details(hex_code):
-    """Get detailed information for a major city."""
-    city_data = hex_service.get_city_details(hex_code)
-    
-    if city_data:
-        return jsonify(city_data)
-    else:
+    """Get detailed information for a major city (language-aware)."""
+    # Determine requested language
+    lang = _get_selected_language()
+    # Map hex to city key via lore database
+    hardcoded = lore_db.get_hardcoded_hex(hex_code)
+    if not hardcoded or hardcoded.get('type') != 'major_city':
         return jsonify({'success': False, 'error': 'Not a major city'}), 404
+    city_key = hardcoded.get('city_key')
+    # Load city data from language-specific database
+    from backend.database_manager import database_manager
+    cities_table = database_manager.get_table('cities', 'major_cities', lang)
+    city = {}
+    for entry in cities_table:
+        if isinstance(entry, dict) and entry.get('key') == city_key:
+            city = entry
+            break
+    if not city:
+        return jsonify({'success': False, 'error': 'City not found'}), 404
+    response = {
+        'success': True,
+        'city': {
+            'name': city.get('name', city_key.title()),
+            'description': city.get('description', ''),
+            'population': city.get('population', 'Unknown'),
+            'region': city.get('region', 'central'),
+            'atmosphere': city.get('atmosphere', ''),
+            'notable_features': city.get('notable_features', []),
+            'key_npcs': city.get('key_npcs', [])
+        }
+    }
+    return jsonify(response)
 
 @api_bp.route('/settlement/<hex_code>')
 def get_settlement_details(hex_code):
-    """Get detailed information for a settlement."""
-    # Try model-based service first
-    settlement_data = hex_service.get_settlement_details(hex_code)
-    if settlement_data:
-        return jsonify(settlement_data)
-
-    # Fallback: read and parse the hex markdown directly if present
+    """Get detailed information for a settlement (language-aware)."""
+    # Always read from language-specific markdown; avoid cross-language cache
     try:
         from backend.utils import safe_file_read
         lang = _get_selected_language()
         output_dir = _get_output_dir_for_language(lang)
-        hex_file_path = output_dir \
-            / "hexes" / f"hex_{hex_code}.md"
-        if hex_file_path.exists():
-            content = safe_file_read(hex_file_path)
-            if '⌂ **' in content:
-                parsed = extract_settlement_data(content)
-                return jsonify({
-                    'success': True,
-                    'settlement': {
-                        'name': parsed.get('name', ''),
-                        'description': parsed.get('description', ''),
-                        'population': parsed.get('population', ''),
-                        'atmosphere': parsed.get('atmosphere', ''),
-                        'notable_feature': parsed.get('notable_feature', ''),
-                        'local_tavern': parsed.get('local_tavern', ''),
-                        'local_power': parsed.get('local_power', ''),
-                        'settlement_art': parsed.get('settlement_art', ''),
-                        # Mörk Borg settlement fields
-                        'weather': parsed.get('weather'),
-                        'city_event': parsed.get('city_event'),
-                        'tavern_details': parsed.get('tavern_details')
-                    }
-                })
+        hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
+        if not hex_file_path.exists():
+            return jsonify({'success': False, 'error': 'Settlement not found'}), 404
+        content = safe_file_read(hex_file_path)
+        parsed = extract_settlement_data(content)
+        return jsonify({
+            'success': True,
+            'settlement': {
+                'name': parsed.get('name', ''),
+                'description': parsed.get('description', ''),
+                'population': parsed.get('population', ''),
+                'atmosphere': parsed.get('atmosphere', ''),
+                'notable_feature': parsed.get('notable_feature', ''),
+                'local_tavern': parsed.get('local_tavern', ''),
+                'local_power': parsed.get('local_power', ''),
+                'settlement_art': parsed.get('settlement_art', ''),
+                'weather': parsed.get('weather'),
+                'city_event': parsed.get('city_event'),
+                'tavern_details': parsed.get('tavern_details')
+            }
+        })
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
-
-        return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
 
 @api_bp.route('/hex/<hex_code>', methods=['PUT'])
 def update_hex_content(hex_code):
