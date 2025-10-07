@@ -627,6 +627,33 @@ def get_hex_info(hex_code):
                 "atmosphere": parsed.get('atmosphere'),
             })
 
+    # If file still not found, generate on-demand and return
+    try:
+        generated = main_map_generator.generate_single_hex(hex_code)
+        # Re-read via service (lazy parser will pick up from filesystem)
+        hex_service.hex_data_cache.pop(hex_code, None)
+        from backend.hex_model import hex_manager
+        hex_manager.clear_cache()
+        generated_dict = hex_service.get_hex_dict(hex_code)
+        if generated_dict:
+            # Attach raw markdown if just generated
+            gen_path = chosen_hex_dir / f"hex_{hex_code}.md"
+            if gen_path.exists():
+                from backend.utils import safe_file_read
+                generated_dict['raw_markdown'] = safe_file_read(gen_path)
+            if request.args.get('debug'):
+                generated_dict['_debug'] = {
+                    'generated': True,
+                    'chosen_hex_dir': str(chosen_hex_dir),
+                    'hex_file_path': str(gen_path),
+                    'hex_file_exists': gen_path.exists(),
+                    'language': current_language,
+                }
+            return jsonify(generated_dict)
+    except Exception:
+        # fall through to default response
+        pass
+
     # Default fallback for missing hexes
     resp = {
         "hex_code": hex_code,
