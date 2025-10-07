@@ -454,25 +454,37 @@ def get_hex_info(hex_code):
     if not validate_hex_code(hex_code):
         return jsonify({'error': 'Invalid hex code format'}), 400
 
+    # Determine candidate hex directories (language-specific preferred)
+    lang_hex_dir = (config.paths.output_path / current_language / "hexes")
+    base_hex_dir = (config.paths.output_path / "hexes")
+    chosen_hex_dir = lang_hex_dir if lang_hex_dir.exists() else base_hex_dir
+
     hex_data = hex_service.get_hex_dict(hex_code)
+    cache_hit = hex_data is not None
     if hex_data:
         # Add raw markdown if available
-        # Prefer language-specific output dir if present
-        lang_hex_dir = (config.paths.output_path / current_language / "hexes")
-        base_hex_dir = (config.paths.output_path / "hexes")
-        hex_dir = lang_hex_dir if lang_hex_dir.exists() else base_hex_dir
-        hex_file_path = hex_dir / f"hex_{hex_code}.md"
+        hex_file_path = chosen_hex_dir / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             from backend.utils import safe_file_read
             hex_data['raw_markdown'] = safe_file_read(hex_file_path)
+        # Optional debug payload
+        if request.args.get('debug'):
+            hex_data['_debug'] = {
+                'language': current_language,
+                'output_path': str(config.paths.output_path),
+                'lang_hex_dir': str(lang_hex_dir),
+                'base_hex_dir': str(base_hex_dir),
+                'chosen_hex_dir': str(chosen_hex_dir),
+                'lang_hex_dir_exists': lang_hex_dir.exists(),
+                'base_hex_dir_exists': base_hex_dir.exists(),
+                'hex_file_path': str(hex_file_path),
+                'hex_file_exists': hex_file_path.exists(),
+                'cache_hit': cache_hit
+            }
         return jsonify(hex_data)
 
     # If not in cache, check for a hex file and parse it for content
-    # Prefer language-specific output dir if present
-    lang_hex_dir = (config.paths.output_path / current_language / "hexes")
-    base_hex_dir = (config.paths.output_path / "hexes")
-    hex_dir = lang_hex_dir if lang_hex_dir.exists() else base_hex_dir
-    hex_file_path = hex_dir / f"hex_{hex_code}.md"
+    hex_file_path = chosen_hex_dir / f"hex_{hex_code}.md"
     if hex_file_path.exists():
         from backend.utils import safe_file_read
         content = safe_file_read(hex_file_path)
@@ -616,7 +628,7 @@ def get_hex_info(hex_code):
             })
 
     # Default fallback for missing hexes
-    return jsonify({
+    resp = {
         "hex_code": hex_code,
         "terrain": "unknown",
         "exists": True,
@@ -628,7 +640,21 @@ def get_hex_info(hex_code):
         "notable_feature": None,
         "atmosphere": None,
         "raw_markdown": None,
-    })
+    }
+    if request.args.get('debug'):
+        resp['_debug'] = {
+            'language': current_language,
+            'output_path': str(config.paths.output_path),
+            'lang_hex_dir': str(lang_hex_dir),
+            'base_hex_dir': str(base_hex_dir),
+            'chosen_hex_dir': str(chosen_hex_dir),
+            'lang_hex_dir_exists': lang_hex_dir.exists(),
+            'base_hex_dir_exists': base_hex_dir.exists(),
+            'hex_file_path': str(chosen_hex_dir / f"hex_{hex_code}.md"),
+            'hex_file_exists': (chosen_hex_dir / f"hex_{hex_code}.md").exists(),
+            'cache_hit': cache_hit
+        }
+    return jsonify(resp)
 
 @api_bp.route('/set-language', methods=['POST'])
 def set_language():
