@@ -161,6 +161,17 @@ def get_config() -> AppConfig:
     """Get the global configuration instance."""
     return config
 
+def get_output_dir_for_language(language: str) -> Path:
+    """Expand the configured output path for a given language when a {lang} stub is present.
+    Falls back to the configured path unmodified if no stub exists.
+    """
+    base = str(config.paths.output_path)
+    try:
+        expanded = base.replace('{lang}', language)
+        return Path(expanded)
+    except Exception:
+        return config.paths.output_path
+
 def update_config(new_config: Dict[str, Any]) -> AppConfig:
     """Update the global configuration."""
     global config

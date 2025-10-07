@@ -10,7 +10,7 @@ from pathlib import Path
 import ast
 from typing import Dict, Any, Optional, List
 from backend.hex_model import hex_manager, BaseHex, TerrainType, SettlementHex
-from backend.config import get_config
+from backend.config import get_config, get_output_dir_for_language
 from backend.terrain_system import terrain_system
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
 from backend.utils.ascii_processor import process_ascii_blocks, parse_loot_section_from_ascii
@@ -28,7 +28,9 @@ class HexService:
     
     def _load_hex_data(self):
         """Load all hex data from the generated JSON files."""
-        hexes_dir = self.config.paths.output_path / "hexes"
+        # Load from the current-language directory if a {lang} stub exists
+        lang_dir = get_output_dir_for_language(self.config.language if hasattr(self.config, 'language') else 'en')
+        hexes_dir = lang_dir / "hexes"
         if not hexes_dir.exists():
             return
         
@@ -972,7 +974,16 @@ class HexService:
         # Get from hex data cache
         hex_data = self.hex_data_cache.get(hex_code)
         if not hex_data:
-            return None
+            # Lazy load from disk for current language if present
+            hexes_dir = get_output_dir_for_language(self.config.language if hasattr(self.config, 'language') else 'en') / 'hexes'
+            hex_file = hexes_dir / f"hex_{hex_code}.md"
+            if hex_file.exists():
+                parsed = self._parse_hex_markdown(hex_file)
+                if parsed:
+                    self.hex_data_cache[hex_code] = parsed
+                    hex_data = parsed
+            if not hex_data:
+                return None
         
         # Create hex model
         hex_model = hex_manager.create_hex_from_data(hex_code, hex_data)

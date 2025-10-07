@@ -14,7 +14,7 @@ import traceback
 from flask import Blueprint, jsonify, request, abort, render_template
 from flask import Response, send_file
 import os
-from backend.config import get_config
+from backend.config import get_config, get_output_dir_for_language
 from backend.utils import setup_project_paths, validate_hex_code
 
 # Setup project paths for imports
@@ -84,7 +84,8 @@ _t.start()
 
 def get_main_map_generator():
     """Get main map generator with current language configuration."""
-    return MainMapGenerator({'language': current_language})
+    output_dir = get_output_dir_for_language(current_language)
+    return MainMapGenerator({'language': current_language, 'output_directory': str(output_dir)})
 
 # Initialize with default language
 main_map_generator = get_main_map_generator()
@@ -409,7 +410,6 @@ def reset_continent():
         # Preserve current state
         global current_language, main_map_generator
         original_language = current_language
-        base_output = config.paths.output_path
 
         last_result = None
         for lang in langs:
@@ -418,9 +418,6 @@ def reset_continent():
                 translation_system.set_language(lang)
                 # Re-init generator for this language
                 main_map_generator = get_main_map_generator()
-                # Write outputs under language-specific subdir
-                from backend.config import update_config
-                update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output / lang)}})
                 last_result = main_map_generator.reset_continent()
             except Exception:
                 logging.exception(f"Reset failed for language {lang}")
@@ -430,8 +427,6 @@ def reset_continent():
             current_language = original_language
             translation_system.set_language(original_language)
             main_map_generator = get_main_map_generator()
-            from backend.config import update_config
-            update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output)}})
         except Exception:
             pass
         # Invalidate overlay caches if any
@@ -454,17 +449,22 @@ def get_hex_info(hex_code):
     if not validate_hex_code(hex_code):
         return jsonify({'error': 'Invalid hex code format'}), 400
 
+    # Prefer language-specific output path if it exists
+    # Resolve language-specific output directory using {lang} stub if present
+    lang_output = get_output_dir_for_language(current_language)
+    chosen_hex_dir = (lang_output / "hexes")
+
     hex_data = hex_service.get_hex_dict(hex_code)
     if hex_data:
         # Add raw markdown if available
-        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+        hex_file_path = chosen_hex_dir / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             from backend.utils import safe_file_read
             hex_data['raw_markdown'] = safe_file_read(hex_file_path)
         return jsonify(hex_data)
 
     # If not in cache, check for a hex file and parse it for content
-    hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
+    hex_file_path = chosen_hex_dir / f"hex_{hex_code}.md"
     if hex_file_path.exists():
         from backend.utils import safe_file_read
         content = safe_file_read(hex_file_path)
@@ -607,6 +607,25 @@ def get_hex_info(hex_code):
                 "atmosphere": parsed.get('atmosphere'),
             })
 
+    # If file still not found, generate on-demand and return
+    try:
+        generated = main_map_generator.generate_single_hex(hex_code)
+        # Re-read via service (lazy parser will pick up from filesystem)
+        hex_service.hex_data_cache.pop(hex_code, None)
+        from backend.hex_model import hex_manager
+        hex_manager.clear_cache()
+        generated_dict = hex_service.get_hex_dict(hex_code)
+        if generated_dict:
+            # Attach raw markdown if just generated
+            gen_path = chosen_hex_dir / f"hex_{hex_code}.md"
+            if gen_path.exists():
+                from backend.utils import safe_file_read
+                generated_dict['raw_markdown'] = safe_file_read(gen_path)
+            return jsonify(generated_dict)
+    except Exception:
+        # fall through to default response
+        pass
+
     # Default fallback for missing hexes
     return jsonify({
         "hex_code": hex_code,
@@ -636,6 +655,12 @@ def set_language():
         translation_system.set_language(new_language)
         # Re-initialize main map generator with new language
         main_map_generator = get_main_map_generator()
+        # Clear caches so services reload from the new language directory
+        try:
+            hex_service.hex_data_cache.clear()
+            hex_manager.clear_cache()
+        except Exception:
+            pass
         # Update city overlay analyzer with new language
         from backend.city_overlay_analyzer import city_overlay_analyzer
         from backend.database_manager import database_manager
