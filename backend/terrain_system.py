@@ -48,7 +48,10 @@ class TerrainSystem:
             resolved = image_path
             try:
                 if not os.path.isabs(resolved):
-                    resolved = str(Path(__file__).parent.parent / resolved)
+                    # Expand ~ and environment variables first
+                    resolved = os.path.expanduser(os.path.expandvars(resolved))
+                    if not os.path.isabs(resolved):
+                        resolved = str(Path(__file__).parent.parent / resolved)
             except Exception:
                 pass
             self.image_analyzer = ImageAnalyzer(resolved, temp_width, temp_height, mapping_mode=mapping_mode, debug=debug)

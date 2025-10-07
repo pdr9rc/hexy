@@ -19,6 +19,7 @@ from backend.utils.tavern_generator import generate_tavern_details, generate_wea
 from backend.utils.npc_generator import generate_npc_encounter
 from backend.utils.markdown_formatter import format_beast_details, format_sea_encounter_details, format_npc_details
 from pathlib import Path
+import os
 import backend.terrain_system as terrain_module
 from backend.translation_system import translation_system
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
@@ -89,7 +90,11 @@ class MainMapGenerator:
         
         # Initialize terrain system with correct map size
         # Reinitialize the shared terrain system singleton with image analysis enabled
-        image_path = str(Path(__file__).parent.parent / "data" / "mork_borg_official_map.jpg")
+        env_image = os.getenv('HEXY_MAP_IMAGE_PATH')
+        if env_image and env_image.strip():
+            image_path = os.path.expanduser(env_image.strip())
+        else:
+            image_path = str(Path(__file__).parent.parent / "data" / "mork_borg_official_map.jpg")
         terrain_module.terrain_system = terrain_module.TerrainSystem(
             map_width=self.map_width,
             map_height=self.map_height,
