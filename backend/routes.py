@@ -43,6 +43,7 @@ import zipfile
 import tempfile
 import shutil
 from pathlib import Path
+import backend.terrain_system as terrain_module
 
 # Create blueprints
 main_bp = Blueprint('main', __name__)
@@ -640,6 +641,28 @@ def get_hex_info(hex_code):
         "atmosphere": None,
         "raw_markdown": None,
     })
+
+@api_bp.route('/terrain-debug')
+def terrain_debug():
+    try:
+        ts = terrain_module.terrain_system
+        ia = getattr(ts, 'image_analyzer', None)
+        info = {
+            'use_image_analysis': getattr(ts, 'use_image_analysis', False),
+            'map_dimensions': [getattr(ts, 'map_width', None), getattr(ts, 'map_height', None)],
+            'image_path': getattr(ia, 'map_image_path', None) if ia else None,
+            'image_loaded': bool(getattr(ia, 'map_image', None)) if ia else False,
+            'mapping_mode': getattr(ts, 'image_analyzer', None).mapping_mode if ia else None,
+        }
+        # Include ImageAnalyzer map info if available
+        if ia and hasattr(ia, 'get_map_info'):
+            try:
+                info['map_info'] = ia.get_map_info()
+            except Exception:
+                pass
+        return jsonify({'success': True, 'terrain_system': info})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 @api_bp.route('/set-language', methods=['POST'])
 def set_language():
