@@ -41,12 +41,8 @@ export class LanguageSelector {
         localStorage.setItem('hexy-language', languageCode);
         // Update translation manager
         await translationManager.setLanguage(languageCode);
-        // Reload with language query param (preserve other params)
-        const url = new URL(window.location.href);
-        url.searchParams.set('language', languageCode);
-        // Bust caches for API and static fetches
-        url.searchParams.set('t', String(Date.now()));
-        window.location.replace(url.toString());
+        // Reload the page to apply translations
+        window.location.reload();
     }
     createLanguageSelector() {
         const container = document.createElement('div');

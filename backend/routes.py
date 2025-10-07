@@ -125,39 +125,15 @@ def normalize_terrain_name(name: str) -> str:
     }
     return mapping.get(name, "unknown")
 
-# Language helpers
-def _get_selected_language(default: str | None = None) -> str:
-    try:
-        lang = request.args.get('language') or request.headers.get('X-Hexy-Language')
-    except Exception:
-        lang = None
-    if not lang:
-        lang = default or current_language
-    try:
-        supported = translation_system.get_supported_languages()  # type: ignore
-    except Exception:
-        supported = ['en', 'pt']
-    if lang not in supported:
-        lang = 'en'
-    return lang
-
-def _get_output_dir_for_language(lang: str) -> Path:
-    base = config.paths.output_path
-    lang_dir = base / lang
-    return lang_dir if lang_dir.exists() else base
-
 # ===== MAIN ROUTES =====
 
 @main_bp.route('/')
 def main_map():
     """Main map page with integrated lore."""
     config = get_config()
-    # Determine selected language and effective output directory
-    lang = _get_selected_language()
-    output_dir = _get_output_dir_for_language(lang)
-
-    if not output_dir.exists():
-        output_dir.mkdir(parents=True, exist_ok=True)
+    
+    if not config.paths.output_path.exists():
+        config.paths.output_path.mkdir(parents=True, exist_ok=True)
     # If output is empty, show world with empty state; user can press Reset from UI
     
     # Auto-regenerate output if flag is set
@@ -168,14 +144,14 @@ def main_map():
     # Get map dimensions
     map_width, map_height = terrain_system.get_map_dimensions()
     
-    # Generate ASCII map data (language-aware)
-    ascii_map_data = generate_ascii_map_data_for_dir(output_dir)
+    # Generate ASCII map data
+    ascii_map_data = generate_ascii_map_data()
 
     # If map is empty, regenerate and reload
     if not ascii_map_data:
         print("[AUTO] Map data empty, regenerating full map...")
         main_map_generator.generate_full_map()
-        ascii_map_data = generate_ascii_map_data_for_dir(output_dir)
+        ascii_map_data = generate_ascii_map_data()
     
     # Ensure all keys are strings
     ascii_map_data = {str(k): v for k, v in ascii_map_data.items()}
@@ -186,7 +162,7 @@ def main_map():
                          map_height=map_height,
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height,
-                          current_language=lang,
+                           current_language=current_language,
                            hexy_token=_HEXY_HEARTBEAT_TOKEN)
 
 # ===== PWA ASSETS =====
@@ -478,21 +454,17 @@ def get_hex_info(hex_code):
     if not validate_hex_code(hex_code):
         return jsonify({'error': 'Invalid hex code format'}), 400
 
-    # Choose language-scoped output dir (do not mutate global config)
-    lang = _get_selected_language()
-    output_dir = _get_output_dir_for_language(lang)
-
     hex_data = hex_service.get_hex_dict(hex_code)
     if hex_data:
         # Add raw markdown if available
-        hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
+        hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             from backend.utils import safe_file_read
             hex_data['raw_markdown'] = safe_file_read(hex_file_path)
         return jsonify(hex_data)
 
     # If not in cache, check for a hex file and parse it for content
-    hex_file_path = output_dir / "hexes" / f"hex_{hex_code}.md"
+    hex_file_path = config.paths.output_path / "hexes" / f"hex_{hex_code}.md"
     if hex_file_path.exists():
         from backend.utils import safe_file_read
         content = safe_file_read(hex_file_path)
@@ -702,9 +674,7 @@ def get_settlement_details(hex_code):
     # Fallback: read and parse the hex markdown directly if present
     try:
         from backend.utils import safe_file_read
-        lang = _get_selected_language()
-        output_dir = _get_output_dir_for_language(lang)
-        hex_file_path = output_dir \
+        hex_file_path = config.paths.output_path \
             / "hexes" / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             content = safe_file_read(hex_file_path)
@@ -1119,7 +1089,7 @@ def _get_hex_file_info(hex_code: str, hex_file) -> dict:
     except Exception as e:
         return jsonify({'error': f'Failed to read hex file: {e}'}), 500
 
-def generate_ascii_map_data_for_dir(output_dir: Path):
+def generate_ascii_map_data():
     # Use centralized grid generator for base grid
     base_grid = generate_hex_grid(lore_db)
     
@@ -1140,12 +1110,12 @@ def generate_ascii_map_data_for_dir(output_dir: Path):
         else:
             # Regular terrain - check for generated content
             terrain = terrain_system.get_terrain_for_hex(hex_code, lore_db)
-            hex_file_exists = (output_dir / "hexes" / f"hex_{hex_code}.md").exists()
+            hex_file_exists = (config.paths.output_path / "hexes" / f"hex_{hex_code}.md").exists()
             has_loot = False
             content_type = None
             
             if hex_file_exists:
-                with open(output_dir / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
+                with open(config.paths.output_path / "hexes" / f"hex_{hex_code}.md", "r", encoding="utf-8") as f:
                     content = f.read()
                 hex_data_content = extract_hex_data(content)
                 terrain = normalize_terrain_name(hex_data_content.get('terrain', 'unknown'))
