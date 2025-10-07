@@ -969,28 +969,8 @@ class HexService:
         if hardcoded and hardcoded.get('type') == 'major_city':
             return self._create_major_city_hex(hex_code, hardcoded)
         
-        # Get from in-memory cache
+        # Get from hex data cache
         hex_data = self.hex_data_cache.get(hex_code)
-        if not hex_data:
-            # Lazily parse from filesystem if present
-            try:
-                from backend.routes import current_language  # use current UI language
-            except Exception:
-                current_language = 'en'
-            # Prefer language-specific directory if exists
-            hexes_dir_lang = self.config.paths.output_path / current_language / 'hexes'
-            hexes_dir_base = self.config.paths.output_path / 'hexes'
-            hexes_dir = hexes_dir_lang if hexes_dir_lang.exists() else hexes_dir_base
-            hex_file = hexes_dir / f"hex_{hex_code}.md"
-            if hex_file.exists():
-                try:
-                    parsed = self._parse_hex_markdown(hex_file)
-                    if parsed:
-                        self.hex_data_cache[hex_code] = parsed
-                        hex_data = parsed
-                except Exception as _e:
-                    # leave hex_data as None
-                    pass
         if not hex_data:
             return None
         
