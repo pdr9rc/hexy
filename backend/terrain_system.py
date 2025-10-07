@@ -15,6 +15,7 @@ from enum import Enum
 import json
 import math
 from backend.image_analyzer import ImageAnalyzer
+from pathlib import Path
 
 class TerrainType(Enum):
     """Enumeration of terrain types."""
@@ -43,7 +44,14 @@ class TerrainSystem:
         if image_path:
             temp_width = map_width
             temp_height = map_height
-            self.image_analyzer = ImageAnalyzer(image_path, temp_width, temp_height, mapping_mode=mapping_mode, debug=debug)
+            # Resolve image path relative to project root if not absolute
+            resolved = image_path
+            try:
+                if not os.path.isabs(resolved):
+                    resolved = str(Path(__file__).parent.parent / resolved)
+            except Exception:
+                pass
+            self.image_analyzer = ImageAnalyzer(resolved, temp_width, temp_height, mapping_mode=mapping_mode, debug=debug)
             if self.image_analyzer.map_image is not None:
                 self.use_image_analysis = True
                 img_width, img_height = self.image_analyzer.map_image.size

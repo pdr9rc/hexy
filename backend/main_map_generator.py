@@ -18,7 +18,8 @@ from backend.utils.beast_generator import generate_beast_encounter
 from backend.utils.tavern_generator import generate_tavern_details, generate_weather, generate_city_event
 from backend.utils.npc_generator import generate_npc_encounter
 from backend.utils.markdown_formatter import format_beast_details, format_sea_encounter_details, format_npc_details
-from backend.terrain_system import TerrainSystem
+from pathlib import Path
+import backend.terrain_system as terrain_module
 from backend.translation_system import translation_system
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
 
@@ -87,12 +88,12 @@ class MainMapGenerator:
         self.custom_tables = {}
         
         # Initialize terrain system with correct map size
-        global terrain_system
-        from backend.terrain_system import TerrainSystem
-        terrain_system = TerrainSystem(
+        # Reinitialize the shared terrain system singleton with image analysis enabled
+        image_path = str(Path(__file__).parent.parent / "data" / "mork_borg_official_map.jpg")
+        terrain_module.terrain_system = terrain_module.TerrainSystem(
             map_width=self.map_width,
             map_height=self.map_height,
-            image_path="data/mork_borg_official_map.jpg",
+            image_path=image_path,
             mapping_mode="letterbox",
             debug=False
         )
@@ -209,7 +210,7 @@ class MainMapGenerator:
         """Generate complete content for a hex."""
         # Determine terrain if not provided
         if terrain is None:
-            terrain = terrain_system.get_terrain_for_hex(hex_code, self.lore_db)
+            terrain = terrain_module.terrain_system.get_terrain_for_hex(hex_code, self.lore_db)
         
         # Check for hardcoded lore locations first
         hardcoded = self.lore_db.get_hardcoded_hex(hex_code)
@@ -224,7 +225,7 @@ class MainMapGenerator:
         print(f"🔄 Resetting continent...")
         
         # Clear terrain cache
-        terrain_system.clear_cache()
+        terrain_module.terrain_system.clear_cache()
         
         # Remove existing output directory
         if os.path.exists(self.output_dir):
@@ -1020,7 +1021,7 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         print(f"🗺️ Creating ASCII map...")
         
         # Create terrain-based ASCII map
-        terrain_map = terrain_system.create_terrain_overview_map()
+        terrain_map = terrain_module.terrain_system.create_terrain_overview_map()
         
         # Add content indicators
         content_map = {}
@@ -1031,7 +1032,7 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             elif hex_data.get('lore_location'):
                 content_map[hex_code] = '◆'
             else:
-                content_map[hex_code] = terrain_system.get_terrain_symbol(hex_data['terrain'])
+                content_map[hex_code] = terrain_module.terrain_system.get_terrain_symbol(hex_data['terrain'])
         
         # Write ASCII map file
         self._write_ascii_map_file(content_map, terrain_map)
@@ -1092,8 +1093,8 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
     
     def get_terrain_overview(self) -> Dict:
         """Get terrain analysis overview."""
-        terrain_map = terrain_system.create_terrain_overview_map()
-        distribution = terrain_system.get_terrain_distribution()
+        terrain_map = terrain_module.terrain_system.create_terrain_overview_map()
+        distribution = terrain_module.terrain_system.get_terrain_distribution()
         
         return {
             'success': True,

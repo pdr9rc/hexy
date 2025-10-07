@@ -11,7 +11,7 @@ import ast
 from typing import Dict, Any, Optional, List
 from backend.hex_model import hex_manager, BaseHex, TerrainType, SettlementHex
 from backend.config import get_config, get_output_dir_for_language
-from backend.terrain_system import terrain_system
+import backend.terrain_system as terrain_module
 from backend.mork_borg_lore_database import MorkBorgLoreDatabase
 from backend.utils.ascii_processor import process_ascii_blocks, parse_loot_section_from_ascii
 import re
@@ -59,7 +59,7 @@ class HexService:
             terrain = self._extract_terrain(content)
             # If terrain is missing or 'plains', use terrain_system
             if not terrain or terrain == 'plains':
-                terrain = terrain_system.get_terrain_for_hex(hex_code, self.lore_db)
+                terrain = terrain_module.terrain_system.get_terrain_for_hex(hex_code, self.lore_db)
             # Check if it's a settlement
             if '⌂ **' in content:
                 settlement_data = self._extract_settlement_data(content, hex_code)
@@ -1015,7 +1015,7 @@ class HexService:
         notable_features = city_data.get('notable_features', [])
         population = city_data.get('population', 'Unknown')
         
-        terrain = TerrainType(terrain_system.get_terrain_for_hex(hex_code, self.lore_db))
+        terrain = TerrainType(terrain_module.terrain_system.get_terrain_for_hex(hex_code, self.lore_db))
         
         return SettlementHex(
             hex_code=hex_code,
