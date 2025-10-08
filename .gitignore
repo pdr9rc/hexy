@@ -38,3 +38,4 @@ requirements-zappa.txt
 # Ignore compiled frontend JS (keep vendor library JS)
 backend/web/static/**/*.js
 !backend/web/static/vendor/**
+.lambda-venv/**
