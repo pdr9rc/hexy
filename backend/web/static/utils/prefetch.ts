@@ -46,33 +46,87 @@ export type PrefetchProgress = {
   processed: number;
 };
 
-function extractFirst(pattern: RegExp, text: string): string | null {
-  const m = text.match(pattern);
-  return m ? (m[1] || m[0]).trim() : null;
+function matchFirst(text: string, patterns: RegExp[]): string | null {
+  for (const rx of patterns) {
+    const m = text.match(rx);
+    if (m) return (m[1] || '').trim();
+  }
+  return null;
+}
+
+function section(text: string, header: string): string | null {
+  const rx = new RegExp(`##\\s*${header}\\s*\n([\\s\\S]*?)(?:\n##|$)`, 'i');
+  const m = text.match(rx);
+  return m ? m[1].trim() : null;
 }
 
 function parseSettlementFromMarkdown(md: string): any | null {
-  // Heuristic: identify settlement by settlement marker or tavern/local fields
   const isSettlement = /⌂\s*\*\*|##\s*Settlement/i.test(md) || /\*\*Population:\*\*/i.test(md);
   if (!isSettlement) return null;
-  const name = extractFirst(/⌂\s*\*\*([^*]+)\*\*/i, md) || extractFirst(/#\s*Hex\s*\d{4}\s*\n+\*\*Name:\*\*\s*([^\n]+)/i, md) || 'Settlement';
-  const population = extractFirst(/\*\*Population:\*\*\s*([^\n]+)/i, md) || '';
-  const atmosphere = extractFirst(/\*\*Atmosphere:\*\*\s*([^\n]+)/i, md) || extractFirst(/##\s*Atmosphere\s*\n+([^\n]+)/i, md) || '';
-  const notable_feature = extractFirst(/\*\*Notable Feature:\*\*\s*([^\n]+)/i, md) || extractFirst(/##\s*Notable Feature\s*\n+([^\n]+)/i, md) || '';
-  const local_tavern = extractFirst(/\*\*Select Menu:\*\*\s*([^\n]+)/i, md) || '';
-  const local_power = extractFirst(/\*\*Local Power:\*\*\s*([^\n]+)/i, md) || '';
-  const settlement_art = extractFirst(/```([\s\S]*?)```/m, md) || '';
+
+  const name = matchFirst(md, [/⌂\s*\*\*([^*]+)\*\*/i, /\*\*Name:\*\*\s*([^\n]+)/i]) || 'Settlement';
+  const population = matchFirst(md, [/\*\*Population:\*\*\s*([^\n]+)/i]) || '';
+  const atmosphere = matchFirst(md, [/\*\*Atmosphere:\*\*\s*([^\n]+)/i, /##\s*Atmosphere\s*\n([^\n]+)/i]) || '';
+  const notable_feature = matchFirst(md, [/\*\*Notable Feature:\*\*\s*([^\n]+)/i, /##\s*Notable Feature\s*\n([^\n]+)/i]) || '';
+  const local_tavern = matchFirst(md, [/\*\*Select Menu:\*\*\s*([^\n]+)/i]) || '';
+  const local_power = matchFirst(md, [/\*\*Local Power:\*\*\s*([^\n]+)/i]) || '';
+  const weather = matchFirst(md, [/\*\*Weather:\*\*\s*([^\n]+)/i]) || '';
+  const city_event = matchFirst(md, [/\*\*City Event:\*\*\s*([^\n]+)/i]) || '';
+
+  const tavern_details: any = {};
+  const select_dish = matchFirst(md, [/\*\*Select Menu:\*\*\s*([^\n]+)/i]);
+  const budget_dish = matchFirst(md, [/\*\*Budget Menu:\*\*\s*([^\n]+)/i]);
+  const innkeeper_quirk = matchFirst(md, [/\*\*Innkeeper:\*\*\s*([^\n]+)/i]);
+  const patron_trait = matchFirst(md, [/\*\*Notable Patron:\*\*\s*([^\n]+)/i]);
+  if (select_dish) tavern_details.select_dish = select_dish;
+  if (budget_dish) tavern_details.budget_dish = budget_dish;
+  if (innkeeper_quirk) tavern_details.innkeeper_quirk = innkeeper_quirk;
+  if (patron_trait) tavern_details.patron_trait = patron_trait;
+
+  const settlement_art = (() => {
+    const sec = section(md, 'Settlement') || section(md, 'Denizen') || md;
+    const m = sec.match(/```([\s\S]*?)```/m);
+    return m ? m[0] : '';
+  })();
+
+  const loot = (() => {
+    const sec = section(md, 'Loot Found');
+    if (!sec) return null;
+    // Collect key-value pairs if present, else return as text
+    const pairs: Record<string, string> = {};
+    const lines = sec.split(/\n+/);
+    let anyPair = false;
+    for (const line of lines) {
+      const pm = line.match(/\*\*([^:]+):\*\*\s*(.+)/);
+      if (pm) { pairs[pm[1].trim()] = pm[2].trim(); anyPair = true; }
+    }
+    if (anyPair) return pairs;
+    return sec.trim();
+  })();
+
+  const description = (() => {
+    const den = section(md, 'Denizen');
+    if (den) return den.split(/\n+/).slice(0, 3).join('\n');
+    const enc = section(md, 'Encounter');
+    if (enc) return enc.split(/\n+/).slice(0, 3).join('\n');
+    return '';
+  })();
+
   return {
     success: true,
     settlement: {
       name,
-      description: '',
+      description,
       population,
       atmosphere,
       notable_feature,
       local_tavern,
       local_power,
-      settlement_art
+      settlement_art,
+      weather,
+      city_event,
+      tavern_details,
+      loot
     }
   };
 }

@@ -1311,7 +1311,7 @@ function enableMiddleMouseDragScroll(panel: HTMLElement) {
   
   panel.addEventListener('mousedown', (e) => {
     // Support both middle mouse (button 1) and left mouse with spacebar/ctrl (button 0)
-    if (e.button === 1 || (e.button === 0 && (e.ctrlKey || e.metaKey))) {
+    if (e.button === 1 || e.button === 0) {
       isDragging = true;
       lastX = e.clientX;
       lastY = e.clientY;
