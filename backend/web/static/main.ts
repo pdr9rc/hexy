@@ -9,6 +9,7 @@ import { showCityOverlayGrid } from './cityOverlays.js';
 import { generateDistrictColor } from './utils/colorUtils.js';
 import { t, getCurrentLanguage } from './translations.js';
 import { SandboxStore, getSandboxId } from './utils/sandboxStore.js';
+import { prefetchAllHexMarkdown } from './utils/prefetch.js';
 
 // Global state for hex editing
 let currentEditingHex: string | null = null;
@@ -99,6 +100,19 @@ class DyingLandsApp {
     })();
     this.updateWorldMapControlsVisibility()
     initializeControls(this)
+
+    // Begin background prefetch of all hex markdown for offline/local-first usage
+    void (async () => {
+      try {
+        await prefetchAllHexMarkdown((p) => {
+          if (p.total > 0 && p.processed % 200 === 0) {
+            console.log(`Prefetch progress: ${p.processed}/${p.total}`);
+          }
+        });
+      } catch (e: any) {
+        console.warn('Prefetch error:', e?.message || e);
+      }
+    })();
 
     console.log("✅ The Dying Lands initialized successfully")
   }

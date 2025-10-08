@@ -15,12 +15,13 @@
     "dev": "npm run start:all & sleep 5 && npm run start:electron"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "npm-run-all": "^4.1.5",
+    "@types/node": "^22.0.0",
     "electron": "^32.0.0",
-    "@types/node": "^22.0.0"
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
+    "jszip": "^3.10.1",
     "lottie-web": "^5.12.2"
   }
 }

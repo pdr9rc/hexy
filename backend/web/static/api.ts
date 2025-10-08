@@ -1,15 +1,27 @@
 // web/static/api.ts
 import { apiGet, apiPost, apiPut, handleApiError } from './utils/apiUtils.js';
 import { SandboxStore } from './utils/sandboxStore.js';
+import { DataStore } from './utils/dataStore.js';
+import { getCurrentLanguage } from './translations.js';
 
 export async function getHex(hexCode: string): Promise<any> {
   try {
-    const server = await apiGet<any>(`api/hex/${hexCode}`);
-    // Merge with local sandbox markdown if present
-    const localMd = await SandboxStore.getHexMarkdown(hexCode);
-    if (localMd) {
-      return { ...server, raw_markdown: localMd };
+    const lang = getCurrentLanguage();
+    // Try server-backed local store first
+    const storedMd = await DataStore.getHexMarkdown(lang, hexCode);
+    if (storedMd) {
+      const base = await apiGet<any>(`api/hex/${hexCode}`);
+      // Merge with sandbox override if present
+      const localMd = await SandboxStore.getHexMarkdown(hexCode);
+      return { ...base, raw_markdown: localMd || storedMd };
     }
+    // Fallback: fetch once from API, then store
+    const server = await apiGet<any>(`api/hex/${hexCode}`);
+    if (server && typeof server.raw_markdown === 'string') {
+      await DataStore.setHexMarkdown(lang, hexCode, server.raw_markdown);
+    }
+    const localMd = await SandboxStore.getHexMarkdown(hexCode);
+    if (localMd) return { ...server, raw_markdown: localMd };
     return server;
   } catch (error) {
     throw handleApiError(error, 'fetching hex');
@@ -79,11 +91,16 @@ export async function resetContinent(language?: string): Promise<any> {
 
 export async function getLoreOverview(): Promise<any> {
   try {
+    const lang = getCurrentLanguage();
+    const cached = await DataStore.getLore(lang);
+    if (cached) return cached;
     const response = await fetch('api/lore-overview');
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
-    return await response.json();
+    const data = await response.json();
+    await DataStore.setLore(lang, data);
+    return data;
   } catch (error) {
     console.error('Error fetching lore overview:', error);
     throw error;
