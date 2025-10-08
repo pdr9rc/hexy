@@ -440,6 +440,11 @@ def reset_continent():
         hex_service.hex_data_cache.clear()
         hex_manager.clear_cache()
         logging.info("Continent reset for languages %s and caches cleared.", langs)
+        # Ensure world is fully materialized before returning (warm map data)
+        try:
+            _ = generate_ascii_map_data()
+        except Exception:
+            pass
         return jsonify(last_result or { 'ok': True })
     except Exception as e:
         logging.error(f"Error resetting continent: {e}\n{traceback.format_exc()}")
