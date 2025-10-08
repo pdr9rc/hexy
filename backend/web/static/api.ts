@@ -2,6 +2,9 @@
 import { apiGet, apiPost, apiPut, handleApiError } from './utils/apiUtils.js';
 import { SandboxStore } from './utils/sandboxStore.js';
 
+type CityResponse = { success: boolean; city?: any } & Record<string, any>;
+type SettlementResponse = { success: boolean; settlement?: any } & Record<string, any>;
+
 export async function getHex(hexCode: string): Promise<any> {
   try {
     const server = await apiGet<any>(`api/hex/${hexCode}`);
@@ -30,7 +33,7 @@ export async function getCity(hexCode: string): Promise<any> {
   try {
     const cached = await SandboxStore.loadCity(hexCode);
     if (cached) return { success: true, city: cached };
-    const server = await apiGet(`api/city/${hexCode}`);
+    const server = await apiGet<CityResponse>(`api/city/${hexCode}`);
     if (server && server.success && server.city) {
       await SandboxStore.saveCity(hexCode, server.city);
     }
@@ -44,7 +47,7 @@ export async function getSettlement(hexCode: string): Promise<any> {
   try {
     const cached = await SandboxStore.loadSettlement(hexCode);
     if (cached) return { success: true, settlement: cached };
-    const server = await apiGet(`api/settlement/${hexCode}`);
+    const server = await apiGet<SettlementResponse>(`api/settlement/${hexCode}`);
     if (server && server.success && server.settlement) {
       await SandboxStore.saveSettlement(hexCode, server.settlement);
     }
