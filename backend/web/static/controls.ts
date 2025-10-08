@@ -149,7 +149,8 @@ export function setupControls(app: DyingLandsApp) {
       ui.showLoading('Importing...');
       try {
         // Read zip locally to restore datastore if present
-        const JSZip = (await import('jszip')).default;
+        const JSZip = await ensureJsZip();
+        if (!JSZip) throw new Error('JSZip not available');
         const zip = await JSZip.loadAsync(file);
         const dsEntry = zip.file('client_datastore.json');
         if (dsEntry) {
