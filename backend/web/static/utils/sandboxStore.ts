@@ -13,9 +13,11 @@ type WorldMapRecord = {
 };
 
 const DB_NAME = 'hexy-sandbox-v1';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const STORE_META = 'meta';
 const STORE_HEX = 'hex';
+const STORE_SETTLEMENT = 'settlement';
+const STORE_CITY = 'city';
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
@@ -30,6 +32,12 @@ function openDb(): Promise<IDBDatabase> {
       }
       if (!db.objectStoreNames.contains(STORE_HEX)) {
         db.createObjectStore(STORE_HEX, { keyPath: 'hexCode' });
+      }
+      if (!db.objectStoreNames.contains(STORE_SETTLEMENT)) {
+        db.createObjectStore(STORE_SETTLEMENT, { keyPath: 'hexCode' });
+      }
+      if (!db.objectStoreNames.contains(STORE_CITY)) {
+        db.createObjectStore(STORE_CITY, { keyPath: 'hexCode' });
       }
     };
     req.onsuccess = () => resolve(req.result);
@@ -125,13 +133,69 @@ export const SandboxStore = {
     } catch (_) {}
   },
 
+  async loadSettlement(hexCode: string): Promise<any | null> {
+    try {
+      const store = await tx(STORE_SETTLEMENT, 'readonly');
+      return await new Promise<any | null>((resolve, reject) => {
+        const req = store.get(hexCode);
+        req.onsuccess = () => {
+          const rec = req.result as (any & { hexCode: string }) | undefined;
+          resolve(rec ? { ...rec } : null);
+        };
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {
+      return null;
+    }
+  },
+
+  async saveSettlement(hexCode: string, settlement: any): Promise<void> {
+    try {
+      const store = await tx(STORE_SETTLEMENT, 'readwrite');
+      await new Promise<void>((resolve, reject) => {
+        const req = store.put({ hexCode, ...settlement });
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {}
+  },
+
+  async loadCity(hexCode: string): Promise<any | null> {
+    try {
+      const store = await tx(STORE_CITY, 'readonly');
+      return await new Promise<any | null>((resolve, reject) => {
+        const req = store.get(hexCode);
+        req.onsuccess = () => {
+          const rec = req.result as (any & { hexCode: string }) | undefined;
+          resolve(rec ? { ...rec } : null);
+        };
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {
+      return null;
+    }
+  },
+
+  async saveCity(hexCode: string, city: any): Promise<void> {
+    try {
+      const store = await tx(STORE_CITY, 'readwrite');
+      await new Promise<void>((resolve, reject) => {
+        const req = store.put({ hexCode, ...city });
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {}
+  },
+
   async clearAll(): Promise<void> {
     try {
       const db = await openDb();
       await new Promise<void>((resolve, reject) => {
-        const t = db.transaction([STORE_META, STORE_HEX], 'readwrite');
+        const t = db.transaction([STORE_META, STORE_HEX, STORE_SETTLEMENT, STORE_CITY], 'readwrite');
         t.objectStore(STORE_META).clear();
         t.objectStore(STORE_HEX).clear();
+        try { t.objectStore(STORE_SETTLEMENT).clear(); } catch (_) {}
+        try { t.objectStore(STORE_CITY).clear(); } catch (_) {}
         t.oncomplete = () => resolve();
         t.onerror = () => reject(t.error);
       });

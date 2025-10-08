@@ -1,5 +1,5 @@
 // web/static/main.ts
-import { getCityOverlay, getCityOverlayHex, updateHex } from "./api.js"
+import { getCityOverlay, getCityOverlayHex, updateHex, getCity, getSettlement } from "./api.js"
 import { apiGet, apiPost } from './utils/apiUtils.js'
 import { showHexDetails as renderHexDetails, showCityDetails, showSettlementDetails } from "./hexViewer.js"
 import { renderMap } from "./mapRenderer.js"
@@ -89,13 +89,12 @@ class DyingLandsApp {
 
     // Initialize components
     this.initializeEventListeners()
-    // Try to hydrate map from sandbox; fallback to server-rendered mapData
+    // Always render server-provided map and eagerly persist it locally
     void (async () => {
-      const cached = await SandboxStore.loadWorldMap();
-      if (cached && Object.keys(cached).length) {
-        this.mapData = cached as any;
-      }
-      this.renderWorldMap()
+      this.renderWorldMap();
+      await SandboxStore.saveWorldMap(this.mapData);
+      // Eagerly preload world content to avoid lazy loading later
+      await this.preloadWorldContent();
     })();
     this.updateWorldMapControlsVisibility()
     initializeControls(this)
@@ -146,6 +145,35 @@ class DyingLandsApp {
         }
       }
     })
+  }
+
+  private async preloadWorldContent(): Promise<void> {
+    try {
+      const entries = Object.entries(this.mapData);
+      const tasks: Array<() => Promise<void>> = [];
+      for (const [hexCode, hex] of entries) {
+        if (!hex) continue;
+        if ((hex as any).is_city) {
+          tasks.push(async () => { try { await getCity(hexCode); } catch (_) {} });
+        }
+        if ((hex as any).content_type === 'settlement') {
+          tasks.push(async () => { try { await getSettlement(hexCode); } catch (_) {} });
+        }
+      }
+      // Run with limited concurrency to avoid overloading server
+      const concurrency = 12;
+      let idx = 0;
+      async function runNext(): Promise<void> {
+        if (idx >= tasks.length) return;
+        const i = idx++;
+        await tasks[i]();
+        await runNext();
+      }
+      const workers = Array.from({ length: Math.min(concurrency, tasks.length) }, () => runNext());
+      await Promise.all(workers);
+    } catch (_) {
+      // Best-effort preload
+    }
   }
 
   private handleHexClick(hexElement: HTMLElement): void {

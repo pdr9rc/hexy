@@ -28,7 +28,13 @@ export async function updateHex(hexCode: string, content: string): Promise<any> 
 
 export async function getCity(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`api/city/${hexCode}`);
+    const cached = await SandboxStore.loadCity(hexCode);
+    if (cached) return { success: true, city: cached };
+    const server = await apiGet(`api/city/${hexCode}`);
+    if (server && server.success && server.city) {
+      await SandboxStore.saveCity(hexCode, server.city);
+    }
+    return server;
   } catch (error) {
     throw handleApiError(error, 'fetching city');
   }
@@ -36,7 +42,13 @@ export async function getCity(hexCode: string): Promise<any> {
 
 export async function getSettlement(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`api/settlement/${hexCode}`);
+    const cached = await SandboxStore.loadSettlement(hexCode);
+    if (cached) return { success: true, settlement: cached };
+    const server = await apiGet(`api/settlement/${hexCode}`);
+    if (server && server.success && server.settlement) {
+      await SandboxStore.saveSettlement(hexCode, server.settlement);
+    }
+    return server;
   } catch (error) {
     throw handleApiError(error, 'fetching settlement');
   }

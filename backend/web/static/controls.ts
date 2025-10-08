@@ -45,12 +45,14 @@ export function setupControls(app: DyingLandsApp) {
         if (typeof w.startBleeding === 'function') w.startBleeding();
       }, 0);
 
-      // Ask for confirmation without blocking
+      // Ask for confirmation; on proceed, clear caches AND reset server, then reload
       ui.showResetConfirm(async () => {
         try {
-          // Local-only reset: clear sandbox data and rotate sandbox id
           await SandboxStore.clearAll();
           await clearServiceWorkerCaches();
+          try { await api.resetContinent(); } catch (_) {}
+          // Hard reload to ensure new world loads and caches are repopulated
+          window.location.reload();
         } catch (e: any) {
           ui.hideLoading();
           ui.showNotification(e.message || 'Failed to reset continent', 'error');
