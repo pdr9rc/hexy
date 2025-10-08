@@ -8,7 +8,7 @@ replacing the markdown parsing approach.
 import json
 from pathlib import Path
 import ast
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Union
 from backend.hex_model import hex_manager, BaseHex, TerrainType, SettlementHex
 from backend.config import get_config, get_output_dir_for_language
 import backend.terrain_system as terrain_module
@@ -173,7 +173,7 @@ class HexService:
 
         # Normalize loot/treasure fields
         loot_keys = {'treasure_found', 'loot_found', 'treasure', 'loot'}
-        hex_data = {'hex_code': hex_code}
+        hex_data: Dict[str, Union[str, Dict[str, Any], List[Any], None]] = {'hex_code': hex_code}
         loot_collected = []
         # For each expected section, extract both structured subfields, raw text, and code blocks
         for section in ['encounter', 'denizen', 'danger', 'atmosphere', 'notable_feature', 'treasure', 'loot_found', 'ancient_knowledge', 'npc_details', 'beast_details', 'threat_level', 'territory']:
@@ -193,12 +193,16 @@ class HexService:
                 # Try to extract key_npcs
                 npc_match = re.search(r'\*\*Key NPCs:\*\*\s*(.+)', section_text)
                 if npc_match:
-                    hex_data['key_npcs'] = [n.strip() for n in npc_match.group(1).split(',')]
+                    hex_data['key_npcs'] = ', '.join(n.strip() for n in npc_match.group(1).split(','))
             hex_data[section] = {'raw': raw_text, 'fields': subfields, 'ascii_art': code_blocks}
         # For backward compatibility, set top-level fields for most common sections
         for key in ['encounter', 'denizen', 'danger', 'atmosphere', 'notable_feature', 'treasure']:
-            if key in hex_data and isinstance(hex_data[key], dict) and 'raw' in hex_data[key]:
-                hex_data[key] = hex_data[key]['raw']
+            if key in hex_data:
+                value = hex_data.get(key)
+                if isinstance(value, dict) and isinstance(value.get('raw'), str):
+                    hex_data[key] = value['raw']
+                else:
+                    hex_data[key] = ''
             else:
                 hex_data[key] = ''
         # Loot and scroll/ancient knowledge special handling
@@ -215,7 +219,7 @@ class HexService:
     def _extract_settlement_data(self, content: str, hex_code: str) -> Dict[str, Any]:
         """Extract settlement data from markdown content."""
         lines = content.split('\n')
-        settlement_data = {
+        settlement_data: Dict[str, Any] = {
             'name': '',
             'description': '',
             'population': '',
@@ -227,7 +231,8 @@ class HexService:
             # Mörk Borg settlement fields
             'weather': '',
             'city_event': '',
-            'tavern_details': None
+            'tavern_details': None,
+            'key_npcs': []  # Initialize as empty list
         }
         # Use centralized ASCII processor
         processed_data = process_ascii_blocks(content)

@@ -68,18 +68,18 @@ class WildernessHex(BaseHex):
 
 
 @dataclass
-class SettlementHex:
+class SettlementHex(BaseHex):
     """Settlement hex with population, services, and local authority."""
     hex_code: str
     terrain: TerrainType
-    name: str
-    description: str
-    population: str
-    atmosphere: str
-    notable_feature: str
-    local_tavern: str
-    local_power: str
-    settlement_art: str
+    name: str = ""
+    description: str = ""
+    population: str = ""
+    atmosphere: str = ""
+    notable_feature: str = ""
+    local_tavern: str = ""
+    local_power: str = ""
+    settlement_art: str = ""
     # Mörk Borg settlement fields
     weather: str = ""
     city_event: str = ""
@@ -115,17 +115,17 @@ class SettlementHex:
 
 
 @dataclass
-class DungeonHex:
+class DungeonHex(BaseHex):
     """Dungeon hex with dangers, treasures, and ancient knowledge."""
     hex_code: str
     terrain: TerrainType
-    encounter: str
-    dungeon_type: str
-    denizen: str
-    danger: str
-    atmosphere: str
-    notable_feature: str
-    treasure: str
+    encounter: str = ""
+    dungeon_type: str = ""
+    denizen: str = ""
+    danger: str = ""
+    atmosphere: str = ""
+    notable_feature: str = ""
+    treasure: str = ""
     loot: Optional[LootItem] = None
     scroll: Optional[AncientKnowledge] = None
     # Mörk Borg dungeon fields
@@ -157,19 +157,19 @@ class DungeonHex:
 
 
 @dataclass
-class BeastHex:
+class BeastHex(BaseHex):
     """Beast hex with creature details, territory, and threat level."""
     hex_code: str
     terrain: TerrainType
-    encounter: str
-    beast_type: str
-    beast_feature: str
-    beast_behavior: str
-    denizen: str
-    territory: str
-    threat_level: str
-    notable_feature: str
-    atmosphere: str
+    encounter: str = ""
+    beast_type: str = ""
+    beast_feature: str = ""
+    beast_behavior: str = ""
+    denizen: str = ""
+    territory: str = ""
+    threat_level: str = ""
+    notable_feature: str = ""
+    atmosphere: str = ""
     loot: Optional[LootItem] = None
     # Beast specific fields
     treasure_found: str = ""
@@ -203,13 +203,13 @@ class BeastHex:
 
 
 @dataclass
-class NPCHex:
+class NPCHex(BaseHex):
     """NPC hex with character details, motivations, and demeanor."""
     hex_code: str
     terrain: TerrainType
-    encounter: str
-    name: str
-    denizen_type: str
+    encounter: str = ""
+    name: str = ""
+    denizen_type: str = ""
     # Mörk Borg NPC fields
     trait: str = ""
     concern: str = ""
@@ -261,17 +261,17 @@ class NPCHex:
 
 
 @dataclass
-class SeaEncounterHex:
+class SeaEncounterHex(BaseHex):
     """Sea encounter hex with abyssal entities and oceanic horrors."""
     hex_code: str
     terrain: TerrainType
-    encounter: str
-    encounter_type: str
-    denizen: str
-    territory: str
-    threat_level: str
-    notable_feature: str
-    atmosphere: str
+    encounter: str = ""
+    encounter_type: str = ""
+    denizen: str = ""
+    territory: str = ""
+    threat_level: str = ""
+    notable_feature: str = ""
+    atmosphere: str = ""
     loot: Optional[LootItem] = None
     # Sea encounter specific fields
     origin: str = ""
@@ -342,7 +342,7 @@ class HexModelManager:
                 atmosphere=data.get('atmosphere', 'Unknown atmosphere'),
                 notable_feature=data.get('notable_feature', 'No notable features'),
                 treasure=data.get('treasure', 'No treasure'),
-                loot=create_loot_item(data.get('loot')) if data.get('loot') else None,
+                loot=create_loot_item(data.get('loot', {})) if data.get('loot') and isinstance(data.get('loot'), dict) else None,
                 scroll=self._create_ancient_knowledge(data.get('scroll')) if data.get('scroll') else None,
                 # Mörk Borg dungeon fields
                 trap_section=data.get('trap_section')
@@ -400,8 +400,10 @@ class HexModelManager:
     
     # Use centralized loot item creator from utils.hex_field_creator
     
-    def _create_ancient_knowledge(self, scroll_data: Dict[str, Any]) -> AncientKnowledge:
+    def _create_ancient_knowledge(self, scroll_data: Optional[Dict[str, Any]]) -> Optional[AncientKnowledge]:
         """Create an AncientKnowledge from raw data."""
+        if not scroll_data:
+            return None
         return AncientKnowledge(
             content=scroll_data.get('content', ''),
             description=scroll_data.get('description', ''),

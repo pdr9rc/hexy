@@ -328,6 +328,7 @@ class MainMapGenerator:
         total = sum(w for _, w in weights)
         roll = random.uniform(0, total)
         upto = 0
+        hex_data = None  # Ensure hex_data is always defined
         for kind, weight in weights:
             if upto + weight >= roll:
                 if kind == 'settlement':
@@ -338,11 +339,11 @@ class MainMapGenerator:
                     hex_data = self._generate_beast_content(hex_code, terrain)
                 elif kind == 'npc':
                     hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
-                
-                return hex_data
+                break
             upto += weight
-        # fallback (shouldn't happen)
-        hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
+        if hex_data is None:
+            # fallback (shouldn't happen)
+            hex_data = self._generate_npc_content(hex_code, terrain, denizen_types)
         
         return hex_data
 
@@ -902,11 +903,11 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
             
             # Mörk Borg settlement details
             if hex_data.get('weather'):
-                lines.append(f"**{self.translation_system.t('weather')}:** " + hex_data.get('weather'))
+                lines.append(f"**{self.translation_system.t('weather')}:** " + str(hex_data.get('weather', 'Unknown')))
                 lines.append("")
             
             if hex_data.get('city_event'):
-                lines.append(f"**{self.translation_system.t('city_event')}:** " + hex_data.get('city_event'))
+                lines.append(f"**{self.translation_system.t('city_event')}:** " + str(hex_data.get('city_event', '')))
                 lines.append("")
             
             # Tavern details
