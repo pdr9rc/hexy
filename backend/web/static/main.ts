@@ -61,7 +61,7 @@ class DyingLandsApp {
   }
 
   private initializeApp(): void {
-    console.log("🗺️ Initializing The Dying Lands...")
+    console.log(" Initializing The Dying Lands...")
 
     // Get map data from template
     const mapDataElement = document.getElementById("map-data")

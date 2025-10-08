@@ -55,7 +55,7 @@
     "hex_details": "HEX DETAILS",
     "city_details": "CITY DETAILS",
     "settlement_details": "SETTLEMENT DETAILS",
-    "terrain_overview": "🗺️ TERRAIN OVERVIEW",
+    "terrain_overview": " TERRAIN OVERVIEW",
     "lore_overview": "📜 MÖRK BORG LORE",
     
     "close": "CLOSE",
@@ -64,7 +64,7 @@
     "reset_continent": "🩸 RESET CONTINENT",
     "zoom_in": "🔍+",
     "zoom_out": "🔍-",
-    "terrain_button": "🗺️ TERRAIN",
+    "terrain_button": " TERRAIN",
     "lore_button": "🍄 LORE",
     
     "click_hexes": "CLICK HEXES TO VIEW/GENERATE CONTENT",

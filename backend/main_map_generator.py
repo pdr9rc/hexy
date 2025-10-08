@@ -136,7 +136,7 @@ class MainMapGenerator:
     
     def generate_full_map(self, options: Optional[Dict] = None) -> Dict:
         """Generate content for the entire map."""
-        print(f"🗺️ {self.translation_system.t('ui.generating_full_map', fallback='Generating Full Map')}...")
+        print(f" {self.translation_system.t('ui.generating_full_map', fallback='Generating Full Map')}...")
         print(f"📍 {self.translation_system.t('ui.map_size', fallback='Map Size')}: {self.map_width}x{self.map_height} hexes")
         print(f"🎯 {self.translation_system.t('ui.language', fallback='Language')}: {self.language}")
         
@@ -1023,7 +1023,7 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
         if 'ascii' not in self.output_formats:
             return
         
-        print(f"🗺️ Creating ASCII map...")
+        print(f" Creating ASCII map...")
         
         # Create terrain-based ASCII map
         terrain_map = terrain_module.terrain_system.create_terrain_overview_map()

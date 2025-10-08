@@ -1435,7 +1435,7 @@ def create_templates():
 <body>
     <div class="container-fluid">
         <header class="text-center py-3">
-            <h1 class="mb-0">🗺️ The Dying Lands</h1>
+            <h1 class="mb-0"> The Dying Lands</h1>
             <p class="text-muted">Interactive Hex Map - {{ map_width }}×{{ map_height }} ({{ total_hexes }} hexes)</p>
         </header>
         
@@ -1444,7 +1444,7 @@ def create_templates():
             <div class="row">
                 <div class="col-md-8">
                     <div class="btn-group me-2" role="group">
-                        <button class="btn btn-warning btn-sm" onclick="showTerrainOverview()">🗺️ Terrain</button>
+                        <button class="btn btn-warning btn-sm" onclick="showTerrainOverview()"> Terrain</button>
                         <button class="btn btn-info btn-sm" onclick="showLoreOverview()">🍄 Lore</button>
                         <button class="btn btn-secondary btn-sm" onclick="showLegend()">🗂️ Legend</button>
                     </div>
@@ -1651,7 +1651,7 @@ def create_templates():
                     let html = `
                         <div class="row">
                             <div class="col-md-6">
-                                <h6>🗺️ City Map</h6>
+                                <h6> City Map</h6>
                                 <pre style="background:#111; color:#e0e0e0; padding:15px; border-radius:5px; font-size:11px; line-height:1.1; overflow:auto; max-height:400px;">${data.city_map}</pre>
                             </div>
                             <div class="col-md-6">
@@ -1854,7 +1854,7 @@ def create_templates():
                     
                     html += `
                                 <hr>
-                                <h6>🗺️ Map Info</h6>
+                                <h6> Map Info</h6>
                                 <div class="small">
                                     <strong>Dimensions:</strong> ${width}×${height}<br>
                                     <strong>Total Hexes:</strong> ${width * height}<br>
@@ -1986,7 +1986,7 @@ def create_templates():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🗺️ Setup Required - The Dying Lands</title>
+    <title> Setup Required - The Dying Lands</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
     body {
@@ -2010,7 +2010,7 @@ def create_templates():
 </head>
 <body>
     <div class="setup-card">
-        <h1 class="mb-4">🗺️ The Dying Lands</h1>
+        <h1 class="mb-4"> The Dying Lands</h1>
         <h3 class="text-warning mb-3">{{ message }}</h3>
         <p class="mb-4">{{ action }}</p>
         <div class="d-flex gap-3 justify-content-center">

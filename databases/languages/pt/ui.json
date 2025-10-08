@@ -55,7 +55,7 @@
     "hex_details": "DETALHES DO HEX",
     "city_details": "DETALHES DA CIDADE",
     "settlement_details": "DETALHES DO ASSENTAMENTO",
-    "terrain_overview": "🗺️ VISÃO GERAL DO TERRENO",
+    "terrain_overview": " VISÃO GERAL DO TERRENO",
     "lore_overview": "📜 LORE DO MÖRK BORG",
     
     "close": "FECHAR",
@@ -64,7 +64,7 @@
     "reset_continent": "🩸 RESETAR CONTINENTE",
     "zoom_in": "🔍+",
     "zoom_out": "🔍-",
-    "terrain_button": "🗺️ TERRENO",
+    "terrain_button": " TERRENO",
     "lore_button": "🍄 LORE",
     
     "click_hexes": "CLIQUE NOS HEXES PARA VER/GERAR CONTEÚDO",
