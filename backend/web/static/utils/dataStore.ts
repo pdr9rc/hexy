@@ -6,14 +6,18 @@
 // - lore: lore overview per language (key: `<lang>`)
 // - cities: structured city details per language+hex (key: `${lang}:${hexCode}`)
 // - settlements: structured settlement details per language+hex (key: `${lang}:${hexCode}`)
+// - overlays: city overlay grids per language+overlay (key: `${lang}:${overlay}`)
+// - overlayHex: overlay hex details per language+overlay+hexId (key: `${lang}:${overlay}:${hexId}`)
 
 const DB_NAME = 'hexy-data-v1';
-const DB_VERSION = 2;
+const DB_VERSION = 3;
 const STORE_META = 'meta';
 const STORE_HEX = 'hexMarkdown';
 const STORE_LORE = 'lore';
 const STORE_CITIES = 'cities';
 const STORE_SETTLEMENTS = 'settlements';
+const STORE_OVERLAYS = 'overlays';
+const STORE_OVERLAY_HEX = 'overlayHex';
 
 let dbPromise: Promise<IDBDatabase> | null = null;
 
@@ -37,6 +41,12 @@ function openDb(): Promise<IDBDatabase> {
       }
       if (!db.objectStoreNames.contains(STORE_SETTLEMENTS)) {
         db.createObjectStore(STORE_SETTLEMENTS);
+      }
+      if (!db.objectStoreNames.contains(STORE_OVERLAYS)) {
+        db.createObjectStore(STORE_OVERLAYS);
+      }
+      if (!db.objectStoreNames.contains(STORE_OVERLAY_HEX)) {
+        db.createObjectStore(STORE_OVERLAY_HEX);
       }
     };
     req.onsuccess = () => resolve(req.result);
@@ -191,6 +201,50 @@ export const DataStore = {
       const store = await tx(STORE_SETTLEMENTS, 'readwrite');
       await new Promise<void>((resolve, reject) => {
         const req = store.put(data, `${language}:${hexCode}`);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {}
+  },
+
+  async getOverlay(language: string, overlayName: string): Promise<any | null> {
+    try {
+      const store = await tx(STORE_OVERLAYS, 'readonly');
+      return await new Promise((resolve, reject) => {
+        const req = store.get(`${language}:${overlayName}`);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) { return null; }
+  },
+
+  async setOverlay(language: string, overlayName: string, data: any): Promise<void> {
+    try {
+      const store = await tx(STORE_OVERLAYS, 'readwrite');
+      await new Promise<void>((resolve, reject) => {
+        const req = store.put(data, `${language}:${overlayName}`);
+        req.onsuccess = () => resolve();
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {}
+  },
+
+  async getOverlayHex(language: string, overlayName: string, hexId: string): Promise<any | null> {
+    try {
+      const store = await tx(STORE_OVERLAY_HEX, 'readonly');
+      return await new Promise((resolve, reject) => {
+        const req = store.get(`${language}:${overlayName}:${hexId}`);
+        req.onsuccess = () => resolve(req.result || null);
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) { return null; }
+  },
+
+  async setOverlayHex(language: string, overlayName: string, hexId: string, data: any): Promise<void> {
+    try {
+      const store = await tx(STORE_OVERLAY_HEX, 'readwrite');
+      await new Promise<void>((resolve, reject) => {
+        const req = store.put(data, `${language}:${overlayName}:${hexId}`);
         req.onsuccess = () => resolve();
         req.onerror = () => reject(req.error);
       });

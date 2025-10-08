@@ -12,13 +12,11 @@ async function ensureJsZip(): Promise<any> {
     JSZipLib = (mod as any).default || mod;
     return JSZipLib;
   } catch (_) {}
-  // Fallback: window.JSZip
   const w: any = window as any;
   if (w && w.JSZip) {
     JSZipLib = w.JSZip;
     return JSZipLib;
   }
-  // Last resort: dynamically load local vendor script
   try {
     JSZipLib = await new Promise<any>((resolve, reject) => {
       const existing = document.getElementById('jszip-lib');
@@ -58,11 +56,14 @@ function isCityMarkdown(md: string): boolean {
 
 export async function prefetchAllHexMarkdown(onProgress?: (p: PrefetchProgress) => void): Promise<void> {
   const lang = getCurrentLanguage();
-  const version = (window as any).__GEN_VERSION__ || '';
-  const current = await DataStore.getVersion(lang);
-  if (current && current === String(version)) {
-    return; // Already synced
+  const serverVersion = (window as any).__GEN_VERSION__ || '';
+  const storedVersion = await DataStore.getVersion(lang);
+  // If we already have a stored version and either server version is absent or matches, skip prefetch
+  if (storedVersion && (!serverVersion || storedVersion === String(serverVersion))) {
+    return;
   }
+
+  // If serverVersion exists and differs, proceed; if absent but no storedVersion, proceed
 
   await DataStore.clearHexMarkdown(lang);
 
@@ -120,5 +121,34 @@ export async function prefetchAllHexMarkdown(onProgress?: (p: PrefetchProgress) 
     }
   } catch (_) {}
 
-  await DataStore.setVersion(lang, String(version));
+  try {
+    const overlaysResp = await fetch('api/city-overlays');
+    if (overlaysResp.ok) {
+      const overlays = await overlaysResp.json();
+      const list = overlays?.overlays || [];
+      for (const ov of list) {
+        const name = ov.name || ov.key || ov.display_name;
+        if (!name) continue;
+        try {
+          const gridResp = await fetch(`api/city-overlay/${name}`);
+          if (gridResp.ok) {
+            const grid = await gridResp.json();
+            await DataStore.setOverlay(lang, name, grid);
+            const hexGrid = grid?.overlay?.hex_grid || grid?.hex_grid || {};
+            for (const hexId of Object.keys(hexGrid)) {
+              try {
+                const hx = await fetch(`api/city-overlay/${name}/hex/${hexId}`);
+                if (hx.ok) {
+                  const data = await hx.json();
+                  await DataStore.setOverlayHex(lang, name, hexId, data);
+                }
+              } catch (_) {}
+            }
+          }
+        } catch (_) {}
+      }
+    }
+  } catch (_) {}
+
+  await DataStore.setVersion(lang, String(serverVersion || storedVersion || '1'));
 }
