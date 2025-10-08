@@ -85,7 +85,7 @@ _t.start()
 
 def get_main_map_generator():
     """Get main map generator with current language configuration."""
-    output_dir = get_output_dir_for_language(current_language)
+    output_dir = get_output_dir_for_language(current_language if isinstance(current_language, str) and current_language else "en")
     return MainMapGenerator({'language': current_language, 'output_directory': str(output_dir)})
 
 # Initialize with default language
@@ -344,7 +344,7 @@ def import_output_zip():
         if 'file' not in request.files:
             return jsonify({'error': 'Missing file'}), 400
         file = request.files['file']
-        if not file.filename.lower().endswith('.zip'):
+        if not file.filename or not file.filename.lower().endswith('.zip'):
             return jsonify({'error': 'File must be a .zip'}), 400
 
         # Save uploaded content to memory and open as zip
@@ -416,7 +416,7 @@ def reset_continent():
         for lang in langs:
             try:
                 current_language = lang
-                translation_system.set_language(lang)
+                translation_system.set_language(lang if isinstance(lang, str) and lang else "en")
                 # Re-init generator for this language
                 main_map_generator = get_main_map_generator()
                 last_result = main_map_generator.reset_continent()
@@ -452,7 +452,7 @@ def get_hex_info(hex_code):
 
     # Prefer language-specific output path if it exists
     # Resolve language-specific output directory using {lang} stub if present
-    lang_output = get_output_dir_for_language(current_language)
+    lang_output = get_output_dir_for_language(current_language if isinstance(current_language, str) and current_language else "en")
     chosen_hex_dir = (lang_output / "hexes")
 
     hex_data = hex_service.get_hex_dict(hex_code)
@@ -652,7 +652,7 @@ def terrain_debug():
             'map_dimensions': [getattr(ts, 'map_width', None), getattr(ts, 'map_height', None)],
             'image_path': getattr(ia, 'map_image_path', None) if ia else None,
             'image_loaded': bool(getattr(ia, 'map_image', None)) if ia else False,
-            'mapping_mode': getattr(ts, 'image_analyzer', None).mapping_mode if ia else None,
+            'mapping_mode': ia.mapping_mode if ia and hasattr(ia, 'mapping_mode') else None,
         }
         # Include ImageAnalyzer map info if available
         if ia and hasattr(ia, 'get_map_info'):
@@ -727,7 +727,7 @@ def get_settlement_details(hex_code):
     # Fallback: read and parse the hex markdown directly if present
     try:
         from backend.utils import safe_file_read
-        hex_file_path = get_output_dir_for_language(current_language) / "hexes" / f"hex_{hex_code}.md"
+        hex_file_path = get_output_dir_for_language(current_language if isinstance(current_language, str) and current_language else "en") / "hexes" / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             content = safe_file_read(hex_file_path)
             if '⌂ **' in content:
@@ -752,7 +752,7 @@ def get_settlement_details(hex_code):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
-        return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
+    return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
 
 @api_bp.route('/hex/<hex_code>', methods=['PUT'])
 def update_hex_content(hex_code):
@@ -1060,12 +1060,13 @@ def regenerate_overlay(overlay_name):
 
 # ===== HELPER FUNCTIONS =====
 
-def _get_major_city_info(hex_code: str, hardcoded: dict) -> dict:
+def _get_major_city_info(hex_code: str, hardcoded: dict):
     city_key = hardcoded['city_key']
     city_data = lore_db.major_cities[city_key]
-    return create_major_city_response(city_data, hex_code, current_language)
+    safe_language = current_language if isinstance(current_language, str) and current_language else "en"
+    return create_major_city_response(city_data, hex_code, safe_language)
 
-def _get_hex_file_info(hex_code: str, hex_file) -> dict:
+def _get_hex_file_info(hex_code: str, hex_file):
     try:
         from backend.utils import safe_file_read
         content = safe_file_read(hex_file)
@@ -1175,8 +1176,8 @@ def generate_ascii_map_data():
                 has_loot = check_hex_has_loot(hex_code)
             
             # Use centralized symbol and CSS class determination
-            symbol = determine_content_symbol(content_type, terrain) if hex_file_exists else get_terrain_symbol(terrain)
-            css_class = determine_css_class(content_type, terrain)
+            symbol = determine_content_symbol(content_type if content_type is not None else "unknown", terrain) if hex_file_exists else get_terrain_symbol(terrain)
+            css_class = determine_css_class(content_type if content_type is not None else "unknown", terrain)
             if has_loot:
                 css_class += ' has-content'
             
@@ -1196,7 +1197,8 @@ def get_major_cities_data():
     cities = []
     # Load cities from database manager with current language
     from backend.database_manager import database_manager
-    cities_table = database_manager.get_table('cities', 'major_cities', current_language)
+    safe_language = current_language if isinstance(current_language, str) and current_language else "en"
+    cities_table = database_manager.get_table('cities', 'major_cities', safe_language)
     
     for city in cities_table:
         if isinstance(city, dict):

@@ -6,8 +6,8 @@ Extracts terrain information from the official Mork Borg map image.
 
 import os
 from typing import Dict, Optional, Tuple, List
+from PIL import Image
 try:
-    from PIL import Image
     PILLOW_AVAILABLE = True
 except ImportError:
     PILLOW_AVAILABLE = False
@@ -104,6 +104,9 @@ class ImageAnalyzer:
             return x, y
     
     def _hex_to_pixel_coordinates(self, hex_x: int, hex_y: int) -> Tuple[int, int, bool]:
+        if not self.map_image:
+            # If map_image is None, return default values and in_image as False
+            return 0, 0, False
         img_width, img_height = self.map_image.size
         grid_width, grid_height = self.map_width, self.map_height
         if self.mapping_mode == "letterbox":
@@ -142,6 +145,8 @@ class ImageAnalyzer:
         
     def get_average_color_for_hex(self, hex_x: int, hex_y: int) -> Tuple[int, int, int]:
         """Return the average RGB color for the region of the image corresponding to this hex."""
+        if not self.map_image:
+            return (0, 0, 0)
         img_width, img_height = self.map_image.size
         grid_width, grid_height = self.map_width, self.map_height
         scale = min(img_width / grid_width, img_height / grid_height)
@@ -221,7 +226,7 @@ class ImageAnalyzer:
                     terrain_scores['unknown'] = terrain_scores.get('unknown', 0) + 1
                     color_matches['unknown'].append(color)
         if terrain_scores:
-            best_terrain = max(terrain_scores, key=terrain_scores.get)
+            best_terrain = max(terrain_scores, key=lambda t: terrain_scores[t])
             if self.debug and self._debug_counter < 40:
                         
                 self._debug_counter += 1

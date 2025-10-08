@@ -12,13 +12,15 @@
     "start:electron": "npm run build:electron && electron dist/electron/main.js",
     "start:all": "npm-run-all --parallel build:web:watch build:electron:watch start:backend",
     "start:desktop": "npm run start:backend & sleep 3 && npm run start:electron",
-    "dev": "npm run start:all & sleep 5 && npm run start:electron"
+    "dev": "npm run start:all & sleep 5 && npm run start:electron",
+    "knip": "knip"
   },
   "devDependencies": {
-    "typescript": "^5.8.3",
-    "npm-run-all": "^4.1.5",
+    "@types/node": "^22.18.8",
     "electron": "^32.0.0",
-    "@types/node": "^22.0.0"
+    "knip": "^5.64.2",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "lottie-web": "^5.12.2"

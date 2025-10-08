@@ -11,6 +11,7 @@ from mangum import Mangum
 from backend import create_app
 from backend.config import get_config
 from backend.utils import setup_project_paths
+from asgiref.wsgi import WsgiToAsgi
 
 # Setup project paths for Lambda environment
 setup_project_paths()
@@ -18,8 +19,11 @@ setup_project_paths()
 # Create Flask application
 app = create_app()
 
+# Wrap Flask app with WsgiToAsgi for ASGI compatibility
+asgi_app = WsgiToAsgi(app)
+
 # Create Lambda handler using Mangum
-handler = Mangum(app, lifespan="off")
+handler = Mangum(asgi_app, lifespan="off")
 
 def lambda_handler(event, context):
     """
