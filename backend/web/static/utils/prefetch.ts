@@ -2,44 +2,7 @@
 
 import { DataStore } from './dataStore.js';
 import { getCurrentLanguage } from '../translations.js';
-
-let JSZipLib: any = null;
-
-async function ensureJsZip(): Promise<any> {
-  if (JSZipLib) return JSZipLib;
-  try {
-    const mod = await import('jszip');
-    JSZipLib = (mod as any).default || mod;
-    return JSZipLib;
-  } catch (_) {}
-  const w: any = window as any;
-  if (w && w.JSZip) {
-    JSZipLib = w.JSZip;
-    return JSZipLib;
-  }
-  try {
-    JSZipLib = await new Promise<any>((resolve, reject) => {
-      const existing = document.getElementById('jszip-lib');
-      if (existing) {
-        const win: any = window as any;
-        return resolve(win.JSZip || null);
-      }
-      const s = document.createElement('script');
-      s.id = 'jszip-lib';
-      s.src = 'static/vendor/jszip.min.js';
-      s.async = true;
-      s.onload = () => {
-        const win: any = window as any;
-        resolve(win.JSZip || null);
-      };
-      s.onerror = () => reject(new Error('Failed to load jszip vendor'));
-      document.head.appendChild(s);
-    });
-  } catch (_) {
-    JSZipLib = null;
-  }
-  return JSZipLib;
-}
+import { ensureJsZip } from './jszipLoader.js';
 
 export type PrefetchProgress = {
   total: number;

@@ -5,6 +5,7 @@ import * as ui from './uiUtils.js';
 import { setLanguage } from './translations.js';
 import { SandboxStore } from './utils/sandboxStore.js';
 import { DataStore } from './utils/dataStore.js';
+import { ensureJsZip } from './utils/jszipLoader.js';
 
 export { setupControls as initializeControls };
 
@@ -93,27 +94,39 @@ export function setupControls(app: DyingLandsApp) {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const zipBlob = await res.blob();
 
-        // Dynamically load JSZip
-        const JSZip = (await import('jszip')).default;
-        const serverZip = await JSZip.loadAsync(zipBlob);
-
-        // Dump client datastore
-        const ds = await DataStore.dumpAll();
-        const dsJson = JSON.stringify(ds);
-        serverZip.file('client_datastore.json', dsJson);
-
-        // Produce combined zip
-        const combinedBlob = await serverZip.generateAsync({ type: 'blob' });
-        const url = URL.createObjectURL(combinedBlob);
-        const a = document.createElement('a');
-        const ts = new Date().toISOString().replace(/[:.]/g, '');
-        a.href = url;
-        a.download = `dying_lands_bundle-${ts}.zip`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-        ui.showNotification('Exported world + client data');
+        // Try to obtain JSZip
+        const JSZip = await ensureJsZip();
+        if (JSZip) {
+          const serverZip = await JSZip.loadAsync(zipBlob);
+          // Dump client datastore
+          const ds = await DataStore.dumpAll();
+          const dsJson = JSON.stringify(ds);
+          serverZip.file('client_datastore.json', dsJson);
+          // Produce combined zip
+          const combinedBlob = await serverZip.generateAsync({ type: 'blob' });
+          const url = URL.createObjectURL(combinedBlob);
+          const a = document.createElement('a');
+          const ts = new Date().toISOString().replace(/[:.]/g, '');
+          a.href = url;
+          a.download = `dying_lands_bundle-${ts}.zip`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          ui.showNotification('Exported world + client data');
+        } else {
+          // Fallback: download server zip directly
+          const url = URL.createObjectURL(zipBlob);
+          const a = document.createElement('a');
+          const ts = new Date().toISOString().replace(/[:.]/g, '');
+          a.href = url;
+          a.download = `dying_lands_export-${ts}.zip`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          ui.showNotification('Exported server world data');
+        }
       } catch (e: any) {
         ui.showNotification(e.message || 'Failed to export', 'error');
       }
