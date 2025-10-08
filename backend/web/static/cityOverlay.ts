@@ -66,7 +66,7 @@ export async function showSettlementDetailsInMap(app: any, hexCode: string): Pro
     }
     catch (error) {
         console.error('Error loading settlement details:', error);
-        showMapErrorState(app, 'Failed to load settlement details');
+        showMapErrorState(app, 'Failed to load settlement details 1');
     }
     finally {
         ui.hideLoading();

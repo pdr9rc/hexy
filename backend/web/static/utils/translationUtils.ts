@@ -146,7 +146,7 @@ class TranslationManager {
             'error_loading_map': 'Failed to load map data',
             'error_loading_hex': 'Failed to load hex details',
             'error_loading_city': 'Failed to load city hex details',
-            'error_loading_settlement': 'Failed to load settlement details',
+            'error_loading_settlement': 'Failed to load settlement details 3',
             'error_regenerating': 'Error regenerating hex',
             'hex_not_found': 'Hex not found',
             'no_overlay_context': 'Error: No city overlay context found',

@@ -982,7 +982,7 @@ async function showSettlementDetailsInMap(app: DyingLandsApp, hexCode: string) {
     }
   } catch (error) {
     console.error('Error loading settlement details:', error);
-    showErrorState('Failed to load settlement details');
+    showErrorState('Failed to load settlement details 2');
   }
 }
 
