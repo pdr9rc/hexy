@@ -684,6 +684,11 @@ def set_language():
             hex_manager.clear_cache()
         except Exception:
             pass
+        # Ensure global config language reflects the current selection so services use correct {lang} dirs
+        try:
+            config.language = new_language
+        except Exception:
+            pass
         # Update city overlay analyzer with new language
         from backend.city_overlay_analyzer import city_overlay_analyzer
         from backend.database_manager import database_manager
@@ -722,8 +727,7 @@ def get_settlement_details(hex_code):
     # Fallback: read and parse the hex markdown directly if present
     try:
         from backend.utils import safe_file_read
-        hex_file_path = config.paths.output_path \
-            / "hexes" / f"hex_{hex_code}.md"
+        hex_file_path = get_output_dir_for_language(current_language) / "hexes" / f"hex_{hex_code}.md"
         if hex_file_path.exists():
             content = safe_file_read(hex_file_path)
             if '⌂ **' in content:
