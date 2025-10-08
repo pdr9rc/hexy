@@ -60,6 +60,36 @@ async function tx(storeName: string, mode: IDBTransactionMode): Promise<IDBObjec
   return db.transaction(storeName, mode).objectStore(storeName);
 }
 
+async function dumpStore(storeName: string): Promise<Record<string, any>> {
+  const store = await tx(storeName, 'readonly');
+  const out: Record<string, any> = {};
+  return await new Promise((resolve, reject) => {
+    const req = (store as any).openCursor();
+    req.onsuccess = () => {
+      const cursor: IDBCursorWithValue | null = req.result;
+      if (cursor) {
+        out[String(cursor.key)] = cursor.value;
+        cursor.continue();
+      } else {
+        resolve(out);
+      }
+    };
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function restoreStore(storeName: string, data: Record<string, any>) {
+  const store = await tx(storeName, 'readwrite');
+  await new Promise<void>((resolve, reject) => {
+    const t = (store as any).transaction;
+    Object.entries(data || {}).forEach(([k, v]) => {
+      (store as any).put(v, k);
+    });
+    t.oncomplete = () => resolve();
+    t.onerror = () => reject(t.error);
+  });
+}
+
 export const DataStore = {
   async getVersion(language: string): Promise<string | null> {
     try {
@@ -249,5 +279,30 @@ export const DataStore = {
         req.onerror = () => reject(req.error);
       });
     } catch (_) {}
+  },
+
+  async dumpAll(): Promise<any> {
+    const [meta, hex, lore, cities, settlements, overlays, overlayHex] = await Promise.all([
+      dumpStore(STORE_META),
+      dumpStore(STORE_HEX),
+      dumpStore(STORE_LORE),
+      dumpStore(STORE_CITIES),
+      dumpStore(STORE_SETTLEMENTS),
+      dumpStore(STORE_OVERLAYS),
+      dumpStore(STORE_OVERLAY_HEX)
+    ]);
+    return { meta, hex, lore, cities, settlements, overlays, overlayHex, schema: 1 };
+  },
+
+  async restoreAll(data: any): Promise<void> {
+    if (!data || typeof data !== 'object') return;
+    const { meta = {}, hex = {}, lore = {}, cities = {}, settlements = {}, overlays = {}, overlayHex = {} } = data;
+    await restoreStore(STORE_META, meta);
+    await restoreStore(STORE_HEX, hex);
+    await restoreStore(STORE_LORE, lore);
+    await restoreStore(STORE_CITIES, cities);
+    await restoreStore(STORE_SETTLEMENTS, settlements);
+    await restoreStore(STORE_OVERLAYS, overlays);
+    await restoreStore(STORE_OVERLAY_HEX, overlayHex);
   }
 };

@@ -4,6 +4,7 @@ import * as api from './api.js';
 import * as ui from './uiUtils.js';
 import { setLanguage } from './translations.js';
 import { SandboxStore } from './utils/sandboxStore.js';
+import { DataStore } from './utils/dataStore.js';
 
 export { setupControls as initializeControls };
 
@@ -87,20 +88,32 @@ export function setupControls(app: DyingLandsApp) {
   if (exportBtn) {
     exportBtn.addEventListener('click', async () => {
       try {
-        // Export current sandbox markdown overrides as a JSON alongside server zip
+        // Fetch server zip
         const res = await fetch('api/export');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const blob = await res.blob();
-        const url = URL.createObjectURL(blob);
+        const zipBlob = await res.blob();
+
+        // Dynamically load JSZip
+        const JSZip = (await import('jszip')).default;
+        const serverZip = await JSZip.loadAsync(zipBlob);
+
+        // Dump client datastore
+        const ds = await DataStore.dumpAll();
+        const dsJson = JSON.stringify(ds);
+        serverZip.file('client_datastore.json', dsJson);
+
+        // Produce combined zip
+        const combinedBlob = await serverZip.generateAsync({ type: 'blob' });
+        const url = URL.createObjectURL(combinedBlob);
         const a = document.createElement('a');
         const ts = new Date().toISOString().replace(/[:.]/g, '');
         a.href = url;
-        a.download = `dying_lands_output-${ts}.zip`;
+        a.download = `dying_lands_bundle-${ts}.zip`;
         document.body.appendChild(a);
         a.click();
         a.remove();
         URL.revokeObjectURL(url);
-        ui.showNotification('Exported world data');
+        ui.showNotification('Exported world + client data');
       } catch (e: any) {
         ui.showNotification(e.message || 'Failed to export', 'error');
       }
@@ -122,8 +135,16 @@ export function setupControls(app: DyingLandsApp) {
       }
       ui.showLoading('Importing...');
       try {
+        // Read zip locally to restore datastore if present
+        const JSZip = (await import('jszip')).default;
+        const zip = await JSZip.loadAsync(file);
+        const dsEntry = zip.file('client_datastore.json');
+        if (dsEntry) {
+          const dsText = await dsEntry.async('string');
+          try { await DataStore.restoreAll(JSON.parse(dsText)); } catch (_) {}
+        }
+        // Send to server import endpoint as well
         await api.importZip(file);
-        // Keep sandbox overrides; do not clear IndexedDB
         ui.hideLoading();
         ui.showNotification('Import complete');
         await clearServiceWorkerCaches();
