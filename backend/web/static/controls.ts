@@ -51,7 +51,8 @@ export function setupControls(app: DyingLandsApp) {
           // Local-only reset: clear sandbox data and rotate sandbox id
           await SandboxStore.clearAll();
           await clearServiceWorkerCaches();
-          window.location.replace('?t=' + Date.now());
+          const v = (window as any).__GEN_VERSION__ || Date.now();
+          window.location.replace('?t=' + v);
         } catch (e: any) {
           ui.hideLoading();
           ui.showNotification(e.message || 'Failed to reset continent', 'error');
@@ -73,7 +74,8 @@ export function setupControls(app: DyingLandsApp) {
         await api.setLanguage(lang);
         setLanguage(lang);
         await clearServiceWorkerCaches();
-                window.location.replace('?t=' + Date.now());
+        const v = (window as any).__GEN_VERSION__ || Date.now();
+        window.location.replace('?t=' + v);
       } catch (e: any) {
         ui.hideLoading();
         ui.showNotification(e.message || 'Failed to change language', 'error');
@@ -125,7 +127,8 @@ export function setupControls(app: DyingLandsApp) {
         ui.hideLoading();
         ui.showNotification('Import complete');
         await clearServiceWorkerCaches();
-        window.location.replace('/?t=' + Date.now());
+        const v = (window as any).__GEN_VERSION__ || Date.now();
+        window.location.replace('/?t=' + v);
       } catch (e: any) {
         ui.hideLoading();
         ui.showNotification(e.message || 'Failed to import', 'error');

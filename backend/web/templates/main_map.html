@@ -128,6 +128,8 @@ The world is dying, but adventure lives on.
     // Periodic heartbeat to allow backend to shutdown when tab closes
     (function(){
       const TOKEN = '{{ hexy_token }}';
+      const GEN_VERSION = '{{ gen_version|default("") }}';
+      try { window.__GEN_VERSION__ = GEN_VERSION; } catch(e) {}
       async function checkAndRevive(){
         try{
           const r = await fetch('api/health');

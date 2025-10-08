@@ -155,12 +155,9 @@ def main_map():
     
     if not config.paths.output_path.exists():
         config.paths.output_path.mkdir(parents=True, exist_ok=True)
-    # If output is empty, show world with empty state; user can press Reset from UI
     
-    # Auto-regenerate output if flag is set
-    if getattr(config, 'auto_regenerate_output', False):
-        print("[AUTO] Regenerating Dying Lands output (auto_regenerate_output=True)...")
-        main_map_generator.generate_full_map()
+    # Atomic cold-boot generation only (no user-triggered regeneration)
+    _maybe_atomic_cold_boot_generation(config)
     
     # Get map dimensions
     map_width, map_height = terrain_system.get_map_dimensions()
@@ -184,7 +181,102 @@ def main_map():
                          major_cities=get_major_cities_data(),
                          total_hexes=map_width * map_height,
                            current_language=current_language,
-                           hexy_token=_HEXY_HEARTBEAT_TOKEN)
+                           hexy_token=_HEXY_HEARTBEAT_TOKEN,
+                           gen_version=_get_generation_version(config))
+
+
+def _hexes_exist(output_dir: Path) -> bool:
+    try:
+        hexes_dir = output_dir / 'hexes'
+        if not hexes_dir.exists():
+            return False
+        for p in hexes_dir.iterdir():
+            if p.is_file() and p.name.startswith('hex_') and p.suffix == '.md':
+                return True
+        return False
+    except Exception:
+        return False
+
+
+def _maybe_atomic_cold_boot_generation(cfg):
+    """Perform atomic generation only when no map exists.
+    Generates into a staging directory and swaps into place under a simple lock.
+    """
+    output_dir: Path = cfg.paths.output_path
+    lock_file = output_dir.parent / f".{output_dir.name}.generating"
+
+    # Already have data
+    if _hexes_exist(output_dir):
+        return
+
+    # Someone else generating? wait briefly
+    if lock_file.exists():
+        for _ in range(120):  # ~60s
+            if _hexes_exist(output_dir):
+                return
+            if not lock_file.exists():
+                break
+            time.sleep(0.5)
+        return
+
+    # Acquire lock
+    try:
+        lock_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(lock_file, 'w', encoding='utf-8') as f:
+            f.write(str(int(time.time())))
+    except Exception:
+        pass
+
+    staging = output_dir.parent / f"{output_dir.name}.staging-{int(time.time())}"
+    try:
+        generator = MainMapGenerator({'language': current_language, 'output_directory': str(staging)})
+        result = generator.generate_full_map({'skip_existing': False})
+        if not isinstance(result, dict):
+            raise RuntimeError('Unexpected generation result')
+
+        backup = None
+        if output_dir.exists():
+            backup = output_dir.parent / f"{output_dir.name}.bak-{int(time.time())}"
+            try:
+                shutil.move(str(output_dir), str(backup))
+            except Exception:
+                shutil.rmtree(output_dir, ignore_errors=True)
+        shutil.move(str(staging), str(output_dir))
+        if backup and backup.exists():
+            shutil.rmtree(backup, ignore_errors=True)
+        # Write generation version manifest
+        _write_generation_version(cfg, output_dir)
+    except Exception:
+        shutil.rmtree(staging, ignore_errors=True)
+    finally:
+        try:
+            if lock_file.exists():
+                lock_file.unlink()
+        except Exception:
+            pass
+
+def _write_generation_version(cfg, output_dir: Path) -> None:
+    try:
+        ver = {
+            'version': str(int(time.time())),
+            'generatedAt': __import__('datetime').datetime.utcnow().isoformat() + 'Z',
+            'language': getattr(cfg, 'language', current_language)
+        }
+        (output_dir / 'version.json').write_text(__import__('json').dumps(ver), encoding='utf-8')
+    except Exception:
+        pass
+
+def _get_generation_version(cfg) -> str:
+    try:
+        ver_file = cfg.paths.output_path / 'version.json'
+        if ver_file.exists():
+            data = __import__('json').loads(ver_file.read_text(encoding='utf-8'))
+            return str(data.get('version') or '')
+        # If missing, create one
+        _write_generation_version(cfg, cfg.paths.output_path)
+        return str(int(time.time()))
+    except Exception:
+        return str(int(time.time()))
 
 # ===== PWA ASSETS =====
 @assets_bp.route('/manifest.webmanifest')
@@ -246,17 +338,18 @@ def serve_service_worker():
         "  if(req.method!=='GET'){ return; }\n"
         "  // Do not intercept cross-origin requests (avoid CORS/undefined Response issues)\n"
         "  if(url.origin!==location.origin){ return; }\n"
-        "  // API: network-first, fallback to cache, and never use http cache\n"
+        "  // Never cache HTML navigation\n"
+        "  const accept=(req.headers.get('Accept')||'');\n"
+        "  if(req.mode==='navigate' || accept.includes('text/html')){\n"
+        "    event.respondWith(fetch(new Request(req,{cache:'no-store'})));\n"
+        "    return;\n"
+        "  }\n"
+        "  // API: strict network-only\n"
         "  if(url.pathname.includes('/api/')){\n"
         "    event.respondWith((async()=>{\n"
         "      try{\n"
-        "        const fresh=await fetch(new Request(req,{cache:'no-store'}));\n"
-        "        const cache=await caches.open(RUNTIME_CACHE);\n"
-        "        cache.put(req, fresh.clone());\n"
-        "        return fresh;\n"
+        "        return await fetch(new Request(req,{cache:'no-store'}));\n"
         "      }catch(e){\n"
-        "        const cached=await caches.match(req);\n"
-        "        if(cached) return cached;\n"
         "        return Response.error();\n"
         "      }\n"
         "    })());\n"
@@ -274,13 +367,11 @@ def serve_service_worker():
         "    })());\n"
         "    return;\n"
         "  }\n"
-        "  // Default: try network, fallback to cache\n"
+        "  // Default: network-first, no cache writes\n"
         "  event.respondWith((async()=>{\n"
         "    try{\n"
         "      return await fetch(req);\n"
         "    }catch(e){\n"
-        "      const cached=await caches.match(req);\n"
-        "      if(cached) return cached;\n"
         "      return Response.error();\n"
         "    }\n"
         "  })());\n"
@@ -422,62 +513,13 @@ def import_output_zip():
 
 @api_bp.route('/reset-continent', methods=['POST'])
 def reset_continent():
-    """Reset the entire continent and regenerate all content.
-    Optionally accepts {"language": "en|pt"} to switch language before regenerating.
-    """
+    """Disabled for end users to control server costs."""
     try:
-        # Optional language override from request body
-        try:
-            data = request.get_json(silent=True) or {}
-        except Exception:
-            data = {}
-        new_language = data.get('language') if isinstance(data, dict) else None
-
-        # Determine languages to generate: requested one or all supported
-        supported = getattr(translation_system, 'get_supported_languages', lambda: ['en','pt'])()
-        langs = [new_language] if new_language in supported else list(supported)
-
-        # Preserve current state
-        global current_language, main_map_generator
-        original_language = current_language
-        base_output = config.paths.output_path
-
-        last_result = None
-        for lang in langs:
-            try:
-                current_language = lang
-                translation_system.set_language(lang)
-                # Re-init generator for this language
-                main_map_generator = get_main_map_generator()
-                # Write outputs under language-specific subdir
-                from backend.config import update_config
-                update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output / lang)}})
-                last_result = main_map_generator.reset_continent()
-            except Exception:
-                logging.exception(f"Reset failed for language {lang}")
-
-        # Restore original language and output path
-        try:
-            current_language = original_language
-            translation_system.set_language(original_language)
-            main_map_generator = get_main_map_generator()
-            from backend.config import update_config
-            update_config({**config.to_dict(), 'paths': {**config.to_dict()['paths'], 'output_path': str(base_output)}})
-        except Exception:
-            pass
-        # Invalidate overlay caches if any
-        try:
-            from backend.city_overlay_analyzer import city_overlay_analyzer
-            city_overlay_analyzer.invalidate_cache()
-        except Exception:
-            pass
-        # Clear hex service cache after reset
-        hex_service.hex_data_cache.clear()
-        hex_manager.clear_cache()
-        logging.info("Continent reset for languages %s and caches cleared.", langs)
-        return jsonify(last_result or { 'ok': True })
+        enabled = os.getenv('HEXY_ENABLE_RESET', '0').lower() in ('1', 'true', 'yes')
+        if not enabled:
+            return jsonify({'error': 'Reset disabled'}), 403
+        return jsonify({'error': 'Admin reset not available in this build'}), 501
     except Exception as e:
-        logging.error(f"Error resetting continent: {e}\n{traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
 
 @api_bp.route('/hex/<hex_code>')
