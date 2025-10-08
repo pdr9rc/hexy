@@ -7,21 +7,31 @@ import { getCurrentLanguage } from './translations.js';
 export async function getHex(hexCode: string): Promise<any> {
   try {
     const lang = getCurrentLanguage();
-    // Try server-backed local store first
     const storedMd = await DataStore.getHexMarkdown(lang, hexCode);
+    const sandboxMd = await SandboxStore.getHexMarkdown(hexCode);
     if (storedMd) {
-      const base = await apiGet<any>(`api/hex/${hexCode}`);
-      // Merge with sandbox override if present
-      const localMd = await SandboxStore.getHexMarkdown(hexCode);
-      return { ...base, raw_markdown: localMd || storedMd };
+      // Offline/base object using locally stored markdown; avoid network
+      const raw = sandboxMd || storedMd;
+      return {
+        hex_code: hexCode,
+        exists: true,
+        hex_type: 'wilderness',
+        is_settlement: false,
+        is_major_city: false,
+        terrain: 'unknown',
+        description: null,
+        encounter: null,
+        notable_feature: null,
+        atmosphere: null,
+        raw_markdown: raw
+      };
     }
-    // Fallback: fetch once from API, then store
+    // Fallback: fetch once from API, then store markdown if present
     const server = await apiGet<any>(`api/hex/${hexCode}`);
     if (server && typeof server.raw_markdown === 'string') {
       await DataStore.setHexMarkdown(lang, hexCode, server.raw_markdown);
     }
-    const localMd = await SandboxStore.getHexMarkdown(hexCode);
-    if (localMd) return { ...server, raw_markdown: localMd };
+    if (sandboxMd) return { ...server, raw_markdown: sandboxMd };
     return server;
   } catch (error) {
     throw handleApiError(error, 'fetching hex');
@@ -40,7 +50,12 @@ export async function updateHex(hexCode: string, content: string): Promise<any> 
 
 export async function getCity(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`api/city/${hexCode}`);
+    const lang = getCurrentLanguage();
+    const cached = await DataStore.getCity(lang, hexCode);
+    if (cached) return cached;
+    const data = await apiGet(`api/city/${hexCode}`);
+    await DataStore.setCity(lang, hexCode, data);
+    return data;
   } catch (error) {
     throw handleApiError(error, 'fetching city');
   }
@@ -48,7 +63,12 @@ export async function getCity(hexCode: string): Promise<any> {
 
 export async function getSettlement(hexCode: string): Promise<any> {
   try {
-    return await apiGet(`api/settlement/${hexCode}`);
+    const lang = getCurrentLanguage();
+    const cached = await DataStore.getSettlement(lang, hexCode);
+    if (cached) return cached;
+    const data = await apiGet(`api/settlement/${hexCode}`);
+    await DataStore.setSettlement(lang, hexCode, data);
+    return data;
   } catch (error) {
     throw handleApiError(error, 'fetching settlement');
   }
@@ -75,10 +95,8 @@ export async function setLanguage(language: string): Promise<any> {
 export async function resetContinent(language?: string): Promise<any> {
   try {
     const response = await fetch('api/reset-continent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(language ? { language } : {})
-    });
+    }
+    );
     if (!response.ok) {
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
