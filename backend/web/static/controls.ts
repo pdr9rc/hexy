@@ -45,14 +45,16 @@ export function setupControls(app: DyingLandsApp) {
         if (typeof w.startBleeding === 'function') w.startBleeding();
       }, 0);
 
-      // Ask for confirmation; on proceed, clear caches AND reset server, then reload
+      // Ask for confirmation; on proceed, clear caches AND reset server, then reload with cache buster
       ui.showResetConfirm(async () => {
         try {
           await SandboxStore.clearAll();
           await clearServiceWorkerCaches();
           try { await api.resetContinent(); } catch (_) {}
-          // Hard reload to ensure new world loads and caches are repopulated
-          window.location.reload();
+          // Hard reload with cache-busting query to defeat CloudFront
+          const url = new URL(window.location.href);
+          url.searchParams.set('v', String(Date.now()));
+          window.location.replace(url.toString());
         } catch (e: any) {
           ui.hideLoading();
           ui.showNotification(e.message || 'Failed to reset continent', 'error');

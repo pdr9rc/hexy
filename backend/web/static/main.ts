@@ -89,12 +89,24 @@ class DyingLandsApp {
 
     // Initialize components
     this.initializeEventListeners()
-    // Always render server-provided map and eagerly persist it locally
+    // Load from local cache if present; otherwise ensure we bust CloudFront once
     void (async () => {
-      this.renderWorldMap();
-      await SandboxStore.saveWorldMap(this.mapData);
-      // Eagerly preload world content to avoid lazy loading later
-      await this.preloadWorldContent();
+      const cached = await SandboxStore.loadWorldMap();
+      const url = new URL(window.location.href);
+      const hasBuster = url.searchParams.has('v');
+      if (cached && Object.keys(cached).length) {
+        this.mapData = cached as any;
+        this.renderWorldMap();
+      } else {
+        if (!hasBuster) {
+          url.searchParams.set('v', String(Date.now()));
+          window.location.replace(url.toString());
+          return;
+        }
+        this.renderWorldMap();
+        await SandboxStore.saveWorldMap(this.mapData);
+        await this.preloadWorldContent();
+      }
     })();
     this.updateWorldMapControlsVisibility()
     initializeControls(this)
