@@ -737,7 +737,8 @@ def get_settlement_details(hex_code):
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
-        return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
+    # Not found as a settlement
+    return jsonify({'success': False, 'error': 'Not a settlement or not found'}), 404
 
 @api_bp.route('/hex/<hex_code>', methods=['PUT'])
 def update_hex_content(hex_code):
