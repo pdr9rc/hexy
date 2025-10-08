@@ -90,6 +90,8 @@ body {
 
 pre {
   font-family: 'IBM', monospace;
+  overflow-wrap: break-word; 
+  white-space: pre-wrap;
 }
 
 h1,

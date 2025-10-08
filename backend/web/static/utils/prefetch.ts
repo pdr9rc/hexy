@@ -46,6 +46,37 @@ export type PrefetchProgress = {
   processed: number;
 };
 
+function extractFirst(pattern: RegExp, text: string): string | null {
+  const m = text.match(pattern);
+  return m ? (m[1] || m[0]).trim() : null;
+}
+
+function parseSettlementFromMarkdown(md: string): any | null {
+  // Heuristic: identify settlement by settlement marker or tavern/local fields
+  const isSettlement = /⌂\s*\*\*|##\s*Settlement/i.test(md) || /\*\*Population:\*\*/i.test(md);
+  if (!isSettlement) return null;
+  const name = extractFirst(/⌂\s*\*\*([^*]+)\*\*/i, md) || extractFirst(/#\s*Hex\s*\d{4}\s*\n+\*\*Name:\*\*\s*([^\n]+)/i, md) || 'Settlement';
+  const population = extractFirst(/\*\*Population:\*\*\s*([^\n]+)/i, md) || '';
+  const atmosphere = extractFirst(/\*\*Atmosphere:\*\*\s*([^\n]+)/i, md) || extractFirst(/##\s*Atmosphere\s*\n+([^\n]+)/i, md) || '';
+  const notable_feature = extractFirst(/\*\*Notable Feature:\*\*\s*([^\n]+)/i, md) || extractFirst(/##\s*Notable Feature\s*\n+([^\n]+)/i, md) || '';
+  const local_tavern = extractFirst(/\*\*Select Menu:\*\*\s*([^\n]+)/i, md) || '';
+  const local_power = extractFirst(/\*\*Local Power:\*\*\s*([^\n]+)/i, md) || '';
+  const settlement_art = extractFirst(/```([\s\S]*?)```/m, md) || '';
+  return {
+    success: true,
+    settlement: {
+      name,
+      description: '',
+      population,
+      atmosphere,
+      notable_feature,
+      local_tavern,
+      local_power,
+      settlement_art
+    }
+  };
+}
+
 export async function prefetchAllHexMarkdown(onProgress?: (p: PrefetchProgress) => void): Promise<void> {
   const lang = getCurrentLanguage();
   const serverVersion = (window as any).__GEN_VERSION__ || '';
@@ -79,10 +110,45 @@ export async function prefetchAllHexMarkdown(onProgress?: (p: PrefetchProgress) 
     if (codeMatch) {
       const hexCode = codeMatch[1];
       await DataStore.setHexMarkdown(lang, hexCode, markdown);
+      const parsedSettlement = parseSettlementFromMarkdown(markdown);
+      if (parsedSettlement) {
+        await DataStore.setSettlement(lang, hexCode, parsedSettlement);
+      }
     }
     processed++;
     if (onProgress && (processed % 50 === 0 || processed === total)) onProgress({ total, processed });
   }
+
+  // Prefetch overlays (API-based, some are generated on-demand)
+  try {
+    const overlaysResp = await fetch('api/city-overlays');
+    if (overlaysResp.ok) {
+      const overlays = await overlaysResp.json();
+      await DataStore.setOverlay(lang, '__index__', overlays);
+      const list = overlays?.overlays || [];
+      for (const ov of list) {
+        const name = ov.name || ov.key || ov.display_name;
+        if (!name) continue;
+        try {
+          const gridResp = await fetch(`api/city-overlay/${name}`);
+          if (gridResp.ok) {
+            const grid = await gridResp.json();
+            await DataStore.setOverlay(lang, name, grid);
+            const hexGrid = grid?.overlay?.hex_grid || grid?.hex_grid || {};
+            for (const hexId of Object.keys(hexGrid)) {
+              try {
+                const hx = await fetch(`api/city-overlay/${name}/hex/${hexId}`);
+                if (hx.ok) {
+                  const data = await hx.json();
+                  await DataStore.setOverlayHex(lang, name, hexId, data);
+                }
+              } catch (_) {}
+            }
+          }
+        } catch (_) {}
+      }
+    }
+  } catch (_) {}
 
   await DataStore.setVersion(lang, String(serverVersion || storedVersion || '1'));
 }
