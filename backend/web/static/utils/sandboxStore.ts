@@ -125,6 +125,52 @@ export const SandboxStore = {
     } catch (_) {}
   },
 
+  async dumpAllHex(): Promise<HexMarkdownRecord[]> {
+    try {
+      const store = await tx(STORE_HEX, 'readonly');
+      const out: HexMarkdownRecord[] = [];
+      return await new Promise<HexMarkdownRecord[]>((resolve, reject) => {
+        const req = (store as any).openCursor();
+        req.onsuccess = () => {
+          const cursor: IDBCursorWithValue | null = req.result;
+          if (cursor) {
+            const rec = cursor.value as HexMarkdownRecord;
+            if (rec && rec.hexCode && typeof rec.raw_markdown === 'string') {
+              out.push(rec);
+            }
+            cursor.continue();
+          } else {
+            resolve(out);
+          }
+        };
+        req.onerror = () => reject(req.error);
+      });
+    } catch (_) {
+      return [];
+    }
+  },
+
+  async restoreAllHex(records: Array<{ hexCode: string; raw_markdown: string; updatedAt?: number }>): Promise<void> {
+    try {
+      if (!Array.isArray(records) || !records.length) return;
+      const store = await tx(STORE_HEX, 'readwrite');
+      await new Promise<void>((resolve, reject) => {
+        const t = (store as any).transaction;
+        for (const rec of records) {
+          if (!rec || !rec.hexCode || typeof rec.raw_markdown !== 'string') continue;
+          const normalized: HexMarkdownRecord = {
+            hexCode: rec.hexCode,
+            raw_markdown: rec.raw_markdown,
+            updatedAt: rec.updatedAt || Date.now()
+          };
+          (store as any).put(normalized);
+        }
+        t.oncomplete = () => resolve();
+        t.onerror = () => reject(t.error);
+      });
+    } catch (_) {}
+  },
+
   async clearAll(): Promise<void> {
     try {
       const db = await openDb();

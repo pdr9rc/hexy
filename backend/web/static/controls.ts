@@ -3,7 +3,7 @@ import { DyingLandsApp } from './main.js';
 import * as api from './api.js';
 import * as ui from './uiUtils.js';
 import { setLanguage } from './translations.js';
-import { SandboxStore } from './utils/sandboxStore.js';
+import { SandboxStore, getSandboxId } from './utils/sandboxStore.js';
 import { DataStore } from './utils/dataStore.js';
 import { ensureJsZip } from './utils/jszipLoader.js';
 
@@ -102,6 +102,20 @@ export function setupControls(app: DyingLandsApp) {
           const ds = await DataStore.dumpAll();
           const dsJson = JSON.stringify(ds);
           serverZip.file('client_datastore.json', dsJson);
+          // Inject sandbox overrides (local edits)
+          try {
+            const overrides = await SandboxStore.dumpAllHex();
+            if (overrides && overrides.length) {
+              for (const rec of overrides) {
+                const code = String(rec.hexCode || '').replace(/[^0-9]/g, '');
+                if (code) {
+                  serverZip.file(`dying_lands_output/hexes/hex_${code}.md`, rec.raw_markdown || '');
+                }
+              }
+              const manifest = { overrides, sandboxId: getSandboxId(), savedAt: Date.now() };
+              serverZip.file('client_sandbox.json', JSON.stringify(manifest));
+            }
+          } catch (_) {}
           // Produce combined zip
           const combinedBlob = await serverZip.generateAsync({ type: 'blob' });
           const url = URL.createObjectURL(combinedBlob);
@@ -156,6 +170,16 @@ export function setupControls(app: DyingLandsApp) {
         if (dsEntry) {
           const dsText = await dsEntry.async('string');
           try { await DataStore.restoreAll(JSON.parse(dsText)); } catch (_) {}
+        }
+        const sbEntry = zip.file('client_sandbox.json');
+        if (sbEntry) {
+          try {
+            const sbText = await sbEntry.async('string');
+            const sb = JSON.parse(sbText);
+            if (sb && Array.isArray(sb.overrides)) {
+              await SandboxStore.restoreAllHex(sb.overrides);
+            }
+          } catch (_) {}
         }
         // Send to server import endpoint as well
         await api.importZip(file);
