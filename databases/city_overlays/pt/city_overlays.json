@@ -1,0 +1,56 @@
+{
+  "category": "city_overlays",
+  "metadata": {
+    "language": "pt",
+    "version": "1.0"
+  },
+  "tables": {
+    "fallbacks": {
+      "districts": [
+        "Bairro dos Cadáveres",
+        "Decadência dos Mercadores",
+        "Mercados de Ossos",
+        "Ala da Peste",
+        "Jardins dos Enforcados",
+        "Ruína dos Eruditos",
+        "Refúgio dos Ladrões",
+        "Ruas Sangrentas",
+        "Decadência dos Nobres",
+        "Comuns Amaldiçoados"
+      ],
+      "encounters": [
+        "Mendigos com peste pedindo esmolas",
+        "Guardas corruptos exigindo subornos",
+        "Figuras misteriosas em vestes negras",
+        "Profeta louco gritando profecias",
+        "Matilha de cães famintos",
+        "Alma perdida vagando sem rumo"
+      ],
+      "atmospheres": [
+        "Espesso com o fedor da decadência",
+        "Crepúsculo perpétuo envolve as ruas",
+        "Sussurros ecoam de prédios vazios",
+        "Sombras se movem onde ninguém anda",
+        "O ar tem gosto de cobre e medo",
+        "Luzes estranhas piscam nas janelas"
+      ],
+      "descriptions": [
+        "Um bairro onde os mercadores antes prosperavam e agora a podridão manda.",
+        "Ruas que lembram eruditos e nobres, hoje assombradas por dívidas e pó.",
+        "Uma ala esquecida, selada após a peste; ninguém retirou os corpos.",
+        "Becos cavados entre casas que tombam, onde ladrões julgam em silêncio."
+      ],
+      "notable_features": [
+        "Mansões em ruínas",
+        "Becos estreitos",
+        "Estátuas antigas",
+        "Fontes quebradas",
+        "Janelas tapadas",
+        "Paredes com grafites",
+        "Bancas abandonadas",
+        "Varandas desabadas"
+      ]
+    }
+  }
+}
+

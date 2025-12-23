@@ -722,7 +722,27 @@ class MainMapGenerator:
         }
     
     def _generate_settlement_art(self, name: str, terrain: str) -> str:
-        """Generate ASCII art for the settlement."""
+        """Generate ASCII art for the settlement using random layout patterns."""
+        # Load settlement layouts from database
+        layouts = database_manager.get_table('settlements', 'settlement_layouts', self.language)
+        
+        if layouts and len(layouts) > 0:
+            # Pick a random layout
+            layout_pattern = random.choice(layouts)
+            layout_lines = layout_pattern.get('lines', [])
+            layout_name = layout_pattern.get('name', name.upper())
+        else:
+            # Fallback to default layout if none found
+            layout_lines = [
+                "H H H",
+                "H T S H",
+                "H G H",
+                "W"
+            ]
+            layout_name = name.upper()
+        
+        # Format the layout with legend
+        layout_text = "\n".join(layout_lines)
         layout = f"""
 ```
 T=Tavern  H=House  S=Shrine  G=Gate  W=Well
@@ -730,10 +750,7 @@ T=Tavern  H=House  S=Shrine  G=Gate  W=Well
 {name.upper()}
 {'=' * len(name)}
 
-   H H H
-  H T S H
-   H G H
-    W
+{layout_text}
 ```"""
         return layout
     

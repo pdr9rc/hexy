@@ -1,0 +1,27 @@
+{
+  "name": "hexy-desktop",
+  "version": "1.0.0",
+  "description": "Hexy - The Dying Lands Desktop App",
+  "main": "dist/electron/main.js",
+  "scripts": {
+    "build:web": "npx tsc --project backend/web/static/tsconfig.json",
+    "build:web:watch": "npx tsc --project backend/web/static/tsconfig.json --watch",
+    "build:electron": "npx tsc --project electron/tsconfig.json",
+    "build:electron:watch": "npx tsc --project electron/tsconfig.json --watch",
+    "start:backend": "python3 -m backend.run",
+    "start:electron": "npm run build:electron && electron dist/electron/main.js",
+    "start:all": "npm-run-all --parallel build:web:watch build:electron:watch start:backend",
+    "start:desktop": "npm run start:backend & sleep 3 && npm run start:electron",
+    "dev": "npm run start:all & sleep 5 && npm run start:electron"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "electron": "^32.0.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "jszip": "^3.10.1",
+    "lottie-web": "^5.12.2"
+  }
+}

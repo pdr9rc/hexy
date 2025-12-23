@@ -1,0 +1,62 @@
+{
+  "category": "lore",
+  "tables": {
+    "regional_lore": [
+      {
+        "region": "north",
+        "themes": ["Ancient tombs", "Undead nobility", "Frozen wastes", "Mountain fortresses"],
+        "common_encounters": ["Undead warriors", "Ice wraiths", "Ancient spirits"],
+        "terrain_bias": {"mountain": 0.6, "forest": 0.2, "plains": 0.2},
+        "atmosphere": "Ancient burial grounds and frozen peaks",
+        "regional_npcs": ["Undead Knight", "Ice Witch", "Frost Giant", "Tomb Guardian", "Corpse Golem Cultist", "Occult Channeler", "Bergen Chrypt Explorer"],
+        "regional_factions": ["shadow_king_followers", "heretical_priests"]
+      },
+      {
+        "region": "central",
+        "themes": ["Urban decay", "Political intrigue", "Ancient ruins", "Trade routes"],
+        "common_encounters": ["Corrupt officials", "Plague victims", "Heretical priests"],
+        "terrain_bias": {"plains": 0.7, "forest": 0.2, "mountain": 0.1},
+        "atmosphere": "Decaying civilization and political corruption",
+        "regional_npcs": ["Corrupt Merchant", "Heretical Priest", "City Guard", "Plague Doctor", "Tax Collector", "Eager Day Laborer", "Soul Contract Negotiator", "Golden Tongue Preacher"],
+        "regional_factions": ["nechrubel_cult", "heretical_priests"]
+      },
+      {
+        "region": "south",
+        "themes": ["Pastoral horror", "Weird weather", "Ancient stones", "Diseased livestock"],
+        "common_encounters": ["Mutant animals", "Weather cults", "Plague farmers"],
+        "terrain_bias": {"plains": 0.6, "swamp": 0.3, "forest": 0.1},
+        "atmosphere": "Pastoral lands with creeping doom",
+        "regional_npcs": ["Weather Seer", "Cattle Baron", "Plague Farmer", "Stone Circle Keeper", "Traveling Tax Collector", "Contract Devil"],
+        "regional_factions": ["plague_bearers", "nechrubel_cult"]
+      },
+      {
+        "region": "west",
+        "themes": ["Coastal storms", "Plague cities", "Trade collapse", "Isolated settlements"],
+        "common_encounters": ["Plague bearers", "Storm cultists", "Desperate survivors"],
+        "terrain_bias": {"coast": 0.5, "swamp": 0.3, "plains": 0.2},
+        "atmosphere": "Coastal decay and plague-ridden ports",
+        "regional_npcs": ["Storm Caller", "Plague Bearer", "Desperate Survivor", "Coastal Raider", "Sea Demon", "Drowned Soul Trader"],
+        "regional_factions": ["plague_bearers"]
+      },
+      {
+        "region": "east",
+        "themes": ["Frontier outposts", "Nomadic traders", "Ancient mysteries", "Wasteland"],
+        "common_encounters": ["Nomad warriors", "Desert spirits", "Treasure hunters"],
+        "terrain_bias": {"plains": 0.5, "mountain": 0.3, "forest": 0.2},
+        "atmosphere": "Frontier wilderness and nomadic culture",
+        "regional_npcs": ["Nomad Warrior", "Caravan Master", "Desert Oracle", "Treasure Hunter", "Corpse Golem Hunter", "Occult Artifact Seeker"],
+        "regional_factions": ["nechrubel_cult"]
+      },
+      {
+        "region": "northwest",
+        "themes": ["Dark forests", "Witch covens", "Ancient magic", "Cursed woods"],
+        "common_encounters": ["Forest witches", "Cursed animals", "Tree spirits"],
+        "terrain_bias": {"forest": 0.8, "swamp": 0.1, "mountain": 0.1},
+        "atmosphere": "Dark magic and primordial forests",
+        "regional_npcs": ["Forest Witch", "Tree Warden", "Cursed Druid", "Beast Speaker", "Corpse Golem Cultist", "Mountain Occult Channeler"],
+        "regional_factions": ["forest_witches"]
+      }
+    ]
+  }
+}
+

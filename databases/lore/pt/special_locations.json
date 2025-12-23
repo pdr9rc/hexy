@@ -1,0 +1,42 @@
+{
+  "category": "lore",
+  "tables": {
+    "special_locations": [
+      {
+        "hex_code": "1012",
+        "type": "special_location",
+        "name": "O Templo dos Ossos",
+        "terrain": "mountain",
+        "description": "Templo antigo construído com ossos de titãs",
+        "atmosphere": "Culto antigo e arquitetura de ossos",
+        "locked": true
+      },
+      {
+        "hex_code": "0614",
+        "type": "special_location",
+        "name": "O Lago Chorão",
+        "terrain": "swamp",
+        "description": "Lago amaldiçoado que chora lágrimas dos condenados",
+        "atmosphere": "Águas amaldiçoadas e tristeza eterna",
+        "locked": true
+      },
+      {
+        "hex_code": "0408",
+        "type": "special_location",
+        "name": "Bergen Chrypt",
+        "terrain": "mountain",
+        "description": "A cordilheira mais assombrada das terras moribundas",
+        "atmosphere": "Desolação sombria, fendas de origem desconhecida, canalizadores ocultos",
+        "features": [
+          "Cultos de golem de cadáver",
+          "Segredos viscosos enterrados no gelo",
+          "Fendas de origem desconhecida",
+          "Canalizadores ocultos buscando o Elixir da Vida",
+          "Erupções infecciosas na pele da terra"
+        ],
+        "locked": true
+      }
+    ]
+  }
+}
+

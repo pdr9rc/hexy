@@ -1,0 +1,38 @@
+{
+  "category": "lore",
+  "tables": {
+    "notable_npcs": [
+      {
+        "key": "josilfa_migol",
+        "name": "Josilfa Migol",
+        "title": "A Ceifadora de Galgenbeck",
+        "location": "galgenbeck",
+        "description": "Figura misteriosa ceifando cidadãos para sacrifício",
+        "faction": "nechrubel_cult",
+        "threat_level": "extremo",
+        "abilities": ["Apagar memórias", "Sacrifício ritual", "Invocar cometas"]
+      },
+      {
+        "key": "shadow_king",
+        "name": "O Rei das Sombras",
+        "title": "Governante dos Reinos Ocultos",
+        "location": "desconhecido",
+        "description": "Governante antigo buscando retornar ao poder",
+        "faction": "shadow_king_followers",
+        "threat_level": "lendário",
+        "abilities": ["Manipular sombras", "Conhecimento antigo", "Comandar mortos-vivos"]
+      },
+      {
+        "key": "nechrubel",
+        "name": "Nechrubel",
+        "title": "O Destruidor",
+        "location": "celestial",
+        "description": "Divindade apocalíptica trazendo o fim dos tempos",
+        "faction": "nechrubel_cult",
+        "threat_level": "divino",
+        "abilities": ["Destruir o mundo", "Criar pragas", "Manipular o tempo"]
+      }
+    ]
+  }
+}
+

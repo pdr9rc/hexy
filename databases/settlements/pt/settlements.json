@@ -85,6 +85,116 @@
       "Florescendo apesar do apocalipse",
       "Lutando para manter a ordem",
       "Florescendo como centro de cultura"
+    ],
+    "settlement_layouts": [
+      {
+        "name": "Forja da Ressurreição",
+        "lines": [
+          "H H H",
+          "H T S H",
+          "H G H",
+          "W"
+        ]
+      },
+      {
+        "name": "Aldeia da Encruzilhada",
+        "lines": [
+          "  H H",
+          "H T G H",
+          "  S W",
+          "  H H"
+        ]
+      },
+      {
+        "name": "Lugarejo Fortificado",
+        "lines": [
+          "G H G",
+          "H T H",
+          "G W G",
+          "  S"
+        ]
+      },
+      {
+        "name": "Entreposto Mercantil",
+        "lines": [
+          "T T",
+          "H G H",
+          "  S",
+          "H W H"
+        ]
+      },
+      {
+        "name": "Centro Espiritual",
+        "lines": [
+          "  S",
+          "H S H",
+          "T W T",
+          "  G"
+        ]
+      },
+      {
+        "name": "Posto Comercial",
+        "lines": [
+          "H T H",
+          "G   G",
+          "H W H",
+          "  S"
+        ]
+      },
+      {
+        "name": "Cidade Porteira",
+        "lines": [
+          "    G",
+          "H H G H H",
+          "  T S",
+          "  W"
+        ]
+      },
+      {
+        "name": "Povoado do Poço",
+        "lines": [
+          "H H",
+          "W T",
+          "H S",
+          "G"
+        ]
+      },
+      {
+        "name": "Taberna Central",
+        "lines": [
+          "H   H",
+          "  T",
+          "H S H",
+          "W G"
+        ]
+      },
+      {
+        "name": "Casario Aglomerado",
+        "lines": [
+          "H H H",
+          "H T H",
+          "G S W",
+          "H"
+        ]
+      },
+      {
+        "name": "Aldeia Linear",
+        "lines": [
+          "H - T - H",
+          "    S",
+          "    W",
+          "    G"
+        ]
+      },
+      {
+        "name": "Anel Defensivo",
+        "lines": [
+          "G   G",
+          " H H",
+          "  T",
+          "G S W G"
+        ]
+      }
     ]
   }
 }

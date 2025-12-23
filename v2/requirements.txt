@@ -1,0 +1,7 @@
+Flask>=3.0.0,<4.0.0
+Pillow>=10.0.0,<11.0.0
+numpy>=1.26.0,<2.0.0
+markdown>=3.5,<4.0
+serverless-wsgi>=3.0.0
+
+

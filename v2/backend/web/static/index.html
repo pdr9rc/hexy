@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hexy v2 Viewer</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="scanlines"></div>
+    <div class="controls">
+      <div class="control-group">
+        <label>Rotate <span id="val-rot">-45</span></label>
+        <input type="range" id="param-rot" min="-180" max="180" value="-45" title="Rotate" aria-label="Rotate" />
+      </div>
+      <div class="control-group">
+        <label>Tilt <span id="val-tilt">0.55</span></label>
+        <input type="range" id="param-tilt" min="0.2" max="1.0" step="0.01" value="0.55" title="Tilt" aria-label="Tilt" />
+      </div>
+      <div class="control-group">
+        <label>Zoom <span id="val-zoom">1.2</span></label>
+        <input type="range" id="param-zoom" min="1" max="1.5" step="0.01" value="1.2" title="Zoom" aria-label="Zoom" />
+      </div>
+      <div class="control-group">
+        <label>Grid Opacity <span id="val-grid">1</span></label>
+        <input type="range" id="param-grid" min="0" max="1" step="0.05" value="1" title="Grid opacity" aria-label="Grid opacity" />
+      </div>
+      <div class="control-group">
+        <button id="btn-reset" class="reset-btn" title="Regenerate map" aria-label="Regenerate map">RESET MAP</button>
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="logo">THE DYING LANDS · V2</div>
+    </header>
+    <main class="shell">
+      <section class="pane pane-grid" aria-label="Hex map">
+        <button class="overlay-exit" id="btn-exit-overlay" aria-label="Exit overlay">BACK</button>
+        <canvas id="grid-canvas"></canvas>
+        <div class="hud" id="hud">
+          <div class="hud-row"><span>HEX</span> <span class="hud-val" id="hud-coords">--</span></div>
+          <div class="hud-row"><span>TYPE</span> <span class="hud-val" id="hud-type">--</span></div>
+        </div>
+      </section>
+      <section class="pane pane-card" aria-label="Hex details">
+        <button class="city-back-btn" id="btn-back-city-overview" aria-label="Back to city overview">BACK</button>
+        <div class="card ascii-card" id="card-styled" role="tabpanel">
+          <div class="border-row">
+            <div class="border-corner">╔</div>
+            <div class="border-fill">══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════</div>
+            <div class="border-corner">╗</div>
+          </div>
+          <div class="middle-row">
+            <div class="border-side" id="border-left"></div>
+            <div class="card-content" id="card-content"></div>
+            <div class="border-side" id="border-right"></div>
+          </div>
+          <div class="border-row">
+            <div class="border-corner">╚</div>
+            <div class="border-fill">══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════</div>
+            <div class="border-corner">╝</div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>

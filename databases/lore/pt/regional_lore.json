@@ -1,0 +1,62 @@
+{
+  "category": "lore",
+  "tables": {
+    "regional_lore": [
+      {
+        "region": "north",
+        "themes": ["Tumbas antigas", "Nobreza morta-viva", "Geleiras", "Fortalezas de montanha"],
+        "common_encounters": ["Guerreiros mortos-vivos", "Espectros de gelo", "Espíritos antigos"],
+        "terrain_bias": {"mountain": 0.6, "forest": 0.2, "plains": 0.2},
+        "atmosphere": "Sepulturas antigas e picos congelados",
+        "regional_npcs": ["Cavaleiro Morto-Vivo", "Bruxa de Gelo", "Gigante de Gelo", "Guardião da Tumba", "Cultista de Golem de Cadáver", "Canalizador Oculto", "Explorador de Bergen Chrypt"],
+        "regional_factions": ["shadow_king_followers", "heretical_priests"]
+      },
+      {
+        "region": "central",
+        "themes": ["Decadência urbana", "Intriga política", "Ruínas antigas", "Rotas de comércio"],
+        "common_encounters": ["Oficiais corruptos", "Vítimas da praga", "Sacerdotes heréticos"],
+        "terrain_bias": {"plains": 0.7, "forest": 0.2, "mountain": 0.1},
+        "atmosphere": "Civilização decadente e corrupção política",
+        "regional_npcs": ["Mercador Corrupto", "Sacerdote Herético", "Guarda da Cidade", "Médico da Peste", "Cobrador de Impostos", "Trabalhador Ansioso", "Negociador de Contratos de Alma", "Pregador da Língua Dourada"],
+        "regional_factions": ["nechrubel_cult", "heretical_priests"]
+      },
+      {
+        "region": "south",
+        "themes": ["Horror pastoral", "Clima estranho", "Pedras antigas", "Gado doente"],
+        "common_encounters": ["Animais mutantes", "Cultos do clima", "Fazendeiros da peste"],
+        "terrain_bias": {"plains": 0.6, "swamp": 0.3, "forest": 0.1},
+        "atmosphere": "Terras pastoris com desgraça crescente",
+        "regional_npcs": ["Vidente do Clima", "Barão do Gado", "Fazendeiro da Peste", "Guardião do Círculo de Pedras", "Cobrador de Impostos Viajante", "Demônio de Contrato"],
+        "regional_factions": ["plague_bearers", "nechrubel_cult"]
+      },
+      {
+        "region": "west",
+        "themes": ["Tempestades costeiras", "Cidades da peste", "Colapso do comércio", "Assentamentos isolados"],
+        "common_encounters": ["Portadores da peste", "Cultistas da tempestade", "Sobreviventes desesperados"],
+        "terrain_bias": {"coast": 0.5, "swamp": 0.3, "plains": 0.2},
+        "atmosphere": "Decadência costeira e portos atormentados pela peste",
+        "regional_npcs": ["Invocador da Tempestade", "Portador da Peste", "Sobrevivente Desesperado", "Saqueador Costeiro", "Demônio do Mar", "Comerciante de Almas Afogadas"],
+        "regional_factions": ["plague_bearers"]
+      },
+      {
+        "region": "east",
+        "themes": ["Postos avançados", "Comerciantes nômades", "Mistérios antigos", "Ermo"],
+        "common_encounters": ["Guerreiros nômades", "Espíritos do deserto", "Caçadores de tesouros"],
+        "terrain_bias": {"plains": 0.5, "mountain": 0.3, "forest": 0.2},
+        "atmosphere": "Selvageria de fronteira e cultura nômade",
+        "regional_npcs": ["Guerreiro Nômade", "Mestre de Caravana", "Oráculo do Deserto", "Caçador de Tesouros", "Caçador de Golem de Cadáver", "Buscador de Artefato Oculto"],
+        "regional_factions": ["nechrubel_cult"]
+      },
+      {
+        "region": "northwest",
+        "themes": ["Florestas sombrias", "Covens de bruxas", "Magia antiga", "Bosques amaldiçoados"],
+        "common_encounters": ["Bruxas da floresta", "Animais amaldiçoados", "Espíritos das árvores"],
+        "terrain_bias": {"forest": 0.8, "swamp": 0.1, "mountain": 0.1},
+        "atmosphere": "Magia escura e florestas primitivas",
+        "regional_npcs": ["Bruxa da Floresta", "Guardião das Árvores", "Druida Amaldiçoado", "Falador de Feras", "Cultista de Golem de Cadáver", "Canalizador Oculto da Montanha"],
+        "regional_factions": ["forest_witches"]
+      }
+    ]
+  }
+}
+

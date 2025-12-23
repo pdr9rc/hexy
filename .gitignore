@@ -16,6 +16,8 @@ pmd-bin-*/
 # Local data/output
 /dying_lands_output/
 /dying_lands_output.bak-*/
+v2/dying_lands_output/
+/.venv-v2/
 
 # Terraform local state (use remote state in CI)
 terraform/terraform.tfstate*

@@ -1,0 +1,38 @@
+{
+  "category": "lore",
+  "tables": {
+    "notable_npcs": [
+      {
+        "key": "josilfa_migol",
+        "name": "Josilfa Migol",
+        "title": "The Harvester of Galgenbeck",
+        "location": "galgenbeck",
+        "description": "Mysterious figure harvesting citizens for sacrifice",
+        "faction": "nechrubel_cult",
+        "threat_level": "extreme",
+        "abilities": ["Memory erasure", "Ritual sacrifice", "Comet summoning"]
+      },
+      {
+        "key": "shadow_king",
+        "name": "The Shadow King",
+        "title": "Ruler of Hidden Realms",
+        "location": "unknown",
+        "description": "Ancient ruler seeking return to power",
+        "faction": "shadow_king_followers",
+        "threat_level": "legendary",
+        "abilities": ["Shadow manipulation", "Ancient knowledge", "Undead command"]
+      },
+      {
+        "key": "nechrubel",
+        "name": "Nechrubel",
+        "title": "The Destroyer",
+        "location": "celestial",
+        "description": "Apocalyptic deity bringing the end times",
+        "faction": "nechrubel_cult",
+        "threat_level": "divine",
+        "abilities": ["World destruction", "Plague creation", "Time manipulation"]
+      }
+    ]
+  }
+}
+

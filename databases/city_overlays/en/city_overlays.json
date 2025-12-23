@@ -1,0 +1,56 @@
+{
+  "category": "city_overlays",
+  "metadata": {
+    "language": "en",
+    "version": "1.0"
+  },
+  "tables": {
+    "fallbacks": {
+      "districts": [
+        "Corpse Quarter",
+        "Merchants' Decay",
+        "Bone Markets",
+        "Plague Wing",
+        "Hanged Gardens",
+        "Scholars' Ruin",
+        "Thieves' Haven",
+        "Bloody Streets",
+        "Noble Rot",
+        "Cursed Commons"
+      ],
+      "encounters": [
+        "Plague beggars pleading for alms",
+        "Corrupt guards demanding bribes",
+        "Hooded figures whispering bargains",
+        "Raving prophet shouting doom",
+        "Pack of starving dogs stalking prey",
+        "Lost soul wandering without aim"
+      ],
+      "atmospheres": [
+        "Air thick with the reek of decay",
+        "Perpetual twilight wraps the streets",
+        "Whispers echo from hollow buildings",
+        "Shadows move where no one walks",
+        "The air tastes of copper and fear",
+        "Strange lights flicker in distant windows"
+      ],
+      "descriptions": [
+        "A quarter where merchants once thrived but now only rot remains.",
+        "Streets that remember scholars and nobles, now haunted by debt and dust.",
+        "A forgotten wing quarantined after the plague; no one cleared the bodies.",
+        "Alleys carved between leaning houses, where thieves judge quietly."
+      ],
+      "notable_features": [
+        "Crumbling mansions",
+        "Narrow alleys",
+        "Ancient statues",
+        "Shattered fountains",
+        "Boarded windows",
+        "Graffiti-scarred walls",
+        "Abandoned stalls",
+        "Collapsed balconies"
+      ]
+    }
+  }
+}
+

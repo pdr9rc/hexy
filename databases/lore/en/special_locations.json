@@ -1,0 +1,42 @@
+{
+  "category": "lore",
+  "tables": {
+    "special_locations": [
+      {
+        "hex_code": "1012",
+        "type": "special_location",
+        "name": "The Bone Temple",
+        "terrain": "mountain",
+        "description": "Ancient temple built from the bones of titans",
+        "atmosphere": "Ancient worship and bone architecture",
+        "locked": true
+      },
+      {
+        "hex_code": "0614",
+        "type": "special_location",
+        "name": "The Weeping Lake",
+        "terrain": "swamp",
+        "description": "Cursed lake that weeps tears of the damned",
+        "atmosphere": "Cursed waters and eternal sorrow",
+        "locked": true
+      },
+      {
+        "hex_code": "0408",
+        "type": "special_location",
+        "name": "Bergen Chrypt",
+        "terrain": "mountain",
+        "description": "The most haunted mountain range of the dying lands",
+        "atmosphere": "Dark desolation, rifts of unknown make, occult channelers",
+        "features": [
+          "Corpse golem cults",
+          "Unctuous secrets buried in ice",
+          "Rifts of unknown origin",
+          "Occult channelers seeking the Elixir of Life",
+          "Infectious rash upon the skin of the earth"
+        ],
+        "locked": true
+      }
+    ]
+  }
+}
+

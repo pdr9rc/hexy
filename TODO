@@ -1,0 +1,8 @@
+- add double click to edit with save button to right side hex box;
+- add import/export buttons to top header;
+- change city overlay gen to give list of encounters rather than just one
+- figure out translations and add translation buttons
+- finish city logic port to frontend random
+- fix duplicates in hex
+- fix main_map_generator section titles missing
+- spruce up dungeon and settlement layouts
