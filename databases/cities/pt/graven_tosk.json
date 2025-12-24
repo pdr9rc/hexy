@@ -77,34 +77,102 @@
         "A Ala Interna do Palácio",
         "Os Estábulos Reais",
         "Alojamentos dos Servos",
-        "As Câmaras dos Cortesãos"
+        "As Câmaras dos Cortesãos",
+        "Salões Colapsados do Palácio",
+        "Abrigos Improvisados (nas ruínas do Palácio)",
+        "Câmaras Subterrâneas (Catacumbas sob o Palácio)",
+        "Criptas Esquecidas (Nagl vagou pelo Vale dos Desmortos Desafortunados, que tem criptas)"
       ],
       "streets": [
         "Caminho do Rei das Sombras",
         "Travessa da Lealdade",
-        "Passo da Mágoa"
+        "Passo da Mágoa",
+        "Túneis Retorcidos (sob o palácio)",
+        "Passeio do Querubim"
       ],
       "landmarks": [
         "Sala do Trono",
         "A Agulha Negra (Torre do Palácio)",
         "A Menagerie Real (em ruínas)",
-        "A Cripta do Conselho"
+        "A Cripta do Conselho",
+        "O Palácio do Rei das Sombras"
       ],
-      "encounters": [
-        "Servos do Rei cumprindo sua vontade",
-        "Príncipes disfarçados de homens comuns, vagueando pelas ruínas e enganando viajantes",
-        "Cortesãos envolvidos em práticas ritualísticas"
-      ],
-      "random_tables": [
-        "1-2: Um príncipe da linhagem tentando ludibriar os PCs",
-        "3-4: Um escravo em pânico foge da ala interna",
-        "5-6: Um cortesão busca favores ou espalha boatos sobre rivais"
-      ],
+      "encounters": {
+        "district": [
+          "Servos do Rei cumprindo sua vontade",
+          "Príncipes disfarçados de homens comuns, vagueando pelas ruínas e enganando viajantes",
+          "Cortesãos envolvidos em práticas ritualísticas",
+          "Mortos‑vivos (Zumbis [5‑8], Grotescos rondando cemitérios)",
+          "Goblins com arcos, carregando uma maldição",
+          "Animais rastejantes (como no Templo Submerso)"
+        ],
+        "street": [
+          "Vison‑de‑cinza selvagem"
+        ],
+        "building": [
+          "Esqueletos patrulhando os terrenos"
+        ],
+        "landmark": [
+          "Bando de corvos segue algo (como um Leão‑de‑Pó)"
+        ],
+        "temple": [
+          "Práticas ritualísticas (Nagl desenvolveu gosto por necromancia)"
+        ],
+        "residence": [
+          "O rosto miserável de um Mineiro Imortal na toca"
+        ],
+        "ruins": [
+          "Almas azaradas abrigadas"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um príncipe da linhagem tentando ludibriar os PCs",
+          "3-4: Um escravo em pânico foge da ala interna",
+          "5-6: Um cortesão busca favores ou espalha boatos sobre rivais",
+          "1-2: A floresta de Sarkash parece espalhar‑se de modo antinatural, invadindo mais o cemitério"
+        ],
+        "building": [
+          "1-2: Uma seção colapsada do Palácio revela ossos antigos e detritos"
+        ],
+        "street": [
+          "1-2: Um bando de corvos segue um imenso Leão‑de‑Pó ao longe"
+        ],
+        "landmark": [
+          "1-2: Um bobo esquelético surge, buscando novo senhor"
+        ],
+        "temple": [
+          "1-2: Marcas rituais aparecem nas pedras antigas, sugerindo cerimônia sombria"
+        ],
+        "residence": [
+          "1-2: Um Mineiro Imortal espreita da toca, queixo frouxo"
+        ],
+        "ruins": [
+          "3-4: Um farfalhar nos escombros sugere 'animais rastejantes'"
+        ]
+      },
       "atmosphere_modifiers": [
         "O ar pesa com rituais antigos e opulência desbotada",
         "Sussurros de lealdade e traição ecoam pelos salões",
-        "Um senso de poder ancestral e pavor persistente permeia a área"
-      ]
+        "Um senso de poder ancestral e pavor persistente permeia a área",
+        "A penumbra opressiva e trilhas que se enredam de Sarkash",
+        "O ar pesado, viciado e difícil de puxar",
+        "O arranhar constante e frenético",
+        "O fedor onipresente de decomposição e terra úmida",
+        "Um frio senso de mágoa e desesperança"
+      ],
+      "markets": [],
+      "temples": [
+        "Santuário da Coleta de Ossos (tipo visto em Galgenbeck; adequado à necrópole)"
+      ],
+      "taverns": [],
+      "guilds": [
+        "Sociedade do Certificado de Óbito (guilda de Galgenbeck; adequada à necrópole)"
+      ],
+      "residences": [
+        "Residência do Rei das Sombras (no Quarteirão do Palácio)"
+      ],
+      "ruins": []
     },
     {
       "name": "Ruínas Reais",
@@ -125,21 +193,73 @@
         "As Paredes Sussurrantes",
         "O Pátio Enlutuado"
       ],
-      "encounters": [
-        "Almas azaradas buscando abrigo",
-        "Matilhas de visons‑de‑cinza selvagens",
-        "Zumbis erguendo‑se dos destroços [5‑8]",
-        "Grotescos à espreita nas sombras"
-      ],
-      "random_tables": [
-        "1-2: Uma seção das ruínas desaba; é preciso um teste de Agilidade para evitar dano",
-        "3-4: Catadores brigam por recursos minguados",
-        "5-6: Um silêncio súbito e inexplicável cai sobre a área, assustando a todos"
-      ],
+      "encounters": {
+        "district": [
+          "Almas azaradas buscando abrigo",
+          "Matilhas de visons‑de‑cinza selvagens",
+          "Zumbis erguendo‑se dos destroços [5‑8]",
+          "Grotescos à espreita nas sombras",
+          "Príncipes da linhagem do Rei das Sombras disfarçados",
+          "Coisas‑de‑cadáver (eco do Vale dos Desmortos Desafortunados, onde a não‑vida se deforma em desespero)"
+        ],
+        "street": [
+          "Aland, wickheads de lâmina à espreita"
+        ],
+        "building": [
+          "Cadáveres presos reanimam como Marionetes de Carne"
+        ],
+        "landmark": [
+          "Bruxas‑Secas (próximas ao Trono de Vidro)"
+        ],
+        "ruins": [
+          "Animais rastejantes"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma seção das ruínas desaba; é preciso um teste de Agilidade para evitar dano",
+          "3-4: Catadores brigam por recursos minguados",
+          "5-6: Um silêncio súbito e inexplicável cai sobre a área, assustando a todos",
+          "3-4: O ar torna‑se pesado, viciado e difícil de puxar, acompanhado de arranhões frenéticos"
+        ],
+        "ruins": [
+          "1-2: Uma seção das ruínas desaba, prendendo d3 almas azaradas"
+        ],
+        "building": [
+          "3-4: Sussurro ou visão espectral ligada a Nagl ou ao Vale dos Desmortos Desafortunados"
+        ],
+        "street": [
+          "3-4: Encontro com um Príncipe disfarçado da linhagem do Rei das Sombras"
+        ],
+        "landmark": [
+          "3-4: A gaiola da Fossa‑Pedreira contém feridos e moribundos"
+        ],
+        "temple": [
+          "3-4: Ouve‑se o som de gemidos fracos sob a terra"
+        ],
+        "residence": [
+          "3-4: Encontra‑se um pequeno esconderijo de fragmentos de osso e bugigangas lúgubres"
+        ]
+      },
       "atmosphere_modifiers": [
         "Som constante de pedra rangendo e entulho movendo‑se",
         "Cheiro onipresente de terra úmida e decomposição",
-        "Bolsões de ar frio apesar do morno geral"
+        "Bolsões de ar frio apesar do morno geral",
+        "A penumbra opressiva e trilhas que se enredam de Sarkash",
+        "O ar pesado, viciado e difícil de puxar",
+        "O arranhar constante e frenético",
+        "O fedor onipresente de decomposição e terra úmida",
+        "Um frio senso de mágoa e desesperança"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [
+        "Abrigos de Almas Azaradas (nas Ruínas Reais)"
+      ],
+      "ruins": [
+        "Ruínas do Palácio do Rei das Sombras"
       ]
     },
     {
@@ -153,30 +273,76 @@
       "streets": [
         "Trilhas dos Túmulos",
         "Passeio do Querubim",
-        "Alameda da Cova da Peste"
+        "Alameda da Cova da Peste",
+        "Travessa da Cova da Peste"
       ],
       "landmarks": [
         "A Grande Cova da Peste",
         "A Fonte Estagnada",
         "O Mausoléu do Anjo Lacrimoso",
-        "Criptas (geral; semelhantes às do Vale dos Desmortos Desafortunados, por onde Nagl vagueou)"
+        "Criptas (geral; semelhantes às do Vale dos Desmortos Desafortunados, por onde Nagl vagueou)",
+        "O Templo Submerso"
       ],
-      "encounters": [
-        "Criaturas mortas‑vivas (p.ex., Zumbis [5‑8])",
-        "Grotescos rondando cemitérios",
-        "Carniçais banqueteando restos (inferido pelo tema de necrópole)",
-        "Animais raivosos vasculhando entre sepulturas"
-      ],
-      "random_tables": [
-        "1-2: Uma cova recém‑aberta, conteúdo perturbado",
-        "3-4: O chão treme e um trecho de sepulturas afunda levemente",
-        "5-6: Um aroma adocicado e estranho emana de um mausoléu, atraindo insetos"
-      ],
+      "encounters": {
+        "district": [
+          "Criaturas mortas‑vivas (p.ex., Zumbis [5‑8])",
+          "Grotescos rondando cemitérios",
+          "Carniçais banqueteando restos (inferido pelo tema de necrópole)",
+          "Animais raivosos vasculhando entre sepulturas",
+          "Pálidos"
+        ],
+        "building": [
+          "Almas miseráveis se abrigam nas partes em ruína"
+        ],
+        "landmark": [
+          "Monstros (geral) espreitam o marco"
+        ],
+        "ruins": [
+          "Zumbis [5‑8]"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma cova recém‑aberta, conteúdo perturbado",
+          "3-4: O chão treme e um trecho de sepulturas afunda levemente",
+          "5-6: Um aroma adocicado e estranho emana de um mausoléu, atraindo insetos",
+          "5-6: Abre‑se uma cova da peste antes oculta, liberando fedor e d4 zumbis [1, 5‑8]"
+        ],
+        "building": [
+          "5-6: Sinais de passagem recente de 'animais rastejantes' perto do Templo Submerso"
+        ],
+        "street": [
+          "5-6: Um frio inexplicável e súbito (ou desespero) assola a área"
+        ],
+        "landmark": [
+          "5-6: Descobre‑se um esconderijo de gemas (como o suborno de Nagl) num mausoléu"
+        ],
+        "temple": [
+          "5-6: A porta de um mausoléu antigo range, revelando escuridão intacta"
+        ],
+        "ruins": [
+          "5-6: Fracos gritos desencarnados de crianças ecoam dos escombros"
+        ]
+      },
       "atmosphere_modifiers": [
         "Fedor esmagador de decomposição e terra úmida",
         "Silêncio inquietante, rompido apenas por arranhões distantes",
-        "Luz tênue e espectral nas lápides à noite"
-      ]
+        "Luz tênue e espectral nas lápides à noite",
+        "A penumbra opressiva e trilhas que se enredam de Sarkash",
+        "O ar pesado, viciado e difícil de puxar",
+        "O arranhar constante e frenético",
+        "O fedor onipresente de decomposição e terra úmida",
+        "Um frio senso de mágoa e desesperança"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [
+        "Mausoléus (morada eterna)",
+        "Tocas (dos Mineiros Imortais)"
+      ],
+      "ruins": []
     },
     {
       "name": "Catacumbas Inferiores",
@@ -185,33 +351,59 @@
       "buildings": [
         "Câmaras Subterrâneas",
         "Criptas Ocultas",
-        "Porões Esquecidos"
+        "Porões Esquecidos",
+        "Templo Submerso (no mapa do Mar Cinzento; ruínas subterrâneas)",
+        "Fossa‑Pedreira (no mapa do Mar Cinzento; escavação e aprisionamento)"
       ],
       "streets": [
         "Túneis Retorcidos",
         "Passagens Enraizadas",
-        "As Trilhas Profundas"
+        "As Trilhas Profundas",
+        "Túneis de Ladrões"
       ],
       "landmarks": [
         "O Templo Submerso (três torres soterradas em cinza, de onde emergem animais rastejantes)",
         "A Fossa‑Pedreira (cunha tosca numa montanha; gaiola com feridos e moribundos; Mineiros Imortais)",
-        "Túneis de Ladrões (uma origem possível para um Sacerdote Herético)"
+        "Túneis de Ladrões (uma origem possível para um Sacerdote Herético)",
+        "A Fossa‑Pedreira"
       ],
-      "encounters": [
-        "Mineiros Imortais, emaciados e mirrados, agarrando picaretas",
-        "Animais rastejantes (como no Templo Submerso)",
-        "Prisioneiros ou outras criaturas presas em fossos ou gaiolas (como na Fossa‑Pedreira)",
-        "Manifestações corpóreas de pesadelo, da não‑vida que nasce ao vagar pelo Vale dos Desmortos Desafortunados"
-      ],
-      "random_tables": [
-        "1-2: Sons frenéticos de arranhar ecoam das paredes",
-        "3-4: Um trecho de túnel alaga ou desaba de súbito",
-        "5-6: Fungos estranhos e luminosos iluminam um corredor, revelando restos esqueléticos"
-      ],
+      "encounters": {
+        "district": [
+          "Mineiros Imortais, emaciados e mirrados, agarrando picaretas",
+          "Animais rastejantes (como no Templo Submerso)",
+          "Prisioneiros ou outras criaturas presas em fossos ou gaiolas (como na Fossa‑Pedreira)",
+          "Manifestações corpóreas de pesadelo, da não‑vida que nasce ao vagar pelo Vale dos Desmortos Desafortunados",
+          "Mineiros Imortais"
+        ],
+        "ruins": [
+          "Fracos gritos desencarnados de crianças ecoam dos escombros"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Sons frenéticos de arranhar ecoam das paredes",
+          "3-4: Um trecho de túnel alaga ou desaba de súbito",
+          "5-6: Fungos estranhos e luminosos iluminam um corredor, revelando restos esqueléticos"
+        ]
+      },
       "atmosphere_modifiers": [
         "Eco constante de água pingando e sons distantes e inquietantes",
         "Cheiro onipresente de terra úmida, podridão e enxofre",
-        "Um senso opressor de estar sendo observado no escuro"
+        "Um senso opressor de estar sendo observado no escuro",
+        "A penumbra opressiva e trilhas que se enredam de Sarkash",
+        "O ar pesado, viciado e difícil de puxar",
+        "O arranhar constante e frenético",
+        "O fedor onipresente de decomposição e terra úmida",
+        "Um frio senso de mágoa e desesperança"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": [
+        "Templo Submerso",
+        "Fossa‑Pedreira (ruína escavada)"
       ]
     },
     {
@@ -224,162 +416,54 @@
       ],
       "streets": [
         "Trilhas Emaranhadas",
-        "Estrada de Sarkash (para Tveland)"
+        "Estrada de Sarkash (para Tveland)",
+        "Trilhas de Escombro",
+        "Estrada de Sarkash (levando à floresta)",
+        "Trilhas dos Túmulos"
       ],
       "landmarks": [
         "O Bosque Petrificado",
         "O Riacho Silencioso",
         "Montes de Sepultamento Ocultos"
       ],
-      "encounters": [
-        "Goblins atiram arcos trinados, levando uma maldição",
-        "Escória de Sarkash com facas envenenadas",
-        "Aland, wickheads de lâmina à espreita",
-        "Pálidos, destrutivos e alheios, como caídos das estrelas",
-        "Nagl, a Realeza Abjeta, ou outros necromantes, tendo vagado até aqui"
-      ],
-      "random_tables": [
-        "1-2: A floresta parece espalhar‑se de modo antinatural",
-        "3-4: Uma quietude perturbadora cai sobre a área, amplificando sons distantes",
-        "5-6: Insetos estranhos e luminosos volitam pelo matagal, levando a lugar nenhum"
-      ],
+      "encounters": {
+        "district": [
+          "Goblins atiram arcos trinados, levando uma maldição",
+          "Escória de Sarkash com facas envenenadas",
+          "Aland, wickheads de lâmina à espreita",
+          "Pálidos, destrutivos e alheios, como caídos das estrelas",
+          "Nagl, a Realeza Abjeta, ou outros necromantes, tendo vagado até aqui"
+        ],
+        "street": [
+          "Escória de Sarkash com facas envenenadas"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: A floresta parece espalhar‑se de modo antinatural",
+          "3-4: Uma quietude perturbadora cai sobre a área, amplificando sons distantes",
+          "5-6: Insetos estranhos e luminosos volitam pelo matagal, levando a lugar nenhum"
+        ]
+      },
       "atmosphere_modifiers": [
         "A penumbra opressiva e trilhas que se enredam na floresta",
         "O ar torna‑se pesado, viciado e difícil de puxar",
-        "Arranhar constante e tênue vindo do sub-bosque"
+        "Arranhar constante e tênue vindo do sub-bosque",
+        "A penumbra opressiva e trilhas que se enredam de Sarkash",
+        "O ar pesado, viciado e difícil de puxar",
+        "O arranhar constante e frenético",
+        "O fedor onipresente de decomposição e terra úmida",
+        "Um frio senso de mágoa e desesperança"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": [
+        "Torres (colapsadas)"
       ]
     }
-  ],
-  "buildings": [
-    "A Ala Interna do Palácio",
-    "Mausoléus",
-    "Salões Colapsados do Palácio",
-    "Criptas Esquecidas (Nagl vagou pelo Vale dos Desmortos Desafortunados, que tem criptas)",
-    "Abrigos Improvisados (nas ruínas do Palácio)",
-    "Câmaras Subterrâneas (Catacumbas sob o Palácio)",
-    "Templo Submerso (no mapa do Mar Cinzento; ruínas subterrâneas)",
-    "Fossa‑Pedreira (no mapa do Mar Cinzento; escavação e aprisionamento)"
-  ],
-  "streets": [
-    "Caminho do Rei das Sombras",
-    "Trilhas de Escombro",
-    "Trilhas dos Túmulos",
-    "Túneis Retorcidos (sob o palácio)",
-    "Estrada de Sarkash (levando à floresta)",
-    "Travessa da Cova da Peste",
-    "Passeio do Querubim",
-    "Túneis de Ladrões"
-  ],
-  "landmarks": [
-    "O Palácio do Rei das Sombras",
-    "A Grande Cova da Peste",
-    "A Fonte Estagnada",
-    "O Templo Submerso",
-    "A Fossa‑Pedreira"
-  ],
-  "temples": [
-    "Santuário da Coleta de Ossos (tipo visto em Galgenbeck; adequado à necrópole)"
-  ],
-  "taverns": [],
-  "guilds": [
-    "Sociedade do Certificado de Óbito (guilda de Galgenbeck; adequada à necrópole)"
-  ],
-  "residences": [
-    "Residência do Rei das Sombras (no Quarteirão do Palácio)",
-    "Mausoléus (morada eterna)",
-    "Tocas (dos Mineiros Imortais)",
-    "Abrigos de Almas Azaradas (nas Ruínas Reais)"
-  ],
-  "ruins": [
-    "Ruínas do Palácio do Rei das Sombras",
-    "Templo Submerso",
-    "Fossa‑Pedreira (ruína escavada)",
-    "Torres (colapsadas)"
-  ],
-  "encounters": {
-    "district": [
-      "Mortos‑vivos (Zumbis [5‑8], Grotescos rondando cemitérios)",
-      "Goblins com arcos, carregando uma maldição",
-      "Pálidos",
-      "Mineiros Imortais",
-      "Animais rastejantes (como no Templo Submerso)",
-      "Príncipes da linhagem do Rei das Sombras disfarçados",
-      "Coisas‑de‑cadáver (eco do Vale dos Desmortos Desafortunados, onde a não‑vida se deforma em desespero)"
-    ],
-    "street": [
-      "Vison‑de‑cinza selvagem",
-      "Escória de Sarkash com facas envenenadas",
-      "Aland, wickheads de lâmina à espreita"
-    ],
-    "building": [
-      "Esqueletos patrulhando os terrenos",
-      "Cadáveres presos reanimam como Marionetes de Carne",
-      "Almas miseráveis se abrigam nas partes em ruína"
-    ],
-    "landmark": [
-      "Bando de corvos segue algo (como um Leão‑de‑Pó)",
-      "Bruxas‑Secas (próximas ao Trono de Vidro)",
-      "Monstros (geral) espreitam o marco"
-    ],
-    "temple": [
-      "Práticas ritualísticas (Nagl desenvolveu gosto por necromancia)"
-    ],
-    "tavern": [],
-    "guild": [],
-    "residence": [
-      "O rosto miserável de um Mineiro Imortal na toca"
-    ],
-    "ruins": [
-      "Almas azaradas abrigadas",
-      "Animais rastejantes",
-      "Zumbis [5‑8]",
-      "Fracos gritos desencarnados de crianças ecoam dos escombros"
-    ]
-  },
-  "random_tables": {
-    "district": [
-      "1-2: A floresta de Sarkash parece espalhar‑se de modo antinatural, invadindo mais o cemitério",
-      "3-4: O ar torna‑se pesado, viciado e difícil de puxar, acompanhado de arranhões frenéticos",
-      "5-6: Abre‑se uma cova da peste antes oculta, liberando fedor e d4 zumbis [1, 5‑8]"
-    ],
-    "building": [
-      "1-2: Uma seção colapsada do Palácio revela ossos antigos e detritos",
-      "3-4: Sussurro ou visão espectral ligada a Nagl ou ao Vale dos Desmortos Desafortunados",
-      "5-6: Sinais de passagem recente de 'animais rastejantes' perto do Templo Submerso"
-    ],
-    "street": [
-      "1-2: Um bando de corvos segue um imenso Leão‑de‑Pó ao longe",
-      "3-4: Encontro com um Príncipe disfarçado da linhagem do Rei das Sombras",
-      "5-6: Um frio inexplicável e súbito (ou desespero) assola a área"
-    ],
-    "landmark": [
-      "1-2: Um bobo esquelético surge, buscando novo senhor",
-      "3-4: A gaiola da Fossa‑Pedreira contém feridos e moribundos",
-      "5-6: Descobre‑se um esconderijo de gemas (como o suborno de Nagl) num mausoléu"
-    ],
-    "temple": [
-      "1-2: Marcas rituais aparecem nas pedras antigas, sugerindo cerimônia sombria",
-      "3-4: Ouve‑se o som de gemidos fracos sob a terra",
-      "5-6: A porta de um mausoléu antigo range, revelando escuridão intacta"
-    ],
-    "tavern": [],
-    "guild": [],
-    "residence": [
-      "1-2: Um Mineiro Imortal espreita da toca, queixo frouxo",
-      "3-4: Encontra‑se um pequeno esconderijo de fragmentos de osso e bugigangas lúgubres"
-    ],
-    "ruins": [
-      "1-2: Uma seção das ruínas desaba, prendendo d3 almas azaradas",
-      "3-4: Um farfalhar nos escombros sugere 'animais rastejantes'",
-      "5-6: Fracos gritos desencarnados de crianças ecoam dos escombros"
-    ]
-  },
-  "atmosphere_modifiers": [
-    "A penumbra opressiva e trilhas que se enredam de Sarkash",
-    "O ar pesado, viciado e difícil de puxar",
-    "O arranhar constante e frenético",
-    "O fedor onipresente de decomposição e terra úmida",
-    "Um frio senso de mágoa e desesperança"
   ],
   "metadata": {
     "migrated_from": "databases/cities/graven_tosk.json",

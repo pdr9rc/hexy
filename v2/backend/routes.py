@@ -22,7 +22,7 @@ from .generation import ensure_generated
 from .translation_system import translation_system
 from .hex_service import hex_service
 from .lore_database import LoreDatabase
-from .city_overlay_analyzer import CityOverlayAnalyzer
+from .database_manager import database_manager
 
 api_bp = Blueprint("api", __name__, url_prefix="/api")
 web_bp = Blueprint(
@@ -46,6 +46,45 @@ def _get_language(cfg: AppConfig) -> str:
 
 def _hex_path(cfg: AppConfig, lang: str, hex_code: str) -> Path:
     return cfg.paths.output_path / lang / "hexes" / f"hex_{hex_code}.md"
+
+
+def _load_city_data(city_name: str, lang: str) -> Dict[str, Any]:
+    """Load city JSON file and encounter tables. NO processing, NO logic."""
+    cfg = _cfg()
+    city_path = cfg.paths.database_path / "cities" / lang / f"{city_name.lower()}.json"
+    
+    if not city_path.exists():
+        raise FileNotFoundError(f"City file not found: {city_path}")
+    
+    with open(city_path, 'r', encoding='utf-8') as f:
+        city_data = json.load(f)
+    
+    # Load all generic encounter tables
+    encounter_types = [
+        'building_encounters',
+        'street_encounters',
+        'landmark_encounters',
+        'market_encounters',
+        'temple_encounters',
+        'tavern_encounters',
+        'guild_encounters',
+        'residence_encounters',
+        'ruins_encounters',
+        'district_encounters'
+    ]
+    
+    encounter_tables = {}
+    for encounter_type in encounter_types:
+        table = database_manager.get_table('encounters', encounter_type, lang)
+        if table:
+            # Remove '_encounters' suffix for key
+            key = encounter_type.replace('_encounters', '')
+            encounter_tables[key] = table
+    
+    return {
+        "city_data": city_data,
+        "encounter_tables": encounter_tables
+    }
 
 
 def _city_key_for_hex(hex_code: str, lang: str) -> str | None:
@@ -305,10 +344,37 @@ def export_output_zip():
                 full = Path(root) / fname
                 rel = full.relative_to(output_dir)
                 zf.write(str(full), arcname=str(Path(base_name) / rel))
+        # Add placeholder for client cache (frontend will add it via separate endpoint or include in request)
+        # For now, we'll add it via a separate endpoint that frontend can call
     mem.seek(0)
     ts = time.strftime("%Y%m%d%H%M%S")
     filename = f"dying_lands_output-{ts}.zip"
     return send_file(mem, mimetype="application/zip", as_attachment=True, download_name=filename)
+
+
+@api_bp.route("/export-cache", methods=["GET"])
+def export_cache():
+    """Export frontend cache data as JSON."""
+    cfg = _cfg()
+    lang = _get_language(cfg)
+    # Return a placeholder - frontend will call this and include cache data
+    # Or frontend can export cache directly via cache.exportCacheData()
+    return jsonify({"message": "Use frontend cache.exportCacheData() to get cache data"})
+
+
+@api_bp.route("/import-cache", methods=["POST"])
+def import_cache():
+    """Import frontend cache data from JSON."""
+    cfg = _cfg()
+    body = request.get_json(silent=True) or {}
+    cache_data = body.get("cacheData")
+    language = body.get("language", _get_language(cfg))
+    
+    if not cache_data:
+        return jsonify({"error": "Missing cacheData"}), 400
+    
+    # Return cache data to frontend for processing
+    return jsonify({"ok": True, "cacheData": cache_data, "language": language})
 
 
 @api_bp.route("/import", methods=["POST"])
@@ -321,9 +387,17 @@ def import_output_zip():
         return jsonify({"error": "File must be a .zip"}), 400
     data = file.read()
     tmpdir = Path(tempfile.mkdtemp(prefix="hexy-v2-import-"))
+    cache_data = None
     try:
         with zipfile.ZipFile(io.BytesIO(data)) as zf:
             zf.extractall(tmpdir)
+            # Check for client_cache.json in ZIP
+            cache_file = tmpdir / "client_cache.json"
+            if cache_file.exists():
+                try:
+                    cache_data = json.loads(cache_file.read_text(encoding="utf-8"))
+                except Exception as e:
+                    print(f"Warning: Failed to read client_cache.json: {e}")
         extracted_root = tmpdir / "dying_lands_output"
         src_dir = extracted_root if extracted_root.exists() else tmpdir
         if not any(p.is_dir() for p in src_dir.iterdir()):
@@ -335,7 +409,11 @@ def import_output_zip():
             backup = final_dir.parent / f"{final_dir.name}.bak-{int(time.time())}"
             shutil.move(str(final_dir), str(backup))
         shutil.move(str(src_dir), str(final_dir))
-        return jsonify({"ok": True, "backup": str(backup) if backup else None})
+        return jsonify({
+            "ok": True,
+            "backup": str(backup) if backup else None,
+            "cacheData": cache_data
+        })
     finally:
         shutil.rmtree(tmpdir, ignore_errors=True)
 
@@ -349,47 +427,47 @@ def _read_markdown_file(path: Path):
 
 @api_bp.route("/city-overlays", methods=["GET"])
 def list_overlays():
+    """List available cities from database. NO file system access."""
     cfg = _cfg()
     lang = _get_language(cfg)
-    overlays_dir = cfg.paths.output_path / lang / "city_overlays"
-    if not overlays_dir.exists():
-        return jsonify({"overlays": []})
-    overlays = [{"name": p.stem, "filename": p.name} for p in overlays_dir.glob("*.md")]
+    
+    # Get cities from lore database
+    lore = LoreDatabase()
+    overlays = []
+    for city_key, city_data in lore.major_cities.items():
+        overlays.append({
+            "name": city_key,
+            "display_name": city_data.get("name", city_key),
+            "filename": None  # No longer using files
+        })
+    
     return jsonify({"overlays": overlays, "language": lang})
 
 
 @api_bp.route("/city-overlay/<overlay_name>", methods=["GET"])
 def get_overlay(overlay_name: str):
+    """Return raw city data. NO generation, NO logic."""
     cfg = _cfg()
     lang = _get_language(cfg)
-    ensure_generated(cfg)
     
     try:
-        analyzer = CityOverlayAnalyzer(language=lang, output_directory=str(cfg.paths.output_path / lang))
-        overlay_data = analyzer.load_overlay_data(overlay_name)
-        if not overlay_data:
-            overlay_data = analyzer.generate_city_overlay(overlay_name)
+        # Load city data (NO processing, NO logic)
+        city_info = _load_city_data(overlay_name, lang)
+        city_data = city_info["city_data"]
+        encounter_tables = city_info["encounter_tables"]
         
-        if not overlay_data:
-            return jsonify({"error": "Overlay not found"}), 404
-        
-        overlays_dir = cfg.paths.output_path / lang / "city_overlays"
-        md_file = overlays_dir / f"{overlay_name}.md"
-        raw_markdown = _read_markdown_file(md_file)
+        # Extract district_matrix (static, no processing)
+        district_matrix = city_data.get("district_matrix", [])
         
         return jsonify({
             "success": True,
-            "overlay": {
-                "name": overlay_data.get("name", overlay_name),
-                "display_name": overlay_data.get("display_name", overlay_name),
-                "grid_type": overlay_data.get("grid_type", "round"),
-                "radius": overlay_data.get("radius", 0),
-                "total_hexes": overlay_data.get("total_hexes", 0),
-                "hex_grid": overlay_data.get("hex_grid", {}),
-                "raw_markdown": raw_markdown,
-            },
+            "city_data": city_data,
+            "district_matrix": district_matrix,
+            "encounter_tables": encounter_tables,
             "language": lang,
         })
+    except FileNotFoundError as e:
+        return jsonify({"success": False, "error": str(e)}), 404
     except Exception as e:
         import traceback
         return jsonify({
@@ -399,43 +477,26 @@ def get_overlay(overlay_name: str):
         }), 500
 
 
-@api_bp.route("/city-overlay/<overlay_name>/ascii", methods=["GET"])
-def get_overlay_ascii(overlay_name: str):
-    cfg = _cfg()
-    lang = _get_language(cfg)
-    overlays_dir = cfg.paths.output_path / lang / "city_overlays"
-    ascii_file = overlays_dir / f"{overlay_name}.txt"
-    content = _read_markdown_file(ascii_file)
-    if content is None:
-        return jsonify({"error": "Overlay ASCII not found"}), 404
-    return jsonify({"name": overlay_name, "language": lang, "ascii": content})
+# Removed /city-overlay/<overlay_name>/ascii endpoint - city content is now generated dynamically by frontend city.js
 
 
 @api_bp.route("/city-overlay/by-hex/<hex_code>", methods=["GET"])
 def get_overlay_by_hex(hex_code: str):
+    """Return city name for a hex code - used to load city overlay. NO generation, NO logic."""
     valid, message = _validate_hex_code(hex_code)
     if not valid:
         return jsonify({"error": message}), 400
     cfg = _cfg()
     lang = _get_language(cfg)
-    ensure_generated(cfg)
     city_key = _city_key_for_hex(hex_code, lang)
     if not city_key:
-        return jsonify({"error": "Overlay not found for hex", "hex_code": hex_code}), 404
-    overlays_dir = cfg.paths.output_path / lang / "city_overlays"
-    ascii_file = overlays_dir / f"{city_key}.txt"
-    md_file = overlays_dir / f"{city_key}.md"
-    ascii_content = _read_markdown_file(ascii_file)
-    md_content = _read_markdown_file(md_file)
-    if ascii_content is None and md_content is None:
-        return jsonify({"error": "Overlay not found for hex", "hex_code": hex_code}), 404
+        return jsonify({"error": "City not found for hex", "hex_code": hex_code}), 404
+    # Return city name only - frontend will load city data via /city-overlay/<city_name>
     return jsonify(
         {
             "name": city_key,
             "hex_code": hex_code,
             "language": lang,
-            "ascii": ascii_content,
-            "raw_markdown": md_content,
         }
     )
 
@@ -464,68 +525,46 @@ def get_settlement(hex_code: str):
 
 @api_bp.route("/city-overlay/<overlay_name>/hex/<hex_id>", methods=["GET"])
 def get_overlay_hex(overlay_name: str, hex_id: str):
+    """Return raw hex position data. NO generation, NO logic."""
     cfg = _cfg()
     lang = _get_language(cfg)
-    ensure_generated(cfg)
     
     try:
-        analyzer = CityOverlayAnalyzer(language=lang, output_directory=str(cfg.paths.output_path / lang))
-        overlay_data = analyzer.load_overlay_data(overlay_name)
-        if not overlay_data:
-            overlay_data = analyzer.generate_city_overlay(overlay_name)
+        # Parse hex_id to get row and col (simple string split: "0_0" -> [0, 0])
+        try:
+            parts = hex_id.split('_')
+            if len(parts) != 2:
+                raise ValueError(f"Invalid hex_id format: {hex_id}")
+            row = int(parts[0])
+            col = int(parts[1])
+        except (ValueError, IndexError) as e:
+            return jsonify({"success": False, "error": f"Invalid hex_id format: {hex_id}"}), 400
         
-        if not overlay_data:
-            return jsonify({"success": False, "error": "Overlay not found"}), 404
+        # Load city data (NO processing, NO logic)
+        city_info = _load_city_data(overlay_name, lang)
+        city_data = city_info["city_data"]
+        encounter_tables = city_info["encounter_tables"]
         
-        hex_grid = overlay_data.get("hex_grid", {})
-        hex_data = hex_grid.get(hex_id)
-        
-        if not hex_data:
-            return jsonify({"success": False, "error": "Hex not found"}), 404
-        
-        hex_content = hex_data.get("content", {})
-        hex_specific_data = {
-            "id": hex_data.get("id", hex_id),
-            "row": hex_data.get("row", 0),
-            "col": hex_data.get("col", 0),
-            "district": hex_data.get("district", "unknown"),
-            "content": {
-                "name": hex_content.get("name", "Unknown"),
-                "type": hex_content.get("type", "unknown"),
-                "description": hex_content.get("description", "No description available"),
-                "encounter": hex_content.get("encounter", "No encounter available"),
-                "atmosphere": hex_content.get("atmosphere", "No atmosphere available"),
-                "position_type": hex_content.get("position_type", "unknown"),
-                "weather": hex_content.get("weather"),
-                "city_event": hex_content.get("city_event"),
-                "npc_name": hex_content.get("npc_name"),
-                "npc_trade": hex_content.get("npc_trade"),
-                "npc_trait": hex_content.get("npc_trait"),
-                "npc_concern": hex_content.get("npc_concern"),
-                "npc_want": hex_content.get("npc_want"),
-                "npc_secret": hex_content.get("npc_secret"),
-                "npc_affiliation": hex_content.get("npc_affiliation"),
-                "npc_attitude": hex_content.get("npc_attitude"),
-                "tavern_menu": hex_content.get("tavern_menu"),
-                "tavern_innkeeper": hex_content.get("tavern_innkeeper"),
-                "tavern_patron": hex_content.get("tavern_patron"),
-                "related_hexes": hex_content.get("related_hexes"),
-                "random_table": hex_content.get("random_table"),
-                "notable_features": hex_content.get("notable_features"),
-                "population": hex_content.get("population"),
-                "services": hex_content.get("services"),
-                "items_sold": hex_content.get("items_sold"),
-                "beast_prices": hex_content.get("beast_prices"),
-                "key_npcs": hex_content.get("key_npcs"),
-                "active_factions": hex_content.get("active_factions"),
-            }
-        }
+        # Extract district from district_matrix at position [row][col]
+        district_matrix = city_data.get("district_matrix", [])
+        district = ""
+        if row < len(district_matrix) and col < len(district_matrix[row]):
+            district = district_matrix[row][col] or ""
         
         return jsonify({
             "success": True,
-            "hex": hex_specific_data,
+            "hex": {
+                "id": hex_id,
+                "row": row,
+                "col": col,
+                "district": district
+            },
+            "city_data": city_data,
+            "encounter_tables": encounter_tables,
             "language": lang,
         })
+    except FileNotFoundError as e:
+        return jsonify({"success": False, "error": str(e)}), 404
     except Exception as e:
         import traceback
         return jsonify({

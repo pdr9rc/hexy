@@ -134,35 +134,177 @@
         "King Fathmu IX's Secret Citadel",
         "Royal Barracks",
         "Noble Residences",
-        "Tax Collection Office"
+        "Tax Collection Office",
+        "Brothel (unnamed)",
+        "Noble Residences (implied by Horn of Schleswig Lords)",
+        "Houses (raided by Fathmu's men)",
+        "Temples (raided by Fathmu's men)",
+        "Barns (raided by Fathmu's men)",
+        "Villages (raided by Fathmu's men)"
       ],
       "streets": [
         "King's Road",
         "Citadel Way",
         "Noble's Path",
-        "Guarded Avenue"
+        "Guarded Avenue",
+        "Iron Road",
+        "Laborer's Path",
+        "Rat Warrens",
+        "Commerce Lane"
       ],
       "landmarks": [
         "The King's Citadel",
         "Royal Gallows",
-        "The Great Tax Vault"
+        "The Great Tax Vault",
+        "The Empty Well",
+        "The Smoking Chimney",
+        "The Singing Buoy"
       ],
-      "encounters": [
-        "King Fathmu IX's men collecting taxes or conducting raids",
-        "Paranoid royal guards patrolling constantly",
-        "Nobles displaying their wealth ostentatiously",
-        "Spies of King Fathmu IX"
-      ],
-      "random_tables": [
-        "1-2: Royal decree for increased taxation causes unrest",
-        "3-4: A noble's caravan is raided by the King's men",
-        "5-6: A public display of 'correction' by the Inquisition"
-      ],
+      "encounters": {
+        "district": [
+          "King Fathmu IX's men collecting taxes or conducting raids",
+          "Paranoid royal guards patrolling constantly",
+          "Nobles displaying their wealth ostentatiously",
+          "Spies of King Fathmu IX",
+          "King Fathmu IX's men conducting raids and collecting taxes",
+          "Laborers carrying a boat-size casket",
+          "A rabid dog rummaging in the trash",
+          "A well-used, rusty guillotine being repaired and cleaned"
+        ],
+        "building": [
+          "The Harvester (King's tax collector) hides in Josilfa's scythe (analogous to Fathmu's citadel)",
+          "Sacrifice volunteers await their fate (general)"
+        ],
+        "street": [
+          "The Harvester rides past delivering summons (analogous to King's men)",
+          "Flutters flutter overhead seeking prey (general)"
+        ],
+        "landmark": [
+          "The Harvester appears here to collect sacrifices (analogous to King's men)",
+          "Sacrifice volunteers gather here for guidance (general)",
+          "Necromancers from a Sooty Hospital search for corpses (general)"
+        ],
+        "market": [
+          "The Harvester collects souls as currency (analogous to King's tax collectors)",
+          "The Worm Sorcerer's worms are sold as pets (general)",
+          "Gunter offers exotic specimens for carnal pleasures (general)",
+          "Family sells centuries-old heirlooms for food (general)"
+        ],
+        "temple": [
+          "The Harvester appears during sacrifice ceremonies (analogous to King's men)",
+          "Sacrifice volunteers seek guidance and absolution (general)"
+        ],
+        "tavern": [
+          "The Harvester appears to collect souls as payment (analogous to King's tax collectors)",
+          "Sacrifice volunteers drink away their final hours (general)",
+          "The One-Handed Knave offers gambling and entertainment (general)",
+          "Old lady Mirth sells meat pies stuffed with dead (general)"
+        ],
+        "guild": [
+          "The Harvester recruits from guild members (analogous to King's men)",
+          "Sacrifice volunteers are processed through the guild (general)",
+          "Archbishop Anne Gorham's crusade funding organization hunts heretics (general)",
+          "Red Liesl's beggar network controls all street information (general)"
+        ],
+        "residence": [
+          "The Harvester appears to collect souls as rent (analogous to King's tax collectors)",
+          "Sacrifice volunteers prepare for their fate (general)",
+          "Archbishop Anne Gorham hunts heretics and infidels fervently (general)",
+          "Red Liesl's beggar network sleuths, steals, and sows rumors (general)"
+        ],
+        "ruins": [
+          "Puppets have achieved sentience and roam freely (general)",
+          "The factory expands itself using construction materials (general)",
+          "The Restaurant's kitchen is haunted by Poison Ivy (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Royal decree for increased taxation causes unrest",
+          "3-4: A noble's caravan is raided by the King's men",
+          "5-6: A public display of 'correction' by the Inquisition",
+          "1-2: King Fathmu IX's men deliver summons or collect taxes",
+          "17-18: Burning buildings, carnage in streets"
+        ],
+        "building": [
+          "1-2: Puppets achieve sentience and attack visitors (general)"
+        ],
+        "street": [
+          "1-2: King Fathmu IX's men ride past delivering summons"
+        ],
+        "landmark": [
+          "1-2: Lake Onda's waters recede, revealing strange sights"
+        ],
+        "market": [
+          "3-4: Flutters are captured and sold as pets (general)",
+          "19-20: Svendon sells jars of earwax (his own and stolen) (general)"
+        ],
+        "temple": [
+          "1-2: Basilisk priests conduct dark rituals (general)"
+        ],
+        "tavern": [
+          "1-2: Lotta Gravy serves chunky stew and hearty ale (general)",
+          "17-18: Lewd Lucy's offers special deals for drinks and staff (general)"
+        ],
+        "guild": [
+          "1-2: Basilisk Knights Order patrols for heretics (general)",
+          "17-18: Vicar General Max 'Eisenhand' Trogler's law enforcement guild hangs offenders (general)"
+        ],
+        "residence": [
+          "1-2: Leopold's Studio contains forgotten paintings (general)",
+          "17-18: Vicar General Max 'Eisenhand' Trogler's manor hangs first offenders (general)"
+        ],
+        "ruins": [
+          "1-2: Puppet Factory constructs puppets of mass destruction (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The omnipresent sense of unseen fears and psychosis",
         "The gaudy decorations clash with the prevailing gloom",
-        "The distant sounds of royal decrees being proclaimed"
-      ]
+        "The distant sounds of royal decrees being proclaimed",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [
+        "Unnamed Temples (raided by Fathmu IX)"
+      ],
+      "taverns": [
+        "An Inn (mentioned as PC starting point)"
+      ],
+      "guilds": [
+        "No specific guilds mentioned in sources."
+      ],
+      "residences": [
+        "Noble Residences (implied by Schleswig lords)"
+      ],
+      "ruins": []
     },
     {
       "name": "Poor Quarter",
@@ -178,28 +320,152 @@
         "Hunger Lane",
         "Despair Alley",
         "Rubble Road",
-        "Pauper's Path"
+        "Pauper's Path",
+        "Waterfront Way"
       ],
       "landmarks": [
         "The Empty Well",
         "The Weeping Wall",
         "Burned-out Temple"
       ],
-      "encounters": [
-        "Rags-clad people fighting over bread, with guards watching and betting",
-        "Children crying in corners, lost and alone",
-        "Families desperately trying to rebuild burnt hovels",
-        "Devastated, eyeless peasants in pillories begging for water"
-      ],
-      "random_tables": [
-        "1-2: King's men conduct a 'larder sweep', leaving homes empty",
-        "3-4: A sudden cacophony of crows descends on the street",
-        "5-6: A rabid dog rummages in trash, keeping people at bay"
-      ],
+      "encounters": {
+        "district": [
+          "Rags-clad people fighting over bread, with guards watching and betting",
+          "Children crying in corners, lost and alone",
+          "Families desperately trying to rebuild burnt hovels",
+          "Devastated, eyeless peasants in pillories begging for water",
+          "Rogust of Wästlands Edge, escaped from Schleswig Sanitarium, posing as a baronet",
+          "A penniless carpenter trying to sell a worn crutch",
+          "Three hardened mercenaries pull a dead troll across the street",
+          "Children missing at Lake Onda (nearby)"
+        ],
+        "building": [
+          "Basilisk priests conduct dark ceremonies (general, could be in Schleswig temples)",
+          "The Worm Sorcerer's worms infest the foundation (general)"
+        ],
+        "street": [
+          "Basilisk knights escort condemned to Cathedral (analogous to King's guards)",
+          "Gutter boars root through garbage (general)"
+        ],
+        "landmark": [
+          "Basilisk priests conduct rituals at this site (general)",
+          "The Worm Sorcerer's worms infest the foundation (general)",
+          "Electric wickheads gather at a Quixotic Dynamo (general)"
+        ],
+        "market": [
+          "Basilisk priests sell holy relics and indulgences (general)",
+          "Blank worms appear mysteriously in stalls (general)",
+          "Cedar Grill serves Galgenburgers made from corpses (general, gruesome food)"
+        ],
+        "temple": [
+          "Basilisk priests conduct dark rituals (general)",
+          "The Worm Sorcerer's worms infest the altar (general)"
+        ],
+        "tavern": [
+          "Basilisk priests gather information from patrons (general)",
+          "The Worm Sorcerer's worms infest the food (general)",
+          "Meat House provides carnal pleasures and diseases (general)"
+        ],
+        "guild": [
+          "Basilisk priests oversee guild operations (general)",
+          "The Worm Sorcerer's worms infest guild halls (general)",
+          "Vicar General Max 'Eisenhand' Trogler's law enforcement guild hangs offenders (general)",
+          "Reverend Karloman's cult worships living pewter lamb (general)"
+        ],
+        "residence": [
+          "Basilisk priests conduct inspections (general)",
+          "The Worm Sorcerer's worms infest the foundation (general)",
+          "Vicar General Max 'Eisenhand' Trogler hangs first offenders (general)",
+          "Reverend Karloman worships a living pewter lamb (general)"
+        ],
+        "ruins": [
+          "Necromancers reconstitute dead laborers as servants (general)",
+          "Worm eggs are spread throughout the ruins (general)",
+          "The Kennel's dog fights echo through the ruins (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: King's men conduct a 'larder sweep', leaving homes empty",
+          "3-4: A sudden cacophony of crows descends on the street",
+          "5-6: A rabid dog rummages in trash, keeping people at bay",
+          "5-6: An escaped patient from the Sanitarium causes a disturbance",
+          "19-20: Old lady Mirth sells meat pies stuffed with dead"
+        ],
+        "building": [
+          "3-4: Electric wickheads plug into Quixotic Dynamo (general)"
+        ],
+        "street": [
+          "3-4: Gutter boars root through garbage piles (general)"
+        ],
+        "landmark": [
+          "3-4: The Sanitarium releases 'reformed' patients, who are still quite mad"
+        ],
+        "market": [
+          "5-6: Gutter boars are butchered and sold as meat (general)",
+          "21-22: Chandler Kasina offers life-size wax statues (general)"
+        ],
+        "temple": [
+          "3-4: King Fathmu IX's men appear during 'sacrifice' ceremonies"
+        ],
+        "tavern": [
+          "3-4: The One-Handed Knave offers gambling and entertainment (general)",
+          "19-20: Old lady Mirth sells meat pies stuffed with dead"
+        ],
+        "guild": [
+          "3-4: Worm Sorcerer's Disciples recruit new members (general)",
+          "19-20: Archhealer René Elwes's healing guild changes all who enter (general)"
+        ],
+        "residence": [
+          "3-4: Luna's Kennel houses desperate individuals (general)",
+          "19-20: Archhealer René Elwes's house changes all who enter (general)"
+        ],
+        "ruins": [
+          "3-4: Sooty Hospital houses heretic necromancers (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The pervasive stench of poverty and decay",
         "Whispers of past raids and coming hunger",
-        "The sound of distant suffering and wailing"
+        "The sound of distant suffering and wailing",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [
+        "Dilapidated Hovels (Poor Quarter)"
+      ],
+      "ruins": [
+        "Charred Houses (Poor Quarter)"
       ]
     },
     {
@@ -216,29 +482,158 @@
         "Market Way",
         "Commerce Lane",
         "Midnight Alley",
-        "Trade Route"
+        "Trade Route",
+        "Alchemist's Alley",
+        "Smokestack Lane"
       ],
       "landmarks": [
         "The Central Fountain",
         "The Gilded Scale",
-        "The Silent Clock"
+        "The Silent Clock",
+        "Burned-out Temple",
+        "The Alchemist's Ruin",
+        "The Great Furnace",
+        "The Stinking Cesspool",
+        "The Broken Cross"
       ],
-      "encounters": [
-        "Smell of dry snuff, herbs, and hash from a crowded market",
-        "Traveling weed-merchant asking for directions to the Seer’s",
-        "Urchin painting 'LISTEN!' with goat’s blood on a wall",
-        "General city encounters, like crossbow bolts hitting nearby doors"
-      ],
-      "random_tables": [
-        "1-2: King's men raid market stalls for unpaid taxes",
-        "3-4: An alarm sounds at the illegal midnight market, causing chaos",
-        "5-6: A demagogue yells about prophecy falsehoods, attracting guards"
-      ],
+      "encounters": {
+        "district": [
+          "Smell of dry snuff, herbs, and hash from a crowded market",
+          "Traveling weed-merchant asking for directions to the Seer’s",
+          "Urchin painting 'LISTEN!' with goat’s blood on a wall",
+          "General city encounters, like crossbow bolts hitting nearby doors",
+          "Jyra of Schleswig, choosing a weapon with lower damage die",
+          "A patron violently escorted, robbed, and stabbed from a pub",
+          "A severely hungover chaplain cursing the state of things",
+          "A sinkhole swallows half of Schleswig"
+        ],
+        "building": [
+          "Worm Sorcerer's disciples gather in secret (general, could be in Schleswig)",
+          "Blank worms hatch in hidden corners (general)"
+        ],
+        "street": [
+          "Worm Sorcerer spreads eggs in the gutters (general)",
+          "Maggot Marl's agents collect tribute (general)"
+        ],
+        "landmark": [
+          "Worm Sorcerer's influence emanates from within (general)",
+          "Blank worms hatch in hidden chambers (general)",
+          "Curse Murk seeps from the ground, warping reality (general)"
+        ],
+        "market": [
+          "The Old One's influence corrupts all transactions (general)",
+          "Gutter boars are butchered and sold as meat (general)",
+          "Mummy Merchant Alma sells mummified corpses for fuel (general)"
+        ],
+        "temple": [
+          "Worm Sorcerer's disciples gather in secret (general)",
+          "Blank worms hatch in holy water fonts (general)"
+        ],
+        "tavern": [
+          "Worm Sorcerer's disciples recruit new members (general)",
+          "Blank worms appear in drinks mysteriously (general)",
+          "The Kennel offers dog fights and bloodletting (general)"
+        ],
+        "guild": [
+          "Worm Sorcerer's disciples infiltrate the guild (general)",
+          "Blank worms are bred in guild laboratories (general)",
+          "Archhealer René Elwes's healing guild changes all who enter (general)",
+          "Whiskers Jenny's peace guild infects people with plague (general)"
+        ],
+        "residence": [
+          "Worm Sorcerer's disciples hide in secret rooms (general)",
+          "Blank worms hatch in hidden corners (general)",
+          "Archhealer René Elwes operates the House of Bodily and Spiritual Healing (general)",
+          "Whiskers Jenny preaches peace while infecting people with plague (general)"
+        ],
+        "ruins": [
+          "Electric wickheads plug into the Quixotic Dynamo (general)",
+          "The yellow blob extends its plasmodium through cracks (general)",
+          "Egg Room (ruined) oozes with basilisk ichor (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: King's men raid market stalls for unpaid taxes",
+          "3-4: An alarm sounds at the illegal midnight market, causing chaos",
+          "5-6: A demagogue yells about prophecy falsehoods, attracting guards",
+          "7-8: A mysterious figure from the illegal midnight market is spotted",
+          "21-22: Town crier proclaims a floating cursed head is watching"
+        ],
+        "building": [
+          "5-6: Curse Murk nears critical capacity (general)"
+        ],
+        "street": [
+          "5-6: Maggot Marl's agents collect tribute (general)"
+        ],
+        "landmark": [
+          "5-6: The King's Citadel is under an invisible siege (Fathmu's paranoia)"
+        ],
+        "market": [
+          "9-10: Memory thieves sell stolen identities (general)",
+          "23-24: Merchant Karl sells plague masks of all kinds (general)"
+        ],
+        "temple": [
+          "5-6: Worm Sorcerer's disciples gather in secret (general)"
+        ],
+        "tavern": [
+          "5-6: Meat House provides carnal pleasures and diseases (general)",
+          "21-22: The Restaurant's cook Poison Ivy prepares last meals (general)"
+        ],
+        "guild": [
+          "5-6: Dunglander Collective harvests mushrooms (general)",
+          "21-22: Church Treasurer Käthe von Wallenstein's calculus society advances dark arts (general)"
+        ],
+        "residence": [
+          "5-6: Maggot Marl's Brown Town thrives in filth (general)",
+          "21-22: Church Treasurer Käthe von Wallenstein's office advances calculus secretly (general)"
+        ],
+        "ruins": [
+          "5-6: Quixotic Dynamo powers electric wickheads (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The constant hum of hushed transactions and wary whispers",
         "The pungent mix of market smells and underlying decay",
-        "The anxious gaze of merchants and buyers alike"
-      ]
+        "The anxious gaze of merchants and buyers alike",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [
+        "Illegal Midnight Market",
+        "Main Market Square"
+      ],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Artisan Quarter",
@@ -248,33 +643,169 @@
         "Blacksmith Workshops",
         "Carpenter's Workshop",
         "Alchemist's Workshop",
-        "Cobbler Shops"
+        "Cobbler Shops",
+        "King Fathmu IX's Secret Citadel",
+        "An Inn (unnamed)",
+        "Ruined Alchemist's Workshop"
       ],
       "streets": [
         "Craftsman's Lane",
         "Smelter's Way",
-        "Alchemist's Alley"
+        "Alchemist's Alley",
+        "No Man's Lane"
       ],
       "landmarks": [
         "The Smoking Chimney",
         "The Broken Anvil",
-        "The Alchemist's Ruin"
+        "The Alchemist's Ruin",
+        "King Fathmu IX's Secret Citadel",
+        "The Iron Bell",
+        "The King's Clockwork Tower",
+        "The Rat King's Lair"
       ],
-      "encounters": [
-        "Explosion, smoke, and screams from a ruined alchemist’s workshop",
-        "A penniless carpenter trying to sell a worn crutch",
-        "Workers haggling over meager payments or supplies",
-        "A group of ragtag scum playing 'Three Dead Skulls'"
-      ],
-      "random_tables": [
-        "1-2: A skilled artisan vanishes, suspected of being taken by the King's men",
-        "3-4: Raw materials shortage cripples a local workshop",
-        "5-6: A craftsman is caught producing 'contraband' goods for the illegal market"
-      ],
+      "encounters": {
+        "district": [
+          "Explosion, smoke, and screams from a ruined alchemist’s workshop",
+          "A penniless carpenter trying to sell a worn crutch",
+          "Workers haggling over meager payments or supplies",
+          "A group of ragtag scum playing 'Three Dead Skulls'",
+          "A fanged deserter, who remembers a brothel in Schleswig",
+          "A chittering wave of a hundred rats scurry across the street",
+          "The smell of dry snuff, herbs, and hash from a crowded market",
+          "PC doppelgangers go berserk"
+        ],
+        "building": [
+          "The Old One's influence corrupts the structure (general)",
+          "Gutter boars have claimed it as territory (general)"
+        ],
+        "street": [
+          "Josilfa's spies watch from every corner (analogous to King's spies)",
+          "Memory thieves steal from passersby (general)"
+        ],
+        "landmark": [
+          "The Old One's presence corrupts the area (general)",
+          "Gutter boars have claimed it as territory (general)",
+          "Cultists breed the yellow blob in hidden chambers (general)"
+        ],
+        "market": [
+          "Yellow blob cultists sell mysterious substances (general)",
+          "Maggot Marl's agents collect tribute (general)",
+          "Svendon sells jars of earwax (his own and stolen) (general)"
+        ],
+        "temple": [
+          "The Old One's influence corrupts the sacred (general)",
+          "Gutter boars have claimed it as territory (general)"
+        ],
+        "tavern": [
+          "The Old One's influence corrupts the atmosphere (general)",
+          "Gutter boars are served as exotic meat (general)",
+          "The Restaurant serves culinary depravities (general)"
+        ],
+        "guild": [
+          "The Old One's influence corrupts guild practices (general)",
+          "Gutter boars are trained and sold by the guild (general)",
+          "Church Treasurer Käthe von Wallenstein's calculus society advances dark arts (general)",
+          "Perry the Unclean's immortal society suffers eternal ridicule (general)"
+        ],
+        "residence": [
+          "The Old One's influence corrupts the home (general)",
+          "Gutter boars have claimed the garden (general)",
+          "Church Treasurer Käthe von Wallenstein secretly advances calculus (general)",
+          "Perry the Unclean constantly burps, farts, and sweats (general)"
+        ],
+        "ruins": [
+          "Curse Murk nears critical capacity, ready to explode (general)",
+          "Cultists breed the yellow blob in hidden chambers (general)",
+          "Thermal Spa (ruined) is haunted by bath attendants (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: A skilled artisan vanishes, suspected of being taken by the King's men",
+          "3-4: Raw materials shortage cripples a local workshop",
+          "5-6: A craftsman is caught producing 'contraband' goods for the illegal market",
+          "9-10: King Fathmu's psychosis manifests as a city-wide hallucination (non-source, inference)",
+          "23-24: Hail storm batters the city, bones shatter, blood squirts"
+        ],
+        "building": [
+          "7-8: The immortal beggar Ulf assaults passersby (general)"
+        ],
+        "street": [
+          "7-8: Memory thieves steal identities from passersby (general)"
+        ],
+        "landmark": [
+          "7-8: The White Múr attracts electric wickheads (general)"
+        ],
+        "market": [
+          "11-12: The Vultures collect spoils from sewage tide (general)",
+          "25-26: Undine offers mobile barber services (general)"
+        ],
+        "temple": [
+          "7-8: The Old One's influence corrupts the sacred (general)"
+        ],
+        "tavern": [
+          "7-8: The Kennel offers dog fights and bloodletting (general)",
+          "23-24: The Kennel's Luna recruits for suicide missions (general)"
+        ],
+        "guild": [
+          "7-8: The Vultures scavenge from sewage tide (general)",
+          "23-24: Professor Constantin Wagner's university guild raids ancient tombs (general)"
+        ],
+        "residence": [
+          "7-8: Klum's Big Shroom rises from wastewater (general)",
+          "23-24: Professor Constantin Wagner's quarters offer tomb raiding quests (general)"
+        ],
+        "ruins": [
+          "7-8: Curse Murk threatens to explode (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The rhythmic clang of hammers mixed with stifled frustration",
         "The acrid smell of burning chemicals and despair",
-        "The constant threat of workshops being raided or shut down"
+        "The constant threat of workshops being raided or shut down",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [
+        "Shrine to Verhu (implied by King's obsession)"
+      ],
+      "taverns": [
+        "Brothel (can function as a tavern/inn)",
+        "Unnamed Pub (where a patron was escorted)"
+      ],
+      "guilds": [],
+      "residences": [
+        "King Fathmu IX's Secret Citadel"
+      ],
+      "ruins": [
+        "Ruined Alchemist's Workshop"
       ]
     },
     {
@@ -291,29 +822,150 @@
         "Dockside Path",
         "Onda Shore Road",
         "Waterfront Way",
-        "Sewer Inlet"
+        "Sewer Inlet",
+        "Rubble Road",
+        "Trade Route"
       ],
       "landmarks": [
         "Lake Onda Docks",
         "The Ruined Lighthouse",
-        "The Singing Buoy"
+        "The Singing Buoy",
+        "The Silent Clock",
+        "Lake Onda (eastern shores of Lake Onda are near Death's Fort, Wästland has Lake Onda)"
       ],
-      "encounters": [
-        "A dead body found near the river, disfigured",
-        "A peglegged sailor stops PCs to brag about the Angloarfish",
-        "Laborers carrying a boat-sized casket to an anonymous priest",
-        "Children missing at Lake Onda"
-      ],
-      "random_tables": [
-        "1-2: River floods, washing debris and grim findings onto the streets",
-        "3-4: A 'strange ship' runs aground near the docks",
-        "5-6: The waters of Lake Onda become 'blackened' or 'tar-like'"
-      ],
+      "encounters": {
+        "district": [
+          "A dead body found near the river, disfigured",
+          "A peglegged sailor stops PCs to brag about the Angloarfish",
+          "Laborers carrying a boat-sized casket to an anonymous priest",
+          "Children missing at Lake Onda",
+          "An occult herbmaster, possibly from Schleswig's illegal midnight market",
+          "A group of ragtag scum playing Three Dead Skulls with weighted dice",
+          "Two monkeys eating what’s left of a dead raven",
+          "A slave revolt in Galgenbeck (could apply generally)"
+        ],
+        "market": [
+          "Worm Sorcerer's disciples trade forbidden knowledge (general)",
+          "Dunglanders trade mushroom meal and ale (general)",
+          "The Ordinance of Devotion regulates all trade (analogous to King's decrees)"
+        ],
+        "building": [
+          "Yellow blob extends its plasmodium through walls (general)",
+          "Maggot Marl's agents conduct business (general)"
+        ],
+        "street": [
+          "Rat trappers vs human trappers battle (general)",
+          "Sacrifice volunteers walk to their fate (general)"
+        ],
+        "landmark": [
+          "Yellow blob extends its plasmodium through (general)",
+          "Maggot Marl's agents conduct business here (general)",
+          "The Egg Room pulses with unholy energy (general)"
+        ],
+        "temple": [
+          "Yellow blob cultists perform blasphemous rites (general)",
+          "Maggot Marl's agents conduct business (general)"
+        ],
+        "tavern": [
+          "Yellow blob cultists plot in dark corners (general)",
+          "Maggot Marl's agents collect tribute (general)",
+          "The Occult Cellar sells Sacred Scrolls (general)"
+        ],
+        "guild": [
+          "Yellow blob cultists operate within the guild (general)",
+          "Maggot Marl's agents control guild operations (general)",
+          "Professor Constantin Wagner's university guild raids ancient tombs (general)"
+        ],
+        "residence": [
+          "Yellow blob extends its plasmodium through walls (general)",
+          "Maggot Marl's agents collect tribute (general)",
+          "Professor Constantin Wagner offers quests to raid ancient tombs (general)"
+        ],
+        "ruins": [
+          "The immortal beggar Ulf assaults passersby (general)",
+          "The blob probes Galgenbeck, feeding and learning (general)",
+          "Throne Room (ruined) is filled with restless spirits (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: River floods, washing debris and grim findings onto the streets",
+          "3-4: A 'strange ship' runs aground near the docks",
+          "5-6: The waters of Lake Onda become 'blackened' or 'tar-like'",
+          "11-12: A sinkhole swallows a portion of a district",
+          "25-26: Free silver thrown by naked man, but bag is full of tarantulas"
+        ],
+        "market": [
+          "1-2: Dunglanders trade mushroom meal and ale (general)",
+          "7-8: Worm Sorcerer's disciples trade forbidden knowledge (general)"
+        ],
+        "building": [
+          "9-10: Sentient factory expands itself (general)"
+        ],
+        "street": [
+          "9-10: Blank worms crawl across cobblestones (general)"
+        ],
+        "landmark": [
+          "9-10: Basilisk Shrine demands sacrifices (general)"
+        ],
+        "temple": [
+          "9-10: Yellow blob cultists perform blasphemous rites (general)"
+        ],
+        "tavern": [
+          "9-10: The Restaurant serves culinary depravities (general)",
+          "25-26: The One-Handed Knave's Earnest Jim offers gambling (general)"
+        ],
+        "guild": [
+          "9-10: Mushroom Farmers Guild cultivates dungshrooms (general)",
+          "25-26: Koopman Achim Igelfreund's trade empire is untouchable (general)"
+        ],
+        "residence": [
+          "9-10: The Worm Sorcerer's Hideout contains secrets (general)",
+          "25-26: Koopman Achim Igelfreund's headquarters receives Josilfa's visits (analogous to King Fathmu)"
+        ],
+        "ruins": [
+          "9-10: Secret Prison contains schismatics and pan-organs (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The stench of stagnant water and decaying fish",
         "The mournful cries of gulls blending with the city's despair",
-        "The quiet lapping of water against rotting timbers"
-      ]
+        "The quiet lapping of water against rotting timbers",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Industrial Zone",
@@ -329,29 +981,149 @@
         "Smokestack Lane",
         "Iron Road",
         "Laborer's Path",
-        "Forge Way"
+        "Forge Way",
+        "King's Road",
+        "Despair Alley",
+        "Filth Alley"
       ],
       "landmarks": [
         "The Great Furnace",
         "The King's Clockwork Tower",
-        "The Iron Bell"
+        "The Iron Bell",
+        "The Ruined Lighthouse",
+        "The Old Boundary Stone"
       ],
-      "encounters": [
-        "Heavy rain clears the streets as people seek shelter, revealing industrial sounds",
-        "Drunken clerks stumbling, scattering scrolls and maps",
-        "The sight of chained laborers being marched to work (non-source, inference)",
-        "Soldiers inspecting goods for the King"
-      ],
-      "random_tables": [
-        "1-2: A crucial piece of machinery breaks down, causing widespread panic (non-source, inference)",
-        "3-4: A 'time-locked pneumotoxin' tablet is found amidst industrial waste",
-        "5-6: A segment of the zone is 'made hollow' as per prophecy, vanishing (non-source, prophecy integration)"
-      ],
+      "encounters": {
+        "district": [
+          "Heavy rain clears the streets as people seek shelter, revealing industrial sounds",
+          "Drunken clerks stumbling, scattering scrolls and maps",
+          "The sight of chained laborers being marched to work (non-source, inference)",
+          "Soldiers inspecting goods for the King",
+          "Rags-clad people fighting over bread, with guards watching and betting",
+          "A crossbow bolt hits a nearby door",
+          "An explosion from a ruined alchemist’s workshop"
+        ],
+        "building": [
+          "Flutters nest in the rafters and eaves (general)",
+          "The Ordinance of Devotion is enforced here (general, replaced by King's decrees)"
+        ],
+        "street": [
+          "Dunglanders emerge from sewer grates (general)",
+          "Blank worms crawl across cobblestones (general)"
+        ],
+        "landmark": [
+          "Flutters nest and breed in the structure (general)",
+          "The Ordinance of Devotion is enforced (analogous to King's decrees)",
+          "Thermal Spa's waters boil with ghostly heat (general)"
+        ],
+        "market": [
+          "Flutters are captured and sold as pets (general)",
+          "Josilfa's spies monitor all transactions (analogous to King's spies)",
+          "Chandler Kasina offers life-size wax statues (general)"
+        ],
+        "temple": [
+          "Flutters nest in the sacred architecture (general)",
+          "The Ordinance of Devotion is enforced (analogous to King's decrees)"
+        ],
+        "tavern": [
+          "Flutters nest in the rafters and eaves (general)",
+          "The Ordinance of Devotion is enforced (analogous to King's decrees)",
+          "Gunter's Bordello offers exotic specimens (general)"
+        ],
+        "guild": [
+          "Flutters are bred and trained by guild members (general)",
+          "The Ordinance of Devotion regulates all guild activity (analogous to King's decrees)",
+          "Koopman Achim Igelfreund's trade empire is untouchable (general)"
+        ],
+        "residence": [
+          "Flutters nest in the attic and eaves (general)",
+          "The Ordinance of Devotion is enforced (analogous to King's decrees)",
+          "Koopman Achim Igelfreund receives personal visits from Josilfa Migol (analogous to King Fathmu)"
+        ],
+        "ruins": [
+          "Sentient factory constructs puppets of mass destruction (general)",
+          "Cultists are reshaped by blob's influence (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: A crucial piece of machinery breaks down, causing widespread panic (non-source, inference)",
+          "3-4: A 'time-locked pneumotoxin' tablet is found amidst industrial waste",
+          "5-6: A segment of the zone is 'made hollow' as per prophecy, vanishing (non-source, prophecy integration)",
+          "13-14: Violent mob pours from alleys, mob rules",
+          "27-28: Vanishing building, cellar and inhabitants disappear with a plop"
+        ],
+        "building": [
+          "11-12: Worm eggs hatch in hidden corners (general)"
+        ],
+        "street": [
+          "11-12: The Old One's influence seeps from below (general)"
+        ],
+        "landmark": [
+          "11-12: The Soul Well reveals forgotten memories (general)"
+        ],
+        "market": [
+          "13-14: Edwina's Shop of Curiosities offers baby oil and beating hearts in a box (general)",
+          "27-28: Family sells centuries-old heirlooms for food (general)"
+        ],
+        "temple": [
+          "11-12: Flutters nest in the sacred architecture (general)"
+        ],
+        "tavern": [
+          "11-12: The Occult Cellar sells Sacred Scrolls (general)",
+          "27-28: Meat House's Madame Neugyer seeks new workers (general)"
+        ],
+        "guild": [
+          "11-12: Flutter Breeders train the creatures (general)",
+          "27-28: Hildegard Abbing's zombie mining corporation feeds beggars to zombies (general)"
+        ],
+        "residence": [
+          "11-12: Garden of Dennys is protected by flower legions (general)",
+          "27-28: Hildegard Abbing's office uses zombies to mine ore (general)"
+        ],
+        "ruins": [
+          "11-12: Dripstone Cave breeds the yellow blob (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The ceaseless grinding and clanking of metal [137 (Galgenbeck, generalized)]",
         "The thick, choking air filled with soot and fumes (non-source, inference)",
-        "The oppressive presence of armed overseers (non-source, inference)"
-      ]
+        "The oppressive presence of armed overseers (non-source, inference)",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Outskirts",
@@ -374,22 +1146,120 @@
         "The Sentinel Tree (often used for hangings)",
         "The Old Boundary Stone"
       ],
-      "encounters": [
-        "A giant tree with a dozen hanged heretics",
-        "Twenty people keeping warm around a bonfire, one a Grift spy",
-        "A bewildered wickhead wandering the outskirts",
-        "A Heretical Priest raving in ruins"
-      ],
-      "random_tables": [
-        "1-2: King Fathmu IX's brother Zigmund's murder is rumored here",
-        "3-4: Wild animals driven by hunger wander into the outskirts (non-source, inference)",
-        "5-6: A vanishing building is reported, disappearing with its inhabitants"
-      ],
+      "encounters": {
+        "district": [
+          "A giant tree with a dozen hanged heretics",
+          "Twenty people keeping warm around a bonfire, one a Grift spy",
+          "A bewildered wickhead wandering the outskirts",
+          "A Heretical Priest raving in ruins",
+          "A peglegged sailor bragging about the Angloarfish",
+          "A giant tree with a dozen hanged heretics",
+          "A demagogue yelling about prophecy falsehood, with guards on their way"
+        ],
+        "building": [
+          "Dunglanders use it as a secret entrance (general)",
+          "Josilfa's spies monitor all activity (general, replaced by Fathmu's spies)"
+        ],
+        "street": [
+          "The Old One's influence seeps from below (general)",
+          "The Ordinance of Devotion is enforced (analogous to King's decrees)"
+        ],
+        "landmark": [
+          "Dunglanders use it as a secret meeting place (general)",
+          "Josilfa's spies monitor all activity (analogous to King's spies)",
+          "Throne Room echoes with Josilfa's last words (analogous to King Fathmu's chamber)"
+        ],
+        "market": [
+          "Memory thieves sell stolen identities (general)",
+          "Edwina sells baby oil, chicken pox, pickled toes, human cloaks, beating hearts in a box (general, curious shops)",
+          "Merchant Karl sells plague masks of all kinds (general)"
+        ],
+        "temple": [
+          "Dunglanders use it as a secret meeting place (general)",
+          "Josilfa's spies monitor all religious activity (analogous to King's spies)"
+        ],
+        "tavern": [
+          "Dunglanders emerge from secret entrances (general)",
+          "Josilfa's spies monitor all conversations (analogous to King's spies)",
+          "Cedar Grill serves Galgenburgers (general)"
+        ],
+        "guild": [
+          "Dunglanders use guild halls as meeting places (general)",
+          "Josilfa's spies monitor all guild meetings (analogous to King's spies)",
+          "Hildegard Abbing's zombie mining corporation feeds beggars to zombies (general)"
+        ],
+        "residence": [
+          "Dunglanders use it as a secret meeting place (general)",
+          "Josilfa's spies monitor all activity (analogous to King's spies)",
+          "Hildegard Abbing uses zombies to mine ore, feeds them beggars (general)"
+        ],
+        "ruins": [
+          "Heretic necromancers use special pathogens for 'improvements' (general)",
+          "Ancient nechrotects' machinery still functions (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: King Fathmu IX's brother Zigmund's murder is rumored here",
+          "3-4: Wild animals driven by hunger wander into the outskirts (non-source, inference)",
+          "5-6: A vanishing building is reported, disappearing with its inhabitants",
+          "15-16: Curse leak rises from cobbles, cursed vapors burn those who inhale"
+        ],
+        "market": [
+          "15-16: Gesa sells Sacred Scrolls and Unclean Scrolls (general)"
+        ],
+        "tavern": [
+          "13-14: Gunter's Bordello offers exotic specimens (general)"
+        ],
+        "guild": [
+          "13-14: Cardinal Benjamin von Swerdenö's excommunication guild tortures rivals (general)"
+        ],
+        "residence": [
+          "13-14: Cardinal Benjamin von Swerdenö's townhouse excommunicates rivals (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The eerie quiet broken by rustling winds and distant wails",
         "The feeling of being watched by unseen eyes",
-        "The stark contrast between overgrown nature and desolate structures"
-      ]
+        "The stark contrast between overgrown nature and desolate structures",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [
+        "Hidden Huts (Outskirts)",
+        "Isolated Farms (Outskirts)"
+      ],
+      "ruins": []
     },
     {
       "name": "Slums",
@@ -399,7 +1269,8 @@
         "Cramped Tenements",
         "Makeshift Brothels",
         "Hidden Drug Dens",
-        "Makeshift Gambling Nests"
+        "Makeshift Gambling Nests",
+        "Schleswig Sanitarium"
       ],
       "streets": [
         "Gutters of Grift (used as a descriptor, applies to slums generally)",
@@ -410,524 +1281,117 @@
       "landmarks": [
         "The Stinking Cesspool",
         "The Rat King's Lair",
-        "The Broken Cross"
+        "The Broken Cross",
+        "Schleswig Sanitarium"
       ],
-      "encounters": [
-        "A wave of a hundred rats scurrying across the street",
-        "Patrons violently escorted from a pub, then robbed and stabbed",
-        "Scum playing 'Three Dead Skulls' with weighted dice",
-        "Someone born in the gutters of Grift (general scum background)"
-      ],
-      "random_tables": [
-        "1-2: A sick, blind demigod wanders the slums",
-        "3-4: Someone becomes 'one with the blackness' (arcane catastrophe)",
-        "5-6: A human-rat peace negotiation guild is active here"
-      ],
+      "encounters": {
+        "district": [
+          "A wave of a hundred rats scurrying across the street",
+          "Patrons violently escorted from a pub, then robbed and stabbed",
+          "Scum playing 'Three Dead Skulls' with weighted dice",
+          "Someone born in the gutters of Grift (general scum background)",
+          "A gutterborn scum, raised by rats in Grift, but could be in Schleswig slums",
+          "People keeping warm around a bonfire, one is a Grift spy",
+          "A devastated, eyeless peasant in a pillory begging for water"
+        ],
+        "building": [
+          "Memory thieves steal identities from visitors (general)"
+        ],
+        "street": [
+          "Yellow blob cultists slink through shadows (general)"
+        ],
+        "landmark": [
+          "Memory thieves steal identities from visitors (general)",
+          "Puppets from a Puppet Factory stalk the area (general)"
+        ],
+        "market": [
+          "Sacrifice volunteers offer their services (general)",
+          "Gesa sells Sacred Scrolls and Unclean Scrolls (general)",
+          "Undine offers mobile barber services (general)"
+        ],
+        "temple": [
+          "Memory thieves steal identities from worshippers (general)"
+        ],
+        "tavern": [
+          "Memory thieves steal identities from drunk patrons (general)",
+          "Lotta Gravy serves chunky stew and hearty ale (general tavern fare)",
+          "Lewd Lucy's offers special deals for drinks and staff (general)"
+        ],
+        "guild": [
+          "Memory thieves steal guild secrets and identities (general)",
+          "Cardinal Benjamin von Swerdenö's excommunication guild tortures rivals (general)",
+          "Tasha Mar's philanthropy guild keeps demon at bay through good deeds (general)"
+        ],
+        "residence": [
+          "Memory thieves steal identities from residents (general)",
+          "Cardinal Benjamin von Swerdenö excommunicates rivals and tortures them personally (general)",
+          "Tasha Mar desperately feeds needy and clothes freezing (general)"
+        ],
+        "ruins": [
+          "Electric wickheads experience ecstasy but risk burning out (general)",
+          "Secret Prison's pan-organs wail in the dark (general)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: A sick, blind demigod wanders the slums",
+          "3-4: Someone becomes 'one with the blackness' (arcane catastrophe)",
+          "5-6: A human-rat peace negotiation guild is active here",
+          "3-4: A gang from the slums initiates a street brawl"
+        ],
+        "market": [
+          "17-18: Mummy Merchant Alma sells mummified corpses for fuel (general)"
+        ],
+        "tavern": [
+          "15-16: Cedar Grill serves Galgenburgers (general)"
+        ],
+        "guild": [
+          "15-16: Archbishop Anne Gorham's crusade funding organization hunts heretics (general)"
+        ],
+        "residence": [
+          "15-16: Archbishop Anne Gorham's residence hunts heretics fervently (general)"
+        ]
+      },
       "atmosphere_modifiers": [
         "The overwhelming stench of waste and despair",
         "The constant sounds of scuttling vermin and muffled cries",
-        "The palpable sense of abandonment and hopelessness"
-      ]
+        "The palpable sense of abandonment and hopelessness",
+        "Terror and despotism stalk the streets",
+        "The palpable sense of King Fathmu IX's paranoia and invisible fears",
+        "The constant reminder of being taxed into starvation",
+        "The air is thick with the stench of human waste and general decay",
+        "Melancholic melodies from broke, starving gutter bards drift through the alleys",
+        "The sudden, unsettling cacophony of wings and croaks from murders of crows",
+        "The relentless hammering rain, clearing the streets",
+        "The distant, muffled screams from the Sanitarium",
+        "The pervasive gloom, occasionally broken by the sad, gaudy displays",
+        "The quiet desperation of the populace",
+        "The Worm Sorcerer's eggs hatch in the gutters (general)",
+        "The Old One's influence seeps from below (general)",
+        "Yellow blob extends its plasmodium through walls (general)",
+        "Flutters flutter overhead seeking prey (general)",
+        "Dunglanders emerge from sewer grates (general)",
+        "Gutter boars root through garbage piles (general)",
+        "Maggot Marl's agents collect tribute (general)",
+        "Memory thieves steal identities from passersby (general)",
+        "Blank worms crawl across cobblestones (general)",
+        "The King's decrees are enforced everywhere",
+        "King Fathmu IX's spies watch from every corner",
+        "Electric wickheads plug into the Quixotic Dynamo (general)",
+        "Curse Murk threatens to explode (general)",
+        "Puppets achieve sentience and roam freely (general)",
+        "The immortal beggar Ulf assaults passersby (general)",
+        "Sentient factory expands itself (general)",
+        "The yellow blob probes Schleswig, feeding and learning (general)",
+        "Ancient nechrotects' machinery still functions (general)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     }
-  ],
-  "buildings": [
-    "King Fathmu IX's Secret Citadel",
-    "Schleswig Sanitarium",
-    "Brothel (unnamed)",
-    "An Inn (unnamed)",
-    "Ruined Alchemist's Workshop",
-    "Noble Residences (implied by Horn of Schleswig Lords)",
-    "Houses (raided by Fathmu's men)",
-    "Temples (raided by Fathmu's men)",
-    "Barns (raided by Fathmu's men)",
-    "Villages (raided by Fathmu's men)"
-  ],
-  "streets": [
-    "King's Road",
-    "Citadel Way",
-    "Noble's Path",
-    "Guarded Avenue",
-    "Hunger Lane",
-    "Despair Alley",
-    "Rubble Road",
-    "Pauper's Path",
-    "Market Way",
-    "Commerce Lane",
-    "Midnight Alley",
-    "Trade Route",
-    "Craftsman's Lane",
-    "Smelter's Way",
-    "Alchemist's Alley",
-    "Dockside Path",
-    "Onda Shore Road",
-    "Waterfront Way",
-    "Smokestack Lane",
-    "Iron Road",
-    "Laborer's Path",
-    "Forge Way",
-    "Outland Road",
-    "Whisper Path",
-    "No Man's Lane",
-    "Escape Route",
-    "Filth Alley",
-    "Rat Warrens",
-    "Sewer Inlet"
-  ],
-  "landmarks": [
-    "King Fathmu IX's Secret Citadel",
-    "Schleswig Sanitarium",
-    "Lake Onda (eastern shores of Lake Onda are near Death's Fort, Wästland has Lake Onda)",
-    "Royal Gallows",
-    "The Great Tax Vault",
-    "The Empty Well",
-    "The Weeping Wall",
-    "Burned-out Temple",
-    "The Central Fountain",
-    "The Gilded Scale",
-    "The Silent Clock",
-    "The Smoking Chimney",
-    "The Broken Anvil",
-    "The Alchemist's Ruin",
-    "Lake Onda Docks",
-    "The Ruined Lighthouse",
-    "The Singing Buoy",
-    "The Great Furnace",
-    "The King's Clockwork Tower",
-    "The Iron Bell",
-    "The Forgotten Crossroads",
-    "The Sentinel Tree",
-    "The Old Boundary Stone",
-    "The Stinking Cesspool",
-    "The Rat King's Lair",
-    "The Broken Cross"
-  ],
-  "markets": [
-    "Illegal Midnight Market",
-    "Main Market Square",
-    "General Market (implied by 'crowded market' event)"
-  ],
-  "temples": [
-    "Unnamed Temples (raided by Fathmu IX)",
-    "Shrine to Verhu (implied by King's obsession)"
-  ],
-  "taverns": [
-    "Brothel (can function as a tavern/inn)",
-    "The Paunchy Swine (mentioned in general Mork Borg lore, could be here)",
-    "Unnamed Pub (where a patron was escorted)",
-    "An Inn (mentioned as PC starting point)"
-  ],
-  "guilds": [
-    "No specific guilds mentioned in sources."
-  ],
-  "residences": [
-    "King Fathmu IX's Secret Citadel",
-    "Noble Residences (implied by Schleswig lords)",
-    "Dilapidated Hovels (Poor Quarter)",
-    "Hidden Huts (Outskirts)",
-    "Isolated Farms (Outskirts)"
-  ],
-  "ruins": [
-    "Ruined Alchemist's Workshop",
-    "General Ruins (where a Heretical Priest might rave)",
-    "Charred Houses (Poor Quarter)"
-  ],
-  "encounters": {
-    "district": [
-      "King Fathmu IX's men conducting raids and collecting taxes",
-      "Rogust of Wästlands Edge, escaped from Schleswig Sanitarium, posing as a baronet",
-      "Jyra of Schleswig, choosing a weapon with lower damage die",
-      "A fanged deserter, who remembers a brothel in Schleswig",
-      "An occult herbmaster, possibly from Schleswig's illegal midnight market",
-      "A gutterborn scum, raised by rats in Grift, but could be in Schleswig slums",
-      "Rags-clad people fighting over bread, with guards watching and betting",
-      "A peglegged sailor bragging about the Angloarfish",
-      "Laborers carrying a boat-size casket",
-      "A penniless carpenter trying to sell a worn crutch",
-      "A patron violently escorted, robbed, and stabbed from a pub",
-      "A chittering wave of a hundred rats scurry across the street",
-      "A group of ragtag scum playing Three Dead Skulls with weighted dice",
-      "A crossbow bolt hits a nearby door",
-      "A giant tree with a dozen hanged heretics",
-      "People keeping warm around a bonfire, one is a Grift spy",
-      "A rabid dog rummaging in the trash",
-      "Three hardened mercenaries pull a dead troll across the street",
-      "A severely hungover chaplain cursing the state of things",
-      "The smell of dry snuff, herbs, and hash from a crowded market",
-      "Two monkeys eating what’s left of a dead raven",
-      "An explosion from a ruined alchemist’s workshop",
-      "A demagogue yelling about prophecy falsehood, with guards on their way",
-      "A devastated, eyeless peasant in a pillory begging for water",
-      "A well-used, rusty guillotine being repaired and cleaned",
-      "Children missing at Lake Onda (nearby)",
-      "A sinkhole swallows half of Schleswig",
-      "PC doppelgangers go berserk",
-      "A slave revolt in Galgenbeck (could apply generally)"
-    ],
-    "building": [
-      "The Harvester (King's tax collector) hides in Josilfa's scythe (analogous to Fathmu's citadel)",
-      "Basilisk priests conduct dark ceremonies (general, could be in Schleswig temples)",
-      "Worm Sorcerer's disciples gather in secret (general, could be in Schleswig)",
-      "The Old One's influence corrupts the structure (general)",
-      "Yellow blob extends its plasmodium through walls (general)",
-      "Flutters nest in the rafters and eaves (general)",
-      "Dunglanders use it as a secret entrance (general)",
-      "Memory thieves steal identities from visitors (general)",
-      "Sacrifice volunteers await their fate (general)",
-      "The Worm Sorcerer's worms infest the foundation (general)",
-      "Blank worms hatch in hidden corners (general)",
-      "Gutter boars have claimed it as territory (general)",
-      "Maggot Marl's agents conduct business (general)",
-      "The Ordinance of Devotion is enforced here (general, replaced by King's decrees)",
-      "Josilfa's spies monitor all activity (general, replaced by Fathmu's spies)"
-    ],
-    "street": [
-      "The Harvester rides past delivering summons (analogous to King's men)",
-      "Basilisk knights escort condemned to Cathedral (analogous to King's guards)",
-      "Worm Sorcerer spreads eggs in the gutters (general)",
-      "Josilfa's spies watch from every corner (analogous to King's spies)",
-      "Rat trappers vs human trappers battle (general)",
-      "Dunglanders emerge from sewer grates (general)",
-      "The Old One's influence seeps from below (general)",
-      "Yellow blob cultists slink through shadows (general)",
-      "Flutters flutter overhead seeking prey (general)",
-      "Gutter boars root through garbage (general)",
-      "Maggot Marl's agents collect tribute (general)",
-      "Memory thieves steal from passersby (general)",
-      "Sacrifice volunteers walk to their fate (general)",
-      "Blank worms crawl across cobblestones (general)",
-      "The Ordinance of Devotion is enforced (analogous to King's decrees)"
-    ],
-    "landmark": [
-      "The Harvester appears here to collect sacrifices (analogous to King's men)",
-      "Basilisk priests conduct rituals at this site (general)",
-      "Worm Sorcerer's influence emanates from within (general)",
-      "The Old One's presence corrupts the area (general)",
-      "Yellow blob extends its plasmodium through (general)",
-      "Flutters nest and breed in the structure (general)",
-      "Dunglanders use it as a secret meeting place (general)",
-      "Memory thieves steal identities from visitors (general)",
-      "Sacrifice volunteers gather here for guidance (general)",
-      "The Worm Sorcerer's worms infest the foundation (general)",
-      "Blank worms hatch in hidden chambers (general)",
-      "Gutter boars have claimed it as territory (general)",
-      "Maggot Marl's agents conduct business here (general)",
-      "The Ordinance of Devotion is enforced (analogous to King's decrees)",
-      "Josilfa's spies monitor all activity (analogous to King's spies)",
-      "Puppets from a Puppet Factory stalk the area (general)",
-      "Necromancers from a Sooty Hospital search for corpses (general)",
-      "Electric wickheads gather at a Quixotic Dynamo (general)",
-      "Curse Murk seeps from the ground, warping reality (general)",
-      "Cultists breed the yellow blob in hidden chambers (general)",
-      "The Egg Room pulses with unholy energy (general)",
-      "Thermal Spa's waters boil with ghostly heat (general)",
-      "Throne Room echoes with Josilfa's last words (analogous to King Fathmu's chamber)"
-    ],
-    "market": [
-      "The Harvester collects souls as currency (analogous to King's tax collectors)",
-      "Basilisk priests sell holy relics and indulgences (general)",
-      "Worm Sorcerer's disciples trade forbidden knowledge (general)",
-      "The Old One's influence corrupts all transactions (general)",
-      "Yellow blob cultists sell mysterious substances (general)",
-      "Flutters are captured and sold as pets (general)",
-      "Dunglanders trade mushroom meal and ale (general)",
-      "Memory thieves sell stolen identities (general)",
-      "Sacrifice volunteers offer their services (general)",
-      "The Worm Sorcerer's worms are sold as pets (general)",
-      "Blank worms appear mysteriously in stalls (general)",
-      "Gutter boars are butchered and sold as meat (general)",
-      "Maggot Marl's agents collect tribute (general)",
-      "The Ordinance of Devotion regulates all trade (analogous to King's decrees)",
-      "Josilfa's spies monitor all transactions (analogous to King's spies)",
-      "Edwina sells baby oil, chicken pox, pickled toes, human cloaks, beating hearts in a box (general, curious shops)",
-      "Gesa sells Sacred Scrolls and Unclean Scrolls (general)",
-      "Gunter offers exotic specimens for carnal pleasures (general)",
-      "Cedar Grill serves Galgenburgers made from corpses (general, gruesome food)",
-      "Mummy Merchant Alma sells mummified corpses for fuel (general)",
-      "Svendon sells jars of earwax (his own and stolen) (general)",
-      "Chandler Kasina offers life-size wax statues (general)",
-      "Merchant Karl sells plague masks of all kinds (general)",
-      "Undine offers mobile barber services (general)",
-      "Family sells centuries-old heirlooms for food (general)"
-    ],
-    "temple": [
-      "The Harvester appears during sacrifice ceremonies (analogous to King's men)",
-      "Basilisk priests conduct dark rituals (general)",
-      "Worm Sorcerer's disciples gather in secret (general)",
-      "The Old One's influence corrupts the sacred (general)",
-      "Yellow blob cultists perform blasphemous rites (general)",
-      "Flutters nest in the sacred architecture (general)",
-      "Dunglanders use it as a secret meeting place (general)",
-      "Memory thieves steal identities from worshippers (general)",
-      "Sacrifice volunteers seek guidance and absolution (general)",
-      "The Worm Sorcerer's worms infest the altar (general)",
-      "Blank worms hatch in holy water fonts (general)",
-      "Gutter boars have claimed it as territory (general)",
-      "Maggot Marl's agents conduct business (general)",
-      "The Ordinance of Devotion is enforced (analogous to King's decrees)",
-      "Josilfa's spies monitor all religious activity (analogous to King's spies)"
-    ],
-    "tavern": [
-      "The Harvester appears to collect souls as payment (analogous to King's tax collectors)",
-      "Basilisk priests gather information from patrons (general)",
-      "Worm Sorcerer's disciples recruit new members (general)",
-      "The Old One's influence corrupts the atmosphere (general)",
-      "Yellow blob cultists plot in dark corners (general)",
-      "Flutters nest in the rafters and eaves (general)",
-      "Dunglanders emerge from secret entrances (general)",
-      "Memory thieves steal identities from drunk patrons (general)",
-      "Sacrifice volunteers drink away their final hours (general)",
-      "The Worm Sorcerer's worms infest the food (general)",
-      "Blank worms appear in drinks mysteriously (general)",
-      "Gutter boars are served as exotic meat (general)",
-      "Maggot Marl's agents collect tribute (general)",
-      "The Ordinance of Devotion is enforced (analogous to King's decrees)",
-      "Josilfa's spies monitor all conversations (analogous to King's spies)",
-      "Lotta Gravy serves chunky stew and hearty ale (general tavern fare)",
-      "The One-Handed Knave offers gambling and entertainment (general)",
-      "Meat House provides carnal pleasures and diseases (general)",
-      "The Kennel offers dog fights and bloodletting (general)",
-      "The Restaurant serves culinary depravities (general)",
-      "The Occult Cellar sells Sacred Scrolls (general)",
-      "Gunter's Bordello offers exotic specimens (general)",
-      "Cedar Grill serves Galgenburgers (general)",
-      "Lewd Lucy's offers special deals for drinks and staff (general)",
-      "Old lady Mirth sells meat pies stuffed with dead (general)"
-    ],
-    "guild": [
-      "The Harvester recruits from guild members (analogous to King's men)",
-      "Basilisk priests oversee guild operations (general)",
-      "Worm Sorcerer's disciples infiltrate the guild (general)",
-      "The Old One's influence corrupts guild practices (general)",
-      "Yellow blob cultists operate within the guild (general)",
-      "Flutters are bred and trained by guild members (general)",
-      "Dunglanders use guild halls as meeting places (general)",
-      "Memory thieves steal guild secrets and identities (general)",
-      "Sacrifice volunteers are processed through the guild (general)",
-      "The Worm Sorcerer's worms infest guild halls (general)",
-      "Blank worms are bred in guild laboratories (general)",
-      "Gutter boars are trained and sold by the guild (general)",
-      "Maggot Marl's agents control guild operations (general)",
-      "The Ordinance of Devotion regulates all guild activity (analogous to King's decrees)",
-      "Josilfa's spies monitor all guild meetings (analogous to King's spies)",
-      "Cardinal Benjamin von Swerdenö's excommunication guild tortures rivals (general)",
-      "Archbishop Anne Gorham's crusade funding organization hunts heretics (general)",
-      "Vicar General Max 'Eisenhand' Trogler's law enforcement guild hangs offenders (general)",
-      "Archhealer René Elwes's healing guild changes all who enter (general)",
-      "Church Treasurer Käthe von Wallenstein's calculus society advances dark arts (general)",
-      "Professor Constantin Wagner's university guild raids ancient tombs (general)",
-      "Koopman Achim Igelfreund's trade empire is untouchable (general)",
-      "Hildegard Abbing's zombie mining corporation feeds beggars to zombies (general)",
-      "Tasha Mar's philanthropy guild keeps demon at bay through good deeds (general)",
-      "Red Liesl's beggar network controls all street information (general)",
-      "Reverend Karloman's cult worships living pewter lamb (general)",
-      "Whiskers Jenny's peace guild infects people with plague (general)",
-      "Perry the Unclean's immortal society suffers eternal ridicule (general)"
-    ],
-    "residence": [
-      "The Harvester appears to collect souls as rent (analogous to King's tax collectors)",
-      "Basilisk priests conduct inspections (general)",
-      "Worm Sorcerer's disciples hide in secret rooms (general)",
-      "The Old One's influence corrupts the home (general)",
-      "Yellow blob extends its plasmodium through walls (general)",
-      "Flutters nest in the attic and eaves (general)",
-      "Dunglanders use it as a secret meeting place (general)",
-      "Memory thieves steal identities from residents (general)",
-      "Sacrifice volunteers prepare for their fate (general)",
-      "The Worm Sorcerer's worms infest the foundation (general)",
-      "Blank worms hatch in hidden corners (general)",
-      "Gutter boars have claimed the garden (general)",
-      "Maggot Marl's agents collect tribute (general)",
-      "The Ordinance of Devotion is enforced (analogous to King's decrees)",
-      "Josilfa's spies monitor all activity (analogous to King's spies)",
-      "Cardinal Benjamin von Swerdenö excommunicates rivals and tortures them personally (general)",
-      "Archbishop Anne Gorham hunts heretics and infidels fervently (general)",
-      "Vicar General Max 'Eisenhand' Trogler hangs first offenders (general)",
-      "Archhealer René Elwes operates the House of Bodily and Spiritual Healing (general)",
-      "Church Treasurer Käthe von Wallenstein secretly advances calculus (general)",
-      "Professor Constantin Wagner offers quests to raid ancient tombs (general)",
-      "Koopman Achim Igelfreund receives personal visits from Josilfa Migol (analogous to King Fathmu)",
-      "Hildegard Abbing uses zombies to mine ore, feeds them beggars (general)",
-      "Tasha Mar desperately feeds needy and clothes freezing (general)",
-      "Red Liesl's beggar network sleuths, steals, and sows rumors (general)",
-      "Reverend Karloman worships a living pewter lamb (general)",
-      "Whiskers Jenny preaches peace while infecting people with plague (general)",
-      "Perry the Unclean constantly burps, farts, and sweats (general)"
-    ],
-    "ruins": [
-      "Puppets have achieved sentience and roam freely (general)",
-      "Necromancers reconstitute dead laborers as servants (general)",
-      "Electric wickheads plug into the Quixotic Dynamo (general)",
-      "Curse Murk nears critical capacity, ready to explode (general)",
-      "The immortal beggar Ulf assaults passersby (general)",
-      "Sentient factory constructs puppets of mass destruction (general)",
-      "Heretic necromancers use special pathogens for 'improvements' (general)",
-      "Electric wickheads experience ecstasy but risk burning out (general)",
-      "The factory expands itself using construction materials (general)",
-      "Worm eggs are spread throughout the ruins (general)",
-      "The yellow blob extends its plasmodium through cracks (general)",
-      "Cultists breed the yellow blob in hidden chambers (general)",
-      "The blob probes Galgenbeck, feeding and learning (general)",
-      "Cultists are reshaped by blob's influence (general)",
-      "Ancient nechrotects' machinery still functions (general)",
-      "Secret Prison's pan-organs wail in the dark (general)",
-      "The Restaurant's kitchen is haunted by Poison Ivy (general)",
-      "The Kennel's dog fights echo through the ruins (general)",
-      "Egg Room (ruined) oozes with basilisk ichor (general)",
-      "Thermal Spa (ruined) is haunted by bath attendants (general)",
-      "Throne Room (ruined) is filled with restless spirits (general)"
-    ]
-  },
-  "random_tables": {
-    "district": [
-      "1-2: King Fathmu IX's men deliver summons or collect taxes",
-      "3-4: A gang from the slums initiates a street brawl",
-      "5-6: An escaped patient from the Sanitarium causes a disturbance",
-      "7-8: A mysterious figure from the illegal midnight market is spotted",
-      "9-10: King Fathmu's psychosis manifests as a city-wide hallucination (non-source, inference)",
-      "11-12: A sinkhole swallows a portion of a district",
-      "13-14: Violent mob pours from alleys, mob rules",
-      "15-16: Curse leak rises from cobbles, cursed vapors burn those who inhale",
-      "17-18: Burning buildings, carnage in streets",
-      "19-20: Old lady Mirth sells meat pies stuffed with dead",
-      "21-22: Town crier proclaims a floating cursed head is watching",
-      "23-24: Hail storm batters the city, bones shatter, blood squirts",
-      "25-26: Free silver thrown by naked man, but bag is full of tarantulas",
-      "27-28: Vanishing building, cellar and inhabitants disappear with a plop"
-    ],
-    "building": [
-      "1-2: Puppets achieve sentience and attack visitors (general)",
-      "3-4: Electric wickheads plug into Quixotic Dynamo (general)",
-      "5-6: Curse Murk nears critical capacity (general)",
-      "7-8: The immortal beggar Ulf assaults passersby (general)",
-      "9-10: Sentient factory expands itself (general)",
-      "11-12: Worm eggs hatch in hidden corners (general)"
-    ],
-    "street": [
-      "1-2: King Fathmu IX's men ride past delivering summons",
-      "3-4: Gutter boars root through garbage piles (general)",
-      "5-6: Maggot Marl's agents collect tribute (general)",
-      "7-8: Memory thieves steal identities from passersby (general)",
-      "9-10: Blank worms crawl across cobblestones (general)",
-      "11-12: The Old One's influence seeps from below (general)"
-    ],
-    "landmark": [
-      "1-2: Lake Onda's waters recede, revealing strange sights",
-      "3-4: The Sanitarium releases 'reformed' patients, who are still quite mad",
-      "5-6: The King's Citadel is under an invisible siege (Fathmu's paranoia)",
-      "7-8: The White Múr attracts electric wickheads (general)",
-      "9-10: Basilisk Shrine demands sacrifices (general)",
-      "11-12: The Soul Well reveals forgotten memories (general)"
-    ],
-    "market": [
-      "1-2: Dunglanders trade mushroom meal and ale (general)",
-      "3-4: Flutters are captured and sold as pets (general)",
-      "5-6: Gutter boars are butchered and sold as meat (general)",
-      "7-8: Worm Sorcerer's disciples trade forbidden knowledge (general)",
-      "9-10: Memory thieves sell stolen identities (general)",
-      "11-12: The Vultures collect spoils from sewage tide (general)",
-      "13-14: Edwina's Shop of Curiosities offers baby oil and beating hearts in a box (general)",
-      "15-16: Gesa sells Sacred Scrolls and Unclean Scrolls (general)",
-      "17-18: Mummy Merchant Alma sells mummified corpses for fuel (general)",
-      "19-20: Svendon sells jars of earwax (his own and stolen) (general)",
-      "21-22: Chandler Kasina offers life-size wax statues (general)",
-      "23-24: Merchant Karl sells plague masks of all kinds (general)",
-      "25-26: Undine offers mobile barber services (general)",
-      "27-28: Family sells centuries-old heirlooms for food (general)"
-    ],
-    "temple": [
-      "1-2: Basilisk priests conduct dark rituals (general)",
-      "3-4: King Fathmu IX's men appear during 'sacrifice' ceremonies",
-      "5-6: Worm Sorcerer's disciples gather in secret (general)",
-      "7-8: The Old One's influence corrupts the sacred (general)",
-      "9-10: Yellow blob cultists perform blasphemous rites (general)",
-      "11-12: Flutters nest in the sacred architecture (general)"
-    ],
-    "tavern": [
-      "1-2: Lotta Gravy serves chunky stew and hearty ale (general)",
-      "3-4: The One-Handed Knave offers gambling and entertainment (general)",
-      "5-6: Meat House provides carnal pleasures and diseases (general)",
-      "7-8: The Kennel offers dog fights and bloodletting (general)",
-      "9-10: The Restaurant serves culinary depravities (general)",
-      "11-12: The Occult Cellar sells Sacred Scrolls (general)",
-      "13-14: Gunter's Bordello offers exotic specimens (general)",
-      "15-16: Cedar Grill serves Galgenburgers (general)",
-      "17-18: Lewd Lucy's offers special deals for drinks and staff (general)",
-      "19-20: Old lady Mirth sells meat pies stuffed with dead",
-      "21-22: The Restaurant's cook Poison Ivy prepares last meals (general)",
-      "23-24: The Kennel's Luna recruits for suicide missions (general)",
-      "25-26: The One-Handed Knave's Earnest Jim offers gambling (general)",
-      "27-28: Meat House's Madame Neugyer seeks new workers (general)"
-    ],
-    "guild": [
-      "1-2: Basilisk Knights Order patrols for heretics (general)",
-      "3-4: Worm Sorcerer's Disciples recruit new members (general)",
-      "5-6: Dunglander Collective harvests mushrooms (general)",
-      "7-8: The Vultures scavenge from sewage tide (general)",
-      "9-10: Mushroom Farmers Guild cultivates dungshrooms (general)",
-      "11-12: Flutter Breeders train the creatures (general)",
-      "13-14: Cardinal Benjamin von Swerdenö's excommunication guild tortures rivals (general)",
-      "15-16: Archbishop Anne Gorham's crusade funding organization hunts heretics (general)",
-      "17-18: Vicar General Max 'Eisenhand' Trogler's law enforcement guild hangs offenders (general)",
-      "19-20: Archhealer René Elwes's healing guild changes all who enter (general)",
-      "21-22: Church Treasurer Käthe von Wallenstein's calculus society advances dark arts (general)",
-      "23-24: Professor Constantin Wagner's university guild raids ancient tombs (general)",
-      "25-26: Koopman Achim Igelfreund's trade empire is untouchable (general)",
-      "27-28: Hildegard Abbing's zombie mining corporation feeds beggars to zombies (general)"
-    ],
-    "residence": [
-      "1-2: Leopold's Studio contains forgotten paintings (general)",
-      "3-4: Luna's Kennel houses desperate individuals (general)",
-      "5-6: Maggot Marl's Brown Town thrives in filth (general)",
-      "7-8: Klum's Big Shroom rises from wastewater (general)",
-      "9-10: The Worm Sorcerer's Hideout contains secrets (general)",
-      "11-12: Garden of Dennys is protected by flower legions (general)",
-      "13-14: Cardinal Benjamin von Swerdenö's townhouse excommunicates rivals (general)",
-      "15-16: Archbishop Anne Gorham's residence hunts heretics fervently (general)",
-      "17-18: Vicar General Max 'Eisenhand' Trogler's manor hangs first offenders (general)",
-      "19-20: Archhealer René Elwes's house changes all who enter (general)",
-      "21-22: Church Treasurer Käthe von Wallenstein's office advances calculus secretly (general)",
-      "23-24: Professor Constantin Wagner's quarters offer tomb raiding quests (general)",
-      "25-26: Koopman Achim Igelfreund's headquarters receives Josilfa's visits (analogous to King Fathmu)",
-      "27-28: Hildegard Abbing's office uses zombies to mine ore (general)"
-    ],
-    "ruins": [
-      "1-2: Puppet Factory constructs puppets of mass destruction (general)",
-      "3-4: Sooty Hospital houses heretic necromancers (general)",
-      "5-6: Quixotic Dynamo powers electric wickheads (general)",
-      "7-8: Curse Murk threatens to explode (general)",
-      "9-10: Secret Prison contains schismatics and pan-organs (general)",
-      "11-12: Dripstone Cave breeds the yellow blob (general)"
-    ]
-  },
-  "atmosphere_modifiers": [
-    "Terror and despotism stalk the streets",
-    "The palpable sense of King Fathmu IX's paranoia and invisible fears",
-    "The constant reminder of being taxed into starvation",
-    "The air is thick with the stench of human waste and general decay",
-    "Melancholic melodies from broke, starving gutter bards drift through the alleys",
-    "The sudden, unsettling cacophony of wings and croaks from murders of crows",
-    "The relentless hammering rain, clearing the streets",
-    "The distant, muffled screams from the Sanitarium",
-    "The pervasive gloom, occasionally broken by the sad, gaudy displays",
-    "The quiet desperation of the populace",
-    "The Worm Sorcerer's eggs hatch in the gutters (general)",
-    "The Old One's influence seeps from below (general)",
-    "Yellow blob extends its plasmodium through walls (general)",
-    "Flutters flutter overhead seeking prey (general)",
-    "Dunglanders emerge from sewer grates (general)",
-    "Gutter boars root through garbage piles (general)",
-    "Maggot Marl's agents collect tribute (general)",
-    "Memory thieves steal identities from passersby (general)",
-    "Blank worms crawl across cobblestones (general)",
-    "The King's decrees are enforced everywhere",
-    "King Fathmu IX's spies watch from every corner",
-    "Electric wickheads plug into the Quixotic Dynamo (general)",
-    "Curse Murk threatens to explode (general)",
-    "Puppets achieve sentience and roam freely (general)",
-    "The immortal beggar Ulf assaults passersby (general)",
-    "Sentient factory expands itself (general)",
-    "The yellow blob probes Schleswig, feeding and learning (general)",
-    "Ancient nechrotects' machinery still functions (general)"
   ],
   "metadata": {
     "migrated_from": "databases/cities/schleswig.json",

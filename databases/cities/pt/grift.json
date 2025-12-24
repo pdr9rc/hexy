@@ -84,22 +84,38 @@
         "Palácio de Grift",
         "Câmara do Sino"
       ],
-      "encounters": [
-        "Nobres e escrivães em rixa por poder e leis absurdas",
-        "Escribas sobrecarregados e exaustos, incapazes de cumprir seus deveres",
-        "Guardas esgotados presentes, mas facilmente distraídos ou subornados",
-        "Os aposentos abandonados do Rei ou a Câmara do Sino"
-      ],
-      "random_tables": [
-        "1-2: Um escrivão tenta se esconder de suas obrigações e foge se confrontado",
-        "3-4: Um assistente pessoal treme após décadas aguardando ser chamado",
-        "5-6: Doze cães correm desenfreados, sobrepujando um escrivão-canil que implora por ajuda"
-      ],
+      "encounters": {
+        "district": [
+          "Nobres e escrivães em rixa por poder e leis absurdas",
+          "Escribas sobrecarregados e exaustos, incapazes de cumprir seus deveres",
+          "Guardas esgotados presentes, mas facilmente distraídos ou subornados",
+          "Os aposentos abandonados do Rei ou a Câmara do Sino"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um escrivão tenta se esconder de suas obrigações e foge se confrontado",
+          "3-4: Um assistente pessoal treme após décadas aguardando ser chamado",
+          "5-6: Doze cães correm desenfreados, sobrepujando um escrivão-canil que implora por ajuda"
+        ]
+      },
       "atmosphere_modifiers": [
         "A graxa espessa da fumaça das velas pesa no ar",
         "O ronco de trovões distantes (ou a voz de um escrivão)",
-        "Latidos e uivos de cães, sem sentido algum"
-      ]
+        "Latidos e uivos de cães, sem sentido algum",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Quarteirão do Mercado",
@@ -116,22 +132,38 @@
       "landmarks": [
         "A Grande Praça do Mercado"
       ],
-      "encounters": [
-        "Cidadãos desesperados suplicando por comida ou troca",
-        "Mercadores barganhando ferozmente, muitas vezes por bens ilícitos",
-        "Rumores da ruína iminente da cidade ou de ocorrências estranhas",
-        "Escória do pátio buscando trabalho ou abrigo"
-      ],
-      "random_tables": [
-        "1-2: Um cidadão desesperado vende uma 'Torta do Rei' (carne podre em líquido vermelho)",
-        "3-4: Um grupo de jovens joga com 'Dados Viciados'",
-        "5-6: Um vendedor oferece bens 'libertados' do Palácio"
-      ],
+      "encounters": {
+        "district": [
+          "Cidadãos desesperados suplicando por comida ou troca",
+          "Mercadores barganhando ferozmente, muitas vezes por bens ilícitos",
+          "Rumores da ruína iminente da cidade ou de ocorrências estranhas",
+          "Escória do pátio buscando trabalho ou abrigo"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um cidadão desesperado vende uma 'Torta do Rei' (carne podre em líquido vermelho)",
+          "3-4: Um grupo de jovens joga com 'Dados Viciados'",
+          "5-6: Um vendedor oferece bens 'libertados' do Palácio"
+        ]
+      },
       "atmosphere_modifiers": [
         "Cheiro de decadência misturado a especiarias estranhas",
         "Clamor de vozes, tanto desesperadas quanto astutas",
-        "Fios de fumaça de fogareiros e lixo queimando"
-      ]
+        "Fios de fumaça de fogareiros e lixo queimando",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Quarteirão dos Artesãos",
@@ -148,21 +180,37 @@
       "landmarks": [
         "A Grande Forja"
       ],
-      "encounters": [
-        "Artífices buscando materiais raros ou oferecendo obras únicas",
-        "Discussões sobre recursos ou qualidade do trabalho",
-        "Possibilidade de criminosos tentando controlar os ofícios"
-      ],
-      "random_tables": [
-        "1-2: Um ferreiro oferece consertar armas ou armaduras danificadas por preço salgado",
-        "3-4: O cheiro acre do curtume enche o ar, exigindo testes de Robustez dos despreparados",
-        "5-6: Um artesão tenta empurrar um item ordinário porém ornado"
-      ],
+      "encounters": {
+        "district": [
+          "Artífices buscando materiais raros ou oferecendo obras únicas",
+          "Discussões sobre recursos ou qualidade do trabalho",
+          "Possibilidade de criminosos tentando controlar os ofícios"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um ferreiro oferece consertar armas ou armaduras danificadas por preço salgado",
+          "3-4: O cheiro acre do curtume enche o ar, exigindo testes de Robustez dos despreparados",
+          "5-6: Um artesão tenta empurrar um item ordinário porém ornado"
+        ]
+      },
       "atmosphere_modifiers": [
         "Tilintar de martelos e zumbido de serras",
         "Cheiro forte de couro e peles em cura",
-        "Clarões ocasionais vindos de forjas ativas"
-      ]
+        "Clarões ocasionais vindos de forjas ativas",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Quarteirão dos Escribas",
@@ -180,21 +228,37 @@
         "Torre dos Escribas",
         "Os Grandes Arquivos"
       ],
-      "encounters": [
-        "Escribas registrando freneticamente eventos ou traduzindo textos antigos",
-        "Acadêmicos ou arquivistas buscando documentos raros ou informação",
-        "Bandos selvagens de escribas brigando por tinta"
-      ],
-      "random_tables": [
-        "1-2: Um escriba confunde os PCs com agentes de Galgenbeck e tenta se esconder ou fugir",
-        "3-4: Uma pilha de registros esquecidos entra em combustão espontânea",
-        "5-6: Um escriba desesperado tenta contratar os PCs para recuperar uma seção perdida de um livro-caixa importante"
-      ],
+      "encounters": {
+        "district": [
+          "Escribas registrando freneticamente eventos ou traduzindo textos antigos",
+          "Acadêmicos ou arquivistas buscando documentos raros ou informação",
+          "Bandos selvagens de escribas brigando por tinta"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um escriba confunde os PCs com agentes de Galgenbeck e tenta se esconder ou fugir",
+          "3-4: Uma pilha de registros esquecidos entra em combustão espontânea",
+          "5-6: Um escriba desesperado tenta contratar os PCs para recuperar uma seção perdida de um livro-caixa importante"
+        ]
+      },
       "atmosphere_modifiers": [
         "Leve cheiro de papel velho e tinta",
         "Raspar de penas e farfalhar de pergaminhos",
-        "Silêncio opressivo, rompido apenas por sons distantes da cidade"
-      ]
+        "Silêncio opressivo, rompido apenas por sons distantes da cidade",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Cidade Baixa",
@@ -214,22 +278,38 @@
         "A Grande Fossa de Merda",
         "O Monte de Ossos"
       ],
-      "encounters": [
-        "Enxames de ratos e outras pragas",
-        "Cidadãos empobrecidos, talvez recorrendo a medidas desesperadas",
-        "Esconderijos ocultos de criminosos ou párias",
-        "Aparições ou sons estranhos ligados à prole de Lir"
-      ],
-      "random_tables": [
-        "1-2: Uma grande horda de ratos sai dos esgotos, atacando tudo no caminho",
-        "3-4: Um 'coletor de cadáveres' vagueia pelos esgotos poluídos, procurando corpos",
-        "5-6: Bolhas translúcidas e estranhas sobem da fossa, gritando ao murchar"
-      ],
+      "encounters": {
+        "district": [
+          "Enxames de ratos e outras pragas",
+          "Cidadãos empobrecidos, talvez recorrendo a medidas desesperadas",
+          "Esconderijos ocultos de criminosos ou párias",
+          "Aparições ou sons estranhos ligados à prole de Lir"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma grande horda de ratos sai dos esgotos, atacando tudo no caminho",
+          "3-4: Um 'coletor de cadáveres' vagueia pelos esgotos poluídos, procurando corpos",
+          "5-6: Bolhas translúcidas e estranhas sobem da fossa, gritando ao murchar"
+        ]
+      },
       "atmosphere_modifiers": [
         "O fedor avassalador de excremento e decadência",
         "O farfalhar constante de criaturas invisíveis",
-        "Uma penumbra pesada e úmida, mesmo durante o dia"
-      ]
+        "Uma penumbra pesada e úmida, mesmo durante o dia",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Enclave dos Trabalhadores",
@@ -246,21 +326,37 @@
       "landmarks": [
         "O Salão Coletivo"
       ],
-      "encounters": [
-        "Trabalhadores labutando ou procurando emprego minguado",
-        "Sinais de pobreza e desespero entre o povo",
-        "Potencial de agitação ou revolta devido às condições duras"
-      ],
-      "random_tables": [
-        "1-2: Um grupo de trabalhadores exaustos desaba na rua de fadiga",
-        "3-4: Uma família implora por ajuda, tendo vendido tudo por comida",
-        "5-6: Um trabalhador solitário recolhe silenciosamente ossos descartados, talvez para uma refeição"
-      ],
+      "encounters": {
+        "district": [
+          "Trabalhadores labutando ou procurando emprego minguado",
+          "Sinais de pobreza e desespero entre o povo",
+          "Potencial de agitação ou revolta devido às condições duras"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um grupo de trabalhadores exaustos desaba na rua de fadiga",
+          "3-4: Uma família implora por ajuda, tendo vendido tudo por comida",
+          "5-6: Um trabalhador solitário recolhe silenciosamente ossos descartados, talvez para uma refeição"
+        ]
+      },
       "atmosphere_modifiers": [
         "O murmúrio de vozes cansadas e o tilintar das ferramentas",
         "Cheiro persistente de suor e comida requentada",
-        "O humor soturno da luta constante"
-      ]
+        "O humor soturno da luta constante",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Quarteirão da Guarda",
@@ -277,21 +373,37 @@
       "landmarks": [
         "O Quartel Principal"
       ],
-      "encounters": [
-        "Vigilantes abatidos e com frio",
-        "Guardas desinteressados ou facilmente subornáveis",
-        "Ex-capitães desgraçados da fortaleza, apodrecendo em apatia"
-      ],
-      "random_tables": [
-        "1-2: d4 vigilantes fazem ronda de olhos turvos, fáceis de convencer a olhar para o outro lado",
-        "3-4: Um 'erudito distraído' da Urniversidade tenta contratar mercenários para uma Larva de Cupim Cabeça‑de‑Ardósia",
-        "5-6: Uma patrulha de cavaleiros Basiliscos procura hereges"
-      ],
+      "encounters": {
+        "district": [
+          "Vigilantes abatidos e com frio",
+          "Guardas desinteressados ou facilmente subornáveis",
+          "Ex-capitães desgraçados da fortaleza, apodrecendo em apatia"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: d4 vigilantes fazem ronda de olhos turvos, fáceis de convencer a olhar para o outro lado",
+          "3-4: Um 'erudito distraído' da Urniversidade tenta contratar mercenários para uma Larva de Cupim Cabeça‑de‑Ardósia",
+          "5-6: Uma patrulha de cavaleiros Basiliscos procura hereges"
+        ]
+      },
       "atmosphere_modifiers": [
         "O leve tilintar de armaduras mal mantidas",
         "O cheiro de vinho velho e corpos não lavados",
-        "Um senso difuso de tédio e resignação"
-      ]
+        "Um senso difuso de tédio e resignação",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Beira do Múr",
@@ -306,21 +418,37 @@
         "As Três Pontes",
         "O Múr Sem Fundo"
       ],
-      "encounters": [
-        "Criaturas subindo da terra seca e rachada",
-        "Os sons desorientadores das pontes em grito",
-        "Encontros com quem tenta fugir de ou entrar em Grift"
-      ],
-      "random_tables": [
-        "1-2: A ponte mais próxima solta um uivo anormalmente alto e doloroso",
-        "3-4: Pequenas criaturas secas, de asas coriáceas, emergem das fendas do chão",
-        "5-6: Um marinheiro solitário, marcado como 'o mais baixo dos baixos', tenta cruzar o Múr"
-      ],
+      "encounters": {
+        "district": [
+          "Criaturas subindo da terra seca e rachada",
+          "Os sons desorientadores das pontes em grito",
+          "Encontros com quem tenta fugir de ou entrar em Grift"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: A ponte mais próxima solta um uivo anormalmente alto e doloroso",
+          "3-4: Pequenas criaturas secas, de asas coriáceas, emergem das fendas do chão",
+          "5-6: Um marinheiro solitário, marcado como 'o mais baixo dos baixos', tenta cruzar o Múr"
+        ]
+      },
       "atmosphere_modifiers": [
         "Um vento frio e cortante carregando pó de além‑Múr",
         "O rugido baixo e os gritos constantes das pontes",
-        "O silêncio lúgubre desta área exposta e desolada"
-      ]
+        "O silêncio lúgubre desta área exposta e desolada",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Arrabaldes_Norte",
@@ -334,21 +462,37 @@
       "landmarks": [
         "Muralha norte da cidade"
       ],
-      "encounters": [
-        "Vagabundos e refugiados buscando entrada ou abrigo",
-        "Contrabandistas ou figuras sombrias operando fora dos limites",
-        "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
-      ],
-      "random_tables": [
-        "1-2: Uma matilha de cães selvagens revira montes de lixo fora do portão",
-        "3-4: Um 'mendigo que sabe demais' oferece avisos cifrados sobre a cidade",
-        "5-6: Um 'cavalo moribundo' chama pelo nome de um PC, falando de um senhor nobre em Grift"
-      ],
+      "encounters": {
+        "district": [
+          "Vagabundos e refugiados buscando entrada ou abrigo",
+          "Contrabandistas ou figuras sombrias operando fora dos limites",
+          "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma matilha de cães selvagens revira montes de lixo fora do portão",
+          "3-4: Um 'mendigo que sabe demais' oferece avisos cifrados sobre a cidade",
+          "5-6: Um 'cavalo moribundo' chama pelo nome de um PC, falando de um senhor nobre em Grift"
+        ]
+      },
       "atmosphere_modifiers": [
         "Sons distantes e tênues da cidade, abafados pela distância",
         "Cheiro de pó seco e vegetação bravia",
-        "Um silêncio inquietante, rompido pelo sussurro do vento"
-      ]
+        "Um silêncio inquietante, rompido pelo sussurro do vento",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Arrabaldes_Leste",
@@ -364,21 +508,37 @@
       "landmarks": [
         "Portão Leste"
       ],
-      "encounters": [
-        "Vagabundos e refugiados buscando entrada ou abrigo",
-        "Contrabandistas ou figuras sombrias operando além dos limites",
-        "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
-      ],
-      "random_tables": [
-        "1-2: Uma patrulha de vigilantes abatidos e com frio guarda o Portão Leste",
-        "3-4: Um 'oficial corrompido' tenta exigir um 'imposto de entrada' ilegal",
-        "5-6: Um bando de 'escória do pátio' tenta barganhar passagem pelos portões"
-      ],
+      "encounters": {
+        "district": [
+          "Vagabundos e refugiados buscando entrada ou abrigo",
+          "Contrabandistas ou figuras sombrias operando além dos limites",
+          "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma patrulha de vigilantes abatidos e com frio guarda o Portão Leste",
+          "3-4: Um 'oficial corrompido' tenta exigir um 'imposto de entrada' ilegal",
+          "5-6: Um bando de 'escória do pátio' tenta barganhar passagem pelos portões"
+        ]
+      },
       "atmosphere_modifiers": [
         "Sons distantes e tênues da cidade, abafados pela distância",
         "Cheiro de pó seco e vegetação bravia",
-        "Um silêncio inquietante, rompido pelo sussurro do vento"
-      ]
+        "Um silêncio inquietante, rompido pelo sussurro do vento",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Arrabaldes_Oeste",
@@ -394,21 +554,37 @@
       "landmarks": [
         "Portão Oeste"
       ],
-      "encounters": [
-        "Vagabundos e refugiados buscando entrada ou abrigo",
-        "Contrabandistas ou figuras sombrias operando fora dos limites",
-        "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
-      ],
-      "random_tables": [
-        "1-2: Uma choupana isolada esconde um proscrito fugindo das leis da cidade",
-        "3-4: Um 'mercenário aposentado' oferece serviços por moedas",
-        "5-6: Um grupo de 'escória dos esgotos' tenta batedear transeuntes"
-      ],
+      "encounters": {
+        "district": [
+          "Vagabundos e refugiados buscando entrada ou abrigo",
+          "Contrabandistas ou figuras sombrias operando fora dos limites",
+          "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma choupana isolada esconde um proscrito fugindo das leis da cidade",
+          "3-4: Um 'mercenário aposentado' oferece serviços por moedas",
+          "5-6: Um grupo de 'escória dos esgotos' tenta batedear transeuntes"
+        ]
+      },
       "atmosphere_modifiers": [
         "Sons distantes e tênues da cidade, abafados pela distância",
         "Cheiro de pó seco e vegetação bravia",
-        "Um silêncio inquietante, rompido pelo sussurro do vento"
-      ]
+        "Um silêncio inquietante, rompido pelo sussurro do vento",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Arrabaldes_Sul",
@@ -424,21 +600,37 @@
       "landmarks": [
         "Muralha sul da cidade"
       ],
-      "encounters": [
-        "Vagabundos e refugiados buscando entrada ou abrigo",
-        "Contrabandistas ou figuras sombrias operando além dos limites",
-        "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
-      ],
-      "random_tables": [
-        "1-2: O 'mendigo imortal Ulf' agride transeuntes",
-        "3-4: Um grupo de 'voluntários ao sacrifício' aguarda orientação ou prepara-se para o destino",
-        "5-6: Um 'traidor torturado' fala de passagens secretas sob a cidade"
-      ],
+      "encounters": {
+        "district": [
+          "Vagabundos e refugiados buscando entrada ou abrigo",
+          "Contrabandistas ou figuras sombrias operando além dos limites",
+          "Agentes do Rei Fathmu caçando Nagl (se aplicável)"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: O 'mendigo imortal Ulf' agride transeuntes",
+          "3-4: Um grupo de 'voluntários ao sacrifício' aguarda orientação ou prepara-se para o destino",
+          "5-6: Um 'traidor torturado' fala de passagens secretas sob a cidade"
+        ]
+      },
       "atmosphere_modifiers": [
         "Sons distantes e tênues da cidade, abafados pela distância",
         "Cheiro de pó seco e vegetação bravia",
-        "Um silêncio inquietante, rompido pelo sussurro do vento"
-      ]
+        "Um silêncio inquietante, rompido pelo sussurro do vento",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Distrito Comercial",
@@ -456,21 +648,37 @@
         "O Píer Principal",
         "A Alfândega"
       ],
-      "encounters": [
-        "Caçadores de sangue oferecendo dicas de caça, sem jamais revelar locais de presa",
-        "Caçadores desesperados vendendo locais de criadouros de criaturas",
-        "Marujos trazendo contos do Mar Sem‑Fim"
-      ],
-      "random_tables": [
-        "1-2: Uma embarcação carregada de peles e carne, fedendo à morte, atraca no píer",
-        "3-4: Riggers e açougueiros içam carcaças imensas de bestas com um Guindaste‑Açougueiro",
-        "5-6: Um 'canalha coberto de úlceras' tenta vender carne 'maturada' suspeita"
-      ],
+      "encounters": {
+        "district": [
+          "Caçadores de sangue oferecendo dicas de caça, sem jamais revelar locais de presa",
+          "Caçadores desesperados vendendo locais de criadouros de criaturas",
+          "Marujos trazendo contos do Mar Sem‑Fim"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma embarcação carregada de peles e carne, fedendo à morte, atraca no píer",
+          "3-4: Riggers e açougueiros içam carcaças imensas de bestas com um Guindaste‑Açougueiro",
+          "5-6: Um 'canalha coberto de úlceras' tenta vender carne 'maturada' suspeita"
+        ]
+      },
       "atmosphere_modifiers": [
         "O cheiro penetrante de carne, peles e sal",
         "O ranger da madeira e o bater das ondas nos cascos atracados",
-        "Os gritos ásperos das gaivotas em busca de restos"
-      ]
+        "Os gritos ásperos das gaivotas em busca de restos",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Penhasco Terion",
@@ -482,35 +690,38 @@
         "Penhasco Terion",
         "O Mar Sem‑Fim em fúria"
       ],
-      "encounters": [
-        "Lealistas de Sigfúm fazem preparativos lúgubres para o suicídio coletivo",
-        "Agentes da Inquisição dos Basiliscos de Duas Cabeças tentam frustrar o plano herético",
-        "Forças invisíveis relacionadas ao 'presente' sob o penhasco"
-      ],
-      "random_tables": [
-        "1-2: Um grupo do povo de Sigfúm reúne‑se, realizando um ritual silencioso de despedida",
-        "3-4: Um 'sacerdote gravemente queimado' observa o penhasco de longe, murmurando profecias",
-        "5-6: Um som tênue de escavação emana de sob o paredão"
-      ],
+      "encounters": {
+        "district": [
+          "Lealistas de Sigfúm fazem preparativos lúgubres para o suicídio coletivo",
+          "Agentes da Inquisição dos Basiliscos de Duas Cabeças tentam frustrar o plano herético",
+          "Forças invisíveis relacionadas ao 'presente' sob o penhasco"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um grupo do povo de Sigfúm reúne‑se, realizando um ritual silencioso de despedida",
+          "3-4: Um 'sacerdote gravemente queimado' observa o penhasco de longe, murmurando profecias",
+          "5-6: Um som tênue de escavação emana de sob o paredão"
+        ]
+      },
       "atmosphere_modifiers": [
         "Um vento gelado trazendo o borrifo do mar",
         "Os gritos distantes e lutuosos das gaivotas",
-        "Uma sensação esmagadora de final iminente e desespero"
-      ]
+        "Uma sensação esmagadora de final iminente e desespero",
+        "Os gritos e rugidos constantes das três pontes à noite",
+        "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
+        "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
+        "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
+        "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
+      ],
+      "buildings": [],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     }
-  ],
-  "random_tables": [
-    "1-2: Editais de Sigfúm são afixados por toda a cidade, marcando mais um dia de preparação para a morte",
-    "3-4: Os gritos noturnos das pontes se intensificam, espalhando medo e paranoia",
-    "5-6: Um grande ajuntamento da prole de Lir é visto num ponto inesperado, perturbando a paz",
-    "7-8: Um nobre mesquinho busca ajuda para recuperar um bem perdido ou capturar um indivíduo 'problemático' (p.ex., o dono de um cavalo moribundo)"
-  ],
-  "atmosphere_modifiers": [
-    "Os gritos e rugidos constantes das três pontes à noite",
-    "O fedor onipresente de decadência e de carne cozinhando permeia o ar",
-    "Pergaminhos sobre a preparação para a morte tremulam nas ruas",
-    "O som de mercadores em rixa e plebeus exigentes ecoa nos becos",
-    "O pulso oculto e desorientador da prole de Lir é sentido sob a cidade"
   ],
   "metadata": {
     "migrated_from": "databases/cities/grift.json",

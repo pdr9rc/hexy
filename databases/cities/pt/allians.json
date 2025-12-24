@@ -80,8 +80,8 @@
       "",
       "",
       "",
-        "Núcleo da Cidade",
-        "Núcleo da Cidade",
+      "Núcleo da Cidade",
+      "Núcleo da Cidade",
       "",
       "",
       "",
@@ -92,8 +92,8 @@
       "",
       "",
       "",
-        "Núcleo da Cidade",
-        "Núcleo da Cidade",
+      "Núcleo da Cidade",
+      "Núcleo da Cidade",
       "",
       "",
       "",
@@ -104,8 +104,8 @@
       "",
       "",
       "",
-        "Núcleo da Cidade",
-        "Núcleo da Cidade",
+      "Núcleo da Cidade",
+      "Núcleo da Cidade",
       "",
       "",
       "",
@@ -116,8 +116,8 @@
       "",
       "",
       "",
-        "Núcleo da Cidade",
-        "Núcleo da Cidade",
+      "Núcleo da Cidade",
+      "Núcleo da Cidade",
       "",
       "",
       "",
@@ -132,7 +132,15 @@
       "theme": "spire_city_cold_opulence",
       "buildings": [
         "Castelo de Anthelia",
-        "Campo do Torneio"
+        "Campo do Torneio",
+        {
+          "name": "Castelo de Anthelia",
+          "description": "Estrutura central de Alliáns, um **castelo de pedra branca feito catarata**, trono da **Condessa de Sangue**. Encena **opulência cinzenta** — coração da corte, em partes **júbilo e pavor**."
+        },
+        {
+          "name": "Campo do Torneio",
+          "description": "A arena onde se digladiam **centenas de nobres** sob as 'Regras da Lista'. Há espaços de **banquetes e danças**, pouco prazerosos."
+        }
       ],
       "streets": [
         "Vielas de Vidro Negro",
@@ -142,137 +150,100 @@
         "A Arena do Torneio",
         "Balcão de Anthelia"
       ],
-      "encounters": [
-        "**Nobres** exaustos e marcados por semanas de luta buscam cura ou favorecimento de Anthelia.",
-        "**Burgueses** e **servos** cuidam da logística, vendendo vagas tardias a procuradores.",
-        "Espectadores e duelistas cochicham sobre regras e punições.",
-        "**Guardas** impõem os caprichos imprevisíveis da Condessa."
-      ],
-      "random_tables": [
-        "1-2: Um duelo em curso segue as **Regras da Lista**; cada golpe pontua; cura após cada assalto.",
-        "3-4: **Banquete e dança**: comida insossa que incha; danças sem sentido que exaurem.",
-        "5-6: Alguém é chamado a **Responder a Anthelia** no balcão — catástrofe arcana, **Ventos de Sal Negro**, maus hábitos, ou graça da Condessa."
-      ],
+      "encounters": {
+        "district": [
+          "**Nobres** exaustos e marcados por semanas de luta buscam cura ou favorecimento de Anthelia.",
+          "**Burgueses** e **servos** cuidam da logística, vendendo vagas tardias a procuradores.",
+          "Espectadores e duelistas cochicham sobre regras e punições.",
+          "**Guardas** impõem os caprichos imprevisíveis da Condessa.",
+          "Burgueses ou servos envolvidos no torneio, talvez oferecendo vagas tardias a procuradores."
+        ],
+        "building": [
+          "**A própria Anthelia**, observando o torneio ou interagindo com combatentes, exibindo seus 'sentimentos frágeis' e 'poderes absolutos'.",
+          "**Combatentes do torneio** (p.ex., Jahnt the Younger, Rocque de Rocque, Bon Slotare, Grastun the Fair, Caul the Murder-maid, Brast de Gaion, Strygmon the Unstable, Haalder the Defenestrator, Eadaeter the Censer-bearer, Gargarix of Eastspire, Chutlem of Westspire, Vuntler of Under-the-Narthex, Rilp Squint the Doom-denied, Jaak Plowshare, Sigrayn of Wyrms Wood, Gwerthon the Outlander, Molglum the Witch-marked, Brutt Maukargsson, Rogust of Wästlands Edge, Brichunne the Fameseeker of Onda, Namun Glory-Gained-at-Graven-Tosk, Okbahn the Cryptborn, Jyra of Schleswig, Xemal Half-a-face, Harlegtum of Terion-march, Krundall the Pious, Teiful Friedling, Skoph of Bridgeside, Tlemna the Walking Ledger of Mur, Blyned de Rednayls) [6, 11, 13-21], lutando ou descansando.",
+          "**Acólitos** assistindo Krundall, o Pio, sacrificando-se para evitar que ele seja ferido."
+        ],
+        "street": [
+          "Nobres e comitivas movendo-se entre o castelo e o campo do torneio, exibindo fadiga ou ferimentos.",
+          "Plebeus e servos no vai-e-vem diário, sob o frio e a tensão onipresentes da cidade.",
+          "Indivíduos com **relações prévias com os PCs**, baseadas em interações passadas como roubo, encontros de batalha, disputas, saque de criptas ou servidão."
+        ],
+        "landmark": [
+          "Um combatente tentando 'Responder a Anthelia' no balcão, enfrentando catástrofes arcanas ou drenagem vital.",
+          "Combatentes em repastos e danças, suportando comida insossa e danças exaustivas e sem sentido.",
+          "Jogadores em embates do torneio, seguindo as específicas 'Regras da Lista'."
+        ],
+        "temple": [
+          "Sussurros ou vestígios do 'culto Massacrado de Alliáns', insinuando um local oculto ou esquecido ligado ao passado."
+        ],
+        "residence": [
+          "Nobres preparando-se para duelos, tratando feridas ou tecendo intrigas de corte.",
+          "Servos cuidando de seus senhores, refletindo a 'opulência cinzenta' da vida na corte."
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um duelo em curso segue as **Regras da Lista**; cada golpe pontua; cura após cada assalto.",
+          "3-4: **Banquete e dança**: comida insossa que incha; danças sem sentido que exaurem.",
+          "5-6: Alguém é chamado a **Responder a Anthelia** no balcão — catástrofe arcana, **Ventos de Sal Negro**, maus hábitos, ou graça da Condessa.",
+          "1-2: Procissão formal de nobres e comitivas, com estandartes puídos e armaduras tisnadas.",
+          "5-6: Decreto público da corte de Anthelia sobre o torneio ou uma nova regra inquietante."
+        ],
+        "building": [
+          "1-2: Um combatente 'Respondendo a Anthelia', levando a uma das consequências listadas (p.ex., Catástrofe Arcana, Ventos de Sal Negro, Pior Hábito, mesa quebrada, itens de Kergüs, ou favor de Anthelia).",
+          "3-4: Um participante 'Retira-se do Torneio', resultando em um dos prêmios lúgubres (morte pelas mãos de Anthelia, renúncia de títulos, entregar entes queridos ao serviço, prata com a mão decepada, feitos não-heroicos, ou presente único).",
+          "5-6: Ocorre um duelo, pontuado por golpes bem-sucedidos; cura após cada assalto."
+        ],
+        "street": [
+          "1-2: Um grupo de nobres passa, discutindo a fadiga de semanas de luta.",
+          "3-4: Desaparecem de súbito sinais de um pretendente à mão de Anthelia, reforçando rumores de sua juventude eterna.",
+          "5-6: Música indecifrável ou sussurros inquietantes ecoam pelas estruturas de vidro negro."
+        ],
+        "landmark": [
+          "1-2: Combatentes suportam comida insossa e danças exaustivas em um repasto.",
+          "3-4: Emite-se um desafio formal no campo do torneio, com armas ou condições específicas.",
+          "5-6: Um combatente usa uma habilidade única em batalha (p.ex., Caul, a Donzela-Assassina, fere um espectador; o DR de Strygmon oscila; Haalder tenta arremessar oponente)."
+        ],
+        "temple": [
+          "1-2: Sussurros do 'culto Massacrado de Alliáns' são ouvidos, insinuando local oculto ou esquecido ligado ao passado.",
+          "3-4: Um sobrevivente solitário, talvez um Sacerdote Herético de 'origem profana', espreita perto de antigos ou extintos recintos sagrados."
+        ],
+        "residence": [
+          "1-2: Um nobre lamenta a glória perdida ou reflete sobre a 'dor' de sua posição, ecoando a Realeza Abjeta.",
+          "3-4: Servos reclamam da 'opulência cinzenta' opressiva e do medo constante na corte da Condessa.",
+          "5-6: Vê-se um nobre tentando secretamente 'trapacear' o torneio, subornando ou buscando ajuda externa."
+        ]
+      },
       "atmosphere_modifiers": [
         "**Frieza constante** bebe todo o calor.",
         "Tensão e **temor** pairam — poder absoluto, vontade volúvel.",
         "Brilho ubíquo das **estruturas de vidro negro**.",
         "Aplausos, murmúrios e o aço batendo — nunca cessam.",
-        "Pressentimento do fim — o torneio é o **último antes do fim de todas as coisas**."
-      ]
+        "Pressentimento do fim — o torneio é o **último antes do fim de todas as coisas**.",
+        "Sensação onipresente de que **o mundo morre agora**, com a realidade apodrecendo ao redor de Alliáns.",
+        "Um **frio cortante** que emana da presença de Anthelia, drenando o calor do ambiente.",
+        "A beleza funérea da **arquitetura de vidro negro**, refletindo a desolação de Kergüs.",
+        "Subcorrentes de **excitação e medo** entre o povo, intensificadas durante o torneio.",
+        "Sabor distinto de desolação e o 'fedor de sangue' trazido do oeste da terra cindida pelo vento.",
+        "Sons ocasionais de exaustão e desconforto em repastos e danças, apesar da tentativa de celebração."
+      ],
+      "markets": [],
+      "temples": [
+        {
+          "name": "Culto Massacrado de Alliáns (ruínas)",
+          "description": "Vestígios de devoção não ortodoxa; rumores apontam um culto esmagado sob decretos antigos."
+        }
+      ],
+      "taverns": [],
+      "guilds": [],
+      "residences": [
+        {
+          "name": "Residências Nobres",
+          "description": "Moradas temporárias ou permanentes das **casas nobres** chamadas ao torneio — base de duelistas e comitivas."
+        }
+      ],
+      "ruins": []
     }
-  ],
-  "buildings": [
-    {
-      "name": "Castelo de Anthelia",
-      "description": "Estrutura central de Alliáns, um **castelo de pedra branca feito catarata**, trono da **Condessa de Sangue**. Encena **opulência cinzenta** — coração da corte, em partes **júbilo e pavor**."
-    },
-    {
-      "name": "Campo do Torneio",
-      "description": "A arena onde se digladiam **centenas de nobres** sob as 'Regras da Lista'. Há espaços de **banquetes e danças**, pouco prazerosos."
-    }
-  ],
-  "streets": [],
-  "landmarks": [
-    {
-      "name": "A Arena do Torneio",
-      "description": "Local principal dos embates; palco de duelos intensos e decisões que granjeiam o favor da Condessa — ou uma herança sussurrada."
-    },
-    {
-      "name": "Balcão de Anthelia",
-      "description": "Dali a Condessa convoca o culpado a **permanecer e suportar** as consequências."
-    }
-  ],
-  "markets": [],
-  "temples": [
-    {
-      "name": "Culto Massacrado de Alliáns (ruínas)",
-      "description": "Vestígios de devoção não ortodoxa; rumores apontam um culto esmagado sob decretos antigos."
-    }
-  ],
-  "taverns": [],
-  "guilds": [],
-  "residences": [
-    {
-      "name": "Residências Nobres",
-      "description": "Moradas temporárias ou permanentes das **casas nobres** chamadas ao torneio — base de duelistas e comitivas."
-    }
-  ],
-  "ruins": [],
-  "encounters": {
-    "district": [
-      "Nobres, exaustos por semanas de combate, buscando cura ou tentando ganhar o favor de Anthelia.",
-      "Burgueses ou servos envolvidos no torneio, talvez oferecendo vagas tardias a procuradores.",
-      "Guardas e serviçais impondo os caprichos imprevisíveis de Anthelia, sobretudo quanto às regras e às celebrações pós-duelo."
-    ],
-    "building": [
-      "**A própria Anthelia**, observando o torneio ou interagindo com combatentes, exibindo seus 'sentimentos frágeis' e 'poderes absolutos'.",
-      "**Combatentes do torneio** (p.ex., Jahnt the Younger, Rocque de Rocque, Bon Slotare, Grastun the Fair, Caul the Murder-maid, Brast de Gaion, Strygmon the Unstable, Haalder the Defenestrator, Eadaeter the Censer-bearer, Gargarix of Eastspire, Chutlem of Westspire, Vuntler of Under-the-Narthex, Rilp Squint the Doom-denied, Jaak Plowshare, Sigrayn of Wyrms Wood, Gwerthon the Outlander, Molglum the Witch-marked, Brutt Maukargsson, Rogust of Wästlands Edge, Brichunne the Fameseeker of Onda, Namun Glory-Gained-at-Graven-Tosk, Okbahn the Cryptborn, Jyra of Schleswig, Xemal Half-a-face, Harlegtum of Terion-march, Krundall the Pious, Teiful Friedling, Skoph of Bridgeside, Tlemna the Walking Ledger of Mur, Blyned de Rednayls) [6, 11, 13-21], lutando ou descansando.",
-      "**Acólitos** assistindo Krundall, o Pio, sacrificando-se para evitar que ele seja ferido."
-    ],
-    "street": [
-      "Nobres e comitivas movendo-se entre o castelo e o campo do torneio, exibindo fadiga ou ferimentos.",
-      "Plebeus e servos no vai-e-vem diário, sob o frio e a tensão onipresentes da cidade.",
-      "Indivíduos com **relações prévias com os PCs**, baseadas em interações passadas como roubo, encontros de batalha, disputas, saque de criptas ou servidão."
-    ],
-    "landmark": [
-      "Um combatente tentando 'Responder a Anthelia' no balcão, enfrentando catástrofes arcanas ou drenagem vital.",
-      "Combatentes em repastos e danças, suportando comida insossa e danças exaustivas e sem sentido.",
-      "Jogadores em embates do torneio, seguindo as específicas 'Regras da Lista'."
-    ],
-    "market": [],
-    "temple": [
-      "Sussurros ou vestígios do 'culto Massacrado de Alliáns', insinuando um local oculto ou esquecido ligado ao passado."
-    ],
-    "tavern": [],
-    "guild": [],
-    "residence": [
-      "Nobres preparando-se para duelos, tratando feridas ou tecendo intrigas de corte.",
-      "Servos cuidando de seus senhores, refletindo a 'opulência cinzenta' da vida na corte."
-    ],
-    "ruins": []
-  },
-  "random_tables": {
-    "district": [
-      "1-2: Procissão formal de nobres e comitivas, com estandartes puídos e armaduras tisnadas.",
-      "3-4: A cidade é tomada por um frio súbito; uivos distantes soam, como da própria Anthelia.",
-      "5-6: Decreto público da corte de Anthelia sobre o torneio ou uma nova regra inquietante."
-    ],
-    "building": [
-      "1-2: Um combatente 'Respondendo a Anthelia', levando a uma das consequências listadas (p.ex., Catástrofe Arcana, Ventos de Sal Negro, Pior Hábito, mesa quebrada, itens de Kergüs, ou favor de Anthelia).",
-      "3-4: Um participante 'Retira-se do Torneio', resultando em um dos prêmios lúgubres (morte pelas mãos de Anthelia, renúncia de títulos, entregar entes queridos ao serviço, prata com a mão decepada, feitos não-heroicos, ou presente único).",
-      "5-6: Ocorre um duelo, pontuado por golpes bem-sucedidos; cura após cada assalto."
-    ],
-    "street": [
-      "1-2: Um grupo de nobres passa, discutindo a fadiga de semanas de luta.",
-      "3-4: Desaparecem de súbito sinais de um pretendente à mão de Anthelia, reforçando rumores de sua juventude eterna.",
-      "5-6: Música indecifrável ou sussurros inquietantes ecoam pelas estruturas de vidro negro."
-    ],
-    "landmark": [
-      "1-2: Combatentes suportam comida insossa e danças exaustivas em um repasto.",
-      "3-4: Emite-se um desafio formal no campo do torneio, com armas ou condições específicas.",
-      "5-6: Um combatente usa uma habilidade única em batalha (p.ex., Caul, a Donzela-Assassina, fere um espectador; o DR de Strygmon oscila; Haalder tenta arremessar oponente)."
-    ],
-    "market": [],
-    "temple": [
-      "1-2: Sussurros do 'culto Massacrado de Alliáns' são ouvidos, insinuando local oculto ou esquecido ligado ao passado.",
-      "3-4: Um sobrevivente solitário, talvez um Sacerdote Herético de 'origem profana', espreita perto de antigos ou extintos recintos sagrados."
-    ],
-    "tavern": [],
-    "guild": [],
-    "residence": [
-      "1-2: Um nobre lamenta a glória perdida ou reflete sobre a 'dor' de sua posição, ecoando a Realeza Abjeta.",
-      "3-4: Servos reclamam da 'opulência cinzenta' opressiva e do medo constante na corte da Condessa.",
-      "5-6: Vê-se um nobre tentando secretamente 'trapacear' o torneio, subornando ou buscando ajuda externa."
-    ]
-  },
-  "atmosphere_modifiers": [
-    "Sensação onipresente de que **o mundo morre agora**, com a realidade apodrecendo ao redor de Alliáns.",
-    "Um **frio cortante** que emana da presença de Anthelia, drenando o calor do ambiente.",
-    "A beleza funérea da **arquitetura de vidro negro**, refletindo a desolação de Kergüs.",
-    "Subcorrentes de **excitação e medo** entre o povo, intensificadas durante o torneio.",
-    "Sabor distinto de desolação e o 'fedor de sangue' trazido do oeste da terra cindida pelo vento.",
-    "Sons ocasionais de exaustão e desconforto em repastos e danças, apesar da tentativa de celebração."
   ],
   "metadata": {
     "migrated_from": "databases/cities/allians.json",

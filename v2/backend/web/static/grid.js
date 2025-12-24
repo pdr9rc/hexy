@@ -33,6 +33,7 @@ export function createGridRenderer(config) {
     fetchMapUrl,
     parseMapData,
     onHexClick,
+    onHexDoubleClick,
     gridConfig,
     onHoverUpdate,
     hudElementId,
@@ -164,7 +165,17 @@ export function createGridRenderer(config) {
     const terrain = data?.terrain || "plains";
     const terrainInfo = terrainMap[terrain] || { label: terrain, glyph: ".." };
     hud.classList.add("visible");
-    const displayedCoords = data?.code || data?.hexId || `[${cell.col + 1}, ${cell.row + 1}]`;
+    
+    // For city hexes, show district name instead of hex coordinates
+    let displayedCoords;
+    if (data?.district) {
+      // City hex - show district name
+      displayedCoords = data.district;
+    } else {
+      // World hex - show hex coordinates
+      displayedCoords = data?.code || data?.hexId || `[${cell.col + 1}, ${cell.row + 1}]`;
+    }
+    
     if (coords) coords.textContent = displayedCoords;
     if (type) type.textContent = terrainInfo.label;
     if (threat) threat.textContent = terrainInfo.label;
@@ -269,9 +280,21 @@ export function createGridRenderer(config) {
         ctx.closePath();
 
         const isHighlight = highlight && highlight.row === row && highlight.col === col;
-        const terrainFill = terrainMap[terrain]?.fill || BG;
-        const terrainHoverFill = terrainMap[terrain]?.hover_fill || BLACK;
-        ctx.fillStyle = isHighlight ? terrainHoverFill : terrainFill;
+        
+        // Use district color if available (for city grids), otherwise use terrain fill
+        let fillColor;
+        if (code?.districtColor) {
+          // City hex with district color
+          fillColor = isHighlight ? BG : code.districtColor;
+        } else {
+          // World hex or empty hex
+          fillColor = terrainMap[terrain]?.fill || BG;
+          if (isHighlight) {
+            fillColor = terrainMap[terrain]?.hover_fill || BLACK;
+          }
+        }
+        
+        ctx.fillStyle = fillColor;
         ctx.fill();
 
         ctx.strokeStyle = `rgba(0,0,0,${state.params.gridAlpha})`;
@@ -363,9 +386,29 @@ export function createGridRenderer(config) {
   }
 
   function setupEventHandlers() {
+    let clickTimeout = null;
     canvas.addEventListener("click", (e) => {
       const { mx, my } = normalizePointer(e);
-      handleClick(mx, my);
+      // Handle single click with delay to detect double-click
+      if (clickTimeout) {
+        clearTimeout(clickTimeout);
+        clickTimeout = null;
+        // This is a double-click
+        const hx = screenToHex(mx, my);
+        if (hx) {
+          const cell = state.grid[hx.row]?.[hx.col];
+          if (cell && onHexDoubleClick) {
+            onHexDoubleClick(cell, hx);
+            return;
+          }
+        }
+      } else {
+        // Single click - wait to see if it becomes a double-click
+        clickTimeout = setTimeout(() => {
+          handleClick(mx, my);
+          clickTimeout = null;
+        }, 250); // 250ms delay to detect double-click
+      }
     });
 
     canvas.addEventListener("mousedown", () => {

@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
 """
+DEPRECATED: This file should NOT be used for v2 API endpoints.
+
+ALL city logic has been moved to frontend city.js module.
+The v2 backend should ONLY return raw data - no generation, no logic.
+
+This file is kept for backward compatibility with overlay_exporter.py
+which generates static markdown files, but it should NOT be used
+for any API endpoints. All API endpoints must use raw data only.
+
 City Overlay Analyzer for The Dying Lands
 Processes city overlay images and generates round hex grids with random content.
 Supports matrix-based district placement from city JSON files.
@@ -874,7 +883,7 @@ class CityOverlayAnalyzer:
             )
             
         # Encounters
-        encounters = district_data.get('encounters', [])
+        encounters = self._get_district_encounters(district_data, 'district')
         encounter = random.choice(encounters) if encounters else "Unclear activity in the district"
             
         # Atmosphere
@@ -939,10 +948,8 @@ class CityOverlayAnalyzer:
         purpose = random.choice(purposes)
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'building')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'building', [])
         
         if encounters:
@@ -1013,10 +1020,8 @@ class CityOverlayAnalyzer:
         condition = self._safe_random_choice(database_manager.get_table('features', 'street_features', self.language) or [], "street_features")
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'street')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'street', [])
         
         if encounters:
@@ -1094,10 +1099,8 @@ class CityOverlayAnalyzer:
             significance = self._safe_random_choice(database_manager.get_table('features', 'landmark_features', self.language) or [], "landmark_features")
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'landmark')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'landmark', [])
         
         if encounters:
@@ -1187,10 +1190,8 @@ class CityOverlayAnalyzer:
         specialty = random.choice(specialties)
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'market')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'market', [])
         
         if encounters:
@@ -1271,10 +1272,8 @@ class CityOverlayAnalyzer:
         deity = random.choice(deities)
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'temple')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'temple', [])
         
         if encounters:
@@ -1349,10 +1348,8 @@ class CityOverlayAnalyzer:
         name = random.choice(taverns)
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'tavern')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'tavern', [])
         
         if encounters:
@@ -1454,10 +1451,8 @@ class CityOverlayAnalyzer:
         purpose = random.choice(purposes)
         
         # Get encounters from district data if available
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'guild')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'guild', [])
         
         if encounters:
@@ -1532,10 +1527,8 @@ class CityOverlayAnalyzer:
             raise ValueError("No residence inhabitants available in database")
         name = random.choice(residences)
         inhabitant = random.choice(inhabitants)
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'residence')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'residence', [])
         if encounters:
             encounter = random.choice(encounters)
@@ -1600,10 +1593,8 @@ class CityOverlayAnalyzer:
             raise ValueError("No ruins histories available in database")
         name = random.choice(ruins)
         history = random.choice(histories)
-        encounters = []
-        if district_data and 'encounters' in district_data:
-            encounters = district_data['encounters']
-        elif city_data:
+        encounters = self._get_district_encounters(district_data, 'ruins')
+        if not encounters and city_data:
             encounters = self._get_city_encounters(city_data, 'ruins', [])
         if encounters:
             encounter = random.choice(encounters)

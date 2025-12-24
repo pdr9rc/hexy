@@ -28,11 +28,25 @@ export function createUIBox(config) {
   }
 
   function updateBorders() {
-    const sides = document.querySelectorAll(".border-side");
+    const leftSide = document.getElementById("border-left");
+    const rightSide = document.getElementById("border-right");
     if (!cardStyled) return;
     const count = Math.ceil(cardStyled.offsetHeight / 8);
-    const fill = Array.from({ length: count }, () => "<span>║</span>").join("");
-    sides.forEach((side) => (side.innerHTML = fill));
+    const fill = Array.from({ length: count }, () => "<span>|</span>").join("");
+    if (leftSide) {
+      leftSide.innerHTML = fill;
+    }
+    // Fill right side when there's no scrollbar
+    if (rightSide && cardContent) {
+      const hasScrollbar = cardContent.scrollHeight > cardContent.clientHeight;
+      if (!hasScrollbar) {
+        rightSide.innerHTML = fill;
+        rightSide.style.display = "block";
+      } else {
+        rightSide.style.display = "none";
+        
+      }
+    }
   }
 
   function isAsciiArtLine(line) {
@@ -199,5 +213,6 @@ export function createUIBox(config) {
     renderRaw,
     clear,
     setActiveTab,
+    updateBorders,
   };
 }

@@ -134,7 +134,10 @@
         "Cidadela Secreta do Rei Fathmu IX",
         "Quartel Real",
         "Residências Nobres",
-        "Escritório de Coleta de Impostos"
+        "Escritório de Coleta de Impostos",
+        "Bordel (sem nome)",
+        "Residências Nobres (inferidas pelo Chifre dos Lordes de Schleswig)",
+        "Casas (invadidas pelos homens de Fathmu)"
       ],
       "streets": [
         "Estrada do Rei",
@@ -145,24 +148,154 @@
       "landmarks": [
         "A Cidadela do Rei",
         "Forca Real",
-        "O Grande Cofre dos Impostos"
+        "O Grande Cofre dos Impostos",
+        "A Cruz Partida",
+        "Cidadela Secreta do Rei Fathmu IX",
+        "Lago Onda (as margens orientais do Lago Onda ficam perto do Forte da Morte; Wästland tem o Lago Onda)",
+        "A Fossa Fétida"
       ],
-      "encounters": [
-        "Homens do Rei Fathmu IX cobrando impostos ou realizando batidas",
-        "Guardas reais paranoicos patrulhando sem cessar",
-        "Nobres ostentando riqueza de forma espalhafatosa",
-        "Espiões do Rei Fathmu IX"
-      ],
-      "random_tables": [
-        "1-2: Decreto real aumentando impostos provoca agitação",
-        "3-4: Caravana de um nobre é saqueada pelos homens do Rei",
-        "5-6: Exibição pública de 'correção' pela Inquisição"
-      ],
+      "encounters": {
+        "district": [
+          "Homens do Rei Fathmu IX cobrando impostos ou realizando batidas",
+          "Guardas reais paranoicos patrulhando sem cessar",
+          "Nobres ostentando riqueza de forma espalhafatosa",
+          "Espiões do Rei Fathmu IX",
+          "Homens do Rei Fathmu IX realizando batidas e cobrando impostos",
+          "Um marinheiro perna-de-pau gabando-se do Angloarfish",
+          "Pessoas se aquecem em uma fogueira; uma é espiã de Grift",
+          "Uma guilhotina enferrujada e muito usada é reparada e limpa"
+        ],
+        "building": [
+          "O Ceifador (cobrador de impostos do Rei) esconde-se na 'cidadela' de Fathmu (analogia)",
+          "Voluntários ao sacrifício aguardam seu destino"
+        ],
+        "street": [
+          "O Ceifador passa entregando intimações (análogas aos homens do Rei)",
+          "Cultistas da gosma amarela esgueiram-se nas sombras"
+        ],
+        "landmark": [
+          "O Ceifador aparece para recolher sacrifícios",
+          "Voluntários ao sacrifício reúnem-se por orientação",
+          "Necromantes do Hospital Fuliginoso buscam cadáveres"
+        ],
+        "market": [
+          "O Ceifador recolhe almas como moeda",
+          "Voluntários ao sacrifício oferecem seus serviços",
+          "Gesa vende Pergaminhos Sagrados e Impuros",
+          "Família vende relíquias seculares por comida"
+        ],
+        "temple": [
+          "O Ceifador aparece durante cerimônias de sacrifício",
+          "Ladrões de memória roubam identidades de fiéis"
+        ],
+        "tavern": [
+          "O Ceifador aparece para cobrar almas como pagamento",
+          "Ladrões de memória roubam identidades de bêbados",
+          "O Valete de Uma Mão oferece jogo e divertimento",
+          "A velha Mirth vende tortas de carne recheadas de mortos"
+        ],
+        "guild": [
+          "O Ceifador recruta membros de guildas",
+          "Dunglanders usam salões de guilda como pontos de encontro",
+          "Espiões do Rei monitoram reuniões",
+          "A rede de mendigos de Liesl, a Vermelha, controla informação de rua"
+        ],
+        "residence": [
+          "O Ceifador aparece para cobrar almas como aluguel",
+          "Voluntários ao sacrifício preparam-se para o destino",
+          "A Arcebispa Anne Gorham caça hereges e infiéis com fervor",
+          "A rede de mendigos de Liesl, a Vermelha, espiona, rouba e espalha boatos"
+        ],
+        "ruins": [
+          "Marionetes alcançam senciência e vagam livres",
+          "A fábrica se expande usando materiais de construção",
+          "A cozinha do Restaurante é assombrada"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Decreto real aumentando impostos provoca agitação",
+          "3-4: Caravana de um nobre é saqueada pelos homens do Rei",
+          "5-6: Exibição pública de 'correção' pela Inquisição",
+          "1-2: Homens do Rei Fathmu IX entregam intimações ou cobram impostos",
+          "17-18: Prédios em chamas; carnificina nas ruas"
+        ],
+        "building": [
+          "1-2: Marionetes ganham senciência e atacam visitantes"
+        ],
+        "street": [
+          "1-2: Homens do Rei Fathmu IX passam a cavalo entregando intimações"
+        ],
+        "landmark": [
+          "1-2: As águas do Lago Onda recuam, revelando visões estranhas"
+        ],
+        "market": [
+          "1-2: Dunglanders trocam farinha de cogumelo e cerveja",
+          "17-18: Alma, a Mercadora de Múmias, vende múmias como combustível"
+        ],
+        "temple": [
+          "1-2: Sacerdotes do Basilisco realizam rituais sombrios"
+        ],
+        "tavern": [
+          "1-2: Lotta Gravy serve ensopado grosso e cerveja forte",
+          "17-18: A Lucy Impudica oferece promoções de bebidas e equipe"
+        ],
+        "guild": [
+          "1-2: A Ordem dos Cavaleiros Basiliscos patrulha por hereges",
+          "17-18: A guilda do Vigário‑Geral Max 'Eisenhand' Trogler enforca infratores"
+        ],
+        "residence": [
+          "1-2: O Estúdio de Leopold guarda pinturas esquecidas",
+          "17-18: A mansão do Vigário‑Geral Max 'Eisenhand' Trogler enforca primeiros infratores"
+        ],
+        "ruins": [
+          "1-2: A Fábrica de Marionetes constrói marionetes de destruição em massa"
+        ]
+      },
       "atmosphere_modifiers": [
         "Sensação onipresente de medos invisíveis e psicose",
         "Decoração espalhafatosa em choque com a penumbra dominante",
-        "Sons distantes de decretos reais proclamados"
-      ]
+        "Sons distantes de decretos reais proclamados",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [
+        "Pub sem Nome (de onde um freguês foi escoltado)"
+      ],
+      "guilds": [],
+      "residences": [
+        "Cidadela Secreta do Rei Fathmu IX",
+        "Residências Nobres (inferidas pelos lordes de Schleswig)"
+      ],
+      "ruins": []
     },
     {
       "name": "Quarteirão dos Pobres",
@@ -172,34 +305,169 @@
         "Casebres Decrepitos",
         "Abrigos Improvisados",
         "Filas de Pão Comunitárias (muitas vezes vazias)",
-        "Casas Chamuscadas"
+        "Casas Chamuscadas",
+        "Templos (invadidos pelos homens de Fathmu)",
+        "Celeiros (invadidos pelos homens de Fathmu)",
+        "Aldeias (invadidas pelos homens de Fathmu)"
       ],
       "streets": [
         "Beco da Fome",
         "Beco do Desespero",
         "Estrada dos Escombros",
-        "Caminho do Pária"
+        "Caminho do Pária",
+        "Caminho da Beira d'Água",
+        "Via da Forja"
       ],
       "landmarks": [
         "O Poço Vazio",
         "O Muro do Pranto",
-        "Templo Carbonizado"
+        "Templo Carbonizado",
+        "O Grande Cofre dos Impostos",
+        "A Torre de Maquinaria do Rei"
       ],
-      "encounters": [
-        "Gente em farrapos brigando por pão, com guardas assistindo e apostando",
-        "Crianças chorando nos cantos, perdidas e sós",
-        "Famílias tentando reconstruir casebres queimados",
-        "Camponeses devastados e sem olhos no pelourinho implorando por água"
-      ],
-      "random_tables": [
-        "1-2: Homens do Rei fazem uma 'varredura de despensas', deixando casas vazias",
-        "3-4: Uma súbita cacofonia de corvos desce sobre a rua",
-        "5-6: Um cão raivoso revira o lixo, mantendo todos afastados"
-      ],
+      "encounters": {
+        "district": [
+          "Gente em farrapos brigando por pão, com guardas assistindo e apostando",
+          "Crianças chorando nos cantos, perdidas e sós",
+          "Famílias tentando reconstruir casebres queimados",
+          "Camponeses devastados e sem olhos no pelourinho implorando por água",
+          "Rogust da Beira de Wästland, fugitivo do Sanatório de Schleswig, posando de baronete",
+          "Trabalhadores carregando um caixão do tamanho de um barco",
+          "Um cão raivoso revira o lixo",
+          "Crianças desaparecidas no Lago Onda (ali perto)"
+        ],
+        "building": [
+          "Sacerdotes do Basilisco conduzem cerimônias sombrias",
+          "Vermes do Feiticeiro infestam a fundação"
+        ],
+        "street": [
+          "Cavaleiros do Basilisco escoltam condenados (análogos aos guardas do Rei)",
+          "Alados esvoaçam em busca de presa"
+        ],
+        "landmark": [
+          "Sacerdotes do Basilisco conduzem rituais",
+          "Vermes do Feiticeiro infestam a fundação",
+          "Wickheads elétricos reúnem-se no Dínamo Quixótico"
+        ],
+        "market": [
+          "Sacerdotes do Basilisco vendem relíquias e indulgências",
+          "Vermes do Feiticeiro são vendidos como bichos de estimação",
+          "Gunter oferece espécimes exóticos para prazeres carnais"
+        ],
+        "temple": [
+          "Sacerdotes do Basilisco conduzem rituais sombrios",
+          "Voluntários ao sacrifício buscam orientação e absolvição"
+        ],
+        "tavern": [
+          "Sacerdotes do Basilisco recolhem informações de fregueses",
+          "Voluntários ao sacrifício bebem suas últimas horas",
+          "A Casa da Carne fornece prazeres carnais e doenças"
+        ],
+        "guild": [
+          "Sacerdotes do Basilisco supervisionam operações",
+          "Ladrões de memória roubam segredos e identidades",
+          "A guilda de excomunhão do Cardeal Benjamin von Swerdenö tortura rivais",
+          "O culto do Reverendo Karloman adora o Cordeiro de Estanho Vivo"
+        ],
+        "residence": [
+          "Sacerdotes do Basilisco realizam inspeções",
+          "Vermes do Feiticeiro infestam a fundação",
+          "O Vigário‑Geral Max 'Eisenhand' Trogler enforca infratores primários",
+          "O Reverendo Karloman adora um Cordeiro de Estanho Vivo"
+        ],
+        "ruins": [
+          "Necromantes recompõem trabalhadores mortos como servos",
+          "Ovos de verme são espalhados pelas ruínas",
+          "As lutas de cães do Canil ecoam pelas ruínas"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Homens do Rei fazem uma 'varredura de despensas', deixando casas vazias",
+          "3-4: Uma súbita cacofonia de corvos desce sobre a rua",
+          "5-6: Um cão raivoso revira o lixo, mantendo todos afastados",
+          "5-6: Um paciente fugitivo do Sanatório causa tumulto",
+          "19-20: Velha Mirth vende tortas de carne recheadas de mortos"
+        ],
+        "building": [
+          "3-4: Wickheads elétricos 'plugam' no Dínamo Quixotesco"
+        ],
+        "street": [
+          "3-4: Javalis de esgoto fuçam montes de lixo"
+        ],
+        "landmark": [
+          "3-4: O Sanatório libera pacientes 'reformados' — ainda loucos"
+        ],
+        "market": [
+          "3-4: Flutters são capturadas e vendidas como animais de estimação",
+          "19-20: Svendon vende potes de cera de ouvido (dele e roubada)"
+        ],
+        "temple": [
+          "3-4: Homens do Rei Fathmu IX surgem durante cerimônias de 'sacrifício'"
+        ],
+        "tavern": [
+          "3-4: O Valete de Uma Mão oferece jogo e divertimento",
+          "19-20: A velha Mirth vende tortas de carne recheadas de mortos"
+        ],
+        "guild": [
+          "3-4: Discípulos do Feiticeiro do Verme recrutam membros",
+          "19-20: A guilda do Arqui‑curador René Elwes muda todos que entram"
+        ],
+        "residence": [
+          "3-4: O Canil de Luna abriga desesperados",
+          "19-20: A casa do Arqui‑curador René Elwes muda todos que entram"
+        ],
+        "ruins": [
+          "3-4: O Hospital Fuliginoso abriga necromantes hereges"
+        ]
+      },
       "atmosphere_modifiers": [
         "O fedor onipresente de miséria e decadência",
         "Sussurros de batidas passadas e fome por vir",
-        "Som de sofrimento distante e lamentos"
+        "Som de sofrimento distante e lamentos",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [
+        "Templos sem Nome (invadidos por Fathmu IX)",
+        "Santuário a Verhu (inferido pela obsessão do Rei)"
+      ],
+      "taverns": [],
+      "guilds": [
+        "Nenhuma guilda específica mencionada nas fontes."
+      ],
+      "residences": [
+        "Casebres Decrepitos (Quarteirão dos Pobres)"
+      ],
+      "ruins": [
+        "Casas Chamuscadas (Quarteirão dos Pobres)"
       ]
     },
     {
@@ -216,29 +484,168 @@
         "Caminho do Mercado",
         "Travessa do Comércio",
         "Beco da Meia‑Noite",
-        "Rota Comercial"
+        "Rota Comercial",
+        "Trilha do Cais",
+        "Estrada do Ermo",
+        "Tocas de Rato",
+        "Estrada do Rei",
+        "Estrada dos Escombros",
+        "Caminho do Operário",
+        "Trilha do Sussurro"
       ],
       "landmarks": [
         "A Fonte Central",
         "A Balança Dourada",
-        "O Relógio Silencioso"
+        "O Relógio Silencioso",
+        "O Muro do Pranto",
+        "O Sino de Ferro",
+        "O Covil do Rei dos Ratos",
+        "O Poço Vazio",
+        "Templo Carbonizado"
       ],
-      "encounters": [
-        "Cheiro de rapé seco, ervas e haxixe num mercado apinhado",
-        "Vendedor itinerante de ervas pergunta o caminho até a Vidente",
-        "Moleque pinta 'OUÇA!' com sangue de cabra num muro",
-        "Encontros gerais, como virotes de balestra atingindo portas próximas"
-      ],
-      "random_tables": [
-        "1-2: Homens do Rei vasculham bancas por impostos não pagos",
-        "3-4: Um alarme soa no mercado ilegal da meia‑noite, gerando caos",
-        "5-6: Um demagogo vocifera contra as profecias, atraindo guardas"
-      ],
+      "encounters": {
+        "district": [
+          "Cheiro de rapé seco, ervas e haxixe num mercado apinhado",
+          "Vendedor itinerante de ervas pergunta o caminho até a Vidente",
+          "Moleque pinta 'OUÇA!' com sangue de cabra num muro",
+          "Encontros gerais, como virotes de balestra atingindo portas próximas",
+          "Cheiro de rapé seco, ervas e haxixe vindo de um mercado apinhado",
+          "Um carpinteiro sem um tostão tentando vender uma muleta gasta",
+          "Três mercenários calejados arrastam um troll morto pela rua",
+          "Um sumidouro engole metade de Schleswig"
+        ],
+        "street": [
+          "Decretos do Rei são aplicados",
+          "Javalis de esgoto fuçam o lixo"
+        ],
+        "landmark": [
+          "Dunglanders usam como ponto de encontro secreto",
+          "Decretos do Rei são aplicados",
+          "Bruma Amaldiçoada vaza do chão, distorcendo a realidade"
+        ],
+        "temple": [
+          "Dunglanders usam como ponto de encontro secreto",
+          "Decretos do Rei são aplicados"
+        ],
+        "tavern": [
+          "Javalis de esgoto são servidos como carne exótica",
+          "Decretos do Rei são aplicados",
+          "O Canil promove lutas de cães e sangrias"
+        ],
+        "guild": [
+          "O império comercial de Achim Igelfreund é intocável",
+          "Voluntários ao sacrifício são processados pela guilda",
+          "A organização de financiamento de cruzadas da Arcebispa Anne Gorham caça hereges",
+          "A guilda de paz de Whiskers Jenny infecta pessoas com praga"
+        ],
+        "residence": [
+          "Dunglanders usam como ponto de encontro secreto",
+          "Decretos do Rei são aplicados",
+          "O Arcecurador René Elwes opera a Casa de Cura Física e Espiritual",
+          "Whiskers Jenny prega paz enquanto infecta pessoas com praga"
+        ],
+        "building": [
+          "Discípulos do Feiticeiro dos Vermes reúnem-se em segredo",
+          "Vermes brancos eclodem em cantos ocultos"
+        ],
+        "market": [
+          "Discípulos do Feiticeiro dos Vermes negociam saber proibido",
+          "Vermes brancos surgem misteriosamente nas bancas",
+          "A Grelha do Cedro serve Galgenburgers feitos de cadáveres"
+        ],
+        "ruins": [
+          "Wickheads elétricos conectam-se ao Dínamo Quixótico",
+          "A gosma amarela estende seu plasmódio por fendas",
+          "A Sala dos Ovos (em ruínas) verte ícor de basilisco"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Homens do Rei vasculham bancas por impostos não pagos",
+          "3-4: Um alarme soa no mercado ilegal da meia‑noite, gerando caos",
+          "5-6: Um demagogo vocifera contra as profecias, atraindo guardas",
+          "7-8: Uma figura misteriosa do mercado ilegal da meia‑noite é avistada",
+          "21-22: Arauto proclama que uma cabeça amaldiçoada flutuante observa"
+        ],
+        "building": [
+          "5-6: Névoa Amaldiçoada atinge capacidade crítica"
+        ],
+        "street": [
+          "5-6: Agentes de Maggot Marl coletam tributo"
+        ],
+        "landmark": [
+          "5-6: A Cidadela do Rei sofre cerco invisível (paranoia de Fathmu)"
+        ],
+        "market": [
+          "5-6: Javalis de esgoto são abatidos e vendidos como carne",
+          "21-22: Chandler Kasina oferece estátuas de cera em tamanho real"
+        ],
+        "temple": [
+          "5-6: Discípulos do Feiticeiro do Verme reúnem‑se em segredo"
+        ],
+        "tavern": [
+          "5-6: A Casa da Carne fornece prazeres carnais e doenças",
+          "21-22: A cozinheira Hera Venenosa prepara últimas refeições"
+        ],
+        "guild": [
+          "5-6: O Coletivo Dunglander colhe cogumelos",
+          "21-22: A sociedade de cálculo de Käthe von Wallenstein avança artes sombrias"
+        ],
+        "residence": [
+          "5-6: A Cidade Marrom de Maggot Marl prospera na imundície",
+          "21-22: O escritório da Tesoureira Käthe von Wallenstein avança cálculo em segredo"
+        ],
+        "ruins": [
+          "5-6: O Dínamo Quixotesco energiza wickheads elétricos"
+        ]
+      },
       "atmosphere_modifiers": [
         "Zumbido constante de transações sussurradas e cochichos cautelosos",
         "Mistura pungente de cheiros do mercado e decadência subjacente",
-        "Olhares ansiosos de mercadores e compradores"
-      ]
+        "Olhares ansiosos de mercadores e compradores",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [
+        "Praça Central do Mercado",
+        "Mercado Ilegal da Meia‑Noite",
+        "Mercado Geral (inferido pelo evento de 'mercado apinhado')"
+      ],
+      "temples": [],
+      "taverns": [
+        "Bordel (pode funcionar como taverna/estalagem)",
+        "O Porco Barrigudo (mencionado em lore geral de Mörk Borg; possivelmente aqui)",
+        "Uma Estalagem (mencionada como ponto inicial de PCs)"
+      ],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Quarteirão dos Artesãos",
@@ -248,33 +655,157 @@
         "Oficinas de Ferreiro",
         "Oficina de Carpinteiro",
         "Oficina do Alquimista",
-        "Lojas de Sapateiro"
+        "Lojas de Sapateiro",
+        "Oficina de Alquimista Arruinada"
       ],
       "streets": [
         "Travessa do Artesão",
         "Caminho da Fusão",
-        "Beco do Alquimista"
+        "Beco do Alquimista",
+        "Beco do Desespero"
       ],
       "landmarks": [
         "A Chaminé Fumegante",
         "A Bigorna Quebrada",
-        "As Ruínas do Alquimista"
+        "As Ruínas do Alquimista",
+        "O Cruzamento Esquecido"
       ],
-      "encounters": [
-        "Explosão, fumaça e gritos de uma oficina de alquimista arruinada",
-        "Um carpinteiro sem um tostão tentando vender uma muleta gasta",
-        "Trabalhadores barganhando por pagamentos ou suprimentos minguados",
-        "Um grupo de desclassificados jogando 'Três Caveiras Mortas'"
-      ],
-      "random_tables": [
-        "1-2: Um artesão habilidoso desaparece, suspeita-se que os homens do Rei o levaram",
-        "3-4: Falta de matéria-prima paralisa uma oficina local",
-        "5-6: Um artífice é pego produzindo mercadorias 'contrabandeadas' para o mercado ilegal"
-      ],
+      "encounters": {
+        "district": [
+          "Explosão, fumaça e gritos de uma oficina de alquimista arruinada",
+          "Um carpinteiro sem um tostão tentando vender uma muleta gasta",
+          "Trabalhadores barganhando por pagamentos ou suprimentos minguados",
+          "Um grupo de desclassificados jogando 'Três Caveiras Mortas'",
+          "Jyra de Schleswig, escolhendo uma arma com dado de dano menor",
+          "Um freguês é escoltado à força, roubado e esfaqueado ao sair de um pub",
+          "Um capelão de ressaca amaldiçoa o estado das coisas",
+          "Duplos dos PCs enlouquecem"
+        ],
+        "temple": [
+          "Espiões do Rei monitoram toda atividade religiosa",
+          "Vermes do Feiticeiro infestam o altar"
+        ],
+        "guild": [
+          "A sociedade de cálculo de Käthe von Wallenstein avança artes sombrias",
+          "Vermes do Feiticeiro infestam salões de guilda",
+          "A guilda do Vigário‑Geral Max 'Eisenhand' Trogler enforca infratores",
+          "A sociedade imortal de Perry, o Imundo, sofre escárnio eterno"
+        ],
+        "building": [
+          "A influência do Antigo corrompe a estrutura",
+          "Javalis de esgoto tomaram o território"
+        ],
+        "street": [
+          "O Feiticeiro dos Vermes espalha ovos nas sarjetas",
+          "Agentes de Maggot Marl coletam tributo"
+        ],
+        "landmark": [
+          "A influência do Feiticeiro dos Vermes emana de dentro",
+          "Vermes brancos eclodem em câmaras ocultas",
+          "Cultistas criam a gosma amarela em câmaras ocultas"
+        ],
+        "market": [
+          "A influência do Antigo corrompe todas as transações",
+          "Javalis de esgoto são abatidos e vendidos como carne",
+          "Alma, a Mercadora de Múmias, vende múmias como combustível"
+        ],
+        "tavern": [
+          "Discípulos do Feiticeiro dos Vermes recrutam membros",
+          "Vermes do Feiticeiro infestam a comida",
+          "O Restaurante serve depravações culinárias"
+        ],
+        "residence": [
+          "Discípulos do Feiticeiro dos Vermes escondem-se em cômodos secretos",
+          "Vermes brancos eclodem em cantos ocultos",
+          "A Tesoureira Käthe von Wallenstein avança cálculo em segredo",
+          "Perry, o Imundo, arrota, peida e sua sem parar"
+        ],
+        "ruins": [
+          "Bruma Amaldiçoada ameaça explodir",
+          "Cultistas criam a gosma amarela em câmaras ocultas",
+          "As Termas (em ruínas) são assombradas por atendentes"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um artesão habilidoso desaparece, suspeita-se que os homens do Rei o levaram",
+          "3-4: Falta de matéria-prima paralisa uma oficina local",
+          "5-6: Um artífice é pego produzindo mercadorias 'contrabandeadas' para o mercado ilegal",
+          "9-10: A psicose do Rei Fathmu manifesta‑se como alucinação pela cidade",
+          "23-24: Tempestade de granizo açoita a cidade; ossos se quebram, sangue espirra"
+        ],
+        "building": [
+          "7-8: O mendigo imortal Ulf agride transeuntes"
+        ],
+        "street": [
+          "7-8: Ladrões de memória roubam identidades de transeuntes"
+        ],
+        "landmark": [
+          "7-8: O Múr Branco atrai wickheads elétricos"
+        ],
+        "market": [
+          "7-8: Discípulos do Feiticeiro do Verme negociam saber proibido",
+          "23-24: O mercador Karl vende máscaras de praga de todos os tipos"
+        ],
+        "temple": [
+          "7-8: A influência do Antigo corrompe o sagrado"
+        ],
+        "tavern": [
+          "7-8: O Canil promove lutas de cães e sangrias",
+          "23-24: Luna, do Canil, recruta para missões suicidas"
+        ],
+        "guild": [
+          "7-8: Os Abutres catam despojos da maré de esgoto",
+          "23-24: A guilda universitária do Prof. Constantin Wagner saqueia tumbas antigas"
+        ],
+        "residence": [
+          "7-8: O Cogumelo Gigante de Klum ergue‑se do esgoto",
+          "23-24: Os aposentos do Prof. Constantin Wagner oferecem expedições a tumbas"
+        ],
+        "ruins": [
+          "7-8: A Névoa Amaldiçoada ameaça explodir"
+        ]
+      },
       "atmosphere_modifiers": [
         "Tilintar rítmico de martelos misturado a frustração contida",
         "Cheiro acre de químicos queimando e desespero",
-        "A ameaça constante de batidas ou fechamento das oficinas"
+        "A ameaça constante de batidas ou fechamento das oficinas",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": [
+        "Oficina de Alquimista Arruinada"
       ]
     },
     {
@@ -285,34 +816,157 @@
         "Armazéns Decrepitos",
         "Barracos de Pescadores",
         "Tavernas do Cais",
-        "Escritórios de Comércio Fluvial (abandonados)"
+        "Escritórios de Comércio Fluvial (abandonados)",
+        "Sanatório de Schleswig"
       ],
       "streets": [
         "Trilha do Cais",
         "Estrada da Orla de Onda",
         "Caminho da Beira d'Água",
-        "Entrada de Esgoto"
+        "Entrada de Esgoto",
+        "Travessa do Comércio",
+        "Estrada de Ferro"
       ],
       "landmarks": [
         "Docas do Lago Onda",
         "O Farol Arruinado",
-        "A Bóia Cantante"
+        "A Bóia Cantante",
+        "Sanatório de Schleswig"
       ],
-      "encounters": [
-        "Um cadáver disforme encontrado perto do rio",
-        "Um marinheiro perna‑de‑pau aborda os PCs para gabar‑se do Angloarfish",
-        "Trabalhadores carregam um caixão do tamanho de um barco para um padre anônimo",
-        "Crianças desaparecidas no Lago Onda"
-      ],
-      "random_tables": [
-        "1-2: O rio transborda, trazendo detritos e achados sombrios às ruas",
-        "3-4: Um 'navio estranho' encalha perto das docas",
-        "5-6: As águas do Lago Onda tornam‑se 'enegradas' ou 'alcatroadas'"
-      ],
+      "encounters": {
+        "district": [
+          "Um cadáver disforme encontrado perto do rio",
+          "Um marinheiro perna‑de‑pau aborda os PCs para gabar‑se do Angloarfish",
+          "Trabalhadores carregam um caixão do tamanho de um barco para um padre anônimo",
+          "Crianças desaparecidas no Lago Onda",
+          "Um desertor dentado, que lembra um bordel em Schleswig",
+          "Uma onda de cem ratos cruza a rua, chocalhando dentes",
+          "Dois macacos comem o que restou de um corvo morto",
+          "Uma revolta de escravos em Galgenbeck (geral)"
+        ],
+        "building": [
+          "A gosma amarela estende seu plasmódio pelas paredes",
+          "Agentes de Maggot Marl tocam negócios"
+        ],
+        "street": [
+          "Espiões do Rei vigiam de cada esquina",
+          "Ladrões de memória roubam transeuntes"
+        ],
+        "landmark": [
+          "A presença do Antigo corrompe a área",
+          "Javalis de esgoto tomaram o território",
+          "A Sala dos Ovos pulsa energia profana"
+        ],
+        "market": [
+          "Cultistas da gosma amarela vendem substâncias misteriosas",
+          "Agentes de Maggot Marl coletam tributo",
+          "Svendon vende potes de cera de ouvido (dele e roubada)"
+        ],
+        "temple": [
+          "Discípulos do Feiticeiro dos Vermes reúnem-se em segredo",
+          "Vermes brancos eclodem nas pias de água benta"
+        ],
+        "tavern": [
+          "A influência do Antigo corrompe a atmosfera",
+          "Vermes brancos aparecem misteriosamente nas bebidas",
+          "O Porão Oculto vende Pergaminhos Sagrados"
+        ],
+        "guild": [
+          "Discípulos do Feiticeiro dos Vermes infiltram a guilda",
+          "Vermes brancos são criados em laboratórios",
+          "A guilda do Arcecurador René Elwes muda todos que entram"
+        ],
+        "residence": [
+          "A influência do Antigo corrompe o lar",
+          "Javalis de esgoto tomaram o jardim",
+          "O Professor Constantin Wagner oferece expedições a tumbas antigas"
+        ],
+        "ruins": [
+          "O mendigo imortal Ulf agride transeuntes",
+          "A gosma sonda Schleswig, alimentando-se e aprendendo",
+          "A Sala do Trono (em ruínas) está cheia de espíritos inquietos"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: O rio transborda, trazendo detritos e achados sombrios às ruas",
+          "3-4: Um 'navio estranho' encalha perto das docas",
+          "5-6: As águas do Lago Onda tornam‑se 'enegradas' ou 'alcatroadas'",
+          "11-12: Um sumidouro engole parte de um distrito",
+          "25-26: Prata é lançada por um homem nu, mas o saco está cheio de tarântulas"
+        ],
+        "building": [
+          "9-10: Fábrica senciente expande‑se sozinha"
+        ],
+        "street": [
+          "9-10: Vermes brancos rastejam pelo calçamento"
+        ],
+        "landmark": [
+          "9-10: Santuário do Basilisco exige sacrifícios"
+        ],
+        "market": [
+          "9-10: Ladrões de memória vendem identidades roubadas",
+          "25-26: Undine oferece serviços de barbeiro itinerante"
+        ],
+        "temple": [
+          "9-10: Cultistas da gosma amarela realizam ritos blasfemos"
+        ],
+        "tavern": [
+          "9-10: O Restaurante serve depravações culinárias",
+          "25-26: Earnest Jim, do Valete de Uma Mão, oferece jogos"
+        ],
+        "guild": [
+          "9-10: A Guilda dos Cultivadores de Cogumelos cria dungshrooms",
+          "25-26: O império comercial de Achim Igelfreund é intocável"
+        ],
+        "residence": [
+          "9-10: O Esconderijo do Feiticeiro do Verme contém segredos",
+          "25-26: A sede de Achim Igelfreund recebe visitas de Josilfa (análoga ao Rei Fathmu)"
+        ],
+        "ruins": [
+          "9-10: A Prisão Secreta contém cismáticos e pan‑órgãos"
+        ]
+      },
       "atmosphere_modifiers": [
         "O fedor de água estagnada e peixe em decomposição",
         "Os gritos lutuosos das gaivotas misturam‑se ao desespero da cidade",
-        "O bater silencioso da água nos madeiros podres"
+        "O bater silencioso da água nos madeiros podres",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": [
+        "Ruínas Gerais (onde um Sacerdote Herético delira)"
       ]
     },
     {
@@ -329,29 +983,148 @@
         "Travessa das Chaminés",
         "Estrada de Ferro",
         "Caminho do Operário",
-        "Via da Forja"
+        "Via da Forja",
+        "Rota de Fuga",
+        "Beco da Imundície"
       ],
       "landmarks": [
         "A Grande Fornalha",
         "A Torre de Maquinaria do Rei",
-        "O Sino de Ferro"
+        "O Sino de Ferro",
+        "A Chaminé Fumegante",
+        "A Bigorna Quebrada"
       ],
-      "encounters": [
-        "Chuva pesada esvazia as ruas enquanto todos buscam abrigo, revelando os sons industriais",
-        "Escribas bêbados tropeçam, espalhando rolos e mapas",
-        "Trabalhadores acorrentados são levados ao serviço",
-        "Soldados inspecionam mercadorias para o Rei"
-      ],
-      "random_tables": [
-        "1-2: Uma peça crucial de maquinário quebra, causando pânico generalizado",
-        "3-4: Uma pastilha de 'pneumotoxina bloqueada no tempo' é encontrada no lixo industrial",
-        "5-6: Um trecho da zona é 'esvaziado' conforme profecia, desaparecendo"
-      ],
+      "encounters": {
+        "district": [
+          "Chuva pesada esvazia as ruas enquanto todos buscam abrigo, revelando os sons industriais",
+          "Escribas bêbados tropeçam, espalhando rolos e mapas",
+          "Trabalhadores acorrentados são levados ao serviço",
+          "Soldados inspecionam mercadorias para o Rei",
+          "Um mestre de ervas ocultas, possivelmente do mercado ilegal da meia-noite de Schleswig",
+          "Um grupo de desclassificados joga Três Caveiras Mortas com dados viciados",
+          "Uma explosão na oficina arruinada de um alquimista"
+        ],
+        "building": [
+          "Alados nidificam nas tesouras e beirais",
+          "Decretos do Rei são aplicados aqui"
+        ],
+        "street": [
+          "Caçadores de ratos enfrentam caçadores de gente",
+          "Voluntários ao sacrifício caminham para o destino"
+        ],
+        "landmark": [
+          "A gosma amarela estende seu plasmódio",
+          "Agentes de Maggot Marl tocam negócios aqui",
+          "As Termas fervem com calor fantasmagórico"
+        ],
+        "market": [
+          "Alados são capturados e vendidos como animais",
+          "Decretos do Rei regulam todo o comércio",
+          "Chandler Kasina oferece estátuas de cera em tamanho real"
+        ],
+        "temple": [
+          "A influência do Antigo corrompe o sagrado",
+          "Javalis de esgoto tomaram o território"
+        ],
+        "tavern": [
+          "Cultistas da gosma amarela conspiram em cantos escuros",
+          "Agentes de Maggot Marl coletam tributo",
+          "O Bordel de Gunter oferece espécimes exóticos"
+        ],
+        "guild": [
+          "A influência do Antigo corrompe práticas de guilda",
+          "Javalis de esgoto são treinados e vendidos",
+          "A guilda universitária do Prof. Constantin Wagner saqueia tumbas antigas"
+        ],
+        "residence": [
+          "A gosma amarela estende seu plasmódio pelas paredes",
+          "Agentes de Maggot Marl coletam tributo",
+          "Achim Igelfreund recebe visitas de figuras importantes"
+        ],
+        "ruins": [
+          "Fábrica senciente constrói marionetes de destruição em massa",
+          "Cultistas são remodelados pela influência da gosma"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Uma peça crucial de maquinário quebra, causando pânico generalizado",
+          "3-4: Uma pastilha de 'pneumotoxina bloqueada no tempo' é encontrada no lixo industrial",
+          "5-6: Um trecho da zona é 'esvaziado' conforme profecia, desaparecendo",
+          "13-14: Uma turba violenta jorra dos becos; a turba manda",
+          "27-28: Prédio desaparece; porão e habitantes somem com um ploft"
+        ],
+        "building": [
+          "11-12: Ovos de verme eclodem em cantos ocultos"
+        ],
+        "street": [
+          "11-12: A influência do Antigo infiltra‑se de baixo"
+        ],
+        "landmark": [
+          "11-12: O Poço das Almas revela memórias esquecidas"
+        ],
+        "market": [
+          "11-12: Os Abutres recolhem despojos da maré de esgoto",
+          "27-28: Uma família vende relíquias de séculos por comida"
+        ],
+        "temple": [
+          "11-12: Flutters nidificam na arquitetura sagrada"
+        ],
+        "tavern": [
+          "11-12: O Porão Oculto vende Pergaminhos Sagrados",
+          "27-28: Madame Neugyer, da Casa da Carne, procura novos trabalhadores"
+        ],
+        "guild": [
+          "11-12: Criadores de Flutter treinam as criaturas",
+          "27-28: A corporação de mineração de zumbis de Hildegard Abbing alimenta mendigos aos zumbis"
+        ],
+        "residence": [
+          "11-12: O Jardim de Dennys é protegido por legiões de flores",
+          "27-28: O escritório de Hildegard Abbing usa zumbis para minerar minério"
+        ],
+        "ruins": [
+          "11-12: A Caverna de Espeleotemas cria a gosma amarela"
+        ]
+      },
       "atmosphere_modifiers": [
         "O ranger e o tilintar incessantes do metal",
         "Ar espesso, sufocante, cheio de fuligem e vapores",
-        "A presença opressiva de capatazes armados"
-      ]
+        "A presença opressiva de capatazes armados",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     },
     {
       "name": "Arrabaldes",
@@ -367,29 +1140,132 @@
         "Estrada do Ermo",
         "Trilha do Sussurro",
         "Travessa de Ninguém",
-        "Rota de Fuga"
+        "Rota de Fuga",
+        "Entrada de Esgoto"
       ],
       "landmarks": [
         "O Cruzamento Esquecido",
         "A Árvore Sentinela (muitas vezes usada para enforcamentos)",
-        "A Antiga Pedra Limite"
+        "A Antiga Pedra Limite",
+        "A Balança Dourada",
+        "As Ruínas do Alquimista",
+        "O Farol Arruinado",
+        "A Bóia Cantante"
       ],
-      "encounters": [
-        "Uma árvore colossal com uma dúzia de hereges enforcados",
-        "Vinte pessoas se aquecem numa fogueira; uma é espiã de Grift",
-        "Um wickhead desnorteado perambula pelos arrabaldes",
-        "Um Sacerdote Herético delira em ruínas"
-      ],
-      "random_tables": [
-        "1-2: Corre aqui o boato do assassinato de Zigmund, irmão do Rei Fathmu IX",
-        "3-4: Animais selvagens, movidos pela fome, invadem os arrabaldes",
-        "5-6: Relata‑se um prédio que desaparece, sumindo com seus moradores"
-      ],
+      "encounters": {
+        "district": [
+          "Uma árvore colossal com uma dúzia de hereges enforcados",
+          "Vinte pessoas se aquecem numa fogueira; uma é espiã de Grift",
+          "Um wickhead desnorteado perambula pelos arrabaldes",
+          "Um Sacerdote Herético delira em ruínas",
+          "Gente em farrapos brigando por pão, com guardas observando e apostando",
+          "Um virote de balestra atinge uma porta próxima",
+          "Um demagogo grita sobre falsidade de profecias; guardas a caminho"
+        ],
+        "building": [
+          "Dunglanders usam como entrada secreta",
+          "Espiões de Fathmu monitoram toda atividade"
+        ],
+        "street": [
+          "Dunglanders emergem das grelhas de esgoto",
+          "Vermes brancos rastejam pelo calçamento"
+        ],
+        "landmark": [
+          "Alados nidificam e procriam na estrutura",
+          "Espiões do Rei monitoram toda atividade",
+          "A Sala do Trono ecoa palavras finais inquietantes"
+        ],
+        "market": [
+          "Dunglanders trocam farinha de cogumelo e cerveja",
+          "Espiões do Rei monitoram todas as transações",
+          "O mercador Karl vende máscaras de praga de todo tipo"
+        ],
+        "temple": [
+          "Cultistas da gosma amarela realizam ritos blasfemos",
+          "Agentes de Maggot Marl conduzem negócios"
+        ],
+        "tavern": [
+          "Alados nidificam nas tesouras e beirais",
+          "Espiões do Rei monitoram todas as conversas",
+          "A Grelha do Cedro serve Galgenburgers"
+        ],
+        "guild": [
+          "Cultistas da gosma amarela atuam dentro da guilda",
+          "Agentes de Maggot Marl controlam operações",
+          "A corporação de mineração de zumbis de Hildegard Abbing alimenta mendigos a zumbis"
+        ],
+        "residence": [
+          "Alados nidificam no sótão e nos beirais",
+          "Espiões do Rei monitoram toda atividade",
+          "Hildegard Abbing usa zumbis para minerar minério e os alimenta com mendigos"
+        ],
+        "ruins": [
+          "Necromantes hereges usam patógenos especiais para 'melhorias'",
+          "A maquinaria dos antigos necrótetos ainda funciona"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Corre aqui o boato do assassinato de Zigmund, irmão do Rei Fathmu IX",
+          "3-4: Animais selvagens, movidos pela fome, invadem os arrabaldes",
+          "5-6: Relata‑se um prédio que desaparece, sumindo com seus moradores",
+          "15-16: Vazamento de maldição sobe do calçamento; vapores malditos queimam quem inala"
+        ],
+        "market": [
+          "13-14: A Loja de Curiosidades de Edwina vende óleo de bebê e corações batendo em caixa"
+        ],
+        "tavern": [
+          "13-14: O Bordel de Gunter oferece espécimes exóticos"
+        ],
+        "guild": [
+          "13-14: A guilda de excomunhão do Cardeal Benjamin von Swerdenö tortura rivais"
+        ],
+        "residence": [
+          "13-14: A casa do Cardeal Benjamin von Swerdenö excomunga rivais"
+        ]
+      },
       "atmosphere_modifiers": [
         "Silêncio estranho, rompido por ventos farfalhantes e uivos distantes",
         "Sensação de estar sob olhos invisíveis",
-        "Contraste gritante entre natureza crescida e estruturas desoladas"
-      ]
+        "Contraste gritante entre natureza crescida e estruturas desoladas",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [
+        "Choupanas Escondidas (Arrabaldes)",
+        "Fazendas Isoladas (Arrabaldes)"
+      ],
+      "ruins": []
     },
     {
       "name": "Favelas",
@@ -399,535 +1275,132 @@
         "Cortiços Apertados",
         "Bordéis Improvisados",
         "Tocas de Droga Escondidas",
-        "Covis de Jogo Improvisados"
+        "Covis de Jogo Improvisados",
+        "Uma Estalagem (sem nome)"
       ],
       "streets": [
         "Esgotos de Grift (descritor usado genericamente)",
         "Travessa da Boca de Esgoto",
         "Beco da Imundície",
-        "Tocas de Rato"
+        "Tocas de Rato",
+        "Avenida Guardada",
+        "Travessa das Chaminés",
+        "Travessa de Ninguém"
       ],
       "landmarks": [
         "A Fossa Fétida",
         "O Covil do Rei dos Ratos",
-        "A Cruz Partida"
+        "A Cruz Partida",
+        "A Árvore Sentinela"
       ],
-      "encounters": [
-        "Uma onda de cem ratos atravessa a rua em disparada",
-        "Frequentadores são expulsos com violência de uma taverna, depois roubados e esfaqueados",
-        "Desclassificados jogam 'Três Caveiras Mortas' com dados viciados",
-        "Alguém nascido nos esgotos de Grift (antecedente geral de escória)"
-      ],
-      "random_tables": [
-        "1-2: Um semideus doente e cego perambula pelas favelas",
-        "3-4: Alguém torna‑se 'um com a negritude' (catástrofe arcana)",
-        "5-6: Uma guilda de negociação de paz humano‑rato atua aqui"
-      ],
+      "encounters": {
+        "district": [
+          "Uma onda de cem ratos atravessa a rua em disparada",
+          "Frequentadores são expulsos com violência de uma taverna, depois roubados e esfaqueados",
+          "Desclassificados jogam 'Três Caveiras Mortas' com dados viciados",
+          "Alguém nascido nos esgotos de Grift (antecedente geral de escória)",
+          "Uma escória nascida no esgoto, criada por ratos em Grift, nas favelas de Schleswig",
+          "Uma árvore gigante com uma dúzia de hereges enforcados",
+          "Um camponês sem olhos, no pelourinho, implora por água"
+        ],
+        "building": [
+          "Ladrões de memória roubam identidades de visitantes"
+        ],
+        "street": [
+          "A influência do Antigo infiltra-se de baixo"
+        ],
+        "landmark": [
+          "Ladrões de memória roubam identidades de visitantes",
+          "Marionetes da Fábrica de Marionetes caçam pela área"
+        ],
+        "market": [
+          "Ladrões de memória vendem identidades roubadas",
+          "Edwina vende óleo de bebê, catapora, dedos em conserva, capas humanas e corações batendo em uma caixa",
+          "Undine oferece serviços de barbeiro itinerante"
+        ],
+        "temple": [
+          "Alados nidificam na arquitetura sagrada"
+        ],
+        "tavern": [
+          "Dunglanders surgem de entradas secretas",
+          "Lotta Gravy serve ensopado grosso e cerveja forte",
+          "A Lucy Impudica oferece promoções de bebidas e equipe"
+        ],
+        "guild": [
+          "Criadores de Alados treinam as criaturas",
+          "Decretos do Rei regulam toda a atividade",
+          "A filantropia de Tasha Mar, possuída por demônio, mantém o demônio afastado"
+        ],
+        "residence": [
+          "Ladrões de memória roubam identidades dos moradores",
+          "O Cardeal Benjamin von Swerdenö excomunga rivais e os tortura pessoalmente",
+          "Tasha Mar alimenta necessitados e veste congelados"
+        ],
+        "ruins": [
+          "Wickheads elétricos experimentam êxtase, mas arriscam queimar",
+          "Pan-órgãos da Prisão Secreta uivam no escuro"
+        ]
+      },
+      "random_tables": {
+        "district": [
+          "1-2: Um semideus doente e cego perambula pelas favelas",
+          "3-4: Alguém torna‑se 'um com a negritude' (catástrofe arcana)",
+          "5-6: Uma guilda de negociação de paz humano‑rato atua aqui",
+          "3-4: Uma gangue das favelas inicia uma briga de rua"
+        ],
+        "market": [
+          "15-16: Gesa vende Pergaminhos Sagrados e Impuros"
+        ],
+        "tavern": [
+          "15-16: A Grelha do Cedro serve Galgenburgers"
+        ],
+        "guild": [
+          "15-16: A organização da Arcebispa Anne Gorham caça hereges para financiar cruzadas"
+        ],
+        "residence": [
+          "15-16: A residência da Arcebispa Anne Gorham caça hereges com fervor"
+        ]
+      },
       "atmosphere_modifiers": [
         "O fedor avassalador de lixo e desespero",
         "Sons constantes de vermes correndo e gritos abafados",
-        "Sensação palpável de abandono e desesperança"
-      ]
+        "Sensação palpável de abandono e desesperança",
+        "Terror e despotismo rondam as ruas",
+        "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
+        "O lembrete constante de ser tributado até a fome",
+        "O ar é espesso com o fedor de dejetos humanos e decadência geral",
+        "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
+        "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
+        "A chuva martelante implacável esvazia as ruas",
+        "Gritos distantes e abafados vindos do Sanatório",
+        "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
+        "O desespero silencioso do povo",
+        "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
+        "A influência do Antigo infiltra‑se de baixo (geral)",
+        "A gosma amarela estende seu plasmódio pelas paredes (geral)",
+        "Alados esvoaçam acima em busca de presa (geral)",
+        "Dunglanders emergem das grelhas de esgoto (geral)",
+        "Javalis de esgoto fuçam montes de lixo (geral)",
+        "Agentes de Maggot Marl coletam tributo (geral)",
+        "Ladrões de memória roubam identidades de transeuntes (geral)",
+        "Vermes brancos rastejam pelo calçamento (geral)",
+        "Decretos do Rei são aplicados por toda parte",
+        "Espiões do Rei Fathmu IX vigiam de cada esquina",
+        "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
+        "Bruma Amaldiçoada ameaça explodir (geral)",
+        "Marionetes alcançam senciência e vagam livres (geral)",
+        "O mendigo imortal Ulf agride transeuntes (geral)",
+        "Fábrica senciente se expande sozinha (geral)",
+        "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
+        "A maquinaria dos antigos necrótetos ainda funciona (geral)"
+      ],
+      "markets": [],
+      "temples": [],
+      "taverns": [],
+      "guilds": [],
+      "residences": [],
+      "ruins": []
     }
-  ],
-  "buildings": [
-    "Cidadela Secreta do Rei Fathmu IX",
-    "Sanatório de Schleswig",
-    "Bordel (sem nome)",
-    "Uma Estalagem (sem nome)",
-    "Oficina de Alquimista Arruinada",
-    "Residências Nobres (inferidas pelo Chifre dos Lordes de Schleswig)",
-    "Casas (invadidas pelos homens de Fathmu)",
-    "Templos (invadidos pelos homens de Fathmu)",
-    "Celeiros (invadidos pelos homens de Fathmu)",
-    "Aldeias (invadidas pelos homens de Fathmu)"
-  ],
-  "streets": [
-    "Estrada do Rei",
-    "Alameda da Cidadela",
-    "Caminho do Nobre",
-    "Avenida Guardada",
-    "Beco da Fome",
-    "Beco do Desespero",
-    "Estrada dos Escombros",
-    "Caminho do Pária",
-    "Caminho do Mercado",
-    "Travessa do Comércio",
-    "Beco da Meia‑Noite",
-    "Rota Comercial",
-    "Travessa do Artesão",
-    "Caminho da Fusão",
-    "Beco do Alquimista",
-    "Trilha do Cais",
-    "Estrada da Orla de Onda",
-    "Caminho da Beira d'Água",
-    "Travessa das Chaminés",
-    "Estrada de Ferro",
-    "Caminho do Operário",
-    "Via da Forja",
-    "Estrada do Ermo",
-    "Trilha do Sussurro",
-    "Travessa de Ninguém",
-    "Rota de Fuga",
-    "Beco da Imundície",
-    "Tocas de Rato",
-    "Entrada de Esgoto"
-  ],
-  "landmarks": [
-    "Cidadela Secreta do Rei Fathmu IX",
-    "Sanatório de Schleswig",
-    "Lago Onda (as margens orientais do Lago Onda ficam perto do Forte da Morte; Wästland tem o Lago Onda)",
-    "Forca Real",
-    "O Grande Cofre dos Impostos",
-    "O Poço Vazio",
-    "O Muro do Pranto",
-    "Templo Carbonizado",
-    "A Fonte Central",
-    "A Balança Dourada",
-    "O Relógio Silencioso",
-    "A Chaminé Fumegante",
-    "A Bigorna Quebrada",
-    "As Ruínas do Alquimista",
-    "Docas do Lago Onda",
-    "O Farol Arruinado",
-    "A Bóia Cantante",
-    "A Grande Fornalha",
-    "A Torre de Maquinaria do Rei",
-    "O Sino de Ferro",
-    "O Cruzamento Esquecido",
-    "A Árvore Sentinela",
-    "A Antiga Pedra Limite",
-    "A Fossa Fétida",
-    "O Covil do Rei dos Ratos",
-    "A Cruz Partida"
-  ],
-  "markets": [
-    "Mercado Ilegal da Meia‑Noite",
-    "Praça Central do Mercado",
-    "Mercado Geral (inferido pelo evento de 'mercado apinhado')"
-  ],
-  "temples": [
-    "Templos sem Nome (invadidos por Fathmu IX)",
-    "Santuário a Verhu (inferido pela obsessão do Rei)"
-  ],
-  "taverns": [
-    "Bordel (pode funcionar como taverna/estalagem)",
-    "O Porco Barrigudo (mencionado em lore geral de Mörk Borg; possivelmente aqui)",
-    "Pub sem Nome (de onde um freguês foi escoltado)",
-    "Uma Estalagem (mencionada como ponto inicial de PCs)"
-  ],
-  "guilds": [
-    "Nenhuma guilda específica mencionada nas fontes."
-  ],
-  "residences": [
-    "Cidadela Secreta do Rei Fathmu IX",
-    "Residências Nobres (inferidas pelos lordes de Schleswig)",
-    "Casebres Decrepitos (Quarteirão dos Pobres)",
-    "Choupanas Escondidas (Arrabaldes)",
-    "Fazendas Isoladas (Arrabaldes)"
-  ],
-  "ruins": [
-    "Oficina de Alquimista Arruinada",
-    "Ruínas Gerais (onde um Sacerdote Herético delira)",
-    "Casas Chamuscadas (Quarteirão dos Pobres)"
-  ],
-  "encounters": {
-    "district": [
-      "Homens do Rei Fathmu IX realizando batidas e cobrando impostos",
-      "Rogust da Beira de Wästland, fugitivo do Sanatório de Schleswig, posando de baronete",
-      "Jyra de Schleswig, escolhendo uma arma com dado de dano menor",
-      "Um desertor dentado, que lembra um bordel em Schleswig",
-      "Um mestre de ervas ocultas, possivelmente do mercado ilegal da meia-noite de Schleswig",
-      "Uma escória nascida no esgoto, criada por ratos em Grift, nas favelas de Schleswig",
-      "Gente em farrapos brigando por pão, com guardas observando e apostando",
-      "Um marinheiro perna-de-pau gabando-se do Angloarfish",
-      "Trabalhadores carregando um caixão do tamanho de um barco",
-      "Um carpinteiro sem um tostão tentando vender uma muleta gasta",
-      "Um freguês é escoltado à força, roubado e esfaqueado ao sair de um pub",
-      "Uma onda de cem ratos cruza a rua, chocalhando dentes",
-      "Um grupo de desclassificados joga Três Caveiras Mortas com dados viciados",
-      "Um virote de balestra atinge uma porta próxima",
-      "Uma árvore gigante com uma dúzia de hereges enforcados",
-      "Pessoas se aquecem em uma fogueira; uma é espiã de Grift",
-      "Um cão raivoso revira o lixo",
-      "Três mercenários calejados arrastam um troll morto pela rua",
-      "Um capelão de ressaca amaldiçoa o estado das coisas",
-      "Cheiro de rapé seco, ervas e haxixe vindo de um mercado apinhado",
-      "Dois macacos comem o que restou de um corvo morto",
-      "Uma explosão na oficina arruinada de um alquimista",
-      "Um demagogo grita sobre falsidade de profecias; guardas a caminho",
-      "Um camponês sem olhos, no pelourinho, implora por água",
-      "Uma guilhotina enferrujada e muito usada é reparada e limpa",
-      "Crianças desaparecidas no Lago Onda (ali perto)",
-      "Um sumidouro engole metade de Schleswig",
-      "Duplos dos PCs enlouquecem",
-      "Uma revolta de escravos em Galgenbeck (geral)"
-    ],
-    "building": [
-      "O Ceifador (cobrador de impostos do Rei) esconde-se na 'cidadela' de Fathmu (analogia)",
-      "Sacerdotes do Basilisco conduzem cerimônias sombrias",
-      "Discípulos do Feiticeiro dos Vermes reúnem-se em segredo",
-      "A influência do Antigo corrompe a estrutura",
-      "A gosma amarela estende seu plasmódio pelas paredes",
-      "Alados nidificam nas tesouras e beirais",
-      "Dunglanders usam como entrada secreta",
-      "Ladrões de memória roubam identidades de visitantes",
-      "Voluntários ao sacrifício aguardam seu destino",
-      "Vermes do Feiticeiro infestam a fundação",
-      "Vermes brancos eclodem em cantos ocultos",
-      "Javalis de esgoto tomaram o território",
-      "Agentes de Maggot Marl tocam negócios",
-      "Decretos do Rei são aplicados aqui",
-      "Espiões de Fathmu monitoram toda atividade"
-    ],
-    "street": [
-      "O Ceifador passa entregando intimações (análogas aos homens do Rei)",
-      "Cavaleiros do Basilisco escoltam condenados (análogos aos guardas do Rei)",
-      "O Feiticeiro dos Vermes espalha ovos nas sarjetas",
-      "Espiões do Rei vigiam de cada esquina",
-      "Caçadores de ratos enfrentam caçadores de gente",
-      "Dunglanders emergem das grelhas de esgoto",
-      "A influência do Antigo infiltra-se de baixo",
-      "Cultistas da gosma amarela esgueiram-se nas sombras",
-      "Alados esvoaçam em busca de presa",
-      "Javalis de esgoto fuçam o lixo",
-      "Agentes de Maggot Marl coletam tributo",
-      "Ladrões de memória roubam transeuntes",
-      "Voluntários ao sacrifício caminham para o destino",
-      "Vermes brancos rastejam pelo calçamento",
-      "Decretos do Rei são aplicados"
-    ],
-    "landmark": [
-      "O Ceifador aparece para recolher sacrifícios",
-      "Sacerdotes do Basilisco conduzem rituais",
-      "A influência do Feiticeiro dos Vermes emana de dentro",
-      "A presença do Antigo corrompe a área",
-      "A gosma amarela estende seu plasmódio",
-      "Alados nidificam e procriam na estrutura",
-      "Dunglanders usam como ponto de encontro secreto",
-      "Ladrões de memória roubam identidades de visitantes",
-      "Voluntários ao sacrifício reúnem-se por orientação",
-      "Vermes do Feiticeiro infestam a fundação",
-      "Vermes brancos eclodem em câmaras ocultas",
-      "Javalis de esgoto tomaram o território",
-      "Agentes de Maggot Marl tocam negócios aqui",
-      "Decretos do Rei são aplicados",
-      "Espiões do Rei monitoram toda atividade",
-      "Marionetes da Fábrica de Marionetes caçam pela área",
-      "Necromantes do Hospital Fuliginoso buscam cadáveres",
-      "Wickheads elétricos reúnem-se no Dínamo Quixótico",
-      "Bruma Amaldiçoada vaza do chão, distorcendo a realidade",
-      "Cultistas criam a gosma amarela em câmaras ocultas",
-      "A Sala dos Ovos pulsa energia profana",
-      "As Termas fervem com calor fantasmagórico",
-      "A Sala do Trono ecoa palavras finais inquietantes"
-    ],
-    "market": [
-      "O Ceifador recolhe almas como moeda",
-      "Sacerdotes do Basilisco vendem relíquias e indulgências",
-      "Discípulos do Feiticeiro dos Vermes negociam saber proibido",
-      "A influência do Antigo corrompe todas as transações",
-      "Cultistas da gosma amarela vendem substâncias misteriosas",
-      "Alados são capturados e vendidos como animais",
-      "Dunglanders trocam farinha de cogumelo e cerveja",
-      "Ladrões de memória vendem identidades roubadas",
-      "Voluntários ao sacrifício oferecem seus serviços",
-      "Vermes do Feiticeiro são vendidos como bichos de estimação",
-      "Vermes brancos surgem misteriosamente nas bancas",
-      "Javalis de esgoto são abatidos e vendidos como carne",
-      "Agentes de Maggot Marl coletam tributo",
-      "Decretos do Rei regulam todo o comércio",
-      "Espiões do Rei monitoram todas as transações",
-      "Edwina vende óleo de bebê, catapora, dedos em conserva, capas humanas e corações batendo em uma caixa",
-      "Gesa vende Pergaminhos Sagrados e Impuros",
-      "Gunter oferece espécimes exóticos para prazeres carnais",
-      "A Grelha do Cedro serve Galgenburgers feitos de cadáveres",
-      "Alma, a Mercadora de Múmias, vende múmias como combustível",
-      "Svendon vende potes de cera de ouvido (dele e roubada)",
-      "Chandler Kasina oferece estátuas de cera em tamanho real",
-      "O mercador Karl vende máscaras de praga de todo tipo",
-      "Undine oferece serviços de barbeiro itinerante",
-      "Família vende relíquias seculares por comida"
-    ],
-    "temple": [
-      "O Ceifador aparece durante cerimônias de sacrifício",
-      "Sacerdotes do Basilisco conduzem rituais sombrios",
-      "Discípulos do Feiticeiro dos Vermes reúnem-se em segredo",
-      "A influência do Antigo corrompe o sagrado",
-      "Cultistas da gosma amarela realizam ritos blasfemos",
-      "Alados nidificam na arquitetura sagrada",
-      "Dunglanders usam como ponto de encontro secreto",
-      "Ladrões de memória roubam identidades de fiéis",
-      "Voluntários ao sacrifício buscam orientação e absolvição",
-      "Vermes do Feiticeiro infestam o altar",
-      "Vermes brancos eclodem nas pias de água benta",
-      "Javalis de esgoto tomaram o território",
-      "Agentes de Maggot Marl conduzem negócios",
-      "Decretos do Rei são aplicados",
-      "Espiões do Rei monitoram toda atividade religiosa"
-    ],
-    "tavern": [
-      "O Ceifador aparece para cobrar almas como pagamento",
-      "Sacerdotes do Basilisco recolhem informações de fregueses",
-      "Discípulos do Feiticeiro dos Vermes recrutam membros",
-      "A influência do Antigo corrompe a atmosfera",
-      "Cultistas da gosma amarela conspiram em cantos escuros",
-      "Alados nidificam nas tesouras e beirais",
-      "Dunglanders surgem de entradas secretas",
-      "Ladrões de memória roubam identidades de bêbados",
-      "Voluntários ao sacrifício bebem suas últimas horas",
-      "Vermes do Feiticeiro infestam a comida",
-      "Vermes brancos aparecem misteriosamente nas bebidas",
-      "Javalis de esgoto são servidos como carne exótica",
-      "Agentes de Maggot Marl coletam tributo",
-      "Decretos do Rei são aplicados",
-      "Espiões do Rei monitoram todas as conversas",
-      "Lotta Gravy serve ensopado grosso e cerveja forte",
-      "O Valete de Uma Mão oferece jogo e divertimento",
-      "A Casa da Carne fornece prazeres carnais e doenças",
-      "O Canil promove lutas de cães e sangrias",
-      "O Restaurante serve depravações culinárias",
-      "O Porão Oculto vende Pergaminhos Sagrados",
-      "O Bordel de Gunter oferece espécimes exóticos",
-      "A Grelha do Cedro serve Galgenburgers",
-      "A Lucy Impudica oferece promoções de bebidas e equipe",
-      "A velha Mirth vende tortas de carne recheadas de mortos"
-    ],
-    "guild": [
-      "O Ceifador recruta membros de guildas",
-      "Sacerdotes do Basilisco supervisionam operações",
-      "Discípulos do Feiticeiro dos Vermes infiltram a guilda",
-      "A influência do Antigo corrompe práticas de guilda",
-      "Cultistas da gosma amarela atuam dentro da guilda",
-      "Criadores de Alados treinam as criaturas",
-      "Dunglanders usam salões de guilda como pontos de encontro",
-      "Ladrões de memória roubam segredos e identidades",
-      "Voluntários ao sacrifício são processados pela guilda",
-      "Vermes do Feiticeiro infestam salões de guilda",
-      "Vermes brancos são criados em laboratórios",
-      "Javalis de esgoto são treinados e vendidos",
-      "Agentes de Maggot Marl controlam operações",
-      "Decretos do Rei regulam toda a atividade",
-      "Espiões do Rei monitoram reuniões",
-      "A guilda de excomunhão do Cardeal Benjamin von Swerdenö tortura rivais",
-      "A organização de financiamento de cruzadas da Arcebispa Anne Gorham caça hereges",
-      "A guilda do Vigário‑Geral Max 'Eisenhand' Trogler enforca infratores",
-      "A guilda do Arcecurador René Elwes muda todos que entram",
-      "A sociedade de cálculo de Käthe von Wallenstein avança artes sombrias",
-      "A guilda universitária do Prof. Constantin Wagner saqueia tumbas antigas",
-      "O império comercial de Achim Igelfreund é intocável",
-      "A corporação de mineração de zumbis de Hildegard Abbing alimenta mendigos a zumbis",
-      "A filantropia de Tasha Mar, possuída por demônio, mantém o demônio afastado",
-      "A rede de mendigos de Liesl, a Vermelha, controla informação de rua",
-      "O culto do Reverendo Karloman adora o Cordeiro de Estanho Vivo",
-      "A guilda de paz de Whiskers Jenny infecta pessoas com praga",
-      "A sociedade imortal de Perry, o Imundo, sofre escárnio eterno"
-    ],
-    "residence": [
-      "O Ceifador aparece para cobrar almas como aluguel",
-      "Sacerdotes do Basilisco realizam inspeções",
-      "Discípulos do Feiticeiro dos Vermes escondem-se em cômodos secretos",
-      "A influência do Antigo corrompe o lar",
-      "A gosma amarela estende seu plasmódio pelas paredes",
-      "Alados nidificam no sótão e nos beirais",
-      "Dunglanders usam como ponto de encontro secreto",
-      "Ladrões de memória roubam identidades dos moradores",
-      "Voluntários ao sacrifício preparam-se para o destino",
-      "Vermes do Feiticeiro infestam a fundação",
-      "Vermes brancos eclodem em cantos ocultos",
-      "Javalis de esgoto tomaram o jardim",
-      "Agentes de Maggot Marl coletam tributo",
-      "Decretos do Rei são aplicados",
-      "Espiões do Rei monitoram toda atividade",
-      "O Cardeal Benjamin von Swerdenö excomunga rivais e os tortura pessoalmente",
-      "A Arcebispa Anne Gorham caça hereges e infiéis com fervor",
-      "O Vigário‑Geral Max 'Eisenhand' Trogler enforca infratores primários",
-      "O Arcecurador René Elwes opera a Casa de Cura Física e Espiritual",
-      "A Tesoureira Käthe von Wallenstein avança cálculo em segredo",
-      "O Professor Constantin Wagner oferece expedições a tumbas antigas",
-      "Achim Igelfreund recebe visitas de figuras importantes",
-      "Hildegard Abbing usa zumbis para minerar minério e os alimenta com mendigos",
-      "Tasha Mar alimenta necessitados e veste congelados",
-      "A rede de mendigos de Liesl, a Vermelha, espiona, rouba e espalha boatos",
-      "O Reverendo Karloman adora um Cordeiro de Estanho Vivo",
-      "Whiskers Jenny prega paz enquanto infecta pessoas com praga",
-      "Perry, o Imundo, arrota, peida e sua sem parar"
-    ],
-    "ruins": [
-      "Marionetes alcançam senciência e vagam livres",
-      "Necromantes recompõem trabalhadores mortos como servos",
-      "Wickheads elétricos conectam-se ao Dínamo Quixótico",
-      "Bruma Amaldiçoada ameaça explodir",
-      "O mendigo imortal Ulf agride transeuntes",
-      "Fábrica senciente constrói marionetes de destruição em massa",
-      "Necromantes hereges usam patógenos especiais para 'melhorias'",
-      "Wickheads elétricos experimentam êxtase, mas arriscam queimar",
-      "A fábrica se expande usando materiais de construção",
-      "Ovos de verme são espalhados pelas ruínas",
-      "A gosma amarela estende seu plasmódio por fendas",
-      "Cultistas criam a gosma amarela em câmaras ocultas",
-      "A gosma sonda Schleswig, alimentando-se e aprendendo",
-      "Cultistas são remodelados pela influência da gosma",
-      "A maquinaria dos antigos necrótetos ainda funciona",
-      "Pan-órgãos da Prisão Secreta uivam no escuro",
-      "A cozinha do Restaurante é assombrada",
-      "As lutas de cães do Canil ecoam pelas ruínas",
-      "A Sala dos Ovos (em ruínas) verte ícor de basilisco",
-      "As Termas (em ruínas) são assombradas por atendentes",
-      "A Sala do Trono (em ruínas) está cheia de espíritos inquietos"
-    ]
-  },
-  "random_tables": {
-    "district": [
-      "1-2: Homens do Rei Fathmu IX entregam intimações ou cobram impostos",
-      "3-4: Uma gangue das favelas inicia uma briga de rua",
-      "5-6: Um paciente fugitivo do Sanatório causa tumulto",
-      "7-8: Uma figura misteriosa do mercado ilegal da meia‑noite é avistada",
-      "9-10: A psicose do Rei Fathmu manifesta‑se como alucinação pela cidade",
-      "11-12: Um sumidouro engole parte de um distrito",
-      "13-14: Uma turba violenta jorra dos becos; a turba manda",
-      "15-16: Vazamento de maldição sobe do calçamento; vapores malditos queimam quem inala",
-      "17-18: Prédios em chamas; carnificina nas ruas",
-      "19-20: Velha Mirth vende tortas de carne recheadas de mortos",
-      "21-22: Arauto proclama que uma cabeça amaldiçoada flutuante observa",
-      "23-24: Tempestade de granizo açoita a cidade; ossos se quebram, sangue espirra",
-      "25-26: Prata é lançada por um homem nu, mas o saco está cheio de tarântulas",
-      "27-28: Prédio desaparece; porão e habitantes somem com um ploft"
-    ],
-    "building": [
-      "1-2: Marionetes ganham senciência e atacam visitantes",
-      "3-4: Wickheads elétricos 'plugam' no Dínamo Quixotesco",
-      "5-6: Névoa Amaldiçoada atinge capacidade crítica",
-      "7-8: O mendigo imortal Ulf agride transeuntes",
-      "9-10: Fábrica senciente expande‑se sozinha",
-      "11-12: Ovos de verme eclodem em cantos ocultos"
-    ],
-    "street": [
-      "1-2: Homens do Rei Fathmu IX passam a cavalo entregando intimações",
-      "3-4: Javalis de esgoto fuçam montes de lixo",
-      "5-6: Agentes de Maggot Marl coletam tributo",
-      "7-8: Ladrões de memória roubam identidades de transeuntes",
-      "9-10: Vermes brancos rastejam pelo calçamento",
-      "11-12: A influência do Antigo infiltra‑se de baixo"
-    ],
-    "landmark": [
-      "1-2: As águas do Lago Onda recuam, revelando visões estranhas",
-      "3-4: O Sanatório libera pacientes 'reformados' — ainda loucos",
-      "5-6: A Cidadela do Rei sofre cerco invisível (paranoia de Fathmu)",
-      "7-8: O Múr Branco atrai wickheads elétricos",
-      "9-10: Santuário do Basilisco exige sacrifícios",
-      "11-12: O Poço das Almas revela memórias esquecidas"
-    ],
-    "market": [
-      "1-2: Dunglanders trocam farinha de cogumelo e cerveja",
-      "3-4: Flutters são capturadas e vendidas como animais de estimação",
-      "5-6: Javalis de esgoto são abatidos e vendidos como carne",
-      "7-8: Discípulos do Feiticeiro do Verme negociam saber proibido",
-      "9-10: Ladrões de memória vendem identidades roubadas",
-      "11-12: Os Abutres recolhem despojos da maré de esgoto",
-      "13-14: A Loja de Curiosidades de Edwina vende óleo de bebê e corações batendo em caixa",
-      "15-16: Gesa vende Pergaminhos Sagrados e Impuros",
-      "17-18: Alma, a Mercadora de Múmias, vende múmias como combustível",
-      "19-20: Svendon vende potes de cera de ouvido (dele e roubada)",
-      "21-22: Chandler Kasina oferece estátuas de cera em tamanho real",
-      "23-24: O mercador Karl vende máscaras de praga de todos os tipos",
-      "25-26: Undine oferece serviços de barbeiro itinerante",
-      "27-28: Uma família vende relíquias de séculos por comida"
-    ],
-    "temple": [
-      "1-2: Sacerdotes do Basilisco realizam rituais sombrios",
-      "3-4: Homens do Rei Fathmu IX surgem durante cerimônias de 'sacrifício'",
-      "5-6: Discípulos do Feiticeiro do Verme reúnem‑se em segredo",
-      "7-8: A influência do Antigo corrompe o sagrado",
-      "9-10: Cultistas da gosma amarela realizam ritos blasfemos",
-      "11-12: Flutters nidificam na arquitetura sagrada"
-    ],
-    "tavern": [
-      "1-2: Lotta Gravy serve ensopado grosso e cerveja forte",
-      "3-4: O Valete de Uma Mão oferece jogo e divertimento",
-      "5-6: A Casa da Carne fornece prazeres carnais e doenças",
-      "7-8: O Canil promove lutas de cães e sangrias",
-      "9-10: O Restaurante serve depravações culinárias",
-      "11-12: O Porão Oculto vende Pergaminhos Sagrados",
-      "13-14: O Bordel de Gunter oferece espécimes exóticos",
-      "15-16: A Grelha do Cedro serve Galgenburgers",
-      "17-18: A Lucy Impudica oferece promoções de bebidas e equipe",
-      "19-20: A velha Mirth vende tortas de carne recheadas de mortos",
-      "21-22: A cozinheira Hera Venenosa prepara últimas refeições",
-      "23-24: Luna, do Canil, recruta para missões suicidas",
-      "25-26: Earnest Jim, do Valete de Uma Mão, oferece jogos",
-      "27-28: Madame Neugyer, da Casa da Carne, procura novos trabalhadores"
-    ],
-    "guild": [
-      "1-2: A Ordem dos Cavaleiros Basiliscos patrulha por hereges",
-      "3-4: Discípulos do Feiticeiro do Verme recrutam membros",
-      "5-6: O Coletivo Dunglander colhe cogumelos",
-      "7-8: Os Abutres catam despojos da maré de esgoto",
-      "9-10: A Guilda dos Cultivadores de Cogumelos cria dungshrooms",
-      "11-12: Criadores de Flutter treinam as criaturas",
-      "13-14: A guilda de excomunhão do Cardeal Benjamin von Swerdenö tortura rivais",
-      "15-16: A organização da Arcebispa Anne Gorham caça hereges para financiar cruzadas",
-      "17-18: A guilda do Vigário‑Geral Max 'Eisenhand' Trogler enforca infratores",
-      "19-20: A guilda do Arqui‑curador René Elwes muda todos que entram",
-      "21-22: A sociedade de cálculo de Käthe von Wallenstein avança artes sombrias",
-      "23-24: A guilda universitária do Prof. Constantin Wagner saqueia tumbas antigas",
-      "25-26: O império comercial de Achim Igelfreund é intocável",
-      "27-28: A corporação de mineração de zumbis de Hildegard Abbing alimenta mendigos aos zumbis"
-    ],
-    "residence": [
-      "1-2: O Estúdio de Leopold guarda pinturas esquecidas",
-      "3-4: O Canil de Luna abriga desesperados",
-      "5-6: A Cidade Marrom de Maggot Marl prospera na imundície",
-      "7-8: O Cogumelo Gigante de Klum ergue‑se do esgoto",
-      "9-10: O Esconderijo do Feiticeiro do Verme contém segredos",
-      "11-12: O Jardim de Dennys é protegido por legiões de flores",
-      "13-14: A casa do Cardeal Benjamin von Swerdenö excomunga rivais",
-      "15-16: A residência da Arcebispa Anne Gorham caça hereges com fervor",
-      "17-18: A mansão do Vigário‑Geral Max 'Eisenhand' Trogler enforca primeiros infratores",
-      "19-20: A casa do Arqui‑curador René Elwes muda todos que entram",
-      "21-22: O escritório da Tesoureira Käthe von Wallenstein avança cálculo em segredo",
-      "23-24: Os aposentos do Prof. Constantin Wagner oferecem expedições a tumbas",
-      "25-26: A sede de Achim Igelfreund recebe visitas de Josilfa (análoga ao Rei Fathmu)",
-      "27-28: O escritório de Hildegard Abbing usa zumbis para minerar minério"
-    ],
-    "ruins": [
-      "1-2: A Fábrica de Marionetes constrói marionetes de destruição em massa",
-      "3-4: O Hospital Fuliginoso abriga necromantes hereges",
-      "5-6: O Dínamo Quixotesco energiza wickheads elétricos",
-      "7-8: A Névoa Amaldiçoada ameaça explodir",
-      "9-10: A Prisão Secreta contém cismáticos e pan‑órgãos",
-      "11-12: A Caverna de Espeleotemas cria a gosma amarela"
-    ]
-  },
-  "atmosphere_modifiers": [
-    "Terror e despotismo rondam as ruas",
-    "A sensação palpável da paranoia e dos medos invisíveis do Rei Fathmu IX",
-    "O lembrete constante de ser tributado até a fome",
-    "O ar é espesso com o fedor de dejetos humanos e decadência geral",
-    "Melodias melancólicas de bardos esfarrapados e famintos ecoam nos becos",
-    "A súbita cacofonia inquietante de asas e grasnidos de bandos de corvos",
-    "A chuva martelante implacável esvazia as ruas",
-    "Gritos distantes e abafados vindos do Sanatório",
-    "A penumbra invasiva, às vezes quebrada por exibições tristes e espalhafatosas",
-    "O desespero silencioso do povo",
-    "Ovos do Feiticeiro dos Vermes eclodem nas sarjetas (geral)",
-    "A influência do Antigo infiltra‑se de baixo (geral)",
-    "A gosma amarela estende seu plasmódio pelas paredes (geral)",
-    "Alados esvoaçam acima em busca de presa (geral)",
-    "Dunglanders emergem das grelhas de esgoto (geral)",
-    "Javalis de esgoto fuçam montes de lixo (geral)",
-    "Agentes de Maggot Marl coletam tributo (geral)",
-    "Ladrões de memória roubam identidades de transeuntes (geral)",
-    "Vermes brancos rastejam pelo calçamento (geral)",
-    "Decretos do Rei são aplicados por toda parte",
-    "Espiões do Rei Fathmu IX vigiam de cada esquina",
-    "Wickheads elétricos conectam‑se ao Dínamo Quixótico (geral)",
-    "Bruma Amaldiçoada ameaça explodir (geral)",
-    "Marionetes alcançam senciência e vagam livres (geral)",
-    "O mendigo imortal Ulf agride transeuntes (geral)",
-    "Fábrica senciente se expande sozinha (geral)",
-    "A gosma amarela sonda Schleswig, alimentando‑se e aprendendo (geral)",
-    "A maquinaria dos antigos necrótetos ainda funciona (geral)"
   ],
   "metadata": {
     "migrated_from": "databases/cities/schleswig.json",

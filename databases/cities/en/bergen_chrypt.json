@@ -150,7 +150,8 @@
       "markets": [
         "The Preservation Market",
         "Undead Servants Exchange",
-        "The Cold Storage"
+        "The Cold Storage",
+        "The Ice Craft Fair"
       ],
       "temples": [
         "Temple of Eternal Preservation",
@@ -160,12 +161,15 @@
       "taverns": [
         "The Frozen Goblet",
         "The Undead's Rest",
-        "The Icy Draught"
+        "The Icy Draught",
+        "The Crypt's Warmth",
+        "The Cold Comfort"
       ],
       "guilds": [
         "The Preservation Society",
         "Guild of Undead Servants",
-        "The Ice Crafters"
+        "The Ice Crafters",
+        "The Cold Preservers"
       ],
       "residences": [
         "Undead Noble's Mansion",
@@ -177,67 +181,117 @@
         "Collapsed Ice Palace Wing",
         "The Shattered Watchtower"
       ],
-      "encounters": [
-        "Stone Mages whisper of the Demon Engine while color drains from the Pale",
-        "Corpse golems haul ledgers and bones up the Avenue of Kings",
-        "Westerners glide like oil through galleries, prefiguring harm and disaster"
-      ],
+      "encounters": {
+        "district": [
+          "Stone Mages whisper of the Demon Engine while color drains from the Pale",
+          "Corpse golems haul ledgers and bones up the Avenue of Kings",
+          "Westerners glide like oil through galleries, prefiguring harm and disaster",
+          "A sick yellow aurora rages over the ice; tempers fray and hands go to blades"
+        ],
+        "building": [
+          "Corpse golems heave at winches in a Golem Assembly Hall"
+        ],
+        "street": [
+          "A gigantic stone bridge groans; a talking troll demands a skull tax"
+        ],
+        "landmark": [
+          "The Great Eastern Wheel turns under corpse golem hands"
+        ],
+        "market": [
+          "The Old Market sells unclean scrolls under a Westerner’s smile"
+        ],
+        "temple": [
+          "Hollywood Chapel whispers to HER beneath tar‑black brick"
+        ],
+        "tavern": [
+          "The Broken Cross reeks of old ale and despair"
+        ],
+        "guild": [
+          "Bone Speakers barter truths for a price of silence"
+        ],
+        "residence": [
+          "A decrepit village room whispers of worm‑eaten maps"
+        ],
+        "ruins": [
+          "Ruined ARK’HAR crawls with unwashed wildlings and their bowels‑king"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Undead nobles hold court, discussing centuries-old politics",
           "3-4: Preservation engines malfunction, causing rapid ice formation",
-          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
+          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice",
+          "3-4: Preservation engines malfunction, causing rapid ice formation"
         ],
         "building": [
           "1-2: The structure phases between life and death realms",
           "3-4: Preservation magic fails temporarily, causing rapid decay",
-          "5-6: Undead nobility conduct eternal administrative business"
+          "5-6: Undead nobility conduct eternal administrative business",
+          "1-2: The structure phases between life and death realms"
         ],
         "street": [
           "1-2: Undead noble procession blocks passage for hours",
           "3-4: Ice crystals form rapidly, making travel dangerous",
-          "5-6: Ancient Nordic spirits demand respect for old laws"
+          "5-6: Ancient Nordic spirits demand respect for old laws",
+          "1-2: Undead noble procession blocks passage for hours"
         ],
         "landmark": [
           "1-2: The monument activates ancient Nordic magic",
           "3-4: Undead nobles gather for ceremonial purposes",
-          "5-6: The Crypt Lord appears to make pronouncements"
+          "5-6: The Crypt Lord appears to make pronouncements",
+          "1-2: The monument activates ancient Nordic magic"
         ],
         "market": [
           "1-2: Eternal contracts bind unwary customers forever",
           "3-4: Undead nobles purchase services for the afterlife",
+          "5-6: Ancient Nordic artifacts gain magical properties",
           "5-6: Ancient Nordic artifacts gain magical properties"
         ],
         "temple": [
           "1-2: Ancient Nordic gods manifest during worship",
           "3-4: The altar demands preservation of life essence",
-          "5-6: Undead nobles seek blessings for eternal rest"
+          "5-6: Undead nobles seek blessings for eternal rest",
+          "1-2: Ancient Nordic gods manifest during worship"
         ],
         "tavern": [
           "1-2: Undead nobles share centuries-old gossip and secrets",
           "3-4: Ancient Nordic drinking songs summon ancestral spirits",
-          "5-6: Ice wine grants visions of the past and future"
+          "5-6: Ice wine grants visions of the past and future",
+          "3-4: Ancient Nordic drinking songs summon ancestral spirits"
         ],
         "guild": [
           "1-2: Guild masters offer apprenticeships lasting centuries",
           "3-4: Ancient Nordic techniques are jealously guarded",
-          "5-6: The Crypt Lord commissions eternal public works"
+          "5-6: The Crypt Lord commissions eternal public works",
+          "1-2: Guild masters offer apprenticeships lasting centuries"
         ],
         "residence": [
           "1-2: Ancient Nordic family spirits demand recognition",
           "3-4: The home exists simultaneously in multiple time periods",
-          "5-6: Undead nobles entertain guests from past centuries"
+          "5-6: Undead nobles entertain guests from past centuries",
+          "1-2: Ancient Nordic family spirits demand recognition"
         ],
         "ruins": [
           "1-2: Ancient Nordic treasure is discovered in the rubble",
           "3-4: Preservation magic attempts to restore the ruins",
-          "5-6: Undead from before the city's transformation appear"
+          "5-6: Undead from before the city's transformation appear",
+          "1-2: Ancient Nordic treasure is discovered in the rubble"
         ]
       },
       "atmosphere_modifiers": [
         "The air is so cold it burns the lungs",
         "Ice crystals form with each breath",
-        "Ancient Nordic chants echo from the glacier"
+        "Ancient Nordic chants echo from the glacier",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -253,22 +307,26 @@
       "streets": [
         "The Noble's Passage",
         "Ice Crystal Avenue",
-        "The Eternal March"
+        "The Eternal March",
+        "The Undead Promenade"
       ],
       "landmarks": [
         "The Crypt Lord's Seal",
         "The Ice Crystal Chandelier",
-        "The Eternal Flame (Cold)"
+        "The Eternal Flame (Cold)",
+        "Undead Noble Monument"
       ],
       "markets": [
         "The Noble's Commerce",
         "Eternal Service Market",
-        "The Ice Craft Fair"
+        "The Ice Craft Fair",
+        "Nordic Relic Bazaar"
       ],
       "temples": [
         "Shrine of Nordic Ancestors",
         "The Ice Crystal Sanctuary",
-        "Temple of Beautiful Death"
+        "Temple of Beautiful Death",
+        "Shrine of the Undead Noble"
       ],
       "taverns": [
         "The Noble's Table",
@@ -278,79 +336,133 @@
       "guilds": [
         "The Noble's Attendants",
         "Nordic Grave Tenders",
-        "The Eternal Guard"
+        "The Eternal Guard",
+        "Guild of Undead Servants"
       ],
       "residences": [
         "The Preservation House",
         "Ancient Nordic Lodge",
-        "The Eternal Residence"
+        "The Eternal Residence",
+        "Undead Noble's Mansion",
+        "The Noble's Estate"
       ],
       "ruins": [
         "Ancient Glacier Caves",
         "Broken Ice Sculptures",
-        "The Lost Nordic Hall"
+        "The Lost Nordic Hall",
+        "Pre-Undead Nordic Ruins"
       ],
-      "encounters": [
-        "Eternal tea turns tar‑black; etiquette masks ravenous hunger",
-        "Dvörga wardens’ masks fog with firedamp as the CODE is enforced",
-        "Bone‑Speakers trade secrets for silence in shadowed salons"
-      ],
+      "encounters": {
+        "district": [
+          "Eternal tea turns tar‑black; etiquette masks ravenous hunger",
+          "Dvörga wardens’ masks fog with firedamp as the CODE is enforced",
+          "Bone‑Speakers trade secrets for silence in shadowed salons",
+          "A TEAR crazes the glacier; bitter wind and whispers spill through"
+        ],
+        "residence": [
+          "A noble manor keeps an undead tutor and colder children"
+        ],
+        "ruins": [
+          "A university of the dead hums with Malakbal’s lessons"
+        ],
+        "building": [
+          "The Preservation Engine shrieks as old ice splits"
+        ],
+        "street": [
+          "Acid snow hisses on steel, pitting blades and burning skin"
+        ],
+        "landmark": [
+          "The Howling Bridge plays a sad tune through gnutz‑holes"
+        ],
+        "market": [
+          "Rat People trade live captives and marrow flasks"
+        ],
+        "temple": [
+          "The Scintillating Temple blesses gems for HER"
+        ],
+        "tavern": [
+          "The Soggy Cradle’s keeper slips on his beard for laughs"
+        ],
+        "guild": [
+          "Stone Mages of Spinel charter forbidden surveys"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Noble undead hold eternal tea ceremonies",
           "3-4: Ancient family feuds erupt between undead houses",
-          "5-6: Preservation magic creates temporal anomalies"
+          "5-6: Preservation magic creates temporal anomalies",
+          "1-2: Undead nobles hold court, discussing centuries-old politics"
         ],
         "building": [
           "1-2: The structure maintains itself through undead magic",
           "3-4: Ice never melts within these preserved walls",
-          "5-6: Undead nobles conduct eternal business here"
+          "5-6: Undead nobles conduct eternal business here",
+          "3-4: Preservation magic fails temporarily, causing rapid decay"
         ],
         "street": [
           "1-2: Undead nobles process in ancient ceremonial order",
           "3-4: Ice crystals make the pathway treacherous",
-          "5-6: Ancient Nordic spirits patrol the streets"
+          "5-6: Ancient Nordic spirits patrol the streets",
+          "3-4: Ice crystals form rapidly, making travel dangerous"
         ],
         "landmark": [
           "1-2: The monument preserves ancient Nordic glory",
           "3-4: Undead nobles gather here for eternal ceremonies",
-          "5-6: The Crypt Lord appears for important occasions"
+          "5-6: The Crypt Lord appears for important occasions",
+          "3-4: Undead nobles gather for ceremonial purposes"
         ],
         "market": [
           "1-2: Trade conducted with services instead of coin",
           "3-4: Undead nobles purchase eternal luxuries",
-          "5-6: Ancient Nordic artifacts change hands"
+          "5-6: Ancient Nordic artifacts change hands",
+          "3-4: Undead nobles purchase services for the afterlife"
         ],
         "temple": [
           "1-2: The altar preserves offerings for eternity",
           "3-4: Undead nobles seek blessings for their condition",
-          "5-6: Ancient Nordic gods still receive worship"
+          "5-6: Ancient Nordic gods still receive worship",
+          "5-6: Undead nobles seek blessings for eternal rest"
         ],
         "tavern": [
           "1-2: Drinks are supernaturally preserved and never spoil",
           "3-4: Undead nobles share tales of past centuries",
-          "5-6: Ancient Nordic drinking songs echo eternally"
+          "5-6: Ancient Nordic drinking songs echo eternally",
+          "1-2: Undead nobles share centuries-old gossip and secrets"
         ],
         "guild": [
           "1-2: Guild members serve the city's undead nobility",
           "3-4: Ancient Nordic crafting techniques are preserved",
-          "5-6: The Crypt Lord's authority governs all guilds"
+          "5-6: The Crypt Lord's authority governs all guilds",
+          "9-10: Undead craftsmen compete with living workers"
         ],
         "residence": [
           "1-2: The home is preserved in eternal perfection",
           "3-4: Undead nobles live in timeless luxury",
-          "5-6: Ancient Nordic family spirits inhabit rooms"
+          "5-6: Ancient Nordic family spirits inhabit rooms",
+          "3-4: The home exists simultaneously in multiple time periods"
         ],
         "ruins": [
           "1-2: Ancient Nordic power still lingers in the stones",
           "3-4: The Crypt Lord's magic failed to preserve this",
-          "5-6: Undead from before the preservation wander here"
+          "5-6: Undead from before the preservation wander here",
+          "3-4: Preservation magic attempts to restore the ruins"
         ]
       },
       "atmosphere_modifiers": [
         "Undead nobility conversing in archaic languages",
         "Cold magic makes the air shimmer with frost",
-        "The creaking of ancient ice under pressure"
+        "The creaking of ancient ice under pressure",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -360,7 +472,8 @@
       "buildings": [
         "The Warden's Tower",
         "The Eternal Watch",
-        "Ancient Nordic Hall"
+        "Ancient Nordic Hall",
+        "Frozen Mausoleum"
       ],
       "streets": [
         "The Warden's Patrol",
@@ -402,67 +515,117 @@
         "Ruined Preservation Engine",
         "Abandoned Servant Quarters"
       ],
-      "encounters": [
-        "Rat Scavengers from Pax Gangrän test the palisade and flee if missed",
-        "Gnutz chew iron; the Howling Bridge begins to sing",
-        "A yellow aurora gnaws tempers as the Warden’s bell tolls"
-      ],
+      "encounters": {
+        "district": [
+          "Rat Scavengers from Pax Gangrän test the palisade and flee if missed",
+          "Gnutz chew iron; the Howling Bridge begins to sing",
+          "A yellow aurora gnaws tempers as the Warden’s bell tolls",
+          "Chains of corpse golems drag ice blocks toward the Preservation Engine"
+        ],
+        "building": [
+          "A petrified giant skull bathhouse exhales bone‑steam"
+        ],
+        "street": [
+          "Seven nailed crosses on a ridge—mouths sewn shut—explode when touched"
+        ],
+        "landmark": [
+          "The Avenue of Kings glares with stone eyes"
+        ],
+        "market": [
+          "Kartusch gem ledgers change hands under the CODE"
+        ],
+        "temple": [
+          "A consumed god’s temple demands warm offerings"
+        ],
+        "tavern": [
+          "A rat‑gnawed inn serves marrow stew and worse"
+        ],
+        "guild": [
+          "Corpse Cult flesh‑wrights recruit with precise smiles"
+        ],
+        "residence": [
+          "A bathhouse inside a giant’s skull sighs with steam"
+        ],
+        "ruins": [
+          "A sunken chapel’s belfry peals over slime and pearls"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Eternal guards challenge all who lack proper authorization",
           "3-4: The Crypt Lord's procession passes through the district",
-          "5-6: Glacier shifts, revealing new chambers and passages"
+          "5-6: Glacier shifts, revealing new chambers and passages",
+          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
         ],
         "building": [
           "1-2: Ancient Nordic runes power the building",
           "3-4: The Crypt Lord's authority emanates from within",
-          "5-6: Preservation engines keep everything frozen"
+          "5-6: Preservation engines keep everything frozen",
+          "7-8: Ancient Nordic runes activate, changing the building"
         ],
         "street": [
           "1-2: The Crypt Lord's procession passes through",
           "3-4: Preservation magic keeps the path eternally frozen",
-          "5-6: Servants clear ice that forms continuously"
+          "5-6: Servants clear ice that forms continuously",
+          "5-6: Ancient Nordic spirits demand respect for old laws"
         ],
         "landmark": [
           "1-2: Ice magic emanates from the structure",
           "3-4: Ancient runes activate when approached",
-          "5-6: The landmark serves as a gateway to death"
+          "5-6: The landmark serves as a gateway to death",
+          "9-10: Ice forms sacred patterns around the landmark"
         ],
         "market": [
           "1-2: The Crypt Lord's servants oversee all trade",
           "3-4: Ice crafts that never melt are highly valued",
-          "5-6: Services for the dead and undead are common"
+          "5-6: Services for the dead and undead are common",
+          "7-8: Preservation services are traded for life essence"
         ],
         "temple": [
           "1-2: The Crypt Lord conducts dark ceremonies",
           "3-4: Ice forms sacred patterns during rituals",
-          "5-6: Preservation magic sanctifies the space"
+          "5-6: Preservation magic sanctifies the space",
+          "3-4: The altar demands preservation of life essence"
         ],
         "tavern": [
           "1-2: The Crypt Lord's servants gather information",
           "3-4: Ice wine that burns cold is the specialty",
-          "5-6: Preservation magic keeps food fresh forever"
+          "5-6: Preservation magic keeps food fresh forever",
+          "5-6: Ice wine grants visions of the past and future"
         ],
         "guild": [
           "1-2: Preservation magic enhances all guild work",
           "3-4: Undead masters teach eternal apprentices",
-          "5-6: Ice crafting requires centuries to master"
+          "5-6: Ice crafting requires centuries to master",
+          "3-4: Ancient Nordic techniques are jealously guarded"
         ],
         "residence": [
           "1-2: Preservation magic maintains all furnishings",
           "3-4: The Crypt Lord's favor protects residents",
-          "5-6: Ice never forms inside due to special wards"
+          "5-6: Ice never forms inside due to special wards",
+          "5-6: Undead nobles entertain guests from past centuries"
         ],
         "ruins": [
           "1-2: Ice has reclaimed what magic could not save",
           "3-4: Nordic spirits mourn their forgotten home",
-          "5-6: Preservation attempts left strange magical effects"
+          "5-6: Preservation attempts left strange magical effects",
+          "5-6: Undead from before the city's transformation appear"
         ]
       },
       "atmosphere_modifiers": [
         "The sound of preservation engines humming",
         "Cold wind carries whispers of the long dead",
-        "Frozen statues of ancient heroes line the way"
+        "Frozen statues of ancient heroes line the way",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -472,7 +635,8 @@
       "buildings": [
         "The Preservation Engine",
         "Glacier Carved Cathedral",
-        "The Ice Archive"
+        "The Ice Archive",
+        "The Preservation Chamber"
       ],
       "streets": [
         "Glacier Heart Road",
@@ -487,7 +651,9 @@
       "markets": [
         "The Preservation Market",
         "Nordic Relic Bazaar",
-        "The Ice Craft Fair"
+        "The Ice Craft Fair",
+        "The Glacier Harvest",
+        "The Noble's Commerce"
       ],
       "temples": [
         "Temple of the Glacier Heart",
@@ -497,12 +663,15 @@
       "taverns": [
         "The Preserved Spirits",
         "The Cold Comfort",
-        "The Warden's Lodge"
+        "The Warden's Lodge",
+        "The Glacier Inn",
+        "The Noble's Table"
       ],
       "guilds": [
         "The Preservation Society",
         "The Cold Preservers",
-        "Ancient Rune Keepers"
+        "Ancient Rune Keepers",
+        "Glacier Sculptors Guild"
       ],
       "residences": [
         "The Preservation House",
@@ -512,69 +681,120 @@
       "ruins": [
         "The Cracked Glacier Heart",
         "Ruined Preservation Engine",
-        "Ancient Glacier Caves"
+        "Ancient Glacier Caves",
+        "The Lost Nordic Hall"
       ],
-      "encounters": [
-        "The Preservation Engine shrieks, demanding a sacrifice of memories",
-        "Oil‑black snow drifts from burst reserves far below",
-        "Cold light leaks from rune cracks; breath turns purple"
-      ],
+      "encounters": {
+        "district": [
+          "The Preservation Engine shrieks, demanding a sacrifice of memories",
+          "Oil‑black snow drifts from burst reserves far below",
+          "Cold light leaks from rune cracks; breath turns purple",
+          "Rat Scavengers from Pax Gangrän skitter along the battlements, testing the gates"
+        ],
+        "building": [
+          "The Demon Engine ticks under frost, wishes curdle and spoil"
+        ],
+        "street": [
+          "A memorial carved into an inert stone golem; it stirs when defiled"
+        ],
+        "landmark": [
+          "The Pale drinks the color from breath and blood"
+        ],
+        "market": [
+          "Black oil is bartered by mask‑wearers ankle‑deep in sludge"
+        ],
+        "temple": [
+          "Cathedral of bones creaks; a golden‑haired infant sleeps on the altar"
+        ],
+        "tavern": [
+          "A Westerner sells luck in bottles that taste like oil"
+        ],
+        "guild": [
+          "Dvörga wardens enforce the CODE with ink‑eyes"
+        ],
+        "residence": [
+          "A dvörga dorm reeks of mold and firedamp"
+        ],
+        "ruins": [
+          "The temple of a consumed god drinks blood for the Deer God"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Preservation engines malfunction, causing rapid ice formation",
           "3-4: The Glacier Heart demands a sacrifice of memories",
-          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
+          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice",
+          "9-10: Glacier shifts, revealing new chambers and passages"
         ],
         "building": [
           "1-2: Preservation engines keep everything frozen",
           "3-4: Servants who died centuries ago still work here",
-          "5-6: The building exists partially in the realm of death"
+          "5-6: The building exists partially in the realm of death",
+          "11-12: Ice magic creates new rooms and passages"
         ],
         "street": [
           "1-2: The street leads deeper into the glacier",
           "3-4: Cold wind carries whispers of the long dead",
-          "5-6: Frozen statues of ancient heroes line the way"
+          "5-6: Frozen statues of ancient heroes line the way",
+          "11-12: Cold magic makes the air visible and hard to breathe"
         ],
         "landmark": [
           "1-2: Preservation magic keeps it eternally perfect",
           "3-4: Nordic ancestors manifest around the monument",
-          "5-6: The structure connects to the Glacier Heart"
+          "5-6: The structure connects to the Glacier Heart",
+          "11-12: Ancient spirits manifest to share forgotten wisdom"
         ],
         "market": [
           "1-2: Preservation services are the main commerce",
           "3-4: Nordic runes are carved into trading tokens",
-          "5-6: Cold magic enhances all goods sold here"
+          "5-6: Cold magic enhances all goods sold here",
+          "11-12: Ice crafts spontaneously gain sentience"
         ],
         "temple": [
           "1-2: The dead and undead worship together",
           "3-4: Nordic runes channel divine cold energy",
-          "5-6: Eternal flames provide sacred illumination"
+          "5-6: Eternal flames provide sacred illumination",
+          "7-8: Preservation magic sanctifies offerings permanently"
         ],
         "tavern": [
           "1-2: Nordic heroes' spirits join in revelry",
           "3-4: Cold magic makes all drinks refreshingly frozen",
-          "5-6: Eternal warmth emanates from the hearth"
+          "5-6: Eternal warmth emanates from the hearth",
+          "7-8: Preservation magic keeps conversations eternally fresh"
         ],
         "guild": [
           "1-2: Guild halls are carved from glacier ice",
           "3-4: Nordic runes mark all guild certifications",
-          "5-6: Cold magic is essential to most professions"
+          "5-6: Cold magic is essential to most professions",
+          "7-8: Preservation magic enhances all crafted items"
         ],
         "residence": [
           "1-2: Servants who died centuries ago still work",
           "3-4: Nordic heritage is displayed prominently",
-          "5-6: Cold magic keeps the home eternally comfortable"
+          "5-6: Cold magic keeps the home eternally comfortable",
+          "7-8: Preservation magic maintains perfect cleanliness"
         ],
         "ruins": [
           "1-2: The ruins serve as a warning of impermanence",
           "3-4: Ancient runes flicker with dying power",
-          "5-6: Cold magic here is wild and unpredictable"
+          "5-6: Cold magic here is wild and unpredictable",
+          "9-10: Ice magic runs wild, creating dangerous formations"
         ]
       },
       "atmosphere_modifiers": [
         "The smell of eternal preservation and old ice",
         "Light refracting through countless ice formations",
-        "The path is lit by cold, eternal flames"
+        "The path is lit by cold, eternal flames",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -589,7 +809,8 @@
       "streets": [
         "The Preservation Walk",
         "The Warden's Patrol",
-        "The Ancient Processional"
+        "The Ancient Processional",
+        "The Noble's Passage"
       ],
       "landmarks": [
         "The Preservation Engine",
@@ -626,16 +847,47 @@
         "Ancient Glacier Caves",
         "The Lost Nordic Hall"
       ],
-      "encounters": [
-        "Crypt Lord's servants maintaining the glacier",
-        "Servants who died centuries ago still work here",
-        "Servants preparing the district for eternal winter"
-      ],
+      "encounters": {
+        "district": [
+          "Crypt Lord's servants maintaining the glacier",
+          "Servants who died centuries ago still work here",
+          "Servants preparing the district for eternal winter",
+          "Westerners seep like oil and dreams, offering wares that stain the soul"
+        ],
+        "building": [
+          "Ancient runes blister and flake from cracked vault doors"
+        ],
+        "street": [
+          "Two giants toss razor slabs; a stray shard screams past"
+        ],
+        "landmark": [
+          "The Petrified Gardens smear bones with troll dung"
+        ],
+        "market": [
+          "Corpse Cult brokers rent golems by the hour"
+        ],
+        "temple": [
+          "Hidden shrines in the Dark Woods wake possessed boars"
+        ],
+        "tavern": [
+          "Miners drink in silence—masks on, eyes hollow"
+        ],
+        "guild": [
+          "Western factors sign contracts in dream‑black ink"
+        ],
+        "residence": [
+          "A rat man nests under floorboards, whispering favors"
+        ],
+        "ruins": [
+          "Swaying tower crackles; purple fire crowns the storm"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Servants clear ice that forms continuously",
           "3-4: The Crypt Lord's servants perform maintenance rituals",
-          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice"
+          "5-6: Ancient Nordic spirits manifest, seeking forgotten justice",
+          "11-12: Eternal guards challenge all who lack proper authorization"
         ],
         "building": [
           "1-2: Servants who died centuries ago still work here",
@@ -645,7 +897,8 @@
         "street": [
           "1-2: Servants clear ice that forms continuously",
           "3-4: The street leads deeper into the glacier",
-          "5-6: Cold wind carries whispers of the long dead"
+          "5-6: Cold wind carries whispers of the long dead",
+          "7-8: Preservation magic creates temporal anomalies"
         ],
         "landmark": [
           "1-2: Cold flames burn eternally around the landmark",
@@ -660,33 +913,48 @@
         "temple": [
           "1-2: The temple exists in both life and death",
           "3-4: Nordic runes channel divine cold energy",
-          "5-6: Eternal flames provide sacred illumination"
+          "5-6: Eternal flames provide sacred illumination",
+          "11-12: Ice forms divine patterns during rituals"
         ],
         "tavern": [
           "1-2: The tavern serves both living and dead patrons",
           "3-4: Cold magic makes all drinks refreshingly frozen",
-          "5-6: Eternal warmth emanates from the hearth"
+          "5-6: Eternal warmth emanates from the hearth",
+          "11-12: Cold magic makes drinks burn with frozen fire"
         ],
         "guild": [
           "1-2: Eternal contracts bind guild memberships",
           "3-4: Nordic runes mark all guild certifications",
-          "5-6: Cold magic is essential to most professions"
+          "5-6: Cold magic is essential to most professions",
+          "11-12: Ice magic creates tools that work themselves"
         ],
         "residence": [
           "1-2: Servants who died centuries ago still work",
           "3-4: Nordic heritage is displayed prominently",
-          "5-6: The residence exists partially in death's realm"
+          "5-6: The residence exists partially in death's realm",
+          "11-12: Ice magic creates rooms that change with the seasons"
         ],
         "ruins": [
           "1-2: The glacier slowly consumes the ruins",
           "3-4: Ancient runes flicker with dying power",
-          "5-6: Cold magic here is wild and unpredictable"
+          "5-6: Cold magic here is wild and unpredictable",
+          "11-12: Nordic spirits offer quests to restore their homes"
         ]
       },
       "atmosphere_modifiers": [
         "The sound of preservation engines humming",
         "Whispers of the long dead carried on cold winds",
-        "The path leads deeper into the glacier"
+        "The path leads deeper into the glacier",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -721,7 +989,8 @@
       "taverns": [
         "The Cold Comfort",
         "The Warden's Lodge",
-        "The Preserved Spirits"
+        "The Preserved Spirits",
+        "The Icy Draught"
       ],
       "guilds": [
         "Ancient Rune Keepers",
@@ -738,11 +1007,41 @@
         "Broken Ice Sculptures",
         "The Lost Nordic Hall"
       ],
-      "encounters": [
-        "Ancient Nordic spirits warning of forgotten laws",
-        "The building exists partially in the realm of death",
-        "Cold magic preserves all who enter"
-      ],
+      "encounters": {
+        "district": [
+          "Ancient Nordic spirits warning of forgotten laws",
+          "The building exists partially in the realm of death",
+          "Cold magic preserves all who enter",
+          "Bone‑Speakers of the Dvörga chant at rune‑scored walls, seeking HER favor"
+        ],
+        "building": [
+          "Hatchery vats of pink rat‑pups bubble and squeal"
+        ],
+        "street": [
+          "A Westerner caravan slides over black ice, hawking dream‑oils"
+        ],
+        "landmark": [
+          "A sunken belfry chimes over a mire of yellow pearls"
+        ],
+        "market": [
+          "Nordic relics, cracked and blood‑smeared, fetch whispers"
+        ],
+        "temple": [
+          "A glacier‑carved cathedral bleeds cold light"
+        ],
+        "tavern": [
+          "Ankle Cutters snip purse‑strings from under benches"
+        ],
+        "guild": [
+          "Mortuary Heresy archivists seek plague‑built stone"
+        ],
+        "residence": [
+          "A Westerner bed‑curtain smells of rain on oil"
+        ],
+        "ruins": [
+          "The greatest library smolders; Karoling whispers rewards"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Ancient Nordic spirits manifest, seeking forgotten justice",
@@ -798,7 +1097,17 @@
       "atmosphere_modifiers": [
         "Ancient Nordic chants echo from the glacier",
         "Cold magic makes the air shimmer with frost",
-        "The creaking of ancient ice under pressure"
+        "The creaking of ancient ice under pressure",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -850,11 +1159,41 @@
         "The Fallen Crypt Spire",
         "Broken Ice Sculptures"
       ],
-      "encounters": [
-        "The Crypt Lord's authority emanates from within",
-        "Noble undead discussing politics from past ages",
-        "The Crypt Lord appears for important occasions"
-      ],
+      "encounters": {
+        "district": [
+          "The Crypt Lord's authority emanates from within",
+          "Noble undead discussing politics from past ages",
+          "The Crypt Lord appears for important occasions",
+          "Corpse Cult acolytes scout discreetly for Noronecron’s needs"
+        ],
+        "building": [
+          "Oil pumps cough black goo that eats lantern‑light"
+        ],
+        "street": [
+          "Rune‑scored archways leak cold light; breath turns purple"
+        ],
+        "landmark": [
+          "A crumbling cathedral exhales plague‑dust"
+        ],
+        "market": [
+          "A marble ‘holy city’ hawks yellow pearls and heresy"
+        ],
+        "temple": [
+          "Stone mages murmur rites that scar the Pale"
+        ],
+        "tavern": [
+          "Tutors from a dead university trade curses for drink"
+        ],
+        "guild": [
+          "Heresy of the Yellow Tongue tithes in pearls"
+        ],
+        "residence": [
+          "A librarian’s ghost shelves threats beside lullabies"
+        ],
+        "ruins": [
+          "Jergal Joch’s lenses turn toward the black star"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: The Crypt Lord's procession passes through the district",
@@ -910,7 +1249,17 @@
       "atmosphere_modifiers": [
         "Undead nobility conversing in archaic languages",
         "The sound of preservation engines humming",
-        "Cold wind carries whispers of the long dead"
+        "Cold wind carries whispers of the long dead",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -920,32 +1269,41 @@
       "buildings": [
         "The Warden's Tower",
         "The Eternal Watch",
-        "Crypt Keeper's Home"
+        "Crypt Keeper's Home",
+        "The Eternal Throne Room"
       ],
       "streets": [
         "The Warden's Patrol",
         "The Eternal March",
-        "The Preservation Walk"
+        "The Preservation Walk",
+        "Ice Crystal Avenue"
       ],
       "landmarks": [
         "The Frozen Watchtower",
         "The Eternal Flame (Cold)",
-        "Ancient Nordic Runestone"
+        "Ancient Nordic Runestone",
+        "Eternal Ice Throne",
+        "The Ice Crystal Chandelier"
       ],
       "markets": [
         "Crypt Supplies Exchange",
         "The Frozen Goods",
-        "The Glacier Harvest"
+        "The Glacier Harvest",
+        "Eternal Service Market"
       ],
       "temples": [
         "The Crypt Lord's Chapel",
         "Temple of the Glacier Heart",
-        "The Preservation Shrine"
+        "The Preservation Shrine",
+        "Temple of Eternal Preservation",
+        "The Ice Crystal Sanctuary",
+        "Temple of Beautiful Death"
       ],
       "taverns": [
         "The Warden's Lodge",
         "The Cold Comfort",
-        "The Preserved Spirits"
+        "The Preserved Spirits",
+        "The Eternal Tavern"
       ],
       "guilds": [
         "The Eternal Guard",
@@ -955,18 +1313,49 @@
       "residences": [
         "The Warden's Quarters",
         "Crypt Keeper's Home",
-        "The Frozen Manor"
+        "The Frozen Manor",
+        "The Eternal Residence"
       ],
       "ruins": [
         "The Shattered Watchtower",
         "The Fallen Crypt Spire",
         "Abandoned Servant Quarters"
       ],
-      "encounters": [
-        "Eternal guards patrolling with centuries of discipline",
-        "Frozen battlements manned by undead sentries",
-        "The Crypt Lord's servants maintaining the glacier"
-      ],
+      "encounters": {
+        "district": [
+          "Eternal guards patrolling with centuries of discipline",
+          "Frozen battlements manned by undead sentries",
+          "The Crypt Lord's servants maintaining the glacier",
+          "Gnutz chew unseen at iron and stone; a span begins to sing and fail"
+        ],
+        "building": [
+          "A swaying tower’s coils hum; purple fire licks the rafters"
+        ],
+        "street": [
+          "Chrypt vultures shadow the party, waiting to peck and infect"
+        ],
+        "landmark": [
+          "Riven bridgeheads bicker across a torn gorge"
+        ],
+        "market": [
+          "Dales charcoalers swap sacks of ash‑bread and lies"
+        ],
+        "temple": [
+          "A Preservation Shrine drinks color from lips"
+        ],
+        "tavern": [
+          "A bandaged leper buys rounds, preaching termination"
+        ],
+        "guild": [
+          "Rat priests weigh pain in ritual chambers"
+        ],
+        "residence": [
+          "An old granny offers cookies no one remembers eating"
+        ],
+        "ruins": [
+          "Warring bridgeheads fling rocks across a torn chasm"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Eternal guards challenge all who lack proper authorization",
@@ -976,7 +1365,8 @@
         "building": [
           "1-2: Ancient Nordic runes power the building",
           "3-4: Preservation engines keep everything frozen",
-          "5-6: Servants who died centuries ago still work here"
+          "5-6: Servants who died centuries ago still work here",
+          "5-6: Undead nobility conduct eternal administrative business"
         ],
         "street": [
           "1-2: The Warden's Patrol maintains order",
@@ -986,12 +1376,14 @@
         "landmark": [
           "1-2: The Frozen Watchtower stands eternal",
           "3-4: Ancient runes activate when approached",
-          "5-6: The landmark serves as a gateway to death"
+          "5-6: The landmark serves as a gateway to death",
+          "7-8: Preservation magic creates an eternal moment"
         ],
         "market": [
           "1-2: Crypt supplies are traded for services",
           "3-4: The Crypt Lord's servants oversee all trade",
-          "5-6: Eternal contracts bind all transactions"
+          "5-6: Eternal contracts bind all transactions",
+          "1-2: Eternal contracts bind unwary customers forever"
         ],
         "temple": [
           "1-2: The Crypt Lord conducts dark ceremonies",
@@ -1022,7 +1414,17 @@
       "atmosphere_modifiers": [
         "The sound of preservation engines humming",
         "Frozen statues of ancient heroes line the way",
-        "The path is lit by cold, eternal flames"
+        "The path is lit by cold, eternal flames",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -1042,12 +1444,14 @@
       "landmarks": [
         "Eternal Ice Throne",
         "The Crypt Lord's Seal",
-        "The Glacier Heart"
+        "The Glacier Heart",
+        "The Great Crypt Spiral"
       ],
       "markets": [
         "The Noble's Commerce",
         "Eternal Service Market",
-        "The Ice Craft Fair"
+        "The Ice Craft Fair",
+        "Crypt Supplies Exchange"
       ],
       "temples": [
         "The Crypt Lord's Chapel",
@@ -1067,74 +1471,125 @@
       "residences": [
         "Ice Palace Apartments",
         "The Noble's Estate",
-        "The Eternal Residence"
+        "The Eternal Residence",
+        "Crypt Keeper's Home"
       ],
       "ruins": [
         "Collapsed Ice Palace Wing",
         "The Fallen Crypt Spire",
         "Broken Ice Sculptures"
       ],
-      "encounters": [
-        "The Crypt Lord's authority emanates from within",
-        "The Crypt Lord appears for important occasions",
-        "The Crypt Lord conducts dark ceremonies"
-      ],
+      "encounters": {
+        "district": [
+          "The Crypt Lord's authority emanates from within",
+          "The Crypt Lord appears for important occasions",
+          "The Crypt Lord conducts dark ceremonies",
+          "Ankle Cutters lurk in oil‑slick hollows beneath the ice, severing tendons"
+        ],
+        "building": [
+          "Catacomb lifts creak, hauling ‘donations’ to the Mortuary"
+        ],
+        "street": [
+          "A mote of power hums above a cairn; approach wounds, touch damns"
+        ],
+        "landmark": [
+          "An observatory watches a black star bruise the sky"
+        ],
+        "market": [
+          "Western wares glisten like oil and stain like guilt"
+        ],
+        "temple": [
+          "Heresy of the Yellow Tongue chants to a black star"
+        ],
+        "tavern": [
+          "A mercury‑tongued peddler offers talking cards"
+        ],
+        "guild": [
+          "Outcast Dvörga sell routes under the mountains"
+        ],
+        "residence": [
+          "A silent ghost watches from the beams of an inn"
+        ],
+        "ruins": [
+          "An aqueduct pours demon blood that tars the thirsty"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: The Crypt Lord's procession passes through the district",
           "3-4: The Crypt Lord appears to make pronouncements",
-          "5-6: The Crypt Lord conducts marriage ceremonies"
+          "5-6: The Crypt Lord conducts marriage ceremonies",
+          "7-8: The Crypt Lord's procession passes through the district"
         ],
         "building": [
           "1-2: The Crypt Lord's authority emanates from within",
           "3-4: Ancient Nordic runes power the building",
-          "5-6: Preservation engines keep everything frozen"
+          "5-6: Preservation engines keep everything frozen",
+          "9-10: The Crypt Lord's servants perform maintenance rituals"
         ],
         "street": [
           "1-2: The Crypt Lord's procession passes through",
           "3-4: Ice crystals make the pathway treacherous",
-          "5-6: Ancient Nordic spirits patrol the streets"
+          "5-6: Ancient Nordic spirits patrol the streets",
+          "9-10: The Crypt Lord's authority is questioned publicly"
         ],
         "landmark": [
           "1-2: The Crypt Lord appears for important occasions",
           "3-4: Ice magic emanates from the structure",
-          "5-6: The landmark serves as a gateway to death"
+          "5-6: The landmark serves as a gateway to death",
+          "5-6: The Crypt Lord appears to make pronouncements"
         ],
         "market": [
           "1-2: The Crypt Lord's servants oversee all trade",
           "3-4: Undead nobles purchase eternal luxuries",
-          "5-6: Eternal contracts bind all transactions"
+          "5-6: Eternal contracts bind all transactions",
+          "9-10: The Crypt Lord's tax collectors demand tribute"
         ],
         "temple": [
           "1-2: The Crypt Lord conducts dark ceremonies",
           "3-4: The altar preserves offerings for eternity",
-          "5-6: Preservation magic sanctifies the space"
+          "5-6: Preservation magic sanctifies the space",
+          "9-10: The Crypt Lord conducts marriage ceremonies"
         ],
         "tavern": [
           "1-2: The Crypt Lord's servants gather information",
           "3-4: Undead nobles share tales of past centuries",
-          "5-6: The tavern serves both living and dead patrons"
+          "5-6: The tavern serves both living and dead patrons",
+          "9-10: The Crypt Lord's spies gather information from patrons"
         ],
         "guild": [
           "1-2: The Crypt Lord's authority governs all guilds",
           "3-4: Guild members serve the city's undead nobility",
-          "5-6: Eternal contracts bind guild memberships"
+          "5-6: Eternal contracts bind guild memberships",
+          "5-6: The Crypt Lord commissions eternal public works"
         ],
         "residence": [
           "1-2: The Crypt Lord's favor protects residents",
           "3-4: Undead nobles live in timeless luxury",
-          "5-6: The residence exists partially in death's realm"
+          "5-6: The residence exists partially in death's realm",
+          "9-10: The Crypt Lord's servants conduct surprise inspections"
         ],
         "ruins": [
           "1-2: The Crypt Lord's magic failed to preserve this",
           "3-4: The ruins serve as a warning of impermanence",
-          "5-6: Ancient runes flicker with dying power"
+          "5-6: Ancient runes flicker with dying power",
+          "7-8: The Crypt Lord's power cannot reach this place"
         ]
       },
       "atmosphere_modifiers": [
         "Undead nobility conversing in archaic languages",
         "The sound of preservation engines humming",
-        "Cold wind carries whispers of the long dead"
+        "Cold wind carries whispers of the long dead",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     },
     {
@@ -1144,12 +1599,14 @@
       "buildings": [
         "The Warden's Tower",
         "The Preservation House",
-        "The Eternal Residence"
+        "The Eternal Residence",
+        "The Cold Treasury"
       ],
       "streets": [
         "The Preservation Walk",
         "The Warden's Patrol",
-        "The Ancient Processional"
+        "The Ancient Processional",
+        "Frozen Path of Sorrows"
       ],
       "landmarks": [
         "The Frozen Watchtower",
@@ -1159,38 +1616,75 @@
       "markets": [
         "The Frozen Goods",
         "Crypt Supplies Exchange",
-        "The Glacier Harvest"
+        "The Glacier Harvest",
+        "The Cold Storage"
       ],
       "temples": [
         "The Preservation Shrine",
         "Shrine of Nordic Ancestors",
-        "The Ice Crystal Sanctuary"
+        "The Ice Crystal Sanctuary",
+        "The Frozen Altar",
+        "Cathedral of Endless Winter"
       ],
       "taverns": [
         "The Warden's Lodge",
         "The Cold Comfort",
-        "The Preserved Spirits"
+        "The Preserved Spirits",
+        "The Frozen Goblet"
       ],
       "guilds": [
         "The Eternal Guard",
         "Crypt Maintenance Union",
-        "Glacier Sculptors Guild"
+        "Glacier Sculptors Guild",
+        "The Noble's Attendants"
       ],
       "residences": [
         "The Warden's Quarters",
         "The Preservation House",
-        "The Eternal Residence"
+        "The Eternal Residence",
+        "The Frozen Manor"
       ],
       "ruins": [
         "The Shattered Watchtower",
         "Ancient Glacier Caves",
-        "Abandoned Servant Quarters"
+        "Abandoned Servant Quarters",
+        "Broken Ice Sculptures"
       ],
-      "encounters": [
-        "Eternal guards patrolling with centuries of discipline",
-        "Servants preparing the district for eternal winter",
-        "The Glacier Heart pulsing with ancient power"
-      ],
+      "encounters": {
+        "district": [
+          "Eternal guards patrolling with centuries of discipline",
+          "Servants preparing the district for eternal winter",
+          "The Glacier Heart pulsing with ancient power",
+          "The ARCHFROST pulses; color drains from flesh and steel, hope thins"
+        ],
+        "building": [
+          "A frozen chapel’s bells toll beneath hoarfrost"
+        ],
+        "street": [
+          "A frozen bell tolls under the ice; footsteps answer from below"
+        ],
+        "landmark": [
+          "Rune‑cut cairns throb with the ARCHFROST"
+        ],
+        "market": [
+          "Scrap buyers weigh femurs beside frozen fish"
+        ],
+        "temple": [
+          "Mortuary prayers stitch skin to purpose"
+        ],
+        "tavern": [
+          "A purple lamb wanders in, utterly unbothered"
+        ],
+        "guild": [
+          "Bridge scavengers auction gnutz‑holed iron"
+        ],
+        "residence": [
+          "A frozen townhouse keeps sixteen hearts in a chest"
+        ],
+        "ruins": [
+          "A marble holy city speaks with yellow tongues"
+        ]
+      },
       "random_tables": {
         "district": [
           "1-2: Eternal guards challenge all who lack proper authorization",
@@ -1246,333 +1740,19 @@
       "atmosphere_modifiers": [
         "The air is so cold it burns the lungs",
         "Ice crystals form with each breath",
-        "The path is lit by cold, eternal flames"
+        "The path is lit by cold, eternal flames",
+        "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
+        "A sick yellow aurora stains the night and gnaws at tempers",
+        "The ARCHFROST leaches color and heat from stone and flesh",
+        "Distant, muffled screams travel through ice‑cut corridors",
+        "Oil‑black snow drifts from burst reserves far below",
+        "The stink of boiled fat and old blood from corpse golems",
+        "Cold‑preserved whispers scratch behind rune‑scored walls",
+        "Frozen bells toll from a sunken chapel under the ice",
+        "The glacier groans; hairline TEARS craze its face",
+        "Thin, sickly light refracts in purple‑tinged frost"
       ]
     }
-  ],
-  "buildings": [
-    "Crypt Lord's Ice Palace",
-    "The Eternal Throne Room",
-    "Frozen Mausoleum",
-    "Undead Noble Mansion",
-    "The Ice Archive",
-    "Glacier Carved Cathedral",
-    "The Cold Treasury",
-    "Ancient Nordic Hall",
-    "The Warden's Tower",
-    "The Preservation Chamber"
-  ],
-  "streets": [
-    "Frozen Path of Sorrows",
-    "The Undead Promenade",
-    "Ice Crystal Avenue",
-    "The Eternal March",
-    "Crypt Lord's Way",
-    "The Preservation Walk",
-    "Glacier Heart Road",
-    "The Noble's Passage",
-    "The Warden's Patrol",
-    "The Ancient Processional"
-  ],
-  "landmarks": [
-    "The Glacier Heart",
-    "Eternal Ice Throne",
-    "The Great Crypt Spiral",
-    "Undead Noble Monument",
-    "The Preservation Engine",
-    "Ancient Nordic Runestone",
-    "The Frozen Watchtower",
-    "The Crypt Lord's Seal",
-    "The Ice Crystal Chandelier",
-    "The Eternal Flame (Cold)"
-  ],
-  "markets": [
-    "The Preservation Market",
-    "Undead Servants Exchange",
-    "The Cold Storage",
-    "Nordic Relic Bazaar",
-    "The Ice Craft Fair",
-    "Eternal Service Market",
-    "The Frozen Goods",
-    "Crypt Supplies Exchange",
-    "The Noble's Commerce",
-    "The Glacier Harvest"
-  ],
-  "temples": [
-    "Temple of Eternal Preservation",
-    "Shrine of the Undead Noble",
-    "The Frozen Altar",
-    "Cathedral of Endless Winter",
-    "The Crypt Lord's Chapel",
-    "Temple of the Glacier Heart",
-    "Shrine of Nordic Ancestors",
-    "The Ice Crystal Sanctuary",
-    "Temple of Beautiful Death",
-    "The Preservation Shrine"
-  ],
-  "taverns": [
-    "The Frozen Goblet",
-    "The Undead's Rest",
-    "The Icy Draught",
-    "The Eternal Tavern",
-    "The Crypt's Warmth",
-    "The Noble's Table",
-    "The Glacier Inn",
-    "The Preserved Spirits",
-    "The Cold Comfort",
-    "The Warden's Lodge"
-  ],
-  "guilds": [
-    "The Preservation Society",
-    "Guild of Undead Servants",
-    "The Ice Crafters",
-    "Nordic Grave Tenders",
-    "The Eternal Guard",
-    "Crypt Maintenance Union",
-    "The Noble's Attendants",
-    "Glacier Sculptors Guild",
-    "The Cold Preservers",
-    "Ancient Rune Keepers"
-  ],
-  "residences": [
-    "Undead Noble's Mansion",
-    "The Warden's Quarters",
-    "Servant's Ice Chambers",
-    "The Preservation House",
-    "Ancient Nordic Lodge",
-    "The Eternal Residence",
-    "Crypt Keeper's Home",
-    "The Frozen Manor",
-    "Ice Palace Apartments",
-    "The Noble's Estate"
-  ],
-  "ruins": [
-    "Pre-Undead Nordic Ruins",
-    "Collapsed Ice Palace Wing",
-    "The Shattered Watchtower",
-    "Ancient Glacier Caves",
-    "Ruined Preservation Engine",
-    "The Fallen Crypt Spire",
-    "Broken Ice Sculptures",
-    "The Lost Nordic Hall",
-    "Abandoned Servant Quarters",
-    "The Cracked Glacier Heart"
-  ],
-  "encounters": {
-    "district": [
-      "A sick yellow aurora rages over the ice; tempers fray and hands go to blades",
-      "A TEAR crazes the glacier; bitter wind and whispers spill through",
-      "Chains of corpse golems drag ice blocks toward the Preservation Engine",
-      "Rat Scavengers from Pax Gangrän skitter along the battlements, testing the gates",
-      "Westerners seep like oil and dreams, offering wares that stain the soul",
-      "Bone‑Speakers of the Dvörga chant at rune‑scored walls, seeking HER favor",
-      "Corpse Cult acolytes scout discreetly for Noronecron’s needs",
-      "Gnutz chew unseen at iron and stone; a span begins to sing and fail",
-      "Ankle Cutters lurk in oil‑slick hollows beneath the ice, severing tendons",
-      "The ARCHFROST pulses; color drains from flesh and steel, hope thins"
-    ],
-    "building": [
-      "Corpse golems heave at winches in a Golem Assembly Hall",
-      "The Preservation Engine shrieks as old ice splits",
-      "A petrified giant skull bathhouse exhales bone‑steam",
-      "The Demon Engine ticks under frost, wishes curdle and spoil",
-      "Ancient runes blister and flake from cracked vault doors",
-      "Hatchery vats of pink rat‑pups bubble and squeal",
-      "Oil pumps cough black goo that eats lantern‑light",
-      "A swaying tower’s coils hum; purple fire licks the rafters",
-      "Catacomb lifts creak, hauling ‘donations’ to the Mortuary",
-      "A frozen chapel’s bells toll beneath hoarfrost"
-    ],
-    "street": [
-      "A gigantic stone bridge groans; a talking troll demands a skull tax",
-      "Acid snow hisses on steel, pitting blades and burning skin",
-      "Seven nailed crosses on a ridge—mouths sewn shut—explode when touched",
-      "A memorial carved into an inert stone golem; it stirs when defiled",
-      "Two giants toss razor slabs; a stray shard screams past",
-      "A Westerner caravan slides over black ice, hawking dream‑oils",
-      "Rune‑scored archways leak cold light; breath turns purple",
-      "Chrypt vultures shadow the party, waiting to peck and infect",
-      "A mote of power hums above a cairn; approach wounds, touch damns",
-      "A frozen bell tolls under the ice; footsteps answer from below"
-    ],
-    "landmark": [
-      "The Great Eastern Wheel turns under corpse golem hands",
-      "The Howling Bridge plays a sad tune through gnutz‑holes",
-      "The Avenue of Kings glares with stone eyes",
-      "The Pale drinks the color from breath and blood",
-      "The Petrified Gardens smear bones with troll dung",
-      "A sunken belfry chimes over a mire of yellow pearls",
-      "A crumbling cathedral exhales plague‑dust",
-      "Riven bridgeheads bicker across a torn gorge",
-      "An observatory watches a black star bruise the sky",
-      "Rune‑cut cairns throb with the ARCHFROST"
-    ],
-    "market": [
-      "The Old Market sells unclean scrolls under a Westerner’s smile",
-      "Rat People trade live captives and marrow flasks",
-      "Kartusch gem ledgers change hands under the CODE",
-      "Black oil is bartered by mask‑wearers ankle‑deep in sludge",
-      "Corpse Cult brokers rent golems by the hour",
-      "Nordic relics, cracked and blood‑smeared, fetch whispers",
-      "A marble ‘holy city’ hawks yellow pearls and heresy",
-      "Dales charcoalers swap sacks of ash‑bread and lies",
-      "Western wares glisten like oil and stain like guilt",
-      "Scrap buyers weigh femurs beside frozen fish"
-    ],
-    "temple": [
-      "Hollywood Chapel whispers to HER beneath tar‑black brick",
-      "The Scintillating Temple blesses gems for HER",
-      "A consumed god’s temple demands warm offerings",
-      "Cathedral of bones creaks; a golden‑haired infant sleeps on the altar",
-      "Hidden shrines in the Dark Woods wake possessed boars",
-      "A glacier‑carved cathedral bleeds cold light",
-      "Stone mages murmur rites that scar the Pale",
-      "A Preservation Shrine drinks color from lips",
-      "Heresy of the Yellow Tongue chants to a black star",
-      "Mortuary prayers stitch skin to purpose"
-    ],
-    "tavern": [
-      "The Broken Cross reeks of old ale and despair",
-      "The Soggy Cradle’s keeper slips on his beard for laughs",
-      "A rat‑gnawed inn serves marrow stew and worse",
-      "A Westerner sells luck in bottles that taste like oil",
-      "Miners drink in silence—masks on, eyes hollow",
-      "Ankle Cutters snip purse‑strings from under benches",
-      "Tutors from a dead university trade curses for drink",
-      "A bandaged leper buys rounds, preaching termination",
-      "A mercury‑tongued peddler offers talking cards",
-      "A purple lamb wanders in, utterly unbothered"
-    ],
-    "guild": [
-      "Bone Speakers barter truths for a price of silence",
-      "Stone Mages of Spinel charter forbidden surveys",
-      "Corpse Cult flesh‑wrights recruit with precise smiles",
-      "Dvörga wardens enforce the CODE with ink‑eyes",
-      "Western factors sign contracts in dream‑black ink",
-      "Mortuary Heresy archivists seek plague‑built stone",
-      "Heresy of the Yellow Tongue tithes in pearls",
-      "Rat priests weigh pain in ritual chambers",
-      "Outcast Dvörga sell routes under the mountains",
-      "Bridge scavengers auction gnutz‑holed iron"
-    ],
-    "residence": [
-      "A decrepit village room whispers of worm‑eaten maps",
-      "A bathhouse inside a giant’s skull sighs with steam",
-      "A noble manor keeps an undead tutor and colder children",
-      "A dvörga dorm reeks of mold and firedamp",
-      "A rat man nests under floorboards, whispering favors",
-      "A Westerner bed‑curtain smells of rain on oil",
-      "A librarian’s ghost shelves threats beside lullabies",
-      "An old granny offers cookies no one remembers eating",
-      "A silent ghost watches from the beams of an inn",
-      "A frozen townhouse keeps sixteen hearts in a chest"
-    ],
-    "ruins": [
-      "Ruined ARK’HAR crawls with unwashed wildlings and their bowels‑king",
-      "A sunken chapel’s belfry peals over slime and pearls",
-      "The temple of a consumed god drinks blood for the Deer God",
-      "Swaying tower crackles; purple fire crowns the storm",
-      "The greatest library smolders; Karoling whispers rewards",
-      "Jergal Joch’s lenses turn toward the black star",
-      "Warring bridgeheads fling rocks across a torn chasm",
-      "An aqueduct pours demon blood that tars the thirsty",
-      "A marble holy city speaks with yellow tongues",
-      "A university of the dead hums with Malakbal’s lessons"
-    ]
-  },
-  "random_tables": {
-    "district": [
-      "1-2: Undead nobles hold court, discussing centuries-old politics",
-      "3-4: Preservation engines malfunction, causing rapid ice formation",
-      "5-6: Ancient Nordic spirits manifest, seeking forgotten justice",
-      "7-8: The Crypt Lord's procession passes through the district",
-      "9-10: Glacier shifts, revealing new chambers and passages",
-      "11-12: Eternal guards challenge all who lack proper authorization"
-    ],
-    "building": [
-      "1-2: The structure phases between life and death realms",
-      "3-4: Preservation magic fails temporarily, causing rapid decay",
-      "5-6: Undead nobility conduct eternal administrative business",
-      "7-8: Ancient Nordic runes activate, changing the building",
-      "9-10: The Crypt Lord's servants perform maintenance rituals",
-      "11-12: Ice magic creates new rooms and passages"
-    ],
-    "street": [
-      "1-2: Undead noble procession blocks passage for hours",
-      "3-4: Ice crystals form rapidly, making travel dangerous",
-      "5-6: Ancient Nordic spirits demand respect for old laws",
-      "7-8: Preservation magic creates temporal anomalies",
-      "9-10: The Crypt Lord's authority is questioned publicly",
-      "11-12: Cold magic makes the air visible and hard to breathe"
-    ],
-    "landmark": [
-      "1-2: The monument activates ancient Nordic magic",
-      "3-4: Undead nobles gather for ceremonial purposes",
-      "5-6: The Crypt Lord appears to make pronouncements",
-      "7-8: Preservation magic creates an eternal moment",
-      "9-10: Ice forms sacred patterns around the landmark",
-      "11-12: Ancient spirits manifest to share forgotten wisdom"
-    ],
-    "market": [
-      "1-2: Eternal contracts bind unwary customers forever",
-      "3-4: Undead nobles purchase services for the afterlife",
-      "5-6: Ancient Nordic artifacts gain magical properties",
-      "7-8: Preservation services are traded for life essence",
-      "9-10: The Crypt Lord's tax collectors demand tribute",
-      "11-12: Ice crafts spontaneously gain sentience"
-    ],
-    "temple": [
-      "1-2: Ancient Nordic gods manifest during worship",
-      "3-4: The altar demands preservation of life essence",
-      "5-6: Undead nobles seek blessings for eternal rest",
-      "7-8: Preservation magic sanctifies offerings permanently",
-      "9-10: The Crypt Lord conducts marriage ceremonies",
-      "11-12: Ice forms divine patterns during rituals"
-    ],
-    "tavern": [
-      "1-2: Undead nobles share centuries-old gossip and secrets",
-      "3-4: Ancient Nordic drinking songs summon ancestral spirits",
-      "5-6: Ice wine grants visions of the past and future",
-      "7-8: Preservation magic keeps conversations eternally fresh",
-      "9-10: The Crypt Lord's spies gather information from patrons",
-      "11-12: Cold magic makes drinks burn with frozen fire"
-    ],
-    "guild": [
-      "1-2: Guild masters offer apprenticeships lasting centuries",
-      "3-4: Ancient Nordic techniques are jealously guarded",
-      "5-6: The Crypt Lord commissions eternal public works",
-      "7-8: Preservation magic enhances all crafted items",
-      "9-10: Undead craftsmen compete with living workers",
-      "11-12: Ice magic creates tools that work themselves"
-    ],
-    "residence": [
-      "1-2: Ancient Nordic family spirits demand recognition",
-      "3-4: The home exists simultaneously in multiple time periods",
-      "5-6: Undead nobles entertain guests from past centuries",
-      "7-8: Preservation magic maintains perfect cleanliness",
-      "9-10: The Crypt Lord's servants conduct surprise inspections",
-      "11-12: Ice magic creates rooms that change with the seasons"
-    ],
-    "ruins": [
-      "1-2: Ancient Nordic treasure is discovered in the rubble",
-      "3-4: Preservation magic attempts to restore the ruins",
-      "5-6: Undead from before the city's transformation appear",
-      "7-8: The Crypt Lord's power cannot reach this place",
-      "9-10: Ice magic runs wild, creating dangerous formations",
-      "11-12: Nordic spirits offer quests to restore their homes"
-    ]
-  },
-  "atmosphere_modifiers": [
-    "Rotting wind carries swarms of carrion flies from corpse‑cloisters",
-    "A sick yellow aurora stains the night and gnaws at tempers",
-    "The ARCHFROST leaches color and heat from stone and flesh",
-    "Distant, muffled screams travel through ice‑cut corridors",
-    "Oil‑black snow drifts from burst reserves far below",
-    "The stink of boiled fat and old blood from corpse golems",
-    "Cold‑preserved whispers scratch behind rune‑scored walls",
-    "Frozen bells toll from a sunken chapel under the ice",
-    "The glacier groans; hairline TEARS craze its face",
-    "Thin, sickly light refracts in purple‑tinged frost"
   ],
   "metadata": {
     "migrated_from": "databases/cities/bergen_chrypt.json",

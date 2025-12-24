@@ -10,7 +10,6 @@ from typing import Dict
 from .cache import BootCache
 from .config import AppConfig
 from .main_map_generator import MainMapGenerator
-from .overlay_exporter import export_overlays
 
 
 def _generate_full_map(target_dir: Path, language: str, cfg: AppConfig) -> Dict:
@@ -28,8 +27,7 @@ def _generate_full_map(target_dir: Path, language: str, cfg: AppConfig) -> Dict:
         }
     )
     result = generator.generate_full_map({"skip_existing": False})
-    # Export city overlays for this language
-    export_overlays(language, target_dir)
+    # City overlays are now handled entirely by frontend city.js - no backend generation needed
     now = datetime.now(timezone.utc)
     return {
         "version": str(int(now.timestamp())),

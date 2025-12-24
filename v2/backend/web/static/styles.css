@@ -86,6 +86,60 @@ body {
   cursor: not-allowed;
 }
 
+.hex-actions {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hex-action-btn {
+  padding: 8px 12px;
+  background: var(--ink);
+  color: var(--bg);
+  border: 2px solid var(--ink);
+  font-family: var(--font);
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+  font-weight: bold;
+}
+
+.hex-action-btn:hover {
+  background: var(--bg);
+  color: var(--ink);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.hex-action-btn:active {
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--bg);
+}
+
+.hex-location-select {
+  padding: 6px 10px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  font-family: var(--font);
+  font-size: 12px;
+  cursor: pointer;
+  flex: 1;
+  font-weight: bold;
+}
+
+.hex-location-select:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.hex-location-select:focus {
+  outline: none;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  border-color: var(--ink);
+}
+
 input[type="range"] {
   width: 100%;
   cursor: pointer;
@@ -127,11 +181,69 @@ input[type="range"] {
   padding: 12px 16px;
   border-bottom: 2px solid var(--ink);
   z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   font-weight: 900;
   letter-spacing: 2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.lang-select {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: var(--font);
+  text-transform: uppercase;
+}
+
+.lang-select:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.lang-select:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.header-btn {
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: var(--font);
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+
+.header-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.header-btn:active {
+  transform: scale(0.95);
+}
+
+.header-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .shell {
@@ -201,6 +313,47 @@ input[type="range"] {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
 }
 
+#btn-save-world-hex {
+  /* Same position as back button, will be shown when editing world hex */
+}
+
+.world-hex-editor {
+  width: 100%;
+  min-height: 300px;
+  font-family: var(--font);
+  font-size: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 8px ;
+  margin-top: 30px;
+  resize: vertical;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  scrollbar-width: auto;
+  box-sizing: border-box;
+}
+
+/* Custom scrollbar styling for world-hex-editor - blocky retro style */
+.world-hex-editor::-webkit-scrollbar {
+  width: 20px;
+}
+
+.world-hex-editor::-webkit-scrollbar-track {
+  background: var(--bg);
+  background-repeat: repeat-y;
+  background-position: center top;
+  border-left: 1px solid var(--ink);
+}
+
+.world-hex-editor::-webkit-scrollbar-thumb {
+  background: var(--ink);
+}
+
+.world-hex-editor::-webkit-scrollbar-thumb:hover {
+  background: #FF3EB5;
+}
+
 .hud {
   position: absolute;
   bottom: 30px;
@@ -265,8 +418,9 @@ input[type="range"] {
   border: 2px solid var(--ink);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
   min-height: 240px;
-  overflow: auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .raw-card {
@@ -301,6 +455,8 @@ input[type="range"] {
 .middle-row {
   display: flex;
   flex-direction: row;
+  flex: 1;
+  min-height: 0;
 }
 
 .border-side {
@@ -318,10 +474,39 @@ input[type="range"] {
   line-height: 14px;
 }
 
+#border-right {
+  padding-left: 5px !important;
+}
+
 .card-content {
   padding: 16px 22px;
   flex: 1;
+  overflow: auto;
+  min-height: 0;
 }
+
+/* Custom scrollbar styling - positioned where border-right was, directly below border corner */
+.card-content::-webkit-scrollbar {
+  width: 20px;
+}
+
+.card-content::-webkit-scrollbar-track {
+  margin-top: 0;
+  background: var(--bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='16'%3E%3Ctext x='10' y='11' font-family='IBM_EGA, Courier New' font-size='14' font-weight='900' text-anchor='middle' fill='%23000000' stroke='%23000000' stroke-width='1' paint-order='fill stroke'%3E%7C%3C%2Ftext%3E%3C%2Fsvg%3E");
+  background-repeat: repeat-y;
+  background-position: center top;
+  margin-bottom: 0;
+}
+
+.card-content::-webkit-scrollbar-thumb {
+  background: var(--ink);
+}
+
+.card-content::-webkit-scrollbar-thumb:hover {
+  background: #FF3EB5;
+}
+
 
 .md-h1 {
   font-size: 18px;
@@ -380,3 +565,4 @@ input[type="range"] {
     border-bottom: 2px solid var(--ink);
   }
 }
+

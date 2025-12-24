@@ -31,6 +31,15 @@
     </div>
     <header class="site-header">
       <div class="logo">THE DYING LANDS · V2</div>
+      <div class="header-actions">
+        <select id="lang-select" class="lang-select" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="pt">PT</option>
+        </select>
+        <button id="btn-export" class="header-btn" title="Export world data" aria-label="Export">EXPORT</button>
+        <button id="btn-import" class="header-btn" title="Import world data" aria-label="Import">IMPORT</button>
+        <input type="file" id="import-file" accept=".zip" style="display: none;" aria-label="Import file">
+      </div>
     </header>
     <main class="shell">
       <section class="pane pane-grid" aria-label="Hex map">
@@ -43,6 +52,7 @@
       </section>
       <section class="pane pane-card" aria-label="Hex details">
         <button class="city-back-btn" id="btn-back-city-overview" aria-label="Back to city overview">BACK</button>
+        <button class="city-back-btn" id="btn-save-world-hex" aria-label="Save world hex edit">SAVE</button>
         <div class="card ascii-card" id="card-styled" role="tabpanel">
           <div class="border-row">
             <div class="border-corner">╔</div>
